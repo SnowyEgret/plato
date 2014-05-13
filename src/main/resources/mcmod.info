@@ -1,0 +1,16 @@
+[
+{
+  "modid": "plato",
+  "name": "Plato",
+  "description": "A mod for building.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["SnowyEgret"],
+  "credits": "DuncanMia",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -1,0 +1,9 @@
+{
+  "surface.sphere": {
+    "category": "block",
+    "sounds": [
+      "surface.sphere0",
+      "surface.sphere1"
+    ]
+  }
+}
