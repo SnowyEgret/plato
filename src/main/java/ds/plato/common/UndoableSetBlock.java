@@ -31,15 +31,17 @@ public class UndoableSetBlock implements Undoable {
 		this.y = y;
 		this.z = z;
 		this.block = block;
+		this.metadata = metadata;
 		this.prevBlock = world.getBlock(x, y, z);
 		this.prevMetadata = world.getBlockMetadata(x, y, z);
-		this.metadata = metadata;
 
 		Selection s = Plato.selectionManager.selectionAt(x, y, z);
+		System.out.println("UndoableSetBlock.constuctor s="+s);
 		if (s != null) {
 			prevBlock = s.block;
 			Plato.selectionManager.removeSelection(x, y, z);
 		}
+		
 		if (block == Blocks.air) {
 			world.setBlock(x, y, z, block);
 		} else {
@@ -51,6 +53,7 @@ public class UndoableSetBlock implements Undoable {
 
 	@Override
 	public void undo() {
+		System.out.println("UndoableSetBlock.undo prevBlock="+prevBlock);
 		world.setBlock(x, y, z, prevBlock);
 		world.setBlockMetadataWithNotify(x, y, z, prevMetadata, 3);
 		Plato.clearSelections();

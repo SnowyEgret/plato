@@ -4,8 +4,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public enum EnumEdit {
 
-	MOVE(2, new Menu("move selection", new String[] { "from", "to" }, Pair.of("alt", "delete original"))),
-	ROTATE(3, new Menu("rotate selection", new String[] { "center of rotation", "angle from", "angle to" }, Pair.of("alt", "delete original"))),
+	MOVE(2, new Menu("move selection", new String[] { "from", "to" }, Pair.of("ctrl", "delete original"))),
+	ROTATE(3, new Menu("rotate selection", new String[] { "center of rotation", "angle from", "angle to" }, Pair.of("ctrl", "delete original"))),
 	ROT90(1, new Menu("rotate 90 degrees clockwise", new String[] { "center of rotation" }, Pair.of("alt",
 			"rotate around centroid"), Pair.of("X:, Y: <default>, Z", "axis of rotation"))),
 	MIRROR(2, new Menu("mirror")),

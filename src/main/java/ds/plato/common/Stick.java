@@ -38,24 +38,14 @@ public abstract class Stick extends Item {
 	private World world;
 	private final PickManager pickManager;
 	Property initialState;
-	// Toggleable state;
 	EnumToggler state;
 
-	// public Stick(int numPicks, Property initialState, Toggleable state) {
 	public Stick(int numPicks, Property initialState, Class<? extends Enum> enumClass) {
 		pickManager = new PickManager();
 		pickManager.reset(numPicks);
 		this.initialState = initialState;
 		state = new EnumToggler(enumClass, initialState.getInt());
-		// this.state = state;
-		// state.setState(initialState.getInt());
 	}
-
-	// protected void setState(Toggleable state) {
-	// this.state = state;
-	// //state.currentEdit = EnumEdit.values()[initialState.getInt()];
-	// state.setCurrentState(initialState.getInt());
-	// }
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -182,16 +172,15 @@ public abstract class Stick extends Item {
 	}
 
 	protected void transformSelections(Transformer transformer) {
-		Transaction transaction = Plato.undoManager.newTransaction();
+		Transaction t = Plato.undoManager.newTransaction();
 		for (Selection s : Plato.selectionManager.getSelections()) {
-			s = transformer.transform(s);
-			transaction.add(new UndoableSetBlock(s.x, s.y, s.z, s.block, s.metadata));
+			t.add(new UndoableSetBlock(transformer.transform(s)));
 		}
-		transaction.commit();
+		t.commit();
 	}
 
 	protected void draw(Drawable drawable, boolean hollow) {
-		Transaction transaction = Plato.undoManager.newTransaction();
+		Transaction t = Plato.undoManager.newTransaction();
 		VoxelSet voxels = drawable.voxelize();
 		if (hollow) {
 			voxels = voxels.shell();
@@ -206,9 +195,9 @@ public abstract class Stick extends Item {
 		}
 		for (Point3i p : voxels) {
 			SlotEntry entry = Plato.getBlocksWithMetadataInIventorySlots().get(0);
-			transaction.add(new UndoableSetBlock(p, entry.block, entry.metadata));
+			t.add(new UndoableSetBlock(p, entry.block, entry.metadata));
 		}
-		transaction.commit();
+		t.commit();
 	}
 
 	protected void onClickLeft(PlayerInteractEvent e) {

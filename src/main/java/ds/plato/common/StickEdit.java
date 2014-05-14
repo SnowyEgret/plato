@@ -26,13 +26,8 @@ import ds.plato.undo.Transaction;
 
 public class StickEdit extends Stick {
 
-	// EnumEdit state = EnumEdit.values()[0];
-
 	public StickEdit(Property initialState) {
-		// super(2, initialState, EnumEdit.values()[0]);
 		super(2, initialState, EnumEdit.class);
-		// state.currentEdit = EnumEdit.values()[initialState.getInt()];
-		// setState(EnumEdit.values()[0]);
 	}
 
 	@Override
@@ -157,10 +152,12 @@ public class StickEdit extends Stick {
 	public void fillSelections(final Block block, final int metadata) {
 		transformSelections(new Transformer() {
 			@Override
-			public Selection transform(Selection selection) {
-				selection.block = block;
-				selection.metadata = metadata;
-				return selection;
+			public Selection transform(Selection s) {
+				//Create a copy here because we don't want to modify the selectionManager's selection list.
+				return new Selection(s.x, s.y, s.z, block, metadata);
+//				s.block = block;
+//				s.metadata = metadata;
+				//return s;
 
 			}
 		});
