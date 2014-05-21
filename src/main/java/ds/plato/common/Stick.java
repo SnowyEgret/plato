@@ -28,6 +28,7 @@ import ds.geom.GeomUtil;
 import ds.geom.Line;
 import ds.geom.Rectangle;
 import ds.geom.Solid;
+import ds.geom.Terrain;
 import ds.geom.VoxelSet;
 import ds.plato.pick.Pick;
 import ds.plato.pick.PickManager;
@@ -40,7 +41,8 @@ public abstract class Stick extends Item {
 	Property initialState;
 	EnumToggler state;
 
-	public Stick(int numPicks, Property initialState, Class<? extends Enum> enumClass) {
+	public Stick(int numPicks, Property initialState,
+			Class<? extends Enum> enumClass) {
 		pickManager = new PickManager();
 		pickManager.reset(numPicks);
 		this.initialState = initialState;
@@ -50,7 +52,8 @@ public abstract class Stick extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister registry) {
-		String s = Plato.ID + ":" + getUnlocalizedName().substring(5); // Removes "tile."
+		String s = Plato.ID + ":" + getUnlocalizedName().substring(5); // Removes
+																		// "tile."
 		this.itemIcon = registry.registerIcon(s);
 	}
 
@@ -69,7 +72,8 @@ public abstract class Stick extends Item {
 	public void clearPicks() {
 		for (Pick p : pickManager.getPicks()) {
 			Block block = getWorld().getBlock(p.x, p.y, p.z);
-			// if (block instanceof BlockPick || block instanceof BlockPick1 || block instanceof BlockPick2)
+			// if (block instanceof BlockPick || block instanceof BlockPick1 ||
+			// block instanceof BlockPick2)
 			if (block == Plato.blockPick0) {
 				// TODO set metadata
 				getWorld().setBlock(p.x, p.y, p.z, p.block);
@@ -86,7 +90,8 @@ public abstract class Stick extends Item {
 		// TODO: Handle case where location is already a selection
 		if (!pickManager.isFinishedPicking()) {
 			// Reads a horizontal displacement and sets it to vertical
-			// TODO Replace with a class which prints x, z, and y displacements to Menu and allows key selection of any
+			// TODO Replace with a class which prints x, z, and y displacements
+			// to Menu and allows key selection of any
 			// of three.
 			if (Keyboard.isKeyDown(Keyboard.KEY_Y)) {
 				Pick lastPick = pickManager.lastPick();
@@ -108,10 +113,13 @@ public abstract class Stick extends Item {
 			// else if (currentPick == 2)
 			// pickblock = MOD.blockPick2;
 			// else
-			// throw new IllegalStateException("Longer than expected pick list. currentPick=" + currentPick);
+			// throw new
+			// IllegalStateException("Longer than expected pick list. currentPick="
+			// + currentPick);
 
 			// if (block != Blocks.air)
-			// TODO Add metadata to class Pick and set metadata (reverse in clearPicks)
+			// TODO Add metadata to class Pick and set metadata (reverse in
+			// clearPicks)
 			getWorld().setBlock(x, y, z, Plato.blockPick0);
 			pickManager.pick(x, y, z, block);
 		}
@@ -149,7 +157,8 @@ public abstract class Stick extends Item {
 		return world;
 	}
 
-	protected void transformSelections(Matrix4d matrix, boolean deleteInitialBlocks) {
+	protected void transformSelections(Matrix4d matrix,
+			boolean deleteInitialBlocks) {
 		World w = getWorld();
 		Transaction transaction = Plato.undoManager.newTransaction();
 		for (Selection s : Plato.selectionManager.getSelections()) {
@@ -160,7 +169,8 @@ public abstract class Stick extends Item {
 				Block b = null;
 				int metadata = 0;
 				if (deleteInitialBlocks) {
-					transaction.add(new UndoableSetBlock(s.x, s.y, s.z, Blocks.air, 0));
+					transaction.add(new UndoableSetBlock(s.x, s.y, s.z,
+							Blocks.air, 0));
 				} else {
 					w.setBlock(s.x, s.y, s.z, s.block);
 					w.setBlockMetadataWithNotify(s.x, s.y, s.z, s.metadata, 3);
@@ -188,13 +198,19 @@ public abstract class Stick extends Item {
 		Plato.log.info("[ItemStick.draw] drawable=" + drawable);
 		Plato.log.info("[ItemStick.draw] voxels=" + voxels);
 		// Minecraft y axis is up. Not needed for Solid - don't understand why.
-		if (!(drawable instanceof Solid) && !(drawable instanceof Line) && !(drawable instanceof Rectangle)) {
-			voxels = voxels.transform(GeomUtil.newRotX270Matrix(drawable.getOrigin()));
-			// voxels = voxels.transform(GeomUtil.newRotX90Matrix(drawable.getOrigin()));
-			// voxels = voxels.transform(GeomUtil.newRotX180Matrix(drawable.getOrigin()));
+		if (!(drawable instanceof Solid) && !(drawable instanceof Terrain)
+				&& !(drawable instanceof Line)
+				&& !(drawable instanceof Rectangle)) {
+			voxels = voxels.transform(GeomUtil.newRotX270Matrix(drawable
+					.getOrigin()));
+			// voxels =
+			// voxels.transform(GeomUtil.newRotX90Matrix(drawable.getOrigin()));
+			// voxels =
+			// voxels.transform(GeomUtil.newRotX180Matrix(drawable.getOrigin()));
 		}
 		for (Point3i p : voxels) {
-			SlotEntry entry = Plato.getBlocksWithMetadataInIventorySlots().get(0);
+			SlotEntry entry = Plato.getBlocksWithMetadataInIventorySlots().get(
+					0);
 			t.add(new UndoableSetBlock(p, entry.block, entry.metadata));
 		}
 		t.commit();
@@ -232,12 +248,14 @@ public abstract class Stick extends Item {
 	// public abstract void save();
 	// TODO For now print to console.
 	public void printCurrentState() {
-		Plato.log.info("[ItemStickEdit.printCurrentState] state=" + state.current());
+		Plato.log.info("[ItemStickEdit.printCurrentState] state="
+				+ state.current());
 		System.out.println(state.getDescription());
 	}
 
 	public void save() {
-		Plato.log.info("[ItemStickEdit.save] state.ordinal()=" + state.current().ordinal());
+		Plato.log.info("[ItemStickEdit.save] state.ordinal()="
+				+ state.current().ordinal());
 		// initialState.set(state.getOrdinal());
 		initialState.set(state.current().ordinal());
 	}

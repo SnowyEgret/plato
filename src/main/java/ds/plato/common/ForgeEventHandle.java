@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -13,17 +14,21 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ds.plato.WorldWrapper;
 import ds.plato.pick.Pick;
 
 public class ForgeEventHandle {
 
 	private Stick heldStick = null;
 	private Vector3d displacement = new Vector3d();
+	private Plato plato;
+	private boolean isWorldSet = false;
 
 	// @SideOnly(Side.CLIENT)
 	// @SubscribeEvent
@@ -31,6 +36,19 @@ public class ForgeEventHandle {
 	// //Works but is called more often than PlayerInteractEvent
 	// MOD.log.info("[ForgeEventHandle.onMouseEvent] e=" + e);
 	// }
+
+	public ForgeEventHandle(Plato plato) {
+		this.plato = plato;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void onEntityJoinWorldEvent(EntityJoinWorldEvent e) {
+		if (!isWorldSet && e.entity instanceof EntityPlayerMP) {
+			plato.setWorld(new WorldWrapper(e.entity.worldObj));
+			isWorldSet = true;
+		}
+	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
@@ -90,7 +108,7 @@ public class ForgeEventHandle {
 			}
 
 		} else {
-			//Might want to check for a bucket to fill with water
+			// Might want to check for a bucket to fill with water
 			System.out.println("[MODEventHandler.onClick] Not Handled. item=" + item);
 		}
 	}

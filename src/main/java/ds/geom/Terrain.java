@@ -38,7 +38,8 @@ public abstract class Terrain extends Surface {
 
 	@Override
 	public Point3d pointAtParameters(double u, double v) {
-		Point3d p = new Point3d(u, v, heights[heightsArrayIndex] * range / 255);
+		//Using y axis is vertical
+		Point3d p = new Point3d(u, heights[heightsArrayIndex] * range / 255, v);
 		p.add(p0);
 		heightsArrayIndex++;
 		return p;

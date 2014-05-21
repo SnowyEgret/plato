@@ -5,7 +5,9 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -13,6 +15,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -30,7 +33,9 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
+import ds.plato.IWorld;
 import ds.plato.client.ClientProxy;
 import ds.plato.undo.UndoManager;
 
@@ -54,11 +59,9 @@ public class Plato {
 	public static StickSolid solidStick;
 	public static StickEdit editStick;
 
-	@Instance(ID)
-	public static Plato instance;
+	@Instance(ID) public static Plato instance;
 
-	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy")
-	public static CommonProxy proxy;
+	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
 
 	public static UndoManager undoManager;
 	public static SelectionManager selectionManager;
@@ -114,13 +117,18 @@ public class Plato {
 		// blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		// RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer());
 
-		MinecraftForge.EVENT_BUS.register(new ForgeEventHandle());
+		MinecraftForge.EVENT_BUS.register(new ForgeEventHandle(this));
 		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		log.info(NAME + " " + VERSION + " loaded.");
+	}
+
+	@EventHandler
+	public void serverStarted(FMLServerStartedEvent event) {
+		log.log(Level.INFO, "[Plato.serverStarted]");
 	}
 
 	@EventHandler
@@ -158,10 +166,12 @@ public class Plato {
 		// http://www.minecraftforum.net/topic/1805594-how-to-get-worldserver-reference-from-world-or-entityplayer/
 		if (world == null) {
 			Minecraft mc = Minecraft.getMinecraft();
+			EntityClientPlayerMP player = mc.thePlayer;
+			//System.out.println("[Plato.getWorldServer] player=" + player);
 			if (mc.getIntegratedServer() != null) {
-				world = mc.getIntegratedServer().worldServerForDimension(mc.thePlayer.dimension);
+				world = mc.getIntegratedServer().worldServerForDimension(player.dimension);
 			} else if (MinecraftServer.getServer() != null) {
-				world = MinecraftServer.getServer().worldServerForDimension(mc.thePlayer.dimension);
+				world = MinecraftServer.getServer().worldServerForDimension(player.dimension);
 			}
 			System.out.println("[Plato.getWorldServer] w=" + world);
 		}
@@ -202,5 +212,10 @@ public class Plato {
 			slotDistribution = d;
 			Plato.log.info("[Plato.updateBlockDistribution] inventoryDistribution=" + slotDistribution);
 		}
+	}
+
+	public void setWorld(IWorld world) {
+		selectionManager.setWorld(world);
+		System.out.println("[Plato.setWorld] world=" + world);
 	}
 }

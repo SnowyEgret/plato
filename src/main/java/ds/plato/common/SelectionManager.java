@@ -8,20 +8,28 @@ import java.util.Map;
 
 import javax.vecmath.Point3i;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import ds.geom.VoxelSet;
+import ds.plato.IWorld;
 
 public class SelectionManager {
 
 	private final Map<Point3i, Selection> selections = new HashMap<>();
+	private IWorld world;
+
+	// World is not available when SelectionManager is constructed. Called when player joins game in ForgeEventHandler
+	public void setWorld(IWorld world) {
+		this.world = world;
+	}
 
 	public Selection selectionAt(int x, int y, int z) {
 		return selectionAt(new Point3i(x, y, z));
 	}
 
-//	public Selection selectionAt(Point3d p) {
-//		return selectionAt(new Point3i((int) p.x, (int) p.y, (int) p.z));
-//	}
+	// public Selection selectionAt(Point3d p) {
+	// return selectionAt(new Point3i((int) p.x, (int) p.y, (int) p.z));
+	// }
 
 	public Selection selectionAt(Point3i p) {
 		return selections.get(p);
@@ -45,11 +53,11 @@ public class SelectionManager {
 		return pointsCleared;
 	}
 
-//	public Iterable<Selection> block() {
-//		List<Selection> l = new ArrayList<>();
-//		l.addAll(selections.values());
-//		return l;
-//	}
+	// public Iterable<Selection> block() {
+	// List<Selection> l = new ArrayList<>();
+	// l.addAll(selections.values());
+	// return l;
+	// }
 
 	public boolean isSelected(Point3i p) {
 		return selections.containsKey(p);
@@ -79,15 +87,26 @@ public class SelectionManager {
 		return removeSelection(s.getPoint3i());
 	}
 
+	public Selection select(int x, int y, int z) {
+		//World world = Plato.getWorldServer();
+		Block prevBlock = world.getBlock(x, y, z);
+		int metadata = world.getBlockMetadata(x, y, z);
+		System.out.println("[SelectionManager.select] metadata=" + metadata);
+		world.setBlock(x, y, z, Plato.blockSelected);
+		Selection s = new Selection(x, y, z, prevBlock, metadata);
+		addSelection(s);
+		return s;
+	}
+
 	public void deselect(Selection s) {
 		removeSelection(s);
-		World w = Plato.getWorldServer();
-		w.setBlock(s.x, s.y, s.z, s.block);
-		w.setBlockMetadataWithNotify(s.x, s.y, s.z, s.metadata, 3);
+		//World world = Plato.getWorldServer();
+		world.setBlock(s.x, s.y, s.z, s.block);
+		world.setBlockMetadataWithNotify(s.x, s.y, s.z, s.metadata, 3);
 	}
 
 	public VoxelSet voxelSet() {
-		//return new VoxelSet(selections.values());
+		// return new VoxelSet(selections.values());
 		return new VoxelSet(selections.keySet());
 	}
 
@@ -102,4 +121,10 @@ public class SelectionManager {
 		l.addAll(selections.values());
 		return l;
 	}
+	
+	@Override
+	public String toString() {
+		return "SelectionManager [selections=" + selections + ", world=" + world + "]";
+	}
+
 }

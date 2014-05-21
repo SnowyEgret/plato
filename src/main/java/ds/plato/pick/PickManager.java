@@ -15,6 +15,13 @@ public class PickManager {
 	private int maxPicks = 0;
 	private final LinkedList<Pick> picks = new LinkedList<>();
 
+	public PickManager(int numPicks) {
+		this.maxPicks = numPicks;
+	}
+
+	public PickManager() {
+	}
+
 	public void reset(int maxPicks) {
 		this.maxPicks = maxPicks;
 		picks.clear();
