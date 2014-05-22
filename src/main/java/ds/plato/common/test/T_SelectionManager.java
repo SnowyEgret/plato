@@ -20,13 +20,6 @@ import ds.plato.test.PlatoTestFactory;
 
 public class T_SelectionManager extends PlatoTestFactory {
 
-	@Mock BlockDirt dirt;
-
-	@Before
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-	}
-
 	@Test
 	public void selectionAt() {
 		SelectionManager m = new SelectionManager();
@@ -107,7 +100,7 @@ public class T_SelectionManager extends PlatoTestFactory {
 	@Test
 	public void select() {
 		SelectionManager m = new SelectionManager();
-		m.setWorld(mockWorld());
+		m.setWorld(newMockWorld());
 		assertThat(m.size(), is(0));
 		m.select(1, 2, 3);
 		System.out.println("[T_SelectionManager.select] m=" + m);
@@ -121,11 +114,32 @@ public class T_SelectionManager extends PlatoTestFactory {
 	@Test
 	public void deselect() {
 		SelectionManager m = new SelectionManager();
-		m.setWorld(mockWorld());
+		m.setWorld(newMockWorld());
 		Selection s = m.select(1, 2, 3);
 		assertThat(m.size(), is(1));
 		m.deselect(s);
 		assertThat(m.size(), is(0));
+	}
+
+	@Test
+	public void clear_sizeIsZero() {
+		SelectionManager m = new SelectionManager().setWorld(newMockWorld());
+		Selection s = m.select(1, 2, 3);
+		assertThat(m.size(), is(1));
+		m.clear();
+		assertThat(m.size(), is(0));
+	}
+
+	@Test
+	public void clear_returnsClearedSelections() {
+		SelectionManager m = new SelectionManager().setWorld(newMockWorld());
+		Selection s = m.select(1, 2, 3);
+		Iterable<Point3i> clearedSelections = m.clear();
+		for (Point3i p : clearedSelections) {
+			assertThat(p.x, is(1));
+			assertThat(p.y, is(2));
+			assertThat(p.z, is(3));
+		}
 	}
 
 }

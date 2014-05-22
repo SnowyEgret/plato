@@ -12,12 +12,8 @@ public class MockWorld implements IWorld {
 	Map<String, Integer> metadata = new HashMap<>();
 
 	@Override
-	public void setBlock(int x, int y, int z, Block block) {
+	public void setBlock(int x, int y, int z, Block block, int metadata, int mode) {
 		blocks.put(encode(x, y, z), block);
-	}
-
-	@Override
-	public void setBlockMetadataWithNotify(int x, int y, int z, int metadata, int mode) {
 		this.metadata.put(encode(x, y, z), Integer.valueOf(metadata));
 	}
 
@@ -27,13 +23,18 @@ public class MockWorld implements IWorld {
 	}
 
 	@Override
-	public int getBlockMetadata(int x, int y, int z) {
+	public int getMetadata(int x, int y, int z) {
 		Integer m = metadata.get(encode(x, y, z));
 		if (m == null) {
 			return 0;
 		} else {
 			return m;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "MockWorld" + Integer.toHexString(hashCode()) + " [blocks=" + blocks + ", metadata=" + metadata + "]";
 	}
 
 	private String encode(int x, int y, int z) {

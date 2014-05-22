@@ -9,27 +9,66 @@ import java.util.Map;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
-import net.minecraft.world.World;
 import ds.geom.VoxelSet;
 import ds.plato.IWorld;
 
-public class SelectionManager {
+public class SelectionManager implements ISelect {
 
 	private final Map<Point3i, Selection> selections = new HashMap<>();
 	private IWorld world;
-
-	// World is not available when SelectionManager is constructed. Called when player joins game in ForgeEventHandler
-	public void setWorld(IWorld world) {
-		this.world = world;
+	private BlockSelected blockSelected;
+	
+	//TODO remove when blockSelected is injected throughout.
+	public SelectionManager() {
 	}
 
+	public SelectionManager(BlockSelected blockSelected) {
+		this.blockSelected = blockSelected;
+	}
+
+	// World is not available when SelectionManager is constructed. Called when player joins game in ForgeEventHandler
+	public SelectionManager setWorld(IWorld world) {
+		this.world = world;
+		return this;
+	}
+
+	@Override
+	public Iterable<Selection> getSelections() {
+		List<Selection> l = new ArrayList<>();
+		l.addAll(selections.values());
+		return l;
+	}
+
+	@Override
 	public Selection selectionAt(int x, int y, int z) {
 		return selectionAt(new Point3i(x, y, z));
 	}
 
-	// public Selection selectionAt(Point3d p) {
-	// return selectionAt(new Point3i((int) p.x, (int) p.y, (int) p.z));
-	// }
+	//For now, only used by UndoableSetBlock in new spell package.
+	@Override
+	public Selection select(int x, int y, int z) {
+		Block prevBlock = world.getBlock(x, y, z);
+		int metadata = world.getMetadata(x, y, z);
+		world.setBlock(x, y, z, blockSelected, 0, 3);
+		Selection s = new Selection(x, y, z, prevBlock, metadata);
+		addSelection(s);
+		return s;
+	}
+
+	@Override
+	public void deselect(Selection s) {
+		removeSelection(s);
+		world.setBlock(s.x, s.y, s.z, s.block, s.metadata, 3);
+	}
+
+	@Override
+	public Iterable<Point3i> clear() {
+		List<Point3i> pointsCleared = new ArrayList<>();
+		pointsCleared.addAll(selections.keySet());
+		selections.clear();
+		//System.out.println("[SelectionManager.clear] selections.size()=" + selections.size());
+		return pointsCleared;
+	}
 
 	public Selection selectionAt(Point3i p) {
 		return selections.get(p);
@@ -44,20 +83,6 @@ public class SelectionManager {
 			addSelection(s);
 		}
 	}
-
-	public Iterable<Point3i> clear() {
-		List<Point3i> pointsCleared = new ArrayList<>();
-		pointsCleared.addAll(selections.keySet());
-		selections.clear();
-		Plato.log.info("[SelectionManager.clear] selections.size()=" + selections.size());
-		return pointsCleared;
-	}
-
-	// public Iterable<Selection> block() {
-	// List<Selection> l = new ArrayList<>();
-	// l.addAll(selections.values());
-	// return l;
-	// }
 
 	public boolean isSelected(Point3i p) {
 		return selections.containsKey(p);
@@ -87,33 +112,8 @@ public class SelectionManager {
 		return removeSelection(s.getPoint3i());
 	}
 
-	public Selection select(int x, int y, int z) {
-		//World world = Plato.getWorldServer();
-		Block prevBlock = world.getBlock(x, y, z);
-		int metadata = world.getBlockMetadata(x, y, z);
-		System.out.println("[SelectionManager.select] metadata=" + metadata);
-		world.setBlock(x, y, z, Plato.blockSelected);
-		Selection s = new Selection(x, y, z, prevBlock, metadata);
-		addSelection(s);
-		return s;
-	}
-
-	public void deselect(Selection s) {
-		removeSelection(s);
-		//World world = Plato.getWorldServer();
-		world.setBlock(s.x, s.y, s.z, s.block);
-		world.setBlockMetadataWithNotify(s.x, s.y, s.z, s.metadata, 3);
-	}
-
 	public VoxelSet voxelSet() {
-		// return new VoxelSet(selections.values());
 		return new VoxelSet(selections.keySet());
-	}
-
-	public Iterable<Selection> getSelections() {
-		List<Selection> l = new ArrayList<>();
-		l.addAll(selections.values());
-		return l;
 	}
 
 	public List<Selection> getSelectionList() {
@@ -121,10 +121,15 @@ public class SelectionManager {
 		l.addAll(selections.values());
 		return l;
 	}
-	
+		
 	@Override
 	public String toString() {
-		return "SelectionManager [selections=" + selections + ", world=" + world + "]";
+		return "SelectionManager [world=" + idOf(world) + ", selections=" + selections + "]";
 	}
+
+	private String idOf(Object o) {
+		return o.getClass().getSimpleName()+"@"+Integer.toHexString(o.hashCode());
+	}
+
 
 }

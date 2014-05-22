@@ -44,15 +44,14 @@ public abstract class Spell {
 		for (Selection s : selectionManager.getSelections()) {
 			Point3d p = s.getPoint3d();
 			matrix.transform(p);
-			transaction.add(new UndoableSetBlock(world, selectionManager, s));
+			transaction.add(new SetBlock(world, selectionManager, s));
 			if (!transaction.contains(s)) {
 				Block b = null;
 				int metadata = 0;
 				if (deleteInitialBlocks) {
-					transaction.add(new UndoableSetBlock(world, selectionManager, s.x, s.y, s.z, Blocks.air, 0));
+					transaction.add(new SetBlock(world, selectionManager, s.x, s.y, s.z, Blocks.air, 0));
 				} else {
-					world.setBlock(s.x, s.y, s.z, s.block);
-					world.setBlockMetadataWithNotify(s.x, s.y, s.z, s.metadata, 3);
+					world.setBlock(s.x, s.y, s.z, s.block, s.metadata, 3);
 				}
 				// Don't want to add to ISelect for now - just to compile
 				// selectionManager.removeSelection(s);
@@ -64,7 +63,7 @@ public abstract class Spell {
 	protected void transformSelections(Transformer transformer) {
 		Transaction t = undoManager.newTransaction();
 		for (Selection s : selectionManager.getSelections()) {
-			t.add(new UndoableSetBlock(world, selectionManager, transformer.transform(s)));
+			t.add(new SetBlock(world, selectionManager, transformer.transform(s)));
 		}
 		t.commit();
 	}

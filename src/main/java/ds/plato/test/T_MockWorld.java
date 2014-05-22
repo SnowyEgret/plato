@@ -23,25 +23,20 @@ public class T_MockWorld extends PlatoTestFactory {
 
 	@Test
 	public void setBlock() {
-		IWorld w = mockWorld();
-		w.setBlock(1, 2, 3, dirt);
+		IWorld w = newMockWorld();
+		w.setBlock(1, 2, 3, dirt, 9, 0);
+		System.out.println("[T_MockWorld.setBlock] w=" + w);
 		Block b = w.getBlock(1, 2, 3);
+		int metadata = w.getMetadata(1, 2, 3);
 		assertThat(b.getClass().getName(), equalTo(dirt.getClass().getName()));
+		assertThat(metadata, equalTo(9));
 	}
 
 	@Test
 	public void getBlockMetadata_atPointNotSet() {
-		IWorld w = mockWorld();
-		int metadata = w.getBlockMetadata(1, 2, 3);
+		IWorld w = newMockWorld();
+		int metadata = w.getMetadata(1, 2, 3);
 		assertThat(metadata, equalTo(0));
-	}
-
-	@Test
-	public void setBlockMetadata() {
-		IWorld w = mockWorld();
-		w.setBlockMetadataWithNotify(1, 2, 3, 9, 0);
-		int metadata = w.getBlockMetadata(1, 2, 3);
-		assertThat(metadata, equalTo(9));
 	}
 
 }

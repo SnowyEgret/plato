@@ -24,11 +24,8 @@ public class StickSelection extends Stick {
 
 	private List<Point3i> expandedSelections = new ArrayList<>();
 
-	// EnumShell state = EnumShell.values()[0];
-
 	public StickSelection(Property initialState) {
 		super(2, initialState, EnumShell.class);
-		//state.currentEdit = EnumShell.values()[initialState.getInt()];
 	}
 
 	@Override
@@ -140,9 +137,4 @@ public class StickSelection extends Stick {
 		getWorld().setBlock(p.x, p.y, p.z, s.block);
 		getWorld().setBlockMetadataWithNotify(p.x, p.y, p.z, s.metadata, 3);
 	}
-	
-//	@Override
-//	public void save() {
-//		initialState.set(state.ordinal());
-//	}
 }

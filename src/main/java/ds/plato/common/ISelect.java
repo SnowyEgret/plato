@@ -1,12 +1,18 @@
 package ds.plato.common;
 
+import javax.vecmath.Point3i;
+
+import net.minecraft.block.Block;
+
 public interface ISelect {
 
-	Iterable<Selection> getSelections();
+	public Iterable<Selection> getSelections();
 
-	Selection selectionAt(int x, int y, int z);
+	public Selection selectionAt(int x, int y, int z);
 
-	void deselect(int x, int y, int z);
-	void select(int x, int y, int z);
+	public Selection select(int x, int y, int z);
 
+	public void deselect(Selection selection);
+
+	public Iterable<Point3i> clear();
 }
