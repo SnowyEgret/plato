@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 import com.google.inject.Provider;
 
 import ds.plato.IWorld;
+import ds.plato.common.BlockPick;
 import ds.plato.common.BlockSelected;
 
 public class PlatoTestFactory {
@@ -18,22 +19,24 @@ public class PlatoTestFactory {
 	@Mock protected BlockAir air;
 	
 	protected BlockSelected blockSelected;
+	protected BlockPick blockPicked;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		blockSelected = new BlockSelected();
+		blockPicked = new BlockPick();
 	}
 	
-	protected IWorld newMockWorld() {
-		return new MockWorld();
+	protected IWorld newStubWorld() {
+		return new StubWorld();
 	}
 
 	protected Provider<IWorld> newMockWorldProvider() {
 		return new Provider() {
 			@Override
 			public Object get() {
-				return newMockWorld();
+				return newStubWorld();
 			}
 		};
 	}

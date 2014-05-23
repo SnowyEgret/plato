@@ -9,17 +9,19 @@ import java.util.NoSuchElementException;
 import org.junit.Before;
 import org.junit.Test;
 
+import ds.plato.test.PlatoTestFactory;
 import ds.plato.undo.Transaction;
 import ds.plato.undo.UndoManager;
 import ds.plato.undo.Undoable;
 
-public class T_UndoManager {
+public class T_UndoManager extends PlatoTestFactory {
 
 	String state = null;
 	UndoManager m;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
+		super.setUp();
 		m = new UndoManager();
 	}
 

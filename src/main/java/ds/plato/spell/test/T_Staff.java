@@ -2,6 +2,7 @@ package ds.plato.spell.test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -15,9 +16,6 @@ import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.MoveSpell;
 import ds.plato.spell.Staff;
 
-//@RunWith(PowerMockRunner.class)
-//@PrepareForTest({ DeleteSpell.class, MoveSpell.class })
-//@PowerMockIgnore({ "javax.management.*" })
 public class T_Staff {
 
 	@Mock PlayerInteractEvent mockedEvent;
@@ -27,8 +25,6 @@ public class T_Staff {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		// mockedDelete = PowerMockito.mock(DeleteSpell.class);
-		// mockedMove = PowerMockito.mock(MoveSpell.class);
 	}
 
 	@Test
@@ -44,10 +40,9 @@ public class T_Staff {
 		Staff staff = new Staff();
 		staff.addSpell(mockedDelete);
 		staff.addSpell(mockedMove);
-		// assertThat(staff.nextSpell(), equalTo(mockedMove));
-		assertThat(staff.nextSpell().getClass().getName(), equalTo(mockedMove.getClass().getName()));
-		assertThat(staff.nextSpell().getClass().getName(), equalTo(mockedDelete.getClass().getName()));
-		assertThat(staff.nextSpell().getClass().getName(), equalTo(mockedMove.getClass().getName()));
+		assertEquals(mockedMove, staff.nextSpell());
+		assertEquals(mockedDelete, staff.nextSpell());
+		assertEquals(mockedMove, staff.nextSpell());
 	}
 
 	@Test

@@ -8,14 +8,15 @@ import java.util.NoSuchElementException;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
+import ds.plato.common.BlockPick;
 import net.minecraft.block.Block;
 
-public class PickManager {
+public class PickManager implements IPick {
 
 	private int maxPicks = 0;
 	private final LinkedList<Pick> picks = new LinkedList<>();
 
-	public PickManager(int numPicks) {
+	public PickManager(int numPicks, BlockPick blockPicked) {
 		this.maxPicks = numPicks;
 	}
 
@@ -53,7 +54,7 @@ public class PickManager {
 		return picks;
 	}
 
-	public List<Point3d> getPickPoints() {
+	public List<Point3d> getPickPoints3d() {
 		List<Point3d> l = new ArrayList<>();
 		for (Pick p : picks) {
 			l.add(new Point3d(p.x, p.y, p.z));

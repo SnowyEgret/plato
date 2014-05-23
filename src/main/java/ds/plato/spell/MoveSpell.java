@@ -25,7 +25,7 @@ public class MoveSpell extends Spell {
 	}
 
 	@Override
-	void encant(PlayerInteractEvent e) {
+	public void encant(PlayerInteractEvent e) {
 		if (pick(e.x, e.y, e.z)) {
 			Matrix4d matrix = GeomUtil.newTranslationMatrix(getPick(0), getPick(1));
 			transformSelections(matrix, Keyboard.isKeyDown(Keyboard.KEY_LCONTROL));

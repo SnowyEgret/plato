@@ -131,7 +131,7 @@ public abstract class Stick extends Item {
 	}
 
 	protected List<Point3d> getPickPoints() {
-		return pickManager.getPickPoints();
+		return pickManager.getPickPoints3d();
 	}
 
 	protected Point3d getPick(int i) {

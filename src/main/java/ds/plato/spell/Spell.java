@@ -35,8 +35,9 @@ public abstract class Spell {
 
 	// Spell can only be partially constructed during FML initialization. The world is only available after the player
 	// joins the game.
-	public void setWorld(IWorld world) {
+	public Spell setWorld(IWorld world) {
 		this.world = world;
+		return this;
 	}
 
 	protected void transformSelections(Matrix4d matrix, boolean deleteInitialBlocks) {
@@ -49,7 +50,9 @@ public abstract class Spell {
 				Block b = null;
 				int metadata = 0;
 				if (deleteInitialBlocks) {
-					transaction.add(new SetBlock(world, selectionManager, s.x, s.y, s.z, Blocks.air, 0));
+					//TODO replace static reference to Blocks.air
+					//TODO set block to previous block instead of air
+					transaction.add(new SetBlock(world, selectionManager, s.x, s.y, s.z, Blocks.air, 0).set());
 				} else {
 					world.setBlock(s.x, s.y, s.z, s.block, s.metadata, 3);
 				}
@@ -63,11 +66,12 @@ public abstract class Spell {
 	protected void transformSelections(Transformer transformer) {
 		Transaction t = undoManager.newTransaction();
 		for (Selection s : selectionManager.getSelections()) {
-			t.add(new SetBlock(world, selectionManager, transformer.transform(s)));
+			t.add(new SetBlock(world, selectionManager, transformer.transform(s)).set());
 		}
 		t.commit();
 	}
 
+	//TODO Move to PickManager?
 	protected boolean pick(int x, int y, int z) {
 		// TODO: Handle case where location is already a selection
 		if (!pickManager.isFinishedPicking()) {
@@ -100,6 +104,6 @@ public abstract class Spell {
 		return false;
 	}
 
-	abstract void encant(PlayerInteractEvent playerInteractEvent);
+	public abstract void encant(PlayerInteractEvent playerInteractEvent);
 
 }

@@ -1,6 +1,7 @@
 package ds.plato.spell;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import ds.plato.IWorld;
@@ -43,8 +44,7 @@ public class SetBlock implements Undoable {
 		}
 		world.setBlock(x, y, z, block, metadata, 3);
 
-		//TODO Blocks.air is null during testing
-		if (block != Blocks.air) {
+		if (!(block instanceof BlockAir)) {
 			selectionManager.select(x, y, z);
 		}
 		return this;

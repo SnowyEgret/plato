@@ -4,6 +4,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import javax.vecmath.Point3i;
 
@@ -14,6 +17,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import ds.plato.IWorld;
+import ds.plato.WorldWrapper;
 import ds.plato.common.Selection;
 import ds.plato.common.SelectionManager;
 import ds.plato.test.PlatoTestFactory;
@@ -99,31 +104,53 @@ public class T_SelectionManager extends PlatoTestFactory {
 
 	@Test
 	public void select() {
-		SelectionManager m = new SelectionManager();
-		m.setWorld(newMockWorld());
-		assertThat(m.size(), is(0));
-		m.select(1, 2, 3);
-		System.out.println("[T_SelectionManager.select] m=" + m);
-		assertThat(m.size(), is(1));
-		Selection s = m.getSelectionList().get(0);
+		SelectionManager sm = new SelectionManager();
+		sm.setWorld(newStubWorld());
+		assertThat(sm.size(), is(0));
+		sm.select(1, 2, 3);
+		System.out.println("[T_SelectionManager.select] m=" + sm);
+		assertThat(sm.size(), is(1));
+		Selection s = sm.getSelectionList().get(0);
 		assertThat(s.x, equalTo(1));
 		assertThat(s.y, equalTo(2));
 		assertThat(s.z, equalTo(3));
 	}
 
+	// TODO fails. This is a bug in the test. blockSelected is null.
+	@Test
+	public void select_worldSetsBlocktoBlockSelected() {
+		SelectionManager m = new SelectionManager();
+		IWorld mockWorld = mock(WorldWrapper.class);
+		m.setWorld(mockWorld);
+		m.select(1, 2, 3);
+		verify(mockWorld).setBlock(1, 2, 3, blockSelected, 0, 3);
+	}
+
 	@Test
 	public void deselect() {
 		SelectionManager m = new SelectionManager();
-		m.setWorld(newMockWorld());
+		m.setWorld(newStubWorld());
 		Selection s = m.select(1, 2, 3);
 		assertThat(m.size(), is(1));
 		m.deselect(s);
 		assertThat(m.size(), is(0));
 	}
 
+	// TODO Parameters are different to each call to setBlock. Test Passes only because of same bug in
+	// select_worldSetsBlocktoBlockSelected
+	@Test
+	public void deselect_worldResetsBlock() {
+		SelectionManager m = new SelectionManager();
+		IWorld mockWorld = mock(WorldWrapper.class);
+		m.setWorld(mockWorld);
+		Selection s = m.select(1, 2, 3);
+		m.deselect(s);
+		verify(mockWorld, times(2)).setBlock(1, 2, 3, null, 0, 3);
+	}
+
 	@Test
 	public void clear_sizeIsZero() {
-		SelectionManager m = new SelectionManager().setWorld(newMockWorld());
+		SelectionManager m = new SelectionManager().setWorld(newStubWorld());
 		Selection s = m.select(1, 2, 3);
 		assertThat(m.size(), is(1));
 		m.clear();
@@ -132,7 +159,7 @@ public class T_SelectionManager extends PlatoTestFactory {
 
 	@Test
 	public void clear_returnsClearedSelections() {
-		SelectionManager m = new SelectionManager().setWorld(newMockWorld());
+		SelectionManager m = new SelectionManager().setWorld(newStubWorld());
 		Selection s = m.select(1, 2, 3);
 		Iterable<Point3i> clearedSelections = m.clear();
 		for (Point3i p : clearedSelections) {

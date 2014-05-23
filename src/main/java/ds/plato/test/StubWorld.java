@@ -6,7 +6,7 @@ import java.util.Map;
 import ds.plato.IWorld;
 import net.minecraft.block.Block;
 
-public class MockWorld implements IWorld {
+public class StubWorld implements IWorld {
 
 	Map<String, Block> blocks = new HashMap<>();
 	Map<String, Integer> metadata = new HashMap<>();
@@ -34,7 +34,7 @@ public class MockWorld implements IWorld {
 
 	@Override
 	public String toString() {
-		return "MockWorld" + Integer.toHexString(hashCode()) + " [blocks=" + blocks + ", metadata=" + metadata + "]";
+		return "StubWorld" + Integer.toHexString(hashCode()) + " [blocks=" + blocks + ", metadata=" + metadata + "]";
 	}
 
 	private String encode(int x, int y, int z) {

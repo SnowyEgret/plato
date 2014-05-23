@@ -2,7 +2,7 @@ package ds.plato.undo;
 
 import java.util.NoSuchElementException;
 
-public class UndoManager {
+public class UndoManager implements IUndo {
 
 	private Node currentNode;
 	int maxLength = 0;
@@ -16,7 +16,7 @@ public class UndoManager {
 		this(50);
 	}
 
-	void add(Undoable undoable) {
+	void addUndoable(Undoable undoable) {
 		Node node = new Node(undoable);
 		currentNode.right = node;
 		node.left = currentNode;

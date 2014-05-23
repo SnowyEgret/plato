@@ -11,16 +11,6 @@ public class WorldWrapper implements IWorld {
 		this.world = world;
 	}
 
-	// @Override
-	// public void setBlock(int x, int y, int z, Block block) {
-	// world.setBlock(x, y, z, block);
-	// }
-	//
-	// @Override
-	// public void setBlockMetadataWithNotify(int x, int y, int z, int metadata, int mode) {
-	// world.setBlockMetadataWithNotify(x, y, z, metadata, mode);
-	// }
-
 	@Override
 	public Block getBlock(int x, int y, int z) {
 		return world.getBlock(x, y, z);

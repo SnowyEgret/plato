@@ -12,7 +12,7 @@ public class Transaction implements Undoable, Iterable {
 	protected List<Undoable> undoables = new ArrayList<>();
 	private final UndoManager undoManager;
 	
-	Transaction(UndoManager undoManager) {
+	public Transaction(UndoManager undoManager) {
 		this.undoManager = undoManager;
 	}
 
@@ -44,7 +44,7 @@ public class Transaction implements Undoable, Iterable {
 	}
 
 	public void commit() {
-		undoManager.add(this);
+		undoManager.addUndoable(this);
 	}
 
 	// Creates a dependency on package ds.plato.common. TODO: Move ds.undo and ds.selection to ds.plato.common.

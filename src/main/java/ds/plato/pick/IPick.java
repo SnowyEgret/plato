@@ -8,5 +8,5 @@ public interface IPick {
 
 	public Pick getPick(int i);
 
-	public void pick(int x, int y, int z, Block block);
+	public Pick pick(int x, int y, int z, Block block);
 }
