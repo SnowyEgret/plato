@@ -1,6 +1,7 @@
 package ds.plato.common;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,10 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import ds.plato.IWorld;
 import ds.plato.client.ClientProxy;
+import ds.plato.pick.PickManager;
+import ds.plato.spell.DeleteSpell;
+import ds.plato.spell.MoveSpell;
+import ds.plato.spell.SpellLoader;
 import ds.plato.undo.UndoManager;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)
@@ -62,10 +67,12 @@ public class Plato {
 
 	@Instance(ID) public static Plato instance;
 
-	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
+	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy")
+	public static CommonProxy proxy;
 
 	public static UndoManager undoManager;
 	public static SelectionManager selectionManager;
+	public static PickManager pickManager;
 
 	public ConfigHelper config;
 
@@ -78,32 +85,39 @@ public class Plato {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
+		undoManager = new UndoManager();
+		selectionManager = new SelectionManager();
+		pickManager = new PickManager();
+
 		log = LogManager.getLogger(NAME);
 		File file = event.getSuggestedConfigurationFile();
 		System.out.println("[Plato.preInit] file=" + file);
 		config = new ConfigHelper(file, ID);
 
-		log.info("Initializing blocks...");
+		log.info("[Plato.preInit]Initializing blocks...");
 		blockSelected = config.initBlock(BlockSelected.class);
 		blockPick0 = config.initBlock(BlockPick.class);
-		// blockPick1 = config.initBlock(BlockPick1.class);
-		// blockPick2 = config.initBlock(BlockPick2.class);
 
-		log.info("Initializing items...");
+		log.info("[Plato.preInit]Initializing items...");
 		selectionStick = (StickSelection) config.initStick(StickSelection.class);
 		surfaceStick = (StickSurface) config.initStick(StickSurface.class);
 		curveStick = (StickCurve) config.initStick(StickCurve.class);
 		editStick = (StickEdit) config.initStick(StickEdit.class);
 		solidStick = (StickSolid) config.initStick(StickSolid.class);
+		
+		log.info("[Plato.preInit] Initializing spells");
+		SpellLoader loader = new SpellLoader(undoManager, selectionManager, pickManager, Blocks.air, ID);
+		try {
+			loader.loadSpells(DeleteSpell.class, MoveSpell.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 
 		config.save();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-
-		undoManager = new UndoManager();
-		selectionManager = new SelectionManager();
 
 		// Should have a config.initKeyBinding for language
 		keyUndo = new KeyBinding("Undo", Keyboard.KEY_Z, NAME);
@@ -170,7 +184,7 @@ public class Plato {
 		if (world == null) {
 			Minecraft mc = Minecraft.getMinecraft();
 			EntityClientPlayerMP player = mc.thePlayer;
-			//System.out.println("[Plato.getWorldServer] player=" + player);
+			// System.out.println("[Plato.getWorldServer] player=" + player);
 			if (mc.getIntegratedServer() != null) {
 				world = mc.getIntegratedServer().worldServerForDimension(player.dimension);
 			} else if (MinecraftServer.getServer() != null) {
@@ -219,6 +233,8 @@ public class Plato {
 
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
+		// undoManager.setWorld(world);
+		// pickManager.setWorld(world);
 		System.out.println("[Plato.setWorld] world=" + world);
 	}
 }

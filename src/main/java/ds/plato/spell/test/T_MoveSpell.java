@@ -45,6 +45,7 @@ public class T_MoveSpell extends PlatoTestFactory {
 	@Mock WorldWrapper world;
 	@Mock UndoManager um;
 	@Mock SelectionManager sm;
+	@Mock PickManager pm;
 	AbstractSpell spell;
 	Pick[] picks;
 	Selection s1, s2;
@@ -60,7 +61,7 @@ public class T_MoveSpell extends PlatoTestFactory {
 		selections.add(s2);
 		when(sm.getSelections()).thenReturn(selections);
 		when(um.newTransaction()).thenReturn(new Transaction(um));
-		spell = new MoveSpell(new MoveSpellDescriptor(), um, sm, air).setWorld(world);
+		spell = new MoveSpell(new MoveSpellDescriptor(), um, sm, pm,air).setWorld(world);
 		picks = new Pick[] { new Pick(0, 0, 0, dirt), new Pick(1, 0, 0, dirt) };
 	}
 

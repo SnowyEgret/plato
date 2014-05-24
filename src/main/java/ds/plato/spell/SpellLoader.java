@@ -11,6 +11,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.common.ISelect;
+import ds.plato.pick.IPick;
 import ds.plato.undo.IUndo;
 
 public class SpellLoader {
@@ -19,11 +20,13 @@ public class SpellLoader {
 	private String modId;
 	IUndo undoManager;
 	ISelect selectionManager;
+	IPick pickManager;
 	Block blockAir;
 
-	public SpellLoader( IUndo undoManager, ISelect selectionManager, Block blockAir, String modId) {
+	public SpellLoader( IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir, String modId) {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
+		this.pickManager = pickManager;
 		this.blockAir = blockAir;
 		this.modId = modId;
 		
@@ -55,14 +58,15 @@ public class SpellLoader {
 		// Property p = config.get("Spell", name + ".state", 0);
 		SpellDescriptor d = (SpellDescriptor) descriptorClass.getConstructor().newInstance();
 		Constructor<? extends AbstractSpell> c = spellClass.getConstructor(SpellDescriptor.class, IUndo.class,
-				ISelect.class, Block.class);
-		AbstractSpell s = (AbstractSpell) c.newInstance(d, undoManager, selectionManager, blockAir);
+				ISelect.class, IPick.class, Block.class);
+		AbstractSpell s = (AbstractSpell) c.newInstance(d, undoManager, selectionManager, pickManager, blockAir);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
 		s.setTextureName(modId + ":" + name);
 		// s.setInitialState(config.get("Stick", name + ".state", 0));
-		// GameRegistry.registerItem(s, name);
+		GameRegistry.registerItem(s, name);
+		System.out.println("[SpellLoader.loadSpell] Loaded spell=" + s);
 		return s;
 	}
 

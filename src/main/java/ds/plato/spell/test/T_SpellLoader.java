@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 
 import ds.plato.common.Plato;
 import ds.plato.common.SelectionManager;
+import ds.plato.pick.PickManager;
 import ds.plato.spell.AbstractSpell;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.MoveSpell;
@@ -28,11 +29,12 @@ public class T_SpellLoader extends PlatoTestFactory {
 	SpellLoader loader;
 	@Mock UndoManager undoManager;
 	@Mock SelectionManager selectionManager;
+	@Mock PickManager pickManager;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		loader = new SpellLoader(undoManager, selectionManager, air, Plato.ID);
+		loader = new SpellLoader(undoManager, selectionManager, pickManager, air, Plato.ID);
 	}
 
 	@Test

@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
+import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
@@ -15,8 +16,8 @@ public abstract class AbstractMatrixTransformationSpell extends AbstractSpell {
 
 	private Block blockAir;
 
-	public AbstractMatrixTransformationSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, Block blockAir) {
-		super(descriptor, undoManager, selectionManager);
+	public AbstractMatrixTransformationSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir) {
+		super(descriptor, undoManager, selectionManager, pickManager);
 		this.blockAir = blockAir;
 	}
 	

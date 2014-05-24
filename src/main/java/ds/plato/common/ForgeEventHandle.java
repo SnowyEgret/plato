@@ -22,6 +22,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.WorldWrapper;
 import ds.plato.pick.Pick;
+import ds.plato.spell.AbstractSpell;
 
 public class ForgeEventHandle {
 
@@ -85,9 +86,8 @@ public class ForgeEventHandle {
 			default:
 				break;
 			}
-		} else
-
-		if (item instanceof ItemBlock) {
+			
+		} else if (item instanceof ItemBlock) {
 			ItemBlock itemBlock = (ItemBlock) item;
 			switch (e.action) {
 			case LEFT_CLICK_BLOCK:
@@ -107,9 +107,20 @@ public class ForgeEventHandle {
 				break;
 			}
 
-		} else {
-			// Might want to check for a bucket to fill with water
-			System.out.println("[MODEventHandler.onClick] Not Handled. item=" + item);
+		} else if (item instanceof AbstractSpell) {
+			AbstractSpell spell = (AbstractSpell) item;
+			switch (e.action) {
+			case LEFT_CLICK_BLOCK:
+				break;
+			case RIGHT_CLICK_AIR:
+				break;
+			case RIGHT_CLICK_BLOCK:
+				spell.onClickRight(e);
+				break;
+			default:
+				break;
+			}
+			System.out.println("[ForgeEventHandler.onClick] Not Handled. item=" + item);
 		}
 	}
 

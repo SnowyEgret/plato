@@ -52,6 +52,7 @@ public class T_DeleteSpell extends PlatoTestFactory {
 	@Mock WorldWrapper world;
 	@Mock UndoManager um;
 	@Mock SelectionManager sm;
+	@Mock PickManager pm;
 	@Mock DeleteSpellDescriptor sd;
 
 	@Before
@@ -67,7 +68,7 @@ public class T_DeleteSpell extends PlatoTestFactory {
 
 	@Test
 	public void encant() {
-		AbstractSpell s = new DeleteSpell(sd, um, sm, air).setWorld(world);
+		AbstractSpell s = new DeleteSpell(sd, um, sm, pm, air).setWorld(world);
 		s.invoke(new Pick[] {});
 		verify(world).setBlock(0, 0, 0, air, 0, 3);
 	}

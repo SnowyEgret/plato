@@ -25,12 +25,13 @@ public abstract class AbstractSpell extends Item {
 	protected IWorld world;
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
-	
+	protected IPick pickManager;
 
-	public AbstractSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager) {
+	public AbstractSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		this.descriptor = descriptor;
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
+		this.pickManager = pickManager;
 	}
 
 	// Spell can only be partially constructed during FML initialization. The world is only available after the player
@@ -56,8 +57,15 @@ public abstract class AbstractSpell extends Item {
 		return false;
 	}
 
+	//TODO Maybe this is protected and staff sends its PlayerInteractEvent to the onClickRight.
 	public abstract void invoke(Pick[] picks);
 
 	public abstract int getNumPicks();
+
+	public void onClickRight(PlayerInteractEvent e) {
+		if (pickManager.isFinishedPicking()) {
+			invoke(pickManager.getPicksArray());
+		}
+	}
 
 }

@@ -19,8 +19,9 @@ public class DeleteSpell extends AbstractTransformerSpell {
 			SpellDescriptor descriptor,
 			IUndo undoManager,
 			ISelect selectionManager,
+			IPick pickManager,
 			Block blockAir) {
-		super(descriptor, undoManager, selectionManager);
+		super(descriptor, undoManager, selectionManager, pickManager);
 		this.blockAir = blockAir;
 	}
 

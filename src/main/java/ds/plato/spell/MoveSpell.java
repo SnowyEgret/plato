@@ -18,8 +18,13 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class MoveSpell extends AbstractMatrixTransformationSpell {
 
-	public MoveSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, Block blockAir) {
-		super(descriptor, undoManager, selectionManager, blockAir);
+	public MoveSpell(
+			SpellDescriptor descriptor,
+			IUndo undoManager,
+			ISelect selectionManager,
+			IPick pickManager,
+			Block blockAir) {
+		super(descriptor, undoManager, selectionManager, pickManager, blockAir);
 	}
 
 	@Override
