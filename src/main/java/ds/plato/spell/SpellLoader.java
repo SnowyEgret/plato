@@ -2,6 +2,8 @@ package ds.plato.spell;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,12 +17,16 @@ public class SpellLoader {
 
 	private CreativeTabs tabSpells;
 	private String modId;
+	IUndo undoManager;
+	ISelect selectionManager;
+	Block blockAir;
 
-	public SpellLoader(String modId) {
+	public SpellLoader( IUndo undoManager, ISelect selectionManager, Block blockAir, String modId) {
+		this.undoManager = undoManager;
+		this.selectionManager = selectionManager;
+		this.blockAir = blockAir;
 		this.modId = modId;
-	}
-
-	public SpellLoader() {
+		
 		tabSpells = new CreativeTabs("tabSpells") {
 			@Override
 			public Item getTabIconItem() {
@@ -29,19 +35,34 @@ public class SpellLoader {
 		};
 	}
 
-	public Item loadSpell(Class<? extends AbstractSpell> spellClass, Class<? extends SpellDescriptor> descriptorClass, IUndo undoManager, ISelect selectionManager, Block blockAir) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+	public Iterable<AbstractSpell> loadSpells(Class<? extends AbstractSpell>... spellClasses) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+		List<AbstractSpell> spells = new ArrayList<>();
+		for (Class<? extends AbstractSpell> c : spellClasses) {
+			spells.add(loadSpell(c));
+		}
+		return spells;
+	}
+
+	// public Item loadSpell(Class<? extends AbstractSpell> spellClass, Class<? extends SpellDescriptor>
+	// descriptorClass, IUndo undoManager, ISelect selectionManager, Block blockAir) throws InstantiationException,
+	// IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
+	// SecurityException {
+	public AbstractSpell loadSpell(Class<? extends AbstractSpell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 
 		String name = toName(spellClass);
+		String descriptorClassname = spellClass.getName() + "Descriptor";
+		Class descriptorClass = Class.forName(descriptorClassname);
 		// Property p = config.get("Spell", name + ".state", 0);
 		SpellDescriptor d = (SpellDescriptor) descriptorClass.getConstructor().newInstance();
-		Constructor<? extends AbstractSpell> c = spellClass.getConstructor(SpellDescriptor.class, IUndo.class, ISelect.class, Block.class);
-		Item s = (Item) c.newInstance(d, undoManager, selectionManager, blockAir);
+		Constructor<? extends AbstractSpell> c = spellClass.getConstructor(SpellDescriptor.class, IUndo.class,
+				ISelect.class, Block.class);
+		AbstractSpell s = (AbstractSpell) c.newInstance(d, undoManager, selectionManager, blockAir);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
 		s.setTextureName(modId + ":" + name);
 		// s.setInitialState(config.get("Stick", name + ".state", 0));
-		//GameRegistry.registerItem(s, name);
+		// GameRegistry.registerItem(s, name);
 		return s;
 	}
 
