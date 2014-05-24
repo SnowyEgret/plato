@@ -1,7 +1,5 @@
-package ds.plato.spell.test;
+package ds.plato.spell;
 
-import ds.plato.spell.PickDescriptor;
-import ds.plato.spell.SpellDescriptor;
 
 public class MoveSpellDescriptor extends SpellDescriptor {
 
@@ -9,5 +7,6 @@ public class MoveSpellDescriptor extends SpellDescriptor {
 		name = "MOVE";
 		description = "Moves selections";
 		picks = new PickDescriptor("From", "To");
+		modifiers = new ModifierDescriptor("ctrl", "Deletes originial");
 	}
 }

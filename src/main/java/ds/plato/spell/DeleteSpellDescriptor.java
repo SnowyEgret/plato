@@ -6,6 +6,5 @@ public class DeleteSpellDescriptor extends SpellDescriptor {
 		name = "DELETE";
 		description = "Deletes selection";
 		picks = new PickDescriptor("Anywhere");
-		modifiers = new ModifierDescriptor("ctrl", "Deletes originial");
 	}
 }

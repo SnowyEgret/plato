@@ -32,6 +32,7 @@ import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.DeleteSpellDescriptor;
 import ds.plato.spell.MoveSpell;
 import ds.plato.spell.AbstractSpell;
+import ds.plato.spell.MoveSpellDescriptor;
 import ds.plato.test.PlatoTestFactory;
 import ds.plato.undo.Transaction;
 import ds.plato.undo.UndoManager;
