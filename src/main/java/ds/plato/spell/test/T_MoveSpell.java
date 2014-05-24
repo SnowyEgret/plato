@@ -31,22 +31,22 @@ import ds.plato.pick.PickManager;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.DeleteSpellDescriptor;
 import ds.plato.spell.MoveSpell;
-import ds.plato.spell.AbstractSpell;
+import ds.plato.spell.Spell;
 import ds.plato.spell.MoveSpellDescriptor;
-import ds.plato.test.PlatoTestFactory;
+import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
 import ds.plato.undo.UndoManager;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Keyboard.class })
 @PowerMockIgnore({ "javax.management.*" })
-public class T_MoveSpell extends PlatoTestFactory {
+public class T_MoveSpell extends PlatoTest {
 
 	@Mock WorldWrapper world;
 	@Mock UndoManager um;
 	@Mock SelectionManager sm;
 	@Mock PickManager pm;
-	AbstractSpell spell;
+	Spell spell;
 	Pick[] picks;
 	Selection s1, s2;
 

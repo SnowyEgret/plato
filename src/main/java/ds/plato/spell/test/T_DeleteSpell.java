@@ -20,12 +20,12 @@ import ds.plato.pick.Pick;
 import ds.plato.pick.PickManager;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.DeleteSpellDescriptor;
-import ds.plato.spell.AbstractSpell;
-import ds.plato.test.PlatoTestFactory;
+import ds.plato.spell.Spell;
+import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
 import ds.plato.undo.UndoManager;
 
-public class T_DeleteSpell extends PlatoTestFactory {
+public class T_DeleteSpell extends PlatoTest {
 
 	// This is an integration test
 	// IWorld w;
@@ -68,7 +68,7 @@ public class T_DeleteSpell extends PlatoTestFactory {
 
 	@Test
 	public void encant() {
-		AbstractSpell s = new DeleteSpell(sd, um, sm, pm, air).setWorld(world);
+		Spell s = new DeleteSpell(sd, um, sm, pm, air).setWorld(world);
 		s.invoke(new Pick[] {});
 		verify(world).setBlock(0, 0, 0, air, 0, 3);
 	}

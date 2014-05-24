@@ -13,7 +13,7 @@ import ds.plato.IWorld;
 import ds.plato.common.BlockPick;
 import ds.plato.common.BlockSelected;
 
-public class PlatoTestFactory {
+public class PlatoTest {
 
 	@Mock protected BlockDirt dirt;
 	@Mock protected BlockAir air;

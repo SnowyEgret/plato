@@ -18,9 +18,9 @@ import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
 import ds.plato.common.SelectionManager;
 import ds.plato.spell.SetBlock;
-import ds.plato.test.PlatoTestFactory;
+import ds.plato.test.PlatoTest;
 
-public class T_SetBlock extends PlatoTestFactory {
+public class T_SetBlock extends PlatoTest {
 
 	@Test
 	public void set() {		

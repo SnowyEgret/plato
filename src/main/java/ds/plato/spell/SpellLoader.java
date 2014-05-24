@@ -38,9 +38,9 @@ public class SpellLoader {
 		};
 	}
 
-	public Iterable<AbstractSpell> loadSpells(Class<? extends AbstractSpell>... spellClasses) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-		List<AbstractSpell> spells = new ArrayList<>();
-		for (Class<? extends AbstractSpell> c : spellClasses) {
+	public Iterable<Spell> loadSpells(Class<? extends Spell>... spellClasses) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+		List<Spell> spells = new ArrayList<>();
+		for (Class<? extends Spell> c : spellClasses) {
 			spells.add(loadSpell(c));
 		}
 		return spells;
@@ -50,16 +50,16 @@ public class SpellLoader {
 	// descriptorClass, IUndo undoManager, ISelect selectionManager, Block blockAir) throws InstantiationException,
 	// IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
 	// SecurityException {
-	public AbstractSpell loadSpell(Class<? extends AbstractSpell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+	public Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 
 		String name = toName(spellClass);
 		String descriptorClassname = spellClass.getName() + "Descriptor";
 		Class descriptorClass = Class.forName(descriptorClassname);
 		// Property p = config.get("Spell", name + ".state", 0);
 		SpellDescriptor d = (SpellDescriptor) descriptorClass.getConstructor().newInstance();
-		Constructor<? extends AbstractSpell> c = spellClass.getConstructor(SpellDescriptor.class, IUndo.class,
+		Constructor<? extends Spell> c = spellClass.getConstructor(SpellDescriptor.class, IUndo.class,
 				ISelect.class, IPick.class, Block.class);
-		AbstractSpell s = (AbstractSpell) c.newInstance(d, undoManager, selectionManager, pickManager, blockAir);
+		Spell s = (Spell) c.newInstance(d, undoManager, selectionManager, pickManager, blockAir);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);

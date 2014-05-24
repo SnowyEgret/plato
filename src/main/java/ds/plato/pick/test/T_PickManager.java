@@ -14,9 +14,9 @@ import org.junit.Test;
 
 import ds.plato.pick.Pick;
 import ds.plato.pick.PickManager;
-import ds.plato.test.PlatoTestFactory;
+import ds.plato.test.PlatoTest;
 
-public class T_PickManager extends PlatoTestFactory {
+public class T_PickManager extends PlatoTest {
 
 	PickManager m;
 

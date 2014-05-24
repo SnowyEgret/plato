@@ -12,7 +12,7 @@ import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
-public abstract class AbstractMatrixTransformationSpell extends AbstractSpell {
+public abstract class AbstractMatrixTransformationSpell extends Spell {
 
 	private Block blockAir;
 

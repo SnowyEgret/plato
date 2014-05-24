@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import ds.plato.IWorld;
 
-public class T_StubWorld extends PlatoTestFactory {
+public class T_StubWorld extends PlatoTest {
 
 	@Mock BlockDirt dirt;
 

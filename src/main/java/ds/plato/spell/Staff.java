@@ -11,7 +11,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class Staff {
 
-	List<AbstractSpell> spells = new ArrayList<>();
+	List<Spell> spells = new ArrayList<>();
 	private int ordinal = 0;
 	private IPick pickManager;
 
@@ -19,7 +19,7 @@ public class Staff {
 		this.pickManager = pickManager;
 	}
 
-	public AbstractSpell currentSpell() {
+	public Spell currentSpell() {
 		// if (spells.isEmpty()) {
 		// return null;
 		// } else {
@@ -27,7 +27,7 @@ public class Staff {
 		// }
 	}
 
-	public void addSpell(AbstractSpell spell) {
+	public void addSpell(Spell spell) {
 		if (!spells.contains(spell)) {
 			spells.add(spell);
 		}
@@ -39,13 +39,13 @@ public class Staff {
 		}
 	}
 
-	public AbstractSpell nextSpell() {
+	public Spell nextSpell() {
 		if (ordinal == spells.size() - 1) {
 			ordinal = 0;
 		} else {
 			ordinal++;
 		}
-		AbstractSpell currentSpell = currentSpell();
+		Spell currentSpell = currentSpell();
 		pickManager.reset(currentSpell.getNumPicks());
 		return currentSpell;
 

@@ -8,7 +8,7 @@ import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
-public abstract class AbstractTransformerSpell extends AbstractSpell {
+public abstract class AbstractTransformerSpell extends Spell {
 	
 
 	public AbstractTransformerSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {

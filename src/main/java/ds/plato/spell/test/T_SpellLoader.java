@@ -17,14 +17,14 @@ import org.mockito.MockitoAnnotations;
 import ds.plato.common.Plato;
 import ds.plato.common.SelectionManager;
 import ds.plato.pick.PickManager;
-import ds.plato.spell.AbstractSpell;
+import ds.plato.spell.Spell;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.MoveSpell;
 import ds.plato.spell.SpellLoader;
-import ds.plato.test.PlatoTestFactory;
+import ds.plato.test.PlatoTest;
 import ds.plato.undo.UndoManager;
 
-public class T_SpellLoader extends PlatoTestFactory {
+public class T_SpellLoader extends PlatoTest {
 
 	SpellLoader loader;
 	@Mock UndoManager undoManager;
@@ -39,16 +39,16 @@ public class T_SpellLoader extends PlatoTestFactory {
 
 	@Test
 	public void loadSpell() throws Exception {
-		AbstractSpell spell = loader.loadSpell(DeleteSpell.class);
+		Spell spell = loader.loadSpell(DeleteSpell.class);
 		assertThat(spell, instanceOf(DeleteSpell.class));
 		assertThat(spell.descriptor.name.toLowerCase(), equalTo("delete"));
 	}
 
 	@Test
 	public void loadSpells() throws Exception {
-		Iterable<AbstractSpell> spells = loader.loadSpells(DeleteSpell.class, MoveSpell.class);
+		Iterable<Spell> spells = loader.loadSpells(DeleteSpell.class, MoveSpell.class);
 		int i = 0;
-		for (AbstractSpell s : spells) {
+		for (Spell s : spells) {
 			Class c = s.getClass();
 			if (c != MoveSpell.class && c != DeleteSpell.class) {
 				fail("Class not expected: "+c);

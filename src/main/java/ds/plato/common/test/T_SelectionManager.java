@@ -21,9 +21,9 @@ import ds.plato.IWorld;
 import ds.plato.WorldWrapper;
 import ds.plato.common.Selection;
 import ds.plato.common.SelectionManager;
-import ds.plato.test.PlatoTestFactory;
+import ds.plato.test.PlatoTest;
 
-public class T_SelectionManager extends PlatoTestFactory {
+public class T_SelectionManager extends PlatoTest {
 
 	@Test
 	public void selectionAt() {
