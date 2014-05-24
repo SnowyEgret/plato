@@ -8,9 +8,10 @@ import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
 import ds.plato.common.Transformer;
 import ds.plato.pick.IPick;
+import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 
-public class DeleteSpell extends Spell {
+public class DeleteSpell extends AbstractTransformerSpell {
 
 	private Block blockAir;
 
@@ -18,14 +19,14 @@ public class DeleteSpell extends Spell {
 			SpellDescriptor descriptor,
 			IUndo undoManager,
 			ISelect selectionManager,
-			IPick pickManager,
 			Block blockAir) {
-		super(descriptor, undoManager, selectionManager, pickManager);
+		super(descriptor, undoManager, selectionManager);
 		this.blockAir = blockAir;
 	}
 
 	@Override
-	public void encant(PlayerInteractEvent playerInteractEvent) {
+	public void invoke(Pick[] picks) {
+		assert picks.length == getNumPicks();
 		transformSelections(new Transformer() {
 			@Override
 			public Selection transform(Selection s) {
@@ -33,5 +34,10 @@ public class DeleteSpell extends Spell {
 				return new Selection(s.x, s.y, s.z, blockAir, 0);
 			}
 		});
+	}
+
+	@Override
+	public int getNumPicks() {
+		return 0;
 	}
 }

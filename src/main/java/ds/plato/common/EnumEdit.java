@@ -15,7 +15,7 @@ public enum EnumEdit {
 	DELETE(1, new Menu("Delete selection", "anywhere")),
 	FILL(1, new Menu("Fill selection with first block in inventory", "anywhere")),
 	FILL_CHECKER(1, new Menu("fill selection with CHECKER pattern with first two blocks in inventory", "anywhere")),
-	FILL_RANDOM(1, new Menu("fill selection with RANDOM pattern with first two blocks in inventory", "anywhere")),
+	FILL_RANDOM(1, new Menu("fill selection with RANDOM pattern with blocks in inventory", "anywhere")),
 	FILL_BELOW(0, new Menu("fill_below")),
 	DROP(1, new Menu("drop")),
 	SAVE(1, new Menu("save")),

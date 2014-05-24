@@ -26,6 +26,7 @@ public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+		//TODO Remove all this when there is only one pickManager injected to all Staffs.
 		Block selectedOrPickedBlock = null;
 		Point3i p = new Point3i(x, y, z);
 		Selection sel = Plato.selectionManager.selectionAt(p);
@@ -59,13 +60,13 @@ public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 		}
 		
 		if (block == Plato.blockSelected) {
+			//TODO 
+			//renderer.renderStandardBlockWithColorMultiplier(selectionManager.selectionAt(x, y, z).block, x, y, z, .9f, .7f, .7f);
 			renderer.renderStandardBlockWithColorMultiplier(selectedOrPickedBlock, x, y, z, .9f, .7f, .7f);
 		} else if (block == Plato.blockPick0) {
+			//TODO
+			//renderer.renderStandardBlockWithColorMultiplier(pickManager.pickAt(x, y, z).block, x, y, z, .7f, .9f, .7f);
 			renderer.renderStandardBlockWithColorMultiplier(selectedOrPickedBlock, x, y, z, .7f, .9f, .7f);
-			// } else if (block instanceof BlockPick1) {
-			// renderer.renderStandardBlockWithColorMultiplier(selectedOrPickedBlock, x, y, z, .7f, .7f, .9f);
-			// } else if (block instanceof BlockPick2) {
-			// renderer.renderStandardBlockWithColorMultiplier(selectedOrPickedBlock, x, y, z, .9f, .7f, .9f);
 		} else {
 			throw new RuntimeException("Unexpected block type: "+block);
 		}

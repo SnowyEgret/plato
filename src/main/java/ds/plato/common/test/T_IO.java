@@ -20,19 +20,17 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import ds.plato.common.IO;
 import ds.plato.common.Selection;
 import ds.plato.common.IO.Group;
+import ds.plato.test.PlatoTestFactory;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ BlockCactus.class, BlockDirt.class })
-@PowerMockIgnore({ "javax.management.*" })
-public class T_IO {
+public class T_IO extends PlatoTestFactory {
 	
 	String filename = "saves/test.json";
 
 	@Test
 	public void write() throws IOException {
 		List<Selection> selections = new ArrayList<>();
-		selections.add(new Selection(1, 2, 3, PowerMockito.mock(BlockCactus.class), 0));
-		selections.add(new Selection(4, 5, 6, PowerMockito.mock(BlockDirt.class), 0));
+		selections.add(new Selection(1, 2, 3, dirt, 0));
+		selections.add(new Selection(4, 5, 6, dirt, 0));
 		IO.writeGroup(new Point3i(0, 0, 0), selections, filename);
 	}
 

@@ -15,4 +15,6 @@ public interface ISelect {
 	public void deselect(Selection selection);
 
 	public Iterable<Point3i> clear();
+
+	public Selection removeSelection(Selection s);
 }

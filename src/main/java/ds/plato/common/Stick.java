@@ -142,9 +142,9 @@ public abstract class Stick extends Item {
 		return pickManager.getPickAt(p);
 	}
 
-	public Pick getPickAt(int x, int y, int z) {
-		return pickManager.getPickAt(x, y, z);
-	}
+//	public Pick getPickAt(int x, int y, int z) {
+//		return pickManager.getPickAt(x, y, z);
+//	}
 
 	public Pick lastPick() {
 		return pickManager.lastPick();

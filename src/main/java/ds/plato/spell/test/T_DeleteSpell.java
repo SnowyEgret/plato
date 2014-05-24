@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import ds.plato.WorldWrapper;
 import ds.plato.common.Selection;
 import ds.plato.common.SelectionManager;
+import ds.plato.pick.Pick;
 import ds.plato.pick.PickManager;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.DeleteSpellDescriptor;
@@ -47,30 +48,27 @@ public class T_DeleteSpell extends PlatoTestFactory {
 	// t.commit();
 	// System.out.println("[T_DeleteSpell.encant] selectionManager=" + selectionManager);
 	// }
-	
+
 	@Mock WorldWrapper world;
 	@Mock UndoManager um;
 	@Mock SelectionManager sm;
-	@Mock PickManager pm;
 	@Mock DeleteSpellDescriptor sd;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		List<Selection> selections = new ArrayList<>();
-		selections.add(new Selection(1, 2, 3, dirt, 0));
+		selections.add(new Selection(0, 0, 0, dirt, 0));
 		when(sm.getSelections()).thenReturn(selections);
 		when(um.newTransaction()).thenReturn(new Transaction(um));
-//		selectionManager.addSelection(new Selection(1, 2, 3, dirt, 0));
-//		System.out.println("[T_DeleteSpell.setUp] selection=" + selectionManager.getSelectionList().get(0));
+		// selectionManager.addSelection(new Selection(1, 2, 3, dirt, 0));
+		// System.out.println("[T_DeleteSpell.setUp] selection=" + selectionManager.getSelectionList().get(0));
 	}
-
 
 	@Test
 	public void encant() {
-		// Spell s = new DeleteSpell(descriptor, undoManager, selectionManager, pickManager).setWorld(w);
-		Spell s = new DeleteSpell(sd, um, sm, pm, air).setWorld(world);
-		s.encant(new PlayerInteractEvent(null, null, 1, 2, 3, 0));
-		verify(world).setBlock(1, 2, 3, air, 0, 3);
+		Spell s = new DeleteSpell(sd, um, sm, air).setWorld(world);
+		s.invoke(new Pick[] {});
+		verify(world).setBlock(0, 0, 0, air, 0, 3);
 	}
 }

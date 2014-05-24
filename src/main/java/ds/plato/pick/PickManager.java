@@ -23,18 +23,34 @@ public class PickManager implements IPick {
 	public PickManager() {
 	}
 
-	public void reset(int maxPicks) {
-		this.maxPicks = maxPicks;
-		picks.clear();
-	}
-
+	@Override
 	public Pick pick(int x, int y, int z, Block block) {
 		if (picks.size() < maxPicks) {
 			Pick p = new Pick(x, y, z, block);
 			picks.add(p);
 			return p;
-		} else
+		} else {
 			return null;
+		}
+	}
+
+	@Override
+	public boolean isFinishedPicking() {
+		return (picks.size() == maxPicks);
+	}
+
+	public Pick getPick(int i) {
+		return picks.get(i);
+	}
+
+	@Override
+	public Pick[] getPicksArray() {
+		return (Pick[]) picks.toArray();
+	}
+
+	public void reset(int maxPicks) {
+		this.maxPicks = maxPicks;
+		picks.clear();
 	}
 
 	public Pick getPickAt(int x, int y, int z) {
@@ -60,14 +76,6 @@ public class PickManager implements IPick {
 			l.add(new Point3d(p.x, p.y, p.z));
 		}
 		return l;
-	}
-
-	public boolean isFinishedPicking() {
-		return (picks.size() == maxPicks);
-	}
-
-	public Pick getPick(int i) {
-		return picks.get(i);
 	}
 
 	public Pick getPickAt(Point3i p) {
