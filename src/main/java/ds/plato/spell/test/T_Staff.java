@@ -18,7 +18,7 @@ import ds.plato.pick.Pick;
 import ds.plato.pick.PickManager;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.MoveSpell;
-import ds.plato.spell.Spell;
+import ds.plato.spell.AbstractSpell;
 import ds.plato.spell.Staff;
 import ds.plato.test.PlatoTestFactory;
 
@@ -60,7 +60,7 @@ public class T_Staff extends PlatoTestFactory {
 
 	@Test
 	public void nextSpell_pickMangerIsReset() {
-		Spell s = staff.nextSpell();
+		AbstractSpell s = staff.nextSpell();
 		verify(mockPickManager).reset(s.getNumPicks());
 		s = staff.nextSpell();
 		verify(mockPickManager, times(2)).reset(s.getNumPicks());

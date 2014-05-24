@@ -11,7 +11,7 @@ import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
-public abstract class AbstractMatrixTransformationSpell extends Spell {
+public abstract class AbstractMatrixTransformationSpell extends AbstractSpell {
 
 	private Block blockAir;
 

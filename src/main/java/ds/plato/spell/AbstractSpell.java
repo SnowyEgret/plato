@@ -18,14 +18,14 @@ import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
-public abstract class Spell {
+public abstract class AbstractSpell {
 
 	public SpellDescriptor descriptor;
 	protected IWorld world;
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
 
-	public Spell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager) {
+	public AbstractSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager) {
 		this.descriptor = descriptor;
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
@@ -33,7 +33,7 @@ public abstract class Spell {
 
 	// Spell can only be partially constructed during FML initialization. The world is only available after the player
 	// joins the game.
-	public Spell setWorld(IWorld world) {
+	public AbstractSpell setWorld(IWorld world) {
 		this.world = world;
 		return this;
 	}
