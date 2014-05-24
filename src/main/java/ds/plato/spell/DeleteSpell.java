@@ -14,7 +14,7 @@ import ds.plato.undo.IUndo;
 public class DeleteSpell extends AbstractTransformerSpell {
 
 	private Block blockAir;
-
+	
 	public DeleteSpell(
 			SpellDescriptor descriptor,
 			IUndo undoManager,

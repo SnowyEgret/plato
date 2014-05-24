@@ -8,6 +8,7 @@ import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
 public abstract class AbstractTransformerSpell extends AbstractSpell {
+	
 
 	public AbstractTransformerSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager) {
 		super(descriptor, undoManager, selectionManager);

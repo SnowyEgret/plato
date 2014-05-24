@@ -5,6 +5,7 @@ import javax.vecmath.Point3d;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import com.google.inject.Inject;
@@ -18,12 +19,13 @@ import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
-public abstract class AbstractSpell {
+public abstract class AbstractSpell extends Item {
 
 	public SpellDescriptor descriptor;
 	protected IWorld world;
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
+	
 
 	public AbstractSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager) {
 		this.descriptor = descriptor;

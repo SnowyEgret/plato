@@ -1,5 +1,6 @@
 package ds.plato.common;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +79,9 @@ public class Plato {
 	public void preInit(FMLPreInitializationEvent event) {
 
 		log = LogManager.getLogger(NAME);
-		config = new ConfigHelper(event.getSuggestedConfigurationFile(), ID);
+		File file = event.getSuggestedConfigurationFile();
+		System.out.println("[Plato.preInit] file=" + file);
+		config = new ConfigHelper(file, ID);
 
 		log.info("Initializing blocks...");
 		blockSelected = config.initBlock(BlockSelected.class);
