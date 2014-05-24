@@ -45,7 +45,9 @@ public class Staff {
 		} else {
 			ordinal++;
 		}
-		return currentSpell();
+		Spell currentSpell = currentSpell();
+		pickManager.reset(currentSpell.getNumPicks());
+		return currentSpell;
 
 	}
 
@@ -63,6 +65,11 @@ public class Staff {
 			// pickManager.pick(x, y, z, block);
 		}
 		return pickManager.isFinishedPicking();
+	}
+
+	@Override
+	public String toString() {
+		return "Staff [spells=" + spells + ", ordinal=" + ordinal + ", pickManager=" + pickManager + "]";
 	}
 
 //	protected Point3d getPick(int i) {

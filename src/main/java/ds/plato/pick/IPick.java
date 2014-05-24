@@ -11,4 +11,6 @@ public interface IPick {
 	public Pick pick(int x, int y, int z, Block block);
 
 	public Pick[] getPicksArray();
+
+	public void reset(int numPicks);
 }
