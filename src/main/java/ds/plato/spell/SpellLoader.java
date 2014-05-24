@@ -75,4 +75,17 @@ public class SpellLoader {
 		return n.substring(0, 1).toLowerCase() + n.substring(1);
 	}
 
+	public Staff loadStaff(Class<Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		String name = toName(staffClass);
+		Constructor c = staffClass.getConstructor(IPick.class);
+		Staff s = (Staff) c.newInstance(pickManager);
+		s.setUnlocalizedName(name);
+		s.setMaxStackSize(1);
+		s.setCreativeTab(tabSpells);
+		s.setTextureName(modId + ":" + name);
+		GameRegistry.registerItem(s, name);
+		System.out.println("[SpellLoader.loadStaff] Loaded staff=" + s);
+		return s;
+	}
+
 }

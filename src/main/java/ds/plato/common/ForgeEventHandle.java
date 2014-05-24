@@ -22,6 +22,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.WorldWrapper;
 import ds.plato.pick.Pick;
+import ds.plato.spell.IClickable;
 import ds.plato.spell.Spell;
 
 public class ForgeEventHandle {
@@ -107,7 +108,8 @@ public class ForgeEventHandle {
 				break;
 			}
 
-		} else if (item instanceof Spell) {
+		//TODO only this block when converting to spell package. IClickable covers both Spells and Staffs.
+		} else if (item instanceof IClickable) {
 			Spell spell = (Spell) item;
 			switch (e.action) {
 			case LEFT_CLICK_BLOCK:

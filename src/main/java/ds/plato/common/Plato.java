@@ -43,6 +43,7 @@ import ds.plato.pick.PickManager;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.MoveSpell;
 import ds.plato.spell.SpellLoader;
+import ds.plato.spell.Staff;
 import ds.plato.undo.UndoManager;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)
@@ -105,10 +106,11 @@ public class Plato {
 		editStick = (StickEdit) config.initStick(StickEdit.class);
 		solidStick = (StickSolid) config.initStick(StickSolid.class);
 		
-		log.info("[Plato.preInit] Initializing spells");
+		log.info("[Plato.preInit] Initializing spells and staff");
 		SpellLoader loader = new SpellLoader(undoManager, selectionManager, pickManager, Blocks.air, ID);
 		try {
 			loader.loadSpells(DeleteSpell.class, MoveSpell.class);
+			loader.loadStaff(Staff.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -233,8 +235,6 @@ public class Plato {
 
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
-		// undoManager.setWorld(world);
-		// pickManager.setWorld(world);
 		System.out.println("[Plato.setWorld] world=" + world);
 	}
 }

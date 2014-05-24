@@ -3,20 +3,27 @@ package ds.plato.spell;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.vecmath.Point3d;
-
 import ds.plato.pick.IPick;
-import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-public class Staff {
+public class Staff extends Item implements IClickable {
 
-	List<Spell> spells = new ArrayList<>();
+	private List<Spell> spells = new ArrayList<>();
 	private int ordinal = 0;
 	private IPick pickManager;
 
 	public Staff(IPick pickManager) {
 		this.pickManager = pickManager;
+	}
+
+	@Override
+	public void onClickRight(PlayerInteractEvent e) {
+		if (pick(e.x, e.y, e.z)) {
+			//TODO
+			//currentSpell().onClickRight(e);
+			currentSpell().invoke(pickManager.getPicksArray());
+		}
 	}
 
 	public Spell currentSpell() {
@@ -30,12 +37,6 @@ public class Staff {
 	public void addSpell(Spell spell) {
 		if (!spells.contains(spell)) {
 			spells.add(spell);
-		}
-	}
-
-	public void onClickRight(PlayerInteractEvent e) {
-		if (pick(e.x, e.y, e.z)) {
-			currentSpell().invoke(pickManager.getPicksArray());
 		}
 	}
 
@@ -58,8 +59,8 @@ public class Staff {
 	public boolean pick(int x, int y, int z) {
 		// TODO: Handle case where location is already a selection
 		if (!pickManager.isFinishedPicking()) {
-			// Block block = world.getBlock(x, y, z);
 			// TODO commented out for now. PickManager could pick a block like SelectionManager selects a block.
+			// Block block = world.getBlock(x, y, z);
 			// blockPick0 could be injected during construction
 			// world.setBlock(x, y, z, Plato.blockPick0);
 			// pickManager.pick(x, y, z, block);
