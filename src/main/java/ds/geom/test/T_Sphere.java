@@ -10,13 +10,13 @@ import org.junit.Test;
 import ds.geom.PointSet;
 import ds.geom.Primitive;
 
-public class T_Sphere {
+public class T_Sphere extends GeomTest {
 
 	@Test
 	public void test() {
-		Primitive p = F.sphere(F.p());
+		Primitive p = sphere(p());
 		PointSet points = p.pointSet();
-		new Viewer(points);
+		//new Viewer(points);
 		for (Point3d pt : points) {
 			assertThat(p.contains(pt), equalTo(true));
 		}

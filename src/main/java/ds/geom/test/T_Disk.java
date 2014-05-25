@@ -11,15 +11,15 @@ import ds.geom.DiskXZ;
 import ds.geom.PointSet;
 import ds.geom.Primitive;
 
-public class T_Disk {
+public class T_Disk extends GeomTest {
 
 	@Test
 	public void constructor() {
-		Point3d p0 = F.p();
-		Point3d pEdge = F.p();
+		Point3d p0 = p();
+		Point3d pEdge = p();
 		Primitive p = new DiskXZ(p0, pEdge);
 		PointSet points = p.pointSet();
-		new Viewer(points);
+		//new Viewer(points);
 		for (Point3d pt : points) {
 			assertThat(p.contains(pt), equalTo(true));
 		}

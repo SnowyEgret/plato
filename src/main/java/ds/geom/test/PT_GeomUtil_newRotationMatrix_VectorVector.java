@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized;
 import ds.geom.GeomUtil;
 
 @RunWith(Parameterized.class)
-public class PT_GeomUtil_newRotationMatrix_VectorVector {
+public class PT_GeomUtil_newRotationMatrix_VectorVector extends GeomTestParamaterized {
 
 	Vector3d v1, v2;
 
@@ -27,7 +27,7 @@ public class PT_GeomUtil_newRotationMatrix_VectorVector {
 
 	@Parameterized.Parameters
 	public static Collection params() {
-		return Arrays.asList(F.vectors(10, 2));
+		return Arrays.asList(vectors(10, 2));
 	}
 
 	@Test

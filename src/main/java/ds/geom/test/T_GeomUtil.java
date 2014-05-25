@@ -16,7 +16,7 @@ import ds.geom.GeomUtil;
 import ds.geom.Primitive;
 import ds.geom.VoxelSet;
 
-public class T_GeomUtil extends F {
+public class T_GeomUtil extends GeomTest {
 	
 	double epsilon = .000001;
 
@@ -75,7 +75,7 @@ public class T_GeomUtil extends F {
 		assertThat(p, closeToTuple3d(new Point3d(0, 0, 0)));
 		
 		p = new Point3d(0, 4, 0);
-		Primitive sphere = F.sphere(p);
+		Primitive sphere = sphere(p);
 		VoxelSet voxels = sphere.voxelize();
 		voxels = voxels.transform(m);
 		Point3i centroid = voxels.centroid();
@@ -85,7 +85,7 @@ public class T_GeomUtil extends F {
 	@Test
 	public void newReflectionMatrix_PointPoint() {
 		Point3d o = new Point3d(4, 0, 0);
-		Primitive sphere = F.sphere(o);
+		Primitive sphere = sphere(o);
 		VoxelSet voxels = sphere.voxelize();
 
 		Matrix4d m = GeomUtil.newReflectionMatrix(o, new Point3d(-1, 0, 1));

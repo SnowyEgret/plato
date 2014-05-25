@@ -15,7 +15,7 @@ import org.junit.runners.Parameterized;
 import ds.geom.InfinitePlane;
 
 @RunWith(Parameterized.class)
-public class PT_Plane_containsPoint {
+public class PT_Plane_containsPoint extends GeomTestParamaterized {
 
 	InfinitePlane infinitePlane;
 	Point3d pOnPlane;
@@ -29,9 +29,9 @@ public class PT_Plane_containsPoint {
 
 	@Parameterized.Parameters
 	public static Collection randomParams() throws Exception {
-		return Arrays.asList(F.plane_PointOnPlane_PointNotOnPlane());
+		return Arrays.asList(plane_PointOnPlane_PointNotOnPlane());
 	}
-	
+
 	@Test
 	public void test() {
 		assertThat("Point on plane is contained by plane", infinitePlane.contains(pOnPlane), equalTo(true));

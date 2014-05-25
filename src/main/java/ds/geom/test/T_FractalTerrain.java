@@ -9,7 +9,7 @@ import ds.geom.FractalTerrain;
 import ds.geom.Terrain;
 import ds.geom.VoxelSet;
 
-public class T_FractalTerrain extends F {
+public class T_FractalTerrain extends GeomTest {
 
 	@Test
 	public void test() throws Exception {

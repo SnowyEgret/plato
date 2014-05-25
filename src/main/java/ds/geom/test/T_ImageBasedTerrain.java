@@ -9,7 +9,7 @@ import ds.geom.ImageBasedTerrain;
 import ds.geom.Terrain;
 import ds.geom.VoxelSet;
 
-public class T_ImageBasedTerrain extends F {
+public class T_ImageBasedTerrain extends GeomTest {
 
 	@Test
 	public void test() throws Exception {

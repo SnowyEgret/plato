@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized;
 import ds.geom.GeomUtil;
 
 @RunWith(Parameterized.class)
-public class PT_GeomUtil_newTranslationMatrix {
+public class PT_GeomUtil_newTranslationMatrix extends GeomTestParamaterized {
 
 	Point3d p1, p2, pTest;
 
@@ -28,15 +28,7 @@ public class PT_GeomUtil_newTranslationMatrix {
 
 	@Parameterized.Parameters
 	public static Collection params() {
-		return Arrays.asList(F.points(3));
-	}
-
-	//@Parameterized.Parameters
-	public static Collection points() {
-		Object[][] params = new Object[][] {
-				{new Point3d(1, 1, 1), new Point3d(2, 2, 2), new Point3d(0, 0, 0) },
-		};
-		return Arrays.asList(params);
+		return Arrays.asList(points(3));
 	}
 
 	@Test

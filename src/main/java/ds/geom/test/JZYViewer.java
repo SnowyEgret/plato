@@ -16,6 +16,7 @@ import ds.geom.Tetrahedron;
 public class JZYViewer extends AbstractAnalysis {
 
 	PointSet pointSet;
+	static GeomTest g = new GeomTest();
 
 	public JZYViewer(PointSet pointSet) {
 		super();
@@ -24,7 +25,7 @@ public class JZYViewer extends AbstractAnalysis {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Drawable d = new Tetrahedron(F.o(), F.p());
+		Drawable d = new Tetrahedron(g.o(), g.p());
 		System.out.println("[JZYViewer.main] d=" + d);
 		//Drawable d = new Helix(Factory.newOrigin(), new Point3d(0, 200, 0), new Point3d(0, 0, 200), 5);
 		//Drawable d = Factory.randomBall(Factory.newOrigin());

@@ -11,7 +11,7 @@ import org.junit.Test;
 import ds.geom.PointSet;
 import ds.geom.Primitive;
 
-public class T_EllipticParaboloid {
+public class T_EllipticParaboloid extends GeomTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -19,9 +19,9 @@ public class T_EllipticParaboloid {
 
 	@Test
 	public void test() {
-		Primitive p = F.elipticParaboloid(F.p());
+		Primitive p = elipticParaboloid(p());
 		PointSet points = p.pointSet();
-		new Viewer(points);
+		//new Viewer(points);
 		for (Point3d pt : points) {
 			assertThat(p.contains(pt), equalTo(true));
 		}

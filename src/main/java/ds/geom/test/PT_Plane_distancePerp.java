@@ -15,7 +15,7 @@ import org.junit.runners.Parameterized;
 import ds.geom.InfinitePlane;
 
 @RunWith(Parameterized.class)
-public class PT_Plane_distancePerp {
+public class PT_Plane_distancePerp extends GeomTestParamaterized {
 
 	InfinitePlane infinitePlane;
 	Point3d point;
@@ -28,8 +28,8 @@ public class PT_Plane_distancePerp {
 	}
 
 	@Parameterized.Parameters
-	public static Collection randomParams() throws Exception {
-		return Arrays.asList(F.plane_PointAbovePlane(distanceAbovePlane));
+	public static  Collection randomParams() throws Exception {
+		return Arrays.asList(plane_PointAbovePlane(distanceAbovePlane));
 	}
 
 	@Test

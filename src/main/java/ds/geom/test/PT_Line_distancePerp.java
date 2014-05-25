@@ -17,7 +17,7 @@ import ds.geom.InfiniteLine;
 import ds.geom.InfinitePlane;
 
 @RunWith(Parameterized.class)
-public class PT_Line_distancePerp {
+public class PT_Line_distancePerp extends GeomTestParamaterized {
 
 	InfiniteLine infiniteLine;
 	Point3d point;

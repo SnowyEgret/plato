@@ -9,7 +9,7 @@ import org.junit.Test;
 import ds.geom.MengerSponge;
 import ds.geom.VoxelSet;
 
-public class T_MengerSponge extends F {
+public class T_MengerSponge extends GeomTest {
 
 	@Test
 	public void test() {

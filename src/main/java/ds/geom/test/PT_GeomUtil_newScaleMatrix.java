@@ -17,7 +17,7 @@ import org.junit.runners.Parameterized;
 import ds.geom.GeomUtil;
 
 @RunWith(Parameterized.class)
-public class PT_GeomUtil_newScaleMatrix {
+public class PT_GeomUtil_newScaleMatrix extends GeomTestParamaterized {
 
 	Vector3d v1;
 	Point3d pTest;
@@ -29,13 +29,7 @@ public class PT_GeomUtil_newScaleMatrix {
 
 	@Parameterized.Parameters
 	public static Collection randomParams() {
-		return Arrays.asList(F.vectorPoint(10));
-	}
-
-	// @Parameterized.Parameters
-	public static Collection points() {
-		Object[][] params = new Object[][] { { new Vector3d(1, 1, 1), new Point3d(2, 2, 2), }, };
-		return Arrays.asList(params);
+		return Arrays.asList(vectorPoint(10));
 	}
 
 	@Test

@@ -13,11 +13,11 @@ import ds.geom.Line;
 import ds.geom.PointSet;
 import ds.geom.VoxelSet;
 
-public class T_PointSet {
+public class T_PointSet extends GeomTest {
 
 	@Test
 	public void voxelize() {
-		PointSet points = F.pointSet(10000);
+		PointSet points = pointSet(10000);
 		VoxelSet voxels = points.voxelize();
 		int numVoxels = voxels.size();
 		int numPoints = points.size();

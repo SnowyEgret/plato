@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import ds.geom.Cube;
 
-public class T_Cube extends F {
+public class T_Cube extends GeomTest {
 
 	@Test
 	public void constructor() {

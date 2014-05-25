@@ -10,13 +10,13 @@ import org.junit.Test;
 import ds.geom.PointSet;
 import ds.geom.Primitive;
 
-public class T_Circle {
+public class T_Circle extends GeomTest {
 	
 	@Test
 	public void test() {
-		Primitive p = F.circleXY(F.p());
+		Primitive p = circleXY(p());
 		PointSet points = p.pointSet();
-		new Viewer(points);
+		//new Viewer(points);
 		for (Point3d pt : points) {
 			assertThat(p.contains(pt), equalTo(true));
 		}

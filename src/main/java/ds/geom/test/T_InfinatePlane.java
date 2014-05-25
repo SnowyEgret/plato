@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import ds.geom.InfinitePlane;
 
-public class T_InfinatePlane {
+public class T_InfinatePlane extends GeomTest {
 
 	@Test
 	public void XY() {
@@ -33,8 +33,8 @@ public class T_InfinatePlane {
 	
 	@Test
 	public void pointAtParameters() {
-		InfinitePlane infinitePlane = F.plane();
-		Point3d p = infinitePlane.pointAtParameters(F.d(), F.d());
+		InfinitePlane infinitePlane = plane();
+		Point3d p = infinitePlane.pointAtParameters(d(), d());
 		assertThat("Point from plane equation is contained by plane", infinitePlane.contains(p), is(true));
 	}
 	

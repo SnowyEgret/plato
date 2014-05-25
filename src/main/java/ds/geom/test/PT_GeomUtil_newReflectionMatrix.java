@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
-public class PT_GeomUtil_newReflectionMatrix {
+public class PT_GeomUtil_newReflectionMatrix extends GeomTestParamaterized {
 
 	Point3d p1, p2, p3, p4;
 	double epsilon = .000001;
@@ -24,7 +24,7 @@ public class PT_GeomUtil_newReflectionMatrix {
 
 	@Parameterized.Parameters
 	public static Collection randomPoints() {
-		return Arrays.asList(F.points(4));
+		return Arrays.asList(points(4));
 	}
 
 	@Test

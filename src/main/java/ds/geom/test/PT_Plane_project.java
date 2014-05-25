@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized;
 import ds.geom.InfinitePlane;
 
 @RunWith(Parameterized.class)
-public class PT_Plane_project {
+public class PT_Plane_project extends GeomTestParamaterized {
 
 	InfinitePlane infinitePlane;
 	Point3d point;
@@ -28,14 +28,13 @@ public class PT_Plane_project {
 
 	@Parameterized.Parameters
 	public static Collection randomParams() throws Exception {
-		return Arrays.asList(F.planePoint());
+		return Arrays.asList(planePoint());
 	}
 
 	@Test
 	public void test() {
 		Point3d p = infinitePlane.project(point);
-		assertThat("Point projected on plane is contained by plane",
-				infinitePlane.contains(p), equalTo(true));
+		assertThat("Point projected on plane is contained by plane", infinitePlane.contains(p), equalTo(true));
 	}
 
 }

@@ -17,7 +17,7 @@ import ds.geom.Primitive;
 import ds.geom.Sphere;
 import ds.geom.VoxelSet;
 
-public class T_VoxelSet extends F {
+public class T_VoxelSet extends GeomTest {
 
 	@Test
 	public void core_shell() {

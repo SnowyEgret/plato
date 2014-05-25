@@ -15,7 +15,7 @@ import org.junit.runners.Parameterized;
 import ds.geom.InfinitePlane;
 
 @RunWith(Parameterized.class)
-public class PT_Plane_normal {
+public class PT_Plane_normal extends GeomTestParamaterized {
 
 	InfinitePlane infinitePlane;
 
@@ -25,14 +25,14 @@ public class PT_Plane_normal {
 
 	@Parameterized.Parameters
 	public static Collection randomParams() throws Exception {
-		return F.params(10, 1, new Callable<InfinitePlane>() {
+		return params(10, 1, new Callable<InfinitePlane>() {
 			@Override
 			public InfinitePlane call() throws Exception {
-				return F.plane();
+				return g.plane();
 			}
 		});
 	}
-	
+
 	@Test
 	public void test() {
 		System.out.println("plane=" + infinitePlane);

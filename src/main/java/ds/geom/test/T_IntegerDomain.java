@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import ds.geom.IntegerDomain;
 
-public class T_IntegerDomain extends F {
+public class T_IntegerDomain extends GeomTest {
 
 	@Test
 	public void constuctor() {

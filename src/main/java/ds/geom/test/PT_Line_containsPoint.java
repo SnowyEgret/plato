@@ -15,7 +15,7 @@ import org.junit.runners.Parameterized;
 import ds.geom.InfiniteLine;
 
 @RunWith(Parameterized.class)
-public class PT_Line_containsPoint { 
+public class PT_Line_containsPoint extends GeomTestParamaterized {
 
 	InfiniteLine infiniteLine;
 	Point3d pOnLine;
@@ -29,7 +29,7 @@ public class PT_Line_containsPoint {
 
 	@Parameterized.Parameters
 	public static Collection randomParams() throws Exception {
-		return Arrays.asList(F.line_PointOnLine_PointNotOnLine());
+		return Arrays.asList(line_PointOnLine_PointNotOnLine());
 	}
 
 	@Test
