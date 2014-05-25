@@ -10,10 +10,10 @@ import ds.plato.common.UndoableSetBlock;
 public class Transaction implements Undoable, Iterable {
 
 	protected List<Undoable> undoables = new ArrayList<>();
-	private final UndoManager undoManager;
+	private final IUndo undoManager;
 	
-	public Transaction(UndoManager undoManager) {
-		this.undoManager = undoManager;
+	public Transaction(IUndo um) {
+		this.undoManager = um;
 	}
 
 	public void add(Undoable undoable) {

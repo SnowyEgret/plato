@@ -6,6 +6,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
+import ds.plato.common.SlotEntry;
 import ds.plato.common.Transformer;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
@@ -26,7 +27,7 @@ public class DeleteSpell extends AbstractTransformerSpell {
 	}
 
 	@Override
-	public void invoke(Pick[] picks) {
+	public void invoke(Pick[] picks, SlotEntry[] slotEntries) {
 		assert picks.length == getNumPicks();
 		transformSelections(new Transformer() {
 			@Override

@@ -5,4 +5,6 @@ public interface IUndo {
 	
 	public Transaction newTransaction();
 
+	public void addUndoable(Undoable undoable);
+
 }

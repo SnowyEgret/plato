@@ -5,8 +5,8 @@ import net.minecraft.block.Block;
 
 public class SlotEntry {
 
-	Block block;
-	int metadata;
+	public Block block;
+	public int metadata;
 	int slotNumber;
 	
 	public SlotEntry(Block block, int metadata, int slotNumber) {

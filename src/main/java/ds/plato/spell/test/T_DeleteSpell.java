@@ -6,24 +6,22 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import ds.plato.WorldWrapper;
+import ds.plato.IWorld;
+import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
-import ds.plato.common.SelectionManager;
+import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
-import ds.plato.pick.PickManager;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.DeleteSpellDescriptor;
 import ds.plato.spell.Spell;
 import ds.plato.test.PlatoTest;
+import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
-import ds.plato.undo.UndoManager;
 
 public class T_DeleteSpell extends PlatoTest {
 
@@ -49,27 +47,27 @@ public class T_DeleteSpell extends PlatoTest {
 	// System.out.println("[T_DeleteSpell.encant] selectionManager=" + selectionManager);
 	// }
 
-	@Mock WorldWrapper world;
-	@Mock UndoManager um;
-	@Mock SelectionManager sm;
-	@Mock PickManager pm;
+	@Mock IWorld world;
+	@Mock IUndo um;
+	@Mock ISelect sm;
+	@Mock IPick pm;
 	@Mock DeleteSpellDescriptor sd;
 
 	@Before
 	public void setUp() {
+		super.setUp();
 		MockitoAnnotations.initMocks(this);
 		List<Selection> selections = new ArrayList<>();
 		selections.add(new Selection(0, 0, 0, dirt, 0));
 		when(sm.getSelections()).thenReturn(selections);
 		when(um.newTransaction()).thenReturn(new Transaction(um));
-		// selectionManager.addSelection(new Selection(1, 2, 3, dirt, 0));
-		// System.out.println("[T_DeleteSpell.setUp] selection=" + selectionManager.getSelectionList().get(0));
 	}
 
 	@Test
-	public void encant() {
+	public void invoke() {
 		Spell s = new DeleteSpell(sd, um, sm, pm, air).setWorld(world);
-		s.invoke(new Pick[] {});
+		//slotEnties not used
+		s.invoke(new Pick[] {}, null);
 		verify(world).setBlock(0, 0, 0, air, 0, 3);
 	}
 }

@@ -20,9 +20,8 @@ public class Staff extends Item implements IClickable {
 	@Override
 	public void onClickRight(PlayerInteractEvent e) {
 		if (pick(e.x, e.y, e.z)) {
-			//TODO
-			//currentSpell().onClickRight(e);
-			currentSpell().invoke(pickManager.getPicksArray());
+			currentSpell().onClickRight(e);
+			//currentSpell().invoke(pickManager.getPicksArray());
 		}
 	}
 

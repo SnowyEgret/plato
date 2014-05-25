@@ -44,21 +44,11 @@ public class SetBlock implements Undoable {
 		}
 		world.setBlock(x, y, z, block, metadata, 3);
 
+		//FIXME Unit test fails.
 		if (!(block instanceof BlockAir)) {
 			selectionManager.select(x, y, z);
 		}
 		return this;
-	}
-
-	@Override
-	public String toString() {
-		return "UndoableSetBlock2 [world=" + idOf(world) + ", selectionManager=" + idOf(selectionManager) + ", x=" + x
-				+ ", y=" + y + ", z=" + z + ", block=" + block + ", prevBlock=" + prevBlock + ", metadata=" + metadata
-				+ ", prevMetadata=" + prevMetadata + "]";
-	}
-
-	private String idOf(Object o) {
-		return o.getClass().getSimpleName() + "@" + Integer.toHexString(o.hashCode());
 	}
 
 	@Override
@@ -72,6 +62,17 @@ public class SetBlock implements Undoable {
 	@Override
 	public void redo() {
 		world.setBlock(x, y, z, block, metadata, 3);
+	}
+
+	@Override
+	public String toString() {
+		return "SetBlock [world=" + idOf(world) + ", selectionManager=" + idOf(selectionManager) + ", x=" + x
+				+ ", y=" + y + ", z=" + z + ", block=" + block + ", prevBlock=" + prevBlock + ", metadata=" + metadata
+				+ ", prevMetadata=" + prevMetadata + "]";
+	}
+
+	private String idOf(Object o) {
+		return o.getClass().getSimpleName() + "@" + Integer.toHexString(o.hashCode());
 	}
 
 }

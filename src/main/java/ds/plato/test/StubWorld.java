@@ -10,6 +10,11 @@ public class StubWorld implements IWorld {
 
 	Map<String, Block> blocks = new HashMap<>();
 	Map<String, Integer> metadata = new HashMap<>();
+	Block dirt;
+	
+	public StubWorld(Block dirt) {
+		this.dirt = dirt;
+	}
 
 	@Override
 	public void setBlock(int x, int y, int z, Block block, int metadata, int mode) {
@@ -19,7 +24,12 @@ public class StubWorld implements IWorld {
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
-		return blocks.get(encode(x, y, z));
+		Block b =  blocks.get(encode(x, y, z));
+		if (b == null) {
+			return dirt;
+		} else {
+			return b;
+		}
 	}
 
 	@Override

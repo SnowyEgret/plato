@@ -16,7 +16,7 @@ public class UndoManager implements IUndo {
 		this(50);
 	}
 
-	void addUndoable(Undoable undoable) {
+	public void addUndoable(Undoable undoable) {
 		Node node = new Node(undoable);
 		currentNode.right = node;
 		node.left = currentNode;

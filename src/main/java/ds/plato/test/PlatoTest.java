@@ -2,6 +2,7 @@ package ds.plato.test;
 
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockSand;
 
 import org.junit.Before;
 import org.mockito.Mock;
@@ -16,6 +17,7 @@ import ds.plato.common.BlockSelected;
 public class PlatoTest {
 
 	@Mock protected BlockDirt dirt;
+	@Mock protected BlockSand sand;
 	@Mock protected BlockAir air;
 	
 	protected BlockSelected blockSelected;
@@ -29,7 +31,7 @@ public class PlatoTest {
 	}
 	
 	protected IWorld newStubWorld() {
-		return new StubWorld();
+		return new StubWorld(dirt);
 	}
 
 	protected Provider<IWorld> newMockWorldProvider() {
