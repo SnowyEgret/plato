@@ -47,25 +47,19 @@ public class T_DeleteSpell extends PlatoTest {
 	// System.out.println("[T_DeleteSpell.encant] selectionManager=" + selectionManager);
 	// }
 
-	@Mock IWorld world;
-	@Mock IUndo um;
-	@Mock ISelect sm;
-	@Mock IPick pm;
-	@Mock DeleteSpellDescriptor sd;
 
 	@Before
 	public void setUp() {
 		super.setUp();
-		MockitoAnnotations.initMocks(this);
 		List<Selection> selections = new ArrayList<>();
 		selections.add(new Selection(0, 0, 0, dirt, 0));
-		when(sm.getSelections()).thenReturn(selections);
-		when(um.newTransaction()).thenReturn(new Transaction(um));
+		when(selectionManager.getSelections()).thenReturn(selections);
+		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
 	}
 
 	@Test
 	public void invoke() {
-		Spell s = new DeleteSpell(sd, um, sm, pm, air).setWorld(world);
+		Spell s = new DeleteSpell(null, undoManager, selectionManager, pickManager, air).setWorld(world);
 		//slotEnties not used
 		s.invoke(new Pick[] {}, null);
 		verify(world).setBlock(0, 0, 0, air, 0, 3);

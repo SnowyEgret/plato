@@ -24,14 +24,10 @@ import ds.plato.undo.IUndo;
 public class T_SpellLoader extends PlatoTest {
 
 	SpellLoader loader;
-	@Mock IUndo undoManager;
-	@Mock ISelect selectionManager;
-	@Mock IPick pickManager;
 
 	@Before
 	public void setUp() {
 		super.setUp();
-		MockitoAnnotations.initMocks(this);
 		loader = new SpellLoader(undoManager, selectionManager, pickManager, air, Plato.ID);
 	}
 

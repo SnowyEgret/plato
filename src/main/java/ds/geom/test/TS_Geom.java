@@ -9,6 +9,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		T_GeomUtil.class, TestVecmath.class, PT_GeomUtil_newTranslationMatrix.class,
 		PT_GeomUtil_newRotationMatrix_VectorVector.class, PT_GeomUtil_newReflectionMatrix.class,
 		PT_GeomUtil_newScaleMatrix.class })
-public class TestSuite_Geom {
+public class TS_Geom {
 
 }

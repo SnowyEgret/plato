@@ -27,7 +27,6 @@ public class T_Staff extends PlatoTest {
 	@Mock PlayerInteractEvent mockEvent;
 	@Mock DeleteSpell mockDelete;
 	@Mock MoveSpell mockMove;
-	@Mock IPick mockPickManager;
 	Staff staff;
 
 	@Before
@@ -35,9 +34,9 @@ public class T_Staff extends PlatoTest {
 		super.setUp();
 		MockitoAnnotations.initMocks(this);
 		Pick[] picks = new Pick[] { new Pick(1, 1, 1, dirt), new Pick(2, 2, 2, dirt) };
-		when(mockPickManager.getPicksArray()).thenReturn(picks);
-		when(mockPickManager.isFinishedPicking()).thenReturn(true);
-		staff = new Staff(mockPickManager);
+		when(pickManager.getPicksArray()).thenReturn(picks);
+		when(pickManager.isFinishedPicking()).thenReturn(true);
+		staff = new Staff(pickManager);
 		staff.addSpell(mockDelete);
 		staff.addSpell(mockMove);
 		System.out.println("[T_Staff.setUp] staff=" + staff);
@@ -64,9 +63,9 @@ public class T_Staff extends PlatoTest {
 	@Test
 	public void nextSpell_pickMangerIsReset() {
 		Spell s = staff.nextSpell();
-		verify(mockPickManager).reset(s.getNumPicks());
+		verify(pickManager).reset(s.getNumPicks());
 		s = staff.nextSpell();
-		verify(mockPickManager, times(2)).reset(s.getNumPicks());
+		verify(pickManager, times(2)).reset(s.getNumPicks());
 	}
 
 	@Test

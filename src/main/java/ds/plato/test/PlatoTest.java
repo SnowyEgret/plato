@@ -1,5 +1,6 @@
 package ds.plato.test;
 
+import static org.mockito.Mockito.when;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockSand;
@@ -13,23 +14,31 @@ import com.google.inject.Provider;
 import ds.plato.IWorld;
 import ds.plato.common.BlockPick;
 import ds.plato.common.BlockSelected;
+import ds.plato.common.ISelect;
+import ds.plato.pick.IPick;
+import ds.plato.undo.IUndo;
 
 public class PlatoTest {
 
 	@Mock protected BlockDirt dirt;
 	@Mock protected BlockSand sand;
+	@Mock protected BlockSand clay;
 	@Mock protected BlockAir air;
-	
-	protected BlockSelected blockSelected;
-	protected BlockPick blockPicked;
+	@Mock protected BlockSelected blockSelected;
+	@Mock protected BlockPick blockPicked;
+	@Mock protected IWorld world;
+	@Mock protected ISelect selectionManager;
+	@Mock protected IPick pickManager;
+	@Mock protected IUndo undoManager;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		blockSelected = new BlockSelected();
-		blockPicked = new BlockPick();
+		when(dirt.getLocalizedName()).thenReturn("dirt");
+		when(sand.getLocalizedName()).thenReturn("sand");
+		when(clay.getLocalizedName()).thenReturn("clay");
 	}
-	
+
 	protected IWorld newStubWorld() {
 		return new StubWorld(dirt);
 	}

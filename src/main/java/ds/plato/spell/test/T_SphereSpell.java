@@ -22,10 +22,6 @@ import ds.plato.undo.Transaction;
 
 public class T_SphereSpell extends PlatoTest {
 
-	@Mock IWorld world;
-	@Mock IUndo um;
-	@Mock ISelect sm;
-	@Mock IPick pm;
 	@Mock SpellDescriptor sd;
 	SlotEntry[] slotEntries;
 	Pick[] picks;
@@ -33,16 +29,15 @@ public class T_SphereSpell extends PlatoTest {
 	@Before
 	public void setUp() {
 		super.setUp();
-		MockitoAnnotations.initMocks(this);
 		slotEntries = new SlotEntry[] {new SlotEntry(dirt, 0, 0)};
 		picks = new Pick[] {new Pick(0, 0, 0, dirt), new Pick(9, 0, 0, dirt)};
-		when(pm.isFinishedPicking()).thenReturn(true);
-		when(um.newTransaction()).thenReturn(new Transaction(um));
+		when(pickManager.isFinishedPicking()).thenReturn(true);
+		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
 	}
 
 	@Test
 	public void invoke() {
-		Spell s = new SphereSpell(sd, um, sm, pm).setWorld(world);
+		Spell s = new SphereSpell(null, undoManager, selectionManager, pickManager).setWorld(world);
 		s.invoke(picks, slotEntries);
 		verify(world).setBlock(9, 0, 0, dirt, 0, 3);
 	}

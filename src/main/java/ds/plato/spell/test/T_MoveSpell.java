@@ -36,10 +36,6 @@ import ds.plato.undo.Transaction;
 @PowerMockIgnore({ "javax.management.*" })
 public class T_MoveSpell extends PlatoTest {
 
-	@Mock IWorld world;
-	@Mock IUndo um;
-	@Mock ISelect sm;
-	@Mock IPick pm;
 	Spell spell;
 	Pick[] picks;
 	Selection s1, s2;
@@ -47,16 +43,15 @@ public class T_MoveSpell extends PlatoTest {
 	@Before
 	public void setUp() {
 		super.setUp();
-		MockitoAnnotations.initMocks(this);
 		PowerMockito.mockStatic(Keyboard.class);
 		List<Selection> selections = new ArrayList<>();
 		s1 = new Selection(0, 0, 0, dirt, 0);
 		s2 = new Selection(1, 0, 0, dirt, 0);
 		selections.add(s1);
 		selections.add(s2);
-		when(sm.getSelections()).thenReturn(selections);
-		when(um.newTransaction()).thenReturn(new Transaction(um));
-		spell = new MoveSpell(new MoveSpellDescriptor(), um, sm, pm,air).setWorld(world);
+		when(selectionManager.getSelections()).thenReturn(selections);
+		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
+		spell = new MoveSpell(new MoveSpellDescriptor(), undoManager, selectionManager, pickManager,air).setWorld(world);
 		picks = new Pick[] { new Pick(0, 0, 0, dirt), new Pick(1, 0, 0, dirt) };
 	}
 
