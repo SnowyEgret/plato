@@ -38,8 +38,8 @@ public class KeyInputEventHandler {
 
 		if (Plato.keyToggle.isPressed()) {
 			Item i = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem().getItem();
-			if (i instanceof Stick) {
-				((Stick) i).toggle();
+			if (i instanceof IToggleable) {
+				((IToggleable) i).toggle();
 			}
 		}
 

@@ -3,11 +3,14 @@ package ds.plato.spell;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
+import ds.plato.common.IToggleable;
 import ds.plato.pick.IPick;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-public class Staff extends Item implements IClickable {
+public class Staff extends Item implements IClickable, IToggleable {
 
 	private List<Spell> spells = new ArrayList<>();
 	private int ordinal = 0;
@@ -48,7 +51,17 @@ public class Staff extends Item implements IClickable {
 		Spell currentSpell = currentSpell();
 		pickManager.reset(currentSpell.getNumPicks());
 		return currentSpell;
+	}
 
+	public Spell previousSpell() {		
+		if (ordinal == 0) {
+			ordinal = spells.size()-1;
+		} else {
+			ordinal--;
+		}
+		Spell currentSpell = currentSpell();
+		pickManager.reset(currentSpell.getNumPicks());
+		return currentSpell;
 	}
 
 	public int numSpells() {
@@ -70,6 +83,15 @@ public class Staff extends Item implements IClickable {
 	@Override
 	public String toString() {
 		return "Staff [spells=" + spells + ", ordinal=" + ordinal + ", pickManager=" + pickManager + "]";
+	}
+
+	@Override
+	public void toggle() {
+		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+			previousSpell();
+		} else {
+			nextSpell();
+		}
 	}
 
 //	protected Point3d getPick(int i) {

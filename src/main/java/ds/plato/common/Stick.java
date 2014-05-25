@@ -34,7 +34,7 @@ import ds.plato.pick.Pick;
 import ds.plato.pick.PickManager;
 import ds.plato.undo.Transaction;
 
-public abstract class Stick extends Item {
+public abstract class Stick extends Item implements IToggleable {
 
 	private World world;
 	private final PickManager pickManager;

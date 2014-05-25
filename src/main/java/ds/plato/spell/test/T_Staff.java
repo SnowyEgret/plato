@@ -11,8 +11,14 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.lwjgl.input.Keyboard;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
@@ -22,6 +28,9 @@ import ds.plato.spell.Spell;
 import ds.plato.spell.Staff;
 import ds.plato.test.PlatoTest;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ Keyboard.class })
+@PowerMockIgnore({ "javax.management.*" })
 public class T_Staff extends PlatoTest {
 
 	@Mock PlayerInteractEvent mockEvent;
@@ -33,13 +42,21 @@ public class T_Staff extends PlatoTest {
 	public void setUp() {
 		super.setUp();
 		MockitoAnnotations.initMocks(this);
+		PowerMockito.mockStatic(Keyboard.class);
 		Pick[] picks = new Pick[] { new Pick(1, 1, 1, dirt), new Pick(2, 2, 2, dirt) };
 		when(pickManager.getPicksArray()).thenReturn(picks);
 		when(pickManager.isFinishedPicking()).thenReturn(true);
 		staff = new Staff(pickManager);
 		staff.addSpell(mockDelete);
 		staff.addSpell(mockMove);
-		System.out.println("[T_Staff.setUp] staff=" + staff);
+	}
+
+	@Test
+	public void nextSpell_setsCurrentSpell() {
+		staff.nextSpell();
+		assertEquals(mockMove, staff.currentSpell());
+		staff.nextSpell();
+		assertEquals(mockDelete, staff.currentSpell());
 	}
 
 	@Test
@@ -47,6 +64,21 @@ public class T_Staff extends PlatoTest {
 		assertEquals(mockMove, staff.nextSpell());
 		assertEquals(mockDelete, staff.nextSpell());
 		assertEquals(mockMove, staff.nextSpell());
+	}
+
+	@Test
+	public void nextSpell_pickManagerResetToNumPicksOfSpell() {
+		assertEquals(mockMove, staff.nextSpell());
+		verify(pickManager).reset(mockMove.getNumPicks());
+		assertEquals(mockDelete, staff.nextSpell());
+		verify(pickManager, times(2)).reset(mockDelete.getNumPicks());
+	}
+
+	@Test
+	public void previousSpell_startsAtEndWhenReachesBeginning() {
+		assertEquals(mockMove, staff.previousSpell());
+		assertEquals(mockDelete, staff.previousSpell());
+		assertEquals(mockMove, staff.previousSpell());
 	}
 
 	@Test
@@ -73,6 +105,21 @@ public class T_Staff extends PlatoTest {
 		assertThat(staff.numSpells(), equalTo(2));
 		staff.addSpell(mockMove);
 		assertThat(staff.numSpells(), equalTo(2));
+	}
+
+	@Test
+	public void toggle() {
+		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(true);
+		staff.toggle();
+		assertEquals(mockMove, staff.currentSpell());
+		staff.toggle();
+		assertEquals(mockDelete, staff.currentSpell());
+		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
+		staff.toggle();
+		assertEquals(mockMove, staff.currentSpell());
+		staff.toggle();
+		assertEquals(mockDelete, staff.currentSpell());
+
 	}
 
 }
