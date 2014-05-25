@@ -13,4 +13,8 @@ public interface IPick {
 	public Pick[] getPicksArray();
 
 	public void reset(int numPicks);
+
+	public void clear();
+
+	public boolean isPicking();
 }

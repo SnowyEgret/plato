@@ -122,4 +122,11 @@ public class T_Staff extends PlatoTest {
 
 	}
 
+	// @Test
+	// public void pick() {
+	// staff.pick(0, 0, 0);
+	// when(pickManager.isFinishedPicking()).thenReturn(false);
+	// verify(world).setBlock(0, 0, 0, blockPicked, 0, 3);
+	// }
+
 }

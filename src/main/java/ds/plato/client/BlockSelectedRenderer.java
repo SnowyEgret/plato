@@ -63,7 +63,7 @@ public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 			//TODO 
 			//renderer.renderStandardBlockWithColorMultiplier(selectionManager.selectionAt(x, y, z).block, x, y, z, .9f, .7f, .7f);
 			renderer.renderStandardBlockWithColorMultiplier(selectedOrPickedBlock, x, y, z, .9f, .7f, .7f);
-		} else if (block == Plato.blockPick0) {
+		} else if (block == Plato.blockPicked) {
 			//TODO
 			//renderer.renderStandardBlockWithColorMultiplier(pickManager.pickAt(x, y, z).block, x, y, z, .7f, .9f, .7f);
 			renderer.renderStandardBlockWithColorMultiplier(selectedOrPickedBlock, x, y, z, .7f, .9f, .7f);

@@ -42,6 +42,7 @@ import ds.plato.client.ClientProxy;
 import ds.plato.pick.PickManager;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.MoveSpell;
+import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
 import ds.plato.spell.Staff;
 import ds.plato.undo.UndoManager;
@@ -57,7 +58,7 @@ public class Plato {
 
 	// Blocks
 	public static Block blockSelected;
-	public static Block blockPick0;
+	public static Block blockPicked;
 
 	// Items
 	public static StickSelection selectionStick;
@@ -76,6 +77,7 @@ public class Plato {
 	public static PickManager pickManager;
 
 	public ConfigHelper config;
+	private Iterable<Spell> spells;
 
 	public static KeyBinding keyUndo, keyRedo, keyToggle, keyDelete;
 
@@ -97,7 +99,7 @@ public class Plato {
 
 		log.info("[Plato.preInit]Initializing blocks...");
 		blockSelected = config.initBlock(BlockSelected.class);
-		blockPick0 = config.initBlock(BlockPick.class);
+		blockPicked = config.initBlock(BlockPick.class);
 
 		log.info("[Plato.preInit]Initializing items...");
 		selectionStick = (StickSelection) config.initStick(StickSelection.class);
@@ -109,8 +111,12 @@ public class Plato {
 		log.info("[Plato.preInit] Initializing spells and staff");
 		SpellLoader loader = new SpellLoader(undoManager, selectionManager, pickManager, Blocks.air, ID);
 		try {
-			loader.loadSpells(DeleteSpell.class, MoveSpell.class);
-			loader.loadStaff(Staff.class);
+			spells = loader.loadSpells(DeleteSpell.class, MoveSpell.class);
+			Staff staff = loader.loadStaff(Staff.class);
+			//TODO Remove when the player can assemble staffs.
+			for (Spell s : spells) {
+				staff.addSpell(s);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -197,6 +203,7 @@ public class Plato {
 		return world;
 	}
 
+	//TODO remove when migrating to staff and spells. Moved to class Spell.
 	public static List<SlotEntry> getBlocksWithMetadataInIventorySlots() {
 		List<SlotEntry> entries = new ArrayList<>();
 		InventoryPlayer inventory = Minecraft.getMinecraft().thePlayer.inventory;
@@ -233,8 +240,12 @@ public class Plato {
 		}
 	}
 
+	// World is not available when selectionManager and spells are intitialized.
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
+		for (Spell s : spells) {
+			s.setWorld(world);
+		}
 		System.out.println("[Plato.setWorld] world=" + world);
 	}
 }

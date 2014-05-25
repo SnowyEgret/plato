@@ -1,6 +1,7 @@
 package ds.plato.pick;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -45,7 +46,12 @@ public class PickManager implements IPick {
 
 	@Override
 	public Pick[] getPicksArray() {
-		return (Pick[]) picks.toArray();
+		Pick[] array = new Pick[picks.size()];
+		int i = 0;
+		for (Pick p : picks) {
+			array[i++] = p;
+		}
+		return array;
 	}
 
 	public void reset(int maxPicks) {
@@ -65,7 +71,7 @@ public class PickManager implements IPick {
 	public void clear() {
 		picks.clear();
 	}
-	
+
 	public Iterable<Pick> getPicks() {
 		return picks;
 	}

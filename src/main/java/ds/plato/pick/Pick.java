@@ -7,10 +7,13 @@ import net.minecraft.block.Block;
 
 public class Pick extends Point3i {
 	public Block block;
+	public int metatdata;
 
+	//TODO add parameter for metadata
 	public Pick(int x, int y, int z, Block block) {
 		super(x, y, z);
 		this.block = block;
+		//this.metadata = metadata;
 	}
 
 	public Point3d toDouble() {

@@ -24,10 +24,13 @@ import ds.plato.WorldWrapper;
 import ds.plato.pick.Pick;
 import ds.plato.spell.IClickable;
 import ds.plato.spell.Spell;
+import ds.plato.spell.SpellDescriptor;
+import ds.plato.spell.Staff;
 
 public class ForgeEventHandle {
 
 	private Stick heldStick = null;
+	private Staff heldStaff = null;
 	private Vector3d displacement = new Vector3d();
 	private Plato plato;
 	private boolean isWorldSet = false;
@@ -47,6 +50,7 @@ public class ForgeEventHandle {
 	@SubscribeEvent
 	public void onEntityJoinWorldEvent(EntityJoinWorldEvent e) {
 		if (!isWorldSet && e.entity instanceof EntityPlayerMP) {
+			// Minecraft's world does not implement IWorld
 			plato.setWorld(new WorldWrapper(e.entity.worldObj));
 			isWorldSet = true;
 		}
@@ -87,7 +91,7 @@ public class ForgeEventHandle {
 			default:
 				break;
 			}
-			
+
 		} else if (item instanceof ItemBlock) {
 			ItemBlock itemBlock = (ItemBlock) item;
 			switch (e.action) {
@@ -108,7 +112,7 @@ public class ForgeEventHandle {
 				break;
 			}
 
-		//TODO only this block when converting to spell package. IClickable covers both Spells and Staffs.
+			// TODO only this block when converting to spell package. IClickable covers both Spells and Staffs.
 		} else if (item instanceof IClickable) {
 			Spell spell = (Spell) item;
 			switch (e.action) {
@@ -153,24 +157,32 @@ public class ForgeEventHandle {
 			return;
 		if (e.entity instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer) e.entity;
-			updateHeldStick(p);
+			updateHeldSticksAndStaff(p);
 			Plato.updateInventoryDistribution();
 		}
 	}
 
 	// Prints current state of newly held stick and clears picks of previously held stick.
-	private void updateHeldStick(EntityPlayer p) {
+	private void updateHeldSticksAndStaff(EntityPlayer p) {
 		ItemStack is = p.getHeldItem();
 		if (is != null) {
 			Item item = is.getItem();
 			if (item instanceof Stick) {
+				heldStaff = null;
 				if (item != heldStick) {
 					Plato.clearPicks();
 					heldStick = (Stick) item;
 					((Stick) item).printCurrentState();
 				}
+			} else if (item instanceof Staff) {
+				heldStick = null;
+				if (item != heldStaff) {
+					heldStaff = (Staff) item;
+					heldStaff.clearPicks();
+				}
 			} else {
 				heldStick = null;
+				heldStaff = null;
 			}
 		}
 		return;
@@ -180,6 +192,8 @@ public class ForgeEventHandle {
 	public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
 		// System.out.println("[ForgeEventHandle.onRenderGameOverlayEvent] event.type=" + event.type);
 		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
+
+			// TODO remove this block when migrating to staff and spells
 			if (heldStick != null) {
 				FontRenderer r = Minecraft.getMinecraft().fontRenderer;
 				int dy = r.FONT_HEIGHT + 5;
@@ -194,9 +208,30 @@ public class ForgeEventHandle {
 				if (heldStick != Plato.selectionStick && heldStick.isPicking()) {
 					r.drawStringWithShadow(displacement.toString(), x, y += dy, 0xffaaaa);
 				}
-				// if (heldStick == MOD.selectionStick) {
 				r.drawStringWithShadow("Selection size: " + Plato.selectionManager.size(), x, y += dy, 0xffaaaa);
-				// }
+			}
+
+			if (heldStaff != null) {
+				Spell s = heldStaff.currentSpell();
+				if (s != null) {
+					FontRenderer r = Minecraft.getMinecraft().fontRenderer;
+					int dy = r.FONT_HEIGHT + 5;
+					int x = 10;
+					int y = x;
+					SpellDescriptor d = heldStaff.currentSpell().getDescriptor();
+					r.drawStringWithShadow(d.name, x, y, 0xffffff);
+					if (d.picks != null) {
+						r.drawStringWithShadow(d.picks.toString(), x, y += dy, 0xaaffaa);
+					}
+					if (d.modifiers != null) {
+						r.drawStringWithShadow(d.modifiers.toString(), x, y += dy, 0xaaaaff);
+					}
+					if (heldStaff.currentSpell().isPicking()) {
+						r.drawStringWithShadow(displacement.toString(), x, y += dy, 0xffaaaa);
+					}
+					r.drawStringWithShadow("Selection size: " + heldStaff.currentSpell().getSelectionManager().size(),
+							x, y += dy, 0xffaaaa);
+				}
 			}
 		}
 	}

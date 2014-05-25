@@ -51,7 +51,7 @@ public abstract class Spell extends Item implements IClickable {
 		}
 	}
 
-	//TODO Eliminate static method getBlocksWithMetadataInIventorySlots in class Plato.
+	//TODO Eliminate static method getBlocksWithMetadataInIventorySlots in class Plato when migrating to staff and spells.
 	private SlotEntry[] getSlotEntriesFromPlayer(EntityPlayer entityPlayer) {
 		List<SlotEntry> entries = new ArrayList<>();
 		InventoryPlayer inventory = entityPlayer.inventory;
@@ -84,6 +84,10 @@ public abstract class Spell extends Item implements IClickable {
 	public SpellDescriptor getDescriptor() {
 		return descriptor;
 	}
+	
+	public ISelect getSelectionManager() {
+		return selectionManager;
+	}
 
 	// For Staff.addSpell(). Only one spell of each class in spells list
 	@Override
@@ -101,5 +105,9 @@ public abstract class Spell extends Item implements IClickable {
 	public abstract void invoke(Pick[] picks, SlotEntry[] entries);
 
 	public abstract int getNumPicks();
+
+	public boolean isPicking() {
+		return pickManager.isPicking();
+	}
 
 }

@@ -17,4 +17,6 @@ public interface ISelect {
 	public Iterable<Point3i> clear();
 
 	public Selection removeSelection(Selection s);
+
+	public int size();
 }

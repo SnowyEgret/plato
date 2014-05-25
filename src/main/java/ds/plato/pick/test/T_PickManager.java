@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import javax.vecmath.Point3d;
 
@@ -24,18 +24,17 @@ public class T_PickManager extends PlatoTest {
 	public void setUp() {
 		super.setUp();
 		m = new PickManager();
+		m.reset(3);
 	}
 
 	@Test
 	public void pick() {
-		m.reset(3);
 		Pick p1 = m.pick(0, 0, 0, dirt);
 		assertThat(m.getPick(0), is(p1));
 	}
 
 	@Test
 	public void reset() {
-		m.reset(3);
 		m.pick(0, 0, 0, dirt);
 		m.reset(3);
 		for (int i = 0; i < 6; i++) {
@@ -46,14 +45,12 @@ public class T_PickManager extends PlatoTest {
 
 	@Test
 	public void getPickAt() {
-		m.reset(3);
 		Pick p = m.pick(1, 0, 0, dirt);
 		assertThat(m.getPickAt(1, 0, 0), is(p));
 	}
 
 	@Test
 	public void clear() {
-		m.reset(3);
 		m.pick(1, 0, 0, dirt);
 		m.pick(2, 0, 0, dirt);
 		m.clear();
@@ -62,7 +59,6 @@ public class T_PickManager extends PlatoTest {
 
 	@Test
 	public void getPickPoints() {
-		m.reset(3);
 		Pick p1 = m.pick(1, 0, 0, dirt);
 		Pick p2 = m.pick(2, 0, 0, dirt);
 		assertThat(m.getPickPoints3d(), hasItems(p1.toDouble(), p2.toDouble()));
@@ -70,7 +66,6 @@ public class T_PickManager extends PlatoTest {
 
 	@Test
 	public void getPick() {
-		m.reset(3);
 		Pick p = m.pick(1, 0, 0, dirt);
 		assertThat(m.getPick(0), equalTo(p));
 	}
@@ -82,6 +77,22 @@ public class T_PickManager extends PlatoTest {
 		assertThat(m.isFinishedPicking(), is(false));
 		m.pick(2, 0, 0, dirt);
 		assertThat(m.isFinishedPicking(), is(true));
+	}
+
+	@Test
+	public void getPicks() {
+		Pick p = m.pick(0, 0, 0, dirt);
+		Iterable<Pick> picks = m.getPicks();
+		assertThat(picks, hasItems(p));
+	}
+
+	@Test
+	public void getPicksArray() {
+		Pick p0 = m.pick(0, 0, 0, dirt);
+		Pick p1 = m.pick(1, 0, 0, dirt);
+		Pick[] picks = m.getPicksArray();
+		assertEquals(p0, picks[0]);
+		assertEquals(p1, picks[1]);
 	}
 
 }
