@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -23,13 +24,13 @@ public class SpellLoader {
 	IPick pickManager;
 	Block blockAir;
 
-	public SpellLoader( IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir, String modId) {
+	public SpellLoader(IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir, String modId) {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
 		this.blockAir = blockAir;
 		this.modId = modId;
-		
+
 		tabSpells = new CreativeTabs("tabSpells") {
 			@Override
 			public Item getTabIconItem() {
@@ -38,7 +39,7 @@ public class SpellLoader {
 		};
 	}
 
-	public Iterable<Spell> loadSpells(Class<? extends Spell>... spellClasses) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+	public List<Spell> loadSpells(List<Class<? extends Spell>> spellClasses) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		List<Spell> spells = new ArrayList<>();
 		for (Class<? extends Spell> c : spellClasses) {
 			spells.add(loadSpell(c));
@@ -53,13 +54,13 @@ public class SpellLoader {
 	public Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 
 		String name = toName(spellClass);
-		String descriptorClassname = spellClass.getName() + "Descriptor";
-		Class descriptorClass = Class.forName(descriptorClassname);
+		// String descriptorClassname = spellClass.getName() + "Descriptor";
+		// Class descriptorClass = Class.forName(descriptorClassname);
 		// Property p = config.get("Spell", name + ".state", 0);
-		SpellDescriptor d = (SpellDescriptor) descriptorClass.getConstructor().newInstance();
-		Constructor<? extends Spell> c = spellClass.getConstructor(SpellDescriptor.class, IUndo.class,
-				ISelect.class, IPick.class, Block.class);
-		Spell s = (Spell) c.newInstance(d, undoManager, selectionManager, pickManager, blockAir);
+		// SpellDescriptor d = (SpellDescriptor) descriptorClass.getConstructor().newInstance();
+		Constructor<? extends Spell> c = spellClass.getConstructor(IUndo.class, ISelect.class, IPick.class,
+				BlockAir.class);
+		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager, blockAir);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);

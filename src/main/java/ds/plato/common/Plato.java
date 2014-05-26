@@ -26,6 +26,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
+import com.google.common.collect.Lists;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -41,6 +43,7 @@ import ds.plato.IWorld;
 import ds.plato.client.ClientProxy;
 import ds.plato.pick.PickManager;
 import ds.plato.spell.DeleteSpell;
+import ds.plato.spell.GrowAllSpell;
 import ds.plato.spell.MoveSpell;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
@@ -111,7 +114,8 @@ public class Plato {
 		log.info("[Plato.preInit] Initializing spells and staff");
 		SpellLoader loader = new SpellLoader(undoManager, selectionManager, pickManager, Blocks.air, ID);
 		try {
-			spells = loader.loadSpells(DeleteSpell.class, MoveSpell.class);
+			List spellClasses = Lists.newArrayList(DeleteSpell.class, MoveSpell.class, GrowAllSpell.class);
+			spells = loader.loadSpells(spellClasses);
 			Staff staff = loader.loadStaff(Staff.class);
 			//TODO Remove when the player can assemble staffs.
 			for (Spell s : spells) {
@@ -240,7 +244,7 @@ public class Plato {
 		}
 	}
 
-	// World is not available when selectionManager and spells are intitialized.
+	// World is not available when selectionManager and spells are initialized.
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
 		for (Spell s : spells) {

@@ -1,19 +1,11 @@
 package ds.plato.spell;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.vecmath.Point3i;
-
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockAir;
 
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.common.EnumShell;
 import ds.plato.common.ISelect;
-import ds.plato.common.Plato;
-import ds.plato.common.Shell;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
@@ -21,8 +13,8 @@ import ds.plato.undo.IUndo;
 
 public class GrowAllSpell extends AbstractSelectionSpell {
 
-	//TODO remove descriptor from constructor and update other spells and class SpellLoader
-	public GrowAllSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+	//TODO blockAir is not needed for selection spells
+	public GrowAllSpell(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
 		super(new Descriptor(), undoManager, selectionManager, pickManager);
 	}
 

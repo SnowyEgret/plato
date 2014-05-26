@@ -59,7 +59,7 @@ public class T_DeleteSpell extends PlatoTest {
 
 	@Test
 	public void invoke() {
-		Spell s = new DeleteSpell(null, undoManager, selectionManager, pickManager, air).setWorld(world);
+		Spell s = new DeleteSpell(undoManager, selectionManager, pickManager, air).setWorld(world);
 		//slotEnties not used
 		s.invoke(new Pick[] {}, null);
 		verify(world).setBlock(0, 0, 0, air, 0, 3);

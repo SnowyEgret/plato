@@ -1,9 +1,7 @@
 package ds.plato.spell;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import ds.plato.IWorld;
+import net.minecraft.block.BlockAir;
 import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
 import ds.plato.common.SlotEntry;
@@ -15,14 +13,9 @@ import ds.plato.undo.IUndo;
 public class DeleteSpell extends AbstractTransformerSpell {
 
 	private Block blockAir;
-	
-	public DeleteSpell(
-			SpellDescriptor descriptor,
-			IUndo undoManager,
-			ISelect selectionManager,
-			IPick pickManager,
-			Block blockAir) {
-		super(descriptor, undoManager, selectionManager, pickManager);
+
+	public DeleteSpell(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
+		super(new Descriptor(), undoManager, selectionManager, pickManager);
 		this.blockAir = blockAir;
 	}
 
@@ -40,6 +33,14 @@ public class DeleteSpell extends AbstractTransformerSpell {
 
 	@Override
 	public int getNumPicks() {
-		return 0;
+		return 1;
+	}
+	
+	private static class Descriptor extends SpellDescriptor {
+		public Descriptor() {
+			name = "DELETE";
+			description = "Deletes selection";
+			picks = new PickDescriptor("Anywhere");
+		}
 	}
 }

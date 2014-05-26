@@ -41,7 +41,7 @@ public class T_GrowAllSpell extends PlatoTest {
 		picks = new Pick[] {new Pick(0, 0, 0, dirt), new Pick(9, 0, 0, dirt)};
 		stubWorld = newStubWorld();
 		sm = new SelectionManager(blockSelected).setWorld(stubWorld);
-		growSpell = new GrowAllSpell(null, undoManager, sm, pickManager).setWorld(stubWorld);
+		growSpell = new GrowAllSpell(undoManager, sm, pickManager, air).setWorld(stubWorld);
 	}
 
 	@Test

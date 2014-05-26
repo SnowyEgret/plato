@@ -51,7 +51,7 @@ public class T_MoveSpell extends PlatoTest {
 		selections.add(s2);
 		when(selectionManager.getSelections()).thenReturn(selections);
 		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
-		spell = new MoveSpell(new MoveSpellDescriptor(), undoManager, selectionManager, pickManager,air).setWorld(world);
+		spell = new MoveSpell(undoManager, selectionManager, pickManager,air).setWorld(world);
 		picks = new Pick[] { new Pick(0, 0, 0, dirt), new Pick(1, 0, 0, dirt) };
 	}
 
