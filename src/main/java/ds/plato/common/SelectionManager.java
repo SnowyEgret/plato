@@ -32,6 +32,7 @@ public class SelectionManager implements ISelect {
 		return this;
 	}
 
+	//Returns a copy to avoid concurrent modification
 	@Override
 	public Iterable<Selection> getSelections() {
 		List<Selection> l = new ArrayList<>();

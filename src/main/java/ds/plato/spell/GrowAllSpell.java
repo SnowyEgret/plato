@@ -28,7 +28,11 @@ public class GrowAllSpell extends AbstractSelectionSpell {
 
 	@Override
 	public void invoke(Pick[] picks, SlotEntry[] entries) {
-		growSelections(EnumShell.ALL, picks[0].block);
+		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+			shrinkSelections(EnumShell.ALL);
+		} else {
+			growSelections(EnumShell.ALL, picks[0].block);
+		}
 	}
 
 	private static class Descriptor extends SpellDescriptor {

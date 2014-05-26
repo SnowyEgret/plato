@@ -13,6 +13,7 @@ import org.lwjgl.input.Keyboard;
 import ds.plato.common.BlockSelected;
 import ds.plato.common.EnumShell;
 import ds.plato.common.ISelect;
+import ds.plato.common.Selection;
 import ds.plato.common.Shell;
 import ds.plato.pick.IPick;
 import ds.plato.undo.IUndo;
@@ -29,21 +30,34 @@ public abstract class AbstractSelectionSpell extends Spell {
 		super(descriptor, undoManager, selectionManager, pickManager);
 	}
 
-	// TODO grow or shrink when key down.
-	protected void growSelections(EnumShell selectionType, Block patternBlock) {
-		System.out.println("[AbstractSelectionSpell.growSelections] grownSelections=" + grownSelections);
+	protected void shrinkSelections(EnumShell shellType) {
+		List<Selection> shrunkSelections = new ArrayList<>();
+		for (Selection s : selectionManager.getSelections()) {
+			Shell shell = new Shell(shellType, s.getPoint3i(), world);
+			for (Point3i p : shell) {
+				Block b = world.getBlock(p.x, p.y, p.z);
+				if (!(b instanceof BlockSelected)) {
+					shrunkSelections.add(s);
+					break;
+				}
+
+			}
+		}
+		for (Selection s : shrunkSelections) {
+			selectionManager.deselect(s);
+		}
+		grownSelections.clear();
+	}
+
+	protected void growSelections(EnumShell shellType, Block patternBlock) {
 		if (grownSelections.isEmpty()) {
 			grownSelections.addAll(selectionManager.selectedPoints());
-			System.out.println("[T_GrowAllSpell.setUp] selectionManager.selectedPoints()=" + selectionManager.selectedPoints());
 		}
 		List<Point3i> newGrownSelections = new ArrayList();
 		for (Point3i center : grownSelections) {
-			//TODO pass world to shell
-			//Shell shell = new Shell(selectionType, center, world);
-			Shell shell = new Shell(selectionType, center, world);
+			Shell shell = new Shell(shellType, center, world);
 			for (Point3i p : shell) {
 				Block block = world.getBlock(p.x, p.y, p.z);
-				System.out.println("[AbstractSelectionSpell.growSelections] block=" + block);
 				if (!(block instanceof BlockAir) && !(block instanceof BlockSelected)) {
 					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) { // Alt
 						selectionManager.select(p.x, p.y, p.z);
