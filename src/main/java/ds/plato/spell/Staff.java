@@ -7,15 +7,17 @@ import org.lwjgl.input.Keyboard;
 
 import ds.plato.IWorld;
 import ds.plato.common.BlockPick;
+import ds.plato.common.ISelect;
 import ds.plato.common.IToggleable;
 import ds.plato.common.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
+import ds.plato.undo.IUndo;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-public class Staff extends Item implements IClickable, IToggleable {
+public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 
 	private List<Spell> spells = new ArrayList<>();
 	private int ordinal = 0;
@@ -117,8 +119,31 @@ public class Staff extends Item implements IClickable, IToggleable {
 		return "Staff [spells=" + spells + ", ordinal=" + ordinal + ", pickManager=" + pickManager + "]";
 	}
 
-	// protected Point3d getPick(int i) {
-	// return pickManager.getPick(i).toDouble();
-	// }
+	@Override
+	public AbstractSpellDescriptor getDescriptor() {
+		Spell s = currentSpell();
+		if (s == null) {
+			return new EmptyStaffDescriptor();
+		} else {
+			return s.descriptor;
+		}
+	}
 
+	@Override
+	public boolean isPicking() {
+		Spell s = currentSpell();
+		if (s == null) {
+			return false;
+		} else {
+			return s.isPicking();
+		}
+	}
+
+	@Override
+	public ISelect getSelectionManager() {
+		return currentSpell().selectionManager;
+	}
+	
+	private class EmptyStaffDescriptor extends AbstractSpellDescriptor {
+	}	
 }

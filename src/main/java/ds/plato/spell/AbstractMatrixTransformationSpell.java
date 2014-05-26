@@ -16,7 +16,7 @@ public abstract class AbstractMatrixTransformationSpell extends Spell {
 
 	private Block blockAir;
 
-	public AbstractMatrixTransformationSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir) {
+	public AbstractMatrixTransformationSpell(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir) {
 		super(descriptor, undoManager, selectionManager, pickManager);
 		this.blockAir = blockAir;
 	}

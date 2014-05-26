@@ -20,15 +20,15 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 
-public abstract class Spell extends Item implements IClickable {
+public abstract class Spell extends Item implements IClickable, IHoldable {
 
-	public SpellDescriptor descriptor;
+	public AbstractSpellDescriptor descriptor;
 	protected IWorld world;
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
 	protected IPick pickManager;
 
-	public Spell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+	public Spell(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		this.descriptor = descriptor;
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
@@ -49,6 +49,25 @@ public abstract class Spell extends Item implements IClickable {
 			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
 			invoke(pickManager.getPicksArray(), entries);
 		}
+	}
+
+	//TODO remove this from ISelect. Pass selection manager to EventHandler instead.
+	public ISelect getSelectionManager() {
+		return selectionManager;
+	}
+
+	public AbstractSpellDescriptor getDescriptor() {
+		return descriptor;
+	}
+
+	public boolean isPicking() {
+		return pickManager.isPicking();
+	}
+
+	@Override
+	public void clearPicks() {
+		//TODO move clearing of picks from Staff to PickManager so that it is available here.
+		//pickManager.clearPicks()
 	}
 
 	//TODO Eliminate static method getBlocksWithMetadataInIventorySlots in class Plato when migrating to staff and spells.
@@ -74,14 +93,6 @@ public abstract class Spell extends Item implements IClickable {
 		return (SlotEntry[])entries.toArray();
 	}
 
-	public SpellDescriptor getDescriptor() {
-		return descriptor;
-	}
-	
-	public ISelect getSelectionManager() {
-		return selectionManager;
-	}
-
 	// For Staff.addSpell(). Only one spell of each class in spells list
 	@Override
 	public boolean equals(Object obj) {
@@ -99,8 +110,5 @@ public abstract class Spell extends Item implements IClickable {
 
 	public abstract int getNumPicks();
 
-	public boolean isPicking() {
-		return pickManager.isPicking();
-	}
 
 }

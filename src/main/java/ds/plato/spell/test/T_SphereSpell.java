@@ -14,7 +14,7 @@ import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.spell.Spell;
-import ds.plato.spell.SpellDescriptor;
+import ds.plato.spell.AbstractSpellDescriptor;
 import ds.plato.spell.SphereSpell;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.IUndo;
@@ -22,7 +22,7 @@ import ds.plato.undo.Transaction;
 
 public class T_SphereSpell extends PlatoTest {
 
-	@Mock SpellDescriptor sd;
+	@Mock AbstractSpellDescriptor sd;
 	SlotEntry[] slotEntries;
 	Pick[] picks;
 

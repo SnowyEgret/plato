@@ -23,14 +23,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.WorldWrapper;
 import ds.plato.pick.Pick;
 import ds.plato.spell.IClickable;
+import ds.plato.spell.IHoldable;
 import ds.plato.spell.Spell;
-import ds.plato.spell.SpellDescriptor;
+import ds.plato.spell.AbstractSpellDescriptor;
 import ds.plato.spell.Staff;
 
 public class ForgeEventHandle {
 
 	private Stick heldStick = null;
-	private Staff heldStaff = null;
+	private IHoldable holdable = null;
 	private Vector3d displacement = new Vector3d();
 	private Plato plato;
 	private boolean isWorldSet = false;
@@ -167,23 +168,29 @@ public class ForgeEventHandle {
 		ItemStack is = p.getHeldItem();
 		if (is != null) {
 			Item item = is.getItem();
+
+			// TODO remove when migrated to staffs and spells
 			if (item instanceof Stick) {
-				heldStaff = null;
+				holdable = null;
 				if (item != heldStick) {
 					Plato.clearPicks();
 					heldStick = (Stick) item;
 					((Stick) item).printCurrentState();
 				}
-			} else if (item instanceof Staff) {
+			} else
+
+			// Both staffs and spells can be held. Staffs delegate calls to the current spell on the staff.
+			if (item instanceof IHoldable) {
 				heldStick = null;
-				if (item != heldStaff) {
-					heldStaff = (Staff) item;
-					heldStaff.clearPicks();
+				if (item != holdable) {
+					holdable = (IHoldable) item;
+					// TODO move clearing of picks from staff to pickManager. For now spell.clearPicks() does nothing.
+					holdable.clearPicks();
 				}
-			} else {
-				heldStick = null;
-				heldStaff = null;
 			}
+		} else {
+			heldStick = null;
+			holdable = null;
 		}
 		return;
 	}
@@ -211,27 +218,26 @@ public class ForgeEventHandle {
 				r.drawStringWithShadow("Selection size: " + Plato.selectionManager.size(), x, y += dy, 0xffaaaa);
 			}
 
-			if (heldStaff != null) {
-				Spell s = heldStaff.currentSpell();
-				if (s != null) {
-					FontRenderer r = Minecraft.getMinecraft().fontRenderer;
-					int dy = r.FONT_HEIGHT + 5;
-					int x = 10;
-					int y = x;
-					SpellDescriptor d = heldStaff.currentSpell().getDescriptor();
-					r.drawStringWithShadow(d.name, x, y, 0xffffff);
-					if (d.picks != null) {
-						r.drawStringWithShadow(d.picks.toString(), x, y += dy, 0xaaffaa);
-					}
-					if (d.modifiers != null) {
-						r.drawStringWithShadow(d.modifiers.toString(), x, y += dy, 0xaaaaff);
-					}
-					if (heldStaff.currentSpell().isPicking()) {
-						r.drawStringWithShadow(displacement.toString(), x, y += dy, 0xffaaaa);
-					}
-					r.drawStringWithShadow("Selection size: " + heldStaff.currentSpell().getSelectionManager().size(),
-							x, y += dy, 0xffaaaa);
+			if (holdable != null) {
+				AbstractSpellDescriptor d = holdable.getDescriptor();
+				FontRenderer r = Minecraft.getMinecraft().fontRenderer;
+				int dy = r.FONT_HEIGHT + 5;
+				int x = 10;
+				int y = x;
+				// AbstractSpellDescriptor d = describable.currentSpell().getDescriptor();
+				r.drawStringWithShadow(d.name, x, y, 0xffffff);
+				if (d.picks != null) {
+					r.drawStringWithShadow(d.picks.toString(), x, y += dy, 0xaaffaa);
 				}
+				if (d.modifiers != null) {
+					r.drawStringWithShadow(d.modifiers.toString(), x, y += dy, 0xaaaaff);
+				}
+				// if (describable.currentSpell().isPicking()) {
+				if (holdable.isPicking()) {
+					r.drawStringWithShadow(displacement.toString(), x, y += dy, 0xffaaaa);
+				}
+				// TODO pass selectionManager to this class instead of getting it from the holdable.
+				r.drawStringWithShadow("Selection size: " + holdable.getSelectionManager().size(), x, y += dy, 0xffaaaa);
 			}
 		}
 	}

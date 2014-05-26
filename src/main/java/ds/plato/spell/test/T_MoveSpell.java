@@ -12,23 +12,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lwjgl.input.Keyboard;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
-import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.spell.MoveSpell;
-import ds.plato.spell.MoveSpellDescriptor;
 import ds.plato.spell.Spell;
 import ds.plato.test.PlatoTest;
-import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
 @RunWith(PowerMockRunner.class)
@@ -73,10 +66,4 @@ public class T_MoveSpell extends PlatoTest {
 		verify(world).setBlock(2, 0, 0, dirt, 0, 3);
 		verify(world).setBlock(0, 0, 0, air, 0, 3);
 	}
-
-	@Test
-	public void getDescriptor() {
-		assertThat(spell.getDescriptor(), instanceOf(MoveSpellDescriptor.class));
-	}
-
 }

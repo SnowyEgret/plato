@@ -8,19 +8,12 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
-import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
-import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.spell.DeleteSpell;
-import ds.plato.spell.DeleteSpellDescriptor;
 import ds.plato.spell.Spell;
 import ds.plato.test.PlatoTest;
-import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
 public class T_DeleteSpell extends PlatoTest {

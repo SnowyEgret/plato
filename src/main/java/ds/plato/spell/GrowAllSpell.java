@@ -27,7 +27,7 @@ public class GrowAllSpell extends AbstractSelectionSpell {
 		}
 	}
 
-	private static class Descriptor extends SpellDescriptor {
+	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
 			name = "ALL";
 			description = "grows selection in all directions";

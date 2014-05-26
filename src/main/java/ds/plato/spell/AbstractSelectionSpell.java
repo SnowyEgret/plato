@@ -23,7 +23,7 @@ public abstract class AbstractSelectionSpell extends Spell {
 	private List<Point3i> grownSelections = new ArrayList<>();
 
 	public AbstractSelectionSpell(
-			SpellDescriptor descriptor,
+			AbstractSpellDescriptor descriptor,
 			IUndo undoManager,
 			ISelect selectionManager,
 			IPick pickManager) {

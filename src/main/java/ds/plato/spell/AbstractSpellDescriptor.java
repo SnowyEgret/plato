@@ -1,16 +1,16 @@
 package ds.plato.spell;
 
-public class SpellDescriptor {
+public abstract class AbstractSpellDescriptor {
 	
 	public String name;
 	public String description;
 	public PickDescriptor picks;
 	public ModifierDescriptor modifiers;
 	
-	public SpellDescriptor() {
+	public AbstractSpellDescriptor() {
 	}
 
-	public SpellDescriptor(String name, String description, PickDescriptor picks, ModifierDescriptor modifiers) {
+	public AbstractSpellDescriptor(String name, String description, PickDescriptor picks, ModifierDescriptor modifiers) {
 		super();
 		this.name = name;
 		this.description = description;

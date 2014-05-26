@@ -35,7 +35,7 @@ public class MoveSpell extends AbstractMatrixTransformationSpell {
 		return 2;
 	}
 	
-	private static class Descriptor extends SpellDescriptor {
+	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
 			name = "MOVE";
 			description = "Moves selections";

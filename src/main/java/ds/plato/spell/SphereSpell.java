@@ -11,8 +11,8 @@ import ds.plato.undo.IUndo;
 public class SphereSpell extends AbstractDrawSpell {
 
 	
-	public SphereSpell(SpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(descriptor, undoManager, selectionManager, pickManager);
+	public SphereSpell(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+		super(new Descriptor(), undoManager, selectionManager, pickManager);
 	}
 
 	@Override
@@ -27,4 +27,13 @@ public class SphereSpell extends AbstractDrawSpell {
 		return 2;
 	}
 
+	
+	private static class Descriptor extends AbstractSpellDescriptor {
+		public Descriptor() {
+			name = "SPHERE";
+			description = "Creates a sphere";
+			picks = new PickDescriptor("Center", "Point on sphere");
+			//modifiers = new ModifierDescriptor("ctrl", "Deletes originial");
+		}
+	}
 }

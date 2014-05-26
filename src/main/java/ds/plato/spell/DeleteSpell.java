@@ -36,11 +36,12 @@ public class DeleteSpell extends AbstractTransformerSpell {
 		return 1;
 	}
 	
-	private static class Descriptor extends SpellDescriptor {
+	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
 			name = "DELETE";
 			description = "Deletes selection";
 			picks = new PickDescriptor("Anywhere");
 		}
 	}
+
 }
