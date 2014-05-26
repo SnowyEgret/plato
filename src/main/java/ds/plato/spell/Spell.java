@@ -65,14 +65,7 @@ public abstract class Spell extends Item implements IClickable {
 					int metadata = item.getDamage(stack);
 					SlotEntry entry = new SlotEntry(b, metadata, i + 1);
 					entries.add(entry);
-					// Not working
 				} 
-				// else if (item instanceof ItemBucket) {
-				// Block b = Blocks.water;
-				// int metadata = item.getDamage(stack);
-				// SlotEntry entry = new SlotEntry(b, metadata, i + 1);
-				// entries.add(entry);
-				// }
 			}
 		}
 		if (entries.isEmpty()) {
@@ -102,7 +95,7 @@ public abstract class Spell extends Item implements IClickable {
 	}
 
 	//TODO Maybe this is protected and staff sends its PlayerInteractEvent to the onClickRight.
-	public abstract void invoke(Pick[] picks, SlotEntry[] entries);
+	public abstract void invoke(Pick[] picks, SlotEntry[] slotEntries);
 
 	public abstract int getNumPicks();
 

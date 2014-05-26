@@ -1,5 +1,7 @@
 package ds.plato.common;
 
+import java.util.Collection;
+
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
@@ -19,4 +21,6 @@ public interface ISelect {
 	public Selection removeSelection(Selection s);
 
 	public int size();
+
+	public Collection<? extends Point3i> selectedPoints();
 }

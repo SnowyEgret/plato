@@ -19,6 +19,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.lwjgl.input.Keyboard;
 
 import ds.geom.Box;
+import ds.plato.WorldWrapper;
 
 public class StickSelection extends Stick {
 
@@ -105,7 +106,7 @@ public class StickSelection extends Stick {
 			expandedSelections.addAll(Plato.selectionManager.selectedPoints());
 		}
 		for (Point3i center : expandedSelections) {
-			Shell shell = new Shell(selectionType, center);
+			Shell shell = new Shell(selectionType, center, new WorldWrapper(Plato.getWorldServer()));
 			for (Point3i p : shell) {
 				Block block = getWorld().getBlock(p.x, p.y, p.z);
 				if (!(block == Blocks.air) && !(block == Plato.blockSelected)) {

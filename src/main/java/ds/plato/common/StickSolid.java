@@ -18,6 +18,7 @@ import ds.geom.Drawable;
 import ds.geom.MengerSponge;
 import ds.geom.RectangularPyramid;
 import ds.geom.Tetrahedron;
+import ds.plato.WorldWrapper;
 import ds.plato.undo.Transaction;
 
 public class StickSolid extends Stick {
@@ -80,7 +81,7 @@ public class StickSolid extends Stick {
 			firstPour = false;
 		} else {
 			for (Selection s : Plato.selectionManager.getSelections()) {
-				Shell shell = new Shell(EnumShell.HORIZONTAL, s.getPoint3i());
+				Shell shell = new Shell(EnumShell.HORIZONTAL, s.getPoint3i(), new WorldWrapper(w));
 				for (Point3i p : shell) {
 					Block b = w.getBlock(p.x, p.y, p.z);
 					if (b == Blocks.air) {
@@ -90,7 +91,7 @@ public class StickSolid extends Stick {
 				Plato.selectionManager.deselect(s);
 			}
 			for (Selection s : Plato.selectionManager.getSelections()) {
-				Shell shell = new Shell(EnumShell.DOWN, s.getPoint3i());
+				Shell shell = new Shell(EnumShell.DOWN, s.getPoint3i(), new WorldWrapper(w));
 				for (Point3i p : shell) {
 					Block b = w.getBlock(p.x, p.y, p.z);
 					if (b == Blocks.air) {
