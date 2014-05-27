@@ -40,7 +40,7 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 
 	@Override
 	public void onClickRight(PlayerInteractEvent e) {
-		if (pick(e.x, e.y, e.z)) {
+		if (pickManager.pick(e.x, e.y, e.z)) {
 			currentSpell().onClickRight(e);
 			// currentSpell().invoke(pickManager.getPicksArray());
 		}
@@ -95,28 +95,22 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 		return spells.size();
 	}
 
-	// TODO Move pick and clearPicks to pickManager. Staff would not need world and BlockPick
-	public boolean pick(int x, int y, int z) {
-		// TODO: Handle case where location is already a selection
-		if (!pickManager.isFinishedPicking()) {
-			Block block = world.getBlock(x, y, z);
-			int metatdata = world.getMetadata(x, y, z);
-			// TODO pass BlockPick
-			world.setBlock(x, y, z, Plato.blockPicked, 0, 3);
-			// TODO add metatdata to Pick constructor
-			pickManager.pick(x, y, z, block);
-		}
-		return pickManager.isFinishedPicking();
-	}
+//	// TODO Move pick and clearPicks to pickManager. Staff would not need world and BlockPick
+//	public boolean pick(int x, int y, int z) {
+//		// TODO: Handle case where location is already a selection
+//		if (!pickManager.isFinishedPicking()) {
+//			Block block = world.getBlock(x, y, z);
+//			int metatdata = world.getMetadata(x, y, z);
+//			// TODO pass BlockPick
+//			world.setBlock(x, y, z, Plato.blockPicked, 0, 3);
+//			// TODO add metatdata to Pick constructor
+//			pickManager.addPick(x, y, z, block);
+//		}
+//		return pickManager.isFinishedPicking();
+//	}
 
 	public void clearPicks() {
-		for (Pick p : pickManager.getPicksArray()) {
-			Block block = world.getBlock(p.x, p.y, p.z);
-			if (block instanceof BlockPick) {
-				world.setBlock(p.x, p.y, p.z, p.block, p.metatdata, 3);
-			}
-		}
-		pickManager.clear();
+		pickManager.clearPicks();
 	}
 
 	@Override

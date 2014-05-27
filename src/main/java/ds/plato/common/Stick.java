@@ -121,7 +121,7 @@ public abstract class Stick extends Item implements IToggleable {
 			// TODO Add metadata to class Pick and set metadata (reverse in
 			// clearPicks)
 			getWorld().setBlock(x, y, z, Plato.blockPicked);
-			pickManager.pick(x, y, z, block);
+			pickManager.addPick(x, y, z, block);
 		}
 		return pickManager.isFinishedPicking();
 	}

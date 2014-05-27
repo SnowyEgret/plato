@@ -4,17 +4,24 @@ import net.minecraft.block.Block;
 
 public interface IPick {
 
+	public boolean pick(int x, int y, int z);
+
+	public void clearPicks();
+
+	//TODO rename to getPicks and remove getPicks returns list from pickManager when migrating to staffs and spells
+	public Pick[] getPicksArray();
+
 	public boolean isFinishedPicking();
 
-	//public Pick getPick(int i);
-
-	public Pick pick(int x, int y, int z, Block block);
-
-	public Pick[] getPicksArray();
+	public boolean isPicking();
 
 	public void reset(int numPicks);
 
-	public void clear();
+	//TODO remove when migrating to staffs and spells
+	@Deprecated
+	public Pick addPick(int x, int y, int z, Block block);
 
-	public boolean isPicking();
+	//TODO remove when migrating to staffs and spells
+	@Deprecated
+	public void clear();
 }
