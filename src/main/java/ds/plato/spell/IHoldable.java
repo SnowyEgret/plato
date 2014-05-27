@@ -6,10 +6,11 @@ public interface IHoldable {
 	
 	AbstractSpellDescriptor getDescriptor();
 
-	void clearPicks();
-
 	boolean isPicking();
 
+	@Deprecated
 	ISelect getSelectionManager();
+
+	void resetPickManager();
 
 }

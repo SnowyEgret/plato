@@ -46,26 +46,40 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 		}
 	}
 
+	//	// TODO Move pick and clearPicks to pickManager. Staff would not need world and BlockPick
+	//	public boolean pick(int x, int y, int z) {
+	//		// TODO: Handle case where location is already a selection
+	//		if (!pickManager.isFinishedPicking()) {
+	//			Block block = world.getBlock(x, y, z);
+	//			int metatdata = world.getMetadata(x, y, z);
+	//			// TODO pass BlockPick
+	//			world.setBlock(x, y, z, Plato.blockPicked, 0, 3);
+	//			// TODO add metatdata to Pick constructor
+	//			pickManager.addPick(x, y, z, block);
+	//		}
+	//		return pickManager.isFinishedPicking();
+	//	}
+	
+		public void clearPicks() {
+			pickManager.clearPicks();
+		}
+
+	@Override
+		public AbstractSpellDescriptor getDescriptor() {
+			Spell s = currentSpell();
+			if (s == null) {
+				return new EmptyStaffDescriptor();
+			} else {
+				return s.descriptor;
+			}
+		}
+
 	@Override
 	public void toggle() {
 		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 			previousSpell();
 		} else {
 			nextSpell();
-		}
-	}
-
-	public Spell currentSpell() {
-		if (spells.isEmpty()) {
-			return null;
-		} else {
-			return spells.get(ordinal);
-		}
-	}
-
-	public void addSpell(Spell spell) {
-		if (!spells.contains(spell)) {
-			spells.add(spell);
 		}
 	}
 
@@ -91,6 +105,20 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 		return currentSpell;
 	}
 
+	public Spell currentSpell() {
+		if (spells.isEmpty()) {
+			return null;
+		} else {
+			return spells.get(ordinal);
+		}
+	}
+
+	public void addSpell(Spell spell) {
+		if (!spells.contains(spell)) {
+			spells.add(spell);
+		}
+	}
+
 	public int numSpells() {
 		return spells.size();
 	}
@@ -109,23 +137,9 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 //		return pickManager.isFinishedPicking();
 //	}
 
-	public void clearPicks() {
-		pickManager.clearPicks();
-	}
-
 	@Override
 	public String toString() {
 		return "Staff [spells=" + spells + ", ordinal=" + ordinal + ", pickManager=" + pickManager + "]";
-	}
-
-	@Override
-	public AbstractSpellDescriptor getDescriptor() {
-		Spell s = currentSpell();
-		if (s == null) {
-			return new EmptyStaffDescriptor();
-		} else {
-			return s.descriptor;
-		}
 	}
 
 	@Override
@@ -144,5 +158,10 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	}
 	
 	private class EmptyStaffDescriptor extends AbstractSpellDescriptor {
+	}
+
+	@Override
+	public void resetPickManager() {
+		currentSpell().resetPickManager();
 	}	
 }

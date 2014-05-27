@@ -84,10 +84,15 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		return pickManager.isPicking();
 	}
 
+//	public void clearPicks() {
+//		// TODO move clearing of picks from Staff to PickManager so that it is available here.
+//		pickManager.clearPicks();
+//	}
+
 	@Override
-	public void clearPicks() {
-		// TODO move clearing of picks from Staff to PickManager so that it is available here.
+	public void resetPickManager() {
 		pickManager.clearPicks();
+		pickManager.reset(getNumPicks());
 	}
 
 	// TODO Eliminate static method getBlocksWithMetadataInIventorySlots in class Plato when migrating to staff and

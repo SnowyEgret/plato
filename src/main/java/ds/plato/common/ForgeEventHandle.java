@@ -185,8 +185,7 @@ public class ForgeEventHandle {
 				heldStick = null;
 				if (item != holdable) {
 					holdable = (IHoldable) item;
-					// TODO move clearing of picks from staff to pickManager. For now spell.clearPicks() does nothing.
-					holdable.clearPicks();
+					holdable.resetPickManager();
 				}
 			}
 		} else {

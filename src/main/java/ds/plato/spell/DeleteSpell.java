@@ -43,5 +43,4 @@ public class DeleteSpell extends AbstractTransformerSpell {
 			picks = new PickDescriptor("Anywhere");
 		}
 	}
-
 }
