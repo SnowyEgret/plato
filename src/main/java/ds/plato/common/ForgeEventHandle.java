@@ -115,14 +115,15 @@ public class ForgeEventHandle {
 
 			// TODO only this block when converting to spell package. IClickable covers both Spells and Staffs.
 		} else if (item instanceof IClickable) {
-			Spell spell = (Spell) item;
+			IClickable c = (IClickable) item;
 			switch (e.action) {
 			case LEFT_CLICK_BLOCK:
+				c.onClickLeft(e);
 				break;
 			case RIGHT_CLICK_AIR:
 				break;
 			case RIGHT_CLICK_BLOCK:
-				spell.onClickRight(e);
+				c.onClickRight(e);
 				break;
 			default:
 				break;

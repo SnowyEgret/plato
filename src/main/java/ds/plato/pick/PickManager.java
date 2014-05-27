@@ -47,11 +47,7 @@ public class PickManager implements IPick {
 	@Override
 	public Pick[] getPicksArray() {
 		Pick[] array = new Pick[picks.size()];
-		int i = 0;
-		for (Pick p : picks) {
-			array[i++] = p;
-		}
-		return array;
+		return picks.toArray(array);
 	}
 
 	public void reset(int maxPicks) {

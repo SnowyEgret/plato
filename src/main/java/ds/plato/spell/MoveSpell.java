@@ -4,6 +4,7 @@ import javax.vecmath.Matrix4d;
 
 import net.minecraft.block.BlockAir;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 
 import ds.geom.GeomUtil;
@@ -40,7 +41,7 @@ public class MoveSpell extends AbstractMatrixTransformationSpell {
 			name = "MOVE";
 			description = "Moves selections";
 			picks = new PickDescriptor("From", "To");
-			modifiers = new ModifierDescriptor("ctrl", "Deletes originial");
+			modifiers = new ModifierDescriptor(Pair.of("ctrl", "Deletes originial"));
 		}
 	}
 }

@@ -6,6 +6,8 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,7 +41,7 @@ public class T_DeleteSpell extends PlatoTest {
 	// t.commit();
 	// System.out.println("[T_DeleteSpell.encant] selectionManager=" + selectionManager);
 	// }
-
+	Spell s;
 
 	@Before
 	public void setUp() {
@@ -48,13 +50,25 @@ public class T_DeleteSpell extends PlatoTest {
 		selections.add(new Selection(0, 0, 0, dirt, 0));
 		when(selectionManager.getSelections()).thenReturn(selections);
 		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
+		s = new DeleteSpell(undoManager, selectionManager, pickManager, air).setWorld(world);
 	}
 
 	@Test
 	public void invoke() {
-		Spell s = new DeleteSpell(undoManager, selectionManager, pickManager, air).setWorld(world);
-		//slotEnties not used
+		// slotEnties not used
 		s.invoke(new Pick[] {}, null);
 		verify(world).setBlock(0, 0, 0, air, 0, 3);
 	}
+
+	@Test
+	public void onClickLeft() {
+		s.onClickLeft(new PlayerInteractEvent(null, null, 1, 1, 1, 0));
+		verify(selectionManager).select(1,1,1);
+	}
+
+//	@Test
+//	public void onClickRight() {
+//		s.onClickRight(new PlayerInteractEvent(null, null, 0, 0, 0, 0));
+//		verify(world).setBlock(0, 0, 0, air, 0, 3);
+//	}
 }
