@@ -1,7 +1,10 @@
 package ds.plato.spell;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,11 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ClassInfo;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.common.ISelect;
 import ds.plato.pick.IPick;
@@ -47,17 +55,10 @@ public class SpellLoader {
 		return spells;
 	}
 
-	// public Item loadSpell(Class<? extends AbstractSpell> spellClass, Class<? extends SpellDescriptor>
-	// descriptorClass, IUndo undoManager, ISelect selectionManager, Block blockAir) throws InstantiationException,
-	// IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
-	// SecurityException {
 	public Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 
 		String name = toName(spellClass);
-		// String descriptorClassname = spellClass.getName() + "Descriptor";
-		// Class descriptorClass = Class.forName(descriptorClassname);
 		// Property p = config.get("Spell", name + ".state", 0);
-		// SpellDescriptor d = (SpellDescriptor) descriptorClass.getConstructor().newInstance();
 		Constructor<? extends Spell> c = spellClass.getConstructor(IUndo.class, ISelect.class, IPick.class,
 				BlockAir.class);
 		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager, blockAir);
@@ -76,7 +77,7 @@ public class SpellLoader {
 		return n.substring(0, 1).toLowerCase() + n.substring(1);
 	}
 
-	public Staff loadStaff(Class<Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String name = toName(staffClass);
 		Constructor c = staffClass.getConstructor(IPick.class);
 		Staff s = (Staff) c.newInstance(pickManager);
@@ -87,6 +88,19 @@ public class SpellLoader {
 		GameRegistry.registerItem(s, name);
 		System.out.println("[SpellLoader.loadStaff] Loaded staff=" + s);
 		return s;
+	}
+
+	public List<Spell> loadSpellsFromPackage(String packageName) throws MalformedURLException, IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+
+		ClassPath p = ClassPath.from(this.getClass().getClassLoader());
+		List<Spell> spells = new ArrayList<>();
+		for (ClassInfo i : p.getTopLevelClasses(packageName)) {
+			Class c = i.load();
+			if (Spell.class.isAssignableFrom(c) && !Modifier.isAbstract(c.getModifiers())) {
+				spells.add(loadSpell(c));
+			}
+		}
+		return spells;
 	}
 
 }

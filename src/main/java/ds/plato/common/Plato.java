@@ -1,7 +1,8 @@
 package ds.plato.common;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -17,7 +17,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -27,6 +26,7 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Lists;
+import com.google.common.reflect.ClassPath;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -42,12 +42,15 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import ds.plato.IWorld;
 import ds.plato.client.ClientProxy;
 import ds.plato.pick.PickManager;
+import ds.plato.spell.AbstractSelectionSpell;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.GrowAllSpell;
 import ds.plato.spell.MoveSpell;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
+import ds.plato.spell.SphereSpell;
 import ds.plato.spell.Staff;
+import ds.plato.spell.StaffSelect;
 import ds.plato.undo.UndoManager;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)
@@ -72,8 +75,7 @@ public class Plato {
 
 	@Instance(ID) public static Plato instance;
 
-	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy")
-	public static CommonProxy proxy;
+	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
 
 	public static UndoManager undoManager;
 	public static SelectionManager selectionManager;
@@ -110,20 +112,28 @@ public class Plato {
 		curveStick = (StickCurve) config.initStick(StickCurve.class);
 		editStick = (StickEdit) config.initStick(StickEdit.class);
 		solidStick = (StickSolid) config.initStick(StickSolid.class);
-		
+
 		log.info("[Plato.preInit] Initializing spells and staff");
 		SpellLoader loader = new SpellLoader(undoManager, selectionManager, pickManager, Blocks.air, ID);
 		try {
-			List spellClasses = Lists.newArrayList(DeleteSpell.class, MoveSpell.class, GrowAllSpell.class);
-			spells = loader.loadSpells(spellClasses);
+
+			// List spellClasses = Lists.newArrayList(DeleteSpell.class, MoveSpell.class, GrowAllSpell.class,
+			// SphereSpell.class);
+			//spells = loader.loadSpells(spellClasses);
+			spells = loader.loadSpellsFromPackage("ds.plato.spell");
 			Staff staff = loader.loadStaff(Staff.class);
-			//TODO Remove when the player can assemble staffs.
+			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
+			// TODO Remove when the player can assemble staffs.
 			for (Spell s : spells) {
-				staff.addSpell(s);
+				if (s instanceof AbstractSelectionSpell) {
+					selectionStaff.addSpell(s);
+				} else {
+					staff.addSpell(s);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 
 		config.save();
 	}
@@ -207,7 +217,7 @@ public class Plato {
 		return world;
 	}
 
-	//TODO remove when migrating to staff and spells. Moved to class Spell.
+	// TODO remove when migrating to staff and spells. Moved to class Spell.
 	public static List<SlotEntry> getBlocksWithMetadataInIventorySlots() {
 		List<SlotEntry> entries = new ArrayList<>();
 		InventoryPlayer inventory = Minecraft.getMinecraft().thePlayer.inventory;

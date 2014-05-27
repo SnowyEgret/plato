@@ -1,5 +1,6 @@
 package ds.plato.spell;
 
+import net.minecraft.block.BlockAir;
 import ds.geom.Drawable;
 import ds.geom.Sphere;
 import ds.plato.common.ISelect;
@@ -10,8 +11,11 @@ import ds.plato.undo.IUndo;
 
 public class SphereSpell extends AbstractDrawSpell {
 
-	
-	public SphereSpell(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+	public SphereSpell(
+			IUndo undoManager,
+			ISelect selectionManager,
+			IPick pickManager,
+			BlockAir air) {
 		super(new Descriptor(), undoManager, selectionManager, pickManager);
 	}
 
@@ -27,13 +31,12 @@ public class SphereSpell extends AbstractDrawSpell {
 		return 2;
 	}
 
-	
 	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
 			name = "SPHERE";
 			description = "Creates a sphere";
 			picks = new PickDescriptor("Center", "Point on sphere");
-			//modifiers = new ModifierDescriptor("ctrl", "Deletes originial");
+			// modifiers = new ModifierDescriptor("ctrl", "Deletes originial");
 		}
 	}
 }
