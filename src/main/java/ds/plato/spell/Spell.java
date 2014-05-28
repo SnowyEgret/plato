@@ -58,7 +58,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	public void onClickLeft(PlayerInteractEvent e) {
 //		if (e.entity.worldObj.isRemote)
 //			return;
-		//selectionManager.select(e.x, e.y, e.z);
+		selectionManager.select(e.x, e.y, e.z);
 		e.setCanceled(true);
 	}
 

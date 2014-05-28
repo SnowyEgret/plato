@@ -28,7 +28,7 @@ import ds.plato.spell.Spell;
 import ds.plato.spell.AbstractSpellDescriptor;
 import ds.plato.spell.Staff;
 
-public class ForgeEventHandle {
+public class ForgeEventHandler {
 
 	private Stick heldStick = null;
 	private IHoldable holdable = null;
@@ -44,7 +44,7 @@ public class ForgeEventHandle {
 	// MOD.log.info("[ForgeEventHandle.onMouseEvent] e=" + e);
 	// }
 
-	public ForgeEventHandle(Plato plato, ISelect selectionManager) {
+	public ForgeEventHandler(Plato plato, ISelect selectionManager) {
 		this.plato = plato;
 		this.selectionManager = selectionManager;
 	}

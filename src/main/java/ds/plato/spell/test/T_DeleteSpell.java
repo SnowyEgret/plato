@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import ds.plato.common.Selection;
 import ds.plato.pick.Pick;
+import ds.plato.spell.AbstractSpellDescriptor;
 import ds.plato.spell.DeleteSpell;
 import ds.plato.spell.Spell;
 import ds.plato.test.PlatoTest;
@@ -20,27 +21,6 @@ import ds.plato.undo.Transaction;
 
 public class T_DeleteSpell extends PlatoTest {
 
-	// This is an integration test
-	// IWorld w;
-	// IUndo undoManager;
-	// ISelect selectionManager;
-	// PickManager pickManager;
-	// SpellDescriptor descriptor;
-	//
-	// @Override
-	// public void setUp() {
-	// super.setUp();
-	// w = newMockWorld();
-	// undoManager = new UndoManager();
-	// selectionManager = new SelectionManager(blockSelected).setWorld(w);
-	// pickManager = new PickManager(1, blockPicked);
-	// descriptor = new DeleteSpellDescriptor();
-	// w.setBlock(1, 2, 3, dirt, 0, 3);
-	// Transaction t = undoManager.newTransaction();
-	// t.add(new SetBlock(w, selectionManager, 1, 2, 3, dirt, 0));
-	// t.commit();
-	// System.out.println("[T_DeleteSpell.encant] selectionManager=" + selectionManager);
-	// }
 	Spell s;
 
 	@Before
@@ -63,12 +43,19 @@ public class T_DeleteSpell extends PlatoTest {
 	@Test
 	public void onClickLeft() {
 		s.onClickLeft(new PlayerInteractEvent(null, null, 1, 1, 1, 0));
-		verify(selectionManager).select(1,1,1);
+		verify(selectionManager).select(1, 1, 1);
 	}
 
-//	@Test
-//	public void onClickRight() {
-//		s.onClickRight(new PlayerInteractEvent(null, null, 0, 0, 0, 0));
-//		verify(world).setBlock(0, 0, 0, air, 0, 3);
-//	}
+	// @Test
+	// public void onClickRight() {
+	// s.onClickRight(new PlayerInteractEvent(null, null, 0, 0, 0, 0));
+	// verify(world).setBlock(0, 0, 0, air, 0, 3);
+	// }
+
+	@Test
+	public void descriptor() {
+		AbstractSpellDescriptor d = s.descriptor;
+		System.out.println("[T_DeleteSpell.descriptor] d=" + d);
+	}
+
 }

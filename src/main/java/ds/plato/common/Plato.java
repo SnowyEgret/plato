@@ -164,7 +164,7 @@ public class Plato {
 		// blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		// RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer());
 
-		MinecraftForge.EVENT_BUS.register(new ForgeEventHandle(this, selectionManager));
+		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(this, selectionManager));
 		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
 	}
 

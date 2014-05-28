@@ -38,9 +38,9 @@ public class DeleteSpell extends AbstractTransformerSpell {
 	
 	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
-			name = "DELETE";
-			description = "Deletes selection";
-			picks = new PickDescriptor("Anywhere");
+			name = Messages.spell_delete_name;
+			description = Messages.spell_delete_description;
+			picks = new PickDescriptor(Messages.spell_delete_pick);
 		}
 	}
 }
