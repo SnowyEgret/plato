@@ -34,6 +34,7 @@ public class ForgeEventHandle {
 	private IHoldable holdable = null;
 	private Vector3d displacement = new Vector3d();
 	private Plato plato;
+	private ISelect selectionManager;
 	private boolean isWorldSet = false;
 
 	// @SideOnly(Side.CLIENT)
@@ -43,8 +44,9 @@ public class ForgeEventHandle {
 	// MOD.log.info("[ForgeEventHandle.onMouseEvent] e=" + e);
 	// }
 
-	public ForgeEventHandle(Plato plato) {
+	public ForgeEventHandle(Plato plato, ISelect selectionManager) {
 		this.plato = plato;
+		this.selectionManager = selectionManager;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -52,6 +54,7 @@ public class ForgeEventHandle {
 	public void onEntityJoinWorldEvent(EntityJoinWorldEvent e) {
 		if (!isWorldSet && e.entity instanceof EntityPlayerMP) {
 			// Minecraft's world does not implement IWorld
+			//System.out.println("[ForgeEventHandle.onEntityJoinWorldEvent] e.entity.worldObj=" + e.entity.worldObj);
 			plato.setWorld(new WorldWrapper(e.entity.worldObj));
 			isWorldSet = true;
 		}
@@ -237,7 +240,7 @@ public class ForgeEventHandle {
 					r.drawStringWithShadow(displacement.toString(), x, y += dy, 0xffaaaa);
 				}
 				// TODO pass selectionManager to this class instead of getting it from the holdable.
-				r.drawStringWithShadow("Selection size: " + holdable.getSelectionManager().size(), x, y += dy, 0xffaaaa);
+				r.drawStringWithShadow("Selection size: " + selectionManager.size(), x, y += dy, 0xffaaaa);
 			}
 		}
 	}

@@ -27,4 +27,13 @@ public class WorldWrapper implements IWorld {
 		world.setBlockMetadataWithNotify(x, y, z, metadata, mode);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("WorldWrapper [world=");
+		builder.append(world);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

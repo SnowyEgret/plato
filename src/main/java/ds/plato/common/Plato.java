@@ -1,8 +1,6 @@
 package ds.plato.common;
 
 import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +23,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
-import com.google.common.collect.Lists;
-import com.google.common.reflect.ClassPath;
-
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -42,15 +37,16 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import ds.plato.IWorld;
 import ds.plato.client.ClientProxy;
 import ds.plato.pick.PickManager;
+import ds.plato.spell.AbstractDrawSpell;
+import ds.plato.spell.AbstractMatrixTransformationSpell;
 import ds.plato.spell.AbstractSelectionSpell;
-import ds.plato.spell.DeleteSpell;
-import ds.plato.spell.GrowAllSpell;
-import ds.plato.spell.MoveSpell;
+import ds.plato.spell.AbstractTransformerSpell;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
-import ds.plato.spell.SphereSpell;
 import ds.plato.spell.Staff;
+import ds.plato.spell.StaffDraw;
 import ds.plato.spell.StaffSelect;
+import ds.plato.spell.StaffTransform;
 import ds.plato.undo.UndoManager;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)
@@ -82,7 +78,8 @@ public class Plato {
 	public static PickManager pickManager;
 
 	public ConfigHelper config;
-	private Iterable<Spell> spells;
+	private List<Spell> spells;
+	private List<Staff> staffs;
 
 	public static KeyBinding keyUndo, keyRedo, keyToggle, keyDelete;
 
@@ -119,18 +116,29 @@ public class Plato {
 
 			// List spellClasses = Lists.newArrayList(DeleteSpell.class, MoveSpell.class, GrowAllSpell.class,
 			// SphereSpell.class);
-			//spells = loader.loadSpells(spellClasses);
+			// spells = loader.loadSpells(spellClasses);
 			spells = loader.loadSpellsFromPackage("ds.plato.spell");
-			Staff staff = loader.loadStaff(Staff.class);
 			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
-			// TODO Remove when the player can assemble staffs.
+			Staff transformStaff = loader.loadStaff(StaffTransform.class);
+			Staff drawStaff = loader.loadStaff(StaffDraw.class);
+			staffs = new ArrayList<>();
+			staffs.add(loader.loadStaff(Staff.class));
+			staffs.add(selectionStaff);
+			staffs.add(transformStaff);
+			staffs.add(drawStaff);
 			for (Spell s : spells) {
 				if (s instanceof AbstractSelectionSpell) {
 					selectionStaff.addSpell(s);
-				} else {
-					staff.addSpell(s);
+				} else if (s instanceof AbstractTransformerSpell || s instanceof AbstractMatrixTransformationSpell) {
+					transformStaff.addSpell(s);
+				} else if (s instanceof AbstractDrawSpell) {
+					drawStaff.addSpell(s);
 				}
 			}
+			System.out.println("[Plato.preInit] selectionStaff=" + selectionStaff);
+			System.out.println("[Plato.preInit] transformStaff=" + transformStaff);
+			System.out.println("[Plato.preInit] drawStaff=" + drawStaff);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -156,7 +164,7 @@ public class Plato {
 		// blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		// RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer());
 
-		MinecraftForge.EVENT_BUS.register(new ForgeEventHandle(this));
+		MinecraftForge.EVENT_BUS.register(new ForgeEventHandle(this, selectionManager));
 		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
 	}
 
@@ -258,6 +266,9 @@ public class Plato {
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
 		for (Spell s : spells) {
+			s.setWorld(world);
+		}
+		for (Staff s : staffs) {
 			s.setWorld(world);
 		}
 		System.out.println("[Plato.setWorld] world=" + world);

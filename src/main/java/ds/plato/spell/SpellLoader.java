@@ -103,4 +103,17 @@ public class SpellLoader {
 		return spells;
 	}
 
+	public List<Class> loadClassesFromPackage(Class type, String packageName) throws MalformedURLException, IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+
+		ClassPath p = ClassPath.from(this.getClass().getClassLoader());
+		List<Class> classes = new ArrayList<>();
+		for (ClassInfo i : p.getTopLevelClasses(packageName)) {
+			Class c = i.load();
+			if (type.isAssignableFrom(c) && !Modifier.isAbstract(c.getModifiers())) {
+				classes.add(c);
+			}
+		}
+		return classes;
+	}
+
 }

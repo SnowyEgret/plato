@@ -19,7 +19,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 
-	private List<Spell> spells = new ArrayList<>();
+	protected List<Spell> spells = new ArrayList<>();
 	private int ordinal = 0;
 	private IPick pickManager;
 	private IWorld world;
@@ -42,37 +42,35 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	public void onClickRight(PlayerInteractEvent e) {
 		if (pickManager.pick(e.x, e.y, e.z)) {
 			currentSpell().onClickRight(e);
-			// currentSpell().invoke(pickManager.getPicksArray());
 		}
 	}
 
-	//	// TODO Move pick and clearPicks to pickManager. Staff would not need world and BlockPick
-	//	public boolean pick(int x, int y, int z) {
-	//		// TODO: Handle case where location is already a selection
-	//		if (!pickManager.isFinishedPicking()) {
-	//			Block block = world.getBlock(x, y, z);
-	//			int metatdata = world.getMetadata(x, y, z);
-	//			// TODO pass BlockPick
-	//			world.setBlock(x, y, z, Plato.blockPicked, 0, 3);
-	//			// TODO add metatdata to Pick constructor
-	//			pickManager.addPick(x, y, z, block);
-	//		}
-	//		return pickManager.isFinishedPicking();
-	//	}
-	
-		public void clearPicks() {
-			pickManager.clearPicks();
-		}
+	@Override
+	public void resetPickManager() {
+		if (currentSpell() != null)
+			currentSpell().resetPickManager();
+	}
 
 	@Override
-		public AbstractSpellDescriptor getDescriptor() {
-			Spell s = currentSpell();
-			if (s == null) {
-				return new EmptyStaffDescriptor();
-			} else {
-				return s.descriptor;
-			}
+	public boolean isPicking() {
+		Spell s = currentSpell();
+		if (s == null) {
+			return false;
+		} else {
+			return s.isPicking();
 		}
+	}
+
+	@Override
+	public AbstractSpellDescriptor getDescriptor() {
+		Spell s = currentSpell();
+		if (s == null) {
+			return new AbstractSpellDescriptor() {
+			};
+		} else {
+			return s.descriptor;
+		}
+	}
 
 	@Override
 	public void toggle() {
@@ -123,45 +121,12 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 		return spells.size();
 	}
 
-//	// TODO Move pick and clearPicks to pickManager. Staff would not need world and BlockPick
-//	public boolean pick(int x, int y, int z) {
-//		// TODO: Handle case where location is already a selection
-//		if (!pickManager.isFinishedPicking()) {
-//			Block block = world.getBlock(x, y, z);
-//			int metatdata = world.getMetadata(x, y, z);
-//			// TODO pass BlockPick
-//			world.setBlock(x, y, z, Plato.blockPicked, 0, 3);
-//			// TODO add metatdata to Pick constructor
-//			pickManager.addPick(x, y, z, block);
-//		}
-//		return pickManager.isFinishedPicking();
-//	}
+	public void clearPicks() {
+		pickManager.clearPicks();
+	}
 
 	@Override
 	public String toString() {
 		return "Staff [spells=" + spells + ", ordinal=" + ordinal + ", pickManager=" + pickManager + "]";
 	}
-
-	@Override
-	public boolean isPicking() {
-		Spell s = currentSpell();
-		if (s == null) {
-			return false;
-		} else {
-			return s.isPicking();
-		}
-	}
-
-	@Override
-	public ISelect getSelectionManager() {
-		return currentSpell().selectionManager;
-	}
-	
-	private class EmptyStaffDescriptor extends AbstractSpellDescriptor {
-	}
-
-	@Override
-	public void resetPickManager() {
-		currentSpell().resetPickManager();
-	}	
 }

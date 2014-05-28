@@ -8,9 +8,6 @@ public interface IHoldable {
 
 	boolean isPicking();
 
-	@Deprecated
-	ISelect getSelectionManager();
-
 	void resetPickManager();
 
 }
