@@ -21,9 +21,9 @@ import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.common.Plato;
-import ds.plato.spell.DeleteSpell;
-import ds.plato.spell.GrowAllSpell;
-import ds.plato.spell.MoveSpell;
+import ds.plato.spell.SpellDelete;
+import ds.plato.spell.SpellGrowAll;
+import ds.plato.spell.SpellMove;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
 import ds.plato.test.PlatoTest;
@@ -44,14 +44,14 @@ public class T_SpellLoader extends PlatoTest {
 
 	@Test
 	public void loadSpell() throws Exception {
-		Spell spell = loader.loadSpell(DeleteSpell.class);
-		assertThat(spell, instanceOf(DeleteSpell.class));
+		Spell spell = loader.loadSpell(SpellDelete.class);
+		assertThat(spell, instanceOf(SpellDelete.class));
 		assertThat(spell.descriptor.name.toLowerCase(), equalTo("delete"));
 	}
 
 	@Test
 	public void loadSpells() throws Exception {
-		List spellClasses = Lists.newArrayList(DeleteSpell.class, MoveSpell.class, GrowAllSpell.class);
+		List spellClasses = Lists.newArrayList(SpellDelete.class, SpellMove.class, SpellGrowAll.class);
 		List<Spell> spells = loader.loadSpells(spellClasses);
 		//assertThat(spells, hasItems(spellClasses));
 		for (Spell s : spells) {

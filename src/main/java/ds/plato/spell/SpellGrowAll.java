@@ -13,11 +13,11 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 
-public class GrowAllSpell extends AbstractSelectionSpell {
+public class SpellGrowAll extends AbstractSpellSelection {
 
 	// TODO blockAir is not needed for selection spells. Maybe a static PlatoBlocks class which returns blockSelected,
 	// blockPicked and BlockAir
-	public GrowAllSpell(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
+	public SpellGrowAll(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
 		super(new Descriptor(), undoManager, selectionManager, pickManager);
 	}
 

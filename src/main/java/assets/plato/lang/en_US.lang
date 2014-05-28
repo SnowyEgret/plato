@@ -3,3 +3,7 @@ item.stickEdit.name=Edit Stick
 item.stickSurface.name=Surface Stick
 item.stickSolid.name=Solid Stick
 item.stickCurve.name=Curve Stick
+
+item.staff.name=Staff
+item.staffSelection.name=Selection Staff
+item.deleteSpell.name=Delete Spell

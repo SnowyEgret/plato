@@ -10,7 +10,7 @@ public class StaffSelect extends Staff {
 
 	@Override
 	public void addSpell(Spell spell) {
-		assert spell instanceof AbstractSelectionSpell;
+		assert spell instanceof AbstractSpellSelection;
 		super.addSpell(spell);
 	}
 

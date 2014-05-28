@@ -14,9 +14,9 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 
-public class MoveSpell extends AbstractMatrixTransformationSpell {
+public class SpellMove extends AbstractSpellMatrixTransformation {
 
-	public MoveSpell(
+	public SpellMove(
 			IUndo undoManager,
 			ISelect selectionManager,
 			IPick pickManager,

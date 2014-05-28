@@ -14,7 +14,7 @@ import org.junit.Test;
 import ds.plato.common.Selection;
 import ds.plato.pick.Pick;
 import ds.plato.spell.AbstractSpellDescriptor;
-import ds.plato.spell.DeleteSpell;
+import ds.plato.spell.SpellDelete;
 import ds.plato.spell.Spell;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
@@ -30,7 +30,7 @@ public class T_DeleteSpell extends PlatoTest {
 		selections.add(new Selection(0, 0, 0, dirt, 0));
 		when(selectionManager.getSelections()).thenReturn(selections);
 		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
-		s = new DeleteSpell(undoManager, selectionManager, pickManager, air).setWorld(world);
+		s = new SpellDelete(undoManager, selectionManager, pickManager, air).setWorld(world);
 	}
 
 	@Test

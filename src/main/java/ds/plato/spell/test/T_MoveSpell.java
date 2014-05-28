@@ -19,7 +19,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import ds.plato.common.Selection;
 import ds.plato.pick.Pick;
-import ds.plato.spell.MoveSpell;
+import ds.plato.spell.SpellMove;
 import ds.plato.spell.Spell;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
@@ -44,7 +44,7 @@ public class T_MoveSpell extends PlatoTest {
 		selections.add(s2);
 		when(selectionManager.getSelections()).thenReturn(selections);
 		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
-		spell = new MoveSpell(undoManager, selectionManager, pickManager,air).setWorld(world);
+		spell = new SpellMove(undoManager, selectionManager, pickManager,air).setWorld(world);
 		picks = new Pick[] { new Pick(0, 0, 0, dirt), new Pick(1, 0, 0, dirt) };
 	}
 

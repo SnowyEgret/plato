@@ -18,7 +18,7 @@ import ds.plato.common.ISelect;
 import ds.plato.common.SelectionManager;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.Pick;
-import ds.plato.spell.GrowAllSpell;
+import ds.plato.spell.SpellGrowAll;
 import ds.plato.spell.Spell;
 import ds.plato.test.PlatoTest;
 
@@ -41,7 +41,7 @@ public class T_GrowAllSpell extends PlatoTest {
 		picks = new Pick[] {new Pick(0, 0, 0, dirt), new Pick(9, 0, 0, dirt)};
 		stubWorld = newStubWorld();
 		sm = new SelectionManager(blockSelected).setWorld(stubWorld);
-		growSpell = new GrowAllSpell(undoManager, sm, pickManager, air).setWorld(stubWorld);
+		growSpell = new SpellGrowAll(undoManager, sm, pickManager, air).setWorld(stubWorld);
 	}
 
 	@Test

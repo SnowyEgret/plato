@@ -18,11 +18,11 @@ import ds.plato.common.Shell;
 import ds.plato.pick.IPick;
 import ds.plato.undo.IUndo;
 
-public abstract class AbstractSelectionSpell extends Spell {
+public abstract class AbstractSpellSelection extends Spell {
 
 	private List<Point3i> grownSelections = new ArrayList<>();
 
-	public AbstractSelectionSpell(
+	public AbstractSpellSelection(
 			AbstractSpellDescriptor descriptor,
 			IUndo undoManager,
 			ISelect selectionManager,

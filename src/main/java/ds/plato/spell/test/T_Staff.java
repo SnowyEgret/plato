@@ -22,8 +22,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
-import ds.plato.spell.DeleteSpell;
-import ds.plato.spell.MoveSpell;
+import ds.plato.spell.SpellDelete;
+import ds.plato.spell.SpellMove;
 import ds.plato.spell.Spell;
 import ds.plato.spell.Staff;
 import ds.plato.test.PlatoTest;
@@ -34,8 +34,8 @@ import ds.plato.test.PlatoTest;
 public class T_Staff extends PlatoTest {
 
 	@Mock PlayerInteractEvent mockEvent;
-	@Mock DeleteSpell mockDelete;
-	@Mock MoveSpell mockMove;
+	@Mock SpellDelete mockDelete;
+	@Mock SpellMove mockMove;
 	Staff staff;
 
 	@Before

@@ -11,7 +11,7 @@ public class StaffDraw extends Staff {
 
 	@Override
 	public void addSpell(Spell spell) {
-		assert spell instanceof AbstractDrawSpell;
+		assert spell instanceof AbstractSpellDraw;
 		super.addSpell(spell);
 	}
 

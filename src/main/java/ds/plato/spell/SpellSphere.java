@@ -9,9 +9,9 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 
-public class SphereSpell extends AbstractDrawSpell {
+public class SpellSphere extends AbstractSpellDraw {
 
-	public SphereSpell(
+	public SpellSphere(
 			IUndo undoManager,
 			ISelect selectionManager,
 			IPick pickManager,

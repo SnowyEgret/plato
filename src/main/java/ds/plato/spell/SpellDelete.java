@@ -10,11 +10,11 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 
-public class DeleteSpell extends AbstractTransformerSpell {
+public class SpellDelete extends AbstractTransformerSpell {
 
 	private Block blockAir;
 
-	public DeleteSpell(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
+	public SpellDelete(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
 		super(new Descriptor(), undoManager, selectionManager, pickManager);
 		this.blockAir = blockAir;
 	}

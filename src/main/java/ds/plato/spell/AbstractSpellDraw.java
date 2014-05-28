@@ -19,9 +19,9 @@ import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
-public abstract class AbstractDrawSpell extends Spell {
+public abstract class AbstractSpellDraw extends Spell {
 
-	public AbstractDrawSpell(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+	public AbstractSpellDraw(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(descriptor, undoManager, selectionManager, pickManager);
 	}
 

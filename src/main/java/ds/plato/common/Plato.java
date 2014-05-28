@@ -37,9 +37,9 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import ds.plato.IWorld;
 import ds.plato.client.ClientProxy;
 import ds.plato.pick.PickManager;
-import ds.plato.spell.AbstractDrawSpell;
-import ds.plato.spell.AbstractMatrixTransformationSpell;
-import ds.plato.spell.AbstractSelectionSpell;
+import ds.plato.spell.AbstractSpellDraw;
+import ds.plato.spell.AbstractSpellMatrixTransformation;
+import ds.plato.spell.AbstractSpellSelection;
 import ds.plato.spell.AbstractTransformerSpell;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
@@ -127,11 +127,11 @@ public class Plato {
 			staffs.add(transformStaff);
 			staffs.add(drawStaff);
 			for (Spell s : spells) {
-				if (s instanceof AbstractSelectionSpell) {
+				if (s instanceof AbstractSpellSelection) {
 					selectionStaff.addSpell(s);
-				} else if (s instanceof AbstractTransformerSpell || s instanceof AbstractMatrixTransformationSpell) {
+				} else if (s instanceof AbstractTransformerSpell || s instanceof AbstractSpellMatrixTransformation) {
 					transformStaff.addSpell(s);
-				} else if (s instanceof AbstractDrawSpell) {
+				} else if (s instanceof AbstractSpellDraw) {
 					drawStaff.addSpell(s);
 				}
 			}

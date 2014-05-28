@@ -12,11 +12,11 @@ import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
-public abstract class AbstractMatrixTransformationSpell extends Spell {
+public abstract class AbstractSpellMatrixTransformation extends Spell {
 
 	private Block blockAir;
 
-	public AbstractMatrixTransformationSpell(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir) {
+	public AbstractSpellMatrixTransformation(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir) {
 		super(descriptor, undoManager, selectionManager, pickManager);
 		this.blockAir = blockAir;
 	}

@@ -15,7 +15,7 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.spell.Spell;
 import ds.plato.spell.AbstractSpellDescriptor;
-import ds.plato.spell.SphereSpell;
+import ds.plato.spell.SpellSphere;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
@@ -37,7 +37,7 @@ public class T_SphereSpell extends PlatoTest {
 
 	@Test
 	public void invoke() {
-		Spell s = new SphereSpell(undoManager, selectionManager, pickManager, air).setWorld(world);
+		Spell s = new SpellSphere(undoManager, selectionManager, pickManager, air).setWorld(world);
 		s.invoke(picks, slotEntries);
 		verify(world).setBlock(9, 0, 0, dirt, 0, 3);
 	}
