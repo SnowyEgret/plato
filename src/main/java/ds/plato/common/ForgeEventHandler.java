@@ -89,8 +89,6 @@ public class ForgeEventHandler {
 				break;
 			case RIGHT_CLICK_BLOCK:
 				stick.onClickRight(e);
-				// MOD.log.info("[ForgeEventHandle.onPlayerInteractEvent] MOD.selectionManager.size()=" +
-				// MOD.selectionManager.size());
 				break;
 			default:
 				break;
@@ -104,7 +102,7 @@ public class ForgeEventHandler {
 			case RIGHT_CLICK_AIR:
 				break;
 			case RIGHT_CLICK_BLOCK:
-				if (Plato.selectionManager.isSelected(e.x, e.y, e.z)) {
+				if (selectionManager.isSelected(e.x, e.y, e.z)) {
 					Block b = itemBlock.field_150939_a;
 					int metadata = item.getDamage(stack);
 					Plato.editStick.fillSelections(b, metadata);
@@ -218,7 +216,7 @@ public class ForgeEventHandler {
 				if (heldStick != Plato.selectionStick && heldStick.isPicking()) {
 					r.drawStringWithShadow(displacement.toString(), x, y += dy, 0xffaaaa);
 				}
-				r.drawStringWithShadow("Selection size: " + Plato.selectionManager.size(), x, y += dy, 0xffaaaa);
+				r.drawStringWithShadow("Selection size: " + selectionManager.size(), x, y += dy, 0xffaaaa);
 			}
 
 			if (holdable != null) {
@@ -239,7 +237,6 @@ public class ForgeEventHandler {
 				if (holdable.isPicking()) {
 					r.drawStringWithShadow(displacement.toString(), x, y += dy, 0xffaaaa);
 				}
-				// TODO pass selectionManager to this class instead of getting it from the holdable.
 				r.drawStringWithShadow("Selection size: " + selectionManager.size(), x, y += dy, 0xffaaaa);
 			}
 		}

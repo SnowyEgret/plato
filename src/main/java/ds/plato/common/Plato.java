@@ -3,12 +3,10 @@ package ds.plato.common;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -17,13 +15,11 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -51,6 +47,7 @@ import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)
+//@NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class Plato {
 
 	public static final String ID = "plato";
@@ -92,13 +89,13 @@ public class Plato {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
+		
 		undoManager = new UndoManager();
 		selectionManager = new SelectionManager();
 		pickManager = new PickManager();
 
 		log = LogManager.getLogger(NAME);
 		File file = event.getSuggestedConfigurationFile();
-		System.out.println("[Plato.preInit] file=" + file);
 		config = new ConfigHelper(file, ID);
 
 		log.info("[Plato.preInit]Initializing blocks...");
@@ -152,10 +149,8 @@ public class Plato {
 	public void init(FMLInitializationEvent event) {
 
 		ClientProxy.setCustomRenderers();
-
-		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(this, selectionManager));
-		Map<String, KeyBinding> keyBindings = proxy.registerKeyBindings(NAME);
-		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(keyBindings, undoManager));
+		
+		proxy.registerEventHandlers(this, selectionManager, undoManager);		
 	}
 
 	@EventHandler

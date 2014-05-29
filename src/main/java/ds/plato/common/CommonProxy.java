@@ -4,13 +4,12 @@ import java.util.Map;
 
 import org.lwjgl.input.Keyboard;
 
+import ds.plato.undo.IUndo;
 import net.minecraft.client.settings.KeyBinding;
 
 public class CommonProxy {
 
-	public Map<String, KeyBinding> registerKeyBindings(String modName) {
-		// TODO Auto-generated method stub
-		return null;
+	public void registerEventHandlers(Plato plato, ISelect selectionManager, IUndo undoManager) {
 	}
 
 }
