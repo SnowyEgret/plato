@@ -3,6 +3,7 @@ package ds.plato.common;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -21,9 +22,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.input.Keyboard;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -50,7 +49,6 @@ import ds.plato.spell.StaffSelect;
 import ds.plato.spell.StaffTransform;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
-import ds.plato.undo.IUndoable;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)
 public class Plato {
@@ -61,14 +59,14 @@ public class Plato {
 
 	@Instance(ID) public static Plato instance;
 
-	//TODO move initialization to ClientProxy
+	// TODO move initialization to ClientProxy
 	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
 
 	// Blocks
 	public static Block blockSelected;
 	public static Block blockPicked;
 
-	//TODO no longer needed after staffs and spells
+	// TODO no longer needed after staffs and spells
 	// Items
 	public static StickSelection selectionStick;
 	public static StickCurve curveStick;
@@ -85,8 +83,8 @@ public class Plato {
 
 	public ConfigHelper config;
 	public static Logger log;
-	public static KeyBinding keyUndo, keyRedo, keyToggle, keyDelete;
-	//TODO remove after migrating to staffs and spells
+	// public static KeyBinding keyUndo, keyRedo, keyToggle, keyDelete;
+	// TODO remove after migrating to staffs and spells
 	static WorldServer world;
 
 	public static SlotDistribution slotDistribution;
@@ -153,20 +151,11 @@ public class Plato {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 
-		// TODO get NLS properties these strings
-		keyUndo = new KeyBinding("Undo", Keyboard.KEY_Z, NAME);
-		keyRedo = new KeyBinding("Redo", Keyboard.KEY_Y, NAME);
-		keyToggle = new KeyBinding("Toggle", Keyboard.KEY_TAB, NAME);
-		keyDelete = new KeyBinding("Delete", Keyboard.KEY_DELETE, NAME);
-		ClientRegistry.registerKeyBinding(keyUndo);
-		ClientRegistry.registerKeyBinding(keyRedo);
-		ClientRegistry.registerKeyBinding(keyToggle);
-		ClientRegistry.registerKeyBinding(keyDelete);
-
 		ClientProxy.setCustomRenderers();
 
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(this, selectionManager));
-		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(undoManager));
+		Map<String, KeyBinding> keyBindings = proxy.registerKeyBindings(NAME);
+		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(keyBindings, undoManager));
 	}
 
 	@EventHandler
@@ -196,13 +185,13 @@ public class Plato {
 		editStick.save();
 	}
 
-	//TODO remove after migrating to staffs and spells
-public static void clearSelections() {
+	// TODO remove after migrating to staffs and spells
+	public static void clearSelections() {
 		if (selectionManager.size() != 0)
 			selectionStick.clearSelections();
 	}
 
-	//TODO remove after migrating to staffs and spells
+	// TODO remove after migrating to staffs and spells
 	public static void clearPicks() {
 		selectionStick.clearPicks();
 		solidStick.clearPicks();
@@ -212,7 +201,7 @@ public static void clearSelections() {
 		editStick.clearPicks();
 	}
 
-	//TODO make private after migrating to staffs and spells
+	// TODO make private after migrating to staffs and spells
 	public static WorldServer getWorldServer() {
 		// http://www.minecraftforum.net/topic/1805594-how-to-get-worldserver-reference-from-world-or-entityplayer/
 		if (world == null) {
