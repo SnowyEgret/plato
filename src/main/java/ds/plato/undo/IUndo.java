@@ -1,7 +1,7 @@
 package ds.plato.undo;
 
 
-public interface IUndo {
+public interface IUndo extends IUndoable{
 	
 	public Transaction newTransaction();
 

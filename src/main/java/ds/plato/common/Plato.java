@@ -59,12 +59,16 @@ public class Plato {
 	public static final String NAME = "Plato";
 	public static final String VERSION = "0.1";
 
-	public static Logger log;
+	@Instance(ID) public static Plato instance;
+
+	//TODO move initialization to ClientProxy
+	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
 
 	// Blocks
 	public static Block blockSelected;
 	public static Block blockPicked;
 
+	//TODO no longer needed after staffs and spells
 	// Items
 	public static StickSelection selectionStick;
 	public static StickCurve curveStick;
@@ -72,20 +76,17 @@ public class Plato {
 	public static StickSolid solidStick;
 	public static StickEdit editStick;
 
-	@Instance(ID) public static Plato instance;
-
-	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
+	private List<Spell> spells;
+	private List<Staff> staffs;
 
 	public static IUndo undoManager;
 	public static ISelect selectionManager;
 	public static IPick pickManager;
 
 	public ConfigHelper config;
-	private List<Spell> spells;
-	private List<Staff> staffs;
-
+	public static Logger log;
 	public static KeyBinding keyUndo, keyRedo, keyToggle, keyDelete;
-
+	//TODO remove after migrating to staffs and spells
 	static WorldServer world;
 
 	public static SlotDistribution slotDistribution;
@@ -152,7 +153,7 @@ public class Plato {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 
-		// Should have a config.initKeyBinding for language
+		// TODO get NLS properties these strings
 		keyUndo = new KeyBinding("Undo", Keyboard.KEY_Z, NAME);
 		keyRedo = new KeyBinding("Redo", Keyboard.KEY_Y, NAME);
 		keyToggle = new KeyBinding("Toggle", Keyboard.KEY_TAB, NAME);
@@ -162,13 +163,10 @@ public class Plato {
 		ClientRegistry.registerKeyBinding(keyToggle);
 		ClientRegistry.registerKeyBinding(keyDelete);
 
-		// Is all this really necessary? Why not
 		ClientProxy.setCustomRenderers();
-		// blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
-		// RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer());
 
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(this, selectionManager));
-		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler((IUndoable)undoManager));
+		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(undoManager));
 	}
 
 	@EventHandler
@@ -198,11 +196,13 @@ public class Plato {
 		editStick.save();
 	}
 
-	public static void clearSelections() {
+	//TODO remove after migrating to staffs and spells
+public static void clearSelections() {
 		if (selectionManager.size() != 0)
 			selectionStick.clearSelections();
 	}
 
+	//TODO remove after migrating to staffs and spells
 	public static void clearPicks() {
 		selectionStick.clearPicks();
 		solidStick.clearPicks();
@@ -212,6 +212,7 @@ public class Plato {
 		editStick.clearPicks();
 	}
 
+	//TODO make private after migrating to staffs and spells
 	public static WorldServer getWorldServer() {
 		// http://www.minecraftforum.net/topic/1805594-how-to-get-worldserver-reference-from-world-or-entityplayer/
 		if (world == null) {
@@ -261,7 +262,7 @@ public class Plato {
 		SlotDistribution d = new SlotDistribution(Plato.getBlocksWithMetadataInIventorySlots());
 		if (!d.equals(slotDistribution)) {
 			slotDistribution = d;
-			Plato.log.info("[Plato.updateBlockDistribution] inventoryDistribution=" + slotDistribution);
+			Plato.log.info("[Plato.updateBlockDistribution] Updated slot distribution: " + slotDistribution);
 		}
 	}
 
@@ -275,6 +276,6 @@ public class Plato {
 		for (Staff s : staffs) {
 			s.setWorld(world);
 		}
-		System.out.println("[Plato.setWorld] world=" + world);
+		System.out.println("[Plato.setWorld] Completed initalization of managers, staffs, and spells. world=" + world);
 	}
 }

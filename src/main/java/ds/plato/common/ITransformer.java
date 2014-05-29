@@ -1,6 +1,6 @@
 package ds.plato.common;
 
 
-public interface Transformer<S> {
+public interface ITransformer<S> {
 	public Selection transform(Selection selection);
 }

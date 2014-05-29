@@ -181,7 +181,7 @@ public abstract class Stick extends Item implements IToggleable {
 		transaction.commit();
 	}
 
-	protected void transformSelections(Transformer transformer) {
+	protected void transformSelections(ITransformer transformer) {
 		Transaction t = Plato.undoManager.newTransaction();
 		for (Selection s : Plato.selectionManager.getSelections()) {
 			t.add(new UndoableSetBlock(transformer.transform(s)));

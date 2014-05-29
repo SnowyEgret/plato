@@ -150,7 +150,7 @@ public class StickEdit extends Stick {
 	}
 
 	public void fillSelections(final Block block, final int metadata) {
-		transformSelections(new Transformer() {
+		transformSelections(new ITransformer() {
 			@Override
 			public Selection transform(Selection s) {
 				//Create a copy here because we don't want to modify the selectionManager's selection list.
@@ -164,7 +164,7 @@ public class StickEdit extends Stick {
 	}
 
 	public void fillChecker(final List<SlotEntry> list) {
-		transformSelections(new Transformer() {
+		transformSelections(new ITransformer() {
 			@Override
 			public Selection transform(Selection s) {
 				int index = 0;
@@ -182,7 +182,7 @@ public class StickEdit extends Stick {
 	}
 
 	private void fillRandom(final List<SlotEntry> list) {
-		transformSelections(new Transformer() {
+		transformSelections(new ITransformer() {
 			Random r = new Random();
 
 			@Override
@@ -197,7 +197,7 @@ public class StickEdit extends Stick {
 	}
 
 	private void hollowSelections() {
-		transformSelections(new Transformer() {
+		transformSelections(new ITransformer() {
 			VoxelSet selections = Plato.selectionManager.voxelSet();
 
 			@Override
@@ -218,7 +218,7 @@ public class StickEdit extends Stick {
 	}
 
 	private void dropSelections() {
-		transformSelections(new Transformer() {
+		transformSelections(new ITransformer() {
 			@Override
 			public Selection transform(Selection s) {
 				World w = Plato.getWorldServer();

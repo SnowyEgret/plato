@@ -5,7 +5,7 @@ import net.minecraft.block.BlockAir;
 import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
 import ds.plato.common.SlotEntry;
-import ds.plato.common.Transformer;
+import ds.plato.common.ITransformer;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
@@ -22,7 +22,7 @@ public class SpellDelete extends AbstractTransformerSpell {
 	@Override
 	public void invoke(Pick[] picks, SlotEntry[] slotEntries) {
 		assert picks.length == getNumPicks();
-		transformSelections(new Transformer() {
+		transformSelections(new ITransformer() {
 			@Override
 			public Selection transform(Selection s) {
 				// Create a copy here because we don't want to modify the selectionManager's selection list.
