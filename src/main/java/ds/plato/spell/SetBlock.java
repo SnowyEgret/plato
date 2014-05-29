@@ -9,9 +9,9 @@ import ds.plato.common.ISelect;
 import ds.plato.common.Plato;
 import ds.plato.common.Selection;
 import ds.plato.common.SelectionManager;
-import ds.plato.undo.Undoable;
+import ds.plato.undo.IUndoable;
 
-public class SetBlock implements Undoable {
+public class SetBlock implements IUndoable {
 
 	IWorld world;
 	ISelect selectionManager;

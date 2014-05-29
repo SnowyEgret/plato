@@ -1,6 +1,6 @@
 package ds.plato.undo;
 
-public interface Undoable {
+public interface IUndoable {
 	
 	public void undo();
 	public void redo();

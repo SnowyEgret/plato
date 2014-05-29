@@ -27,7 +27,7 @@ public class SelectionManager implements ISelect {
 	}
 
 	// World is not available when SelectionManager is constructed. Called when player joins game in ForgeEventHandler
-	public SelectionManager setWorld(IWorld world) {
+	public ISelect setWorld(IWorld world) {
 		this.world = world;
 		return this;
 	}

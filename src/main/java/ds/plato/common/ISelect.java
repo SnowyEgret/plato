@@ -1,9 +1,12 @@
 package ds.plato.common;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.vecmath.Point3i;
 
+import ds.geom.VoxelSet;
+import ds.plato.IWorld;
 import net.minecraft.block.Block;
 
 public interface ISelect {
@@ -23,4 +26,20 @@ public interface ISelect {
 	public int size();
 
 	public Collection<? extends Point3i> selectedPoints();
+
+	public boolean isSelected(int x, int y, int z);
+
+	public ISelect setWorld(IWorld world);
+	
+	// TODO methods below can be removed when migrating to spells and staffs. Used by package common.
+
+	public VoxelSet voxelSet();
+
+	public List<Selection> getSelectionList();
+
+	public void addSelection(Selection selection);
+
+	public Selection removeSelection(Point3i p);
+
+	public Selection removeSelection(int x, int y, int z);
 }

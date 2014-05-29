@@ -12,7 +12,7 @@ import org.junit.Test;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
 import ds.plato.undo.UndoManager;
-import ds.plato.undo.Undoable;
+import ds.plato.undo.IUndoable;
 
 public class T_UndoManager extends PlatoTest {
 
@@ -123,7 +123,7 @@ public class T_UndoManager extends PlatoTest {
 		}
 	}
 
-	private class TestUndoable implements Undoable {
+	private class TestUndoable implements IUndoable {
 
 		@Override
 		public void undo() {

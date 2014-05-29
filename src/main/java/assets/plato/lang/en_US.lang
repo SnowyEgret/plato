@@ -5,5 +5,10 @@ item.stickSolid.name=Solid Stick
 item.stickCurve.name=Curve Stick
 
 item.staff.name=Staff
-item.staffSelection.name=Selection Staff
-item.deleteSpell.name=Delete Spell
+item.staffDraw.name=Draw Staff
+item.staffSelect.name=Select Staff
+item.staffTransform.name=Edit Staff
+item.spellDelete.name=Delete Spell
+item.spellMove.name=Move Spell
+item.spellSphere.name=Sphere Spell
+item.spellGrowAll.name=Grow ALL Spell

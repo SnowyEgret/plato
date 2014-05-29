@@ -26,10 +26,19 @@ public class SpellGrowAll extends AbstractSpellSelection {
 		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 			shrinkSelections(EnumShell.ALL);
 		} else {
-			Block typeOfFirstBlockSelected = selectionManager.getSelections().iterator().next().block;
-			System.out.println("[GrowAllSpell.invoke] typeOfFirstBlockSelected=" + typeOfFirstBlockSelected);
-			growSelections(EnumShell.ALL, typeOfFirstBlockSelected);
+			Block firstBlockSelected = selectionManager.getSelections().iterator().next().block;
+			System.out.println("[GrowAllSpell.invoke] typeOfFirstBlockSelected=" + firstBlockSelected);
+			growSelections(EnumShell.ALL, firstBlockSelected);
 		}
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("SpellGrowAll [getNumPicks()=");
+		builder.append(getNumPicks());
+		builder.append("]");
+		return builder.toString();
 	}
 
 	private static class Descriptor extends AbstractSpellDescriptor {

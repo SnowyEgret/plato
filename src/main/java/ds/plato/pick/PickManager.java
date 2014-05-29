@@ -20,13 +20,17 @@ public class PickManager implements IPick {
 	private IWorld world;
 	private BlockPick blockPicked;
 
-	public PickManager(int numPicks, IWorld world, BlockPick blockPicked) {
+	public PickManager(int numPicks, BlockPick blockPicked) {
 		this.maxPicks = numPicks;
-		this.world = world;
 		this.blockPicked = blockPicked;
 	}
 
 	public PickManager() {
+	}
+
+	@Override
+	public void setWorld(IWorld world) {
+		this.world = world;
 	}
 
 	@Override
@@ -53,7 +57,7 @@ public class PickManager implements IPick {
 		}
 		return isFinishedPicking();
 	}
-	
+
 	@Override
 	public boolean isFinishedPicking() {
 		return (picks.size() == maxPicks);
@@ -84,7 +88,7 @@ public class PickManager implements IPick {
 	public void clear() {
 		picks.clear();
 	}
-	
+
 	@Override
 	public void clearPicks() {
 		for (Pick p : getPicksArray()) {

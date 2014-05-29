@@ -6,12 +6,12 @@ import javax.vecmath.Point3i;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import ds.plato.undo.Undoable;
+import ds.plato.undo.IUndoable;
 
-public class UndoableSetBlock implements Undoable {
+public class UndoableSetBlock implements IUndoable {
 	
 	World world;
-	SelectionManager selectionManager;
+	ISelect selectionManager;
 	public final int x, y, z;
 	Block block, prevBlock;
 	int metadata, prevMetadata;
@@ -19,7 +19,7 @@ public class UndoableSetBlock implements Undoable {
 	// Started refactoring for dependency injection. Created this constructor with world and selectionManager parameters.
 	// Only used by new spell package.
 	// UndoableSetBlock(int x, int y, int z, Block block, int metadata) calls this constructor with Plato's world and selectionManager
-	public UndoableSetBlock(World world, SelectionManager selectionManager, int x, int y, int z, Block block, int metadata) {
+	public UndoableSetBlock(World world, ISelect selectionManager, int x, int y, int z, Block block, int metadata) {
 		
 		this.world = world;
 		this.selectionManager = selectionManager;

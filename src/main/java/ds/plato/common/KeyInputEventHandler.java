@@ -9,8 +9,16 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ds.plato.undo.IUndo;
+import ds.plato.undo.IUndoable;
 
 public class KeyInputEventHandler {
+
+	private IUndoable undoManager;
+
+	public KeyInputEventHandler(IUndoable undoManager) {
+		this.undoManager = undoManager;
+	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
@@ -19,8 +27,9 @@ public class KeyInputEventHandler {
 		if (Plato.keyUndo.isPressed()) {
 			try {
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL))
-					Plato.undoManager.undo();
+					undoManager.undo();
 			} catch (Exception e) {
+				
 				// TODO Log to chat
 				Plato.log.info(e.getMessage());
 			}
@@ -29,7 +38,7 @@ public class KeyInputEventHandler {
 		if (Plato.keyRedo.isPressed()) {
 			try {
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL))
-					Plato.undoManager.redo();
+					undoManager.redo();
 			} catch (Exception e) {
 				// TODO Log to chat
 				Plato.log.info(e.getMessage());

@@ -7,29 +7,29 @@ import java.util.List;
 import ds.plato.common.Selection;
 import ds.plato.common.UndoableSetBlock;
 
-public class Transaction implements Undoable, Iterable {
+public class Transaction implements IUndoable, Iterable {
 
-	protected List<Undoable> undoables = new ArrayList<>();
+	protected List<IUndoable> undoables = new ArrayList<>();
 	private final IUndo undoManager;
 	
 	public Transaction(IUndo um) {
 		this.undoManager = um;
 	}
 
-	public void add(Undoable undoable) {
+	public void add(IUndoable undoable) {
 		undoables.add(undoable);
 	}
 
 	@Override
 	public void undo() {
-		for (Undoable undoable : undoables) {
+		for (IUndoable undoable : undoables) {
 			undoable.undo();
 		}
 	}
 
 	@Override
 	public void redo() {
-		for (Undoable undoable : undoables) {
+		for (IUndoable undoable : undoables) {
 			undoable.redo();
 		}
 	}
@@ -49,7 +49,7 @@ public class Transaction implements Undoable, Iterable {
 
 	// Creates a dependency on package ds.plato.common. TODO: Move ds.undo and ds.selection to ds.plato.common.
 	public boolean contains(Selection s) {
-		for (Undoable u : undoables) {
+		for (IUndoable u : undoables) {
 			UndoableSetBlock uu = (UndoableSetBlock) u;
 			if (uu.x == s.x && uu.y == s.y && uu.z == s.z ) {
 				return true;

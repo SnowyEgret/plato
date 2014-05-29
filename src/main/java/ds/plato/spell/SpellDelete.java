@@ -32,6 +32,15 @@ public class SpellDelete extends AbstractTransformerSpell {
 	}
 
 	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("SpellDelete [getNumPicks()=");
+		builder.append(getNumPicks());
+		builder.append("]");
+		return builder.toString();
+	}
+
+	@Override
 	public int getNumPicks() {
 		return 1;
 	}

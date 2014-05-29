@@ -29,7 +29,7 @@ public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 		//TODO Remove all this when there is only one pickManager injected to all Staffs.
 		Block selectedOrPickedBlock = null;
 		Point3i p = new Point3i(x, y, z);
-		Selection sel = Plato.selectionManager.selectionAt(p);
+		Selection sel = Plato.selectionManager.selectionAt(x, y, z);
 		if (sel == null) {
 			Pick pick = Plato.surfaceStick.getPickAt(p);
 			if (pick == null) {

@@ -59,9 +59,9 @@ public class StickSelection extends Stick {
 
 		Point3i p = new Point3i(e.x, e.y, e.z);
 
-		if (Plato.selectionManager.isSelected(p)) {
+		if (Plato.selectionManager.isSelected(e.x, e.y, e.z)) {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-				Selection s = Plato.selectionManager.selectionAt(p);
+				Selection s = Plato.selectionManager.selectionAt(e.x, e.y, e.z);
 				expandSelections((EnumShell)state.current(), s.block);
 			} else {
 				deselectBlockAt(p);

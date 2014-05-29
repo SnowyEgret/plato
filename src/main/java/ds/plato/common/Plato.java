@@ -36,6 +36,7 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import ds.plato.IWorld;
 import ds.plato.client.ClientProxy;
+import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.spell.AbstractSpellDraw;
 import ds.plato.spell.AbstractSpellMatrixTransformation;
@@ -47,7 +48,9 @@ import ds.plato.spell.Staff;
 import ds.plato.spell.StaffDraw;
 import ds.plato.spell.StaffSelect;
 import ds.plato.spell.StaffTransform;
+import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
+import ds.plato.undo.IUndoable;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)
 public class Plato {
@@ -73,9 +76,9 @@ public class Plato {
 
 	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
 
-	public static UndoManager undoManager;
-	public static SelectionManager selectionManager;
-	public static PickManager pickManager;
+	public static IUndo undoManager;
+	public static ISelect selectionManager;
+	public static IPick pickManager;
 
 	public ConfigHelper config;
 	private List<Spell> spells;
@@ -165,7 +168,7 @@ public class Plato {
 		// RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer());
 
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(this, selectionManager));
-		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
+		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler((IUndoable)undoManager));
 	}
 
 	@EventHandler
@@ -265,6 +268,7 @@ public class Plato {
 	// World is not available when selectionManager and spells are initialized.
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
+		pickManager.setWorld(world);
 		for (Spell s : spells) {
 			s.setWorld(world);
 		}

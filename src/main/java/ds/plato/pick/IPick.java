@@ -1,5 +1,6 @@
 package ds.plato.pick;
 
+import ds.plato.IWorld;
 import net.minecraft.block.Block;
 
 public interface IPick {
@@ -24,4 +25,6 @@ public interface IPick {
 	//TODO remove when migrating to staffs and spells
 	@Deprecated
 	public void clear();
+
+	public void setWorld(IWorld world);
 }
