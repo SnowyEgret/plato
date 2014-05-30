@@ -8,4 +8,6 @@ public interface IClickable {
 
 	public void onClickRight(PlayerInteractEvent e);
 
+	public void onClickRightAir(PlayerInteractEvent e);
+
 }

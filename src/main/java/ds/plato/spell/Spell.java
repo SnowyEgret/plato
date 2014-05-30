@@ -12,10 +12,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import ds.plato.IWorld;
 import ds.plato.common.ISelect;
+import ds.plato.common.Plato;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
@@ -42,6 +45,19 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		this.world = world;
 		return this;
 	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
+		if (!w.isRemote) {
+			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+			if (position.typeOfHit == MovingObjectType.MISS) {
+				pickManager.clearPicks();
+			}
+		}
+		return is;
+	}
+
+
 
 	// TODO Tried overiding left click to select or deselect a block. For now, just cancels event so block is not broken.
 	// Description: Ticking memory connection
@@ -69,6 +85,13 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
 			invoke(pickManager.getPicksArray(), entries);
 		}
+	}
+
+	@Override
+	public void onClickRightAir(PlayerInteractEvent e) {
+		System.out.println("[Spell.onClickRightAir] e=" + e);
+		//Not working
+		//pickManager.clearPicks();
 	}
 
 	// TODO remove this from ISelect. Pass selection manager to EventHandler instead.

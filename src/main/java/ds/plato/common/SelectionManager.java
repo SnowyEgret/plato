@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
+import net.minecraft.world.World;
 import ds.geom.VoxelSet;
 import ds.plato.IWorld;
 
@@ -17,8 +18,8 @@ public class SelectionManager implements ISelect {
 	private final Map<Point3i, Selection> selections = new HashMap<>();
 	private IWorld world;
 	private BlockSelected blockSelected;
-	
-	//TODO remove when blockSelected is injected throughout.
+
+	// TODO remove when blockSelected is injected throughout.
 	public SelectionManager() {
 	}
 
@@ -32,7 +33,7 @@ public class SelectionManager implements ISelect {
 		return this;
 	}
 
-	//Returns a copy to avoid concurrent modification
+	// Returns a copy to avoid concurrent modification
 	@Override
 	public Iterable<Selection> getSelections() {
 		List<Selection> l = new ArrayList<>();
@@ -45,7 +46,7 @@ public class SelectionManager implements ISelect {
 		return selectionAt(new Point3i(x, y, z));
 	}
 
-	//For now, only used by UndoableSetBlock in new spell package.
+	// For now, only used by UndoableSetBlock in new spell package.
 	@Override
 	public Selection select(int x, int y, int z) {
 		Block prevBlock = world.getBlock(x, y, z);
@@ -67,7 +68,7 @@ public class SelectionManager implements ISelect {
 		List<Point3i> pointsCleared = new ArrayList<>();
 		pointsCleared.addAll(selections.keySet());
 		selections.clear();
-		//System.out.println("[SelectionManager.clear] selections.size()=" + selections.size());
+		// System.out.println("[SelectionManager.clear] selections.size()=" + selections.size());
 		return pointsCleared;
 	}
 
@@ -122,15 +123,21 @@ public class SelectionManager implements ISelect {
 		l.addAll(selections.values());
 		return l;
 	}
-		
+
 	@Override
 	public String toString() {
 		return "SelectionManager [world=" + idOf(world) + ", selections=" + selections + "]";
 	}
 
 	private String idOf(Object o) {
-		return o.getClass().getSimpleName()+"@"+Integer.toHexString(o.hashCode());
+		return o.getClass().getSimpleName() + "@" + Integer.toHexString(o.hashCode());
 	}
 
+	@Override
+	public void clearSelections() {
+		for (Selection s : getSelections()) {
+			deselect(s);
+		}
+	}
 
 }

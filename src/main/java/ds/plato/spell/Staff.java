@@ -14,7 +14,13 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class Staff extends Item implements IClickable, IToggleable, IHoldable {
@@ -34,15 +40,31 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	}
 
 	@Override
+	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
+		System.out.println("[Staff.onItemRightClick] w=" + w);
+		if (currentSpell() != null)
+			currentSpell().onItemRightClick(is, w, player);
+		return is;
+	}
+
+	@Override
 	public void onClickLeft(PlayerInteractEvent e) {
-		currentSpell().onClickLeft(e);
+		if (currentSpell() != null)
+			currentSpell().onClickLeft(e);
 	}
 
 	@Override
 	public void onClickRight(PlayerInteractEvent e) {
 		if (pickManager.pick(e.x, e.y, e.z)) {
-			currentSpell().onClickRight(e);
+			if (currentSpell() != null)
+				currentSpell().onClickRight(e);
 		}
+	}
+
+	@Override
+	public void onClickRightAir(PlayerInteractEvent e) {
+		if (currentSpell() != null)
+			currentSpell().onClickRightAir(e);
 	}
 
 	@Override

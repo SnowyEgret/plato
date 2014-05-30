@@ -19,7 +19,7 @@ public interface ISelect {
 
 	public void deselect(Selection selection);
 
-	public Iterable<Point3i> clear();
+	public void clearSelections();
 
 	public Selection removeSelection(Selection s);
 
@@ -38,6 +38,8 @@ public interface ISelect {
 	public List<Selection> getSelectionList();
 
 	public void addSelection(Selection selection);
+
+	public Iterable<Point3i> clear();
 
 	public Selection removeSelection(Point3i p);
 

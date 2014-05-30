@@ -122,6 +122,8 @@ public class ForgeEventHandler {
 				c.onClickLeft(e);
 				break;
 			case RIGHT_CLICK_AIR:
+				//Recieving this when right clicking (not on air)
+				//c.onClickRightAir(e);
 				break;
 			case RIGHT_CLICK_BLOCK:
 				c.onClickRight(e);

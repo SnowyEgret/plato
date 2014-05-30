@@ -7,6 +7,13 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
@@ -28,6 +35,18 @@ public abstract class AbstractSpellSelection extends Spell {
 			ISelect selectionManager,
 			IPick pickManager) {
 		super(descriptor, undoManager, selectionManager, pickManager);
+	}
+
+	//Only clear selections when this is a selection spell. Spell.onItemRightClick only clears picks.
+	@Override
+	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
+		System.out.println("[AbstractSpellSelection.onItemRightClick] w=" + w);
+		super.onItemRightClick(is, w, player);
+		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+		if (position.typeOfHit == MovingObjectType.MISS) {
+			selectionManager.clearSelections();
+		}
+		return is;
 	}
 
 	protected void growSelections(EnumShell shellType, Block patternBlock) {
@@ -73,10 +92,17 @@ public abstract class AbstractSpellSelection extends Spell {
 		}
 		grownSelections.clear();
 	}
+	
+//	@Override
+//	public void onClickRightAir(PlayerInteractEvent e) {
+//		System.out.println("[AbstractSpellSelection.onClickRightAir] e=" + e);
+//		super.onClickRightAir(e);
+//		selectionManager.clearSelections();
+//	}
 
 	@Override
 	public int getNumPicks() {
-		return 1;
+		return 0;
 	}
 
 }
