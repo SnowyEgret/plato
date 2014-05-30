@@ -21,10 +21,13 @@ import ds.plato.undo.IUndo;
 public class ClientProxy extends CommonProxy {
 
 	public static int blockSelectedRenderId;
+	public static int blockPickedRenderId;
 
 	public static void setCustomRenderers() {
 		blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer());
+		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId));
+		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId));
 	}
 	
 	@Override

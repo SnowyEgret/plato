@@ -13,64 +13,35 @@ import ds.plato.pick.Pick;
 
 public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 
-	@Override
-	public int getRenderId() {
-		return ClientProxy.blockSelectedRenderId;
-		//return MOD.blockSelectedRenderId;
+	private int id;
+
+	public BlockSelectedRenderer(int id) {
+		this.id = id;
 	}
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		// TODO Auto-generated method stub
+	public int getRenderId() {
+		return id;
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		//TODO Remove all this when there is only one pickManager injected to all Staffs.
-		Block selectedOrPickedBlock = null;
-		Point3i p = new Point3i(x, y, z);
+
+		Block selectedBlock = null;
 		Selection sel = Plato.selectionManager.selectionAt(x, y, z);
-		if (sel == null) {
-			Pick pick = Plato.surfaceStick.getPickAt(p);
-			if (pick == null) {
-				pick = Plato.selectionStick.getPickAt(p);
-			}
-			if (pick == null) {
-				pick = Plato.curveStick.getPickAt(p);
-			}
-			if (pick == null) {
-				pick = Plato.solidStick.getPickAt(p);
-			}
-			if (pick == null) {
-				pick = Plato.editStick.getPickAt(p);
-			}
-			if (pick == null) {
-				// Block 
-				renderer.renderStandardBlock(Blocks.ice, x, y, z);
-				return true;
-			} else {
-				selectedOrPickedBlock = pick.block;
-			}
+		if (sel != null) {
+			selectedBlock = sel.block;
 		} else {
-			selectedOrPickedBlock = sel.block;
+			renderer.renderStandardBlock(Blocks.ice, x, y, z);
+			return true;
 		}
-		
-		if (selectedOrPickedBlock == null) {
-			throw new RuntimeException("Block is not selected or picked at voxel "+p);
-		}
-		
-		if (block == Plato.blockSelected) {
-			//TODO 
-			//renderer.renderStandardBlockWithColorMultiplier(selectionManager.selectionAt(x, y, z).block, x, y, z, .9f, .7f, .7f);
-			renderer.renderStandardBlockWithColorMultiplier(selectedOrPickedBlock, x, y, z, .9f, .7f, .7f);
-		} else if (block == Plato.blockPicked) {
-			//TODO
-			//renderer.renderStandardBlockWithColorMultiplier(pickManager.pickAt(x, y, z).block, x, y, z, .7f, .9f, .7f);
-			renderer.renderStandardBlockWithColorMultiplier(selectedOrPickedBlock, x, y, z, .7f, .9f, .7f);
-		} else {
-			throw new RuntimeException("Unexpected block type: "+block);
-		}
+
+		renderer.renderStandardBlockWithColorMultiplier(selectedBlock, x, y, z, .9f, .7f, .7f);
 		return true;
+	}
+
+	@Override
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 	}
 
 	@Override

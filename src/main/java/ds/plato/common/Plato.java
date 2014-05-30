@@ -88,7 +88,10 @@ public class Plato {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-
+		
+//		IUndo undoManager;
+//		ISelect selectionManager;
+//		IPick pickManager;
 		
 		undoManager = new UndoManager();
 		selectionManager = new SelectionManager();
@@ -172,6 +175,7 @@ public class Plato {
 		config.save();
 	}
 
+	// TODO remove after migrating to staffs and spells
 	private void saveSticks() {
 		selectionStick.save();
 		solidStick.save();
