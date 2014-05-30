@@ -10,7 +10,7 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import ds.plato.IWorld;
-import ds.plato.common.BlockPick;
+import ds.plato.common.BlockPicked;
 import ds.plato.common.Plato;
 
 public class PickManager implements IPick {
@@ -18,9 +18,9 @@ public class PickManager implements IPick {
 	private int maxPicks = 0;
 	private final LinkedList<Pick> picks = new LinkedList<>();
 	private IWorld world;
-	private BlockPick blockPicked;
+	private BlockPicked blockPicked;
 
-	public PickManager(int numPicks, BlockPick blockPicked) {
+	public PickManager(int numPicks, BlockPicked blockPicked) {
 		this.maxPicks = numPicks;
 		this.blockPicked = blockPicked;
 	}
@@ -93,7 +93,7 @@ public class PickManager implements IPick {
 	public void clearPicks() {
 		for (Pick p : getPicksArray()) {
 			Block block = world.getBlock(p.x, p.y, p.z);
-			if (block instanceof BlockPick) {
+			if (block instanceof BlockPicked) {
 				world.setBlock(p.x, p.y, p.z, p.block, p.metatdata, 3);
 			}
 		}

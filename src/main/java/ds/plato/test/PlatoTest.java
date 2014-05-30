@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import com.google.inject.Provider;
 
 import ds.plato.IWorld;
-import ds.plato.common.BlockPick;
+import ds.plato.common.BlockPicked;
 import ds.plato.common.BlockSelected;
 import ds.plato.common.ISelect;
 import ds.plato.pick.IPick;
@@ -25,7 +25,7 @@ public class PlatoTest {
 	@Mock protected BlockSand clay;
 	@Mock protected BlockAir air;
 	@Mock protected BlockSelected blockSelected;
-	@Mock protected BlockPick blockPicked;
+	@Mock protected BlockPicked blockPicked;
 	@Mock protected IWorld world;
 	@Mock protected ISelect selectionManager;
 	@Mock protected IPick pickManager;

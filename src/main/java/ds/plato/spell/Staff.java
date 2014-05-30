@@ -6,7 +6,7 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.IWorld;
-import ds.plato.common.BlockPick;
+import ds.plato.common.BlockPicked;
 import ds.plato.common.ISelect;
 import ds.plato.common.IToggleable;
 import ds.plato.common.Plato;

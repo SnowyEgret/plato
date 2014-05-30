@@ -103,7 +103,7 @@ public class Plato {
 
 		log.info("[Plato.preInit]Initializing blocks...");
 		blockSelected = config.initBlock(BlockSelected.class);
-		blockPicked = config.initBlock(BlockPick.class);
+		blockPicked = config.initBlock(BlockPicked.class);
 
 		log.info("[Plato.preInit]Initializing items...");
 		selectionStick = (StickSelection) config.initStick(StickSelection.class);

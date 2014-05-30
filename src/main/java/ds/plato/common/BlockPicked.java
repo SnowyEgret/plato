@@ -2,9 +2,9 @@ package ds.plato.common;
 
 import ds.plato.client.ClientProxy;
 
-public class BlockPick extends BlockSelected {
+public class BlockPicked extends BlockSelected {
 
-	public BlockPick() {
+	public BlockPicked() {
 		super();
 	}
 	
