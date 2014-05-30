@@ -50,7 +50,7 @@ public class SelectionManager implements ISelect {
 	public Selection select(int x, int y, int z) {
 		Block prevBlock = world.getBlock(x, y, z);
 		int metadata = world.getMetadata(x, y, z);
-		world.setBlock(x, y, z, blockSelected, 0, 3);
+		world.setBlock(x, y, z, blockSelected, 0);
 		Selection s = new Selection(x, y, z, prevBlock, metadata);
 		addSelection(s);
 		return s;
@@ -59,7 +59,7 @@ public class SelectionManager implements ISelect {
 	@Override
 	public void deselect(Selection s) {
 		removeSelection(s);
-		world.setBlock(s.x, s.y, s.z, s.block, s.metadata, 3);
+		world.setBlock(s.x, s.y, s.z, s.block, s.metadata);
 	}
 
 	@Override

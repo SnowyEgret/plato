@@ -22,9 +22,9 @@ public class WorldWrapper implements IWorld {
 	}
 
 	@Override
-	public void setBlock(int x, int y, int z, Block block, int metadata, int mode) {
+	public void setBlock(int x, int y, int z, Block block, int metadata) {
 		world.setBlock(x,  y,  x, block);
-		world.setBlockMetadataWithNotify(x, y, z, metadata, mode);
+		world.setBlockMetadataWithNotify(x, y, z, metadata, 3);
 	}
 
 	@Override

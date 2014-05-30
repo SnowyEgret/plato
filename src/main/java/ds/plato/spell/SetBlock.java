@@ -42,7 +42,7 @@ public class SetBlock implements IUndoable {
 			prevBlock = s.block;
 			prevMetadata = s.metadata;
 		}
-		world.setBlock(x, y, z, block, metadata, 3);
+		world.setBlock(x, y, z, block, metadata);
 
 		//FIXME Unit test fails.
 		if (!(block instanceof BlockAir)) {
@@ -53,7 +53,7 @@ public class SetBlock implements IUndoable {
 
 	@Override
 	public void undo() {
-		world.setBlock(x, y, z, prevBlock, prevMetadata, 3);
+		world.setBlock(x, y, z, prevBlock, prevMetadata);
 		selectionManager.clear();
 		//TODO commented out for now
 		// pickManager.clearPicks();
@@ -61,7 +61,7 @@ public class SetBlock implements IUndoable {
 
 	@Override
 	public void redo() {
-		world.setBlock(x, y, z, block, metadata, 3);
+		world.setBlock(x, y, z, block, metadata);
 	}
 
 	@Override

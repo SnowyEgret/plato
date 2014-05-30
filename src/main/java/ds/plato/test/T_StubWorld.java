@@ -25,7 +25,7 @@ public class T_StubWorld extends PlatoTest {
 
 	@Test
 	public void setBlock() {
-		world.setBlock(1, 2, 3, dirt, 9, 0);
+		world.setBlock(1, 2, 3, dirt, 9);
 		Block b = world.getBlock(1, 2, 3);
 		int metadata = world.getMetadata(1, 2, 3);
 		assertEquals(dirt, b);

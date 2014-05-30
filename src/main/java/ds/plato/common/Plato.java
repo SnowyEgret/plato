@@ -93,9 +93,6 @@ public class Plato {
 //		ISelect selectionManager;
 //		IPick pickManager;
 		
-		undoManager = new UndoManager();
-		selectionManager = new SelectionManager();
-		pickManager = new PickManager();
 
 		log = LogManager.getLogger(NAME);
 		File file = event.getSuggestedConfigurationFile();
@@ -105,6 +102,10 @@ public class Plato {
 		blockSelected = config.initBlock(BlockSelected.class);
 		blockPicked = config.initBlock(BlockPicked.class);
 
+		undoManager = new UndoManager();
+		selectionManager = new SelectionManager((BlockSelected)blockSelected);
+		pickManager = new PickManager(0, (BlockPicked)blockPicked);
+		
 		log.info("[Plato.preInit]Initializing items...");
 		selectionStick = (StickSelection) config.initStick(StickSelection.class);
 		surfaceStick = (StickSurface) config.initStick(StickSurface.class);

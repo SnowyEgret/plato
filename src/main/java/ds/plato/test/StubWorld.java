@@ -17,7 +17,7 @@ public class StubWorld implements IWorld {
 	}
 
 	@Override
-	public void setBlock(int x, int y, int z, Block block, int metadata, int mode) {
+	public void setBlock(int x, int y, int z, Block block, int metadata) {
 		blocks.put(encode(x, y, z), block);
 		this.metadata.put(encode(x, y, z), Integer.valueOf(metadata));
 	}

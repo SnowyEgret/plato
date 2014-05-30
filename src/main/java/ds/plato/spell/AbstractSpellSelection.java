@@ -30,25 +30,6 @@ public abstract class AbstractSpellSelection extends Spell {
 		super(descriptor, undoManager, selectionManager, pickManager);
 	}
 
-	protected void shrinkSelections(EnumShell shellType) {
-		List<Selection> shrunkSelections = new ArrayList<>();
-		for (Selection s : selectionManager.getSelections()) {
-			Shell shell = new Shell(shellType, s.getPoint3i(), world);
-			for (Point3i p : shell) {
-				Block b = world.getBlock(p.x, p.y, p.z);
-				if (!(b instanceof BlockSelected)) {
-					shrunkSelections.add(s);
-					break;
-				}
-
-			}
-		}
-		for (Selection s : shrunkSelections) {
-			selectionManager.deselect(s);
-		}
-		grownSelections.clear();
-	}
-
 	protected void growSelections(EnumShell shellType, Block patternBlock) {
 		if (grownSelections.isEmpty()) {
 			grownSelections.addAll(selectionManager.selectedPoints());
@@ -72,6 +53,25 @@ public abstract class AbstractSpellSelection extends Spell {
 			}
 		}
 		grownSelections = newGrownSelections;
+	}
+
+	protected void shrinkSelections(EnumShell shellType) {
+		List<Selection> shrunkSelections = new ArrayList<>();
+		for (Selection s : selectionManager.getSelections()) {
+			Shell shell = new Shell(shellType, s.getPoint3i(), world);
+			for (Point3i p : shell) {
+				Block b = world.getBlock(p.x, p.y, p.z);
+				if (!(b instanceof BlockSelected)) {
+					shrunkSelections.add(s);
+					break;
+				}
+	
+			}
+		}
+		for (Selection s : shrunkSelections) {
+			selectionManager.deselect(s);
+		}
+		grownSelections.clear();
 	}
 
 	@Override

@@ -23,11 +23,11 @@ public class SpellGrowAll extends AbstractSpellSelection {
 
 	@Override
 	public void invoke(Pick[] picks, SlotEntry[] entries) {
+		//TODO test for case no selections. Should pick block.
 		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 			shrinkSelections(EnumShell.ALL);
 		} else {
 			Block firstBlockSelected = selectionManager.getSelections().iterator().next().block;
-			System.out.println("[GrowAllSpell.invoke] typeOfFirstBlockSelected=" + firstBlockSelected);
 			growSelections(EnumShell.ALL, firstBlockSelected);
 		}
 	}

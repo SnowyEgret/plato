@@ -51,7 +51,7 @@ public class PickManager implements IPick {
 			Block block = world.getBlock(x, y, z);
 			int metatdata = world.getMetadata(x, y, z);
 			// TODO pass BlockPick
-			world.setBlock(x, y, z, blockPicked, 0, 3);
+			world.setBlock(x, y, z, blockPicked, 0);
 			// TODO add metatdata to Pick constructor
 			addPick(x, y, z, block);
 		}
@@ -94,7 +94,7 @@ public class PickManager implements IPick {
 		for (Pick p : getPicksArray()) {
 			Block block = world.getBlock(p.x, p.y, p.z);
 			if (block instanceof BlockPicked) {
-				world.setBlock(p.x, p.y, p.z, p.block, p.metatdata, 3);
+				world.setBlock(p.x, p.y, p.z, p.block, p.metatdata);
 			}
 		}
 		clear();

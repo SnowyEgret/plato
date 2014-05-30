@@ -54,7 +54,7 @@ public class ForgeEventHandler {
 	public void onEntityJoinWorldEvent(EntityJoinWorldEvent e) {
 		if (!isWorldSet && e.entity instanceof EntityPlayerMP) {
 			// Minecraft's world does not implement IWorld
-			//System.out.println("[ForgeEventHandle.onEntityJoinWorldEvent] e.entity.worldObj=" + e.entity.worldObj);
+			// System.out.println("[ForgeEventHandle.onEntityJoinWorldEvent] e.entity.worldObj=" + e.entity.worldObj);
 			plato.setWorld(new WorldWrapper(e.entity.worldObj));
 			isWorldSet = true;
 		}
@@ -114,7 +114,7 @@ public class ForgeEventHandler {
 				break;
 			}
 
-			// TODO only this block when converting to spell package. IClickable covers both Spells and Staffs.
+		// TODO only this block when converting to spell package. IClickable covers both Spells and Staffs.
 		} else if (item instanceof IClickable) {
 			IClickable c = (IClickable) item;
 			switch (e.action) {
@@ -129,7 +129,11 @@ public class ForgeEventHandler {
 			default:
 				break;
 			}
-			System.out.println("[ForgeEventHandler.onClick] Not Handled. item=" + item);
+			if (e.isCancelable()) {
+				e.setCanceled(true);
+			}
+		} else {
+			System.out.println("[ForgeEventHandler.onClick] Unexpected item: " + item);
 		}
 	}
 

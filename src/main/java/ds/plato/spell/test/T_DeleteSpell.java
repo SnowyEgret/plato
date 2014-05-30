@@ -37,7 +37,7 @@ public class T_DeleteSpell extends PlatoTest {
 	public void invoke() {
 		// slotEnties not used
 		s.invoke(new Pick[] {}, null);
-		verify(world).setBlock(0, 0, 0, air, 0, 3);
+		verify(world).setBlock(0, 0, 0, air, 0);
 	}
 
 	@Test

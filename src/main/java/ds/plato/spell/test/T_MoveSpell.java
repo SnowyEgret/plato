@@ -53,8 +53,8 @@ public class T_MoveSpell extends PlatoTest {
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
 		//Parameter slotEntries not used by this spell
 		spell.invoke(picks, null);
-		verify(world).setBlock(1, 0, 0, dirt, 0, 3);
-		verify(world).setBlock(2, 0, 0, dirt, 0, 3);
+		verify(world).setBlock(1, 0, 0, dirt, 0);
+		verify(world).setBlock(2, 0, 0, dirt, 0);
 	}
 
 	// TODO Test that only the two transformed blocks are selected. Must test state instead of behavior.
@@ -62,8 +62,8 @@ public class T_MoveSpell extends PlatoTest {
 	public void invoke_deleteOriginal() {
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(true);
 		spell.invoke(picks, null);
-		verify(world).setBlock(1, 0, 0, dirt, 0, 3);
-		verify(world).setBlock(2, 0, 0, dirt, 0, 3);
-		verify(world).setBlock(0, 0, 0, air, 0, 3);
+		verify(world).setBlock(1, 0, 0, dirt, 0);
+		verify(world).setBlock(2, 0, 0, dirt, 0);
+		verify(world).setBlock(0, 0, 0, air, 0);
 	}
 }
