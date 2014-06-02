@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 
 public interface IPick {
 
-	public boolean pick(int x, int y, int z);
+	public void pick(int x, int y, int z);
 
 	public void clearPicks();
 

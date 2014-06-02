@@ -6,17 +6,19 @@ import org.apache.commons.lang3.Range;
 
 public class Tetrahedron extends Solid {
 
-	double a;
-	double twoRootA = Math.sqrt(2) * a;
-	double fourRoot3 = 4 * Math.sqrt(3);
-	double threeRoot2 = 3 * Math.sqrt(2);
-	double eightRoot6 = 8 * Math.sqrt(6);
-	double root6 = Math.sqrt(6);
-	double root3 = Math.sqrt(3);
+	private double a;
+	private double twoRootA;
+	
+	private final double fourRoot3 = 4 * Math.sqrt(3);
+	private final double threeRoot2 = 3 * Math.sqrt(2);
+	private final double eightRoot6 = 8 * Math.sqrt(6);
+	private final double root6 = Math.sqrt(6);
+	private final double root3 = Math.sqrt(3);
 
 	public Tetrahedron(Point3d origin, Point3d p1) {
 		super(origin);
 		a = Math.floor(p1.distance(origin) * Math.sqrt(2)); // Floor for shorter toString
+		twoRootA = Math.sqrt(2) * a;
 		rT = Range.between(0d, a);
 		rU = Range.between(0d, a);
 		rV = Range.between(0d, a);

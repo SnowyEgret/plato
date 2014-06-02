@@ -29,6 +29,17 @@ public class PickManager implements IPick {
 	}
 
 	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PickManager [maxPicks=");
+		builder.append(maxPicks);
+		builder.append(", picks=");
+		builder.append(picks);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	@Override
 	public void setWorld(IWorld world) {
 		this.world = world;
 	}
@@ -45,17 +56,17 @@ public class PickManager implements IPick {
 	}
 
 	@Override
-	public boolean pick(int x, int y, int z) {
+	//public boolean pick(int x, int y, int z) {
+		public void pick(int x, int y, int z) {
 		// TODO: Handle case where location is already a selection
-		if (!isFinishedPicking()) {
+		//if (!isFinishedPicking()) {
 			Block block = world.getBlock(x, y, z);
 			int metatdata = world.getMetadata(x, y, z);
-			// TODO pass BlockPick
 			world.setBlock(x, y, z, blockPicked, 0);
 			// TODO add metatdata to Pick constructor
 			addPick(x, y, z, block);
-		}
-		return isFinishedPicking();
+		//}
+		//return isFinishedPicking();
 	}
 
 	@Override

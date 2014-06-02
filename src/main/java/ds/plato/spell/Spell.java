@@ -80,11 +80,13 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	@Override
 	public void onClickRight(PlayerInteractEvent e) {
+		pickManager.pick(e.x, e.y, e.z);
+		System.out.println("[Spell.onClickRight] pickManager=" + pickManager);
 		if (pickManager.isFinishedPicking()) {
 			// TODO move getBlocksWithMetadataInIventorySlots here
 			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
 			invoke(pickManager.getPicksArray(), entries);
-		}
+		} 
 	}
 
 	@Override
@@ -118,6 +120,23 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		pickManager.reset(getNumPicks());
 	}
 
+	// For Staff.addSpell(). Only one spell of each type on a staff
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() == obj.getClass())
+			return true;
+		return false;
+	}
+
+	// TODO Maybe this is protected and staff sends its PlayerInteractEvent to the onClickRight.
+	public abstract void invoke(Pick[] picks, SlotEntry[] slotEntries);
+
+	public abstract int getNumPicks();
+
 	// TODO Eliminate static method getBlocksWithMetadataInIventorySlots in class Plato when migrating to staff and
 	// spells.
 	private SlotEntry[] getSlotEntriesFromPlayer(EntityPlayer entityPlayer) {
@@ -142,22 +161,5 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		SlotEntry[] array = new SlotEntry[entries.size()];
 		return entries.toArray(array);
 	}
-
-	// For Staff.addSpell(). Only one spell of each type on a staff
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() == obj.getClass())
-			return true;
-		return false;
-	}
-
-	// TODO Maybe this is protected and staff sends its PlayerInteractEvent to the onClickRight.
-	public abstract void invoke(Pick[] picks, SlotEntry[] slotEntries);
-
-	public abstract int getNumPicks();
 
 }

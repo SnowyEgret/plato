@@ -55,10 +55,8 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 
 	@Override
 	public void onClickRight(PlayerInteractEvent e) {
-		if (pickManager.pick(e.x, e.y, e.z)) {
-			if (currentSpell() != null)
-				currentSpell().onClickRight(e);
-		}
+		if (currentSpell() != null)
+			currentSpell().onClickRight(e);
 	}
 
 	@Override

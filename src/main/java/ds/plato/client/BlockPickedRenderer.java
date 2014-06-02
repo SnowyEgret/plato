@@ -43,7 +43,8 @@ public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 			pick = Plato.editStick.getPickAt(p);
 		}
 		if (pick == null) {
-			renderer.renderStandardBlock(Blocks.ice, x, y, z);
+			//renderer.renderStandardBlock(Blocks.ice, x, y, z);
+			renderer.renderStandardBlock(block, x, y, z);
 			return true;
 		} else {
 			pickedBlock = pick.block;
