@@ -152,7 +152,7 @@ public class Plato {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 
-		ClientProxy.setCustomRenderers();
+		ClientProxy.setCustomRenderers(selectionManager, pickManager);
 		
 		proxy.registerEventHandlers(this, selectionManager, undoManager);		
 	}

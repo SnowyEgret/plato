@@ -9,14 +9,17 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import ds.plato.common.Plato;
 import ds.plato.common.Selection;
+import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 
 public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 
 	private int id;
+	private IPick pickManager;
 
-	public BlockPickedRenderer(int id) {
+	public BlockPickedRenderer(int id, IPick pickManager) {
 		this.id = id;
+		this.pickManager = pickManager;
 	}
 
 	@Override
@@ -41,6 +44,9 @@ public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 		}
 		if (pick == null) {
 			pick = Plato.editStick.getPickAt(p);
+		}
+		if (pick == null) {
+			pick = pickManager.getPickAt(p);
 		}
 		if (pick == null) {
 			//renderer.renderStandardBlock(Blocks.ice, x, y, z);

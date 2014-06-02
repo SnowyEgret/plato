@@ -16,6 +16,7 @@ import ds.plato.common.ForgeEventHandler;
 import ds.plato.common.ISelect;
 import ds.plato.common.KeyInputEventHandler;
 import ds.plato.common.Plato;
+import ds.plato.pick.IPick;
 import ds.plato.undo.IUndo;
 
 public class ClientProxy extends CommonProxy {
@@ -23,11 +24,11 @@ public class ClientProxy extends CommonProxy {
 	public static int blockSelectedRenderId;
 	public static int blockPickedRenderId;
 
-	public static void setCustomRenderers() {
+	public static void setCustomRenderers(ISelect selectionManager, IPick pickManager) {
 		blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId));
-		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId));
+		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId, selectionManager));
+		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, pickManager));
 	}
 	
 	@Override

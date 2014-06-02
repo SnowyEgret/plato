@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import ds.plato.common.ISelect;
 import ds.plato.common.Plato;
 import ds.plato.common.Selection;
 import ds.plato.pick.Pick;
@@ -14,9 +15,11 @@ import ds.plato.pick.Pick;
 public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 
 	private int id;
+	private ISelect selectionManager;
 
-	public BlockSelectedRenderer(int id) {
+	public BlockSelectedRenderer(int id, ISelect selectionManager) {
 		this.id = id;
+		this.selectionManager = selectionManager;
 	}
 
 	@Override
@@ -28,11 +31,12 @@ public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 
 		Block selectedBlock = null;
-		Selection sel = Plato.selectionManager.selectionAt(x, y, z);
+		Selection sel = selectionManager.selectionAt(x, y, z);
 		if (sel != null) {
 			selectedBlock = sel.block;
 		} else {
-			renderer.renderStandardBlock(Blocks.ice, x, y, z);
+			//renderer.renderStandardBlock(Blocks.ice, x, y, z);
+			renderer.renderStandardBlock(block, x, y, z);
 			return true;
 		}
 

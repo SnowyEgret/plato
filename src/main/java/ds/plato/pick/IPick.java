@@ -1,5 +1,7 @@
 package ds.plato.pick;
 
+import javax.vecmath.Point3i;
+
 import ds.plato.IWorld;
 import net.minecraft.block.Block;
 
@@ -27,4 +29,6 @@ public interface IPick {
 	public void clear();
 
 	public void setWorld(IWorld world);
+
+	public Pick getPickAt(Point3i p);
 }
