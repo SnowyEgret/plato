@@ -17,6 +17,9 @@ public abstract class AbstractSpellDescriptor {
 //		this.picks = picks;
 //		this.modifiers = modifiers;
 //	}
+	public String getName() {
+		return name.toUpperCase() + " spell";
+	}
 
 	@Override
 	public String toString() {

@@ -238,8 +238,10 @@ public class ForgeEventHandler {
 				int dy = r.FONT_HEIGHT + 5;
 				int x = 10;
 				int y = x;
-				// AbstractSpellDescriptor d = describable.currentSpell().getDescriptor();
-				r.drawStringWithShadow(d.name, x, y, 0xffffff);
+				r.drawStringWithShadow(d.getName(), x, y, 0xffffff);
+				if (d.description != null) {
+					r.drawStringWithShadow(d.description.toString(), x, y += dy, 0xffffff);
+				}
 				if (d.picks != null) {
 					r.drawStringWithShadow(d.picks.toString(), x, y += dy, 0xaaffaa);
 				}

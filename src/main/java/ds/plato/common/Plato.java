@@ -36,7 +36,7 @@ import ds.plato.pick.PickManager;
 import ds.plato.spell.AbstractSpellDraw;
 import ds.plato.spell.AbstractSpellMatrixTransformation;
 import ds.plato.spell.AbstractSpellSelection;
-import ds.plato.spell.AbstractTransformerSpell;
+import ds.plato.spell.AbstractSpellTransformer;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
 import ds.plato.spell.Staff;
@@ -132,7 +132,7 @@ public class Plato {
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelection) {
 					selectionStaff.addSpell(s);
-				} else if (s instanceof AbstractTransformerSpell || s instanceof AbstractSpellMatrixTransformation) {
+				} else if (s instanceof AbstractSpellTransformer || s instanceof AbstractSpellMatrixTransformation) {
 					transformStaff.addSpell(s);
 				} else if (s instanceof AbstractSpellDraw) {
 					drawStaff.addSpell(s);

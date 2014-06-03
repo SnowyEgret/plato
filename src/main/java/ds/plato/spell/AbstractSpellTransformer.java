@@ -8,11 +8,11 @@ import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
-public abstract class AbstractTransformerSpell extends Spell {
+public abstract class AbstractSpellTransformer extends Spell {
 	
 
-	public AbstractTransformerSpell(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(descriptor, undoManager, selectionManager, pickManager);
+	public AbstractSpellTransformer(AbstractSpellDescriptor descriptor, IUndo undo, ISelect select, IPick pick) {
+		super(descriptor, undo, select, pick);
 	}
 
 	protected void transformSelections(ITransformer transformer) {
@@ -23,4 +23,8 @@ public abstract class AbstractTransformerSpell extends Spell {
 		t.commit();
 	}
 
+	@Override
+	public int getNumPicks() {
+		return 1;
+	}
 }

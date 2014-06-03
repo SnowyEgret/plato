@@ -10,7 +10,7 @@ import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.undo.IUndo;
 
-public class SpellDelete extends AbstractTransformerSpell {
+public class SpellDelete extends AbstractSpellTransformer {
 
 	private Block blockAir;
 
@@ -48,7 +48,7 @@ public class SpellDelete extends AbstractTransformerSpell {
 		public Descriptor() {
 			name = Messages.spell_delete_name;
 			description = Messages.spell_delete_description;
-			picks = new PickDescriptor(Messages.spell_delete_pick);
+			picks = new PickDescriptor(Messages.spell_pick);
 		}
 	}
 
