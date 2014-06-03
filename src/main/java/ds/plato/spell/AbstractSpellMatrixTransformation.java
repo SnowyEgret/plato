@@ -16,21 +16,32 @@ public abstract class AbstractSpellMatrixTransformation extends Spell {
 
 	private Block blockAir;
 
-	public AbstractSpellMatrixTransformation(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir) {
+	public AbstractSpellMatrixTransformation(
+			AbstractSpellDescriptor descriptor,
+			IUndo undoManager,
+			ISelect selectionManager,
+			IPick pickManager,
+			Block blockAir) {
 		super(descriptor, undoManager, selectionManager, pickManager);
 		this.blockAir = blockAir;
 	}
-	
+
 	protected void transformSelections(Matrix4d matrix, boolean deleteInitialBlocks) {
 		Transaction t = undoManager.newTransaction();
 		for (Selection s : selectionManager.getSelections()) {
 			Point3d p = s.getPoint3d();
 			matrix.transform(p);
-			if (deleteInitialBlocks) { 
+			if (deleteInitialBlocks) {
 				t.add(new SetBlock(world, selectionManager, s.x, s.y, s.z, blockAir, 0).set());
-				selectionManager.removeSelection(s);
+				// SetBlock does this for us
+				// selectionManager.removeSelection(s);
 			}
-			t.add(new SetBlock(world, selectionManager, (int) p.x, (int) p.y, (int) p.z, s.block, s.metadata).set());		
+			t.add(new SetBlock(world, selectionManager, (int) p.x, (int) p.y, (int) p.z, s.block, s.metadata).set());
+			//TODO Optimize this. Expensive for large operations.
+			//Deselect the block which has been transformed
+			if (!t.contains(s)) {
+				selectionManager.deselect(s);
+			}
 		}
 		t.commit();
 	}

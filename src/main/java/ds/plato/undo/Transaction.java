@@ -6,6 +6,7 @@ import java.util.List;
 
 import ds.plato.common.Selection;
 import ds.plato.common.UndoableSetBlock;
+import ds.plato.spell.SetBlock;
 
 public class Transaction implements IUndoable, Iterable {
 
@@ -47,10 +48,11 @@ public class Transaction implements IUndoable, Iterable {
 		undoManager.addUndoable(this);
 	}
 
-	// Creates a dependency on package ds.plato.common. TODO: Move ds.undo and ds.selection to ds.plato.common.
+	// Creates a dependency on package spell. TODO: Move SetBlock to package undo.
 	public boolean contains(Selection s) {
 		for (IUndoable u : undoables) {
-			UndoableSetBlock uu = (UndoableSetBlock) u;
+			//UndoableSetBlock uu = (UndoableSetBlock) u;
+			SetBlock uu = (SetBlock) u;
 			if (uu.x == s.x && uu.y == s.y && uu.z == s.z ) {
 				return true;
 			}

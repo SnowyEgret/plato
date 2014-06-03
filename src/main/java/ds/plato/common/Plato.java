@@ -152,6 +152,8 @@ public class Plato {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 
+		//TODO remove static call
+		//proxy.setCustomRenderers(selectionManager, pickManager);
 		ClientProxy.setCustomRenderers(selectionManager, pickManager);
 		
 		proxy.registerEventHandlers(this, selectionManager, undoManager);		

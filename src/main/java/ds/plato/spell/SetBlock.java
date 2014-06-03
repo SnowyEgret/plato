@@ -45,7 +45,10 @@ public class SetBlock implements IUndoable {
 		world.setBlock(x, y, z, block, metadata);
 
 		//FIXME Unit test fails.
-		if (!(block instanceof BlockAir)) {
+		if (block instanceof BlockAir) {
+			//We do not want a selection pointing to a newly set air block.
+			selectionManager.removeSelection(x, y, z);
+		} else {
 			selectionManager.select(x, y, z);
 		}
 		return this;
