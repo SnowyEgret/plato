@@ -22,11 +22,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.WorldWrapper;
 import ds.plato.pick.Pick;
+import ds.plato.spell.AbstractSpellDescriptor;
 import ds.plato.spell.IClickable;
 import ds.plato.spell.IHoldable;
-import ds.plato.spell.Spell;
-import ds.plato.spell.AbstractSpellDescriptor;
-import ds.plato.spell.Staff;
+import ds.plato.spell.SpellFill;
+import ds.plato.undo.IUndo;
 
 public class ForgeEventHandler {
 
@@ -34,8 +34,10 @@ public class ForgeEventHandler {
 	private IHoldable holdable = null;
 	private Vector3d displacement = new Vector3d();
 	private Plato plato;
+	private IUndo undoManager;
 	private ISelect selectionManager;
 	private boolean isWorldSet = false;
+	//private IWorld world;
 
 	// @SideOnly(Side.CLIENT)
 	// @SubscribeEvent
@@ -44,9 +46,10 @@ public class ForgeEventHandler {
 	// MOD.log.info("[ForgeEventHandle.onMouseEvent] e=" + e);
 	// }
 
-	public ForgeEventHandler(Plato plato, ISelect selectionManager) {
+	public ForgeEventHandler(Plato plato, ISelect selectionManager, IUndo undoManager) {
 		this.plato = plato;
 		this.selectionManager = selectionManager;
+		this.undoManager = undoManager;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -105,7 +108,11 @@ public class ForgeEventHandler {
 				if (selectionManager.isSelected(e.x, e.y, e.z)) {
 					Block b = itemBlock.field_150939_a;
 					int metadata = item.getDamage(stack);
-					Plato.editStick.fillSelections(b, metadata);
+//					Plato.editStick.fillSelections(b, metadata);
+					//TODO something like this
+					SlotEntry[] slotEntries = new SlotEntry[] {new SlotEntry(b, metadata, 0)};
+					new SpellFill(undoManager, selectionManager, null, null).setWorld(new WorldWrapper(w)).invoke(slotEntries);
+					//new SpellFill(undoManager, selectionManager, null, null).setWorld(new WorldWrapper(w)).invoke(p);
 					if (e.isCancelable())
 						e.setCanceled(true);
 				}

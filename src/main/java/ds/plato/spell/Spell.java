@@ -10,6 +10,8 @@ import org.lwjgl.input.Keyboard;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -55,11 +57,34 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	}
 
 	@Override
+	public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
+		// Minimizes animation on selecting with left mouse button.
+		return true;
+	}
+	
+	@Override
+	public boolean onBlockDestroyed(ItemStack is, World w, Block b, int x, int y, int z, EntityLivingBase p) {
+		// Minimizes animation on selecting with left mouse button.
+		return true;
+	}
+
+//	@Override
+//	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+//		System.out.println("[Spell.onUpdate] =");
+//		super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
+//	}
+
+	//TODO find a way to clear selections on left click air only
+	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
-		if (!w.isRemote) {
+		if (w.isRemote) {
 			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+			System.out.println("[Spell.onItemRightClick] position=" + position);
 			if (position.typeOfHit == MovingObjectType.MISS) {
 				pickManager.clearPicks();
+				// if (this instanceof AbstractSpellSelection) {
+				selectionManager.clearSelections();
+				// }
 			}
 		}
 		return is;
@@ -67,14 +92,15 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	@Override
 	public void onClickLeft(PlayerInteractEvent e) {
-		if (e.entity.worldObj.isRemote)
+		if (e.entity.worldObj.isRemote) {
+			System.out.println("[Spell.onClickLeft] Got remore world: " + e.entity.worldObj);
 			return;
+		}
 
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
 			Point3d lastPointSelected = selectionManager.lastSelection().getPoint3d();
 			selectionManager.clearSelections();
 			Box b = new Box(lastPointSelected, new Point3d(e.x, e.y, e.z));
-			// pickManager.clearPicks();
 			for (Point3i p : b.voxelize()) {
 				selectionManager.select(p.x, p.y, p.z);
 			}
@@ -102,9 +128,9 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		pickManager.pick(e.x, e.y, e.z);
 		System.out.println("[Spell.onClickRight] pickManager=" + pickManager);
 		if (pickManager.isFinishedPicking()) {
-			// TODO move getBlocksWithMetadataInIventorySlots here
 			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
-			invoke(pickManager.getPicksArray(), entries);
+			//invoke(pickManager.getPicksArray(), entries);
+			invoke(entries);
 		}
 	}
 
@@ -151,14 +177,15 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		return false;
 	}
 
-	// TODO Maybe this is protected and staff sends its PlayerInteractEvent to the onClickRight.
-	public abstract void invoke(Pick[] picks, SlotEntry[] slotEntries);
+	// Public for when spell is invoked from event handler.
+	//public abstract void invoke(Pick[] picks, SlotEntry[] slotEntries);
+	public abstract void invoke(final SlotEntry[] slotEntries);
 
 	public abstract int getNumPicks();
 
 	// TODO Eliminate static method getBlocksWithMetadataInIventorySlots in class Plato when migrating to staff and
 	// spells.
-	private SlotEntry[] getSlotEntriesFromPlayer(EntityPlayer entityPlayer) {
+	protected SlotEntry[] getSlotEntriesFromPlayer(EntityPlayer entityPlayer) {
 		List<SlotEntry> entries = new ArrayList<>();
 		InventoryPlayer inventory = entityPlayer.inventory;
 		for (int i = 0; i < 9; i++) {

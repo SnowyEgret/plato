@@ -2,12 +2,12 @@ package ds.plato.spell;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
+import net.minecraft.entity.player.EntityPlayer;
 import ds.plato.common.ISelect;
+import ds.plato.common.ITransformer;
 import ds.plato.common.Selection;
 import ds.plato.common.SlotEntry;
-import ds.plato.common.ITransformer;
 import ds.plato.pick.IPick;
-import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 
 public class SpellDelete extends AbstractTransformerSpell {
@@ -20,8 +20,7 @@ public class SpellDelete extends AbstractTransformerSpell {
 	}
 
 	@Override
-	public void invoke(Pick[] picks, SlotEntry[] slotEntries) {
-		assert picks.length == getNumPicks();
+	public void invoke(SlotEntry[] slotEntries) {
 		transformSelections(new ITransformer() {
 			@Override
 			public Selection transform(Selection s) {
@@ -52,4 +51,5 @@ public class SpellDelete extends AbstractTransformerSpell {
 			picks = new PickDescriptor(Messages.spell_delete_pick);
 		}
 	}
+
 }

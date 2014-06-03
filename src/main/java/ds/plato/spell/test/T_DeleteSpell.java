@@ -33,10 +33,11 @@ public class T_DeleteSpell extends PlatoTest {
 		s = new SpellDelete(undoManager, selectionManager, pickManager, air).setWorld(world);
 	}
 
+	//TODO set up mocks
 	@Test
 	public void invoke() {
 		// slotEnties not used
-		s.invoke(new Pick[] {}, null);
+		s.invoke(null);
 		verify(world).setBlock(0, 0, 0, air, 0);
 	}
 

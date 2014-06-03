@@ -2,6 +2,7 @@ package ds.plato.spell;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
+import net.minecraft.entity.player.EntityPlayer;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
@@ -10,7 +11,6 @@ import ds.plato.common.EnumShell;
 import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
-import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 
 public class SpellGrowAll extends AbstractSpellSelection {
@@ -22,11 +22,12 @@ public class SpellGrowAll extends AbstractSpellSelection {
 	}
 
 	@Override
-	public void invoke(Pick[] picks, SlotEntry[] entries) {
+	public void invoke(final SlotEntry[] slotEntries) {
 		//TODO test for case no selections. Should pick block.
 		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 			shrinkSelections(EnumShell.ALL);
 		} else {
+			//Is this really the first block? getSelections gets the values from a map.
 			Block firstBlockSelected = selectionManager.getSelections().iterator().next().block;
 			growSelections(EnumShell.ALL, firstBlockSelected);
 		}

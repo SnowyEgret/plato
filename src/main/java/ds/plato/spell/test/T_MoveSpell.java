@@ -52,7 +52,7 @@ public class T_MoveSpell extends PlatoTest {
 	public void invoke() {
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
 		//Parameter slotEntries not used by this spell
-		spell.invoke(picks, null);
+		spell.invoke(null);
 		verify(world).setBlock(1, 0, 0, dirt, 0);
 		verify(world).setBlock(2, 0, 0, dirt, 0);
 	}
@@ -61,7 +61,7 @@ public class T_MoveSpell extends PlatoTest {
 	@Test
 	public void invoke_deleteOriginal() {
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(true);
-		spell.invoke(picks, null);
+		spell.invoke(null);
 		verify(world).setBlock(1, 0, 0, dirt, 0);
 		verify(world).setBlock(2, 0, 0, dirt, 0);
 		verify(world).setBlock(0, 0, 0, air, 0);

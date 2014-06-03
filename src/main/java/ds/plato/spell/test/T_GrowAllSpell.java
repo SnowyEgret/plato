@@ -48,7 +48,9 @@ public class T_GrowAllSpell extends PlatoTest {
 	public void invoke_grow() {
 		sm.select(0, 0, 0);
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
-		growSpell.invoke(picks, slotEntries);
+		//growSpell.invoke(picks, slotEntries);
+		//TODO set up pickManager
+		growSpell.invoke(slotEntries);
 		assertThat(sm.size(), equalTo(27));
 	}
 
@@ -56,9 +58,11 @@ public class T_GrowAllSpell extends PlatoTest {
 	public void invoke_shrink() {
 		sm.select(0, 0, 0);
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
-		growSpell.invoke(picks, slotEntries);
+		//growSpell.invoke(picks, slotEntries);
+		growSpell.invoke(slotEntries);
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(true);
-		growSpell.invoke(picks, slotEntries);
+		//growSpell.invoke(picks, slotEntries);
+		growSpell.invoke(slotEntries);
 		assertThat(sm.size(), equalTo(1));
 	}
 

@@ -3,6 +3,7 @@ package ds.plato.spell;
 import javax.vecmath.Matrix4d;
 
 import net.minecraft.block.BlockAir;
+import net.minecraft.entity.player.EntityPlayer;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
@@ -16,17 +17,13 @@ import ds.plato.undo.IUndo;
 
 public class SpellMove extends AbstractSpellMatrixTransformation {
 
-	public SpellMove(
-			IUndo undoManager,
-			ISelect selectionManager,
-			IPick pickManager,
-			BlockAir blockAir) {
+	public SpellMove(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
 		super(new Descriptor(), undoManager, selectionManager, pickManager, blockAir);
 	}
 
 	@Override
-	public void invoke(Pick[] picks, SlotEntry[] slotEntries) {
-		assert picks.length == getNumPicks();
+	public void invoke(final SlotEntry[] slotEntries) {
+		Pick[] picks = pickManager.getPicksArray();
 		Matrix4d matrix = GeomUtil.newTranslationMatrix(picks[0].toDouble(), picks[1].toDouble());
 		transformSelections(matrix, Keyboard.isKeyDown(Keyboard.KEY_LCONTROL));
 	}
@@ -35,7 +32,7 @@ public class SpellMove extends AbstractSpellMatrixTransformation {
 	public int getNumPicks() {
 		return 2;
 	}
-	
+
 	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
 			name = "MOVE";

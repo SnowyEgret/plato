@@ -33,7 +33,7 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void registerEventHandlers(Plato plato, ISelect selectionManager, IUndo undoManager) {
-		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(plato, selectionManager));
+		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(plato, selectionManager, undoManager));
 		Map<String, KeyBinding> keyBindings = new HashMap<>();
 		// TODO get NLS properties these strings
 		keyBindings.put("undo", registerKeyBinding("Undo", Keyboard.KEY_Z, plato.NAME));
