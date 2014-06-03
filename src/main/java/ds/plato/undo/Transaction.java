@@ -10,6 +10,17 @@ import ds.plato.spell.SetBlock;
 
 public class Transaction implements IUndoable, Iterable {
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Transaction [undoManager=");
+		builder.append(undoManager);
+		builder.append(", undoables=");
+		builder.append(undoables);
+		builder.append("]");
+		return builder.toString();
+	}
+
 	protected List<IUndoable> undoables = new ArrayList<>();
 	private final IUndo undoManager;
 	
@@ -50,13 +61,13 @@ public class Transaction implements IUndoable, Iterable {
 
 	// Creates a dependency on package spell. TODO: Move SetBlock to package undo.
 	public boolean contains(Selection s) {
-		for (IUndoable u : undoables) {
-			//UndoableSetBlock uu = (UndoableSetBlock) u;
-			SetBlock uu = (SetBlock) u;
-			if (uu.x == s.x && uu.y == s.y && uu.z == s.z ) {
-				return true;
-			}
-		}
-		return false;
+		return undoables.contains(s);
+//		for (IUndoable u : undoables) {
+//			UndoableSetBlock uu = (UndoableSetBlock) u;
+//			if (uu.x == s.x && uu.y == s.y && uu.z == s.z ) {
+//				return true;
+//			}
+//		}
+//		return false;
 	}
 }

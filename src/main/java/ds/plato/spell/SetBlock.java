@@ -55,11 +55,39 @@ public class SetBlock implements IUndoable {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		result = prime * result + z;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SetBlock other = (SetBlock) obj;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		if (z != other.z)
+			return false;
+		return true;
+	}
+
+	@Override
 	public void undo() {
-		world.setBlock(x, y, z, prevBlock, prevMetadata);
-		selectionManager.clear();
+		selectionManager.clearSelections();
 		//TODO commented out for now
 		// pickManager.clearPicks();
+		world.setBlock(x, y, z, prevBlock, prevMetadata);
 	}
 
 	@Override
@@ -69,9 +97,23 @@ public class SetBlock implements IUndoable {
 
 	@Override
 	public String toString() {
-		return "SetBlock [world=" + idOf(world) + ", selectionManager=" + idOf(selectionManager) + ", x=" + x
-				+ ", y=" + y + ", z=" + z + ", block=" + block + ", prevBlock=" + prevBlock + ", metadata=" + metadata
-				+ ", prevMetadata=" + prevMetadata + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("SetBlock [x=");
+		builder.append(x);
+		builder.append(", y=");
+		builder.append(y);
+		builder.append(", z=");
+		builder.append(z);
+		builder.append(", block=");
+		builder.append(block);
+		builder.append(", prevBlock=");
+		builder.append(prevBlock);
+		builder.append(", metadata=");
+		builder.append(metadata);
+		builder.append(", prevMetadata=");
+		builder.append(prevMetadata);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	private String idOf(Object o) {

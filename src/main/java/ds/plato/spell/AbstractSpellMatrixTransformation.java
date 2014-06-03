@@ -31,18 +31,19 @@ public abstract class AbstractSpellMatrixTransformation extends Spell {
 		for (Selection s : selectionManager.getSelections()) {
 			Point3d p = s.getPoint3d();
 			matrix.transform(p);
-			if (deleteInitialBlocks) {
-				t.add(new SetBlock(world, selectionManager, s.x, s.y, s.z, blockAir, 0).set());
-				// SetBlock does this for us
-				// selectionManager.removeSelection(s);
-			}
-			t.add(new SetBlock(world, selectionManager, (int) p.x, (int) p.y, (int) p.z, s.block, s.metadata).set());
 			//TODO Optimize this. Expensive for large operations.
-			//Deselect the block which has been transformed
+			//Test that we are not transforming onto oneself
+			//Must be done before setting the block
 			if (!t.contains(s)) {
 				selectionManager.deselect(s);
 			}
+			if (deleteInitialBlocks) {
+				System.out.println("[AbstractSpellMatrixTransformation.transformSelections] deleteInitialBlocks=" + deleteInitialBlocks);
+				t.add(new SetBlock(world, selectionManager, s.x, s.y, s.z, blockAir, 0).set());
+			}
+			t.add(new SetBlock(world, selectionManager, (int) p.x, (int) p.y, (int) p.z, s.block, s.metadata).set());
 		}
+		System.out.println("[AbstractSpellMatrixTransformation.transformSelections] t=" + t);
 		t.commit();
 	}
 
