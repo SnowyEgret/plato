@@ -3,6 +3,11 @@ package ds.plato.spell;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.vecmath.Point3d;
+import javax.vecmath.Point3i;
+
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,9 +21,12 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import ds.geom.Box;
 import ds.plato.IWorld;
+import ds.plato.common.EnumShell;
 import ds.plato.common.ISelect;
 import ds.plato.common.Plato;
+import ds.plato.common.Selection;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
@@ -45,7 +53,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		this.world = world;
 		return this;
 	}
-	
+
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
 		if (!w.isRemote) {
@@ -57,24 +65,35 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		return is;
 	}
 
-
-
-	// TODO Tried overiding left click to select or deselect a block. For now, just cancels event so block is not broken.
-	// Description: Ticking memory connection
-	//
-	// java.lang.NullPointerException: Ticking memory connection
-	// at net.minecraft.world.chunk.storage.ExtendedBlockStorage.func_150818_a(ExtendedBlockStorage.java:96)
-	// at net.minecraft.world.chunk.Chunk.func_150807_a(Chunk.java:665)
-	// at net.minecraft.world.World.setBlock(World.java:517)
-	// at net.minecraft.world.World.setBlock(World.java:665)
-	// at ds.plato.WorldWrapper.setBlock(WorldWrapper.java:26)
-	// at ds.plato.common.SelectionManager.select(SelectionManager.java:53)
-	// at ds.plato.spell.Spell.onClickLeft(Spell.java:51)
 	@Override
 	public void onClickLeft(PlayerInteractEvent e) {
-//		if (e.entity.worldObj.isRemote)
-//			return;
-		selectionManager.select(e.x, e.y, e.z);
+		if (e.entity.worldObj.isRemote)
+			return;
+
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
+			Point3d lastPointSelected = selectionManager.lastSelection().getPoint3d();
+			selectionManager.clearSelections();
+			Box b = new Box(lastPointSelected, new Point3d(e.x, e.y, e.z));
+			// pickManager.clearPicks();
+			for (Point3i p : b.voxelize()) {
+				selectionManager.select(p.x, p.y, p.z);
+			}
+			if (e.isCancelable())
+				e.setCanceled(true);
+			return;
+		}
+
+		Selection s = selectionManager.selectionAt(e.x, e.y, e.z);
+		if (s == null) {
+			if (!Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+				selectionManager.clearSelections();
+			}
+			selectionManager.select(e.x, e.y, e.z);
+		} else {
+			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+				selectionManager.deselect(s);
+			}
+		}
 		e.setCanceled(true);
 	}
 
@@ -86,14 +105,14 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			// TODO move getBlocksWithMetadataInIventorySlots here
 			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
 			invoke(pickManager.getPicksArray(), entries);
-		} 
+		}
 	}
 
 	@Override
 	public void onClickRightAir(PlayerInteractEvent e) {
 		System.out.println("[Spell.onClickRightAir] e=" + e);
-		//Not working
-		//pickManager.clearPicks();
+		// Not working
+		// pickManager.clearPicks();
 	}
 
 	// TODO remove this from ISelect. Pass selection manager to EventHandler instead.
@@ -109,10 +128,10 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		return pickManager.isPicking();
 	}
 
-//	public void clearPicks() {
-//		// TODO move clearing of picks from Staff to PickManager so that it is available here.
-//		pickManager.clearPicks();
-//	}
+	// public void clearPicks() {
+	// // TODO move clearing of picks from Staff to PickManager so that it is available here.
+	// pickManager.clearPicks();
+	// }
 
 	@Override
 	public void resetPickManager() {

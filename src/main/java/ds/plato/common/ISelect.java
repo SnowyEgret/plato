@@ -3,6 +3,7 @@ package ds.plato.common;
 import java.util.Collection;
 import java.util.List;
 
+import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
 import ds.geom.VoxelSet;
@@ -31,6 +32,8 @@ public interface ISelect {
 
 	public ISelect setWorld(IWorld world);
 	
+	public Selection lastSelection();
+	
 	// TODO methods below can be removed when migrating to spells and staffs. Used by package common.
 
 	public VoxelSet voxelSet();
@@ -44,4 +47,5 @@ public interface ISelect {
 	public Selection removeSelection(Point3i p);
 
 	public Selection removeSelection(int x, int y, int z);
+
 }

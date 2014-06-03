@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
@@ -138,6 +139,11 @@ public class SelectionManager implements ISelect {
 		for (Selection s : getSelections()) {
 			deselect(s);
 		}
+	}
+
+	@Override
+	public Selection lastSelection() {
+		return getSelectionList().get(selections.size()-1);
 	}
 
 }
