@@ -46,13 +46,6 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		this.pickManager = pickManager;
 	}
 
-	// Spell can only be partially constructed during FML initialization. The world is only available after the player
-	// joins the game.
-//	public Spell setWorld(IWorld world) {
-//		this.world = world;
-//		return this;
-//	}
-
 	@Override
 	public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
 		// Minimizes animation on selecting with left mouse button.

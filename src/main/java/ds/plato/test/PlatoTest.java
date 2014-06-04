@@ -6,6 +6,8 @@ import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockSand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
 import org.junit.Before;
 import org.mockito.Mock;
@@ -34,6 +36,8 @@ public class PlatoTest {
 	@Mock protected IUndo undoManager;
 	@Mock protected EntityPlayer player;
 	@Mock protected InventoryPlayer inventory;
+	@Mock protected Configuration config;
+	@Mock protected Property property;
 
 	@Before
 	public void setUp() {

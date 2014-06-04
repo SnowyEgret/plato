@@ -12,6 +12,7 @@ import ds.geom.Line;
 import ds.geom.Rectangle;
 import ds.geom.Square;
 
+@Deprecated
 public class StickCurve extends Stick {
 
 //	EnumCurve state = EnumCurve.values()[0];

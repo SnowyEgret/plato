@@ -3,25 +3,18 @@ package ds.plato.spell;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
-import ds.plato.IWorld;
-import ds.plato.common.BlockPicked;
-import ds.plato.common.ISelect;
-import ds.plato.common.IToggleable;
-import ds.plato.common.Plato;
-import ds.plato.pick.IPick;
-import ds.plato.pick.Pick;
-import ds.plato.undo.IUndo;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+
+import org.lwjgl.input.Keyboard;
+
+import ds.plato.IWorld;
+import ds.plato.common.IToggleable;
+import ds.plato.pick.IPick;
 
 public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 
@@ -29,9 +22,11 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	private int ordinal = 0;
 	private IPick pickManager;
 	private IWorld world;
+	private Property propertyOrdinal;
 
-	public Staff(IPick pickManager) {
+	public Staff(Property propertyOrdinal, IPick pickManager) {
 		this.pickManager = pickManager;
+		this.propertyOrdinal = propertyOrdinal;
 	}
 
 	public Staff setWorld(IWorld world) {
@@ -148,5 +143,14 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	@Override
 	public String toString() {
 		return "Staff [spells=" + spells + ", ordinal=" + ordinal + ", pickManager=" + pickManager + "]";
+	}
+
+	public void setOrdinal(int ordinal) {
+		this.ordinal = ordinal;
+	}
+
+	public void save() {
+		propertyOrdinal.set(ordinal);
+		System.out.println("[Staff.save] propertyOrdinal=" + propertyOrdinal);
 	}
 }

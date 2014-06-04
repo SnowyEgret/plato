@@ -1,12 +1,12 @@
 package ds.plato.spell;
 
+import net.minecraftforge.common.config.Property;
 import ds.plato.pick.IPick;
 
 public class StaffTransform extends Staff {
 
-	public StaffTransform(IPick pickManager) {
-		super(pickManager);
-		// TODO Auto-generated constructor stub
+	public StaffTransform(Property propOrdinal, IPick pickManager) {
+		super(propOrdinal, pickManager);
 	}
 
 	@Override

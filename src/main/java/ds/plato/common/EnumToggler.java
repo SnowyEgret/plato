@@ -2,6 +2,7 @@ package ds.plato.common;
 
 import java.lang.reflect.Field;
 
+@Deprecated
 public class EnumToggler {
 
 	Enum[] constants;

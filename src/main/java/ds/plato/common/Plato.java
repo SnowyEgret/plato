@@ -16,6 +16,7 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -48,7 +49,7 @@ import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)
-//@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+// @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class Plato {
 
 	public static final String ID = "plato";
@@ -57,38 +58,38 @@ public class Plato {
 
 	@Instance(ID) public static Plato instance;
 
-	// TODO move initialization to ClientProxy
 	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
 
 	// Blocks
 	public static Block blockSelected;
 	public static Block blockPicked;
 
-	// TODO no longer needed after staffs and spells
 	// Items
-	public static StickSelection selectionStick;
-	public static StickCurve curveStick;
-	public static StickSurface surfaceStick;
-	public static StickSolid solidStick;
-	public static StickEdit editStick;
+	@Deprecated public static StickSelection selectionStick;
+	@Deprecated public static StickCurve curveStick;
+	@Deprecated public static StickSurface surfaceStick;
+	@Deprecated public static StickSolid solidStick;
+	@Deprecated public static StickEdit editStick;
 
 	private List<Spell> spells;
-	//private List<Staff> staffs;
+	private List<Staff> staffs;
 
 	public static IUndo undoManager;
 	public static ISelect selectionManager;
 	public static IPick pickManager;
 
-	public ConfigHelper config;
+	private Configuration configuration;
 	public static Logger log;
+
 	// TODO remove after migrating to staffs and spells
-	static WorldServer world;
+	@Deprecated static WorldServer world;
+	@Deprecated public ConfigHelper config;
 
 	public static SlotDistribution slotDistribution;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		
+
 		log = LogManager.getLogger(NAME);
 		File file = event.getSuggestedConfigurationFile();
 		config = new ConfigHelper(file, ID);
@@ -98,9 +99,9 @@ public class Plato {
 		blockPicked = config.initBlock(BlockPicked.class);
 
 		undoManager = new UndoManager();
-		selectionManager = new SelectionManager((BlockSelected)blockSelected);
-		pickManager = new PickManager(0, (BlockPicked)blockPicked);
-		
+		selectionManager = new SelectionManager((BlockSelected) blockSelected);
+		pickManager = new PickManager(0, (BlockPicked) blockPicked);
+
 		log.info("[Plato.preInit]Initializing items...");
 		selectionStick = (StickSelection) config.initStick(StickSelection.class);
 		surfaceStick = (StickSurface) config.initStick(StickSurface.class);
@@ -109,23 +110,22 @@ public class Plato {
 		solidStick = (StickSolid) config.initStick(StickSolid.class);
 
 		log.info("[Plato.preInit] Initializing spells and staff");
-		SpellLoader loader = new SpellLoader(undoManager, selectionManager, pickManager, Blocks.air, ID);
+		configuration = new Configuration(file);
+		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, Blocks.air, ID);
 		try {
-
-			// List spellClasses = Lists.newArrayList(DeleteSpell.class, MoveSpell.class, GrowAllSpell.class,
-			// SphereSpell.class);
-			// spells = loader.loadSpells(spellClasses);
 			spells = loader.loadSpellsFromPackage("ds.plato.spell");
-			//TODO remove the staff list. Only needed to set world which is now being passed to invoke.
+
 			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
 			Staff transformStaff = loader.loadStaff(StaffTransform.class);
 			Staff drawStaff = loader.loadStaff(StaffDraw.class);
 			loader.loadStaff(Staff.class);
-			// staffs = new ArrayList<>();
+
+			staffs = new ArrayList<>();
 			// staffs.add(loader.loadStaff(Staff.class));
-			// staffs.add(selectionStaff);
-			// staffs.add(transformStaff);
-			// staffs.add(drawStaff);
+			staffs.add(selectionStaff);
+			staffs.add(transformStaff);
+			staffs.add(drawStaff);
+
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelection) {
 					selectionStaff.addSpell(s);
@@ -135,6 +135,7 @@ public class Plato {
 					drawStaff.addSpell(s);
 				}
 			}
+
 			System.out.println("[Plato.preInit] selectionStaff=" + selectionStaff);
 			System.out.println("[Plato.preInit] transformStaff=" + transformStaff);
 			System.out.println("[Plato.preInit] drawStaff=" + drawStaff);
@@ -142,6 +143,7 @@ public class Plato {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		configuration.save();
 
 		config.save();
 	}
@@ -149,11 +151,11 @@ public class Plato {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 
-		//TODO remove static call
-		//proxy.setCustomRenderers(selectionManager, pickManager);
+		// TODO remove static call
+		// proxy.setCustomRenderers(selectionManager, pickManager);
 		ClientProxy.setCustomRenderers(selectionManager, pickManager);
-		
-		proxy.registerEventHandlers(this, selectionManager, undoManager, pickManager, (BlockAir) Blocks.air);		
+
+		proxy.registerEventHandlers(this, selectionManager, undoManager, pickManager, (BlockAir) Blocks.air);
 	}
 
 	@EventHandler
@@ -169,13 +171,21 @@ public class Plato {
 	@EventHandler
 	public void serverStopping(FMLServerStoppingEvent event) {
 		log.log(Level.INFO, "[Plato.serverStopping]");
+
 		clearSelections();
 		clearPicks();
 		saveSticks();
 		config.save();
+
+		selectionManager.clearSelections();
+		pickManager.clearPicks();
+		for (Staff s : staffs) {
+			s.save();
+		}
+		configuration.save();
 	}
 
-	// TODO remove after migrating to staffs and spells
+	@Deprecated
 	private void saveSticks() {
 		selectionStick.save();
 		solidStick.save();
@@ -184,26 +194,24 @@ public class Plato {
 		editStick.save();
 	}
 
-	// TODO remove after migrating to staffs and spells
+	@Deprecated
 	public static void clearSelections() {
 		if (selectionManager.size() != 0)
 			selectionStick.clearSelections();
 	}
 
+	@Deprecated
 	public static void clearPicks() {
-
-		// TODO remove after migrating to staffs and spells
 		selectionStick.clearPicks();
 		solidStick.clearPicks();
 		solidStick.firstPour = true;
 		surfaceStick.clearPicks();
 		curveStick.clearPicks();
 		editStick.clearPicks();
-		
-		pickManager.clearPicks();
+
 	}
 
-	// TODO make remove after migrating to staffs and spells. Get world from player at login and Spell.invoke()
+	@Deprecated
 	public static WorldServer getWorldServer() {
 		// http://www.minecraftforum.net/topic/1805594-how-to-get-worldserver-reference-from-world-or-entityplayer/
 		if (world == null) {
@@ -220,7 +228,7 @@ public class Plato {
 		return world;
 	}
 
-	// TODO remove when migrating to staff and spells. Moved to class Spell.
+	@Deprecated
 	public static List<SlotEntry> getBlocksWithMetadataInIventorySlots() {
 		List<SlotEntry> entries = new ArrayList<>();
 		InventoryPlayer inventory = Minecraft.getMinecraft().thePlayer.inventory;
@@ -261,12 +269,6 @@ public class Plato {
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
 		pickManager.setWorld(world);
-//		for (Spell s : spells) {
-//			s.setWorld(world);
-//		}
-//		for (Staff s : staffs) {
-//			s.setWorld(world);
-//		}
 		System.out.println("[Plato.setWorld] Completed initalization of managers, staffs, and spells. world=" + world);
 	}
 }

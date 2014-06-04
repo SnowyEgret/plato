@@ -7,6 +7,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Joiner;
 
+
+@Deprecated
 public class Menu {
 
 	public String name = "Name: ";

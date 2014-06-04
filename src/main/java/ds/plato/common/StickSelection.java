@@ -21,6 +21,7 @@ import org.lwjgl.input.Keyboard;
 import ds.geom.Box;
 import ds.plato.WorldWrapper;
 
+@Deprecated
 public class StickSelection extends Stick {
 
 	private List<Point3i> expandedSelections = new ArrayList<>();

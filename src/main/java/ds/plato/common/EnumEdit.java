@@ -2,6 +2,7 @@ package ds.plato.common;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+@Deprecated
 public enum EnumEdit {
 
 	MOVE(2, new Menu("move selection", new String[] { "from", "to" }, Pair.of("ctrl", "delete original"))),

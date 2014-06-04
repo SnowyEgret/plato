@@ -12,6 +12,7 @@ import ds.geom.ImageBasedTerrain;
 import ds.geom.Sphere;
 import ds.geom.Torus;
 
+@Deprecated
 public class StickSurface extends Stick {
 
 //	EnumSurface state = EnumSurface.values()[0];

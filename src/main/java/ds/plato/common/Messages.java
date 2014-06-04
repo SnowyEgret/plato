@@ -2,6 +2,7 @@ package ds.plato.common;
 
 import org.eclipse.osgi.util.NLS;
 
+@Deprecated
 public class Messages extends NLS {
 	
 	public static String selection_expand_all;

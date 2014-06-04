@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import ds.plato.undo.IUndoable;
 
+@Deprecated
 public class UndoableSetBlock implements IUndoable {
 	
 	World world;

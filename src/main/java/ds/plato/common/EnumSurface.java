@@ -1,5 +1,6 @@
 package ds.plato.common;
 
+@Deprecated
 public enum EnumSurface {
 
 	DISK(2, new Menu("disk")),

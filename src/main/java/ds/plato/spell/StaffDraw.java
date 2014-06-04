@@ -1,12 +1,12 @@
 package ds.plato.spell;
 
+import net.minecraftforge.common.config.Property;
 import ds.plato.pick.IPick;
 
 public class StaffDraw extends Staff {
 
-	public StaffDraw(IPick pickManager) {
-		super(pickManager);
-		// TODO Auto-generated constructor stub
+	public StaffDraw(Property propOrdinal, IPick pickManager) {
+		super(propOrdinal, pickManager);
 	}
 
 	@Override

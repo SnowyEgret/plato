@@ -24,6 +24,7 @@ import ds.plato.common.IO.Group;
 import ds.plato.common.IO.Voxel;
 import ds.plato.undo.Transaction;
 
+@Deprecated
 public class StickEdit extends Stick {
 
 	public StickEdit(Property initialState) {

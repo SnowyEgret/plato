@@ -1,5 +1,6 @@
 package ds.plato.spell;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -13,8 +14,9 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
 
@@ -31,13 +33,15 @@ public class SpellLoader {
 	ISelect selectionManager;
 	IPick pickManager;
 	Block blockAir;
+	private Configuration config;
 
-	public SpellLoader(IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir, String modId) {
+	public SpellLoader(Configuration config, IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir, String modId) {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
 		this.blockAir = blockAir;
 		this.modId = modId;
+		this.config = config;
 
 		tabSpells = new CreativeTabs("tabSpells") {
 			@Override
@@ -58,7 +62,6 @@ public class SpellLoader {
 	public Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 
 		String name = toName(spellClass);
-		// Property p = config.get("Spell", name + ".state", 0);
 		Constructor<? extends Spell> c = spellClass.getConstructor(IUndo.class, ISelect.class, IPick.class,
 				BlockAir.class);
 		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager, blockAir);
@@ -79,12 +82,14 @@ public class SpellLoader {
 
 	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String name = toName(staffClass);
-		Constructor c = staffClass.getConstructor(IPick.class);
-		Staff s = (Staff) c.newInstance(pickManager);
+		Property propertyOrdinal = config.get("Staff", name + ".ordinal", 0);
+		Constructor c = staffClass.getConstructor(Property.class, IPick.class);
+		Staff s = (Staff) c.newInstance(propertyOrdinal, pickManager);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
 		s.setTextureName(modId + ":" + name);
+		s.setOrdinal(propertyOrdinal.getInt());
 		GameRegistry.registerItem(s, name);
 		System.out.println("[SpellLoader.loadStaff] Loaded staff=" + s);
 		return s;
@@ -114,6 +119,10 @@ public class SpellLoader {
 			}
 		}
 		return classes;
+	}
+
+	public void save() {
+		config.save();
 	}
 
 }

@@ -21,6 +21,7 @@ import ds.geom.Tetrahedron;
 import ds.plato.WorldWrapper;
 import ds.plato.undo.Transaction;
 
+@Deprecated
 public class StickSolid extends Stick {
 
 	public boolean firstPour = true;

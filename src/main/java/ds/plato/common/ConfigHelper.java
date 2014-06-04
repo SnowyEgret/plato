@@ -14,6 +14,7 @@ import ds.plato.spell.Spell;
 import ds.plato.spell.AbstractSpellDescriptor;
 import ds.plato.undo.IUndo;
 
+@Deprecated
 public class ConfigHelper {
 
 	private CreativeTabs tabMOD;

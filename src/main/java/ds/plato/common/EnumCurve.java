@@ -1,5 +1,6 @@
 package ds.plato.common;
 
+@Deprecated
 public enum EnumCurve {
 
 	LINE(2, new Menu("line")),

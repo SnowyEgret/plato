@@ -2,6 +2,7 @@ package ds.plato.common;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+@Deprecated
 public enum EnumSolid {
 
 	BALL(2, new Menu("ball", new String[] { "center", "point on surface" }, Pair.of("ctrl", "hollow"))),
