@@ -3,12 +3,12 @@ package ds.plato.spell;
 import javax.vecmath.Matrix4d;
 
 import net.minecraft.block.BlockAir;
-import net.minecraft.entity.player.EntityPlayer;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 
 import ds.geom.GeomUtil;
+import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
@@ -22,10 +22,10 @@ public class SpellMove extends AbstractSpellMatrixTransformation {
 	}
 
 	@Override
-	public void invoke(final SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
 		Pick[] picks = pickManager.getPicksArray();
 		Matrix4d matrix = GeomUtil.newTranslationMatrix(picks[0].toDouble(), picks[1].toDouble());
-		transformSelections(matrix, Keyboard.isKeyDown(Keyboard.KEY_LCONTROL));
+		transformSelections(matrix, world, Keyboard.isKeyDown(Keyboard.KEY_LCONTROL));
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package ds.plato.spell;
 
 import net.minecraft.block.BlockAir;
-import net.minecraft.entity.player.EntityPlayer;
+import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.ITransformer;
 import ds.plato.common.Selection;
@@ -16,8 +16,8 @@ public class SpellFill extends AbstractSpellTransformer {
 	}
 
 	@Override
-	public void invoke(final SlotEntry[] slotEntries) {
-		transformSelections(new ITransformer() {
+	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
+		transformSelections(world, new ITransformer() {
 			@Override
 			public Selection transform(Selection s) {
 				// Create a copy here because we don't want to modify the selection list.

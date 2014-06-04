@@ -8,6 +8,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
+import com.google.common.collect.Lists;
+
 import net.minecraft.block.Block;
 
 public class SlotDistribution {
@@ -32,6 +34,10 @@ public class SlotDistribution {
 				distributionPercentage.put(percentage, e.block);
 			}
 		}
+	}
+
+	public SlotDistribution(SlotEntry[] slotEntries) {
+		this(Lists.asList(slotEntries[0], slotEntries));
 	}
 
 	public SlotEntry randomEntry() {

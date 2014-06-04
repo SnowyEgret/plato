@@ -111,8 +111,7 @@ public class ForgeEventHandler {
 //					Plato.editStick.fillSelections(b, metadata);
 					//TODO something like this
 					SlotEntry[] slotEntries = new SlotEntry[] {new SlotEntry(b, metadata, 0)};
-					new SpellFill(undoManager, selectionManager, null, null).setWorld(new WorldWrapper(w)).invoke(slotEntries);
-					//new SpellFill(undoManager, selectionManager, null, null).setWorld(new WorldWrapper(w)).invoke(p);
+					new SpellFill(undoManager, selectionManager, null, null).invoke(new WorldWrapper(w), slotEntries);
 					if (e.isCancelable())
 						e.setCanceled(true);
 				}
@@ -240,6 +239,7 @@ public class ForgeEventHandler {
 				int y = x;
 				r.drawStringWithShadow(d.getName(), x, y, 0xffffff);
 				if (d.description != null) {
+					//TODO Capitalize description through getter
 					r.drawStringWithShadow(d.description.toString(), x, y += dy, 0xffffff);
 				}
 				if (d.picks != null) {

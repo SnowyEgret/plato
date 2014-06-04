@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -72,7 +73,7 @@ public class Plato {
 	public static StickEdit editStick;
 
 	private List<Spell> spells;
-	private List<Staff> staffs;
+	//private List<Staff> staffs;
 
 	public static IUndo undoManager;
 	public static ISelect selectionManager;
@@ -80,7 +81,6 @@ public class Plato {
 
 	public ConfigHelper config;
 	public static Logger log;
-	// public static KeyBinding keyUndo, keyRedo, keyToggle, keyDelete;
 	// TODO remove after migrating to staffs and spells
 	static WorldServer world;
 
@@ -89,11 +89,6 @@ public class Plato {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		
-//		IUndo undoManager;
-//		ISelect selectionManager;
-//		IPick pickManager;
-		
-
 		log = LogManager.getLogger(NAME);
 		File file = event.getSuggestedConfigurationFile();
 		config = new ConfigHelper(file, ID);
@@ -121,14 +116,16 @@ public class Plato {
 			// SphereSpell.class);
 			// spells = loader.loadSpells(spellClasses);
 			spells = loader.loadSpellsFromPackage("ds.plato.spell");
+			//TODO remove the staff list. Only needed to set world which is now being passed to invoke.
 			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
 			Staff transformStaff = loader.loadStaff(StaffTransform.class);
 			Staff drawStaff = loader.loadStaff(StaffDraw.class);
-			staffs = new ArrayList<>();
-			staffs.add(loader.loadStaff(Staff.class));
-			staffs.add(selectionStaff);
-			staffs.add(transformStaff);
-			staffs.add(drawStaff);
+			loader.loadStaff(Staff.class);
+			// staffs = new ArrayList<>();
+			// staffs.add(loader.loadStaff(Staff.class));
+			// staffs.add(selectionStaff);
+			// staffs.add(transformStaff);
+			// staffs.add(drawStaff);
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelection) {
 					selectionStaff.addSpell(s);
@@ -156,7 +153,7 @@ public class Plato {
 		//proxy.setCustomRenderers(selectionManager, pickManager);
 		ClientProxy.setCustomRenderers(selectionManager, pickManager);
 		
-		proxy.registerEventHandlers(this, selectionManager, undoManager);		
+		proxy.registerEventHandlers(this, selectionManager, undoManager, pickManager, (BlockAir) Blocks.air);		
 	}
 
 	@EventHandler
@@ -193,17 +190,20 @@ public class Plato {
 			selectionStick.clearSelections();
 	}
 
-	// TODO remove after migrating to staffs and spells
 	public static void clearPicks() {
+
+		// TODO remove after migrating to staffs and spells
 		selectionStick.clearPicks();
 		solidStick.clearPicks();
 		solidStick.firstPour = true;
 		surfaceStick.clearPicks();
 		curveStick.clearPicks();
 		editStick.clearPicks();
+		
+		pickManager.clearPicks();
 	}
 
-	// TODO make private after migrating to staffs and spells
+	// TODO make remove after migrating to staffs and spells. Get world from player at login and Spell.invoke()
 	public static WorldServer getWorldServer() {
 		// http://www.minecraftforum.net/topic/1805594-how-to-get-worldserver-reference-from-world-or-entityplayer/
 		if (world == null) {
@@ -261,12 +261,12 @@ public class Plato {
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
 		pickManager.setWorld(world);
-		for (Spell s : spells) {
-			s.setWorld(world);
-		}
-		for (Staff s : staffs) {
-			s.setWorld(world);
-		}
+//		for (Spell s : spells) {
+//			s.setWorld(world);
+//		}
+//		for (Staff s : staffs) {
+//			s.setWorld(world);
+//		}
 		System.out.println("[Plato.setWorld] Completed initalization of managers, staffs, and spells. world=" + world);
 	}
 }

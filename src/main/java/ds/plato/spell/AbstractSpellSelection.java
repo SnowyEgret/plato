@@ -17,6 +17,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
+import ds.plato.IWorld;
 import ds.plato.common.BlockSelected;
 import ds.plato.common.EnumShell;
 import ds.plato.common.ISelect;
@@ -49,7 +50,7 @@ public abstract class AbstractSpellSelection extends Spell {
 		return is;
 	}
 
-	protected void growSelections(EnumShell shellType, Block patternBlock) {
+	protected void growSelections(EnumShell shellType, IWorld world, Block patternBlock) {
 		if (grownSelections.isEmpty()) {
 			grownSelections.addAll(selectionManager.selectedPoints());
 		}
@@ -74,7 +75,7 @@ public abstract class AbstractSpellSelection extends Spell {
 		grownSelections = newGrownSelections;
 	}
 
-	protected void shrinkSelections(EnumShell shellType) {
+	protected void shrinkSelections(EnumShell shellType, IWorld world) {
 		List<Selection> shrunkSelections = new ArrayList<>();
 		for (Selection s : selectionManager.getSelections()) {
 			Shell shell = new Shell(shellType, s.getPoint3i(), world);

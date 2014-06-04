@@ -5,6 +5,7 @@ import javax.vecmath.Point3d;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
 import ds.plato.pick.IPick;
@@ -26,7 +27,7 @@ public abstract class AbstractSpellMatrixTransformation extends Spell {
 		this.blockAir = blockAir;
 	}
 
-	protected void transformSelections(Matrix4d matrix, boolean deleteInitialBlocks) {
+	protected void transformSelections(Matrix4d matrix, IWorld world, boolean deleteInitialBlocks) {
 		Transaction t = undoManager.newTransaction();
 		for (Selection s : selectionManager.getSelections()) {
 			Point3d p = s.getPoint3d();

@@ -6,32 +6,29 @@ import java.util.List;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+
+import org.lwjgl.input.Keyboard;
+
 import ds.geom.Box;
 import ds.plato.IWorld;
-import ds.plato.common.EnumShell;
+import ds.plato.WorldWrapper;
 import ds.plato.common.ISelect;
-import ds.plato.common.Plato;
 import ds.plato.common.Selection;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
-import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
 
 public abstract class Spell extends Item implements IClickable, IHoldable {
@@ -51,10 +48,10 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	// Spell can only be partially constructed during FML initialization. The world is only available after the player
 	// joins the game.
-	public Spell setWorld(IWorld world) {
-		this.world = world;
-		return this;
-	}
+//	public Spell setWorld(IWorld world) {
+//		this.world = world;
+//		return this;
+//	}
 
 	@Override
 	public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
@@ -130,7 +127,9 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		if (pickManager.isFinishedPicking()) {
 			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
 			//invoke(pickManager.getPicksArray(), entries);
-			invoke(entries);
+			World w = e.entity.worldObj;
+			System.out.println("[Spell.onClickRight] w=" + w);
+			invoke(new WorldWrapper(w), entries);
 		}
 	}
 
@@ -179,7 +178,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	// Public for when spell is invoked from event handler.
 	//public abstract void invoke(Pick[] picks, SlotEntry[] slotEntries);
-	public abstract void invoke(final SlotEntry[] slotEntries);
+	public abstract void invoke(IWorld world, final SlotEntry[] slotEntries);
 
 	public abstract int getNumPicks();
 

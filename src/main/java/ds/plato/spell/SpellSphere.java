@@ -1,11 +1,12 @@
 package ds.plato.spell;
 
+import net.minecraft.block.BlockAir;
+
 import org.apache.commons.lang3.tuple.Pair;
 
-import net.minecraft.block.BlockAir;
-import net.minecraft.entity.player.EntityPlayer;
 import ds.geom.Drawable;
 import ds.geom.Sphere;
+import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
@@ -19,10 +20,10 @@ public class SpellSphere extends AbstractSpellDraw {
 	}
 
 	@Override
-	public void invoke(final SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
 		Pick[] picks = pickManager.getPicksArray();
 		Drawable d = new Sphere(picks[0].toDouble(), picks[1].toDouble());
-		draw(d, slotEntries[0].block, slotEntries[0].metadata, false);
+		draw(d, world, slotEntries[0].block, slotEntries[0].metadata, false);
 	}
 
 	@Override
@@ -32,9 +33,11 @@ public class SpellSphere extends AbstractSpellDraw {
 
 	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
-			name = "SPHERE";
-			description = "Creates a sphere";
+			name = Messages.spell_sphere_name;
+			description = Messages.spell_sphere_description;
+			//TODO Change constructor to comma separated string
 			picks = new PickDescriptor("Center", "Point on sphere");
+			//TODO Change constructor to varyarg comma separated string and drop pair
 			modifiers = new ModifierDescriptor(Pair.of("ctrl", "Deletes originial"));
 		}
 	}

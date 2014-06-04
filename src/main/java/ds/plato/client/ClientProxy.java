@@ -3,6 +3,7 @@ package ds.plato.client;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.block.BlockAir;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -32,15 +33,15 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	@Override
-	public void registerEventHandlers(Plato plato, ISelect selectionManager, IUndo undoManager) {
-		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(plato, selectionManager, undoManager));
+	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick, BlockAir air) {
+		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(plato, select, undo));
 		Map<String, KeyBinding> keyBindings = new HashMap<>();
 		// TODO get NLS properties these strings
 		keyBindings.put("undo", registerKeyBinding("Undo", Keyboard.KEY_Z, plato.NAME));
 		keyBindings.put("redo", registerKeyBinding("Redo", Keyboard.KEY_Y, plato.NAME));
 		keyBindings.put("toggle", registerKeyBinding("Toggle", Keyboard.KEY_TAB, plato.NAME));
 		keyBindings.put("delete", registerKeyBinding("Delete", Keyboard.KEY_DELETE, plato.NAME));
-		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(keyBindings, undoManager));
+		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(keyBindings, undo, select, pick, air));
 	}
 
 	private KeyBinding registerKeyBinding(String name, int key, String modName) {

@@ -44,7 +44,7 @@ public class T_MoveSpell extends PlatoTest {
 		selections.add(s2);
 		when(selectionManager.getSelections()).thenReturn(selections);
 		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
-		spell = new SpellMove(undoManager, selectionManager, pickManager,air).setWorld(world);
+		spell = new SpellMove(undoManager, selectionManager, pickManager,air);
 		picks = new Pick[] { new Pick(0, 0, 0, dirt), new Pick(1, 0, 0, dirt) };
 	}
 
@@ -52,7 +52,7 @@ public class T_MoveSpell extends PlatoTest {
 	public void invoke() {
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
 		//Parameter slotEntries not used by this spell
-		spell.invoke(null);
+		spell.invoke(world, null);
 		verify(world).setBlock(1, 0, 0, dirt, 0);
 		verify(world).setBlock(2, 0, 0, dirt, 0);
 	}
@@ -61,7 +61,7 @@ public class T_MoveSpell extends PlatoTest {
 	@Test
 	public void invoke_deleteOriginal() {
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(true);
-		spell.invoke(null);
+		spell.invoke(world, null);
 		verify(world).setBlock(1, 0, 0, dirt, 0);
 		verify(world).setBlock(2, 0, 0, dirt, 0);
 		verify(world).setBlock(0, 0, 0, air, 0);

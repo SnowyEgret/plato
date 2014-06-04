@@ -16,6 +16,13 @@ public class Messages extends NLS {
 	public static String spell_fill_checker_name;
 	public static String spell_fill_checker_description;
 
+	public static String spell_fill_random_name;
+	public static String spell_fill_random_description;
+
+	public static String spell_sphere_name;
+	public static String spell_sphere_description;
+
+
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);
 	}

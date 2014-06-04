@@ -1,17 +1,20 @@
 package ds.plato.spell;
 
+import java.util.Random;
+
 import net.minecraft.block.BlockAir;
 import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.ITransformer;
 import ds.plato.common.Selection;
+import ds.plato.common.SlotDistribution;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.undo.IUndo;
 
-public class SpellFillChecker extends AbstractSpellTransformer {
+public class SpellFillRandom extends AbstractSpellTransformer {
 
-	public SpellFillChecker(IUndo undo,ISelect select, IPick pick, BlockAir b) {
+	public SpellFillRandom(IUndo undo, ISelect select, IPick pick, BlockAir b) {
 		super(new Descriptor(), undo, select, pick);
 	}
 
@@ -20,13 +23,12 @@ public class SpellFillChecker extends AbstractSpellTransformer {
 		transformSelections(world, new ITransformer() {
 			@Override
 			public Selection transform(Selection s) {
-				int index = 0;
-				if (((s.x & 1) == 0 && (s.z & 1) == 0) || ((s.x & 1) == 1 && (s.z & 1) == 1)) {
-					index = ((s.y & 1) == 0) ? 0 : 1;
-				} else {
-					index = ((s.y & 1) == 0) ? 1 : 0;
-				}
-				SlotEntry entry = slotEntries[index];
+				// TODO remove static reference. Maybe SlotDistribution is passed to invoke, or a SlotDistribution
+				// is constructed from slot entries
+				//SlotDistribution d = Plato.slotDistribution;
+				SlotDistribution d = new SlotDistribution(slotEntries);
+				System.out.println("[SpellFillRandom.invoke(...).new ITransformer() {...}.transform] d=" + d);
+				SlotEntry entry = d.randomEntry();
 				s.block = entry.block;
 				s.metadata = entry.metadata;
 				return s;
@@ -36,8 +38,8 @@ public class SpellFillChecker extends AbstractSpellTransformer {
 
 	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
-			name = Messages.spell_fill_checker_name;
-			description = Messages.spell_fill_checker_description;
+			name = Messages.spell_fill_random_name;
+			description = Messages.spell_fill_random_description;
 			picks = new PickDescriptor(Messages.spell_pick);
 		}
 	}

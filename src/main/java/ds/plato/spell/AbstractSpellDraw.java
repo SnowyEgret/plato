@@ -10,6 +10,7 @@ import ds.geom.Rectangle;
 import ds.geom.Solid;
 import ds.geom.Terrain;
 import ds.geom.VoxelSet;
+import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.Plato;
 import ds.plato.common.SlotEntry;
@@ -25,7 +26,7 @@ public abstract class AbstractSpellDraw extends Spell {
 		super(descriptor, undoManager, selectionManager, pickManager);
 	}
 
-	protected void draw(Drawable drawable, Block block, int metadata, boolean hollow) {
+	protected void draw(Drawable drawable, IWorld world, Block block, int metadata, boolean hollow) {
 		Transaction t = undoManager.newTransaction();
 		VoxelSet voxels = drawable.voxelize();
 		if (drawable instanceof Solid && hollow) {
