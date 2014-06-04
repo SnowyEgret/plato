@@ -9,9 +9,10 @@ public class PickDescriptor {
 
 	List<String> picks = new ArrayList<>();
 
-	public PickDescriptor(String... picks) {
+	public PickDescriptor(String commaSeparatedPicks) {
+		String[] picks = commaSeparatedPicks.split(",");
 		for (String string : picks) {
-			this.picks.add(string);
+			this.picks.add(string.trim());
 		}
 	}
 

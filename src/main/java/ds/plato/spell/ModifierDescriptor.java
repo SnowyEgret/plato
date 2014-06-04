@@ -11,9 +11,10 @@ public class ModifierDescriptor {
 
 	List<Pair<String, String>> modifiers = new ArrayList<>();
 
-	public ModifierDescriptor(Pair<String, String>... modifierPairs) {
-		for (Pair p : modifierPairs) {
-			modifiers.add(p);
+	public ModifierDescriptor(String... commaSeparatedKeyActionPairs) {
+		for (String keyActionPair : commaSeparatedKeyActionPairs) {
+			String[] strings = keyActionPair.split(",");
+			modifiers.add(Pair.of(strings[0].trim(), strings[1].trim()));
 		}
 	}
 

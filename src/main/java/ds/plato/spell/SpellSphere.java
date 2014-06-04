@@ -35,10 +35,7 @@ public class SpellSphere extends AbstractSpellDraw {
 		public Descriptor() {
 			name = Messages.spell_sphere_name;
 			description = Messages.spell_sphere_description;
-			//TODO Change constructor to comma separated string
-			picks = new PickDescriptor("Center", "Point on sphere");
-			//TODO Change constructor to varyarg comma separated string and drop pair
-			modifiers = new ModifierDescriptor(Pair.of("ctrl", "Deletes originial"));
+			picks = new PickDescriptor(Messages.spell_sphere_picks);
 		}
 	}
 }

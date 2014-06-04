@@ -21,6 +21,19 @@ public class Messages extends NLS {
 
 	public static String spell_sphere_name;
 	public static String spell_sphere_description;
+	public static String spell_sphere_picks;
+
+	public static String spell_move_name;
+	public static String spell_move_description;
+	public static String spell_move_picks;
+	public static String spell_move_modifier;
+
+	public static String spell_grow_all_name;
+	public static String spell_grow_all_description;
+	public static String spell_grow_all_picks;
+	public static String spell_grow_all_modifier_0;
+	public static String spell_grow_all_modifier_1;
+
 
 
 	static {

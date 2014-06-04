@@ -11,7 +11,7 @@ public class T_ModifierDescriptor {
 
 	@Test
 	public void testToString() {
-		ModifierDescriptor d = new ModifierDescriptor(Pair.of("foo", "bar"), Pair.of("a", "b"));
+		ModifierDescriptor d = new ModifierDescriptor("foo, bar", "a,b");
 		System.out.println("[T_ModifierDescriptor.testToString] d=" + d);
 	}
 

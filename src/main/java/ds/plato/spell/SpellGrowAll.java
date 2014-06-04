@@ -45,10 +45,10 @@ public class SpellGrowAll extends AbstractSpellSelection {
 	private static class Descriptor extends AbstractSpellDescriptor {
 
 		public Descriptor() {
-			name = "ALL";
-			description = "grows selection in all directions";
-			picks = new PickDescriptor("Pattern block");
-			modifiers = new ModifierDescriptor(Pair.of("ctrl", "shrinks selection"), Pair.of("alt", "selects any block"));
+			name = Messages.spell_grow_all_name;
+			description = Messages.spell_grow_all_description;
+			picks = new PickDescriptor(Messages.spell_grow_all_picks);
+			modifiers = new ModifierDescriptor(Messages.spell_grow_all_modifier_0, Messages.spell_grow_all_modifier_1);
 		}
 	}
 

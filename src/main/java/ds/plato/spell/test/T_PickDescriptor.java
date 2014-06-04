@@ -8,7 +8,7 @@ public class T_PickDescriptor {
 
 	@Test
 	public void testToString() {
-		PickDescriptor d = new PickDescriptor("foo", "bar");
+		PickDescriptor d = new PickDescriptor("foo, bar");
 		System.out.println("[T_PickDescriptor.testToString] d=" + d);
 	}
 

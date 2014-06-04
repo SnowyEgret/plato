@@ -35,10 +35,10 @@ public class SpellMove extends AbstractSpellMatrixTransformation {
 
 	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
-			name = "MOVE";
-			description = "Moves selections";
-			picks = new PickDescriptor("From", "To");
-			modifiers = new ModifierDescriptor(Pair.of("ctrl", "Deletes originial"));
+			name = Messages.spell_move_name;
+			description = Messages.spell_move_description;
+			picks = new PickDescriptor(Messages.spell_move_picks);
+			modifiers = new ModifierDescriptor(Messages.spell_move_modifier);
 		}
 	}
 }
