@@ -32,10 +32,16 @@ public class SpellLoader {
 	IUndo undoManager;
 	ISelect selectionManager;
 	IPick pickManager;
-	Block blockAir;
+	BlockAir blockAir;
 	private Configuration config;
 
-	public SpellLoader(Configuration config, IUndo undoManager, ISelect selectionManager, IPick pickManager, Block blockAir, String modId) {
+	public SpellLoader(
+			Configuration config,
+			IUndo undoManager,
+			ISelect selectionManager,
+			IPick pickManager,
+			BlockAir blockAir,
+			String modId) {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
@@ -69,7 +75,6 @@ public class SpellLoader {
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
 		s.setTextureName(modId + ":" + name);
-		// s.setInitialState(config.get("Stick", name + ".state", 0));
 		GameRegistry.registerItem(s, name);
 		System.out.println("[SpellLoader.loadSpell] Loaded spell=" + s);
 		return s;

@@ -61,8 +61,8 @@ public class Plato {
 	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
 
 	// Blocks
-	public static Block blockSelected;
-	public static Block blockPicked;
+	@Deprecated public static Block blockSelected;
+	@Deprecated public static Block blockPicked;
 
 	// Items
 	@Deprecated public static StickSelection selectionStick;
@@ -74,6 +74,7 @@ public class Plato {
 	private List<Spell> spells;
 	private List<Staff> staffs;
 
+	//TODO make private non-static with staffs and spells
 	public static IUndo undoManager;
 	public static ISelect selectionManager;
 	public static IPick pickManager;
@@ -111,7 +112,7 @@ public class Plato {
 
 		log.info("[Plato.preInit] Initializing spells and staff");
 		configuration = new Configuration(file);
-		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, Blocks.air, ID);
+		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, (BlockAir) Blocks.air, ID);
 		try {
 			spells = loader.loadSpellsFromPackage("ds.plato.spell");
 

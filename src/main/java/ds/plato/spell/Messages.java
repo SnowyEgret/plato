@@ -6,6 +6,7 @@ public class Messages extends NLS {
 
 	// Generic single pick for any spell
 	public static String spell_pick;
+	public static String spell_modifier_deleteOriginal;
 
 	public static String spell_delete_name;
 	public static String spell_delete_description;
@@ -34,7 +35,13 @@ public class Messages extends NLS {
 	public static String spell_grow_all_modifier_0;
 	public static String spell_grow_all_modifier_1;
 
-
+	public static String spell_rotate_90_name;
+	public static String spell_rotate_90_description;
+	public static String spell_rotate_90_picks;
+	public static String spell_rotate_90_modifier_0;
+	public static String spell_rotate_90_modifier_1;
+	public static String spell_rotate_90_modifier_2;
+	public static String spell_rotate_90_modifier_3;
 
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);
