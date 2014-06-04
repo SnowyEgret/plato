@@ -43,6 +43,10 @@ public class Messages extends NLS {
 	public static String spell_rotate_90_modifier_2;
 	public static String spell_rotate_90_modifier_3;
 
+	public static String spell_mirror_name;
+	public static String spell_mirror_description;
+	public static String spell_mirror_picks;
+
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);
 	}
