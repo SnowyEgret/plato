@@ -16,13 +16,12 @@ public class T_ReflectionMatrix extends GeomTest {
 
 	@Test
 	public void test() {
-		Point3d p0 = p();
 		Point3d p1 = p();
 		Point3d p2 = p();
 		Point3d p3 = p();
 		Point3d p4 = p();
 		Point3d p5 = new Point3d(p4);
-		Matrix4d m = new ReflectionMatrix(p0, p1, p2, p3);
+		Matrix4d m = new ReflectionMatrix(p1, p2, p3);
 		m.transform(p5);
 		m.invert();
 		m.transform(p5);

@@ -200,6 +200,9 @@ public class ForgeEventHandler {
 					holdable = (IHoldable) item;
 					holdable.resetPickManager();
 				}
+			} else {
+				heldStick = null;
+				holdable = null;
 			}
 		} else {
 			heldStick = null;

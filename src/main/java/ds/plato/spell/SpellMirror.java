@@ -33,7 +33,8 @@ public class SpellMirror extends AbstractSpellMatrixTransformation {
 		Pick[] picks = pickManager.getPicksArray();
 		Point3i c = selectionManager.voxelSet().centroid();
 		//Matrix4d matrix = GeomUtil.newReflectionMatrix(new Point3d(c.x, c.y, c.z), picks[0].toDouble());
-		Matrix4d matrix = new ReflectionMatrix(new Point3d(c.x, c.y, c.z), picks[0].toDouble(), picks[1].toDouble(), picks[2].toDouble());
+		//FIXME
+		Matrix4d matrix = new ReflectionMatrix(picks[0].toDouble(), picks[1].toDouble(), picks[2].toDouble());
 		boolean deleteInitialBlocks = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		transformSelections(matrix, world, deleteInitialBlocks);
 }
