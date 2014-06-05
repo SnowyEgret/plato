@@ -11,14 +11,14 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.geom.Ball;
-import ds.geom.Box;
-import ds.geom.Cube;
-import ds.geom.Drawable;
-import ds.geom.MengerSponge;
-import ds.geom.RectangularPyramid;
-import ds.geom.Tetrahedron;
 import ds.plato.WorldWrapper;
+import ds.plato.geom.Ball;
+import ds.plato.geom.Box;
+import ds.plato.geom.Cube;
+import ds.plato.geom.Drawable;
+import ds.plato.geom.MengerSponge;
+import ds.plato.geom.RectangularPyramid;
+import ds.plato.geom.Tetrahedron;
 import ds.plato.undo.Transaction;
 
 @Deprecated

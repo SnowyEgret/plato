@@ -4,11 +4,11 @@ import net.minecraft.block.BlockAir;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import ds.geom.Drawable;
-import ds.geom.Sphere;
 import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
+import ds.plato.geom.Drawable;
+import ds.plato.geom.Sphere;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;

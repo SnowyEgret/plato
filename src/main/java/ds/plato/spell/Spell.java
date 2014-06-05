@@ -22,12 +22,12 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.geom.Box;
 import ds.plato.IWorld;
 import ds.plato.WorldWrapper;
 import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
 import ds.plato.common.SlotEntry;
+import ds.plato.geom.Box;
 import ds.plato.pick.IPick;
 import ds.plato.undo.IUndo;
 

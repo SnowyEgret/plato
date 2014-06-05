@@ -6,8 +6,8 @@ import java.util.List;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
-import ds.geom.VoxelSet;
 import ds.plato.IWorld;
+import ds.plato.geom.VoxelSet;
 import net.minecraft.block.Block;
 
 public interface ISelect {

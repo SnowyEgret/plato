@@ -5,12 +5,12 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.geom.CircleXY;
-import ds.geom.Drawable;
-import ds.geom.Helix;
-import ds.geom.Line;
-import ds.geom.Rectangle;
-import ds.geom.Square;
+import ds.plato.geom.CircleXY;
+import ds.plato.geom.Drawable;
+import ds.plato.geom.Helix;
+import ds.plato.geom.Line;
+import ds.plato.geom.Rectangle;
+import ds.plato.geom.Square;
 
 @Deprecated
 public class StickCurve extends Stick {

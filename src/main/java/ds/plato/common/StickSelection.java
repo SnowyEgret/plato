@@ -18,8 +18,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.geom.Box;
 import ds.plato.WorldWrapper;
+import ds.plato.geom.Box;
 
 @Deprecated
 public class StickSelection extends Stick {

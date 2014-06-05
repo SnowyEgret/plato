@@ -2,15 +2,15 @@ package ds.plato.common;
 
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import ds.geom.Cone;
-import ds.geom.DinisSurface;
-import ds.geom.DiskXZ;
-import ds.geom.Drawable;
-import ds.geom.EllipticParaboloid;
-import ds.geom.FractalTerrain;
-import ds.geom.ImageBasedTerrain;
-import ds.geom.Sphere;
-import ds.geom.Torus;
+import ds.plato.geom.Cone;
+import ds.plato.geom.DinisSurface;
+import ds.plato.geom.DiskXZ;
+import ds.plato.geom.Drawable;
+import ds.plato.geom.EllipticParaboloid;
+import ds.plato.geom.FractalTerrain;
+import ds.plato.geom.ImageBasedTerrain;
+import ds.plato.geom.Sphere;
+import ds.plato.geom.Torus;
 
 @Deprecated
 public class StickSurface extends Stick {

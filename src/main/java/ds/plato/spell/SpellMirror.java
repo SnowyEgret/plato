@@ -9,11 +9,11 @@ import net.minecraft.block.BlockAir;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.geom.GeomUtil;
-import ds.geom.ReflectionMatrix;
 import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
+import ds.plato.geom.GeomUtil;
+import ds.plato.geom.ReflectionMatrix;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;

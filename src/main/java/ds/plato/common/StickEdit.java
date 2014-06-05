@@ -18,10 +18,10 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.geom.GeomUtil;
-import ds.geom.VoxelSet;
 import ds.plato.common.IO.Group;
 import ds.plato.common.IO.Voxel;
+import ds.plato.geom.GeomUtil;
+import ds.plato.geom.VoxelSet;
 import ds.plato.undo.Transaction;
 
 @Deprecated
