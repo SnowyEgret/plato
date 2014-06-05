@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.matrix.test;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,13 +9,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import ds.plato.geom.test.GeomTestParamaterized;
+
 @RunWith(Parameterized.class)
-public class PT_GeomUtil_newReflectionMatrix extends GeomTestParamaterized {
+public class PT_ReflectionMatrix extends GeomTestParamaterized {
 
 	Point3d p1, p2, p3, p4;
 	double epsilon = .000001;
 
-	public PT_GeomUtil_newReflectionMatrix(Point3d p1, Point3d p2, Point3d p3, Point3d p4) {
+	public PT_ReflectionMatrix(Point3d p1, Point3d p2, Point3d p3, Point3d p4) {
 		this.p1 = p1;
 		this.p2 = p2;
 		this.p3 = p3;
@@ -62,16 +64,3 @@ public class PT_GeomUtil_newReflectionMatrix extends GeomTestParamaterized {
 //		assertThat("Inverted transformation lies on same point", _p4inv, equalTo(_p4));		
 	}
 }
-
-// //@Parameterized.Parameters
-// public static Collection points() {
-// Object[][] params = new Object[][] {
-// {new Point3d(0, 2, 0), new Point3d(1, 2, 0), new Point3d(0, 2, 1), new Point3d(0, 4, 0)},
-// {new Point3d(0, 3, 0), new Point3d(1, 3, 0), new Point3d(0, 3, 1), new Point3d(0, 4, 0)},
-// {new Point3d(0, 3, 0), new Point3d(1, 3, 0), new Point3d(0, 3, 9), new Point3d(0, 4, 0)},
-// {new Point3d(0, 3, 0), new Point3d(1, 3, 0), new Point3d(0, 3, 9), new Point3d(0, -4, 0)},
-// {new Point3d(0, 3, 0), new Point3d(1, 3, 0), new Point3d(0, 2, 9), new Point3d(0, 4, 0)},
-// };
-// return Arrays.asList(params);
-// }
-

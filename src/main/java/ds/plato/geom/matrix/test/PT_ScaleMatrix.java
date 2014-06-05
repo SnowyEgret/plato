@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.matrix.test;
 
 import static ds.plato.geom.test.CloseToTuple3d.closeToTuple3d;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,14 +15,16 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import ds.plato.geom.GeomUtil;
+import ds.plato.geom.matrix.ScaleMatrix;
+import ds.plato.geom.test.GeomTestParamaterized;
 
 @RunWith(Parameterized.class)
-public class PT_GeomUtil_newScaleMatrix extends GeomTestParamaterized {
+public class PT_ScaleMatrix extends GeomTestParamaterized {
 
 	Vector3d v1;
 	Point3d pTest;
 
-	public PT_GeomUtil_newScaleMatrix(Vector3d v1, Point3d pTest) {
+	public PT_ScaleMatrix(Vector3d v1, Point3d pTest) {
 		this.v1 = v1;
 		this.pTest = pTest;
 	}
@@ -35,7 +37,7 @@ public class PT_GeomUtil_newScaleMatrix extends GeomTestParamaterized {
 	@Test
 	public void test() {
 
-		Matrix4d m = GeomUtil.newScaleMatrix(v1);
+		Matrix4d m = new ScaleMatrix(v1);
 		Point3d pOriginal = new Point3d(pTest);
 
 		m.transform(pTest);

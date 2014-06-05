@@ -25,6 +25,7 @@ public class GeomTest {
 
 	Random rand = new Random();
 	double scale = 200;
+	protected double epsilon = .000000001;
 
 	public Point3d p() {
 		return new Point3d(d(), d(), d());

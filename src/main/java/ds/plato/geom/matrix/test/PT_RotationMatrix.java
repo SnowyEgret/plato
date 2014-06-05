@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.matrix.test;
 
 import static ds.plato.geom.test.CloseToTuple3d.closeToTuple3d;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,13 +14,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import ds.plato.geom.GeomUtil;
+import ds.plato.geom.test.GeomTestParamaterized;
 
 @RunWith(Parameterized.class)
-public class PT_GeomUtil_newRotationMatrix_VectorVector extends GeomTestParamaterized {
+public class PT_RotationMatrix extends GeomTestParamaterized {
 
 	Vector3d v1, v2;
 
-	public PT_GeomUtil_newRotationMatrix_VectorVector(Vector3d v1, Vector3d v2) {
+	public PT_RotationMatrix(Vector3d v1, Vector3d v2) {
 		this.v1 = v1;
 		this.v2 = v2;
 	}
