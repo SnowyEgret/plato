@@ -5,12 +5,12 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.plato.geom.CircleXY;
-import ds.plato.geom.Drawable;
-import ds.plato.geom.Helix;
-import ds.plato.geom.Line;
-import ds.plato.geom.Rectangle;
-import ds.plato.geom.Square;
+import ds.plato.geom.IDrawable;
+import ds.plato.geom.curve.CircleXY;
+import ds.plato.geom.curve.Helix;
+import ds.plato.geom.curve.Line;
+import ds.plato.geom.curve.Rectangle;
+import ds.plato.geom.curve.Square;
 
 @Deprecated
 public class StickCurve extends Stick {
@@ -25,7 +25,7 @@ public class StickCurve extends Stick {
 	@Override
 	protected void onClickRight(PlayerInteractEvent e) {
 		if (pick(e.x, e.y, e.z)) {
-			Drawable drawable = null;
+			IDrawable drawable = null;
 			switch ((EnumCurve)state.current()) {
 			case LINE:
 				drawable = new Line(getPick(0), getPick(1));

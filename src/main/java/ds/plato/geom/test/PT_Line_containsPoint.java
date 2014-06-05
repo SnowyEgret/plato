@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import ds.plato.geom.InfiniteLine;
+import ds.plato.geom.curve.InfiniteLine;
 
 @RunWith(Parameterized.class)
 public class PT_Line_containsPoint extends GeomTestParamaterized {

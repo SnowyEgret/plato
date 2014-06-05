@@ -7,8 +7,8 @@ import java.util.concurrent.Callable;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
-import ds.plato.geom.InfiniteLine;
-import ds.plato.geom.InfinitePlane;
+import ds.plato.geom.curve.InfiniteLine;
+import ds.plato.geom.surface.InfinitePlane;
 
 public class GeomTestParamaterized {
 	

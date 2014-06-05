@@ -2,15 +2,15 @@ package ds.plato.common;
 
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import ds.plato.geom.Cone;
-import ds.plato.geom.DinisSurface;
-import ds.plato.geom.DiskXZ;
-import ds.plato.geom.Drawable;
-import ds.plato.geom.EllipticParaboloid;
-import ds.plato.geom.FractalTerrain;
-import ds.plato.geom.ImageBasedTerrain;
-import ds.plato.geom.Sphere;
-import ds.plato.geom.Torus;
+import ds.plato.geom.IDrawable;
+import ds.plato.geom.surface.Cone;
+import ds.plato.geom.surface.DinisSurface;
+import ds.plato.geom.surface.DiskXZ;
+import ds.plato.geom.surface.EllipticParaboloid;
+import ds.plato.geom.surface.FractalTerrain;
+import ds.plato.geom.surface.ImageBasedTerrain;
+import ds.plato.geom.surface.Sphere;
+import ds.plato.geom.surface.Torus;
 
 @Deprecated
 public class StickSurface extends Stick {
@@ -52,7 +52,7 @@ public class StickSurface extends Stick {
 //		}
 
 		if (pick(e.x, e.y, e.z)) {
-			Drawable drawable = null;
+			IDrawable drawable = null;
 			switch ((EnumSurface)state.current()) {
 			case DISK:
 				drawable = new DiskXZ(getPick(0), getPick(1));

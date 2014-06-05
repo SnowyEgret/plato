@@ -7,9 +7,9 @@ import javax.vecmath.Point3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.Line;
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
+import ds.plato.geom.curve.Line;
 
 public class T_Line extends GeomTest {
 	

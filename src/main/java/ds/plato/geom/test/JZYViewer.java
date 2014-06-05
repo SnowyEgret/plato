@@ -9,9 +9,9 @@ import org.jzy3d.maths.Coord3d;
 import org.jzy3d.plot3d.primitives.Scatter;
 import org.jzy3d.plot3d.rendering.canvas.Quality;
 
-import ds.plato.geom.Drawable;
+import ds.plato.geom.IDrawable;
 import ds.plato.geom.PointSet;
-import ds.plato.geom.Tetrahedron;
+import ds.plato.geom.solid.Tetrahedron;
 
 public class JZYViewer extends AbstractAnalysis {
 
@@ -25,7 +25,7 @@ public class JZYViewer extends AbstractAnalysis {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Drawable d = new Tetrahedron(g.o(), g.p());
+		IDrawable d = new Tetrahedron(g.o(), g.p());
 		System.out.println("[JZYViewer.main] d=" + d);
 		//Drawable d = new Helix(Factory.newOrigin(), new Point3d(0, 200, 0), new Point3d(0, 0, 200), 5);
 		//Drawable d = Factory.randomBall(Factory.newOrigin());

@@ -5,9 +5,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
-import ds.plato.geom.FractalTerrain;
-import ds.plato.geom.Terrain;
 import ds.plato.geom.VoxelSet;
+import ds.plato.geom.surface.FractalTerrain;
+import ds.plato.geom.surface.Terrain;
 
 public class T_FractalTerrain extends GeomTest {
 

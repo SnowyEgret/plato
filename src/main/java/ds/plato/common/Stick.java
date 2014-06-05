@@ -23,13 +23,13 @@ import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ds.plato.geom.Drawable;
+import ds.plato.geom.IDrawable;
 import ds.plato.geom.GeomUtil;
-import ds.plato.geom.Line;
-import ds.plato.geom.Rectangle;
-import ds.plato.geom.Solid;
-import ds.plato.geom.Terrain;
 import ds.plato.geom.VoxelSet;
+import ds.plato.geom.curve.Line;
+import ds.plato.geom.curve.Rectangle;
+import ds.plato.geom.solid.Solid;
+import ds.plato.geom.surface.Terrain;
 import ds.plato.pick.Pick;
 import ds.plato.pick.PickManager;
 import ds.plato.undo.Transaction;
@@ -190,7 +190,7 @@ public abstract class Stick extends Item implements IToggleable {
 		t.commit();
 	}
 
-	protected void draw(Drawable drawable, boolean hollow) {
+	protected void draw(IDrawable drawable, boolean hollow) {
 		Transaction t = Plato.undoManager.newTransaction();
 		VoxelSet voxels = drawable.voxelize();
 		if (hollow) {

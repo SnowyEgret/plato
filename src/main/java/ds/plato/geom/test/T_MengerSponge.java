@@ -6,8 +6,8 @@ import static org.hamcrest.Matchers.equalTo;
 import org.apache.commons.lang3.Range;
 import org.junit.Test;
 
-import ds.plato.geom.MengerSponge;
 import ds.plato.geom.VoxelSet;
+import ds.plato.geom.solid.MengerSponge;
 
 public class T_MengerSponge extends GeomTest {
 

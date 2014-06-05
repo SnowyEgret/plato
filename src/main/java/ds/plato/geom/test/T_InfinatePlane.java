@@ -9,7 +9,7 @@ import javax.vecmath.Vector3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.InfinitePlane;
+import ds.plato.geom.surface.InfinitePlane;
 
 public class T_InfinatePlane extends GeomTest {
 

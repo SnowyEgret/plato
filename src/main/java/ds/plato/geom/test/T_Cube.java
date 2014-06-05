@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
-import ds.plato.geom.Cube;
+import ds.plato.geom.solid.Cube;
 
 public class T_Cube extends GeomTest {
 

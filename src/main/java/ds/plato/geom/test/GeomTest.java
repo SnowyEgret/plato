@@ -9,17 +9,17 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 import javax.vecmath.Vector3d;
 
-import ds.plato.geom.Ball;
-import ds.plato.geom.Box;
-import ds.plato.geom.CircleXY;
-import ds.plato.geom.Cube;
-import ds.plato.geom.EllipticParaboloid;
-import ds.plato.geom.InfiniteLine;
-import ds.plato.geom.InfinitePlane;
-import ds.plato.geom.Line;
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
-import ds.plato.geom.Sphere;
+import ds.plato.geom.curve.CircleXY;
+import ds.plato.geom.curve.InfiniteLine;
+import ds.plato.geom.curve.Line;
+import ds.plato.geom.solid.Ball;
+import ds.plato.geom.solid.Box;
+import ds.plato.geom.solid.Cube;
+import ds.plato.geom.surface.EllipticParaboloid;
+import ds.plato.geom.surface.InfinitePlane;
+import ds.plato.geom.surface.Sphere;
 
 public class GeomTest {
 

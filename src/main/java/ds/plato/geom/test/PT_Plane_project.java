@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import ds.plato.geom.InfinitePlane;
+import ds.plato.geom.surface.InfinitePlane;
 
 @RunWith(Parameterized.class)
 public class PT_Plane_project extends GeomTestParamaterized {

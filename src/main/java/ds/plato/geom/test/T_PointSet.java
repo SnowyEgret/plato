@@ -9,9 +9,9 @@ import javax.vecmath.Vector3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.Line;
 import ds.plato.geom.PointSet;
 import ds.plato.geom.VoxelSet;
+import ds.plato.geom.curve.Line;
 
 public class T_PointSet extends GeomTest {
 

@@ -23,11 +23,11 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
-import ds.plato.geom.Drawable;
+import ds.plato.geom.IDrawable;
 
 public class Viewer {
 
-	public Viewer(Drawable drawable) {
+	public Viewer(IDrawable drawable) {
 		int w = 300;
 		try {
 			Display.setDisplayMode(new DisplayMode(w, w));

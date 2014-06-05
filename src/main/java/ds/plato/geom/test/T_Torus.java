@@ -9,7 +9,7 @@ import javax.vecmath.Point3d;
 import org.junit.Test;
 
 import ds.plato.geom.PointSet;
-import ds.plato.geom.Torus;
+import ds.plato.geom.surface.Torus;
 
 public class T_Torus extends GeomTest {
 

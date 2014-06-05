@@ -12,13 +12,13 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.WorldWrapper;
-import ds.plato.geom.Ball;
-import ds.plato.geom.Box;
-import ds.plato.geom.Cube;
-import ds.plato.geom.Drawable;
-import ds.plato.geom.MengerSponge;
-import ds.plato.geom.RectangularPyramid;
-import ds.plato.geom.Tetrahedron;
+import ds.plato.geom.IDrawable;
+import ds.plato.geom.solid.Ball;
+import ds.plato.geom.solid.Box;
+import ds.plato.geom.solid.Cube;
+import ds.plato.geom.solid.MengerSponge;
+import ds.plato.geom.solid.RectangularPyramid;
+import ds.plato.geom.solid.Tetrahedron;
 import ds.plato.undo.Transaction;
 
 @Deprecated
@@ -33,7 +33,7 @@ public class StickSolid extends Stick {
 	@Override
 	protected void onClickRight(PlayerInteractEvent e) {
 		if (pick(e.x, e.y, e.z)) {
-			Drawable drawable = null;
+			IDrawable drawable = null;
 			switch ((EnumSolid) state.current()) {
 			case BALL:
 				drawable = new Ball(getPick(0), getPick(1));

@@ -2,8 +2,8 @@ package ds.plato.geom.test;
 
 import org.junit.Test;
 
-import ds.plato.geom.Tetrahedron;
 import ds.plato.geom.VoxelSet;
+import ds.plato.geom.solid.Tetrahedron;
 
 public class T_Tetrahedron extends GeomTest {
 

@@ -7,8 +7,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
-import ds.plato.geom.Drawable;
-import ds.plato.geom.Sphere;
+import ds.plato.geom.IDrawable;
+import ds.plato.geom.surface.Sphere;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
@@ -22,7 +22,7 @@ public class SpellSphere extends AbstractSpellDraw {
 	@Override
 	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
 		Pick[] picks = pickManager.getPicksArray();
-		Drawable d = new Sphere(picks[0].toDouble(), picks[1].toDouble());
+		IDrawable d = new Sphere(picks[0].toDouble(), picks[1].toDouble());
 		draw(d, world, slotEntries[0].block, slotEntries[0].metadata, false);
 	}
 

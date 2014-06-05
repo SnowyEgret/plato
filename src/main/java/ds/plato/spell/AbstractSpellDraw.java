@@ -8,13 +8,13 @@ import ds.plato.common.ISelect;
 import ds.plato.common.Plato;
 import ds.plato.common.SlotEntry;
 import ds.plato.common.UndoableSetBlock;
-import ds.plato.geom.Drawable;
+import ds.plato.geom.IDrawable;
 import ds.plato.geom.GeomUtil;
-import ds.plato.geom.Line;
-import ds.plato.geom.Rectangle;
-import ds.plato.geom.Solid;
-import ds.plato.geom.Terrain;
 import ds.plato.geom.VoxelSet;
+import ds.plato.geom.curve.Line;
+import ds.plato.geom.curve.Rectangle;
+import ds.plato.geom.solid.Solid;
+import ds.plato.geom.surface.Terrain;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;
@@ -26,7 +26,7 @@ public abstract class AbstractSpellDraw extends Spell {
 		super(descriptor, undoManager, selectionManager, pickManager);
 	}
 
-	protected void draw(Drawable drawable, IWorld world, Block block, int metadata, boolean hollow) {
+	protected void draw(IDrawable drawable, IWorld world, Block block, int metadata, boolean hollow) {
 		Transaction t = undoManager.newTransaction();
 		VoxelSet voxels = drawable.voxelize();
 		if (drawable instanceof Solid && hollow) {

@@ -13,7 +13,7 @@ import ds.plato.IWorld;
 import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
 import ds.plato.geom.GeomUtil;
-import ds.plato.geom.ReflectionMatrix;
+import ds.plato.geom.matrix.ReflectionMatrix;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.undo.IUndo;

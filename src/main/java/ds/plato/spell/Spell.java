@@ -27,7 +27,7 @@ import ds.plato.WorldWrapper;
 import ds.plato.common.ISelect;
 import ds.plato.common.Selection;
 import ds.plato.common.SlotEntry;
-import ds.plato.geom.Box;
+import ds.plato.geom.solid.Box;
 import ds.plato.pick.IPick;
 import ds.plato.undo.IUndo;
 

@@ -7,7 +7,7 @@ import java.util.List;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
-public class PointSet implements Drawable, Iterable<Point3d> {
+public class PointSet implements IDrawable, Iterable<Point3d> {
 
 	private final List<Point3d> points = new ArrayList<>();
 

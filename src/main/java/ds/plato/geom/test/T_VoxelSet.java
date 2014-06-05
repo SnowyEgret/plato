@@ -9,13 +9,13 @@ import javax.vecmath.Vector3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.Ball;
-import ds.plato.geom.Cube;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.IntegerDomain;
 import ds.plato.geom.Primitive;
-import ds.plato.geom.Sphere;
 import ds.plato.geom.VoxelSet;
+import ds.plato.geom.solid.Ball;
+import ds.plato.geom.solid.Cube;
+import ds.plato.geom.surface.Sphere;
 
 public class T_VoxelSet extends GeomTest {
 

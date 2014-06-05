@@ -2,7 +2,7 @@ package ds.plato.geom;
 
 import javax.vecmath.Point3d;
 
-public abstract class Primitive implements Drawable {
+public abstract class Primitive implements IDrawable {
 
 	protected Point3d p0;
 	protected double epsilon = .00000001d;

@@ -8,9 +8,9 @@ import javax.vecmath.Point3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.Helix;
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
+import ds.plato.geom.curve.Helix;
 
 public class T_Helix extends GeomTest {
 

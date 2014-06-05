@@ -7,9 +7,9 @@ import javax.vecmath.Point3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.DiskXZ;
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
+import ds.plato.geom.surface.DiskXZ;
 
 public class T_Disk extends GeomTest {
 

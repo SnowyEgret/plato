@@ -7,9 +7,9 @@ import javax.vecmath.Point3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.Box;
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
+import ds.plato.geom.solid.Box;
 
 public class T_Box extends GeomTest {
 

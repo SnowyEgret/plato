@@ -12,7 +12,7 @@ public class IntegerDomain {
 	public Range<Integer> rx, ry, rz;
 	public int dx, dy, dz;
 	Point3i min, max;
-	int count;
+	public int count;
 
 	public IntegerDomain(Point3i min, Point3i max) {
 		this.min = min;
