@@ -30,5 +30,5 @@ public interface IPick {
 	@Deprecated
 	public void clear();
 
-	public void setWorld(IWorld world);
+	public IPick setWorld(IWorld world);
 }

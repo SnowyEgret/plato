@@ -39,8 +39,9 @@ public class PickManager implements IPick {
 	}
 
 	@Override
-	public void setWorld(IWorld world) {
+	public IPick setWorld(IWorld world) {
 		this.world = world;
+		return this;
 	}
 
 	@Override
