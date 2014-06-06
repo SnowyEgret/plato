@@ -2,7 +2,7 @@ package ds.plato.pick;
 
 import javax.vecmath.Point3i;
 
-import ds.plato.IWorld;
+import ds.plato.core.IWorld;
 import net.minecraft.block.Block;
 
 public interface IPick {

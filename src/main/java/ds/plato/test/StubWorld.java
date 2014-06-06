@@ -3,7 +3,7 @@ package ds.plato.test;
 import java.util.HashMap;
 import java.util.Map;
 
-import ds.plato.IWorld;
+import ds.plato.core.IWorld;
 import net.minecraft.block.Block;
 
 public class StubWorld implements IWorld {

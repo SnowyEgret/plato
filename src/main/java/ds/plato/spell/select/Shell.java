@@ -1,4 +1,4 @@
-package ds.plato.common;
+package ds.plato.spell.select;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.vecmath.Point3i;
 
-import ds.plato.IWorld;
+import ds.plato.core.IWorld;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -14,11 +14,10 @@ import net.minecraft.world.World;
 public class Shell implements Iterable<Point3i> {
 
 	private List<Point3i> points = new ArrayList();
-	private final EnumShell selectionType;
+	private final EnumShell type;
 
-	public Shell(EnumShell selectionType, Point3i p0, IWorld w) {
-		this.selectionType = selectionType;
-		//World w = Plato.getWorldServer();
+	public Shell(EnumShell type, Point3i p0, IWorld w) {
+		this.type = type;
 
 		List<Point3i> pts = new ArrayList<>();
 		for (int x = 0; x < 3; x++) {
@@ -31,7 +30,7 @@ public class Shell implements Iterable<Point3i> {
 			}
 		}
 
-		switch (selectionType) {
+		switch (type) {
 		case HORIZONTAL:
 			for (Point3i p : pts) {
 				if (p.y == p0.y)
@@ -128,7 +127,7 @@ public class Shell implements Iterable<Point3i> {
 
 	@Override
 	public String toString() {
-		return "Shell [selectionType=" + selectionType + ", points=" + points + "]";
+		return "Shell [type=" + type + ", points=" + points + "]";
 	}
 
 	@Override

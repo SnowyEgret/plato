@@ -1,4 +1,4 @@
-package ds.plato.client;
+package ds.plato.proxy;
 
 import javax.vecmath.Point3i;
 
@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import ds.plato.common.Plato;
+import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.Selection;

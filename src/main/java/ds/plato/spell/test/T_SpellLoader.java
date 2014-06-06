@@ -20,7 +20,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import ds.plato.common.Plato;
+import ds.plato.Plato;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
 import ds.plato.spell.matrix.SpellCopy;

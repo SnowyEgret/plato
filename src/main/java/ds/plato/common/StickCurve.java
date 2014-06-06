@@ -5,6 +5,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
+import ds.plato.Plato;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.curve.CircleXY;
 import ds.plato.geom.curve.Helix;
@@ -23,7 +24,7 @@ public class StickCurve extends Stick {
 	}
 
 	@Override
-	protected void onClickRight(PlayerInteractEvent e) {
+	public void onClickRight(PlayerInteractEvent e) {
 		if (pick(e.x, e.y, e.z)) {
 			IDrawable drawable = null;
 			switch ((EnumCurve)state.current()) {

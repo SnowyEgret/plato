@@ -1,4 +1,4 @@
-package ds.plato;
+package ds.plato.core;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;

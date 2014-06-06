@@ -1,6 +1,9 @@
-package ds.plato.common;
+package ds.plato.spell.select;
 
 import org.apache.commons.lang3.tuple.Pair;
+
+import ds.plato.common.Menu;
+import ds.plato.common.Messages;
 
 public enum EnumShell {
 

@@ -15,9 +15,9 @@ import org.mockito.MockitoAnnotations;
 
 import com.google.inject.Provider;
 
-import ds.plato.IWorld;
-import ds.plato.common.BlockPicked;
-import ds.plato.common.BlockSelected;
+import ds.plato.block.BlockPicked;
+import ds.plato.block.BlockSelected;
+import ds.plato.core.IWorld;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;

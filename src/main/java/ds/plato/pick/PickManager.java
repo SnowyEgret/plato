@@ -9,9 +9,9 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
-import ds.plato.IWorld;
-import ds.plato.common.BlockPicked;
-import ds.plato.common.Plato;
+import ds.plato.Plato;
+import ds.plato.block.BlockPicked;
+import ds.plato.core.IWorld;
 
 public class PickManager implements IPick {
 

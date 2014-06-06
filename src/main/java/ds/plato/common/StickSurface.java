@@ -2,6 +2,7 @@ package ds.plato.common;
 
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import ds.plato.Plato;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.surface.Cone;
 import ds.plato.geom.surface.DinisSurface;
@@ -25,7 +26,7 @@ public class StickSurface extends Stick {
 	}
 
 	@Override
-	protected void onClickRight(PlayerInteractEvent e) {
+	public void onClickRight(PlayerInteractEvent e) {
 //		if (drawn) {
 //			if (e.isCancelable())
 //				e.setCanceled(true);

@@ -9,8 +9,8 @@ import net.minecraft.block.BlockAir;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.plato.IWorld;
 import ds.plato.common.SlotEntry;
+import ds.plato.core.IWorld;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.matrix.ReflectionMatrix;
 import ds.plato.pick.IPick;

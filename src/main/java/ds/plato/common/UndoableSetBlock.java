@@ -6,6 +6,7 @@ import javax.vecmath.Point3i;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import ds.plato.Plato;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.select.SelectionManager;

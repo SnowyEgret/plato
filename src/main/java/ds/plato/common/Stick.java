@@ -23,6 +23,7 @@ import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ds.plato.Plato;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.VoxelSet;
@@ -33,6 +34,7 @@ import ds.plato.geom.surface.Terrain;
 import ds.plato.pick.Pick;
 import ds.plato.pick.PickManager;
 import ds.plato.select.Selection;
+import ds.plato.spell.transform.ITransform;
 import ds.plato.undo.Transaction;
 
 @Deprecated
@@ -41,7 +43,7 @@ public abstract class Stick extends Item implements IToggleable {
 	private World world;
 	private final PickManager pickManager;
 	Property initialState;
-	EnumToggler state;
+	public EnumToggler state;
 
 	public Stick(int numPicks, Property initialState,
 			Class<? extends Enum> enumClass) {
@@ -183,7 +185,7 @@ public abstract class Stick extends Item implements IToggleable {
 		transaction.commit();
 	}
 
-	protected void transformSelections(ITransformer transformer) {
+	protected void transformSelections(ITransform transformer) {
 		Transaction t = Plato.undoManager.newTransaction();
 		for (Selection s : Plato.selectionManager.getSelections()) {
 			t.add(new UndoableSetBlock(transformer.transform(s)));
@@ -218,7 +220,7 @@ public abstract class Stick extends Item implements IToggleable {
 		t.commit();
 	}
 
-	protected void onClickLeft(PlayerInteractEvent e) {
+	public void onClickLeft(PlayerInteractEvent e) {
 		if (e.isCancelable())
 			e.setCanceled(true);
 	}
@@ -228,7 +230,7 @@ public abstract class Stick extends Item implements IToggleable {
 		System.out.println("[ItemStick.onClickRightAir] e=" + e);
 	}
 
-	protected abstract void onClickRight(PlayerInteractEvent e);
+	public abstract void onClickRight(PlayerInteractEvent e);
 
 	// public abstract void printCurrentState();
 

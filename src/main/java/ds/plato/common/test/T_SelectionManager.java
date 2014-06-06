@@ -17,8 +17,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import ds.plato.IWorld;
-import ds.plato.WorldWrapper;
+import ds.plato.core.IWorld;
+import ds.plato.core.WorldWrapper;
 import ds.plato.select.Selection;
 import ds.plato.select.SelectionManager;
 import ds.plato.test.PlatoTest;

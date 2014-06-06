@@ -14,7 +14,7 @@ public class StaffTransform extends Staff {
 
 	@Override
 	public void addSpell(Spell spell) {
-		assert (spell instanceof AbstractSpellTransformer || spell instanceof AbstractSpellMatrix);
+		assert (spell instanceof AbstractSpellTransform || spell instanceof AbstractSpellMatrix);
 		super.addSpell(spell);
 	}
 

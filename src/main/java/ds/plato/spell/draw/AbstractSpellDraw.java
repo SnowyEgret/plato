@@ -3,10 +3,10 @@ package ds.plato.spell.draw;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
-import ds.plato.IWorld;
-import ds.plato.common.Plato;
+import ds.plato.Plato;
 import ds.plato.common.SlotEntry;
 import ds.plato.common.UndoableSetBlock;
+import ds.plato.core.IWorld;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.VoxelSet;

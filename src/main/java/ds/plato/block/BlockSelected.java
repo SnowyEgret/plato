@@ -1,4 +1,4 @@
-package ds.plato.common;
+package ds.plato.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -8,7 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ds.plato.client.ClientProxy;
+import ds.plato.Plato;
+import ds.plato.proxy.ClientProxy;
 
 public class BlockSelected extends Block {
 

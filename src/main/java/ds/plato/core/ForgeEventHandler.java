@@ -1,4 +1,4 @@
-package ds.plato.common;
+package ds.plato.core;
 
 import javax.vecmath.Vector3d;
 
@@ -22,7 +22,10 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ds.plato.WorldWrapper;
+import ds.plato.Plato;
+import ds.plato.common.Menu;
+import ds.plato.common.SlotEntry;
+import ds.plato.common.Stick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.IClickable;

@@ -1,4 +1,4 @@
-package ds.plato.client;
+package ds.plato.proxy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,10 +12,9 @@ import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
-import ds.plato.common.CommonProxy;
-import ds.plato.common.ForgeEventHandler;
-import ds.plato.common.KeyInputEventHandler;
-import ds.plato.common.Plato;
+import ds.plato.Plato;
+import ds.plato.core.ForgeEventHandler;
+import ds.plato.core.KeyInputEventHandler;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;

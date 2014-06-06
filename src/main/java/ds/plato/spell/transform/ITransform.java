@@ -1,8 +1,8 @@
-package ds.plato.common;
+package ds.plato.spell.transform;
 
 import ds.plato.select.Selection;
 
 
-public interface ITransformer<S> {
+public interface ITransform<S> {
 	public Selection transform(Selection selection);
 }

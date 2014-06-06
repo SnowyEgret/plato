@@ -1,4 +1,4 @@
-package ds.plato.common;
+package ds.plato.core;
 
 import java.util.Map;
 
@@ -14,7 +14,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ds.plato.WorldWrapper;
+import ds.plato.Plato;
+import ds.plato.common.IToggleable;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.transform.SpellDelete;

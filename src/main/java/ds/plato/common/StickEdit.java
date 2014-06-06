@@ -18,11 +18,13 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
+import ds.plato.Plato;
 import ds.plato.common.IO.Group;
 import ds.plato.common.IO.Voxel;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.VoxelSet;
 import ds.plato.select.Selection;
+import ds.plato.spell.transform.ITransform;
 import ds.plato.undo.Transaction;
 
 @Deprecated
@@ -33,7 +35,7 @@ public class StickEdit extends Stick {
 	}
 
 	@Override
-	protected void onClickRight(PlayerInteractEvent e) {
+	public void onClickRight(PlayerInteractEvent e) {
 		if (pick(e.x, e.y, e.z)) {
 			Matrix4d matrix = null;
 			Point3d p = null;
@@ -152,7 +154,7 @@ public class StickEdit extends Stick {
 	}
 
 	public void fillSelections(final Block block, final int metadata) {
-		transformSelections(new ITransformer() {
+		transformSelections(new ITransform() {
 			@Override
 			public Selection transform(Selection s) {
 				//Create a copy here because we don't want to modify the selectionManager's selection list.
@@ -166,7 +168,7 @@ public class StickEdit extends Stick {
 	}
 
 	public void fillChecker(final List<SlotEntry> list) {
-		transformSelections(new ITransformer() {
+		transformSelections(new ITransform() {
 			@Override
 			public Selection transform(Selection s) {
 				int index = 0;
@@ -184,7 +186,7 @@ public class StickEdit extends Stick {
 	}
 
 	private void fillRandom(final List<SlotEntry> list) {
-		transformSelections(new ITransformer() {
+		transformSelections(new ITransform() {
 			Random r = new Random();
 
 			@Override
@@ -199,7 +201,7 @@ public class StickEdit extends Stick {
 	}
 
 	private void hollowSelections() {
-		transformSelections(new ITransformer() {
+		transformSelections(new ITransform() {
 			VoxelSet selections = Plato.selectionManager.voxelSet();
 
 			@Override
@@ -220,7 +222,7 @@ public class StickEdit extends Stick {
 	}
 
 	private void dropSelections() {
-		transformSelections(new ITransformer() {
+		transformSelections(new ITransform() {
 			@Override
 			public Selection transform(Selection s) {
 				World w = Plato.getWorldServer();

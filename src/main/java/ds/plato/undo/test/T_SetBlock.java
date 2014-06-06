@@ -11,7 +11,7 @@ import net.minecraft.block.Block;
 import org.junit.Before;
 import org.junit.Test;
 
-import ds.plato.IWorld;
+import ds.plato.core.IWorld;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.select.SelectionManager;

@@ -1,6 +1,6 @@
-package ds.plato.common;
+package ds.plato.block;
 
-import ds.plato.client.ClientProxy;
+import ds.plato.proxy.ClientProxy;
 
 public class BlockPicked extends BlockSelected {
 

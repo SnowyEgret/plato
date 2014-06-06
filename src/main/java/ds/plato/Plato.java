@@ -1,4 +1,4 @@
-package ds.plato.common;
+package ds.plato;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,10 +31,21 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
-import ds.plato.IWorld;
-import ds.plato.client.ClientProxy;
+import ds.plato.block.BlockPicked;
+import ds.plato.block.BlockSelected;
+import ds.plato.common.ConfigHelper;
+import ds.plato.common.SlotDistribution;
+import ds.plato.common.SlotEntry;
+import ds.plato.common.StickCurve;
+import ds.plato.common.StickEdit;
+import ds.plato.common.StickSelection;
+import ds.plato.common.StickSolid;
+import ds.plato.common.StickSurface;
+import ds.plato.core.IWorld;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
+import ds.plato.proxy.ClientProxy;
+import ds.plato.proxy.CommonProxy;
 import ds.plato.select.ISelect;
 import ds.plato.select.SelectionManager;
 import ds.plato.spell.Spell;
@@ -45,7 +56,7 @@ import ds.plato.spell.draw.StaffDraw;
 import ds.plato.spell.matrix.AbstractSpellMatrix;
 import ds.plato.spell.select.AbstractSpellSelect;
 import ds.plato.spell.select.StaffSelect;
-import ds.plato.spell.transform.AbstractSpellTransformer;
+import ds.plato.spell.transform.AbstractSpellTransform;
 import ds.plato.spell.transform.StaffTransform;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
@@ -60,7 +71,7 @@ public class Plato {
 
 	@Instance(ID) public static Plato instance;
 
-	@SidedProxy(clientSide = "ds.plato.client.ClientProxy", serverSide = "ds.plato.common.CommonProxy") public static CommonProxy proxy;
+	@SidedProxy(clientSide = "ds.plato.proxy.ClientProxy", serverSide = "ds.plato.proxy.CommonProxy") public static CommonProxy proxy;
 
 	// Blocks
 	@Deprecated public static Block blockSelected;
@@ -132,7 +143,7 @@ public class Plato {
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelect) {
 					selectionStaff.addSpell(s);
-				} else if (s instanceof AbstractSpellTransformer || s instanceof AbstractSpellMatrix) {
+				} else if (s instanceof AbstractSpellTransform || s instanceof AbstractSpellMatrix) {
 					transformStaff.addSpell(s);
 				} else if (s instanceof AbstractSpellDraw) {
 					drawStaff.addSpell(s);

@@ -1,6 +1,7 @@
-package ds.plato.common;
+package ds.plato.proxy;
 
 import net.minecraft.block.BlockAir;
+import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;

@@ -18,9 +18,13 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.plato.WorldWrapper;
+import ds.plato.Plato;
+import ds.plato.block.BlockSelected;
+import ds.plato.core.WorldWrapper;
 import ds.plato.geom.solid.Box;
 import ds.plato.select.Selection;
+import ds.plato.spell.select.EnumShell;
+import ds.plato.spell.select.Shell;
 
 @Deprecated
 public class StickSelection extends Stick {

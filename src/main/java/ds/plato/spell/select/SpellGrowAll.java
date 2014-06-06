@@ -6,9 +6,8 @@ import net.minecraft.block.BlockAir;
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 
-import ds.plato.IWorld;
-import ds.plato.common.EnumShell;
 import ds.plato.common.SlotEntry;
+import ds.plato.core.IWorld;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Messages;

@@ -22,9 +22,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.plato.IWorld;
-import ds.plato.WorldWrapper;
 import ds.plato.common.SlotEntry;
+import ds.plato.core.IWorld;
+import ds.plato.core.WorldWrapper;
 import ds.plato.geom.solid.Box;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;

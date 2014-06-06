@@ -1,9 +1,8 @@
 package ds.plato.spell.transform;
 
 import net.minecraft.block.BlockAir;
-import ds.plato.IWorld;
-import ds.plato.common.ITransformer;
 import ds.plato.common.SlotEntry;
+import ds.plato.core.IWorld;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
@@ -12,7 +11,7 @@ import ds.plato.spell.descriptor.AbstractSpellDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
 
-public class SpellFillChecker extends AbstractSpellTransformer {
+public class SpellFillChecker extends AbstractSpellTransform {
 
 	public SpellFillChecker(IUndo undo,ISelect select, IPick pick, BlockAir b) {
 		super(new Descriptor(), undo, select, pick);
@@ -20,7 +19,7 @@ public class SpellFillChecker extends AbstractSpellTransformer {
 
 	@Override
 	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
-		transformSelections(world, new ITransformer() {
+		transformSelections(world, new ITransform() {
 			@Override
 			public Selection transform(Selection s) {
 				int index = 0;

@@ -12,8 +12,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.plato.IWorld;
 import ds.plato.common.IToggleable;
+import ds.plato.core.IWorld;
 import ds.plato.pick.IPick;
 import ds.plato.spell.descriptor.AbstractSpellDescriptor;
 

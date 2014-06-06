@@ -5,7 +5,7 @@ import javax.vecmath.Point3d;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import ds.plato.IWorld;
+import ds.plato.core.IWorld;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
