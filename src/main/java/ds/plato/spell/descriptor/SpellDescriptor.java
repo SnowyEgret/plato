@@ -1,23 +1,24 @@
 package ds.plato.spell.descriptor;
 
 
-public abstract class AbstractSpellDescriptor {
+public class SpellDescriptor {
 	
 	public String name = "This staff has no spells";
 	public String description;
 	public PickDescriptor picks;
 	public ModifierDescriptor modifiers;
 	
-	public AbstractSpellDescriptor() {
+	public SpellDescriptor() {
 	}
 
-//	public AbstractSpellDescriptor(String name, String description, PickDescriptor picks, ModifierDescriptor modifiers) {
-//		super();
-//		this.name = name;
-//		this.description = description;
-//		this.picks = picks;
-//		this.modifiers = modifiers;
-//	}
+	public SpellDescriptor(String name, String description, PickDescriptor picks, ModifierDescriptor modifiers) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.picks = picks;
+		this.modifiers = modifiers;
+	}
+	
 	public String getName() {
 		return name.toUpperCase() + " spell";
 	}

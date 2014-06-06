@@ -11,7 +11,7 @@ import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
@@ -20,13 +20,8 @@ public abstract class AbstractSpellMatrix extends Spell {
 
 	private Block blockAir;
 
-	public AbstractSpellMatrix(
-			AbstractSpellDescriptor descriptor,
-			IUndo undoManager,
-			ISelect selectionManager,
-			IPick pickManager,
-			Block blockAir) {
-		super(descriptor, undoManager, selectionManager, pickManager);
+	public AbstractSpellMatrix(IUndo undo, ISelect select, IPick pick, Block blockAir) {
+		super(undo, select, pick);
 		this.blockAir = blockAir;
 	}
 
@@ -35,14 +30,15 @@ public abstract class AbstractSpellMatrix extends Spell {
 		for (Selection s : selectionManager.getSelections()) {
 			Point3d p = s.getPoint3d();
 			matrix.transform(p);
-			//TODO Optimize this. Expensive for large operations.
-			//Test that we are not transforming onto oneself
-			//Must be done before setting the block
+			// TODO Optimize this. Expensive for large operations.
+			// Test that we are not transforming onto oneself
+			// Must be done before setting the block
 			if (!t.contains(s)) {
 				selectionManager.deselect(s);
 			}
 			if (deleteInitialBlocks) {
-				System.out.println("[AbstractSpellMatrixTransformation.transformSelections] deleteInitialBlocks=" + deleteInitialBlocks);
+				System.out.println("[AbstractSpellMatrixTransformation.transformSelections] deleteInitialBlocks="
+						+ deleteInitialBlocks);
 				t.add(new SetBlock(world, selectionManager, s.x, s.y, s.z, blockAir, 0).set());
 			}
 			t.add(new SetBlock(world, selectionManager, (int) p.x, (int) p.y, (int) p.z, s.block, s.metadata).set());

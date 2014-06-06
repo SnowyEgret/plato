@@ -5,6 +5,8 @@ import java.util.Map;
 
 import net.minecraft.block.BlockAir;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.input.Keyboard;
@@ -17,11 +19,22 @@ import ds.plato.block.BlockPickedRenderer;
 import ds.plato.block.BlockSelectedRenderer;
 import ds.plato.core.ForgeEventHandler;
 import ds.plato.core.KeyInputEventHandler;
+import ds.plato.gui.GuiSave;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;
 
 public class ClientProxy extends CommonProxy {
+
+	@Override
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		switch (ID) {
+		case 0:
+			return new GuiSave(player);
+		default:
+			return null;
+		}
+	}
 
 	public static int blockSelectedRenderId;
 	public static int blockPickedRenderId;
@@ -32,7 +45,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId, selectionManager));
 		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, pickManager));
 	}
-	
+
 	@Override
 	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick, BlockAir air) {
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(plato, select, undo));

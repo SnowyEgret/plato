@@ -17,7 +17,7 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
@@ -29,7 +29,7 @@ public class SpellMirror extends AbstractSpellMatrix {
 			ISelect selectionManager,
 			IPick pickManager,
 			BlockAir blockAir) {
-		super(new Descriptor(), undoManager, selectionManager, pickManager, blockAir);
+		super(undoManager, selectionManager, pickManager, blockAir);
 	}
 
 	@Override
@@ -49,12 +49,23 @@ public class SpellMirror extends AbstractSpellMatrix {
 	}
 
 
-	private static class Descriptor extends AbstractSpellDescriptor {
-		public Descriptor() {
-			name = Messages.spell_mirror_name;
-			description = Messages.spell_mirror_description;
-			picks = new PickDescriptor(Messages.spell_mirror_picks);
-			modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal);
-		}
+//	private static class Descriptor extends SpellDescriptor {
+//		public Descriptor() {
+//			name = Messages.spell_mirror_name;
+//			description = Messages.spell_mirror_description;
+//			picks = new PickDescriptor(Messages.spell_mirror_picks);
+//			modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal);
+//		}
+//	}
+
+
+	@Override
+	public SpellDescriptor getDescriptor() {
+		SpellDescriptor d = new SpellDescriptor();
+		d.name = Messages.spell_mirror_name;
+		d.description = Messages.spell_mirror_description;
+		d.picks = new PickDescriptor(Messages.spell_mirror_picks);
+		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal);
+		return d;
 	}
 }

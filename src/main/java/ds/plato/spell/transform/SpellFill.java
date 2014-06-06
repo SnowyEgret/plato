@@ -7,14 +7,14 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellFill extends AbstractSpellTransform {
 
 	public SpellFill(IUndo undo, ISelect select, IPick pick, BlockAir blockAir) {
-		super(new Descriptor(), undo, select, pick);
+		super(undo, select, pick);
 	}
 
 	@Override
@@ -35,11 +35,12 @@ public class SpellFill extends AbstractSpellTransform {
 		return 1;
 	}
 
-	private static class Descriptor extends AbstractSpellDescriptor {
-		public Descriptor() {
-			name = Messages.spell_fill_name;
-			description = Messages.spell_fill_description;
-			picks = new PickDescriptor(Messages.spell_pick);
-		}
+	@Override
+	public SpellDescriptor getDescriptor() {
+		SpellDescriptor d = new SpellDescriptor();
+		d.name = Messages.spell_fill_name;
+		d.description = Messages.spell_fill_description;
+		d.picks = new PickDescriptor(Messages.spell_pick);
+		return d;
 	}
 }

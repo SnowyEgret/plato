@@ -14,7 +14,7 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
@@ -22,7 +22,7 @@ import ds.plato.undo.IUndo;
 public class SpellCopy extends AbstractSpellMatrix {
 
 	public SpellCopy(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
-		super(new Descriptor(), undoManager, selectionManager, pickManager, blockAir);
+		super(undoManager, selectionManager, pickManager, blockAir);
 	}
 
 	@Override
@@ -37,12 +37,22 @@ public class SpellCopy extends AbstractSpellMatrix {
 		return 2;
 	}
 
-	private static class Descriptor extends AbstractSpellDescriptor {
-		public Descriptor() {
-			name = Messages.spell_copy_name;
-			description = Messages.spell_copy_description;
-			picks = new PickDescriptor(Messages.spell_copy_picks);
-			modifiers = new ModifierDescriptor(Messages.spell_copy_modifier);
-		}
+//	private static class Descriptor extends SpellDescriptor {
+//		public Descriptor() {
+//			name = Messages.spell_copy_name;
+//			description = Messages.spell_copy_description;
+//			picks = new PickDescriptor(Messages.spell_copy_picks);
+//			modifiers = new ModifierDescriptor(Messages.spell_copy_modifier);
+//		}
+//	}
+
+	@Override
+	public SpellDescriptor getDescriptor() {
+		SpellDescriptor d = new SpellDescriptor();
+		d.name = Messages.spell_copy_name;
+		d.description = Messages.spell_copy_description;
+		d.picks = new PickDescriptor(Messages.spell_copy_picks);
+		d.modifiers = new ModifierDescriptor(Messages.spell_copy_modifier);
+		return d;
 	}
 }

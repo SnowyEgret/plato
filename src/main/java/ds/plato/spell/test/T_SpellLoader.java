@@ -46,7 +46,7 @@ public class T_SpellLoader extends PlatoTest {
 	public void loadSpell() throws Exception {
 		Spell spell = loader.loadSpell(SpellDelete.class);
 		assertThat(spell, instanceOf(SpellDelete.class));
-		assertThat(spell.descriptor.name.toLowerCase(), equalTo("delete"));
+		assertThat(spell.getDescriptor().name.toLowerCase(), equalTo("delete"));
 	}
 
 	@Test

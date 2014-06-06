@@ -1,11 +1,11 @@
 package ds.plato.spell;
 
 import ds.plato.select.ISelect;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 
 public interface IHoldable {
 	
-	AbstractSpellDescriptor getDescriptor();
+	SpellDescriptor getDescriptor();
 
 	boolean isPicking();
 

@@ -18,15 +18,15 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
 
 public abstract class AbstractSpellDraw extends Spell {
 
-	public AbstractSpellDraw(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(descriptor, undoManager, selectionManager, pickManager);
+	public AbstractSpellDraw(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+		super(undoManager, selectionManager, pickManager);
 	}
 
 	protected void draw(IDrawable drawable, IWorld world, Block block, int metadata, boolean hollow) {

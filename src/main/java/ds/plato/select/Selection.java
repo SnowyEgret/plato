@@ -19,17 +19,12 @@ public class Selection {
 		this.metadata = metadata;
 	}
 
-	public Selection(Point3i p, Block id, int metadata) {
-		this(p.x, p.y, p.z, id, metadata);
-	}
-
-	public Selection(Point3d p, Block block, int metadata) {
-		this((int) p.x, (int) p.y, (int) p.z, block, metadata);
+	@Deprecated
+	public Selection(Point3i p, Block block, int metadata) {
+		this(p.x, p.y, p.z, block, metadata);
 	}
 
 	public Point3d getPoint3d() {
-		//Created problem with move. Because pick.toDouble() adds .5
-		//return new Point3d(x + .5, y + .5, z + .5);
 		return new Point3d(x, y, z);
 	}
 
@@ -39,7 +34,6 @@ public class Selection {
 
 	@Override
 	public String toString() {
-		return "Selection [x=" + x + ", y=" + y + ", z=" + z + ", block="
-				+ block + ", metadata=" + metadata + "]";
+		return "Selection [x=" + x + ", y=" + y + ", z=" + z + ", block=" + block + ", metadata=" + metadata + "]";
 	}
 }

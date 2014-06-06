@@ -29,19 +29,17 @@ import ds.plato.geom.solid.Box;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public abstract class Spell extends Item implements IClickable, IHoldable {
 
-	public AbstractSpellDescriptor descriptor;
 	protected IWorld world;
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
 	protected IPick pickManager;
 
-	public Spell(AbstractSpellDescriptor descriptor, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		this.descriptor = descriptor;
+	public Spell(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
@@ -139,9 +137,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		return selectionManager;
 	}
 
-	public AbstractSpellDescriptor getDescriptor() {
-		return descriptor;
-	}
+	public abstract SpellDescriptor getDescriptor();
 
 	public boolean isPicking() {
 		return pickManager.isPicking();

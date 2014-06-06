@@ -24,6 +24,8 @@ public interface ISelect {
 
 	public Selection removeSelection(Selection s);
 
+	public Selection removeSelection(int x, int y, int z);
+
 	public int size();
 
 	public Collection<? extends Point3i> selectedPoints();
@@ -34,18 +36,14 @@ public interface ISelect {
 	
 	public Selection lastSelection();
 	
-	// TODO methods below can be removed when migrating to spells and staffs. Used by package common.
-
 	public VoxelSet voxelSet();
 
 	public List<Selection> getSelectionList();
 
-	public void addSelection(Selection selection);
+	@Deprecated public void addSelection(Selection selection);
 
-	public Iterable<Point3i> clear();
+	@Deprecated public Iterable<Point3i> clear();
 
-	public Selection removeSelection(Point3i p);
-
-	public Selection removeSelection(int x, int y, int z);
+	@Deprecated public Selection removeSelection(Point3i p);
 
 }

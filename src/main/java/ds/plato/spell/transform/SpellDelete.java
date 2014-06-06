@@ -8,7 +8,7 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
 
@@ -17,7 +17,7 @@ public class SpellDelete extends AbstractSpellTransform {
 	private Block blockAir;
 
 	public SpellDelete(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
-		super(new Descriptor(), undoManager, selectionManager, pickManager);
+		super(undoManager, selectionManager, pickManager);
 		this.blockAir = blockAir;
 	}
 
@@ -46,12 +46,21 @@ public class SpellDelete extends AbstractSpellTransform {
 		return 1;
 	}
 	
-	private static class Descriptor extends AbstractSpellDescriptor {
-		public Descriptor() {
-			name = Messages.spell_delete_name;
-			description = Messages.spell_delete_description;
-			picks = new PickDescriptor(Messages.spell_pick);
-		}
+//	private static class Descriptor extends AbstractSpellDescriptor {
+//		public Descriptor() {
+//			name = Messages.spell_delete_name;
+//			description = Messages.spell_delete_description;
+//			picks = new PickDescriptor(Messages.spell_pick);
+//		}
+//	}
+
+	@Override
+	public SpellDescriptor getDescriptor() {
+		SpellDescriptor d = new SpellDescriptor();
+		d.name = Messages.spell_delete_name;
+		d.description = Messages.spell_delete_description;
+		d.picks = new PickDescriptor(Messages.spell_pick);
+		return d;
 	}
 
 }

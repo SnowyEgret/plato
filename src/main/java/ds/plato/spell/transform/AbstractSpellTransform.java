@@ -5,7 +5,7 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
@@ -13,8 +13,8 @@ import ds.plato.undo.Transaction;
 public abstract class AbstractSpellTransform extends Spell {
 	
 
-	public AbstractSpellTransform(AbstractSpellDescriptor descriptor, IUndo undo, ISelect select, IPick pick) {
-		super(descriptor, undo, select, pick);
+	public AbstractSpellTransform(IUndo undo, ISelect select, IPick pick) {
+		super(undo, select, pick);
 	}
 
 	protected void transformSelections(IWorld world, ITransform transformer) {

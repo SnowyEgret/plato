@@ -11,7 +11,7 @@ import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
@@ -21,7 +21,7 @@ public class SpellGrowAll extends AbstractSpellSelect {
 	// TODO blockAir is not needed for selection spells. Maybe a static PlatoBlocks class which returns blockSelected,
 	// blockPicked and BlockAir
 	public SpellGrowAll(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
-		super(new Descriptor(), undoManager, selectionManager, pickManager);
+		super(undoManager, selectionManager, pickManager);
 	}
 
 	@Override
@@ -45,14 +45,24 @@ public class SpellGrowAll extends AbstractSpellSelect {
 		return builder.toString();
 	}
 
-	private static class Descriptor extends AbstractSpellDescriptor {
+	// private static class Descriptor extends SpellDescriptor {
+	//
+	// public Descriptor() {
+	// name = Messages.spell_grow_all_name;
+	// description = Messages.spell_grow_all_description;
+	// picks = new PickDescriptor(Messages.spell_grow_all_picks);
+	// modifiers = new ModifierDescriptor(Messages.spell_grow_all_modifier_0, Messages.spell_grow_all_modifier_1);
+	// }
+	// }
 
-		public Descriptor() {
-			name = Messages.spell_grow_all_name;
-			description = Messages.spell_grow_all_description;
-			picks = new PickDescriptor(Messages.spell_grow_all_picks);
-			modifiers = new ModifierDescriptor(Messages.spell_grow_all_modifier_0, Messages.spell_grow_all_modifier_1);
-		}
+	@Override
+	public SpellDescriptor getDescriptor() {
+		SpellDescriptor d = new SpellDescriptor();
+		d.name = Messages.spell_grow_all_name;
+		d.description = Messages.spell_grow_all_description;
+		d.picks = new PickDescriptor(Messages.spell_grow_all_picks);
+		d.modifiers = new ModifierDescriptor(Messages.spell_grow_all_modifier_0, Messages.spell_grow_all_modifier_1);
+		return d;
 	}
 
 }

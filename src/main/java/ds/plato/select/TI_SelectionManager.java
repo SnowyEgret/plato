@@ -21,6 +21,7 @@ public class TI_SelectionManager extends PlatoIntegrationTest {
 		Selection s = selectionManager.select(1, 1, 1);
 		selectionManager.deselect(s);
 		assertThat(world.getBlock(1, 1, 1), equalTo(dirt));
+		assertThat(world.getMetadata(1, 1, 1), equalTo(0));
 	}
 
 }

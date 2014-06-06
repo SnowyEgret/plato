@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 import ds.plato.core.IToggleable;
 import ds.plato.core.IWorld;
 import ds.plato.pick.IPick;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 
 public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 
@@ -78,13 +78,13 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	}
 
 	@Override
-	public AbstractSpellDescriptor getDescriptor() {
+	public SpellDescriptor getDescriptor() {
 		Spell s = currentSpell();
 		if (s == null) {
-			return new AbstractSpellDescriptor() {
+			return new SpellDescriptor() {
 			};
 		} else {
-			return s.descriptor;
+			return s.getDescriptor();
 		}
 	}
 

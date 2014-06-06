@@ -29,7 +29,7 @@ import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.IClickable;
 import ds.plato.spell.IHoldable;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.transform.SpellFill;
 import ds.plato.undo.IUndo;
 
@@ -239,7 +239,7 @@ public class ForgeEventHandler {
 			}
 
 			if (holdable != null) {
-				AbstractSpellDescriptor d = holdable.getDescriptor();
+				SpellDescriptor d = holdable.getDescriptor();
 				FontRenderer r = Minecraft.getMinecraft().fontRenderer;
 				int dy = r.FONT_HEIGHT + 5;
 				int x = 10;

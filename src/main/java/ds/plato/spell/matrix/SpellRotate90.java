@@ -15,7 +15,7 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
@@ -23,7 +23,7 @@ import ds.plato.undo.IUndo;
 public class SpellRotate90 extends AbstractSpellMatrix {
 
 	public SpellRotate90(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
-		super(new Descriptor(), undoManager, selectionManager, pickManager, blockAir);
+		super(undoManager, selectionManager, pickManager, blockAir);
 	}
 
 	@Override
@@ -56,15 +56,27 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 		return 1;
 	}
 
-	private static class Descriptor extends AbstractSpellDescriptor {
-		public Descriptor() {
-			name = Messages.spell_rotate_90_name;
-			description = Messages.spell_rotate_90_description;
-			picks = new PickDescriptor(Messages.spell_rotate_90_picks);
-			modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal, Messages.spell_rotate_90_modifier_0,
-					Messages.spell_rotate_90_modifier_1, Messages.spell_rotate_90_modifier_2,
-					Messages.spell_rotate_90_modifier_3);
-		}
+	// private static class Descriptor extends SpellDescriptor {
+	// public Descriptor() {
+	// name = Messages.spell_rotate_90_name;
+	// description = Messages.spell_rotate_90_description;
+	// picks = new PickDescriptor(Messages.spell_rotate_90_picks);
+	// modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal, Messages.spell_rotate_90_modifier_0,
+	// Messages.spell_rotate_90_modifier_1, Messages.spell_rotate_90_modifier_2,
+	// Messages.spell_rotate_90_modifier_3);
+	// }
+	// }
+
+	@Override
+	public SpellDescriptor getDescriptor() {
+		SpellDescriptor d = new SpellDescriptor();
+		d.name = Messages.spell_rotate_90_name;
+		d.description = Messages.spell_rotate_90_description;
+		d.picks = new PickDescriptor(Messages.spell_rotate_90_picks);
+		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal, Messages.spell_rotate_90_modifier_0,
+				Messages.spell_rotate_90_modifier_1, Messages.spell_rotate_90_modifier_2,
+				Messages.spell_rotate_90_modifier_3);
+		return d;
 	}
 
 }

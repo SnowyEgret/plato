@@ -12,14 +12,14 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellSphere extends AbstractSpellDraw {
 
-	public SpellSphere(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir air) {
-		super(new Descriptor(), undoManager, selectionManager, pickManager);
+	public SpellSphere(IUndo undo, ISelect select, IPick pick, BlockAir air) {
+		super(undo, select, pick);
 	}
 
 	@Override
@@ -34,11 +34,20 @@ public class SpellSphere extends AbstractSpellDraw {
 		return 2;
 	}
 
-	private static class Descriptor extends AbstractSpellDescriptor {
-		public Descriptor() {
-			name = Messages.spell_sphere_name;
-			description = Messages.spell_sphere_description;
-			picks = new PickDescriptor(Messages.spell_sphere_picks);
-		}
+//	private static class Descriptor extends SpellDescriptor {
+//		public Descriptor() {
+//			name = Messages.spell_sphere_name;
+//			description = Messages.spell_sphere_description;
+//			picks = new PickDescriptor(Messages.spell_sphere_picks);
+//		}
+//	}
+
+	@Override
+	public SpellDescriptor getDescriptor() {
+		SpellDescriptor d = new SpellDescriptor();
+		d.name = Messages.spell_sphere_name;
+		d.description = Messages.spell_sphere_description;
+		d.picks = new PickDescriptor(Messages.spell_sphere_picks);
+		return d;
 	}
 }

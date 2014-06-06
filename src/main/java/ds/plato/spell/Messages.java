@@ -46,6 +46,10 @@ public class Messages extends NLS {
 	public static String spell_mirror_name;
 	public static String spell_mirror_description;
 	public static String spell_mirror_picks;
+	
+	public static String spell_save_name;
+	public static String spell_save_description;
+	public static String spell_save_picks;
 
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);

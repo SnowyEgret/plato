@@ -23,22 +23,18 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public abstract class AbstractSpellSelect extends Spell {
 
 	private List<Point3i> grownSelections = new ArrayList<>();
 
-	public AbstractSpellSelect(
-			AbstractSpellDescriptor descriptor,
-			IUndo undoManager,
-			ISelect selectionManager,
-			IPick pickManager) {
-		super(descriptor, undoManager, selectionManager, pickManager);
+	public AbstractSpellSelect(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+		super(undoManager, selectionManager, pickManager);
 	}
 
-	//Only clear selections when this is a selection spell. Spell.onItemRightClick only clears picks.
+	// Only clear selections when this is a selection spell. Spell.onItemRightClick only clears picks.
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
 		System.out.println("[AbstractSpellSelection.onItemRightClick] w=" + w);
@@ -85,7 +81,7 @@ public abstract class AbstractSpellSelect extends Spell {
 					shrunkSelections.add(s);
 					break;
 				}
-	
+
 			}
 		}
 		for (Selection s : shrunkSelections) {
@@ -93,13 +89,13 @@ public abstract class AbstractSpellSelect extends Spell {
 		}
 		grownSelections.clear();
 	}
-	
-//	@Override
-//	public void onClickRightAir(PlayerInteractEvent e) {
-//		System.out.println("[AbstractSpellSelection.onClickRightAir] e=" + e);
-//		super.onClickRightAir(e);
-//		selectionManager.clearSelections();
-//	}
+
+	// @Override
+	// public void onClickRightAir(PlayerInteractEvent e) {
+	// System.out.println("[AbstractSpellSelection.onClickRightAir] e=" + e);
+	// super.onClickRightAir(e);
+	// selectionManager.clearSelections();
+	// }
 
 	@Override
 	public int getNumPicks() {

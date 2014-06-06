@@ -14,7 +14,7 @@ import org.junit.Test;
 import ds.plato.pick.Pick;
 import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.transform.SpellDelete;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
@@ -55,7 +55,7 @@ public class T_DeleteSpell extends PlatoTest {
 
 	@Test
 	public void descriptor() {
-		AbstractSpellDescriptor d = s.descriptor;
+		SpellDescriptor d = s.getDescriptor();
 		System.out.println("[T_DeleteSpell.descriptor] d=" + d);
 	}
 

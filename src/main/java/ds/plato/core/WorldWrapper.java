@@ -35,4 +35,9 @@ public class WorldWrapper implements IWorld {
 		return builder.toString();
 	}
 
+	@Override
+	public World getWorld() {
+		return world;
+	}
+
 }

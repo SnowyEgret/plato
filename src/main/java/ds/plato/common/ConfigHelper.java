@@ -12,7 +12,7 @@ import net.minecraftforge.common.config.Property;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 @Deprecated

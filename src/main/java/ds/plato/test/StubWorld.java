@@ -5,6 +5,7 @@ import java.util.Map;
 
 import ds.plato.core.IWorld;
 import net.minecraft.block.Block;
+import net.minecraft.world.World;
 
 public class StubWorld implements IWorld {
 
@@ -49,6 +50,11 @@ public class StubWorld implements IWorld {
 
 	private String encode(int x, int y, int z) {
 		return "" + x + ":" + y + ":" + z;
+	}
+
+	@Override
+	public World getWorld() {
+		return null;
 	}
 
 }

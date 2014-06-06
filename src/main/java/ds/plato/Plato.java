@@ -31,6 +31,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
 import ds.plato.common.ConfigHelper;
@@ -44,7 +45,6 @@ import ds.plato.core.SlotDistribution;
 import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
-import ds.plato.proxy.ClientProxy;
 import ds.plato.proxy.CommonProxy;
 import ds.plato.select.ISelect;
 import ds.plato.select.SelectionManager;
@@ -158,8 +158,10 @@ public class Plato {
 			e.printStackTrace();
 		}
 		configuration.save();
-
 		config.save();
+		
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+
 	}
 
 	@EventHandler

@@ -1,4 +1,4 @@
-package ds.plato.common.test;
+package ds.plato.select;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
@@ -19,8 +19,6 @@ import org.mockito.MockitoAnnotations;
 
 import ds.plato.core.IWorld;
 import ds.plato.core.WorldWrapper;
-import ds.plato.select.Selection;
-import ds.plato.select.SelectionManager;
 import ds.plato.test.PlatoTest;
 
 public class T_SelectionManager extends PlatoTest {
