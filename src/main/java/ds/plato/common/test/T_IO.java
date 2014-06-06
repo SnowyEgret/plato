@@ -18,8 +18,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import ds.plato.common.IO;
-import ds.plato.common.Selection;
 import ds.plato.common.IO.Group;
+import ds.plato.select.Selection;
 import ds.plato.test.PlatoTest;
 
 public class T_IO extends PlatoTest {

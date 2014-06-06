@@ -24,11 +24,12 @@ import org.lwjgl.input.Keyboard;
 
 import ds.plato.IWorld;
 import ds.plato.WorldWrapper;
-import ds.plato.common.ISelect;
-import ds.plato.common.Selection;
 import ds.plato.common.SlotEntry;
 import ds.plato.geom.solid.Box;
 import ds.plato.pick.IPick;
+import ds.plato.select.ISelect;
+import ds.plato.select.Selection;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public abstract class Spell extends Item implements IClickable, IHoldable {

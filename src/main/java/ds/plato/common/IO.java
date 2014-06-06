@@ -12,6 +12,8 @@ import javax.vecmath.Point3i;
 
 import com.google.gson.Gson;
 
+import ds.plato.select.Selection;
+
 public class IO {
 
 	public static String writeGroup(Point3i insertionPoint, List<Selection> selections, String fileName) throws IOException {

@@ -19,6 +19,7 @@ import ds.plato.geom.solid.Cube;
 import ds.plato.geom.solid.MengerSponge;
 import ds.plato.geom.solid.RectangularPyramid;
 import ds.plato.geom.solid.Tetrahedron;
+import ds.plato.select.Selection;
 import ds.plato.undo.Transaction;
 
 @Deprecated

@@ -1,10 +1,9 @@
-package ds.plato.spell;
+package ds.plato.spell.draw;
 
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.Plato;
 import ds.plato.common.SlotEntry;
 import ds.plato.common.UndoableSetBlock;
@@ -17,7 +16,11 @@ import ds.plato.geom.solid.Solid;
 import ds.plato.geom.surface.Terrain;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
+import ds.plato.select.ISelect;
+import ds.plato.spell.Spell;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
 import ds.plato.undo.IUndo;
+import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
 
 public abstract class AbstractSpellDraw extends Spell {

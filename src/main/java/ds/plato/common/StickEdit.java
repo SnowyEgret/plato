@@ -22,6 +22,7 @@ import ds.plato.common.IO.Group;
 import ds.plato.common.IO.Voxel;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.VoxelSet;
+import ds.plato.select.Selection;
 import ds.plato.undo.Transaction;
 
 @Deprecated

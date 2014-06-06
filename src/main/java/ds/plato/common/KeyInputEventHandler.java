@@ -16,7 +16,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.WorldWrapper;
 import ds.plato.pick.IPick;
-import ds.plato.spell.SpellDelete;
+import ds.plato.select.ISelect;
+import ds.plato.spell.transform.SpellDelete;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.IUndoable;
 

@@ -1,4 +1,4 @@
-package ds.plato.common;
+package ds.plato.select;
 
 import java.util.Collection;
 import java.util.List;

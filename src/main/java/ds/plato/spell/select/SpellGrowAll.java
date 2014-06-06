@@ -1,4 +1,4 @@
-package ds.plato.spell;
+package ds.plato.spell.select;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
@@ -8,12 +8,16 @@ import org.lwjgl.input.Keyboard;
 
 import ds.plato.IWorld;
 import ds.plato.common.EnumShell;
-import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
+import ds.plato.select.ISelect;
+import ds.plato.spell.Messages;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.ModifierDescriptor;
+import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
 
-public class SpellGrowAll extends AbstractSpellSelection {
+public class SpellGrowAll extends AbstractSpellSelect {
 
 	// TODO blockAir is not needed for selection spells. Maybe a static PlatoBlocks class which returns blockSelected,
 	// blockPicked and BlockAir

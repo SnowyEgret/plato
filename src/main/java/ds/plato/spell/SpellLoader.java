@@ -21,8 +21,8 @@ import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import ds.plato.common.ISelect;
 import ds.plato.pick.IPick;
+import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;
 
 public class SpellLoader {

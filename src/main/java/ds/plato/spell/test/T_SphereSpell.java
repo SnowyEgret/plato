@@ -9,13 +9,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
+import ds.plato.select.ISelect;
 import ds.plato.spell.Spell;
-import ds.plato.spell.AbstractSpellDescriptor;
-import ds.plato.spell.SpellSphere;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.draw.SpellSphere;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;

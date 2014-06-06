@@ -1,12 +1,15 @@
-package ds.plato.spell;
+package ds.plato.spell.transform;
 
 import net.minecraft.block.BlockAir;
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.ITransformer;
-import ds.plato.common.Selection;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.IPick;
+import ds.plato.select.ISelect;
+import ds.plato.select.Selection;
+import ds.plato.spell.Messages;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellFill extends AbstractSpellTransformer {

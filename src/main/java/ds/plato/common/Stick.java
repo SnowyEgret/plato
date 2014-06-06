@@ -32,6 +32,7 @@ import ds.plato.geom.solid.Solid;
 import ds.plato.geom.surface.Terrain;
 import ds.plato.pick.Pick;
 import ds.plato.pick.PickManager;
+import ds.plato.select.Selection;
 import ds.plato.undo.Transaction;
 
 @Deprecated

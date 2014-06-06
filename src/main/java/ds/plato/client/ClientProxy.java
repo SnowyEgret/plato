@@ -14,10 +14,10 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import ds.plato.common.CommonProxy;
 import ds.plato.common.ForgeEventHandler;
-import ds.plato.common.ISelect;
 import ds.plato.common.KeyInputEventHandler;
 import ds.plato.common.Plato;
 import ds.plato.pick.IPick;
+import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;
 
 public class ClientProxy extends CommonProxy {

@@ -1,6 +1,7 @@
 package ds.plato.spell;
 
-import ds.plato.common.ISelect;
+import ds.plato.select.ISelect;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
 
 public interface IHoldable {
 	

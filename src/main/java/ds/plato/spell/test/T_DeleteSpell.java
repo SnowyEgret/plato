@@ -11,11 +11,11 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.junit.Before;
 import org.junit.Test;
 
-import ds.plato.common.Selection;
 import ds.plato.pick.Pick;
-import ds.plato.spell.AbstractSpellDescriptor;
-import ds.plato.spell.SpellDelete;
+import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.transform.SpellDelete;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
 

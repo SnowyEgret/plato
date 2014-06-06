@@ -8,9 +8,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import ds.plato.common.Plato;
-import ds.plato.common.Selection;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
+import ds.plato.select.Selection;
 
 public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 

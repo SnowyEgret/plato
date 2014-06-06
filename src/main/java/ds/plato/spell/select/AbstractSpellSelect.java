@@ -1,4 +1,4 @@
-package ds.plato.spell;
+package ds.plato.spell.select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +20,19 @@ import org.lwjgl.input.Keyboard;
 import ds.plato.IWorld;
 import ds.plato.common.BlockSelected;
 import ds.plato.common.EnumShell;
-import ds.plato.common.ISelect;
-import ds.plato.common.Selection;
 import ds.plato.common.Shell;
 import ds.plato.pick.IPick;
+import ds.plato.select.ISelect;
+import ds.plato.select.Selection;
+import ds.plato.spell.Spell;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
 import ds.plato.undo.IUndo;
 
-public abstract class AbstractSpellSelection extends Spell {
+public abstract class AbstractSpellSelect extends Spell {
 
 	private List<Point3i> grownSelections = new ArrayList<>();
 
-	public AbstractSpellSelection(
+	public AbstractSpellSelect(
 			AbstractSpellDescriptor descriptor,
 			IUndo undoManager,
 			ISelect selectionManager,

@@ -1,4 +1,4 @@
-package ds.plato.spell;
+package ds.plato.spell.descriptor;
 
 import java.util.ArrayList;
 import java.util.List;

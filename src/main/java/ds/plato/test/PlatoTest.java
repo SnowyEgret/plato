@@ -18,8 +18,8 @@ import com.google.inject.Provider;
 import ds.plato.IWorld;
 import ds.plato.common.BlockPicked;
 import ds.plato.common.BlockSelected;
-import ds.plato.common.ISelect;
 import ds.plato.pick.IPick;
+import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;
 
 public class PlatoTest {

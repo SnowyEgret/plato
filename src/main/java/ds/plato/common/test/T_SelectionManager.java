@@ -19,8 +19,8 @@ import org.mockito.MockitoAnnotations;
 
 import ds.plato.IWorld;
 import ds.plato.WorldWrapper;
-import ds.plato.common.Selection;
-import ds.plato.common.SelectionManager;
+import ds.plato.select.Selection;
+import ds.plato.select.SelectionManager;
 import ds.plato.test.PlatoTest;
 
 public class T_SelectionManager extends PlatoTest {

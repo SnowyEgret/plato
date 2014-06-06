@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 
-import ds.plato.spell.ModifierDescriptor;
+import ds.plato.spell.descriptor.ModifierDescriptor;
 
 public class T_ModifierDescriptor {
 

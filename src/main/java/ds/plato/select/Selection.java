@@ -1,4 +1,4 @@
-package ds.plato.common;
+package ds.plato.select;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;

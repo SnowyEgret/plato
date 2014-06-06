@@ -21,11 +21,11 @@ import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.common.Plato;
-import ds.plato.spell.SpellDelete;
-import ds.plato.spell.SpellGrowAll;
-import ds.plato.spell.SpellMove;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
+import ds.plato.spell.matrix.SpellCopy;
+import ds.plato.spell.select.SpellGrowAll;
+import ds.plato.spell.transform.SpellDelete;
 import ds.plato.test.PlatoTest;
 
 @RunWith(PowerMockRunner.class)
@@ -51,7 +51,7 @@ public class T_SpellLoader extends PlatoTest {
 
 	@Test
 	public void loadSpells() throws Exception {
-		List spellClasses = Lists.newArrayList(SpellDelete.class, SpellMove.class, SpellGrowAll.class);
+		List spellClasses = Lists.newArrayList(SpellDelete.class, SpellCopy.class, SpellGrowAll.class);
 		List<Spell> spells = loader.loadSpells(spellClasses);
 		//assertThat(spells, hasItems(spellClasses));
 		for (Spell s : spells) {

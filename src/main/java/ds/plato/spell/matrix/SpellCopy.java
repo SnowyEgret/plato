@@ -1,4 +1,4 @@
-package ds.plato.spell;
+package ds.plato.spell.matrix;
 
 import javax.vecmath.Matrix4d;
 
@@ -8,16 +8,20 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
 import ds.plato.geom.GeomUtil;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
+import ds.plato.select.ISelect;
+import ds.plato.spell.Messages;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.ModifierDescriptor;
+import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
 
-public class SpellMove extends AbstractSpellMatrixTransformation {
+public class SpellCopy extends AbstractSpellMatrix {
 
-	public SpellMove(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
+	public SpellCopy(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
 		super(new Descriptor(), undoManager, selectionManager, pickManager, blockAir);
 	}
 
@@ -35,10 +39,10 @@ public class SpellMove extends AbstractSpellMatrixTransformation {
 
 	private static class Descriptor extends AbstractSpellDescriptor {
 		public Descriptor() {
-			name = Messages.spell_move_name;
-			description = Messages.spell_move_description;
-			picks = new PickDescriptor(Messages.spell_move_picks);
-			modifiers = new ModifierDescriptor(Messages.spell_move_modifier);
+			name = Messages.spell_copy_name;
+			description = Messages.spell_copy_description;
+			picks = new PickDescriptor(Messages.spell_copy_picks);
+			modifiers = new ModifierDescriptor(Messages.spell_copy_modifier);
 		}
 	}
 }

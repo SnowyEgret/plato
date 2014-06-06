@@ -7,10 +7,10 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import ds.plato.common.ISelect;
 import ds.plato.common.Plato;
-import ds.plato.common.Selection;
 import ds.plato.pick.Pick;
+import ds.plato.select.ISelect;
+import ds.plato.select.Selection;
 
 public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 

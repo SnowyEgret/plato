@@ -1,11 +1,14 @@
-package ds.plato.spell;
+package ds.plato.spell.transform;
 
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.ITransformer;
-import ds.plato.common.Selection;
 import ds.plato.pick.IPick;
+import ds.plato.select.ISelect;
+import ds.plato.select.Selection;
+import ds.plato.spell.Spell;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
 import ds.plato.undo.IUndo;
+import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
 
 public abstract class AbstractSpellTransformer extends Spell {

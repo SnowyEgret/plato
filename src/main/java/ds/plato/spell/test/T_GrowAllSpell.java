@@ -14,12 +14,12 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
-import ds.plato.common.SelectionManager;
 import ds.plato.common.SlotEntry;
 import ds.plato.pick.Pick;
-import ds.plato.spell.SpellGrowAll;
+import ds.plato.select.ISelect;
+import ds.plato.select.SelectionManager;
 import ds.plato.spell.Spell;
+import ds.plato.spell.select.SpellGrowAll;
 import ds.plato.test.PlatoTest;
 
 @RunWith(PowerMockRunner.class)

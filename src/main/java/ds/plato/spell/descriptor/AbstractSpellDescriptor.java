@@ -1,4 +1,5 @@
-package ds.plato.spell;
+package ds.plato.spell.descriptor;
+
 
 public abstract class AbstractSpellDescriptor {
 	

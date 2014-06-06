@@ -2,7 +2,7 @@ package ds.plato.spell.test;
 
 import org.junit.Test;
 
-import ds.plato.spell.PickDescriptor;
+import ds.plato.spell.descriptor.PickDescriptor;
 
 public class T_PickDescriptor {
 

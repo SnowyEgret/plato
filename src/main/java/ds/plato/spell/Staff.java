@@ -15,6 +15,7 @@ import org.lwjgl.input.Keyboard;
 import ds.plato.IWorld;
 import ds.plato.common.IToggleable;
 import ds.plato.pick.IPick;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
 
 public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 

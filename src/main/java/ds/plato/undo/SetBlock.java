@@ -1,15 +1,14 @@
-package ds.plato.spell;
+package ds.plato.undo;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.Plato;
-import ds.plato.common.Selection;
-import ds.plato.common.SelectionManager;
-import ds.plato.undo.IUndoable;
+import ds.plato.select.ISelect;
+import ds.plato.select.Selection;
+import ds.plato.select.SelectionManager;
 
 public class SetBlock implements IUndoable {
 

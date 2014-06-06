@@ -20,6 +20,7 @@ import org.lwjgl.input.Keyboard;
 
 import ds.plato.WorldWrapper;
 import ds.plato.geom.solid.Box;
+import ds.plato.select.Selection;
 
 @Deprecated
 public class StickSelection extends Stick {

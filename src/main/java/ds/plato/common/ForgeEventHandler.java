@@ -2,6 +2,8 @@ package ds.plato.common;
 
 import javax.vecmath.Vector3d;
 
+import org.w3c.dom.events.MouseEvent;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -22,10 +24,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.WorldWrapper;
 import ds.plato.pick.Pick;
-import ds.plato.spell.AbstractSpellDescriptor;
+import ds.plato.select.ISelect;
 import ds.plato.spell.IClickable;
 import ds.plato.spell.IHoldable;
-import ds.plato.spell.SpellFill;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.transform.SpellFill;
 import ds.plato.undo.IUndo;
 
 public class ForgeEventHandler {
@@ -37,20 +40,19 @@ public class ForgeEventHandler {
 	private IUndo undoManager;
 	private ISelect selectionManager;
 	private boolean isWorldSet = false;
-	//private IWorld world;
-
-	// @SideOnly(Side.CLIENT)
-	// @SubscribeEvent
-	// public void onMouseEvent(MouseEvent e) {
-	// //Works but is called more often than PlayerInteractEvent
-	// MOD.log.info("[ForgeEventHandle.onMouseEvent] e=" + e);
-	// }
 
 	public ForgeEventHandler(Plato plato, ISelect selectionManager, IUndo undoManager) {
 		this.plato = plato;
 		this.selectionManager = selectionManager;
 		this.undoManager = undoManager;
 	}
+
+	// @SideOnly(Side.CLIENT)
+	// @SubscribeEvent
+	// public void onMouseEvent(MouseEvent e) {
+	// // Works but is called more often than PlayerInteractEvent
+	// System.out.println("[ForgeEventHandle.onMouseEvent] e=" + e.getCurrentTarget());
+	// }
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

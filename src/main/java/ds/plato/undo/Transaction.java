@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import ds.plato.common.Selection;
 import ds.plato.common.UndoableSetBlock;
-import ds.plato.spell.SetBlock;
+import ds.plato.select.Selection;
 
 public class Transaction implements IUndoable, Iterable {
 

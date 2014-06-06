@@ -1,4 +1,4 @@
-package ds.plato.spell.test;
+package ds.plato.undo.test;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -12,11 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
-import ds.plato.common.Selection;
-import ds.plato.common.SelectionManager;
-import ds.plato.spell.SetBlock;
+import ds.plato.select.ISelect;
+import ds.plato.select.Selection;
+import ds.plato.select.SelectionManager;
 import ds.plato.test.PlatoTest;
+import ds.plato.undo.SetBlock;
 
 public class T_SetBlock extends PlatoTest {
 	

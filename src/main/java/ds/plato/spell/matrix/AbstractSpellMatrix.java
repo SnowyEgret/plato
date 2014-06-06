@@ -1,4 +1,4 @@
-package ds.plato.spell;
+package ds.plato.spell.matrix;
 
 import javax.vecmath.Matrix4d;
 import javax.vecmath.Point3d;
@@ -6,18 +6,21 @@ import javax.vecmath.Point3d;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
-import ds.plato.common.Selection;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
+import ds.plato.select.ISelect;
+import ds.plato.select.Selection;
+import ds.plato.spell.Spell;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
 import ds.plato.undo.IUndo;
+import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
 
-public abstract class AbstractSpellMatrixTransformation extends Spell {
+public abstract class AbstractSpellMatrix extends Spell {
 
 	private Block blockAir;
 
-	public AbstractSpellMatrixTransformation(
+	public AbstractSpellMatrix(
 			AbstractSpellDescriptor descriptor,
 			IUndo undoManager,
 			ISelect selectionManager,

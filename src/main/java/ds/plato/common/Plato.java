@@ -35,16 +35,18 @@ import ds.plato.IWorld;
 import ds.plato.client.ClientProxy;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
-import ds.plato.spell.AbstractSpellDraw;
-import ds.plato.spell.AbstractSpellMatrixTransformation;
-import ds.plato.spell.AbstractSpellSelection;
-import ds.plato.spell.AbstractSpellTransformer;
+import ds.plato.select.ISelect;
+import ds.plato.select.SelectionManager;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
 import ds.plato.spell.Staff;
-import ds.plato.spell.StaffDraw;
-import ds.plato.spell.StaffSelect;
-import ds.plato.spell.StaffTransform;
+import ds.plato.spell.draw.AbstractSpellDraw;
+import ds.plato.spell.draw.StaffDraw;
+import ds.plato.spell.matrix.AbstractSpellMatrix;
+import ds.plato.spell.select.AbstractSpellSelect;
+import ds.plato.spell.select.StaffSelect;
+import ds.plato.spell.transform.AbstractSpellTransformer;
+import ds.plato.spell.transform.StaffTransform;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
 
@@ -128,9 +130,9 @@ public class Plato {
 			staffs.add(drawStaff);
 
 			for (Spell s : spells) {
-				if (s instanceof AbstractSpellSelection) {
+				if (s instanceof AbstractSpellSelect) {
 					selectionStaff.addSpell(s);
-				} else if (s instanceof AbstractSpellTransformer || s instanceof AbstractSpellMatrixTransformation) {
+				} else if (s instanceof AbstractSpellTransformer || s instanceof AbstractSpellMatrix) {
 					transformStaff.addSpell(s);
 				} else if (s instanceof AbstractSpellDraw) {
 					drawStaff.addSpell(s);

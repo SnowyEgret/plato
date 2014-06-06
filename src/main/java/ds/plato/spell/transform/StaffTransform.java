@@ -1,7 +1,10 @@
-package ds.plato.spell;
+package ds.plato.spell.transform;
 
 import net.minecraftforge.common.config.Property;
 import ds.plato.pick.IPick;
+import ds.plato.spell.Spell;
+import ds.plato.spell.Staff;
+import ds.plato.spell.matrix.AbstractSpellMatrix;
 
 public class StaffTransform extends Staff {
 
@@ -11,7 +14,7 @@ public class StaffTransform extends Staff {
 
 	@Override
 	public void addSpell(Spell spell) {
-		assert (spell instanceof AbstractSpellTransformer || spell instanceof AbstractSpellMatrixTransformation);
+		assert (spell instanceof AbstractSpellTransformer || spell instanceof AbstractSpellMatrix);
 		super.addSpell(spell);
 	}
 

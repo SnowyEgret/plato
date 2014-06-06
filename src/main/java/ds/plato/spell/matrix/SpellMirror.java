@@ -1,4 +1,4 @@
-package ds.plato.spell;
+package ds.plato.spell.matrix;
 
 
 import javax.vecmath.Matrix4d;
@@ -10,15 +10,19 @@ import net.minecraft.block.BlockAir;
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.matrix.ReflectionMatrix;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
+import ds.plato.select.ISelect;
+import ds.plato.spell.Messages;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.ModifierDescriptor;
+import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
 
-public class SpellMirror extends AbstractSpellMatrixTransformation {
+public class SpellMirror extends AbstractSpellMatrix {
 
 	public SpellMirror(
 			IUndo undoManager,

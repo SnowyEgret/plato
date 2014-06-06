@@ -24,10 +24,10 @@ public class Messages extends NLS {
 	public static String spell_sphere_description;
 	public static String spell_sphere_picks;
 
-	public static String spell_move_name;
-	public static String spell_move_description;
-	public static String spell_move_picks;
-	public static String spell_move_modifier;
+	public static String spell_copy_name;
+	public static String spell_copy_description;
+	public static String spell_copy_picks;
+	public static String spell_copy_modifier;
 
 	public static String spell_grow_all_name;
 	public static String spell_grow_all_description;

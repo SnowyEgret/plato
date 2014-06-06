@@ -1,16 +1,19 @@
-package ds.plato.spell;
+package ds.plato.spell.draw;
 
 import net.minecraft.block.BlockAir;
 
 import org.apache.commons.lang3.tuple.Pair;
 
 import ds.plato.IWorld;
-import ds.plato.common.ISelect;
 import ds.plato.common.SlotEntry;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.surface.Sphere;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
+import ds.plato.select.ISelect;
+import ds.plato.spell.Messages;
+import ds.plato.spell.descriptor.AbstractSpellDescriptor;
+import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellSphere extends AbstractSpellDraw {
