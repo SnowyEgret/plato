@@ -4,9 +4,9 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import ds.plato.Plato;
-import ds.plato.common.SlotEntry;
 import ds.plato.common.UndoableSetBlock;
 import ds.plato.core.IWorld;
+import ds.plato.core.SlotEntry;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.VoxelSet;

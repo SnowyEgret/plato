@@ -3,9 +3,9 @@ package ds.plato.spell.transform;
 import java.util.Random;
 
 import net.minecraft.block.BlockAir;
-import ds.plato.common.SlotDistribution;
-import ds.plato.common.SlotEntry;
 import ds.plato.core.IWorld;
+import ds.plato.core.SlotDistribution;
+import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;

@@ -17,8 +17,8 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import ds.plato.common.IO;
-import ds.plato.common.IO.Group;
+import ds.plato.core.IO;
+import ds.plato.core.IO.Group;
 import ds.plato.select.Selection;
 import ds.plato.test.PlatoTest;
 

@@ -8,8 +8,8 @@ import net.minecraft.init.Blocks;
 import org.junit.Before;
 import org.junit.Test;
 
-import ds.plato.common.SlotDistribution;
-import ds.plato.common.SlotEntry;
+import ds.plato.core.SlotDistribution;
+import ds.plato.core.SlotEntry;
 import ds.plato.test.PlatoTest;
 
 public class T_SlotDistribution extends PlatoTest {

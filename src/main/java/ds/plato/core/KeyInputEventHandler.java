@@ -15,7 +15,6 @@ import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
-import ds.plato.common.IToggleable;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.transform.SpellDelete;

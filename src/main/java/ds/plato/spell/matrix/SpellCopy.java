@@ -7,8 +7,8 @@ import net.minecraft.block.BlockAir;
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 
-import ds.plato.common.SlotEntry;
 import ds.plato.core.IWorld;
+import ds.plato.core.SlotEntry;
 import ds.plato.geom.GeomUtil;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;

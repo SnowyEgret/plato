@@ -24,7 +24,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
 import ds.plato.common.Menu;
-import ds.plato.common.SlotEntry;
 import ds.plato.common.Stick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;

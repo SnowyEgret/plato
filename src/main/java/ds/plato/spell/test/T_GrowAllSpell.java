@@ -13,8 +13,8 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import ds.plato.common.SlotEntry;
 import ds.plato.core.IWorld;
+import ds.plato.core.SlotEntry;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.select.SelectionManager;

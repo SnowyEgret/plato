@@ -1,4 +1,4 @@
-package ds.plato.common;
+package ds.plato.core;
 
 public interface IToggleable {
 	

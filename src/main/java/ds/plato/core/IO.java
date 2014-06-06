@@ -1,4 +1,4 @@
-package ds.plato.common;
+package ds.plato.core;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -33,8 +33,8 @@ public class IO {
 	}
 
 	public static class Group {
-		Point3i insertionPoint;
-		Voxel[] voxels;
+		public Point3i insertionPoint;
+		public Voxel[] voxels;
 
 		public Group(Point3i insertionPoint, List<Selection> selections) {
 			this.insertionPoint = insertionPoint;
@@ -52,8 +52,8 @@ public class IO {
 	}
 
 	public static class Voxel {
-		String b;
-		int x, y, z, m;
+		public String b;
+		public int x, y, z, m;
 
 		public Voxel(Selection s) {
 			b = s.block.getUnlocalizedName().substring(5);

@@ -2,8 +2,8 @@ package ds.plato.spell.transform;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
-import ds.plato.common.SlotEntry;
 import ds.plato.core.IWorld;
+import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;

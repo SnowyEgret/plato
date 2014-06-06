@@ -24,6 +24,8 @@ import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
+import ds.plato.core.IToggleable;
+import ds.plato.core.SlotEntry;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.VoxelSet;

@@ -4,8 +4,8 @@ import net.minecraft.block.BlockAir;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import ds.plato.common.SlotEntry;
 import ds.plato.core.IWorld;
+import ds.plato.core.SlotEntry;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.surface.Sphere;
 import ds.plato.pick.IPick;

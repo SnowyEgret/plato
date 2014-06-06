@@ -12,6 +12,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.Plato;
+import ds.plato.core.SlotEntry;
 import ds.plato.core.WorldWrapper;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.solid.Ball;

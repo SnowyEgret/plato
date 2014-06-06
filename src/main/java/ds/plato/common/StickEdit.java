@@ -19,8 +19,11 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.Plato;
-import ds.plato.common.IO.Group;
-import ds.plato.common.IO.Voxel;
+import ds.plato.core.IO;
+import ds.plato.core.SlotDistribution;
+import ds.plato.core.SlotEntry;
+import ds.plato.core.IO.Group;
+import ds.plato.core.IO.Voxel;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.VoxelSet;
 import ds.plato.select.Selection;
