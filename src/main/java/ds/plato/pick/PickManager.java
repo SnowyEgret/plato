@@ -18,10 +18,9 @@ public class PickManager implements IPick {
 	private int maxPicks = 0;
 	private final LinkedList<Pick> picks = new LinkedList<>();
 	private IWorld world;
-	private BlockPicked blockPicked;
+	private Block blockPicked;
 
-	public PickManager(int numPicks, BlockPicked blockPicked) {
-		this.maxPicks = numPicks;
+	public PickManager(Block blockPicked) {
 		this.blockPicked = blockPicked;
 	}
 
@@ -45,9 +44,9 @@ public class PickManager implements IPick {
 	}
 
 	@Override
-	public Pick addPick(int x, int y, int z, Block block) {
+	public Pick addPick(int x, int y, int z, Block block, int metadata) {
 		if (picks.size() < maxPicks) {
-			Pick p = new Pick(x, y, z, block);
+			Pick p = new Pick(x, y, z, block, metadata);
 			picks.add(p);
 			return p;
 		} else {
@@ -56,17 +55,12 @@ public class PickManager implements IPick {
 	}
 
 	@Override
-	//public boolean pick(int x, int y, int z) {
-		public void pick(int x, int y, int z) {
+	public void pick(int x, int y, int z) {
 		// TODO: Handle case where location is already a selection
-		//if (!isFinishedPicking()) {
-			Block block = world.getBlock(x, y, z);
-			int metatdata = world.getMetadata(x, y, z);
-			world.setBlock(x, y, z, blockPicked, 0);
-			// TODO add metatdata to Pick constructor
-			addPick(x, y, z, block);
-		//}
-		//return isFinishedPicking();
+		Block block = world.getBlock(x, y, z);
+		int metadata = world.getMetadata(x, y, z);
+		world.setBlock(x, y, z, blockPicked, 0);
+		addPick(x, y, z, block, metadata);
 	}
 
 	@Override
@@ -105,7 +99,7 @@ public class PickManager implements IPick {
 		for (Pick p : getPicksArray()) {
 			Block block = world.getBlock(p.x, p.y, p.z);
 			if (block instanceof BlockPicked) {
-				world.setBlock(p.x, p.y, p.z, p.block, p.metatdata);
+				world.setBlock(p.x, p.y, p.z, p.block, p.metadata);
 			}
 		}
 		clear();
@@ -113,7 +107,7 @@ public class PickManager implements IPick {
 
 	public Pick getPickAt(int x, int y, int z) {
 		for (Pick p : picks) {
-			if (p.equals(new Pick(x, y, z, null))) {
+			if (p.equals(new Pick(x, y, z, null, 0))) {
 				return p;
 			}
 		}

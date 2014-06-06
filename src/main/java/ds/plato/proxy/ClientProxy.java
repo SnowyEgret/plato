@@ -13,6 +13,8 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import ds.plato.Plato;
+import ds.plato.block.BlockPickedRenderer;
+import ds.plato.block.BlockSelectedRenderer;
 import ds.plato.core.ForgeEventHandler;
 import ds.plato.core.KeyInputEventHandler;
 import ds.plato.pick.IPick;
@@ -24,7 +26,7 @@ public class ClientProxy extends CommonProxy {
 	public static int blockSelectedRenderId;
 	public static int blockPickedRenderId;
 
-	public static void setCustomRenderers(ISelect selectionManager, IPick pickManager) {
+	public void setCustomRenderers(ISelect selectionManager, IPick pickManager) {
 		blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId, selectionManager));

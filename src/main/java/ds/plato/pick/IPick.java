@@ -18,17 +18,17 @@ public interface IPick {
 
 	public boolean isPicking();
 
+	public Pick getPickAt(Point3i p);
+
 	public void reset(int numPicks);
 
 	//TODO remove when migrating to staffs and spells
 	@Deprecated
-	public Pick addPick(int x, int y, int z, Block block);
+	public Pick addPick(int x, int y, int z, Block block, int metadata);
 
 	//TODO remove when migrating to staffs and spells
 	@Deprecated
 	public void clear();
 
 	public void setWorld(IWorld world);
-
-	public Pick getPickAt(Point3i p);
 }

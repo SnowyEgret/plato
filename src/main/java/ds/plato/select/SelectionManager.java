@@ -19,13 +19,13 @@ public class SelectionManager implements ISelect {
 
 	private final Map<Point3i, Selection> selections = new HashMap<>();
 	private IWorld world;
-	private BlockSelected blockSelected;
+	private Block blockSelected;
 
 	// TODO remove when blockSelected is injected throughout.
 	public SelectionManager() {
 	}
 
-	public SelectionManager(BlockSelected blockSelected) {
+	public SelectionManager(Block blockSelected) {
 		this.blockSelected = blockSelected;
 	}
 

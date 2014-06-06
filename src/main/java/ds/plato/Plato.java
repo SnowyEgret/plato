@@ -113,8 +113,8 @@ public class Plato {
 		blockPicked = config.initBlock(BlockPicked.class);
 
 		undoManager = new UndoManager();
-		selectionManager = new SelectionManager((BlockSelected) blockSelected);
-		pickManager = new PickManager(0, (BlockPicked) blockPicked);
+		selectionManager = new SelectionManager(blockSelected);
+		pickManager = new PickManager(blockPicked);
 
 		log.info("[Plato.preInit]Initializing items...");
 		selectionStick = (StickSelection) config.initStick(StickSelection.class);
@@ -164,11 +164,7 @@ public class Plato {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-
-		// TODO remove static call
-		// proxy.setCustomRenderers(selectionManager, pickManager);
-		ClientProxy.setCustomRenderers(selectionManager, pickManager);
-
+		proxy.setCustomRenderers(selectionManager, pickManager);
 		proxy.registerEventHandlers(this, selectionManager, undoManager, pickManager, (BlockAir) Blocks.air);
 	}
 

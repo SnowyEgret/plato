@@ -78,8 +78,6 @@ public abstract class Stick extends Item implements IToggleable {
 	public void clearPicks() {
 		for (Pick p : pickManager.getPicks()) {
 			Block block = getWorld().getBlock(p.x, p.y, p.z);
-			// if (block instanceof BlockPick || block instanceof BlockPick1 ||
-			// block instanceof BlockPick2)
 			if (block == Plato.blockPicked) {
 				// TODO set metadata
 				getWorld().setBlock(p.x, p.y, p.z, p.block);
@@ -109,6 +107,7 @@ public abstract class Stick extends Item implements IToggleable {
 				y += d;
 			}
 			Block block = getWorld().getBlock(x, y, z);
+			int metadata = getWorld().getBlockMetadata(x,  y,  z);
 
 			// int currentPick = pickManager.size();
 			// Block pickblock = null;
@@ -126,8 +125,8 @@ public abstract class Stick extends Item implements IToggleable {
 			// if (block != Blocks.air)
 			// TODO Add metadata to class Pick and set metadata (reverse in
 			// clearPicks)
-			getWorld().setBlock(x, y, z, Plato.blockPicked);
-			pickManager.addPick(x, y, z, block);
+			getWorld().setBlock(x, y, z, Plato.blockPicked, metadata, 3);
+			pickManager.addPick(x, y, z, block, metadata);
 		}
 		return pickManager.isFinishedPicking();
 	}

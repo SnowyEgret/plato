@@ -6,19 +6,17 @@ import javax.vecmath.Point3i;
 import net.minecraft.block.Block;
 
 public class Pick extends Point3i {
+	
 	public Block block;
-	public int metatdata;
+	public int metadata;
 
-	//TODO add parameter for metadata
-	public Pick(int x, int y, int z, Block block) {
+	public Pick(int x, int y, int z, Block block, int metadata) {
 		super(x, y, z);
 		this.block = block;
-		//this.metadata = metadata;
+		this.metadata = metadata;
 	}
 
 	public Point3d toDouble() {
-		// Solved problem of end of line not being drawn.
-		//return new Point3d(x + .5, y + .5, z + .5);
 		return new Point3d(x, y, z);
 	}
 }

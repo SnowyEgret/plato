@@ -30,7 +30,7 @@ public class T_SphereSpell extends PlatoTest {
 	public void setUp() {
 		super.setUp();
 		slotEntries = new SlotEntry[] {new SlotEntry(dirt, 0, 0)};
-		picks = new Pick[] {new Pick(0, 0, 0, dirt), new Pick(9, 0, 0, dirt)};
+		picks = new Pick[] {new Pick(0, 0, 0, dirt, 0), new Pick(9, 0, 0, dirt, 0)};
 		when(pickManager.isFinishedPicking()).thenReturn(true);
 		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
 	}

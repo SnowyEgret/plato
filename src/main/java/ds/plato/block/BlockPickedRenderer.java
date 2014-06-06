@@ -1,4 +1,4 @@
-package ds.plato.proxy;
+package ds.plato.block;
 
 import javax.vecmath.Point3i;
 
