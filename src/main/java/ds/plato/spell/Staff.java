@@ -36,6 +36,11 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	}
 
 	@Override
+	public Spell getSpell() {
+		return currentSpell();
+	}
+
+	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
 		System.out.println("[Staff.onItemRightClick] w=" + w);
 		if (currentSpell() != null)
@@ -104,7 +109,9 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 			ordinal++;
 		}
 		Spell currentSpell = currentSpell();
-		pickManager.reset(currentSpell.getNumPicks());
+		if (currentSpell != null) {
+			pickManager.reset(currentSpell.getNumPicks());
+		}
 		return currentSpell;
 	}
 

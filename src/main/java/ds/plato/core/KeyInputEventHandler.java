@@ -6,6 +6,7 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -23,7 +24,7 @@ import ds.plato.undo.IUndoable;
 
 public class KeyInputEventHandler {
 
-	private IUndoable undoManager;
+	private IUndo undoManager;
 	private Map<String, KeyBinding> keyBindings;
 	private ISelect selectionManager;
 	private IPick pickManager;
@@ -31,7 +32,7 @@ public class KeyInputEventHandler {
 
 	public KeyInputEventHandler(
 			Map<String, KeyBinding> keyBindings,
-			IUndoable undo,
+			IUndo undo,
 			ISelect select,
 			IPick pick,
 			BlockAir blockAir) {
@@ -71,23 +72,22 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("toggle").isPressed()) {
-			Item i = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem().getItem();
-			if (i instanceof IToggleable) {
-				((IToggleable) i).toggle();
+			ItemStack is = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
+			if (is != null) {
+				Item i = is.getItem();
+				if (i instanceof IToggleable) {
+					((IToggleable) i).toggle();
+				}
 			}
 		}
 
 		if (keyBindings.get("delete").isPressed()) {
-			// Plato.editStick.deleteSelections();
-			// TODO pass world to invoke instead of constructor so that spells function in nether. Remove
-			// Spell.setWorld() and Staff.setWorld()
-			//new SpellDelete((IUndo) undoManager, selectionManager, pickManager, blockAir).invoke(new WorldWrapper(w));
+			new SpellDelete(undoManager, selectionManager, pickManager, blockAir).invoke(new WorldWrapper(w), null);
 		}
 
 		if (event.isCancelable())
 			event.setCanceled(true);
 	}
-
 	// @SideOnly(Side.CLIENT)
 	// @SubscribeEvent
 	// public void onMouseInput(MouseInputEvent event) {

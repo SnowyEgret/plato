@@ -50,6 +50,10 @@ public class Messages extends NLS {
 	public static String spell_save_name;
 	public static String spell_save_description;
 	public static String spell_save_picks;
+	
+	public static String spell_regenerate_name;
+	public static String spell_regenerate_description;
+	public static String spell_regenerate_picks;
 
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);

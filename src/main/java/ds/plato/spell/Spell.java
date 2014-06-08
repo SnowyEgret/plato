@@ -30,6 +30,7 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.select.AbstractSpellSelect;
 import ds.plato.undo.IUndo;
 
 public abstract class Spell extends Item implements IClickable, IHoldable {
@@ -44,6 +45,15 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
 	}
+	
+	
+
+	@Override
+	public Spell getSpell() {
+		return this;
+	}
+
+
 
 	@Override
 	public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
@@ -166,15 +176,11 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		return false;
 	}
 
-	// Public for when spell is invoked from event handler.
-	//public abstract void invoke(Pick[] picks, SlotEntry[] slotEntries);
 	public abstract void invoke(IWorld world, final SlotEntry[] slotEntries);
 
 	public abstract int getNumPicks();
 
-	// TODO Eliminate static method getBlocksWithMetadataInIventorySlots in class Plato when migrating to staff and
-	// spells.
-	protected SlotEntry[] getSlotEntriesFromPlayer(EntityPlayer entityPlayer) {
+	public SlotEntry[] getSlotEntriesFromPlayer(EntityPlayer entityPlayer) {
 		List<SlotEntry> entries = new ArrayList<>();
 		InventoryPlayer inventory = entityPlayer.inventory;
 		for (int i = 0; i < 9; i++) {

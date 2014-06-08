@@ -2,6 +2,7 @@ package ds.plato.spell;
 
 import ds.plato.select.ISelect;
 import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.select.AbstractSpellSelect;
 
 public interface IHoldable {
 	
@@ -9,6 +10,8 @@ public interface IHoldable {
 
 	boolean isPicking();
 
-	void resetPickManager();
+	@Deprecated void resetPickManager();
+
+	Spell getSpell();
 
 }

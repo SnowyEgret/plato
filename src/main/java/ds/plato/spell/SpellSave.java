@@ -2,36 +2,62 @@ package ds.plato.spell;
 
 import java.io.IOException;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import ds.plato.Plato;
 import ds.plato.core.IO;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
+import ds.plato.core.WorldWrapper;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
+import ds.plato.select.SpellRegenerate;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.transform.SpellDelete;
 import ds.plato.undo.IUndo;
 
 public class SpellSave extends Spell {
 
+	private BlockAir air;
+
 	public SpellSave(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir air) {
 		super(undoManager, selectionManager, pickManager);
+		this.air = air;
 	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
-		Pick[] picks = pickManager.getPicksArray();
 		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 0, world.getWorld(), 0, 0, 0);
-		String fileName = "saves/test.json";
+	}
+
+	// Called by GuiSave
+	public void writeFile(String name) {
+		// TODO could create a new item in the players inventory. Could be named with an anvil like a sword. Could have
+		// a texture generated from the player's view at the time of creation
+		Pick[] picks = pickManager.getPicksArray();
+		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+		String json = null;
 		try {
-			String json = IO.writeGroup(picks[0], selectionManager.getSelectionList(), fileName);
-			System.out.println("[ItemStickEdit.saveSelections] json=" + json);
+			json = IO.writeGroup(picks[0], selectionManager.getSelectionList(), "saves/" + name + ".json");
+			System.out.println("[SpellSave.writeFile] json=" + json);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		pickManager.clearPicks();
+		new SpellDelete((IUndo) undoManager, selectionManager, pickManager, air).invoke(new WorldWrapper(
+				player.worldObj), null);
+		SpellRegenerate i = new SpellRegenerate(undoManager, selectionManager, pickManager, air, json);
+		GameRegistry.registerItem(i, name);
+		i.setCreativeTab(SpellLoader.tabSpells);
+		i.setUnlocalizedName(name);
+		System.out.println("[SpellSave.writeFile] i=" + i);
+		// player.displayGUIAnvil(0, 0, 0);
+		//player.dropItem(i, 7);
+		pickManager.clearPicks();
 	}
 
 	@Override

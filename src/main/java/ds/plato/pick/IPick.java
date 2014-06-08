@@ -22,13 +22,13 @@ public interface IPick {
 
 	public void reset(int numPicks);
 
-	//TODO remove when migrating to staffs and spells
 	@Deprecated
 	public Pick addPick(int x, int y, int z, Block block, int metadata);
 
-	//TODO remove when migrating to staffs and spells
 	@Deprecated
 	public void clear();
 
 	public IPick setWorld(IWorld world);
+
+	public Pick lastPick();
 }

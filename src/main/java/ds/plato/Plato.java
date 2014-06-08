@@ -73,9 +73,10 @@ public class Plato {
 
 	@SidedProxy(clientSide = "ds.plato.proxy.ClientProxy", serverSide = "ds.plato.proxy.CommonProxy") public static CommonProxy proxy;
 
+	//TODO make private and non-static after spells
 	// Blocks
-	@Deprecated public static Block blockSelected;
-	@Deprecated public static Block blockPicked;
+	public static Block blockSelected;
+	public static Block blockPicked;
 
 	// Items
 	@Deprecated public static StickSelection selectionStick;
@@ -95,11 +96,10 @@ public class Plato {
 	private Configuration configuration;
 	public static Logger log;
 
-	// TODO remove after migrating to staffs and spells
 	@Deprecated static WorldServer world;
 	@Deprecated public ConfigHelper config;
 
-	public static SlotDistribution slotDistribution;
+	@Deprecated public static SlotDistribution slotDistribution;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -269,15 +269,8 @@ public class Plato {
 		return entries;
 	}
 
-	public static void updateInventoryDistribution() {
-		SlotDistribution d = new SlotDistribution(Plato.getBlocksWithMetadataInIventorySlots());
-		if (!d.equals(slotDistribution)) {
-			slotDistribution = d;
-			Plato.log.info("[Plato.updateBlockDistribution] Updated slot distribution: " + slotDistribution);
-		}
-	}
-
 	// World is not available when selectionManager and spells are initialized.
+	@Deprecated
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
 		pickManager.setWorld(world);

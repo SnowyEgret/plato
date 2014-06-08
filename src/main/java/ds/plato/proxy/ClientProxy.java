@@ -20,11 +20,15 @@ import ds.plato.block.BlockSelectedRenderer;
 import ds.plato.core.ForgeEventHandler;
 import ds.plato.core.KeyInputEventHandler;
 import ds.plato.gui.GuiSave;
+import ds.plato.gui.Overlay;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;
 
 public class ClientProxy extends CommonProxy {
+
+	public static int blockSelectedRenderId;
+	public static int blockPickedRenderId;
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -36,9 +40,6 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 
-	public static int blockSelectedRenderId;
-	public static int blockPickedRenderId;
-
 	public void setCustomRenderers(ISelect selectionManager, IPick pickManager) {
 		blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
@@ -48,7 +49,8 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick, BlockAir air) {
-		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(plato, select, undo));
+		Overlay overlay = new Overlay(select);
+		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(plato, undo, select, pick, overlay));
 		Map<String, KeyBinding> keyBindings = new HashMap<>();
 		// TODO get NLS properties these strings
 		keyBindings.put("undo", registerKeyBinding("Undo", Keyboard.KEY_Z, plato.NAME));

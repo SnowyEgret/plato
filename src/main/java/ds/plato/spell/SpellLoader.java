@@ -27,7 +27,7 @@ import ds.plato.undo.IUndo;
 
 public class SpellLoader {
 
-	private CreativeTabs tabSpells;
+	public static CreativeTabs tabSpells;
 	private String modId;
 	IUndo undoManager;
 	ISelect selectionManager;
