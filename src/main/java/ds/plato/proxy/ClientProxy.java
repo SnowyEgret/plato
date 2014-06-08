@@ -50,7 +50,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick, BlockAir air) {
 		Overlay overlay = new Overlay(select);
-		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(plato, undo, select, pick, overlay));
+		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(undo, select, pick, overlay));
 		Map<String, KeyBinding> keyBindings = new HashMap<>();
 		// TODO get NLS properties these strings
 		keyBindings.put("undo", registerKeyBinding("Undo", Keyboard.KEY_Z, plato.NAME));

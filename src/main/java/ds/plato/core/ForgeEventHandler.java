@@ -32,24 +32,14 @@ import ds.plato.undo.IUndo;
 
 public class ForgeEventHandler {
 
-	// private Stick heldStick = null;
 	private IHoldable holdable = null;
-	// private Vector3d displacement = new Vector3d();
-	private Plato plato;
 	private IUndo undoManager;
 	private ISelect selectionManager;
 	private IPick pickManager;
 	private boolean isWorldSet = false;
 	private Overlay overlay;
-	private SlotDistribution slotDistribution;
 
-	public ForgeEventHandler(
-			Plato plato,
-			IUndo undoManager,
-			ISelect selectionManager,
-			IPick pickManager,
-			Overlay overlay) {
-		this.plato = plato;
+	public ForgeEventHandler(IUndo undoManager, ISelect selectionManager, IPick pickManager, Overlay overlay) {
 		this.selectionManager = selectionManager;
 		this.undoManager = undoManager;
 		this.pickManager = pickManager;
@@ -92,24 +82,6 @@ public class ForgeEventHandler {
 		}
 		Item item = stack.getItem();
 
-		// if (item instanceof Stick) {
-		// Stick stick = (Stick) item;
-		// switch (e.action) {
-		// case LEFT_CLICK_BLOCK:
-		// stick.onClickLeft(e);
-		// break;
-		// case RIGHT_CLICK_AIR:
-		// // Doesn't seem to be working
-		// // stick.onClickRightAir(e);
-		// break;
-		// case RIGHT_CLICK_BLOCK:
-		// stick.onClickRight(e);
-		// break;
-		// default:
-		// break;
-		// }
-		// } else
-
 		if (item instanceof ItemBlock) {
 			ItemBlock itemBlock = (ItemBlock) item;
 			switch (e.action) {
@@ -131,7 +103,7 @@ public class ForgeEventHandler {
 				break;
 			}
 
-			// IClickable covers both Spells and Staffs.
+		// IClickable covers both Spells and Staffs.
 		} else if (item instanceof IClickable) {
 			IClickable c = (IClickable) item;
 			switch (e.action) {
@@ -160,8 +132,7 @@ public class ForgeEventHandler {
 	@SubscribeEvent
 	public void onDrawBlockHightlight(DrawBlockHighlightEvent e) {
 		MovingObjectPosition pos = e.target;
-		// if (heldStick != null && heldStick != Plato.selectionStick) {
-		if (holdable != null && !(holdable.getSpell() instanceof AbstractSpellSelect)) {
+		if (holdable != null) {
 			Pick lastPick = pickManager.lastPick();
 			if (lastPick != null) {
 				Vector3d d = new Vector3d();
@@ -169,10 +140,6 @@ public class ForgeEventHandler {
 				d.y = lastPick.y - pos.blockY;
 				d.z = lastPick.z - pos.blockZ;
 				overlay.setDisplacement(d);
-				// if (!displacement.equals(d)) {
-				// displacement = d;
-				// Plato.log.info("[ForgeEventHandle.onDrawBlockHightlight] displacment=" + displacement);
-				// }
 			}
 		}
 	}
@@ -185,83 +152,30 @@ public class ForgeEventHandler {
 			return;
 		if (e.entity instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer) e.entity;
-			updateHoldable(p);
-			updateInventoryDistribution(p);
-		}
-	}
-
-	// Prints current state of newly held stick and clears picks of previously held stick.
-	private void updateHoldable(EntityPlayer player) {
-		ItemStack is = player.getHeldItem();
-		if (is == null) {
-			holdable = null;
-		} else {
-			Item item = is.getItem();
-
-			// if (item instanceof Stick) {
-			// holdable = null;
-			// if (item != heldStick) {
-			// Plato.clearPicks();
-			// heldStick = (Stick) item;
-			// ((Stick) item).printCurrentState();
-			// }
-			// } else
-
-			// Both staffs and spells can be held. Staffs delegate calls to the current spell on the staff.
-			if (item instanceof IHoldable) {
-				// heldStick = null;
-				if (item != holdable) {
-					holdable = (IHoldable) item;
-					Spell s = holdable.getSpell();
-					if (s != null) {
-						pickManager.clearPicks();
-						pickManager.reset(s.getNumPicks());
-					}
-					//TODO remove this from IHoldable. not clear what it does.
-					// holdable.resetPickManager();
-				}
-			} else {
-				// heldStick = null;
+			ItemStack is = p.getHeldItem();
+			if (is == null) {
 				holdable = null;
-			}
-		}
-	}
-
-	private void updateInventoryDistribution(EntityPlayer player) {
-		if (holdable != null) {
-			Spell s = holdable.getSpell();
-			SlotDistribution d = new SlotDistribution(s.getSlotEntriesFromPlayer(player));
-			if (!d.equals(slotDistribution)) {
-				slotDistribution = d;
-				System.out.println("[ForgeEventHandler.updateInventoryDistribution] slotDistribution="
-						+ slotDistribution);
+			} else {
+				Item item = is.getItem();
+				if (item instanceof IHoldable) {
+					if (item != holdable) {
+						holdable = (IHoldable) item;
+						Spell s = holdable.getSpell();
+						if (s != null) {
+							pickManager.clearPicks();
+							pickManager.reset(s.getNumPicks());
+						}
+					}
+				} else {
+					holdable = null;
+				}
 			}
 		}
 	}
 
 	@SubscribeEvent
 	public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
-		// System.out.println("[ForgeEventHandle.onRenderGameOverlayEvent] event.type=" + event.type);
 		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
-
-			// // TODO remove this block when migrating to staff and spells
-			// if (heldStick != null) {
-			// FontRenderer r = Minecraft.getMinecraft().fontRenderer;
-			// int dy = r.FONT_HEIGHT + 5;
-			// int x = 10;
-			// int y = x;
-			// Menu d = heldStick.state.getDescription();
-			// r.drawStringWithShadow(d.name, x, y, 0xffffff);
-			// if (d.picks != "") {
-			// r.drawStringWithShadow(d.picks, x, y += dy, 0xaaffaa);
-			// }
-			// r.drawStringWithShadow(d.modifiers, x, y += dy, 0xaaaaff);
-			// if (heldStick != Plato.selectionStick && heldStick.isPicking()) {
-			// r.drawStringWithShadow(displacement.toString(), x, y += dy, 0xffaaaa);
-			// }
-			// r.drawStringWithShadow("Selection size: " + selectionManager.size(), x, y += dy, 0xffaaaa);
-			// }
-
 			if (holdable != null) {
 				overlay.draw(holdable);
 			}

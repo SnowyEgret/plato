@@ -32,7 +32,7 @@ public class SpellLoader {
 	IUndo undoManager;
 	ISelect selectionManager;
 	IPick pickManager;
-	BlockAir blockAir;
+	Block blockAir;
 	private Configuration config;
 
 	public SpellLoader(
@@ -40,7 +40,7 @@ public class SpellLoader {
 			IUndo undoManager,
 			ISelect selectionManager,
 			IPick pickManager,
-			BlockAir blockAir,
+			Block blockAir,
 			String modId) {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
@@ -104,7 +104,7 @@ public class SpellLoader {
 
 		ClassPath p = ClassPath.from(this.getClass().getClassLoader());
 		List<Spell> spells = new ArrayList<>();
-		for (ClassInfo i : p.getTopLevelClasses(packageName)) {
+		for (ClassInfo i : p.getTopLevelClassesRecursive(packageName)) {
 			Class c = i.load();
 			if (Spell.class.isAssignableFrom(c) && !Modifier.isAbstract(c.getModifiers())) {
 				spells.add(loadSpell(c));

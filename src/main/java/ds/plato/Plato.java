@@ -125,20 +125,22 @@ public class Plato {
 
 		log.info("[Plato.preInit] Initializing spells and staff");
 		configuration = new Configuration(file);
-		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, (BlockAir) Blocks.air, ID);
+		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, Blocks.air, ID);
 		try {
 			spells = loader.loadSpellsFromPackage("ds.plato.spell");
+			System.out.println("[Plato.preInit] loaded spells=" + spells);
 
 			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
 			Staff transformStaff = loader.loadStaff(StaffTransform.class);
 			Staff drawStaff = loader.loadStaff(StaffDraw.class);
-			loader.loadStaff(Staff.class);
+			//loader.loadStaff(Staff.class);
 
 			staffs = new ArrayList<>();
 			// staffs.add(loader.loadStaff(Staff.class));
 			staffs.add(selectionStaff);
 			staffs.add(transformStaff);
 			staffs.add(drawStaff);
+			
 
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelect) {
