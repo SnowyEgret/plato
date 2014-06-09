@@ -27,8 +27,8 @@ public class SpellGrowAll extends AbstractSpellSelect {
 		SpellDescriptor d = new SpellDescriptor();
 		d.name = Messages.spell_grow_all_name;
 		d.description = Messages.spell_grow_all_description;
-		d.picks = new PickDescriptor(Messages.spell_grow_all_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_grow_all_modifier_0, Messages.spell_grow_all_modifier_1);
+		d.picks = new PickDescriptor(Messages.spell_grow_picks);
+		d.modifiers = new ModifierDescriptor(Messages.spell_grow_modifier_0, Messages.spell_grow_modifier_1);
 		return d;
 	}
 

@@ -44,16 +44,12 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
-	}
-	
-	
+	}	
 
 	@Override
 	public Spell getSpell() {
 		return this;
 	}
-
-
 
 	@Override
 	public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
@@ -67,23 +63,12 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		return true;
 	}
 
-//	@Override
-//	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
-//		System.out.println("[Spell.onUpdate] =");
-//		super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
-//	}
-
-	//TODO find a way to clear selections on left click air only
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
 		if (w.isRemote) {
 			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-			System.out.println("[Spell.onItemRightClick] position=" + position);
 			if (position.typeOfHit == MovingObjectType.MISS) {
 				pickManager.clearPicks();
-				// if (this instanceof AbstractSpellSelection) {
-				selectionManager.clearSelections();
-				// }
 			}
 		}
 		return is;
@@ -96,12 +81,6 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			return;
 		}
 		
-		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-		if (position.typeOfHit == MovingObjectType.MISS) {
-			selectionManager.clearSelections();
-			return;
-		}
-
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
 			Point3d lastPointSelected = selectionManager.lastSelection().getPoint3d();
 			selectionManager.clearSelections();
@@ -158,11 +137,6 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	public boolean isPicking() {
 		return pickManager.isPicking();
 	}
-
-	// public void clearPicks() {
-	// // TODO move clearing of picks from Staff to PickManager so that it is available here.
-	// pickManager.clearPicks();
-	// }
 
 	@Override
 	public void resetPickManager() {

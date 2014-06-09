@@ -3,14 +3,17 @@ package ds.plato.core;
 import javax.vecmath.Vector3d;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -18,7 +21,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ds.plato.Plato;
 import ds.plato.gui.Overlay;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
@@ -26,7 +28,6 @@ import ds.plato.select.ISelect;
 import ds.plato.spell.IClickable;
 import ds.plato.spell.IHoldable;
 import ds.plato.spell.Spell;
-import ds.plato.spell.select.AbstractSpellSelect;
 import ds.plato.spell.transform.SpellFill;
 import ds.plato.undo.IUndo;
 
@@ -46,12 +47,18 @@ public class ForgeEventHandler {
 		this.overlay = overlay;
 	}
 
-	// @SideOnly(Side.CLIENT)
-	// @SubscribeEvent
-	// public void onMouseEvent(MouseEvent e) {
-	// // Works but is called more often than PlayerInteractEvent
-	// System.out.println("[ForgeEventHandle.onMouseEvent] e=" + e.getCurrentTarget());
-	// }
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void onMouseEvent(MouseEvent e) {
+		if (e.button == 0) {
+			System.out.println("[ForgeEventHandler.onMouseEvent] e.button=" + e.button);
+			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+			if (position.typeOfHit == MovingObjectType.MISS) {
+				System.out.println("[Spell.onClickLeft] clearing selections=");
+				selectionManager.clearSelections();
+			}
+		}
+	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
@@ -103,7 +110,7 @@ public class ForgeEventHandler {
 				break;
 			}
 
-		// IClickable covers both Spells and Staffs.
+			// IClickable covers both Spells and Staffs.
 		} else if (item instanceof IClickable) {
 			IClickable c = (IClickable) item;
 			switch (e.action) {

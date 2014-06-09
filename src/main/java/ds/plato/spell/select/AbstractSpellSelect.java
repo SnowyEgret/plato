@@ -37,18 +37,6 @@ public abstract class AbstractSpellSelect extends Spell {
 		this.type = type;
 	}
 
-	// Only clear selections when this is a selection spell. Spell.onItemRightClick only clears picks.
-	@Override
-	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
-		System.out.println("[AbstractSpellSelection.onItemRightClick] w=" + w);
-		super.onItemRightClick(is, w, player);
-		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-		if (position.typeOfHit == MovingObjectType.MISS) {
-			selectionManager.clearSelections();
-		}
-		return is;
-	}
-
 	@Override
 	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
 		//TODO test for case no selections. Should pick block.

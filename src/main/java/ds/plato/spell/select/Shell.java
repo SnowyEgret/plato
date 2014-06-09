@@ -51,13 +51,13 @@ public class Shell implements Iterable<Point3i> {
 					points.add(p);
 			}
 			break;
-		case TOP:
+		case ABOVE:
 			for (Point3i p : pts) {
 				if (p.y >= p0.y)
 					points.add(p);
 			}
 			break;
-		case BOTTOM:
+		case BELLOW:
 			for (Point3i p : pts) {
 				if (p.y <= p0.y)
 					points.add(p);
@@ -94,7 +94,7 @@ public class Shell implements Iterable<Point3i> {
 			for (Point3i p : pts) {
 				if (p.y == p0.y) {
 					if (w.getBlock(p.x, p.y + 1, p.z) == Blocks.air) {
-						Shell s = new Shell(EnumShell.TOP, p, w);
+						Shell s = new Shell(EnumShell.ABOVE, p, w);
 						for (Point3i pp : s) {
 							if (pp.y > p.y && w.getBlock(pp.x, pp.y, pp.z) != Blocks.air) {
 								points.add(p);
@@ -109,7 +109,7 @@ public class Shell implements Iterable<Point3i> {
 			for (Point3i p : pts) {
 				if (p.y == p0.y) {
 					if (w.getBlock(p.x, p.y - 1, p.z) == Blocks.air) {
-						Shell s = new Shell(EnumShell.BOTTOM, p, w);
+						Shell s = new Shell(EnumShell.BELLOW, p, w);
 						for (Point3i pp : s) {
 							if (pp.y < p.y && w.getBlock(pp.x, pp.y, pp.z) != Blocks.air) {
 								points.add(p);
