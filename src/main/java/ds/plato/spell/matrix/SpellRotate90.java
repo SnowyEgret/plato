@@ -22,8 +22,8 @@ import ds.plato.undo.IUndo;
 
 public class SpellRotate90 extends AbstractSpellMatrix {
 
-	public SpellRotate90(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
-		super(undoManager, selectionManager, pickManager, blockAir);
+	public SpellRotate90(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+		super(undoManager, selectionManager, pickManager);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ import ds.plato.spell.descriptor.SpellDescriptor;
 public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 
 	protected List<Spell> spells = new ArrayList<>();
-	private int ordinal = 0;
+	protected int ordinal = 0;
 	private IPick pickManager;
 	private IWorld world;
 	private Property propertyOrdinal;

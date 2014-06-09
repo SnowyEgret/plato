@@ -94,7 +94,7 @@ public class ForgeEventHandler {
 					Block b = itemBlock.field_150939_a;
 					int metadata = item.getDamage(stack);
 					SlotEntry[] slotEntries = new SlotEntry[] { new SlotEntry(b, metadata, 0) };
-					new SpellFill(undoManager, selectionManager, null, null).invoke(new WorldWrapper(w), slotEntries);
+					new SpellFill(undoManager, selectionManager, null).invoke(new WorldWrapper(w), slotEntries);
 					if (e.isCancelable())
 						e.setCanceled(true);
 				}

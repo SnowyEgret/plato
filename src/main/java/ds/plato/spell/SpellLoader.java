@@ -21,6 +21,7 @@ import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;
@@ -32,7 +33,6 @@ public class SpellLoader {
 	IUndo undoManager;
 	ISelect selectionManager;
 	IPick pickManager;
-	Block blockAir;
 	private Configuration config;
 
 	public SpellLoader(
@@ -40,12 +40,10 @@ public class SpellLoader {
 			IUndo undoManager,
 			ISelect selectionManager,
 			IPick pickManager,
-			Block blockAir,
 			String modId) {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
-		this.blockAir = blockAir;
 		this.modId = modId;
 		this.config = config;
 
@@ -68,9 +66,9 @@ public class SpellLoader {
 	public Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 
 		String name = toName(spellClass);
-		Constructor<? extends Spell> c = spellClass.getConstructor(IUndo.class, ISelect.class, IPick.class,
-				BlockAir.class);
-		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager, blockAir);
+		Constructor<? extends Spell> c = spellClass
+				.getConstructor(IUndo.class, ISelect.class, IPick.class);
+		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
@@ -128,6 +126,22 @@ public class SpellLoader {
 
 	public void save() {
 		config.save();
+	}
+
+	private Object instanciate(Class cls, Property property) {
+		Object o;
+		try {
+			if (property == null) {
+				o = cls.getConstructor().newInstance();
+			} else {
+				o = cls.getConstructor(property.getClass()).newInstance(property);
+			}
+			Plato.log.info("Constructed: " + o);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return o;
 	}
 
 }

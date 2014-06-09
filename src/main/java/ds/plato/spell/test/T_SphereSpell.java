@@ -37,7 +37,7 @@ public class T_SphereSpell extends PlatoTest {
 
 	@Test
 	public void invoke() {
-		Spell s = new SpellSphere(undoManager, selectionManager, pickManager, air);
+		Spell s = new SpellSphere(undoManager, selectionManager, pickManager);
 		//s.invoke(picks, slotEntries);
 		s.invoke(world, slotEntries);
 		verify(world).setBlock(9, 0, 0, dirt, 0);

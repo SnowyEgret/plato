@@ -48,7 +48,7 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick, BlockAir air) {
+	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick) {
 		Overlay overlay = new Overlay(select);
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(undo, select, pick, overlay));
 		Map<String, KeyBinding> keyBindings = new HashMap<>();
@@ -57,7 +57,7 @@ public class ClientProxy extends CommonProxy {
 		keyBindings.put("redo", registerKeyBinding("Redo", Keyboard.KEY_Y, plato.NAME));
 		keyBindings.put("toggle", registerKeyBinding("Toggle", Keyboard.KEY_TAB, plato.NAME));
 		keyBindings.put("delete", registerKeyBinding("Delete", Keyboard.KEY_DELETE, plato.NAME));
-		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(keyBindings, undo, select, pick, air));
+		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(keyBindings, undo, select, pick));
 	}
 
 	private KeyBinding registerKeyBinding(String name, int key, String modName) {

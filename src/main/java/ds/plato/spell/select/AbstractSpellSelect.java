@@ -19,6 +19,7 @@ import org.lwjgl.input.Keyboard;
 
 import ds.plato.block.BlockSelected;
 import ds.plato.core.IWorld;
+import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
@@ -29,9 +30,11 @@ import ds.plato.undo.IUndo;
 public abstract class AbstractSpellSelect extends Spell {
 
 	private List<Point3i> grownSelections = new ArrayList<>();
+	private EnumShell type;
 
-	public AbstractSpellSelect(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(undoManager, selectionManager, pickManager);
+	public AbstractSpellSelect(EnumShell type, IUndo undo, ISelect select, IPick pick) {
+		super(undo, select, pick);
+		this.type = type;
 	}
 
 	// Only clear selections when this is a selection spell. Spell.onItemRightClick only clears picks.
@@ -44,6 +47,18 @@ public abstract class AbstractSpellSelect extends Spell {
 			selectionManager.clearSelections();
 		}
 		return is;
+	}
+
+	@Override
+	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
+		//TODO test for case no selections. Should pick block.
+		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+			shrinkSelections(type, world);
+		} else {
+			//Is this really the first block? getSelections gets the values from a map.
+			Block firstBlockSelected = selectionManager.getSelections().iterator().next().block;
+			growSelections(type, world, firstBlockSelected);
+		}
 	}
 
 	protected void growSelections(EnumShell shellType, IWorld world, Block patternBlock) {

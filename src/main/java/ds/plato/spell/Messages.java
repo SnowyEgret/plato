@@ -35,6 +35,12 @@ public class Messages extends NLS {
 	public static String spell_grow_all_modifier_0;
 	public static String spell_grow_all_modifier_1;
 
+	public static String spell_grow_horizontal_name;
+	public static String spell_grow_horizontal_description;
+	public static String spell_grow_horizontal_picks;
+	public static String spell_grow_horizontal_modifier_0;
+	public static String spell_grow_horizontal_modifier_1;
+
 	public static String spell_rotate_90_name;
 	public static String spell_rotate_90_description;
 	public static String spell_rotate_90_picks;

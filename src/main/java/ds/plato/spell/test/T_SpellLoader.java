@@ -39,7 +39,7 @@ public class T_SpellLoader extends PlatoTest {
 	public void setUp() {
 		super.setUp();
 		PowerMockito.mockStatic(GameRegistry.class);
-		loader = new SpellLoader(config, undoManager, selectionManager, pickManager, air, Plato.ID);
+		loader = new SpellLoader(config, undoManager, selectionManager, pickManager, Plato.ID);
 	}
 
 	@Test

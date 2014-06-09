@@ -15,7 +15,7 @@ public class SpellRegenerate extends Spell {
 
 	private String json;
 
-	public SpellRegenerate(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir air, String json) {
+	public SpellRegenerate(IUndo undoManager, ISelect selectionManager, IPick pickManager, String json) {
 		super(undoManager, selectionManager, pickManager);
 		this.json = json;
 	}

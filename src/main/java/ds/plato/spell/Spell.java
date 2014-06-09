@@ -95,6 +95,12 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			System.out.println("[Spell.onClickLeft] Got remore world: " + e.entity.worldObj);
 			return;
 		}
+		
+		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+		if (position.typeOfHit == MovingObjectType.MISS) {
+			selectionManager.clearSelections();
+			return;
+		}
 
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
 			Point3d lastPointSelected = selectionManager.lastSelection().getPoint3d();

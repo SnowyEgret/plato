@@ -18,11 +18,11 @@ import ds.plato.undo.Transaction;
 
 public abstract class AbstractSpellMatrix extends Spell {
 
-	private Block blockAir;
+	//private Block blockAir;
 
-	public AbstractSpellMatrix(IUndo undo, ISelect select, IPick pick, Block blockAir) {
+	public AbstractSpellMatrix(IUndo undo, ISelect select, IPick pick) {
 		super(undo, select, pick);
-		this.blockAir = blockAir;
+		//this.blockAir = blockAir;
 	}
 
 	protected void transformSelections(Matrix4d matrix, IWorld world, boolean deleteInitialBlocks) {
@@ -39,7 +39,7 @@ public abstract class AbstractSpellMatrix extends Spell {
 			if (deleteInitialBlocks) {
 				System.out.println("[AbstractSpellMatrixTransformation.transformSelections] deleteInitialBlocks="
 						+ deleteInitialBlocks);
-				t.add(new SetBlock(world, selectionManager, s.x, s.y, s.z, blockAir, 0).set());
+				t.add(new SetBlock(world, selectionManager, s.x, s.y, s.z, Blocks.air, 0).set());
 			}
 			t.add(new SetBlock(world, selectionManager, (int) p.x, (int) p.y, (int) p.z, s.block, s.metadata).set());
 		}

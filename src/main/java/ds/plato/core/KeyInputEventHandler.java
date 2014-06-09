@@ -28,19 +28,12 @@ public class KeyInputEventHandler {
 	private Map<String, KeyBinding> keyBindings;
 	private ISelect selectionManager;
 	private IPick pickManager;
-	private BlockAir blockAir;
 
-	public KeyInputEventHandler(
-			Map<String, KeyBinding> keyBindings,
-			IUndo undo,
-			ISelect select,
-			IPick pick,
-			BlockAir blockAir) {
+	public KeyInputEventHandler(Map<String, KeyBinding> keyBindings, IUndo undo, ISelect select, IPick pick) {
 		this.undoManager = undo;
 		this.selectionManager = select;
 		this.pickManager = pick;
 		this.keyBindings = keyBindings;
-		this.blockAir = blockAir;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -82,7 +75,7 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("delete").isPressed()) {
-			new SpellDelete(undoManager, selectionManager, pickManager, blockAir).invoke(new WorldWrapper(w), null);
+			new SpellDelete(undoManager, selectionManager, pickManager).invoke(new WorldWrapper(w), null);
 		}
 
 		if (event.isCancelable())

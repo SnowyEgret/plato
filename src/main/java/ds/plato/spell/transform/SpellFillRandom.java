@@ -16,7 +16,7 @@ import ds.plato.undo.IUndo;
 
 public class SpellFillRandom extends AbstractSpellTransform {
 
-	public SpellFillRandom(IUndo undo, ISelect select, IPick pick, BlockAir b) {
+	public SpellFillRandom(IUndo undo, ISelect select, IPick pick) {
 		super(undo, select, pick);
 	}
 

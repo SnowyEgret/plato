@@ -32,19 +32,20 @@ public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 		Block pickedBlock = null;
 		//TODO get pickManager from plato when migrated to staffs and spells
 		Point3i p = new Point3i(x, y, z);
-		Pick pick = Plato.surfaceStick.getPickAt(p);
-		if (pick == null) {
-			pick = Plato.selectionStick.getPickAt(p);
-		}
-		if (pick == null) {
-			pick = Plato.curveStick.getPickAt(p);
-		}
-		if (pick == null) {
-			pick = Plato.solidStick.getPickAt(p);
-		}
-		if (pick == null) {
-			pick = Plato.editStick.getPickAt(p);
-		}
+		Pick pick = null;
+//		Pick pick = Plato.surfaceStick.getPickAt(p);
+//		if (pick == null) {
+//			pick = Plato.selectionStick.getPickAt(p);
+//		}
+//		if (pick == null) {
+//			pick = Plato.curveStick.getPickAt(p);
+//		}
+//		if (pick == null) {
+//			pick = Plato.solidStick.getPickAt(p);
+//		}
+//		if (pick == null) {
+//			pick = Plato.editStick.getPickAt(p);
+//		}
 		if (pick == null) {
 			pick = pickManager.getPickAt(p);
 		}

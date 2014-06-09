@@ -32,6 +32,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
 import ds.plato.common.ConfigHelper;
@@ -79,11 +80,11 @@ public class Plato {
 	public static Block blockPicked;
 
 	// Items
-	@Deprecated public static StickSelection selectionStick;
-	@Deprecated public static StickCurve curveStick;
-	@Deprecated public static StickSurface surfaceStick;
-	@Deprecated public static StickSolid solidStick;
-	@Deprecated public static StickEdit editStick;
+//	@Deprecated public static StickSelection selectionStick;
+//	@Deprecated public static StickCurve curveStick;
+//	@Deprecated public static StickSurface surfaceStick;
+//	@Deprecated public static StickSolid solidStick;
+//	@Deprecated public static StickEdit editStick;
 
 	private List<Spell> spells;
 	private List<Staff> staffs;
@@ -97,35 +98,34 @@ public class Plato {
 	public static Logger log;
 
 	@Deprecated static WorldServer world;
-	@Deprecated public ConfigHelper config;
-
-	@Deprecated public static SlotDistribution slotDistribution;
+//	@Deprecated public ConfigHelper config;
+//	@Deprecated public static SlotDistribution slotDistribution;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
 		log = LogManager.getLogger(NAME);
 		File file = event.getSuggestedConfigurationFile();
-		config = new ConfigHelper(file, ID);
+//		config = new ConfigHelper(file, ID);
 
 		log.info("[Plato.preInit]Initializing blocks...");
-		blockSelected = config.initBlock(BlockSelected.class);
-		blockPicked = config.initBlock(BlockPicked.class);
+		blockSelected = initBlock(new BlockSelected());
+		blockPicked = initBlock(new BlockPicked());
 
 		undoManager = new UndoManager();
 		selectionManager = new SelectionManager(blockSelected);
 		pickManager = new PickManager(blockPicked);
 
-		log.info("[Plato.preInit]Initializing items...");
-		selectionStick = (StickSelection) config.initStick(StickSelection.class);
-		surfaceStick = (StickSurface) config.initStick(StickSurface.class);
-		curveStick = (StickCurve) config.initStick(StickCurve.class);
-		editStick = (StickEdit) config.initStick(StickEdit.class);
-		solidStick = (StickSolid) config.initStick(StickSolid.class);
+//		log.info("[Plato.preInit]Initializing items...");
+//		selectionStick = (StickSelection) config.initStick(StickSelection.class);
+//		surfaceStick = (StickSurface) config.initStick(StickSurface.class);
+//		curveStick = (StickCurve) config.initStick(StickCurve.class);
+//		editStick = (StickEdit) config.initStick(StickEdit.class);
+//		solidStick = (StickSolid) config.initStick(StickSolid.class);
 
 		log.info("[Plato.preInit] Initializing spells and staff");
 		configuration = new Configuration(file);
-		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, Blocks.air, ID);
+		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, ID);
 		try {
 			spells = loader.loadSpellsFromPackage("ds.plato.spell");
 			System.out.println("[Plato.preInit] loaded spells=" + spells);
@@ -160,16 +160,24 @@ public class Plato {
 			e.printStackTrace();
 		}
 		configuration.save();
-		config.save();
+		//config.save();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
 	}
 
+	private Block initBlock(BlockSelected block) {
+		String classname = block.getClass().getSimpleName();
+		String name = classname.substring(0, 1).toLowerCase() + classname.substring(1);
+		block.setBlockName(name);
+		GameRegistry.registerBlock(block, ID + name);
+		return block;
+	}
+
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.setCustomRenderers(selectionManager, pickManager);
-		proxy.registerEventHandlers(this, selectionManager, undoManager, pickManager, (BlockAir) Blocks.air);
+		proxy.registerEventHandlers(this, selectionManager, undoManager, pickManager);
 	}
 
 	@EventHandler
@@ -186,10 +194,10 @@ public class Plato {
 	public void serverStopping(FMLServerStoppingEvent event) {
 		log.log(Level.INFO, "[Plato.serverStopping]");
 
-		clearSelections();
-		clearPicks();
-		saveSticks();
-		config.save();
+//		clearSelections();
+//		clearPicks();
+//		saveSticks();
+		//config.save();
 
 		selectionManager.clearSelections();
 		pickManager.clearPicks();
@@ -201,27 +209,27 @@ public class Plato {
 
 	@Deprecated
 	private void saveSticks() {
-		selectionStick.save();
-		solidStick.save();
-		surfaceStick.save();
-		curveStick.save();
-		editStick.save();
+//		selectionStick.save();
+//		solidStick.save();
+//		surfaceStick.save();
+//		curveStick.save();
+//		editStick.save();
 	}
 
 	@Deprecated
 	public static void clearSelections() {
-		if (selectionManager.size() != 0)
-			selectionStick.clearSelections();
+//		if (selectionManager.size() != 0)
+//			selectionStick.clearSelections();
 	}
 
 	@Deprecated
 	public static void clearPicks() {
-		selectionStick.clearPicks();
-		solidStick.clearPicks();
-		solidStick.firstPour = true;
-		surfaceStick.clearPicks();
-		curveStick.clearPicks();
-		editStick.clearPicks();
+//		selectionStick.clearPicks();
+//		solidStick.clearPicks();
+//		solidStick.firstPour = true;
+//		surfaceStick.clearPicks();
+//		curveStick.clearPicks();
+//		editStick.clearPicks();
 
 	}
 

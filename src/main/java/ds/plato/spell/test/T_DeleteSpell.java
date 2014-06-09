@@ -30,7 +30,7 @@ public class T_DeleteSpell extends PlatoTest {
 		selections.add(new Selection(0, 0, 0, dirt, 0));
 		when(selectionManager.getSelections()).thenReturn(selections);
 		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
-		s = new SpellDelete(undoManager, selectionManager, pickManager, air);
+		s = new SpellDelete(undoManager, selectionManager, pickManager);
 	}
 
 	//TODO set up mocks

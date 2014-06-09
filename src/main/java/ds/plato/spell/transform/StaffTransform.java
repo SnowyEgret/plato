@@ -23,8 +23,8 @@ public class StaffTransform extends Staff {
 		StringBuilder builder = new StringBuilder();
 		builder.append("StaffTransform [spells=");
 		builder.append(spells);
-		builder.append(", currentSpell()=");
-		builder.append(currentSpell());
+		builder.append(", ordinal=");
+		builder.append(ordinal);
 		builder.append("]");
 		return builder.toString();
 	}

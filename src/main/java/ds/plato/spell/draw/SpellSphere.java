@@ -18,7 +18,7 @@ import ds.plato.undo.IUndo;
 
 public class SpellSphere extends AbstractSpellDraw {
 
-	public SpellSphere(IUndo undo, ISelect select, IPick pick, BlockAir air) {
+	public SpellSphere(IUndo undo, ISelect select, IPick pick) {
 		super(undo, select, pick);
 	}
 

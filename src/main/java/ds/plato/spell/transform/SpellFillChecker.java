@@ -13,7 +13,7 @@ import ds.plato.undo.IUndo;
 
 public class SpellFillChecker extends AbstractSpellTransform {
 
-	public SpellFillChecker(IUndo undo,ISelect select, IPick pick, BlockAir b) {
+	public SpellFillChecker(IUndo undo,ISelect select, IPick pick) {
 		super(undo, select, pick);
 	}
 

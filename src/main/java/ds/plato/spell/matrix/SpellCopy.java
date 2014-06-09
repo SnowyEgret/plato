@@ -21,8 +21,8 @@ import ds.plato.undo.IUndo;
 
 public class SpellCopy extends AbstractSpellMatrix {
 
-	public SpellCopy(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
-		super(undoManager, selectionManager, pickManager, blockAir);
+	public SpellCopy(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+		super(undoManager, selectionManager, pickManager);
 	}
 
 	@Override

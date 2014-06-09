@@ -1,24 +1,21 @@
 package ds.plato.spell.transform;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
+import net.minecraft.init.Blocks;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellDelete extends AbstractSpellTransform {
 
-	private Block blockAir;
 
-	public SpellDelete(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
+	public SpellDelete(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(undoManager, selectionManager, pickManager);
-		this.blockAir = blockAir;
 	}
 
 	@Override
@@ -27,7 +24,7 @@ public class SpellDelete extends AbstractSpellTransform {
 			@Override
 			public Selection transform(Selection s) {
 				// Create a copy here because we don't want to modify the selectionManager's selection list.
-				return new Selection(s.x, s.y, s.z, blockAir, 0);
+				return new Selection(s.x, s.y, s.z, Blocks.air, 0);
 			}
 		});
 	}

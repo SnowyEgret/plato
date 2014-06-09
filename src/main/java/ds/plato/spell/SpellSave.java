@@ -22,11 +22,9 @@ import ds.plato.undo.IUndo;
 
 public class SpellSave extends Spell {
 
-	private BlockAir air;
 
-	public SpellSave(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir air) {
+	public SpellSave(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(undoManager, selectionManager, pickManager);
-		this.air = air;
 	}
 
 	@Override
@@ -48,9 +46,9 @@ public class SpellSave extends Spell {
 			e.printStackTrace();
 		}
 		pickManager.clearPicks();
-		new SpellDelete((IUndo) undoManager, selectionManager, pickManager, air).invoke(new WorldWrapper(
+		new SpellDelete((IUndo) undoManager, selectionManager, pickManager).invoke(new WorldWrapper(
 				player.worldObj), null);
-		SpellRegenerate i = new SpellRegenerate(undoManager, selectionManager, pickManager, air, json);
+		SpellRegenerate i = new SpellRegenerate(undoManager, selectionManager, pickManager, json);
 		GameRegistry.registerItem(i, name);
 		i.setCreativeTab(SpellLoader.tabSpells);
 		i.setUnlocalizedName(name);

@@ -69,7 +69,7 @@ public abstract class Stick extends Item implements IToggleable {
 			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
 			if (position.typeOfHit == MovingObjectType.MISS) {
 				clearPicks();
-				Plato.solidStick.firstPour = true;
+//				Plato.solidStick.firstPour = true;
 			}
 		}
 		return is;

@@ -14,7 +14,7 @@ public class CommonProxy implements IGuiHandler {
 	public void setCustomRenderers(ISelect selectionManager, IPick pickManager) {
 	}
 	
-	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick, BlockAir air) {
+	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick) {
 	}
 
 	@Override

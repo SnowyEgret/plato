@@ -18,42 +18,9 @@ import ds.plato.undo.IUndo;
 
 public class SpellGrowAll extends AbstractSpellSelect {
 
-	// TODO blockAir is not needed for selection spells. Maybe a static PlatoBlocks class which returns blockSelected,
-	// blockPicked and BlockAir
-	public SpellGrowAll(IUndo undoManager, ISelect selectionManager, IPick pickManager, BlockAir blockAir) {
-		super(undoManager, selectionManager, pickManager);
+	public SpellGrowAll(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+		super(EnumShell.ALL, undoManager, selectionManager, pickManager);
 	}
-
-	@Override
-	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
-		//TODO test for case no selections. Should pick block.
-		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-			shrinkSelections(EnumShell.ALL, world);
-		} else {
-			//Is this really the first block? getSelections gets the values from a map.
-			Block firstBlockSelected = selectionManager.getSelections().iterator().next().block;
-			growSelections(EnumShell.ALL, world, firstBlockSelected);
-		}
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SpellGrowAll [getNumPicks()=");
-		builder.append(getNumPicks());
-		builder.append("]");
-		return builder.toString();
-	}
-
-	// private static class Descriptor extends SpellDescriptor {
-	//
-	// public Descriptor() {
-	// name = Messages.spell_grow_all_name;
-	// description = Messages.spell_grow_all_description;
-	// picks = new PickDescriptor(Messages.spell_grow_all_picks);
-	// modifiers = new ModifierDescriptor(Messages.spell_grow_all_modifier_0, Messages.spell_grow_all_modifier_1);
-	// }
-	// }
 
 	@Override
 	public SpellDescriptor getDescriptor() {

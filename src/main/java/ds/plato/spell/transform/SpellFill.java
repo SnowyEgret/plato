@@ -13,7 +13,7 @@ import ds.plato.undo.IUndo;
 
 public class SpellFill extends AbstractSpellTransform {
 
-	public SpellFill(IUndo undo, ISelect select, IPick pick, BlockAir blockAir) {
+	public SpellFill(IUndo undo, ISelect select, IPick pick) {
 		super(undo, select, pick);
 	}
 

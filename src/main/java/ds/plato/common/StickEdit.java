@@ -194,10 +194,10 @@ public class StickEdit extends Stick {
 
 			@Override
 			public Selection transform(Selection s) {
-				SlotDistribution d = Plato.slotDistribution;
-				SlotEntry entry = d.randomEntry();
-				s.block = entry.block;
-				s.metadata = entry.metadata;
+//				SlotDistribution d = Plato.slotDistribution;
+//				SlotEntry entry = d.randomEntry();
+//				s.block = entry.block;
+//				s.metadata = entry.metadata;
 				return s;
 			}
 		});
