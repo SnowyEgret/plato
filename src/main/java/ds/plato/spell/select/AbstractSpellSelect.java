@@ -7,11 +7,6 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
@@ -20,11 +15,12 @@ import org.lwjgl.input.Keyboard;
 import ds.plato.block.BlockSelected;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
+import ds.plato.core.WorldWrapper;
 import ds.plato.pick.IPick;
+import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public abstract class AbstractSpellSelect extends Spell {
@@ -36,10 +32,19 @@ public abstract class AbstractSpellSelect extends Spell {
 		super(undo, select, pick);
 		this.type = type;
 	}
+	
+	@Override
+	public void onClickRight(PlayerInteractEvent e) {
+		super.onClickRight(e);
+		//Only clear picks when this is an selection spell
+		pickManager.clearPicks();
+	}
 
 	@Override
 	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
-		//TODO test for case no selections. Should pick block.
+		if (selectionManager.size() == 0) {
+			return;
+		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 			shrinkSelections(type, world);
 		} else {
@@ -102,7 +107,11 @@ public abstract class AbstractSpellSelect extends Spell {
 
 	@Override
 	public int getNumPicks() {
-		return 0;
+		return 1;
+	}
+
+	public void clearGrownSelections() {
+		grownSelections.clear();
 	}
 
 }

@@ -4,6 +4,7 @@ import javax.vecmath.Vector3d;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -28,6 +29,8 @@ import ds.plato.select.ISelect;
 import ds.plato.spell.IClickable;
 import ds.plato.spell.IHoldable;
 import ds.plato.spell.Spell;
+import ds.plato.spell.select.AbstractSpellSelect;
+import ds.plato.spell.select.StaffSelect;
 import ds.plato.spell.transform.SpellFill;
 import ds.plato.undo.IUndo;
 
@@ -56,6 +59,20 @@ public class ForgeEventHandler {
 			if (position.typeOfHit == MovingObjectType.MISS) {
 				System.out.println("[Spell.onClickLeft] clearing selections=");
 				selectionManager.clearSelections();
+				
+				// TODO a better way?
+				EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+				ItemStack is = player.getCurrentEquippedItem();
+				if (is != null) {
+					Item i = is.getItem();
+					if (i instanceof StaffSelect) {
+						StaffSelect staff = (StaffSelect) i;
+						AbstractSpellSelect s = (AbstractSpellSelect) staff.currentSpell();
+						if (s != null) {
+							s.clearGrownSelections();
+						}
+					}
+				}
 			}
 		}
 	}

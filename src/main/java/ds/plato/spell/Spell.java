@@ -110,12 +110,9 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	@Override
 	public void onClickRight(PlayerInteractEvent e) {
 		pickManager.pick(e.x, e.y, e.z);
-		System.out.println("[Spell.onClickRight] pickManager=" + pickManager);
 		if (pickManager.isFinishedPicking()) {
 			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
-			//invoke(pickManager.getPicksArray(), entries);
 			World w = e.entity.worldObj;
-			System.out.println("[Spell.onClickRight] w=" + w);
 			invoke(new WorldWrapper(w), entries);
 		}
 	}
