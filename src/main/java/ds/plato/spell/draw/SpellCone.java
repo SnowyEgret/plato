@@ -15,9 +15,9 @@ import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
-public class ConeSpell extends AbstractSpellDraw {
+public class SpellCone extends AbstractSpellDraw {
 
-	public ConeSpell(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+	public SpellCone(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(3, undoManager, selectionManager, pickManager);
 	}
 

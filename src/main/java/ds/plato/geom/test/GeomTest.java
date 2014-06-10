@@ -11,7 +11,7 @@ import javax.vecmath.Vector3d;
 
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
-import ds.plato.geom.curve.CircleXY;
+import ds.plato.geom.curve.CircleXZ;
 import ds.plato.geom.curve.InfiniteLine;
 import ds.plato.geom.curve.Line;
 import ds.plato.geom.solid.Ball;
@@ -67,8 +67,8 @@ public class GeomTest {
 		return s;
 	}
 
-	public CircleXY circleXY(Point3d origin) {
-		return new CircleXY(origin, p());
+	public CircleXZ circleXY(Point3d origin) {
+		return new CircleXZ(origin, p());
 	}
 
 	double d() {

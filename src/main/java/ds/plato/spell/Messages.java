@@ -25,7 +25,7 @@ public class Messages extends NLS {
 	public static String spell_copy_picks;
 	public static String spell_copy_modifier;
 	
-	//Draww spells
+	//Draw spells
 	
 	public static String spell_sphere_name;
 	public static String spell_sphere_description;
@@ -35,7 +35,10 @@ public class Messages extends NLS {
 	public static String spell_cone_name;
 	public static String spell_cone_description;
 	public static String spell_cone_picks;
-	public static String spell_cone_modifier;
+
+	public static String spell_circle_name;
+	public static String spell_circle_description;
+	public static String spell_circle_picks;
 
 	//Grow spells
 	public static String spell_grow_picks;

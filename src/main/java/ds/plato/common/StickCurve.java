@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 
 import ds.plato.Plato;
 import ds.plato.geom.IDrawable;
-import ds.plato.geom.curve.CircleXY;
+import ds.plato.geom.curve.CircleXZ;
 import ds.plato.geom.curve.Helix;
 import ds.plato.geom.curve.Line;
 import ds.plato.geom.curve.Rectangle;
@@ -42,7 +42,7 @@ public class StickCurve extends Stick {
 					break;
 				}
 			case CIRCLE:
-				drawable = new CircleXY(getPick(0), getPick(1));
+				drawable = new CircleXZ(getPick(0), getPick(1));
 				break;
 			case ARC:
 				throw new UnsupportedOperationException(
