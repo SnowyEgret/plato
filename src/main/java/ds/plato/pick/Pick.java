@@ -16,7 +16,7 @@ public class Pick extends Point3i {
 		this.metadata = metadata;
 	}
 
-	public Point3d toDouble() {
+	public Point3d toPoint3d() {
 		return new Point3d(x, y, z);
 	}
 }

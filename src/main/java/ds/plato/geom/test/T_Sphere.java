@@ -9,14 +9,14 @@ import org.junit.Test;
 
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
+import ds.plato.geom.surface.Sphere;
 
 public class T_Sphere extends GeomTest {
 
 	@Test
 	public void test() {
-		Primitive p = sphere(p());
+		Primitive p = new Sphere(o(), p(), false);
 		PointSet points = p.pointSet();
-		//new Viewer(points);
 		for (Point3d pt : points) {
 			assertThat(p.contains(pt), equalTo(true));
 		}

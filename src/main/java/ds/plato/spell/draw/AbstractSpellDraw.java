@@ -2,6 +2,8 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3i;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.block.Block;
 import ds.plato.Plato;
 import ds.plato.common.UndoableSetBlock;
@@ -29,10 +31,11 @@ public abstract class AbstractSpellDraw extends Spell {
 		super(undoManager, selectionManager, pickManager);
 	}
 
-	protected void draw(IDrawable drawable, IWorld world, Block block, int metadata, boolean hollow) {
+	protected void draw(IDrawable drawable, IWorld world, Block block, int metadata) {
 		Transaction t = undoManager.newTransaction();
 		VoxelSet voxels = drawable.voxelize();
-		if (drawable instanceof Solid && hollow) {
+		boolean isHollow = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
+		if (drawable instanceof Solid && isHollow) {
 			voxels = voxels.shell();
 		}
 		//TODO Change all geom classes for y is up

@@ -61,7 +61,7 @@ public class T_PickManager extends PlatoTest {
 	public void getPickPoints() {
 		Pick p1 = m.addPick(1, 0, 0, dirt, 0);
 		Pick p2 = m.addPick(2, 0, 0, dirt, 0);
-		assertThat(m.getPickPoints3d(), hasItems(p1.toDouble(), p2.toDouble()));
+		assertThat(m.getPickPoints3d(), hasItems(p1.toPoint3d(), p2.toPoint3d()));
 	}
 
 	@Test

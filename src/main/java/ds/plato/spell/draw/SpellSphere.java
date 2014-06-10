@@ -3,6 +3,7 @@ package ds.plato.spell.draw;
 import net.minecraft.block.BlockAir;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
@@ -25,12 +26,15 @@ public class SpellSphere extends AbstractSpellDraw {
 	@Override
 	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
 		Pick[] picks = pickManager.getPicksArray();
-		IDrawable d = new Sphere(picks[0].toDouble(), picks[1].toDouble());
-		draw(d, world, slotEntries[0].block, slotEntries[0].metadata, false);
+		boolean isHemisphere = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
+		System.out.println("[SpellSphere.invoke] isHemisphere=" + isHemisphere);
+		IDrawable d = new Sphere(picks[0].toPoint3d(), picks[1].toPoint3d(), isHemisphere);
+		draw(d, world, slotEntries[0].block, slotEntries[0].metadata);
+		pickManager.clearPicks();
 	}
 
 	@Override
-	public int getNumPicks() {
+	public int getNumPicks() {		
 		return 2;
 	}
 

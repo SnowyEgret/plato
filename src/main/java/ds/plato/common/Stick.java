@@ -140,7 +140,7 @@ public abstract class Stick extends Item implements IToggleable {
 	}
 
 	protected Point3d getPick(int i) {
-		return pickManager.getPick(i).toDouble();
+		return pickManager.getPick(i).toPoint3d();
 	}
 
 	public Pick getPickAt(Point3i p) {

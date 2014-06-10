@@ -15,6 +15,7 @@ import org.junit.Test;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.Primitive;
 import ds.plato.geom.VoxelSet;
+import ds.plato.geom.surface.Sphere;
 
 public class T_GeomUtil extends GeomTest {
 	
@@ -75,7 +76,7 @@ public class T_GeomUtil extends GeomTest {
 		assertThat(p, closeToTuple3d(new Point3d(0, 0, 0)));
 		
 		p = new Point3d(0, 4, 0);
-		Primitive sphere = sphere(p);
+		Primitive sphere = new Sphere(o(), p, false);
 		VoxelSet voxels = sphere.voxelize();
 		voxels = voxels.transform(m);
 		Point3i centroid = voxels.centroid();
@@ -85,7 +86,7 @@ public class T_GeomUtil extends GeomTest {
 	@Test
 	public void newReflectionMatrix_PointPoint() {
 		Point3d o = new Point3d(4, 0, 0);
-		Primitive sphere = sphere(o);
+		Primitive sphere = new Sphere(o, p(), false);
 		VoxelSet voxels = sphere.voxelize();
 
 		Matrix4d m = GeomUtil.newReflectionMatrix(o, new Point3d(-1, 0, 1));

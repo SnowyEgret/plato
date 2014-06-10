@@ -19,6 +19,7 @@ import ds.plato.block.BlockPickedRenderer;
 import ds.plato.block.BlockSelectedRenderer;
 import ds.plato.core.ForgeEventHandler;
 import ds.plato.core.KeyInputEventHandler;
+import ds.plato.gui.GuiRestore;
 import ds.plato.gui.GuiSave;
 import ds.plato.gui.Overlay;
 import ds.plato.pick.IPick;
@@ -35,6 +36,8 @@ public class ClientProxy extends CommonProxy {
 		switch (ID) {
 		case 0:
 			return new GuiSave(player);
+		case 1:
+			return new GuiRestore(player);
 		default:
 			return null;
 		}

@@ -35,7 +35,7 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 			Point3i c = selectionManager.voxelSet().centroid();
 			p = new Point3d(c.x, c.y, c.z);
 		} else {
-			p = picks[0].toDouble();
+			p = picks[0].toPoint3d();
 		}
 		switch (Keyboard.getEventKey()) {
 		case (Keyboard.KEY_X):

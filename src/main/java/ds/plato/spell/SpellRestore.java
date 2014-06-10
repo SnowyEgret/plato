@@ -1,44 +1,46 @@
-package ds.plato.select;
+package ds.plato.spell;
 
+import ds.plato.Plato;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
-import ds.plato.spell.Messages;
-import ds.plato.spell.Spell;
+import ds.plato.select.ISelect;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import net.minecraft.block.BlockAir;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 
-public class SpellRegenerate extends Spell {
+public class SpellRestore extends Spell {
 
-	private String json;
 
-	public SpellRegenerate(IUndo undoManager, ISelect selectionManager, IPick pickManager, String json) {
+	public SpellRestore(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(undoManager, selectionManager, pickManager);
-		this.json = json;
 	}
 	
-
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_regenerate_name;
-		d.description = Messages.spell_regenerate_description;
-		d.picks = new PickDescriptor(Messages.spell_regenerate_picks);
+		d.name = Messages.spell_restore_name;
+		d.description = Messages.spell_restore_description;
+		d.picks = new PickDescriptor(Messages.spell_pick);
 		return d;
 	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
-		System.out.println("[ItemSave.invoke] json=" + json);
+		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 1, world.getWorld(), 0, 0, 0);
 	}
 
 	@Override
 	public int getNumPicks() {
-		// TODO Auto-generated method stub
 		return 1;
+	}
+
+	public void readFile(String fileName) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

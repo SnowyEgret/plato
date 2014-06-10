@@ -62,7 +62,7 @@ public class StickSurface extends Stick {
 				drawable = new Torus(getPick(0), getPick(1), getPick(2));
 				break;
 			case SPHERE:
-				drawable = new Sphere(getPick(0), getPick(1));
+				drawable = new Sphere(getPick(0), getPick(1), false);
 				break;
 			case ELLIPTIC_PARABOLOID:
 				drawable = new EllipticParaboloid(getPick(0), getPick(1), getPick(2));

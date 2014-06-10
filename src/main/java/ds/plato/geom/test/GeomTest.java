@@ -79,10 +79,6 @@ public class GeomTest {
 		return (int) d();
 	}
 
-	public Sphere sphere(Point3d origin) {
-		return new Sphere(origin, p());
-	}
-
 	public Ball ball(Point3d origin) {
 		return new Ball(origin, p());
 	}
