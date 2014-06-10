@@ -53,7 +53,7 @@ public class StickCurve extends Stick {
 				drawable = new Helix(getPick(0), getPick(1), getPick(2), 5);
 				break;
 			case RECTANGLE:
-				drawable = new Rectangle(getPick(0), getPick(1));
+				drawable = new Rectangle(getPick(0), getPick(1), true);
 				break;
 			case SQUARE:
 				drawable = new Square(getPick(0), getPick(1));

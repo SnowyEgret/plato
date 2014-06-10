@@ -14,8 +14,9 @@ public class ModifierDescriptor {
 	public ModifierDescriptor(String... commaSeparatedKeyActionPairs) {
 		for (String keyActionPair : commaSeparatedKeyActionPairs) {
 			String[] strings = keyActionPair.split(",");
-			assert strings.length == 2;
-			modifiers.add(Pair.of(strings[0].trim(), strings[1].trim()));
+			if (strings.length == 2) {
+				modifiers.add(Pair.of(strings[0].trim(), strings[1].trim()));
+			}
 		}
 	}
 
@@ -23,7 +24,7 @@ public class ModifierDescriptor {
 	public String toString() {
 		List<String> pairs = new ArrayList();
 		for (Pair p : modifiers) {
-			pairs.add(String.format("<%s>", p.getLeft())+" "+p.getRight());
+			pairs.add(String.format("<%s>", p.getLeft()) + " " + p.getRight());
 		}
 		return Joiner.on(", ").join(pairs);
 	}

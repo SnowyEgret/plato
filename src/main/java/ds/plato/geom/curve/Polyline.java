@@ -16,18 +16,6 @@ public class Polyline extends Primitive {
 		super(origin);
 	}
 
-//	public Polyline(List<Point3d> points) {
-//		super(points.get(0));
-//		for(int ordinal = 0; ordinal<points.size(); ordinal+=2) {
-//			lines.add(new Line(points.get(ordinal), points.get(ordinal+1)));
-//		}
-//	}
-
-	// public Polyline(List<Line> lines) {
-	// super(lines.get(0).getOrigin());
-	// this.lines = lines;
-	// }
-
 	@Override
 	public boolean contains(Point3d p) {
 		// TODO Auto-generated method stub
