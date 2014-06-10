@@ -23,7 +23,7 @@ import ds.plato.undo.IUndo;
 public class SpellRotate90 extends AbstractSpellMatrix {
 
 	public SpellRotate90(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(undoManager, selectionManager, pickManager);
+		super(1, undoManager, selectionManager, pickManager);
 	}
 
 	@Override
@@ -50,22 +50,6 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 		boolean deleteInitialBlocks = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		transformSelections(matrix, world, deleteInitialBlocks);
 	}
-
-	@Override
-	public int getNumPicks() {
-		return 1;
-	}
-
-	// private static class Descriptor extends SpellDescriptor {
-	// public Descriptor() {
-	// name = Messages.spell_rotate_90_name;
-	// description = Messages.spell_rotate_90_description;
-	// picks = new PickDescriptor(Messages.spell_rotate_90_picks);
-	// modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal, Messages.spell_rotate_90_modifier_0,
-	// Messages.spell_rotate_90_modifier_1, Messages.spell_rotate_90_modifier_2,
-	// Messages.spell_rotate_90_modifier_3);
-	// }
-	// }
 
 	@Override
 	public SpellDescriptor getDescriptor() {

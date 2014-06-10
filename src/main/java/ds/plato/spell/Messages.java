@@ -20,15 +20,23 @@ public class Messages extends NLS {
 	public static String spell_fill_random_name;
 	public static String spell_fill_random_description;
 
-	public static String spell_sphere_name;
-	public static String spell_sphere_description;
-	public static String spell_sphere_picks;
-
 	public static String spell_copy_name;
 	public static String spell_copy_description;
 	public static String spell_copy_picks;
 	public static String spell_copy_modifier;
 	
+	//Draww spells
+	
+	public static String spell_sphere_name;
+	public static String spell_sphere_description;
+	public static String spell_sphere_picks;
+	public static String spell_sphere_modifier;
+
+	public static String spell_cone_name;
+	public static String spell_cone_description;
+	public static String spell_cone_picks;
+	public static String spell_cone_modifier;
+
 	//Grow spells
 	public static String spell_grow_picks;
 	public static String spell_grow_modifier_0;
@@ -69,10 +77,11 @@ public class Messages extends NLS {
 	public static String spell_save_name;
 	public static String spell_save_description;
 	public static String spell_save_picks;
+	public static String spell_save_modifier;
 	
 	public static String spell_restore_name;
 	public static String spell_restore_description;
-	public static String spell_save_modifier;
+	public static String spell_restore_modifier;
 
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);

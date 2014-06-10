@@ -23,7 +23,7 @@ import ds.plato.undo.IUndo;
 public class SpellSave extends Spell {
 
 	public SpellSave(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(undoManager, selectionManager, pickManager);
+		super(1, undoManager, selectionManager, pickManager);
 	}
 
 	@Override
@@ -57,11 +57,6 @@ public class SpellSave extends Spell {
 		// player.displayGUIAnvil(0, 0, 0);
 		// player.dropItem(i, 7);
 		//pickManager.clearPicks();
-	}
-
-	@Override
-	public int getNumPicks() {
-		return 1;
 	}
 
 	@Override

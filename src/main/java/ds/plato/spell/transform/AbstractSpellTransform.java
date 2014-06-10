@@ -14,7 +14,7 @@ public abstract class AbstractSpellTransform extends Spell {
 	
 
 	public AbstractSpellTransform(IUndo undo, ISelect select, IPick pick) {
-		super(undo, select, pick);
+		super(1, undo, select, pick);
 	}
 
 	protected void transformSelections(IWorld world, ITransform transformer) {
@@ -23,10 +23,5 @@ public abstract class AbstractSpellTransform extends Spell {
 			t.add(new SetBlock(world, selectionManager, transformer.transform(s)).set());
 		}
 		t.commit();
-	}
-
-	@Override
-	public int getNumPicks() {
-		return 1;
 	}
 }

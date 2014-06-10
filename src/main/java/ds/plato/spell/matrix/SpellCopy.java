@@ -22,7 +22,7 @@ import ds.plato.undo.IUndo;
 public class SpellCopy extends AbstractSpellMatrix {
 
 	public SpellCopy(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(undoManager, selectionManager, pickManager);
+		super(2, undoManager, selectionManager, pickManager);
 	}
 
 	@Override
@@ -30,11 +30,6 @@ public class SpellCopy extends AbstractSpellMatrix {
 		Pick[] picks = pickManager.getPicksArray();
 		Matrix4d matrix = GeomUtil.newTranslationMatrix(picks[0].toPoint3d(), picks[1].toPoint3d());
 		transformSelections(matrix, world, Keyboard.isKeyDown(Keyboard.KEY_LCONTROL));
-	}
-
-	@Override
-	public int getNumPicks() {
-		return 2;
 	}
 
 //	private static class Descriptor extends SpellDescriptor {

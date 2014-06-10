@@ -27,8 +27,8 @@ import ds.plato.undo.Transaction;
 
 public abstract class AbstractSpellDraw extends Spell {
 
-	public AbstractSpellDraw(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(undoManager, selectionManager, pickManager);
+	public AbstractSpellDraw(int numPicks, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+		super(numPicks, undoManager, selectionManager, pickManager);
 	}
 
 	protected void draw(IDrawable drawable, IWorld world, Block block, int metadata) {

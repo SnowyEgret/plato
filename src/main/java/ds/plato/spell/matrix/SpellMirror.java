@@ -24,7 +24,7 @@ import ds.plato.undo.IUndo;
 public class SpellMirror extends AbstractSpellMatrix {
 
 	public SpellMirror(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(undoManager, selectionManager, pickManager);
+		super(3, undoManager, selectionManager, pickManager);
 	}
 
 	@Override
@@ -37,20 +37,6 @@ public class SpellMirror extends AbstractSpellMatrix {
 		boolean deleteInitialBlocks = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		transformSelections(matrix, world, deleteInitialBlocks);
 	}
-
-	@Override
-	public int getNumPicks() {
-		return 3;
-	}
-
-	// private static class Descriptor extends SpellDescriptor {
-	// public Descriptor() {
-	// name = Messages.spell_mirror_name;
-	// description = Messages.spell_mirror_description;
-	// picks = new PickDescriptor(Messages.spell_mirror_picks);
-	// modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal);
-	// }
-	// }
 
 	@Override
 	public SpellDescriptor getDescriptor() {

@@ -16,7 +16,7 @@ public class SpellRestore extends Spell {
 
 
 	public SpellRestore(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(undoManager, selectionManager, pickManager);
+		super(1, undoManager, selectionManager, pickManager);
 	}
 	
 	@Override
@@ -31,11 +31,6 @@ public class SpellRestore extends Spell {
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
 		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 1, world.getWorld(), 0, 0, 0);
-	}
-
-	@Override
-	public int getNumPicks() {
-		return 1;
 	}
 
 	public void readFile(String fileName) {

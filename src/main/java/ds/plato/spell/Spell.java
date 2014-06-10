@@ -39,8 +39,10 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
 	protected IPick pickManager;
+	private int numPicks;
 
-	public Spell(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+	public Spell(int numPicks, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+		this.numPicks = numPicks;
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
@@ -138,7 +140,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	@Override
 	public void resetPickManager() {
 		pickManager.clearPicks();
-		pickManager.reset(getNumPicks());
+		pickManager.reset(numPicks);
 	}
 
 	// For Staff.addSpell(). Only one spell of each type on a staff
@@ -154,8 +156,6 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	}
 
 	public abstract void invoke(IWorld world, final SlotEntry[] slotEntries);
-
-	public abstract int getNumPicks();
 
 	public SlotEntry[] getSlotEntriesFromPlayer(EntityPlayer entityPlayer) {
 		List<SlotEntry> entries = new ArrayList<>();
@@ -178,6 +178,10 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		}
 		SlotEntry[] array = new SlotEntry[entries.size()];
 		return entries.toArray(array);
+	}
+
+	public int getNumPicks() {
+		return numPicks;
 	}
 
 }

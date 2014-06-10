@@ -21,8 +21,8 @@ public class Cone extends Surface {
 	public Point3d pointAtParameters(double u, double v) {
 		Point3d p = new Point3d();
 		p.x = (Math.cos(v) * a * (h - u)) / h;
-		p.y = (Math.sin(v) * a * (h - u)) / h;
-		p.z = u;
+		p.y = u;
+		p.z = (Math.sin(v) * a * (h - u)) / h;
 		p.add(p0);
 		return p;
 	}

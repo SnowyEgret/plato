@@ -18,11 +18,8 @@ import ds.plato.undo.Transaction;
 
 public abstract class AbstractSpellMatrix extends Spell {
 
-	//private Block blockAir;
-
-	public AbstractSpellMatrix(IUndo undo, ISelect select, IPick pick) {
-		super(undo, select, pick);
-		//this.blockAir = blockAir;
+	public AbstractSpellMatrix(int numPicks, IUndo undo, ISelect select, IPick pick) {
+		super(numPicks, undo, select, pick);
 	}
 
 	protected void transformSelections(Matrix4d matrix, IWorld world, boolean deleteInitialBlocks) {

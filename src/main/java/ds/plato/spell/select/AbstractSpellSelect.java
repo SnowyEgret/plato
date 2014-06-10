@@ -29,7 +29,7 @@ public abstract class AbstractSpellSelect extends Spell {
 	private EnumShell type;
 
 	public AbstractSpellSelect(EnumShell type, IUndo undo, ISelect select, IPick pick) {
-		super(undo, select, pick);
+		super(1, undo, select, pick);
 		this.type = type;
 	}
 	
@@ -104,11 +104,6 @@ public abstract class AbstractSpellSelect extends Spell {
 	// super.onClickRightAir(e);
 	// selectionManager.clearSelections();
 	// }
-
-	@Override
-	public int getNumPicks() {
-		return 1;
-	}
 
 	public void clearGrownSelections() {
 		grownSelections.clear();
