@@ -10,7 +10,7 @@ import ds.plato.geom.Primitive;
 public abstract class Curve extends Primitive {
 
 	protected Range<Double> rT;
-	
+
 	public Curve(Point3d origin) {
 		super(origin);
 	}
@@ -20,10 +20,11 @@ public abstract class Curve extends Primitive {
 	@Override
 	public PointSet pointSet() {
 		PointSet points = new PointSet();
-		double inc = .01;
+		//double r = rT.getMaximum() - rT.getMinimum();
+		double inc = .00001;
+		System.out.println("[Curve.pointSet] inc=" + inc);
 		for (double u = rT.getMinimum(); u <= rT.getMaximum(); u += inc) {
 			Point3d p = pointAtParameter(u);
-			//p.sub(new Point3d(.5, .5, .5));
 			points.addPoint(p);
 		}
 		return points;
