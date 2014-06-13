@@ -3,7 +3,6 @@ package ds.plato.proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.block.BlockAir;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

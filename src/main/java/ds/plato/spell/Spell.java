@@ -35,7 +35,7 @@ import ds.plato.undo.IUndo;
 
 public abstract class Spell extends Item implements IClickable, IHoldable {
 
-	protected IWorld world;
+	//protected IWorld world;
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
 	protected IPick pickManager;
