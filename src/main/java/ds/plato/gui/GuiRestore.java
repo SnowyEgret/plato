@@ -21,6 +21,7 @@ public class GuiRestore extends GuiScreen {
 
 	@Override
 	public void initGui() {
+		
 		List<String> filenames = new ArrayList<>();
 		File folder = new File("saves");
 		for (File file : folder.listFiles()) {
@@ -31,11 +32,10 @@ public class GuiRestore extends GuiScreen {
 				}
 			}
 		}
-		System.out.println("[GuiRestore.initGui] filenames=" + filenames);
-		String[] saves = new String[filenames.size()];
 		int spacing = 25;
 		int header = 30;
 		int footer = 40;
+		String[] saves = new String[filenames.size()];
 		list = new GuiSavesList(mc, width, height, header, height - footer, spacing, player, filenames.toArray(saves));
 
 		this.buttonList.clear();

@@ -64,7 +64,7 @@ public class SpellSave extends Spell {
 		SpellDescriptor d = new SpellDescriptor();
 		d.name = Messages.spell_save_name;
 		d.description = Messages.spell_save_description;
-		d.picks = new PickDescriptor(Messages.spell_pick);
+		d.picks = new PickDescriptor(Messages.spell_save_picks);
 		d.modifiers = new ModifierDescriptor(Messages.spell_save_modifier);
 		return d;
 	}

@@ -40,7 +40,7 @@ public class SpellFill extends AbstractSpellTransform {
 		SpellDescriptor d = new SpellDescriptor();
 		d.name = Messages.spell_fill_name;
 		d.description = Messages.spell_fill_description;
-		d.picks = new PickDescriptor(Messages.spell_pick);
+		d.picks = new PickDescriptor(Messages.spell_restore_pick);
 		return d;
 	}
 }

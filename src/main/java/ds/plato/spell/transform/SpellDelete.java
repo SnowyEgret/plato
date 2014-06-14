@@ -56,7 +56,7 @@ public class SpellDelete extends AbstractSpellTransform {
 		SpellDescriptor d = new SpellDescriptor();
 		d.name = Messages.spell_delete_name;
 		d.description = Messages.spell_delete_description;
-		d.picks = new PickDescriptor(Messages.spell_pick);
+		d.picks = new PickDescriptor(Messages.spell_restore_pick);
 		return d;
 	}
 

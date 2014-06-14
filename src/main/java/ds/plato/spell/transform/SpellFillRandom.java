@@ -43,7 +43,7 @@ public class SpellFillRandom extends AbstractSpellTransform {
 		SpellDescriptor d = new SpellDescriptor();
 		d.name = Messages.spell_fill_random_name;
 		d.description = Messages.spell_fill_random_description;
-		d.picks = new PickDescriptor(Messages.spell_pick);
+		d.picks = new PickDescriptor(Messages.spell_restore_pick);
 		return d;
 	}
 }
