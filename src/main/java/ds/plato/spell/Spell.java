@@ -14,6 +14,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -35,7 +36,7 @@ import ds.plato.undo.IUndo;
 
 public abstract class Spell extends Item implements IClickable, IHoldable {
 
-	//protected IWorld world;
+	// protected IWorld world;
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
 	protected IPick pickManager;
@@ -46,7 +47,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
-	}	
+	}
 
 	@Override
 	public Spell getSpell() {
@@ -58,7 +59,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		// Minimizes animation on selecting with left mouse button.
 		return true;
 	}
-	
+
 	@Override
 	public boolean onBlockDestroyed(ItemStack is, World w, Block b, int x, int y, int z, EntityLivingBase p) {
 		// Minimizes animation on selecting with left mouse button.
@@ -82,7 +83,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			System.out.println("[Spell.onClickLeft] Got remore world: " + e.entity.worldObj);
 			return;
 		}
-		
+
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
 			Point3d lastPointSelected = selectionManager.lastSelection().getPoint3d();
 			selectionManager.clearSelections();
@@ -164,9 +165,17 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			ItemStack stack = inventory.getStackInSlot(i);
 			if (stack != null) {
 				Item item = stack.getItem();
+				System.out.println("[Spell.getSlotEntriesFromPlayer] item=" + item);
+				Block b = null;
 				if (item instanceof ItemBlock) {
 					ItemBlock itemBlock = (ItemBlock) item;
-					Block b = itemBlock.field_150939_a;
+					b = itemBlock.field_150939_a;
+				} else if (item instanceof ItemBucket) {
+					// ItemBucket itemBucket = (ItemBucket) item;
+					// TODO how to determine contents of a bucket
+					b = Blocks.water;
+				}
+				if (b != null) {
 					int metadata = item.getDamage(stack);
 					SlotEntry entry = new SlotEntry(b, metadata, i + 1);
 					entries.add(entry);

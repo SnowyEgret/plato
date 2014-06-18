@@ -5,8 +5,8 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	// Generic single pick for any spell
-	public static String spell_restore_pick;
 	public static String spell_modifier_deleteOriginal;
+	public static String spell_pick_anywhere;
 
 	public static String spell_delete_name;
 	public static String spell_delete_description;
@@ -94,12 +94,14 @@ public class Messages extends NLS {
 	
 	public static String spell_restore_name;
 	public static String spell_restore_description;
+	public static String spell_restore_pick;
 	public static String spell_restore_modifier;
 
-	public static String spell_fill_liquid_name;
-	public static String spell_fill_liquid_description;
-	public static String spell_fill_liquid_picks;
-	public static String spell_fill_liquid_modifier;
+	public static String spell_fill_hole_name;
+	public static String spell_fill_hole_description;
+	public static String spell_fill_hole_picks;
+	public static String spell_fill_hole_modifier_0;
+	public static String spell_fill_hole_modifier_1;
 	
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);

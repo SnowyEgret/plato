@@ -9,6 +9,7 @@ import ds.plato.select.ISelect;
 import ds.plato.spell.IHoldable;
 import ds.plato.spell.Spell;
 import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.transform.SpellFillRandom;
 
 public class Overlay {
 
@@ -59,8 +60,11 @@ public class Overlay {
 
 		Spell s = holdable.getSpell();
 		if (s != null) {
-			SlotDistribution d = new SlotDistribution(s.getSlotEntriesFromPlayer(Minecraft.getMinecraft().thePlayer));
-			r.drawStringWithShadow(d.toString(), x, y += dy, 0xffaaaa);
+			if (s instanceof SpellFillRandom) {
+				SlotDistribution d = new SlotDistribution(
+						s.getSlotEntriesFromPlayer(Minecraft.getMinecraft().thePlayer));
+				r.drawStringWithShadow(d.toString(), x, y += dy, 0xffaaaa);
+			}
 		}
 
 		if (message != null) {
