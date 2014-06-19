@@ -70,6 +70,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
 		if (w.isRemote) {
 			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+			//System.out.println("[Spell.onItemRightClick] position.typeOfHit=" + position.typeOfHit);
 			if (position.typeOfHit == MovingObjectType.MISS) {
 				pickManager.clearPicks();
 			}
@@ -112,6 +113,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	@Override
 	public void onClickRight(PlayerInteractEvent e) {
+		//System.out.println("[Spell.onClickRight] e.y=" + e.y);
 		pickManager.pick(e.x, e.y, e.z);
 		if (pickManager.isFinishedPicking()) {
 			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);

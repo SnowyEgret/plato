@@ -57,7 +57,7 @@ public class ForgeEventHandler {
 			System.out.println("[ForgeEventHandler.onMouseEvent] e.button=" + e.button);
 			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
 			if (position.typeOfHit == MovingObjectType.MISS) {
-				System.out.println("[Spell.onClickLeft] clearing selections=");
+				System.out.println("[Spell.onClickLeft] clearing selections");
 				selectionManager.clearSelections();
 				
 				// TODO a better way?

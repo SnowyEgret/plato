@@ -4,6 +4,7 @@ import java.util.Map;
 
 import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -39,8 +40,10 @@ public class KeyInputEventHandler {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {
-
-		World w = Minecraft.getMinecraft().thePlayer.worldObj;
+		
+		//World w = Minecraft.getMinecraft().thePlayer.worldObj;
+		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+		World w = Minecraft.getMinecraft().getIntegratedServer().worldServerForDimension(player.dimension);
 
 		// if (Plato.keyUndo.isPressed()) {
 		if (keyBindings.get("undo").isPressed()) {
@@ -48,7 +51,6 @@ public class KeyInputEventHandler {
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL))
 					undoManager.undo();
 			} catch (Exception e) {
-
 				// TODO Log to chat
 				Plato.log.info("[KeyInputEventHandler.onKeyInput]" + e.getMessage());
 			}

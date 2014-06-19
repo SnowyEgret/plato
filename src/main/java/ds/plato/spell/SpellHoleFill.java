@@ -23,19 +23,19 @@ import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
 
-public class SpellFillHole extends Spell {
+public class SpellHoleFill extends Spell {
 
-	public SpellFillHole(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
+	public SpellHoleFill(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
 	}
 
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_fill_hole_name;
-		d.description = Messages.spell_fill_hole_description;
+		d.name = Messages.spell_hole_fill_name;
+		d.description = Messages.spell_hole_fill_description;
 		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
-		d.modifiers = new ModifierDescriptor(Messages.spell_fill_hole_modifier_0, Messages.spell_fill_hole_modifier_1);
+		d.modifiers = new ModifierDescriptor(Messages.spell_hole_fill_modifier_0, Messages.spell_hole_fill_modifier_1);
 		return d;
 	}
 

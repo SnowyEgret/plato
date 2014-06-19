@@ -3,8 +3,12 @@ package ds.plato.block;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import ds.plato.Plato;
@@ -28,19 +32,25 @@ public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+			RenderBlocks renderer) {
 
 		Block selectedBlock = null;
 		Selection sel = selectionManager.selectionAt(x, y, z);
 		if (sel != null) {
 			selectedBlock = sel.block;
 		} else {
-			//renderer.renderStandardBlock(Blocks.ice, x, y, z);
 			renderer.renderStandardBlock(block, x, y, z);
 			return true;
 		}
-
 		renderer.renderStandardBlockWithColorMultiplier(selectedBlock, x, y, z, .9f, .7f, .7f);
+		//Tessellator tessellator = Tessellator.instance;
+		//renderer.useInventoryTint = false;
+		//renderer.renderBlockByRenderType(selectedBlock, x, y, z);
+		//renderer.useInventoryTint = true;
+		//IIcon icon = renderer.getBlockIcon(selectedBlock);
+		// renderer.useInventoryTint = true;
+		// renderer.renderBlockStairs((BlockStairs)selectedBlock, x, y, z);
 		return true;
 	}
 
@@ -52,4 +62,124 @@ public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 	public boolean shouldRender3DInInventory(int modelId) {
 		return false;
 	}
+
+	public boolean renderStandardBlockWithColorMultiplier(RenderBlocks renderer, Block block, int x, int y, int z,
+			float r, float g, float b) {
+		renderer.enableAO = false;
+		Tessellator tessellator = Tessellator.instance;
+		boolean flag = false;
+		float f3 = 0.5F;
+		float f4 = 1.0F;
+		float f5 = 0.8F;
+		float f6 = 0.6F;
+		float f7 = f4 * r;
+		float f8 = f4 * g;
+		float f9 = f4 * b;
+		float f10 = f3;
+		float f11 = f5;
+		float f12 = f6;
+		float f13 = f3;
+		float f14 = f5;
+		float f15 = f6;
+		float f16 = f3;
+		float f17 = f5;
+		float f18 = f6;
+
+		if (block != Blocks.grass) {
+			f10 = f3 * r;
+			f11 = f5 * r;
+			f12 = f6 * r;
+			f13 = f3 * g;
+			f14 = f5 * g;
+			f15 = f6 * g;
+			f16 = f3 * b;
+			f17 = f5 * b;
+			f18 = f6 * b;
+		}
+
+		int l = block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z);
+
+		if (renderer.renderAllFaces || block.shouldSideBeRendered(renderer.blockAccess, x, y - 1, z, 0)) {
+			tessellator.setBrightness(renderer.renderMinY > 0.0D ? l : block.getMixedBrightnessForBlock(
+					renderer.blockAccess, x, y - 1, z));
+			tessellator.setColorOpaque_F(f10, f13, f16);
+			renderer.renderFaceYNeg(block, (double) x, (double) y, (double) z,
+					renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 0));
+			flag = true;
+		}
+
+		if (renderer.renderAllFaces || block.shouldSideBeRendered(renderer.blockAccess, x, y + 1, z, 1)) {
+			tessellator.setBrightness(renderer.renderMaxY < 1.0D ? l : block.getMixedBrightnessForBlock(
+					renderer.blockAccess, x, y + 1, z));
+			tessellator.setColorOpaque_F(f7, f8, f9);
+			renderer.renderFaceYPos(block, (double) x, (double) y, (double) z,
+					renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 1));
+			flag = true;
+		}
+
+		IIcon iicon;
+
+		if (renderer.renderAllFaces || block.shouldSideBeRendered(renderer.blockAccess, x, y, z - 1, 2)) {
+			tessellator.setBrightness(renderer.renderMinZ > 0.0D ? l : block.getMixedBrightnessForBlock(
+					renderer.blockAccess, x, y, z - 1));
+			tessellator.setColorOpaque_F(f11, f14, f17);
+			iicon = renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 2);
+			renderer.renderFaceZNeg(block, (double) x, (double) y, (double) z, iicon);
+
+			if (renderer.fancyGrass && iicon.getIconName().equals("grass_side") && !renderer.hasOverrideBlockTexture()) {
+				tessellator.setColorOpaque_F(f11 * r, f14 * g, f17 * b);
+				renderer.renderFaceZNeg(block, (double) x, (double) y, (double) z, BlockGrass.getIconSideOverlay());
+			}
+
+			flag = true;
+		}
+
+		if (renderer.renderAllFaces || block.shouldSideBeRendered(renderer.blockAccess, x, y, z + 1, 3)) {
+			tessellator.setBrightness(renderer.renderMaxZ < 1.0D ? l : block.getMixedBrightnessForBlock(
+					renderer.blockAccess, x, y, z + 1));
+			tessellator.setColorOpaque_F(f11, f14, f17);
+			iicon = renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 3);
+			renderer.renderFaceZPos(block, (double) x, (double) y, (double) z, iicon);
+
+			if (renderer.fancyGrass && iicon.getIconName().equals("grass_side") && !renderer.hasOverrideBlockTexture()) {
+				tessellator.setColorOpaque_F(f11 * r, f14 * g, f17 * b);
+				renderer.renderFaceZPos(block, (double) x, (double) y, (double) z, BlockGrass.getIconSideOverlay());
+			}
+
+			flag = true;
+		}
+
+		if (renderer.renderAllFaces || block.shouldSideBeRendered(renderer.blockAccess, x - 1, y, z, 4)) {
+			tessellator.setBrightness(renderer.renderMinX > 0.0D ? l : block.getMixedBrightnessForBlock(
+					renderer.blockAccess, x - 1, y, z));
+			tessellator.setColorOpaque_F(f12, f15, f18);
+			iicon = renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 4);
+			renderer.renderFaceXNeg(block, (double) x, (double) y, (double) z, iicon);
+
+			if (renderer.fancyGrass && iicon.getIconName().equals("grass_side") && !renderer.hasOverrideBlockTexture()) {
+				tessellator.setColorOpaque_F(f12 * r, f15 * g, f18 * b);
+				renderer.renderFaceXNeg(block, (double) x, (double) y, (double) z, BlockGrass.getIconSideOverlay());
+			}
+
+			flag = true;
+		}
+
+		if (renderer.renderAllFaces || block.shouldSideBeRendered(renderer.blockAccess, x + 1, y, z, 5)) {
+			tessellator.setBrightness(renderer.renderMaxX < 1.0D ? l : block.getMixedBrightnessForBlock(
+					renderer.blockAccess, x + 1, y, z));
+			tessellator.setColorOpaque_F(f12, f15, f18);
+			iicon = renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 5);
+			renderer.renderFaceXPos(block, (double) x, (double) y, (double) z, iicon);
+
+			if (renderer.fancyGrass && iicon.getIconName().equals("grass_side") && !renderer.hasOverrideBlockTexture()) {
+				tessellator.setColorOpaque_F(f12 * r, f15 * g, f18 * b);
+				renderer.renderFaceXPos(block, (double) x, (double) y, (double) z, BlockGrass.getIconSideOverlay());
+			}
+
+			flag = true;
+		}
+
+		return flag;
+	}
+
 }

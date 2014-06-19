@@ -13,8 +13,6 @@ import org.junit.Before;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.google.inject.Provider;
-
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
 import ds.plato.core.IWorld;
@@ -51,12 +49,12 @@ public class PlatoTest {
 		return new StubWorld(dirt);
 	}
 
-	protected Provider<IWorld> newMockWorldProvider() {
-		return new Provider() {
-			@Override
-			public Object get() {
-				return newStubWorld();
-			}
-		};
-	}
+//	protected Provider<IWorld> newMockWorldProvider() {
+//		return new Provider() {
+//			@Override
+//			public Object get() {
+//				return newStubWorld();
+//			}
+//		};
+//	}
 }

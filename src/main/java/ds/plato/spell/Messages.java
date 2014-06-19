@@ -97,11 +97,17 @@ public class Messages extends NLS {
 	public static String spell_restore_pick;
 	public static String spell_restore_modifier;
 
-	public static String spell_fill_hole_name;
-	public static String spell_fill_hole_description;
-	public static String spell_fill_hole_picks;
-	public static String spell_fill_hole_modifier_0;
-	public static String spell_fill_hole_modifier_1;
+	public static String spell_hole_fill_name;
+	public static String spell_hole_fill_description;
+	public static String spell_hole_fill_picks;
+	public static String spell_hole_fill_modifier_0;
+	public static String spell_hole_fill_modifier_1;
+
+	public static String spell_hole_drain_name;
+	public static String spell_hole_drain_description;
+	public static String spell_hole_drain_picks;
+	//public static String spell_hole_drain_modifier_0;
+	//public static String spell_hole_drain_modifier_1;
 	
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);
