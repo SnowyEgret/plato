@@ -1,30 +1,20 @@
 package ds.plato.undo;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
-import ds.plato.common.UndoableSetBlock;
 import ds.plato.select.Selection;
 
 public class Transaction implements IUndoable, Iterable {
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Transaction [undoManager=");
-		builder.append(undoManager);
-		builder.append(", undoables=");
-		builder.append(undoables);
-		builder.append("]");
-		return builder.toString();
-	}
-
-	protected List<IUndoable> undoables = new ArrayList<>();
+	// TODO Maybe this should be a set
+	//protected List<IUndoable> undoables = new ArrayList<>();
+	protected Set<IUndoable> undoables = new HashSet<>();
 	private final IUndo undoManager;
-	
-	public Transaction(IUndo um) {
-		this.undoManager = um;
+
+	public Transaction(IUndo undoManager) {
+		this.undoManager = undoManager;
 	}
 
 	public void add(IUndoable undoable) {
@@ -58,15 +48,18 @@ public class Transaction implements IUndoable, Iterable {
 		undoManager.addUndoable(this);
 	}
 
-	// Creates a dependency on package spell. TODO: Move SetBlock to package undo.
 	public boolean contains(Selection s) {
 		return undoables.contains(s);
-//		for (IUndoable u : undoables) {
-//			UndoableSetBlock uu = (UndoableSetBlock) u;
-//			if (uu.x == s.x && uu.y == s.y && uu.z == s.z ) {
-//				return true;
-//			}
-//		}
-//		return false;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Transaction [undoManager=");
+		builder.append(undoManager);
+		builder.append(", undoables=");
+		builder.append(undoables);
+		builder.append("]");
+		return builder.toString();
 	}
 }

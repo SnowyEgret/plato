@@ -109,6 +109,14 @@ public class Messages extends NLS {
 	//public static String spell_hole_drain_modifier_0;
 	//public static String spell_hole_drain_modifier_1;
 	
+	public static String spell_thicken_name;
+	public static String spell_thicken_description;
+	public static String spell_thicken_picks;
+	public static String spell_thicken_modifier_0;
+	public static String spell_thicken_modifier_1;
+
+
+	
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);
 	}

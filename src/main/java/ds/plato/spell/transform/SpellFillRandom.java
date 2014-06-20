@@ -25,11 +25,7 @@ public class SpellFillRandom extends AbstractSpellTransform {
 		transformSelections(world, new ITransform() {
 			@Override
 			public Selection transform(Selection s) {
-				// TODO remove static reference. Maybe SlotDistribution is passed to invoke, or a SlotDistribution
-				// is constructed from slot entries
-				//SlotDistribution d = Plato.slotDistribution;
 				SlotDistribution d = new SlotDistribution(slotEntries);
-				System.out.println("[SpellFillRandom.invoke(...).new ITransformer() {...}.transform] d=" + d);
 				SlotEntry entry = d.randomEntry();
 				s.block = entry.block;
 				s.metadata = entry.metadata;
