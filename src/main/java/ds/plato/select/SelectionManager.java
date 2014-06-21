@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
+import com.google.common.collect.Lists;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import ds.plato.block.BlockSelected;
@@ -20,6 +22,7 @@ public class SelectionManager implements ISelect {
 	private final Map<Point3i, Selection> selections = new HashMap<>();
 	private IWorld world;
 	private Block blockSelected;
+	private List<Point3i> lastSelections = new ArrayList<>();
 
 	// TODO remove when blockSelected is injected throughout.
 	public SelectionManager() {
@@ -137,6 +140,11 @@ public class SelectionManager implements ISelect {
 
 	@Override
 	public void clearSelections() {
+		lastSelections.clear();
+		for (Point3i p : selectedPoints()) {
+			lastSelections.add((Point3i) p.clone());
+		}
+		System.out.println("[SelectionManager.clearSelections] lastSelections=" + lastSelections);
 		for (Selection s : getSelections()) {
 			deselect(s);
 		}
@@ -145,6 +153,14 @@ public class SelectionManager implements ISelect {
 	@Override
 	public Selection lastSelection() {
 		return getSelectionList().get(selections.size()-1);
+	}
+
+	@Override
+	public void reselectLast() {
+		System.out.println("[SelectionManager.reselectLast] lastSelections=" + lastSelections);
+		for(Point3i p : lastSelections) {
+			select(p.x, p.y, p.z);
+		}
 	}
 
 }

@@ -46,4 +46,6 @@ public interface ISelect {
 
 	@Deprecated public Selection removeSelection(Point3i p);
 
+	public void reselectLast();
+
 }

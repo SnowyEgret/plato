@@ -1,13 +1,15 @@
 package ds.plato.spell;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
 import org.lwjgl.input.Keyboard;
 
-import net.minecraft.init.Blocks;
 import ds.plato.core.IWorld;
-import ds.plato.core.SlotDistribution;
 import ds.plato.core.SlotEntry;
 import ds.plato.geom.GeomUtil;
 import ds.plato.pick.IPick;
@@ -41,7 +43,9 @@ public class SpellThicken extends AbstractSpellTransform {
 
 	@Override
 	public void invoke(final IWorld world, SlotEntry[] slotEntries) {
-		Transaction t = undoManager.newTransaction();
+		Set<Point3i> points = new HashSet<>();
+		Selection first = selectionManager.getSelections().iterator().next();
+		// TODO Case where selections are planar
 		final Point3d c = GeomUtil.toPoint3d(selectionManager.voxelSet().centroid());
 		for (Selection s : selectionManager.getSelections()) {
 			double d = s.getPoint3d().distance(c);
@@ -51,9 +55,16 @@ public class SpellThicken extends AbstractSpellTransform {
 				boolean in = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 				boolean out = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
 				if ((in && dd < d) || (out && dd > d) || (!in && !out)) {
-					t.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, s.block, s.metadata).set());
+					if (!selectionManager.isSelected(p.x, p.y, p.z)) {
+						points.add(p);
+					}
 				}
 			}
+		}
+		selectionManager.clearSelections();
+		Transaction t = undoManager.newTransaction();
+		for (Point3i p : points) {
+			t.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, first.block, first.metadata).set());
 		}
 		t.commit();
 	}

@@ -80,6 +80,10 @@ public class KeyInputEventHandler {
 			new SpellDelete(undoManager, selectionManager, pickManager).invoke(new WorldWrapper(w), null);
 		}
 
+		if (keyBindings.get("lastSelection").isPressed()) {
+			selectionManager.reselectLast();
+		}
+
 		if (event.isCancelable())
 			event.setCanceled(true);
 	}

@@ -36,7 +36,6 @@ import ds.plato.undo.IUndo;
 
 public abstract class Spell extends Item implements IClickable, IHoldable {
 
-	// protected IWorld world;
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
 	protected IPick pickManager;
@@ -81,10 +80,17 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	@Override
 	public void onClickLeft(PlayerInteractEvent e) {
 		if (e.entity.worldObj.isRemote) {
-			System.out.println("[Spell.onClickLeft] Got remore world: " + e.entity.worldObj);
+			System.out.println("[Spell.onClickLeft] Returning. Got remote world: " + e.entity.worldObj);
 			return;
 		}
 
+//		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+//		if (position.typeOfHit == MovingObjectType.MISS) {
+//			if (e.isCancelable())
+//				e.setCanceled(true);
+//			return;
+//		}
+		
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
 			Point3d lastPointSelected = selectionManager.lastSelection().getPoint3d();
 			selectionManager.clearSelections();

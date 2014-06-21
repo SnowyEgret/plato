@@ -57,10 +57,13 @@ public class ForgeEventHandler {
 			System.out.println("[ForgeEventHandler.onMouseEvent] e.button=" + e.button);
 			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
 			if (position.typeOfHit == MovingObjectType.MISS) {
-				System.out.println("[Spell.onClickLeft] clearing selections");
-				selectionManager.clearSelections();
-				
-				// TODO a better way?
+				// This event is being called twice for some reason. Can't test for event having remote world. Clearing
+				// selection list twice creates an empty last selection list.
+				if (!selectionManager.getSelectionList().isEmpty()) {
+					selectionManager.clearSelections();
+				}
+
+				// TODO a better way to clear the grown selections?
 				EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 				ItemStack is = player.getCurrentEquippedItem();
 				if (is != null) {

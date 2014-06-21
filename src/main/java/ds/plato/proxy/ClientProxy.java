@@ -59,6 +59,7 @@ public class ClientProxy extends CommonProxy {
 		keyBindings.put("redo", registerKeyBinding("Redo", Keyboard.KEY_Y, plato.NAME));
 		keyBindings.put("toggle", registerKeyBinding("Toggle", Keyboard.KEY_TAB, plato.NAME));
 		keyBindings.put("delete", registerKeyBinding("Delete", Keyboard.KEY_DELETE, plato.NAME));
+		keyBindings.put("lastSelection", registerKeyBinding("Last selection", Keyboard.KEY_L, plato.NAME));
 		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(keyBindings, undo, select, pick));
 	}
 
