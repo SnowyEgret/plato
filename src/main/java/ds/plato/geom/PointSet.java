@@ -16,16 +16,6 @@ public class PointSet implements IDrawable, Iterable<Point3d> {
 		return this;
 	}
 
-	//
-	// @Override
-	// public boolean contains(Point3d point) {
-	// for(Point3d p : points) {
-	// if (p.equals(point))
-	// return true;
-	// }
-	// return false;
-	// }
-
 	public void addPoints(PointSet pointSet) {
 		points.addAll(pointSet.points);
 	}
@@ -63,14 +53,4 @@ public class PointSet implements IDrawable, Iterable<Point3d> {
 	public Point3d getOrigin() {
 		return points.get(0);
 	}
-	//
-	// @Override
-	// public boolean contains(Point3d point) {
-	// for(Point3d p : points) {
-	// if (p.equals(point))
-	// return true;
-	// }
-	// return false;
-	// }
-
 }

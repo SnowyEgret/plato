@@ -155,4 +155,8 @@ public class VoxelSet implements Iterable<Point3i> {
 		return voxels.iterator().next();
 	}
 
+	public Boolean contains(Point3i p) {
+		return voxels.contains(p);
+	}
+
 }

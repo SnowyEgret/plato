@@ -32,6 +32,7 @@ public abstract class AbstractSpellDraw extends Spell {
 	}
 
 	protected void draw(IDrawable drawable, IWorld world, Block block, int metadata) {
+		selectionManager.clearSelections();
 		Transaction t = undoManager.newTransaction();
 		VoxelSet voxels = drawable.voxelize();
 		boolean isHollow = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);

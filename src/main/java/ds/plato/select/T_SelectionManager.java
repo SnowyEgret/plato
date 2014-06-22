@@ -29,7 +29,7 @@ public class T_SelectionManager extends PlatoTest {
 	@Before
 	public void setUp() {
 		w = newStubWorld();
-		m = new SelectionManager();
+		m = new SelectionManager(blockSelected);
 		m.setWorld(w);
 	}
 

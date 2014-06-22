@@ -22,11 +22,7 @@ public class SelectionManager implements ISelect {
 	private final Map<Point3i, Selection> selections = new HashMap<>();
 	private IWorld world;
 	private Block blockSelected;
-	private List<Point3i> lastSelections = new ArrayList<>();
-
-	// TODO remove when blockSelected is injected throughout.
-	public SelectionManager() {
-	}
+	private List<Point3i> lastSelections;
 
 	public SelectionManager(Block blockSelected) {
 		this.blockSelected = blockSelected;
@@ -140,10 +136,7 @@ public class SelectionManager implements ISelect {
 
 	@Override
 	public void clearSelections() {
-		lastSelections.clear();
-		for (Point3i p : selectedPoints()) {
-			lastSelections.add((Point3i) p.clone());
-		}
+		lastSelections = Lists.newArrayList(selectedPoints());
 		System.out.println("[SelectionManager.clearSelections] lastSelections=" + lastSelections);
 		for (Selection s : getSelections()) {
 			deselect(s);

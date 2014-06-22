@@ -22,7 +22,7 @@ public abstract class Curve extends Primitive {
 		PointSet points = new PointSet();
 		//double r = rT.getMaximum() - rT.getMinimum();
 		double inc = .00001;
-		System.out.println("[Curve.pointSet] inc=" + inc);
+		//System.out.println("[Curve.pointSet] inc=" + inc);
 		for (double u = rT.getMinimum(); u <= rT.getMaximum(); u += inc) {
 			Point3d p = pointAtParameter(u);
 			points.addPoint(p);

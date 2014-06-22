@@ -24,9 +24,9 @@ public class Rectangle extends Polyline {
 		double dz = Math.abs(p2.z - p0.z);
 		double d = Math.abs(dz - dx);
 		if (dx > dz) {
-			p2.z += p2.z > 0 ? - d : d;
+			p2.z += (p2.z > p0.z) ? d : -d;
 		} else {
-			p2.x += p2.x > 0 ? - d : d;
+			p2.x += (p2.x > p0.x) ? d : -d;
 		}
 		return new Point3d(p2);
 	}
