@@ -2,13 +2,14 @@ package ds.plato.geom.curve;
 
 import javax.vecmath.Point3d;
 
+@Deprecated
 public class Square extends Rectangle {
 
 	public Square(Point3d p0, Point3d p2) {
 		super(p0, squareOf(p0, p2), true);
 	}
 
-	private static Point3d squareOf(Point3d p0, Point3d p2) {
+	public static Point3d squareOf(Point3d p0, Point3d p2) {
 		double dx = p2.x - p0.x;
 		double dz = p2.z - p0.z;
 		double d = dz - dx;

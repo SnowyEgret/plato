@@ -19,7 +19,7 @@ public class Rectangle extends Polyline {
 		lines.add(new Line(p3, p0));
 	}
 
-	private static Point3d squareOf(Point3d p0, Point3d p2) {
+	public static Point3d squareOf(Point3d p0, Point3d p2) {
 		double dx = Math.abs(p2.x - p0.x);
 		double dz = Math.abs(p2.z - p0.z);
 		double d = Math.abs(dz - dx);

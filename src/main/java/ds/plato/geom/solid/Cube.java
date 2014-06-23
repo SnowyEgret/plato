@@ -2,6 +2,8 @@ package ds.plato.geom.solid;
 
 import javax.vecmath.Point3d;
 
+
+@Deprecated
 public class Cube extends Box {
 
 	public Cube(Point3d origin, Point3d diagonalCorner) {

@@ -23,6 +23,7 @@ public abstract class Solid extends Primitive {
 		for (double t = rangeT().getMinimum(); t <= rangeT().getMaximum(); t += inc) {
 			for (double u = rangeU().getMinimum(); u <= rangeU().getMaximum(); u += inc) {
 				for (double v = rangeV().getMinimum(); v <= rangeV().getMaximum(); v += inc) {
+					//Point3d p = new Point3d(t, v, u);
 					Point3d p = new Point3d(t, u, v);
 					p.add(p0);
 					if (contains(p))
