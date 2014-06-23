@@ -16,6 +16,10 @@ public class Overlay {
 	private ISelect selectionManager;
 	private Vector3d displacement;
 	private String message;
+	private final int white = 0xffffff;
+	private final int red = 0xffaaaa;
+	private final int green = 0xaaffaa;
+	private final int blue = 0xaaaaff;
 
 	public Overlay(ISelect selectionManager) {
 		this.selectionManager = selectionManager;
@@ -37,26 +41,31 @@ public class Overlay {
 		SpellDescriptor descriptor = holdable.getDescriptor();
 		if (descriptor != null) {
 			if (descriptor.name != null) {
-				r.drawStringWithShadow(descriptor.name.toUpperCase() + " spell", x, y, 0xffffff);
+				r.drawStringWithShadow(descriptor.name.toUpperCase() + " spell", x, y, white);
 			}
 			if (descriptor.description != null) {
-				r.drawStringWithShadow(descriptor.description, x, y += dy, 0xffffff);
+				r.drawStringWithShadow(descriptor.description, x, y += dy, white);
 			}
 			if (descriptor.picks != null) {
-				r.drawStringWithShadow(descriptor.picks.toString(), x, y += dy, 0xaaffaa);
+				r.drawStringWithShadow(descriptor.picks.toString(), x, y += dy, green);
 			}
 			if (descriptor.modifiers != null) {
-				r.drawStringWithShadow(descriptor.modifiers.toString(), x, y += dy, 0xaaaaff);
+				r.drawStringWithShadow(descriptor.modifiers.toString(), x, y += dy, blue);
 			}
 		}
 
 		if (holdable.isPicking()) {
 			if (displacement != null) {
-				r.drawStringWithShadow(displacement.toString(), x, y += dy, 0xffaaaa);
+				int dx = (int) displacement.x;
+				int dz = (int) displacement.z;
+				r.drawStringWithShadow(((dx >= 0) ? "East" : "West") + ": " + Math.abs(dx) + "  " + ((dz >= 0) ? "North" : "South")
+						+ ": " + Math.abs(dz), x, y += dy, red);
+				// r.drawStringWithShadow((dz > 0) ? "North" : "South" + ": " + Math.abs(dz), x, y += dy, red);
+				r.drawStringWithShadow("Height: " + Math.abs((int) displacement.y), x, y += dy, red);
 			}
 		}
 
-		r.drawStringWithShadow("Selection size: " + selectionManager.size(), x, y += dy, 0xffaaaa);
+		r.drawStringWithShadow("Selection size: " + selectionManager.size(), x, y += dy, red);
 
 		Spell s = holdable.getSpell();
 		if (s != null) {
