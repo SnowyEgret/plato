@@ -19,4 +19,8 @@ public class Pick extends Point3i {
 	public Point3d toPoint3d() {
 		return new Point3d(x, y, z);
 	}
+
+	public Point3i getPoint3i() {
+		return new Point3i(x, y, z);
+	}
 }

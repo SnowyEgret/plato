@@ -2,6 +2,8 @@ package ds.plato.gui;
 
 import javax.vecmath.Vector3d;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import ds.plato.core.SlotDistribution;
@@ -54,7 +56,7 @@ public class Overlay {
 			}
 		}
 
-		if (holdable.isPicking()) {
+		if (holdable.isPicking() || (!holdable.isPicking() && !selectionManager.getSelectionList().isEmpty() && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))) {
 			if (displacement != null) {
 				int dx = (int) displacement.x;
 				int dz = (int) displacement.z;

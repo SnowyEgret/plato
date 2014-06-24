@@ -39,8 +39,10 @@ public class SpellBox extends AbstractSpellDraw {
 		boolean isCube = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		Point3d p0 = picks[0].toPoint3d();
 		Point3d p1 = picks[1].toPoint3d();
-		p0.y += 1;
-		p1.y += 1;
+		if (isCube) {
+			p0.y += 1;
+			p1.y += 1;
+		}
 		IDrawable d = new Box(p0, p1, isCube);
 		draw(d, world, slotEntries[0].block, slotEntries[0].metadata);
 		pickManager.clearPicks();

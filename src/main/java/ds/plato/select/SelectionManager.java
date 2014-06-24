@@ -145,6 +145,9 @@ public class SelectionManager implements ISelect {
 
 	@Override
 	public Selection lastSelection() {
+		if (selections.isEmpty()) {
+			return null;
+		}
 		return getSelectionList().get(selections.size()-1);
 	}
 

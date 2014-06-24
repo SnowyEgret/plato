@@ -1,5 +1,6 @@
 package ds.plato.core;
 
+import javax.vecmath.Point3i;
 import javax.vecmath.Vector3d;
 
 import net.minecraft.block.Block;
@@ -26,6 +27,7 @@ import ds.plato.gui.Overlay;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
+import ds.plato.select.Selection;
 import ds.plato.spell.IClickable;
 import ds.plato.spell.IHoldable;
 import ds.plato.spell.Spell;
@@ -159,13 +161,44 @@ public class ForgeEventHandler {
 	@SubscribeEvent
 	public void onDrawBlockHightlight(DrawBlockHighlightEvent e) {
 		MovingObjectPosition pos = e.target;
+		
+//		if (holdable != null) {
+//			Pick p = pickManager.lastPick();
+//			if (p != null) {
+//				Vector3d d = new Vector3d();
+//				d.x = p.x - pos.blockX;
+//				d.y = p.y - pos.blockY;
+//				d.z = p.z - pos.blockZ;
+//				overlay.setDisplacement(d);
+//			} else {
+//				Selection s = selectionManager.lastSelection();
+//				if (s != null) {
+//					Vector3d d = new Vector3d();
+//					d.x = s.x - pos.blockX;
+//					d.y = s.y - pos.blockY;
+//					d.z = s.z - pos.blockZ;
+//					overlay.setDisplacement(d);
+//				}
+//			}
+//		}
+
 		if (holdable != null) {
-			Pick lastPick = pickManager.lastPick();
-			if (lastPick != null) {
+			Point3i p = null;
+			Pick pick = pickManager.lastPick();
+			if (pick != null) {
+				p = pick.getPoint3i();
+			}
+			if (p == null) {
+				Selection s = selectionManager.lastSelection();
+				if (s != null) {
+					p = s.getPoint3i();
+				}
+			}
+			if (p != null) {
 				Vector3d d = new Vector3d();
-				d.x = lastPick.x - pos.blockX;
-				d.y = lastPick.y - pos.blockY;
-				d.z = lastPick.z - pos.blockZ;
+				d.x = p.x - pos.blockX;
+				d.y = p.y - pos.blockY;
+				d.z = p.z - pos.blockZ;
 				overlay.setDisplacement(d);
 			}
 		}
