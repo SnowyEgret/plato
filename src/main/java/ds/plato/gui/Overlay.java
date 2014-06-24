@@ -60,7 +60,6 @@ public class Overlay {
 				int dz = (int) displacement.z;
 				r.drawStringWithShadow(((dx >= 0) ? "East" : "West") + ": " + Math.abs(dx) + "  " + ((dz >= 0) ? "North" : "South")
 						+ ": " + Math.abs(dz), x, y += dy, red);
-				// r.drawStringWithShadow((dz > 0) ? "North" : "South" + ": " + Math.abs(dz), x, y += dy, red);
 				r.drawStringWithShadow("Height: " + Math.abs((int) displacement.y), x, y += dy, red);
 			}
 		}
@@ -72,7 +71,8 @@ public class Overlay {
 			if (s instanceof SpellFillRandom) {
 				SlotDistribution d = new SlotDistribution(
 						s.getSlotEntriesFromPlayer(Minecraft.getMinecraft().thePlayer));
-				r.drawStringWithShadow(d.toString(), x, y += dy, 0xffaaaa);
+				
+				r.drawStringWithShadow(d.toString(), x, y += dy, blue);
 			}
 		}
 

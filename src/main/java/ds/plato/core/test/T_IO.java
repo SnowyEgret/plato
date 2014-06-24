@@ -1,4 +1,4 @@
-package ds.plato.common.test;
+package ds.plato.core.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

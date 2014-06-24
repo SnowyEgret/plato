@@ -7,6 +7,8 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -69,7 +71,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
 		if (w.isRemote) {
 			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-			//System.out.println("[Spell.onItemRightClick] position.typeOfHit=" + position.typeOfHit);
+			// System.out.println("[Spell.onItemRightClick] position.typeOfHit=" + position.typeOfHit);
 			if (position.typeOfHit == MovingObjectType.MISS) {
 				pickManager.clearPicks();
 			}
@@ -84,13 +86,13 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			return;
 		}
 
-//		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-//		if (position.typeOfHit == MovingObjectType.MISS) {
-//			if (e.isCancelable())
-//				e.setCanceled(true);
-//			return;
-//		}
-		
+		// MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+		// if (position.typeOfHit == MovingObjectType.MISS) {
+		// if (e.isCancelable())
+		// e.setCanceled(true);
+		// return;
+		// }
+
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
 			Point3d lastPointSelected = selectionManager.lastSelection().getPoint3d();
 			selectionManager.clearSelections();
@@ -119,7 +121,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	@Override
 	public void onClickRight(PlayerInteractEvent e) {
-		//System.out.println("[Spell.onClickRight] e.y=" + e.y);
+		// System.out.println("[Spell.onClickRight] e.y=" + e.y);
 		pickManager.pick(e.x, e.y, e.z);
 		if (pickManager.isFinishedPicking()) {
 			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
@@ -173,18 +175,31 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			ItemStack stack = inventory.getStackInSlot(i);
 			if (stack != null) {
 				Item item = stack.getItem();
-				System.out.println("[Spell.getSlotEntriesFromPlayer] item=" + item);
+				int metadata = item.getDamage(stack);
+
 				Block b = null;
 				if (item instanceof ItemBlock) {
 					ItemBlock itemBlock = (ItemBlock) item;
 					b = itemBlock.field_150939_a;
+					// TODO how to get color name from sub block?
+					// if (b instanceof BlockColored) {
+					// if (stack.getHasSubtypes()) {
+					// List<ItemStack> subBlocks = new ArrayList<>();
+					// ((BlockColored) b).getSubBlocks(item, getCreativeTab(), subBlocks);
+					// ItemStack is = subBlocks.get(metadata);
+					// b = ((ItemBlock) is.getItem()).field_150939_a;
+					// System.out.println("[Spell.getSlotEntriesFromPlayer] is=" + is);
+					// }
+					// MapColor c = ((BlockColored) b).getMapColor(metadata);
+					// System.out.println("[Spell.getSlotEntriesFromPlayer] c=" + c.colorValue);
+					// }
 				} else if (item instanceof ItemBucket) {
 					// ItemBucket itemBucket = (ItemBucket) item;
 					// TODO how to determine contents of a bucket
 					b = Blocks.water;
 				}
+
 				if (b != null) {
-					int metadata = item.getDamage(stack);
 					SlotEntry entry = new SlotEntry(b, metadata, i + 1);
 					entries.add(entry);
 				}

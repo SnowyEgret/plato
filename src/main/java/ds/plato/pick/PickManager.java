@@ -65,6 +65,11 @@ public class PickManager implements IPick {
 	}
 
 	@Override
+	public boolean isPicking() {
+		return picks.size() > 0 && !isFinishedPicking();
+	}
+
+	@Override
 	public boolean isFinishedPicking() {
 		return (picks.size() == maxPicks);
 	}
@@ -83,11 +88,6 @@ public class PickManager implements IPick {
 	public void reset(int maxPicks) {
 		this.maxPicks = maxPicks;
 		picks.clear();
-	}
-
-	@Override
-	public boolean isPicking() {
-		return picks.size() > 0;
 	}
 
 	@Override

@@ -23,5 +23,6 @@ public abstract class AbstractSpellTransform extends Spell {
 			t.add(new SetBlock(world, selectionManager, transformer.transform(s)).set());
 		}
 		t.commit();
+		selectionManager.clearSelections();
 	}
 }
