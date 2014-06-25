@@ -27,6 +27,7 @@ public class SpellCone extends AbstractSpellDraw {
 		d.name = Messages.spell_cone_name;
 		d.description = Messages.spell_cone_description;
 		d.picks = new PickDescriptor(Messages.spell_cone_picks);
+		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_isHollow);
 		return d;
 	}
 
@@ -34,7 +35,7 @@ public class SpellCone extends AbstractSpellDraw {
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
 		Pick[] picks = pickManager.getPicksArray();
 		IDrawable d = new Cone(picks[0].toPoint3d(), picks[1].toPoint3d(), picks[2].toPoint3d());
-		draw(d, world, slotEntries[0].block, slotEntries[0].metadata);
-		pickManager.clearPicks();
+		boolean isHollow = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
+		draw(d, world, slotEntries[0].block, slotEntries[0].metadata, isHollow);
 	}
 }

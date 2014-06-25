@@ -4,9 +4,12 @@ import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 
-	// Generic single pick for any spell
+	// Generic strings
 	public static String spell_modifier_deleteOriginal;
 	public static String spell_pick_anywhere;
+	public static String spell_modifier_isHollow;
+	
+	//Edit Spells
 
 	public static String spell_delete_name;
 	public static String spell_delete_description;
@@ -25,8 +28,8 @@ public class Messages extends NLS {
 	public static String spell_copy_picks;
 	public static String spell_copy_modifier;
 	
-	//Draw spells
-	
+	//Draw spells	
+
 	public static String spell_sphere_name;
 	public static String spell_sphere_description;
 	public static String spell_sphere_picks;
@@ -101,6 +104,11 @@ public class Messages extends NLS {
 	public static String spell_restore_description;
 	public static String spell_restore_pick;
 	public static String spell_restore_modifier;
+
+	public static String spell_mengerSponge_name;
+	public static String spell_mengerSponge_description;
+	public static String spell_mengerSponge_pick;
+	public static String spell_mengerSponge_modifier;
 
 	public static String spell_hole_fill_name;
 	public static String spell_hole_fill_description;

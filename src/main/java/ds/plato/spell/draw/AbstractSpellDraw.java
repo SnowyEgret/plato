@@ -32,19 +32,23 @@ public abstract class AbstractSpellDraw extends Spell {
 	}
 
 	protected void draw(IDrawable drawable, IWorld world, Block block, int metadata) {
+		draw(drawable, world, block, metadata, false);
+	}
+
+	protected void draw(IDrawable drawable, IWorld world, Block block, int metadata, boolean isHollow) {
 		selectionManager.clearSelections();
 		Transaction t = undoManager.newTransaction();
 		VoxelSet voxels = drawable.voxelize();
-		boolean isHollow = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		if (drawable instanceof Solid && isHollow) {
 			voxels = voxels.shell();
 		}
-		//TODO Change all geom classes for y is up
+		// TODO Change all geom classes for y is up
 		for (Point3i p : voxels) {
-			//SlotEntry entry = Plato.getBlocksWithMetadataInIventorySlots().get(0);
+			// SlotEntry entry = Plato.getBlocksWithMetadataInIventorySlots().get(0);
 			t.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, block, metadata).set());
 		}
 		t.commit();
+		//pickManager.clearPicks();
 	}
 
 }

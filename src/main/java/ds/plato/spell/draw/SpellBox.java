@@ -29,7 +29,7 @@ public class SpellBox extends AbstractSpellDraw {
 		d.name = Messages.spell_box_name;
 		d.description = Messages.spell_box_description;
 		d.picks = new PickDescriptor(Messages.spell_box_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_box_modifier);
+		d.modifiers = new ModifierDescriptor(Messages.spell_box_modifier, Messages.spell_modifier_isHollow);
 		return d;
 	}
 
@@ -44,7 +44,8 @@ public class SpellBox extends AbstractSpellDraw {
 			p1.y += 1;
 		}
 		IDrawable d = new Box(p0, p1, isCube);
-		draw(d, world, slotEntries[0].block, slotEntries[0].metadata);
+		boolean isHollow = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
+		draw(d, world, slotEntries[0].block, slotEntries[0].metadata, isHollow);
 		pickManager.clearPicks();
 	}
 

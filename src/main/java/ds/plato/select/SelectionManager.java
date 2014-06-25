@@ -6,14 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import ds.plato.block.BlockSelected;
 import ds.plato.core.IWorld;
 import ds.plato.geom.VoxelSet;
 
@@ -29,6 +26,7 @@ public class SelectionManager implements ISelect {
 	}
 
 	// World is not available when SelectionManager is constructed. Called when player joins game in ForgeEventHandler
+	@Override
 	public ISelect setWorld(IWorld world) {
 		this.world = world;
 		return this;
@@ -77,6 +75,7 @@ public class SelectionManager implements ISelect {
 		return selections.get(p);
 	}
 
+	@Override
 	public void addSelection(Selection s) {
 		selections.put(s.getPoint3i(), s);
 	}
@@ -91,34 +90,42 @@ public class SelectionManager implements ISelect {
 		return selections.containsKey(p);
 	}
 
+	@Override
 	public boolean isSelected(int x, int y, int z) {
 		return isSelected(new Point3i(x, y, z));
 	}
 
+	@Override
 	public int size() {
 		return selections.size();
 	}
 
+	@Override
 	public Collection<Point3i> selectedPoints() {
 		return selections.keySet();
 	}
 
+	@Override
 	public Selection removeSelection(Point3i p) {
 		return selections.remove(p);
 	}
 
+	@Override
 	public Selection removeSelection(int x, int y, int z) {
 		return removeSelection(new Point3i(x, y, z));
 	}
 
+	@Override
 	public Selection removeSelection(Selection s) {
 		return removeSelection(s.getPoint3i());
 	}
 
+	@Override
 	public VoxelSet voxelSet() {
 		return new VoxelSet(selections.keySet());
 	}
 
+	@Override
 	public List<Selection> getSelectionList() {
 		List<Selection> l = new ArrayList<>();
 		l.addAll(selections.values());
@@ -127,7 +134,7 @@ public class SelectionManager implements ISelect {
 
 	@Override
 	public String toString() {
-		return "SelectionManager [world=" + idOf(world) + ", selections=" + selections + "]";
+		return "SelectionManager [world=" + idOf(world) + ", selections=" + selections.size() + "]";
 	}
 
 	private String idOf(Object o) {
@@ -137,7 +144,6 @@ public class SelectionManager implements ISelect {
 	@Override
 	public void clearSelections() {
 		lastSelections = Lists.newArrayList(selectedPoints());
-		System.out.println("[SelectionManager.clearSelections] lastSelections=" + lastSelections);
 		for (Selection s : getSelections()) {
 			deselect(s);
 		}
@@ -153,7 +159,6 @@ public class SelectionManager implements ISelect {
 
 	@Override
 	public void reselectLast() {
-		System.out.println("[SelectionManager.reselectLast] lastSelections=" + lastSelections);
 		for(Point3i p : lastSelections) {
 			select(p.x, p.y, p.z);
 		}

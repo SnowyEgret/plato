@@ -56,13 +56,14 @@ public class Overlay {
 			}
 		}
 
-		if (holdable.isPicking() || (!holdable.isPicking() && !selectionManager.getSelectionList().isEmpty() && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))) {
+		if (holdable.isPicking() || (!holdable.isPicking() && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))) {
 			if (displacement != null) {
 				int dx = (int) displacement.x;
 				int dz = (int) displacement.z;
-				r.drawStringWithShadow(((dx >= 0) ? "East" : "West") + ": " + Math.abs(dx) + "  " + ((dz >= 0) ? "North" : "South")
-						+ ": " + Math.abs(dz), x, y += dy, red);
-				r.drawStringWithShadow("Height: " + Math.abs((int) displacement.y), x, y += dy, red);
+				//Add 1 to get distance
+				r.drawStringWithShadow(((dx >= 0) ? "East" : "West") + ": " + (Math.abs(dx) + 1) + "  " + ((dz >= 0) ? "North" : "South")
+						+ ": " + (Math.abs(dz) + 1), x, y += dy, red);
+				r.drawStringWithShadow("Height: " + (Math.abs((int) displacement.y) + 1), x, y += dy, red);
 			}
 		}
 
