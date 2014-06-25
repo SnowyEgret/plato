@@ -58,6 +58,11 @@ public class Messages extends NLS {
 	public static String spell_box_picks;
 	public static String spell_box_modifier;
 
+	public static String spell_pyramid_name;
+	public static String spell_pyramid_description;
+	public static String spell_pyramid_picks;
+	public static String spell_pyramid_modifier;
+
 	//Grow spells
 	public static String spell_grow_picks;
 	public static String spell_grow_modifier_0;

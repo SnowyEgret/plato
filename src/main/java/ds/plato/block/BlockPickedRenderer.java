@@ -37,7 +37,7 @@ public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 			pickedBlock = pick.block;
 		}
 		
-		// If the pick is selected we want to render the selection's block, not the BlockSelected
+		// If the pick is selected we want to render the selection's block, not the BlockSelected. Fix for issue #6.
 		if (pickedBlock instanceof BlockSelected) {
 			Selection s = selectionManager.selectionAt(x, y, z);
 			pickedBlock = s.block;
