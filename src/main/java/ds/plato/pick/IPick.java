@@ -20,6 +20,8 @@ public interface IPick {
 
 	public Pick getPickAt(Point3i p);
 
+	public Pick getPickAt(int x, int y, int z);
+
 	public void reset(int numPicks);
 
 	@Deprecated

@@ -46,7 +46,7 @@ public class ClientProxy extends CommonProxy {
 		blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId, selectionManager));
-		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, pickManager));
+		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, selectionManager, pickManager));
 	}
 
 	@Override

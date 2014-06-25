@@ -9,7 +9,6 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
-import ds.plato.Plato;
 import ds.plato.block.BlockPicked;
 import ds.plato.core.IWorld;
 
@@ -106,6 +105,7 @@ public class PickManager implements IPick {
 		clear();
 	}
 
+	@Override
 	public Pick getPickAt(int x, int y, int z) {
 		for (Pick p : picks) {
 			if (p.equals(new Pick(x, y, z, null, 0))) {
@@ -113,6 +113,12 @@ public class PickManager implements IPick {
 			}
 		}
 		return null;
+	}
+
+	@Deprecated
+	@Override
+	public Pick getPickAt(Point3i p) {
+		return getPickAt(p.x, p.y, p.z);
 	}
 
 	public Iterable<Pick> getPicks() {
@@ -127,14 +133,11 @@ public class PickManager implements IPick {
 		return l;
 	}
 
-	public Pick getPickAt(Point3i p) {
-		return getPickAt(p.x, p.y, p.z);
-	}
-
 	public int size() {
 		return picks.size();
 	}
 
+	@Override
 	public Pick lastPick() {
 		try {
 			return picks.getLast();

@@ -60,7 +60,7 @@ public class Overlay {
 			if (displacement != null) {
 				int dx = (int) displacement.x;
 				int dz = (int) displacement.z;
-				//Add 1 to get distance
+				//Add 1 to get distance instead of displacement
 				r.drawStringWithShadow(((dx >= 0) ? "East" : "West") + ": " + (Math.abs(dx) + 1) + "  " + ((dz >= 0) ? "North" : "South")
 						+ ": " + (Math.abs(dz) + 1), x, y += dy, red);
 				r.drawStringWithShadow("Height: " + (Math.abs((int) displacement.y) + 1), x, y += dy, red);
