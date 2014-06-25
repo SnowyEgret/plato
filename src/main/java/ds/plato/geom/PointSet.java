@@ -11,6 +11,12 @@ public class PointSet implements IDrawable, Iterable<Point3d> {
 
 	private final List<Point3d> points = new ArrayList<>();
 
+	public PointSet(Point3d...points) {
+		for (Point3d p : points) {
+			this.points.add(p);
+		}
+	}
+
 	@Override
 	public PointSet pointSet() {
 		return this;
@@ -52,5 +58,15 @@ public class PointSet implements IDrawable, Iterable<Point3d> {
 	@Override
 	public Point3d getOrigin() {
 		return points.get(0);
+	}
+
+	public void addPoints(Point3d...points) {
+		for (Point3d p : points) {
+			this.points.add(p);
+		}
+	}
+
+	public boolean isEmpty() {
+		return points.isEmpty();
 	}
 }

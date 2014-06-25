@@ -161,26 +161,6 @@ public class ForgeEventHandler {
 	@SubscribeEvent
 	public void onDrawBlockHightlight(DrawBlockHighlightEvent e) {
 		MovingObjectPosition pos = e.target;
-		
-//		if (holdable != null) {
-//			Pick p = pickManager.lastPick();
-//			if (p != null) {
-//				Vector3d d = new Vector3d();
-//				d.x = p.x - pos.blockX;
-//				d.y = p.y - pos.blockY;
-//				d.z = p.z - pos.blockZ;
-//				overlay.setDisplacement(d);
-//			} else {
-//				Selection s = selectionManager.lastSelection();
-//				if (s != null) {
-//					Vector3d d = new Vector3d();
-//					d.x = s.x - pos.blockX;
-//					d.y = s.y - pos.blockY;
-//					d.z = s.z - pos.blockZ;
-//					overlay.setDisplacement(d);
-//				}
-//			}
-//		}
 
 		if (holdable != null) {
 			Point3i p = null;
@@ -222,8 +202,9 @@ public class ForgeEventHandler {
 						holdable = (IHoldable) item;
 						Spell s = holdable.getSpell();
 						if (s != null) {
-							pickManager.clearPicks();
-							pickManager.reset(s.getNumPicks());
+							holdable.reset();
+//							pickManager.clearPicks();
+//							pickManager.reset(s.getNumPicks());
 						}
 					}
 				} else {

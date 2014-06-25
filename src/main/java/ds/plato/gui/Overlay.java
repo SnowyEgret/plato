@@ -17,7 +17,7 @@ public class Overlay {
 
 	private ISelect selectionManager;
 	private Vector3d displacement;
-	private String message;
+	//private String message;
 	private final int white = 0xffffff;
 	private final int red = 0xffaaaa;
 	private final int green = 0xaaffaa;
@@ -31,9 +31,9 @@ public class Overlay {
 		this.displacement = displacement;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+//	public void setMessage(String message) {
+//		this.message = message;
+//	}
 
 	public void draw(IHoldable holdable) {
 		int x = 10;
@@ -79,8 +79,9 @@ public class Overlay {
 			}
 		}
 
+		String message = holdable.getMessage();
 		if (message != null) {
-			r.drawStringWithShadow(message, x, y += dy, 0xffaaaa);
+			r.drawStringWithShadow(message, x, y += dy, green);
 		}
 	}
 

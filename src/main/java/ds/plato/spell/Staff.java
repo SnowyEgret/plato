@@ -67,9 +67,9 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	}
 
 	@Override
-	public void resetPickManager() {
+	public void reset() {
 		if (currentSpell() != null)
-			currentSpell().resetPickManager();
+			currentSpell().reset();
 	}
 
 	@Override
@@ -160,5 +160,15 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	public void save() {
 		propertyOrdinal.set(ordinal);
 		System.out.println("[Staff.save] propertyOrdinal=" + propertyOrdinal);
+	}
+
+	@Override
+	public String getMessage() {
+		Spell s = currentSpell();
+		if (s == null) {
+			return null;
+		} else {
+			return s.getMessage();
+		}
 	}
 }

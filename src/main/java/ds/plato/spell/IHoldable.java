@@ -10,8 +10,10 @@ public interface IHoldable {
 
 	boolean isPicking();
 
-	@Deprecated void resetPickManager();
+	void reset();
 
 	Spell getSpell();
+
+	String getMessage();
 
 }

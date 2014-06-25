@@ -7,8 +7,6 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockColored;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +31,6 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.SpellDescriptor;
-import ds.plato.spell.select.AbstractSpellSelect;
 import ds.plato.undo.IUndo;
 
 public abstract class Spell extends Item implements IClickable, IHoldable {
@@ -41,6 +38,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
 	protected IPick pickManager;
+	protected String message;
 	private int numPicks;
 
 	public Spell(int numPicks, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
@@ -142,16 +140,20 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		return selectionManager;
 	}
 
+	@Override
 	public abstract SpellDescriptor getDescriptor();
 
+	@Override
 	public boolean isPicking() {
 		return pickManager.isPicking();
 	}
 
 	@Override
-	public void resetPickManager() {
+	public void reset() {
+		System.out.println("[Spell.reset] resetting");
 		pickManager.clearPicks();
 		pickManager.reset(numPicks);
+		message = null;
 	}
 
 	// For Staff.addSpell(). Only one spell of each type on a staff
@@ -214,6 +216,11 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	public int getNumPicks() {
 		return numPicks;
+	}
+	
+	@Override
+	public String getMessage() {
+		return message;
 	}
 
 }
