@@ -66,7 +66,9 @@ public class Messages extends NLS {
 	public static String spell_measure_name;
 	public static String spell_measure_description;
 	public static String spell_measure_picks;
-	public static String spell_measure_modifier;
+	public static String spell_measure_modifier_0;
+	public static String spell_measure_modifier_1;
+	public static String spell_measure_modifier_2;
 
 	//Grow spells
 	public static String spell_grow_picks;

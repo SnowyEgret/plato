@@ -29,7 +29,7 @@ public class SpellMeasure extends AbstractSpellDraw {
 		d.name = Messages.spell_measure_name;
 		d.description = Messages.spell_measure_description;
 		d.picks = new PickDescriptor(Messages.spell_measure_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_measure_modifier);
+		d.modifiers = new ModifierDescriptor(Messages.spell_measure_modifier_0, Messages.spell_measure_modifier_1, Messages.spell_measure_modifier_2);
 		return d;
 	}
 
@@ -41,10 +41,15 @@ public class SpellMeasure extends AbstractSpellDraw {
 		message = String.format("Distance: %.1f", p0.distance(p1));
 		PointSet points = new PointSet();
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			//TODO if point is on border between two blocks, draw both blocks
-			Point3d midPoint = new Point3d();
-			midPoint.interpolate(p0, p1, .5d);
-			points.addPoint(midPoint);
+			// TODO if point is on border between two blocks, draw both blocks
+			points.addPoint(interpolate(p0, p1, .5d));
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU)) { //Alt
+			double d = 1 / 3d;
+			for (int i = 1; i < 3; i++) {
+				double dd = i * d;
+				points.addPoint(interpolate(p0, p1, i * d));
+			}
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 			points.addPoints(p0, p1);
@@ -54,6 +59,12 @@ public class SpellMeasure extends AbstractSpellDraw {
 			selectionManager.clearSelections();
 		}
 		pickManager.clearPicks();
+	}
+
+	private Point3d interpolate(Point3d p0, Point3d p1, double d) {
+		Point3d p = new Point3d();
+		p.interpolate(p0, p1, d);
+		return p;
 	}
 
 }
