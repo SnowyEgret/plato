@@ -14,6 +14,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import ds.plato.Plato;
+import ds.plato.block.BlockModelRenderer;
 import ds.plato.block.BlockPickedRenderer;
 import ds.plato.block.BlockSelectedRenderer;
 import ds.plato.core.ForgeEventHandler;
@@ -47,6 +48,7 @@ public class ClientProxy extends CommonProxy {
 		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId, selectionManager));
 		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, selectionManager, pickManager));
+		RenderingRegistry.registerBlockHandler(new BlockModelRenderer());
 	}
 
 	@Override

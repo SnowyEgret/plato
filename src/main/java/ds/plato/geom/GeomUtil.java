@@ -46,12 +46,14 @@ public class GeomUtil {
 		return vP.length();
 	}
 
+	@Deprecated
 	public static Matrix4d newTranslationMatrix(Point3d from, Point3d to) {
 		Vector3d v = new Vector3d();
 		v.sub(to, from);
 		return newTranslationMatrix(v);
 	}
 
+	@Deprecated
 	public static Matrix4d newTranslationMatrix(Vector3d v) {
 		Matrix4d m = new Matrix4d();
 		m.setIdentity();
@@ -60,6 +62,7 @@ public class GeomUtil {
 	}
 
 	// Creates a matrix which reflects in either the XY or YZ plane depending largest component
+	@Deprecated
 	public static Matrix4d newReflectionMatrix(Point3d centroid, Point3d p) {
 		Vector3d v = new Vector3d();
 		v.sub(centroid, p);
@@ -84,6 +87,7 @@ public class GeomUtil {
 
 	// http://www.moreprocess.com/computer-graphics/reflection-of-a-point-with-respect-to-an-arbitrary-plane-in-3d
 	// http://onyx.boisestate.edu/~tcole/cs496/java3d/demo/ch7/composition/Mirror.java
+	@Deprecated
 	public static Matrix4d newReflectionMatrix(Point3d p1, Point3d p2, Point3d p3) {
 
 		Matrix4d mT = newTranslationMatrix(new Vector3d(p1));
@@ -102,6 +106,7 @@ public class GeomUtil {
 		return m;
 	}
 
+	@Deprecated
 	public static Matrix4d newRotationMatrix(Vector3d v1, Vector3d v2) {
 		Matrix4d m = new Matrix4d();
 		m.setIdentity();
@@ -113,10 +118,12 @@ public class GeomUtil {
 		return m;
 	}
 
+	@Deprecated
 	public static Matrix4d newScaleMatrix(Point3d origin, Point3d from, Point3d to) {
 		throw new UnsupportedOperationException("Method 'GeomUtil.newScaleMatrix' not yet implemented");
 	}
 
+	@Deprecated
 	public static Matrix4d newScaleMatrix(Vector3d scale) {
 		Matrix4d m = new Matrix4d();
 		m.setIdentity();
@@ -126,6 +133,7 @@ public class GeomUtil {
 		return m;
 	}
 
+	@Deprecated
 	public static Matrix4d newRotX90Matrix(Point3d origin) {
 		Point3d from = new Point3d(origin);
 		Point3d to = new Point3d(origin);
@@ -134,6 +142,7 @@ public class GeomUtil {
 		return newRotationMatrix(origin, from, to);
 	}
 
+	@Deprecated
 	public static Matrix4d newRotX180Matrix(Point3d origin) {
 		Point3d from = new Point3d(origin);
 		Point3d to = new Point3d(origin);
@@ -142,6 +151,7 @@ public class GeomUtil {
 		return newRotationMatrix(origin, from, to);
 	}
 
+	@Deprecated
 	public static Matrix4d newRotX270Matrix(Point3d origin) {
 		Point3d from = new Point3d(origin);
 		Point3d to = new Point3d(origin);
@@ -150,6 +160,7 @@ public class GeomUtil {
 		return newRotationMatrix(origin, from, to);
 	}
 
+	@Deprecated
 	public static Matrix4d newRotZ90Matrix(Point3d center) {
 		Point3d from = new Point3d(center);
 		Point3d to = new Point3d(center);
@@ -158,6 +169,7 @@ public class GeomUtil {
 		return newRotationMatrix(center, from, to);
 	}
 
+	@Deprecated
 	public static Matrix4d newRotY90Matrix(Point3d center) {
 		Point3d from = new Point3d(center);
 		Point3d to = new Point3d(center);
@@ -166,6 +178,7 @@ public class GeomUtil {
 		return newRotationMatrix(center, from, to);
 	}
 
+	@Deprecated
 	public static Matrix4d newRotationMatrix(Point3d center, Point3d from, Point3d to) {
 
 		Matrix4d mR = new Matrix4d();

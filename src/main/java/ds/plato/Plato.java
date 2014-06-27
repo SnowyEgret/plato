@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -22,6 +23,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -33,6 +35,8 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import ds.plato.block.BlockModel;
+import ds.plato.block.BlockModelRenderer;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
 import ds.plato.common.ConfigHelper;
@@ -111,8 +115,12 @@ public class Plato {
 		log.info("[Plato.preInit]Initializing blocks...");
 		blockSelected = initBlock(new BlockSelected());
 		blockPicked = initBlock(new BlockPicked());
+		
+		//Try loading a Wavefront model
+		Block blockModel = initBlock(new BlockModel());
+		blockModel.setCreativeTab(CreativeTabs.tabBlock);
 
-		undoManager = new UndoManager();
+		undoManager = new UndoManager();		
 		selectionManager = new SelectionManager(blockSelected);
 		pickManager = new PickManager(blockPicked);
 
@@ -166,14 +174,6 @@ public class Plato {
 
 	}
 
-	private Block initBlock(BlockSelected block) {
-		String classname = block.getClass().getSimpleName();
-		String name = classname.substring(0, 1).toLowerCase() + classname.substring(1);
-		block.setBlockName(name);
-		GameRegistry.registerBlock(block, ID + name);
-		return block;
-	}
-
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.setCustomRenderers(selectionManager, pickManager);
@@ -205,6 +205,14 @@ public class Plato {
 			s.save();
 		}
 		configuration.save();
+	}
+
+	private Block initBlock(Block block) {
+		String classname = block.getClass().getSimpleName();
+		String name = classname.substring(0, 1).toLowerCase() + classname.substring(1);
+		block.setBlockName(name);
+		GameRegistry.registerBlock(block, ID + name);
+		return block;
 	}
 
 	@Deprecated
