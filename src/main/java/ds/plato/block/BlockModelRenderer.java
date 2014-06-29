@@ -20,11 +20,11 @@ public class BlockModelRenderer implements ISimpleBlockRenderingHandler {
 
 	public BlockModelRenderer() {
 		this.id = RenderingRegistry.getNextAvailableRenderId();
-		ResourceLocation l = new ResourceLocation("plato", "models/sphere.obj");
-		System.out.println(l);
-		System.out.println(l.getResourceDomain());
-		System.out.println(l.getResourcePath());
-		model = AdvancedModelLoader.loadModel(l);
+		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/sphere.obj"));
+	}
+
+	public void setModel(String modelName) {
+		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/" + modelName + ".obj"));
 	}
 
 	@Override
@@ -38,13 +38,11 @@ public class BlockModelRenderer implements ISimpleBlockRenderingHandler {
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
 			RenderBlocks renderer) {
 		Tessellator tes = Tessellator.instance;
-		System.out.println("[BlockModelRenderer.renderWorldBlock] tes=" + tes);
-		System.out.println("[BlockModelRenderer.renderWorldBlock] tes.renderingWorldRenderer="
-				+ tes.renderingWorldRenderer);
-		int mode = tes.draw();
+		// To solve "already rendering" exception. See http://www.minecraftforge.net/forum/index.php?topic=16380.0
+		tes.draw();
 		GL11.glPushMatrix();
-		GL11.glTranslated(x + .5, y + .5 , z + .5);
-		//GL11.glScalef(.5f, .5f, .5f);
+		GL11.glTranslated(x + .5, y + .5, z + .5);
+		// GL11.glScaled(.5, .5, .5);
 		try {
 			model.renderAll();
 		} catch (Exception e) {

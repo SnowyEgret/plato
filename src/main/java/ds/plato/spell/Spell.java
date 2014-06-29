@@ -47,6 +47,10 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
 	}
+	
+	public Recipe getRecipe() {
+		return new Recipe();		
+	}
 
 	@Override
 	public Spell getSpell() {

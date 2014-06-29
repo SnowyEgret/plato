@@ -1,13 +1,13 @@
 package ds.plato.spell;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 
 import com.google.common.collect.Lists;
 
@@ -16,7 +16,6 @@ import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.select.EnumShell;
@@ -26,6 +25,11 @@ import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
 
 public class SpellHoleDrain extends Spell {
+
+	@Override
+	public Recipe getRecipe() {
+		return new Recipe(new Ingredient(Items.bucket, 4, 6), new Ingredient(Items.ghast_tear, 5));
+	}
 
 	private Set<Point3i> points = new HashSet<>();
 	private int numBlocksDrained = 0;

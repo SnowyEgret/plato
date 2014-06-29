@@ -93,6 +93,9 @@ public class Messages extends NLS {
 	public static String spell_grow_bellow_name;
 	public static String spell_grow_bellow_description;
 	
+	public static String spell_grow_xy_name;
+	public static String spell_grow_xy_description;
+	
 	//Transform spells
 
 	public static String spell_rotate_90_name;

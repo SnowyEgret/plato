@@ -6,6 +6,7 @@ import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockSand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
@@ -26,6 +27,7 @@ public class PlatoTest {
 	@Mock protected BlockSand sand;
 	@Mock protected BlockSand clay;
 	@Mock protected BlockAir air;
+	@Mock protected Item bucket;
 	@Mock protected BlockSelected blockSelected;
 	@Mock protected BlockPicked blockPicked;
 	@Mock protected IWorld world;
@@ -43,6 +45,8 @@ public class PlatoTest {
 		when(dirt.getLocalizedName()).thenReturn("dirt");
 		when(sand.getLocalizedName()).thenReturn("sand");
 		when(clay.getLocalizedName()).thenReturn("clay");
+		//TODO class Item does not have method getLocalizedName. What is called instead? Used in T_Spell.getRecipe
+		when(bucket.toString()).thenReturn("bucket");
 	}
 
 	protected IWorld newStubWorld() {
