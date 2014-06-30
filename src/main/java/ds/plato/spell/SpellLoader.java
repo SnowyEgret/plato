@@ -1,6 +1,5 @@
 package ds.plato.spell;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -9,11 +8,10 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
@@ -66,14 +64,17 @@ public class SpellLoader {
 	public Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 
 		String name = toName(spellClass);
-		Constructor<? extends Spell> c = spellClass
-				.getConstructor(IUndo.class, ISelect.class, IPick.class);
+		Constructor<? extends Spell> c = spellClass.getConstructor(IUndo.class, ISelect.class, IPick.class);
 		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
 		s.setTextureName(modId + ":" + name);
 		GameRegistry.registerItem(s, name);
+		if (s.getRecipe() != null) {
+			System.out.println("[SpellLoader.loadSpell] s.getRecipe()=" + s.getRecipe());
+			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
+		}
 		System.out.println("[SpellLoader.loadSpell] Loaded spell=" + s);
 		return s;
 	}

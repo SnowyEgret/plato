@@ -8,6 +8,7 @@ import javax.vecmath.Point3i;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.Lists;
 
@@ -26,11 +27,6 @@ import ds.plato.undo.Transaction;
 
 public class SpellHoleDrain extends Spell {
 
-	@Override
-	public Recipe getRecipe() {
-		return new Recipe(new Ingredient(Items.bucket, 4, 6), new Ingredient(Items.ghast_tear, 5));
-	}
-
 	private Set<Point3i> points = new HashSet<>();
 	private int numBlocksDrained = 0;
 	private int maxBlocksDrained = 9999;
@@ -38,6 +34,11 @@ public class SpellHoleDrain extends Spell {
 
 	public SpellHoleDrain(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
+	} 
+
+	@Override
+	public Object[] getRecipe() {
+		return new Object[] { "", "BTB", "", 'T', Items.ghast_tear, 'B', Items.bone };
 	}
 
 	@Override
@@ -46,7 +47,8 @@ public class SpellHoleDrain extends Spell {
 		d.name = Messages.spell_hole_drain_name;
 		d.description = Messages.spell_hole_drain_description;
 		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
-		//d.modifiers = new ModifierDescriptor(Messages.spell_hole_drain_modifier_0, Messages.spell_hole_drain_modifier_1);
+		// d.modifiers = new ModifierDescriptor(Messages.spell_hole_drain_modifier_0,
+		// Messages.spell_hole_drain_modifier_1);
 		return d;
 	}
 
@@ -90,8 +92,8 @@ public class SpellHoleDrain extends Spell {
 					points.add(p);
 				}
 			}
-		}		
-		if (points.size() > lastPointsSize  && numBlocksDrained < maxBlocksDrained) {
+		}
+		if (points.size() > lastPointsSize && numBlocksDrained < maxBlocksDrained) {
 			lastPointsSize = points.size();
 			recursivelyDrainWater(world);
 		}

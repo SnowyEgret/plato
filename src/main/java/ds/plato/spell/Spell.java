@@ -12,10 +12,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
@@ -48,8 +50,8 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		this.pickManager = pickManager;
 	}
 	
-	public Recipe getRecipe() {
-		return new Recipe();		
+	public Object[] getRecipe() {
+		return null;		
 	}
 
 	@Override
