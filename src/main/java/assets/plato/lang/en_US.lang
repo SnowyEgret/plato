@@ -1,21 +1,31 @@
-item.stickSelection.name=Selection Stick
-item.stickEdit.name=Edit Stick
-item.stickSurface.name=Surface Stick
-item.stickSolid.name=Solid Stick
-item.stickCurve.name=Curve Stick
-
 item.staff.name=Staff
 item.staffDraw.name=Draw Staff
 item.staffSelect.name=Select Staff
 item.staffTransform.name=Edit Staff
 
+item.spellBox.name=Box Spell
+item.spellCircle.name=Circle Spell
+item.spellCone.name=Cone Spell
+item.spellLine.name=Line Spell
+item.spellMeasure.name=Measure Spell
+item.spellPyramid.name=Pyramid Spell
+item.spellRectangle.name=Rectangle Spell
+item.spellSphere.name=Sphere Spell
+
 item.spellCopy.name=Copy Spell
+item.spellMirror.name=Mirror Spell
+item.spellRotate90.name=Rotate Spell
+
+item.spellGrowAll.name=Grow ALL Spell
+item.spellGrowAbove.name=Grow Above Spell
+item.spellGrowBellow.name=Grow Bellow Spell
+item.spellGrowDown.name=Grow Down Spell
+item.spellGrowHorizontal.name=Grow Horizontal Spell
+item.spellGrowUp.name=Grow Up Spell
+item.spellGrowXY.name=Grow XY Spell
+
 item.spellDelete.name=Delete Spell
 item.spellFill.name=Fill Spell
 item.spellFillChecker.name=Checker Spell
 item.spellFillRandom.name=Random Fill Spell
-item.spellGrowAll.name=Grow ALL Spell
-item.spellMirror.name=Mirror Spell
-item.spellRotate90.name=Rotate Spell
-item.spellSphere.name=Sphere Spell
 

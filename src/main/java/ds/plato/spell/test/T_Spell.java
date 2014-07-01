@@ -1,4 +1,4 @@
-package ds.plato.spell.testt;
+package ds.plato.spell.test;
 
 import static org.junit.Assert.*;
 
