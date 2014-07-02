@@ -42,4 +42,10 @@ public class SpellSphere extends AbstractSpellDraw {
 		d.modifiers = new ModifierDescriptor(Messages.spell_sphere_modifier);
 		return d;
 	}
+
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

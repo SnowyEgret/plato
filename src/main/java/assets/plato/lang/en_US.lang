@@ -29,3 +29,10 @@ item.spellFill.name=Fill Spell
 item.spellFillChecker.name=Checker Spell
 item.spellFillRandom.name=Random Fill Spell
 
+item.spellHoleDrain.name = Drain Hole spell
+item.spellHoleFill.name = Fill Hole spell
+item.spellHoleDrain.name = Drain Hole spell
+item.spellMengerSponge.name = Menger Sponge spell
+item.spellSave.name = Store spell
+item.spellRestore.name = Restore spell
+item.spellThicken.name = Thicken spell

@@ -272,7 +272,7 @@ public class Plato {
 					int metadata = item.getDamage(stack);
 					SlotEntry entry = new SlotEntry(b, metadata, i + 1);
 					entries.add(entry);
-					// Not working
+					// FIXME
 				} else if (item instanceof ItemBucket) {
 					Block b = Blocks.water;
 					int metadata = item.getDamage(stack);
@@ -287,11 +287,9 @@ public class Plato {
 		return entries;
 	}
 
-	// World is not available when selectionManager and spells are initialized.
 	@Deprecated
 	public void setWorld(IWorld world) {
 		selectionManager.setWorld(world);
 		pickManager.setWorld(world);
-		System.out.println("[Plato.setWorld] Completed initalization of managers, staffs, and spells. world=" + world);
 	}
 }

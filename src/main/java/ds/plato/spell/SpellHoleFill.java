@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import ds.plato.Plato;
 import ds.plato.common.UndoableSetBlock;
 import ds.plato.core.IWorld;
@@ -37,6 +38,11 @@ public class SpellHoleFill extends Spell {
 		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
 		d.modifiers = new ModifierDescriptor(Messages.spell_hole_fill_modifier_0, Messages.spell_hole_fill_modifier_1);
 		return d;
+	}
+
+	@Override
+	public Object[] getRecipe() {
+		return new Object[] { "", "BTB", "", 'T', Items.ghast_tear, 'B', Items.water_bucket };
 	}
 
 	@Override

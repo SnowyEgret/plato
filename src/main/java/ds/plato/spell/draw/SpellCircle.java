@@ -36,4 +36,10 @@ public class SpellCircle extends AbstractSpellDraw {
 		pickManager.clearPicks();
 	}
 
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -48,4 +48,10 @@ public class SpellLine extends AbstractSpellDraw {
 		}
 	}
 
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

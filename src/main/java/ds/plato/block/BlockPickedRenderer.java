@@ -27,7 +27,8 @@ public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+			RenderBlocks renderer) {
 		Block pickedBlock = null;
 		Pick pick = pickManager.getPickAt(x, y, z);
 		if (pick == null) {
@@ -36,11 +37,13 @@ public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 		} else {
 			pickedBlock = pick.block;
 		}
-		
+
 		// If the pick is selected we want to render the selection's block, not the BlockSelected. Fix for issue #6.
 		if (pickedBlock instanceof BlockSelected) {
 			Selection s = selectionManager.selectionAt(x, y, z);
-			pickedBlock = s.block;
+			if (s != null) {
+				pickedBlock = s.block;
+			}
 		}
 
 		renderer.renderStandardBlockWithColorMultiplier(pickedBlock, x, y, z, .7f, .9f, .7f);

@@ -85,4 +85,10 @@ public class SpellMengerSponge extends Spell {
 		level--;
 		System.out.println("[SpellMengerSponge.recursivelySubtract] level=" + level);
 	}
+
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

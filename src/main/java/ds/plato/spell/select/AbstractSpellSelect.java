@@ -109,4 +109,9 @@ public abstract class AbstractSpellSelect extends Spell {
 		grownSelections.clear();
 	}
 
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

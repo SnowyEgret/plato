@@ -32,15 +32,6 @@ public class SpellCopy extends AbstractSpellMatrix {
 		transformSelections(matrix, world, Keyboard.isKeyDown(Keyboard.KEY_LCONTROL));
 	}
 
-//	private static class Descriptor extends SpellDescriptor {
-//		public Descriptor() {
-//			name = Messages.spell_copy_name;
-//			description = Messages.spell_copy_description;
-//			picks = new PickDescriptor(Messages.spell_copy_picks);
-//			modifiers = new ModifierDescriptor(Messages.spell_copy_modifier);
-//		}
-//	}
-
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
@@ -49,5 +40,11 @@ public class SpellCopy extends AbstractSpellMatrix {
 		d.picks = new PickDescriptor(Messages.spell_copy_picks);
 		d.modifiers = new ModifierDescriptor(Messages.spell_copy_modifier);
 		return d;
+	}
+
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

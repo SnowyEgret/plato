@@ -25,4 +25,10 @@ public abstract class AbstractSpellTransform extends Spell {
 		t.commit();
 		selectionManager.clearSelections();
 	}
+	
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

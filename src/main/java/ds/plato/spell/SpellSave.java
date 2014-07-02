@@ -68,4 +68,10 @@ public class SpellSave extends Spell {
 		d.modifiers = new ModifierDescriptor(Messages.spell_save_modifier);
 		return d;
 	}
+
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

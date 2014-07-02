@@ -67,4 +67,10 @@ public class SpellRestore extends Spell {
 		}
 	}
 
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

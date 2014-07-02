@@ -48,8 +48,9 @@ public class KeyInputEventHandler {
 		// if (Plato.keyUndo.isPressed()) {
 		if (keyBindings.get("undo").isPressed()) {
 			try {
-				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL))
+				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 					undoManager.undo();
+				}
 			} catch (Exception e) {
 				// TODO Log to chat
 				Plato.log.info("[KeyInputEventHandler.onKeyInput]" + e.getMessage());
@@ -58,8 +59,9 @@ public class KeyInputEventHandler {
 
 		if (keyBindings.get("redo").isPressed()) {
 			try {
-				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL))
+				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 					undoManager.redo();
+				}
 			} catch (Exception e) {
 				// TODO Log to overlay. Create info line in overlay
 				Plato.log.info("[KeyInputEventHandler.onKeyInput]" + e.getMessage());

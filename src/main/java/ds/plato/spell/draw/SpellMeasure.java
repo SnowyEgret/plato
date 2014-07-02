@@ -67,4 +67,10 @@ public class SpellMeasure extends AbstractSpellDraw {
 		return p;
 	}
 
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

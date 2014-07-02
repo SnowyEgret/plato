@@ -38,4 +38,10 @@ public class SpellCone extends AbstractSpellDraw {
 		boolean isHollow = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
 		draw(d, world, slotEntries[0].block, slotEntries[0].metadata, isHollow);
 	}
+
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

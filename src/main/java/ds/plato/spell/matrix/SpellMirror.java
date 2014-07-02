@@ -47,4 +47,10 @@ public class SpellMirror extends AbstractSpellMatrix {
 		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal);
 		return d;
 	}
+
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

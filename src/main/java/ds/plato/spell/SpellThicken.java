@@ -69,4 +69,10 @@ public class SpellThicken extends AbstractSpellTransform {
 		t.commit();
 	}
 
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
