@@ -4,12 +4,13 @@ import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 
-	// Generic strings
+	//Generic strings
+	
 	public static String spell_modifier_deleteOriginal;
 	public static String spell_pick_anywhere;
 	public static String spell_modifier_isHollow;
 	
-	//Edit Spells
+	//Transform Spells
 
 	public static String spell_delete_name;
 	public static String spell_delete_description;
@@ -28,6 +29,9 @@ public class Messages extends NLS {
 	public static String spell_copy_picks;
 	public static String spell_copy_modifier;
 	
+	public static String spell_hollow_name;
+	public static String spell_hollow_description;
+
 	//Draw spells	
 
 	public static String spell_sphere_name;
@@ -71,6 +75,7 @@ public class Messages extends NLS {
 	public static String spell_measure_modifier_2;
 
 	//Grow spells
+	
 	public static String spell_grow_picks;
 	public static String spell_grow_modifier_0;
 	public static String spell_grow_modifier_1;
@@ -96,7 +101,7 @@ public class Messages extends NLS {
 	public static String spell_grow_xy_name;
 	public static String spell_grow_xy_description;
 	
-	//Transform spells
+	//Matrix spells
 
 	public static String spell_rotate_90_name;
 	public static String spell_rotate_90_description;
@@ -147,8 +152,6 @@ public class Messages extends NLS {
 	public static String spell_drop_description;
 	public static String spell_drop_picks;
 	public static String spell_drop_modifier;
-
-
 	
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);
