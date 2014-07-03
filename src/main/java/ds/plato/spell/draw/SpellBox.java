@@ -35,6 +35,7 @@ public class SpellBox extends AbstractSpellDraw {
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicksArray();
 		boolean isCube = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		Point3d p0 = picks[0].toPoint3d();

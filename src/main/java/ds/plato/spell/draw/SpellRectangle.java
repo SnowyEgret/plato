@@ -33,6 +33,7 @@ public class SpellRectangle extends AbstractSpellDraw {
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicksArray();
 		boolean isSquare = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		IDrawable d = new Rectangle(picks[0].toPoint3d(), picks[1].toPoint3d(), isSquare);

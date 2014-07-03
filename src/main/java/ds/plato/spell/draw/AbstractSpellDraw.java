@@ -36,7 +36,6 @@ public abstract class AbstractSpellDraw extends Spell {
 	}
 
 	protected void draw(IDrawable drawable, IWorld world, Block block, int metadata, boolean isHollow) {
-		selectionManager.clearSelections();
 		Transaction t = undoManager.newTransaction();
 		VoxelSet voxels = drawable.voxelize();
 		if (drawable instanceof Solid && isHollow) {

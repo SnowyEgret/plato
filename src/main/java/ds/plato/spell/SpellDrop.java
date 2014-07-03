@@ -43,11 +43,11 @@ public class SpellDrop extends Spell {
 			int drop = 0;
 			while (b == Blocks.air) {
 				drop++;
-				Block nextBlock = world.getBlock(s.x, s.y - drop - 1, s.z);
-				if (fill || nextBlock != Blocks.air) {
+				Block nextBlockDown = world.getBlock(s.x, s.y - drop - 1, s.z);
+				if (fill || nextBlockDown != Blocks.air) {
 					transaction.add(new SetBlock(world, selectionManager, s.x, s.y - drop, s.z, s.block, s.metadata).set());
 				}
-				b = nextBlock;
+				b = nextBlockDown;
 			}
 			selectionManager.deselect(s);
 			if (deleteOriginal) {
@@ -55,6 +55,7 @@ public class SpellDrop extends Spell {
 			}
 		}
 		transaction.commit();
+		pickManager.clearPicks();
 	}
 
 	@Override

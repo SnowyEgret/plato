@@ -30,6 +30,7 @@ public class SpellCircle extends AbstractSpellDraw {
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicksArray();
 		IDrawable d = new CircleXZ(picks[0].toPoint3d(), picks[1].toPoint3d());
 		draw(d, world, slotEntries[0].block, slotEntries[0].metadata);

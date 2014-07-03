@@ -37,6 +37,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.block.BlockModel;
 import ds.plato.block.BlockModelRenderer;
+import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
 import ds.plato.common.ConfigHelper;
@@ -119,7 +120,9 @@ public class Plato {
 		//Try loading a Wavefront model
 		Block blockModel = initBlock(new BlockModel());
 		blockModel.setCreativeTab(CreativeTabs.tabBlock);
-
+		//TODO what is this stringID
+		GameRegistry.registerTileEntity(BlockModelTileEntity.class, "stringID");
+		
 		undoManager = new UndoManager();		
 		selectionManager = new SelectionManager(blockSelected);
 		pickManager = new PickManager(blockPicked);

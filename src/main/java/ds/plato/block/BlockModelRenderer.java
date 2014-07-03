@@ -23,6 +23,7 @@ public class BlockModelRenderer implements ISimpleBlockRenderingHandler {
 		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/sphere.obj"));
 	}
 
+	// TODO move to tile entity
 	public void setModel(String modelName) {
 		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/" + modelName + ".obj"));
 	}
@@ -38,12 +39,13 @@ public class BlockModelRenderer implements ISimpleBlockRenderingHandler {
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
 			RenderBlocks renderer) {
 		Tessellator tes = Tessellator.instance;
-		// To solve "already rendering" exception. See http://www.minecraftforge.net/forum/index.php?topic=16380.0
+		// Call draw() to solve "already rendering" exception. See http://www.minecraftforge.net/forum/index.php?topic=16380.0
 		tes.draw();
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + .5, y + .5, z + .5);
 		// GL11.glScaled(.5, .5, .5);
 		try {
+			// TODO get model from blocks tile entity
 			model.renderAll();
 		} catch (Exception e) {
 			System.out.println("[BlockModelRenderer.renderWorldBlock] e=" + e);
