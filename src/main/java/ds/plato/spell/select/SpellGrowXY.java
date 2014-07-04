@@ -11,7 +11,7 @@ import ds.plato.undo.IUndo;
 public class SpellGrowXY extends AbstractSpellSelect {
 
 	public SpellGrowXY(IUndo undo, ISelect select, IPick pick) {
-		super(EnumShell.VERTICAL_XY, undo, select, pick);
+		super(Shell.Type.VERTICAL_XY, undo, select, pick);
 	}
 
 	@Override

@@ -79,11 +79,6 @@ public class SpellLoader {
 		return s;
 	}
 
-	private String toName(Class c) {
-		String n = c.getSimpleName();
-		return n.substring(0, 1).toLowerCase() + n.substring(1);
-	}
-
 	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String name = toName(staffClass);
 		Property propertyOrdinal = config.get("Staff", name + ".ordinal", 0);
@@ -127,6 +122,17 @@ public class SpellLoader {
 
 	public void save() {
 		config.save();
+	}
+
+	// Not used
+	private String lastWordInCameltype(String cameltype) {
+		String[] tokens = cameltype.split("(?=[A-Z])");
+		return tokens[tokens.length - 1];
+	}
+
+	private String toName(Class c) {
+		String n = c.getSimpleName();
+		return n.substring(0, 1).toLowerCase() + n.substring(1);
 	}
 
 	private Object instanciate(Class cls, Property property) {

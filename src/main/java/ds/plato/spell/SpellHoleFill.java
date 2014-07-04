@@ -2,23 +2,20 @@ package ds.plato.spell;
 
 import javax.vecmath.Point3i;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import ds.plato.Plato;
-import ds.plato.common.UndoableSetBlock;
+
+import org.lwjgl.input.Keyboard;
+
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
-import ds.plato.core.WorldWrapper;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
-import ds.plato.spell.select.EnumShell;
 import ds.plato.spell.select.Shell;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
@@ -49,7 +46,7 @@ public class SpellHoleFill extends Spell {
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
 		Transaction t = undoManager.newTransaction();
 		for (Selection s : selectionManager.getSelections()) {
-			EnumShell type = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) ? EnumShell.HORIZONTAL : EnumShell.BELLOW;
+			Shell.Type type = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) ? Shell.Type.HORIZONTAL : Shell.Type.BELLOW;
 			Shell shell = new Shell(type, s.getPoint3i(), world);
 			for (Point3i p : shell) {
 				Block b = world.getBlock(p.x, p.y, p.z);

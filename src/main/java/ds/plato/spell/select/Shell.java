@@ -6,17 +6,32 @@ import java.util.List;
 
 import javax.vecmath.Point3i;
 
-import ds.plato.core.IWorld;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
+import ds.plato.core.IWorld;
 
 public class Shell implements Iterable<Point3i> {
+	
+	public enum Type {
+		ALL,
+		HORIZONTAL,
+		UP,
+		DOWN,
+		ABOVE,
+		BELLOW,
+		VERTICAL_XY,
+		VERTICAL_ZY,
+		FLOOR,
+		CEILING,
+		FLOOR_EDGE,
+		CEILING_EDGE
+	}
 
 	private List<Point3i> points = new ArrayList();
-	private final EnumShell type;
+	//private final EnumShell type;
+	private final Type type;
 
-	public Shell(EnumShell type, Point3i p0, IWorld w) {
+	public Shell(Type type, Point3i p0, IWorld w) {
 		this.type = type;
 
 		List<Point3i> pts = new ArrayList<>();
@@ -94,7 +109,7 @@ public class Shell implements Iterable<Point3i> {
 			for (Point3i p : pts) {
 				if (p.y == p0.y) {
 					if (w.getBlock(p.x, p.y + 1, p.z) == Blocks.air) {
-						Shell s = new Shell(EnumShell.ABOVE, p, w);
+						Shell s = new Shell(Type.ABOVE, p, w);
 						for (Point3i pp : s) {
 							if (pp.y > p.y && w.getBlock(pp.x, pp.y, pp.z) != Blocks.air) {
 								points.add(p);
@@ -109,7 +124,7 @@ public class Shell implements Iterable<Point3i> {
 			for (Point3i p : pts) {
 				if (p.y == p0.y) {
 					if (w.getBlock(p.x, p.y - 1, p.z) == Blocks.air) {
-						Shell s = new Shell(EnumShell.BELLOW, p, w);
+						Shell s = new Shell(Type.BELLOW, p, w);
 						for (Point3i pp : s) {
 							if (pp.y < p.y && w.getBlock(pp.x, pp.y, pp.z) != Blocks.air) {
 								points.add(p);

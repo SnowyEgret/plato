@@ -47,7 +47,7 @@ public class SpellRestore extends Spell {
 		try {
 			Group group = IO.readGroup("saves/" + filename + ".json");
 			System.out.println("[SpellRestore.readFile] group=" + group);
-			Transaction transaction = Plato.undoManager.newTransaction();
+			Transaction transaction = undoManager.newTransaction();
 			Point3i d = new Point3i();
 			d.sub(group.insertionPoint, pickManager.lastPick());
 			for (Voxel v : group.voxels) {

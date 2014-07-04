@@ -1,6 +1,5 @@
 package ds.plato.spell;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +17,6 @@ import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
-import ds.plato.spell.select.EnumShell;
 import ds.plato.spell.select.Shell;
 import ds.plato.spell.transform.AbstractSpellTransform;
 import ds.plato.undo.IUndo;
@@ -49,7 +47,7 @@ public class SpellThicken extends AbstractSpellTransform {
 		final Point3d c = GeomUtil.toPoint3d(selectionManager.voxelSet().centroid());
 		for (Selection s : selectionManager.getSelections()) {
 			double d = s.getPoint3d().distance(c);
-			Shell shell = new Shell(EnumShell.ALL, s.getPoint3i(), world);
+			Shell shell = new Shell(Shell.Type.ALL, s.getPoint3i(), world);
 			for (Point3i p : shell) {
 				double dd = GeomUtil.toPoint3d(p).distance(c);
 				boolean in = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);

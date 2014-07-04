@@ -20,7 +20,7 @@ import ds.plato.undo.IUndo;
 public class SpellGrowAll extends AbstractSpellSelect {
 
 	public SpellGrowAll(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
-		super(EnumShell.ALL, undoManager, selectionManager, pickManager);
+		super(Shell.Type.ALL, undoManager, selectionManager, pickManager);
 	}
 
 	@Override

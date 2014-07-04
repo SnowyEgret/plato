@@ -2,25 +2,14 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3i;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.block.Block;
-import ds.plato.Plato;
-import ds.plato.common.UndoableSetBlock;
 import ds.plato.core.IWorld;
-import ds.plato.core.SlotEntry;
 import ds.plato.geom.IDrawable;
-import ds.plato.geom.GeomUtil;
 import ds.plato.geom.VoxelSet;
-import ds.plato.geom.curve.Line;
-import ds.plato.geom.curve.Rectangle;
 import ds.plato.geom.solid.Solid;
-import ds.plato.geom.surface.Terrain;
 import ds.plato.pick.IPick;
-import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;

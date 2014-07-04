@@ -11,7 +11,7 @@ import ds.plato.undo.IUndo;
 public class SpellGrowDown extends AbstractSpellSelect {
 
 	public SpellGrowDown(IUndo undo, ISelect select, IPick pick) {
-		super(EnumShell.DOWN, undo, select, pick);
+		super(Shell.Type.DOWN, undo, select, pick);
 	}
 
 	@Override

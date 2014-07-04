@@ -8,7 +8,6 @@ import javax.vecmath.Point3i;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.Lists;
 
@@ -19,7 +18,6 @@ import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
-import ds.plato.spell.select.EnumShell;
 import ds.plato.spell.select.Shell;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
@@ -84,7 +82,7 @@ public class SpellHoleDrain extends Spell {
 	private void recursivelyDrainWater(IWorld world) {
 		// To avoid concurrent modification
 		for (Point3i center : Lists.newArrayList(points)) {
-			Shell shell = new Shell(EnumShell.HORIZONTAL, center, world);
+			Shell shell = new Shell(Shell.Type.HORIZONTAL, center, world);
 			for (Point3i p : shell) {
 				Block b = world.getBlock(p.x, p.y, p.z);
 				if (b == Blocks.water) {

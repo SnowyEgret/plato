@@ -12,7 +12,7 @@ import ds.plato.undo.IUndo;
 public class SpellGrowHorizontal extends AbstractSpellSelect {
 
 	public SpellGrowHorizontal(IUndo undo, ISelect select, IPick pick) {
-		super(EnumShell.HORIZONTAL, undo, select, pick);
+		super(Shell.Type.HORIZONTAL, undo, select, pick);
 	}
 
 	@Override
