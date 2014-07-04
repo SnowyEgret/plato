@@ -2,6 +2,7 @@ package ds.plato.spell.select;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
+import net.minecraft.init.Items;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
@@ -30,6 +31,11 @@ public class SpellGrowAll extends AbstractSpellSelect {
 		d.picks = new PickDescriptor(Messages.spell_grow_picks);
 		d.modifiers = new ModifierDescriptor(Messages.spell_grow_modifier_0, Messages.spell_grow_modifier_1);
 		return d;
+	}
+
+	@Override
+	public Object[] getRecipe() {
+		return new Object[] { "BBB", "BAB", "BBB", 'A', ingredientA, 'B', ingredientB };
 	}
 
 }

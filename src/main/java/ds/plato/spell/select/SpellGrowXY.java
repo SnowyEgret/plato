@@ -24,4 +24,8 @@ public class SpellGrowXY extends AbstractSpellSelect {
 		return d;
 	}
 
+	@Override
+	public Object[] getRecipe() {
+		return new Object[] { " B ", " A ", " B ", 'A', ingredientA, 'B', ingredientB };
+	}
 }

@@ -7,6 +7,8 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
@@ -27,6 +29,8 @@ public abstract class AbstractSpellSelect extends Spell {
 
 	private List<Point3i> grownSelections = new ArrayList<>();
 	private EnumShell type;
+	protected Item ingredientA  = Items.feather;
+	protected Item ingredientB  = Items.dye;
 
 	public AbstractSpellSelect(EnumShell type, IUndo undo, ISelect select, IPick pick) {
 		super(1, undo, select, pick);
@@ -109,9 +113,9 @@ public abstract class AbstractSpellSelect extends Spell {
 		grownSelections.clear();
 	}
 
-	@Override
-	public Object[] getRecipe() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Object[] getRecipe() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

@@ -38,7 +38,7 @@ public class SpellHoleDrain extends Spell {
 
 	@Override
 	public Object[] getRecipe() {
-		return new Object[] { "", "BTB", "", 'T', Items.ghast_tear, 'B', Items.bucket };
+		return new Object[] { "   ", "BTB", "   ", 'T', Items.ghast_tear, 'B', Items.bucket };
 	}
 
 	@Override

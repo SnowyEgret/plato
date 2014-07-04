@@ -42,7 +42,7 @@ public class SpellHoleFill extends Spell {
 
 	@Override
 	public Object[] getRecipe() {
-		return new Object[] { "", "BTB", "", 'T', Items.ghast_tear, 'B', Items.water_bucket };
+		return new Object[] { "   ", "BTB", "   ", 'T', Items.ghast_tear, 'B', Items.water_bucket };
 	}
 
 	@Override

@@ -24,4 +24,9 @@ public class SpellGrowHorizontal extends AbstractSpellSelect {
 		d.modifiers = new ModifierDescriptor(Messages.spell_grow_modifier_0, Messages.spell_grow_modifier_1);
 		return d;
 	}
+
+	@Override
+	public Object[] getRecipe() {
+		return new Object[] { "   ", "BAB", "   ", 'A', ingredientA, 'B', ingredientB };
+	}
 }

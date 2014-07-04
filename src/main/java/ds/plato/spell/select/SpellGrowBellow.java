@@ -24,4 +24,8 @@ public class SpellGrowBellow extends AbstractSpellSelect {
 		return d;
 	}
 
+	@Override
+	public Object[] getRecipe() {
+		return new Object[] { "   ", "BAB", "BBB", 'A', ingredientA, 'B', ingredientB };
+	}
 }
