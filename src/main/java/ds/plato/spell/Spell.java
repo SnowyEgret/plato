@@ -199,10 +199,10 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 					// MapColor c = ((BlockColored) b).getMapColor(metadata);
 					// System.out.println("[Spell.getSlotEntriesFromPlayer] c=" + c.colorValue);
 					// }
-				} else if (item instanceof ItemBucket) {
-					// ItemBucket itemBucket = (ItemBucket) item;
-					// TODO how to determine contents of a bucket
+				} else if (item == Items.water_bucket) {
 					b = Blocks.water;
+				} else if (item == Items.lava_bucket) {
+					b = Blocks.lava;
 				}
 
 				if (b != null) {

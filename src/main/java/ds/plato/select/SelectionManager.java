@@ -2,21 +2,22 @@ package ds.plato.select;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.vecmath.Point3i;
 
+import net.minecraft.block.Block;
+
 import com.google.common.collect.Lists;
 
-import net.minecraft.block.Block;
 import ds.plato.core.IWorld;
 import ds.plato.geom.VoxelSet;
 
 public class SelectionManager implements ISelect {
 
-	private final Map<Point3i, Selection> selections = new HashMap<>();
+	private final Map<Point3i, Selection> selections = new ConcurrentHashMap<>();
 	private IWorld world;
 	private Block blockSelected;
 	private List<Point3i> lastSelections;
@@ -150,17 +151,29 @@ public class SelectionManager implements ISelect {
 	}
 
 	@Override
+	public Selection firstSelection() {
+		if (selections.isEmpty()) {
+			return null;
+		}
+		return getSelectionList().get(0);
+	}
+
+	@Override
 	public Selection lastSelection() {
 		if (selections.isEmpty()) {
 			return null;
 		}
-		return getSelectionList().get(selections.size()-1);
+		// FIXME going out of bounds using ConcurrentHashMap when the selections are being deleted
+		// onDrawBlockHightlight using firstSelection() instead
+		return getSelectionList().get(selections.size() - 1);
 	}
 
 	@Override
 	public void reselectLast() {
-		for(Point3i p : lastSelections) {
-			select(p.x, p.y, p.z);
+		if (lastSelections != null) {
+			for (Point3i p : lastSelections) {
+				select(p.x, p.y, p.z);
+			}
 		}
 	}
 

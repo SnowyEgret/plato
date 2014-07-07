@@ -34,6 +34,8 @@ public interface ISelect {
 
 	public ISelect setWorld(IWorld world);
 	
+	public Selection firstSelection();
+
 	public Selection lastSelection();
 	
 	public VoxelSet voxelSet();

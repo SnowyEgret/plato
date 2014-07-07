@@ -36,7 +36,6 @@ public abstract class AbstractSpellDraw extends Spell {
 			t.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, block, metadata).set());
 		}
 		t.commit();
-		//pickManager.clearPicks();
 	}
 
 }
