@@ -38,7 +38,8 @@ public class SpellThicken extends AbstractSpellTransform {
 		d.name = Messages.spell_thicken_name;
 		d.description = Messages.spell_thicken_description;
 		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
-		d.modifiers = new ModifierDescriptor(Messages.spell_thicken_modifier_0, Messages.spell_thicken_modifier_1);
+		d.modifiers = new ModifierDescriptor(Messages.spell_thicken_modifier_0, Messages.spell_thicken_modifier_1,
+				Messages.spell_thicken_modifier_2);
 		return d;
 	}
 
@@ -46,7 +47,6 @@ public class SpellThicken extends AbstractSpellTransform {
 	public void invoke(final IWorld world, SlotEntry[] slotEntries) {
 		Set<Point3i> points = new HashSet<>();
 		Selection first = selectionManager.getSelections().iterator().next();
-		// TODO Case where selections are planar
 		VoxelSet voxels = selectionManager.voxelSet();
 		IntegerDomain domain = selectionManager.voxelSet().getDomain();
 		if (domain.isPlanar()) {
@@ -54,6 +54,7 @@ public class SpellThicken extends AbstractSpellTransform {
 		} else {
 			thicken(points, voxels, world);
 		}
+
 		selectionManager.clearSelections();
 		Transaction t = undoManager.newTransaction();
 		for (Point3i p : points) {
@@ -82,25 +83,28 @@ public class SpellThicken extends AbstractSpellTransform {
 	}
 
 	private void thickenPlane(Set<Point3i> points, IntegerDomain domain, IWorld world) {
+		boolean withinPlane = Keyboard.isKeyDown(Keyboard.KEY_LMENU);
 		Shell.Type shellType = null;
 		System.out.println("[SpellThicken.thickenPlane] domain.getPlane()=" + domain.getPlane());
 		switch (domain.getPlane()) {
 		case XY:
-			shellType = Shell.Type.Z;
+			shellType = withinPlane ? Shell.Type.XY : Shell.Type.Z;
 			break;
 		case XZ:
 			System.out.println("[SpellThicken.thickenPlane] shellType=" + shellType);
-			shellType = Shell.Type.Y;
+			shellType = withinPlane ? Shell.Type.XZ : Shell.Type.Y;
 			break;
 		case YZ:
-			shellType = Shell.Type.X;
+			shellType = withinPlane ? Shell.Type.YZ : Shell.Type.X;
 			break;
 		}
 		System.out.println("[SpellThicken.thickenPlane] shellType=" + shellType);
 		for (Selection s : selectionManager.getSelections()) {
 			Shell shell = new Shell(shellType, s.getPoint3i(), world);
 			for (Point3i p : shell) {
-				points.add(p);
+				if (!selectionManager.isSelected(p.x, p.y, p.z)) {
+					points.add(p);
+				}
 			}
 		}
 	}

@@ -27,7 +27,10 @@ public class Shell implements Iterable<Point3i> {
 		CEILING_EDGE,
 		X,
 		Y,
-		Z
+		Z,
+		XY,
+		XZ,
+		YZ
 	}
 
 	private List<Point3i> points = new ArrayList();
@@ -152,6 +155,24 @@ public class Shell implements Iterable<Point3i> {
 		case Z:
 			for (Point3i p : pts) {
 				if (p.x == p0.x && p.y == p0.y)
+					points.add(p);
+			}
+			break;
+		case XY:
+			for (Point3i p : pts) {
+				if (p.z == p0.z)
+					points.add(p);
+			}
+			break;
+		case XZ:
+			for (Point3i p : pts) {
+				if (p.y == p0.y)
+					points.add(p);
+			}
+			break;
+		case YZ:
+			for (Point3i p : pts) {
+				if (p.x == p0.x)
 					points.add(p);
 			}
 			break;

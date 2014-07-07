@@ -45,14 +45,14 @@ public class SpellText extends Spell {
 		d.sub(picks[0], picks[1]);
 //		int width = Math.abs(d.x);
 //		int height = Math.abs(d.z);
-		int width = 512;
-		int height = 128;
+		int width = 128;
+		int height = 32;
 		
 		int fontSize = 24;
 		String fontName = "URW Chancery L";
 		int fontStyle = Font.PLAIN;
 		Font font = new Font(fontName, fontStyle, fontSize);
-		font = font.deriveFont(32);
+		//font = font.deriveFont(32);
 		
 		String s = "Oceane";
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -60,7 +60,7 @@ public class SpellText extends Spell {
 		g.setFont(font);
 		Graphics2D graphics = (Graphics2D) g;
 		// graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		graphics.drawString(s, 6, 100);
+		graphics.drawString(s, 6, fontSize + 6);
 		// ImageIO.write(image, "png", new File("text.png"));
 
 		Set<Point3i> points = new HashSet<>();

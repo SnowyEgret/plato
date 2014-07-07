@@ -148,6 +148,7 @@ public class Messages extends NLS {
 	public static String spell_thicken_picks;
 	public static String spell_thicken_modifier_0;
 	public static String spell_thicken_modifier_1;
+	public static String spell_thicken_modifier_2;
 
 	public static String spell_drop_name;
 	public static String spell_drop_description;

@@ -111,6 +111,7 @@ public class ForgeEventHandler {
 		}
 		Item item = stack.getItem();
 
+		//TODO case clicking with bucket
 		if (item instanceof ItemBlock) {
 			ItemBlock itemBlock = (ItemBlock) item;
 			switch (e.action) {
@@ -153,7 +154,7 @@ public class ForgeEventHandler {
 				e.setCanceled(true);
 			}
 		} else {
-			System.out.println("[ForgeEventHandler.onClick] Unexpected item: " + item);
+			System.out.println("[ForgeEventHandler.onPlayerInteractEvent] Unexpected item: " + item);
 		}
 	}
 
