@@ -11,6 +11,9 @@ import org.lwjgl.input.Keyboard;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.geom.GeomUtil;
+import ds.plato.geom.IntegerDomain;
+import ds.plato.geom.VoxelSet;
+import ds.plato.geom.surface.InfinitePlane;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
@@ -44,12 +47,29 @@ public class SpellThicken extends AbstractSpellTransform {
 		Set<Point3i> points = new HashSet<>();
 		Selection first = selectionManager.getSelections().iterator().next();
 		// TODO Case where selections are planar
-		final Point3d c = GeomUtil.toPoint3d(selectionManager.voxelSet().centroid());
+		VoxelSet voxels = selectionManager.voxelSet();
+		IntegerDomain domain = selectionManager.voxelSet().getDomain();
+		if (domain.isPlanar()) {
+			thickenPlane(points, domain, world);
+		} else {
+			thicken(points, voxels, world);
+		}
+		selectionManager.clearSelections();
+		Transaction t = undoManager.newTransaction();
+		for (Point3i p : points) {
+			t.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, first.block, first.metadata).set());
+		}
+		t.commit();
+		pickManager.clearPicks();
+	}
+
+	private void thicken(Set<Point3i> points, VoxelSet voxels, IWorld world) {
+		final Point3d centroid = GeomUtil.toPoint3d(voxels.centroid());
 		for (Selection s : selectionManager.getSelections()) {
-			double d = s.getPoint3d().distance(c);
+			double d = s.getPoint3d().distance(centroid);
 			Shell shell = new Shell(Shell.Type.ALL, s.getPoint3i(), world);
 			for (Point3i p : shell) {
-				double dd = GeomUtil.toPoint3d(p).distance(c);
+				double dd = GeomUtil.toPoint3d(p).distance(centroid);
 				boolean in = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 				boolean out = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
 				if ((in && dd < d) || (out && dd > d) || (!in && !out)) {
@@ -59,12 +79,30 @@ public class SpellThicken extends AbstractSpellTransform {
 				}
 			}
 		}
-		selectionManager.clearSelections();
-		Transaction t = undoManager.newTransaction();
-		for (Point3i p : points) {
-			t.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, first.block, first.metadata).set());
+	}
+
+	private void thickenPlane(Set<Point3i> points, IntegerDomain domain, IWorld world) {
+		Shell.Type shellType = null;
+		System.out.println("[SpellThicken.thickenPlane] domain.getPlane()=" + domain.getPlane());
+		switch (domain.getPlane()) {
+		case XY:
+			shellType = Shell.Type.Z;
+			break;
+		case XZ:
+			System.out.println("[SpellThicken.thickenPlane] shellType=" + shellType);
+			shellType = Shell.Type.Y;
+			break;
+		case YZ:
+			shellType = Shell.Type.X;
+			break;
 		}
-		t.commit();
+		System.out.println("[SpellThicken.thickenPlane] shellType=" + shellType);
+		for (Selection s : selectionManager.getSelections()) {
+			Shell shell = new Shell(shellType, s.getPoint3i(), world);
+			for (Point3i p : shell) {
+				points.add(p);
+			}
+		}
 	}
 
 	@Override

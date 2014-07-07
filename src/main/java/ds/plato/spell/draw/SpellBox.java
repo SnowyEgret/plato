@@ -29,7 +29,7 @@ public class SpellBox extends AbstractSpellDraw {
 		d.name = Messages.spell_box_name;
 		d.description = Messages.spell_box_description;
 		d.picks = new PickDescriptor(Messages.spell_box_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_box_modifier, Messages.spell_modifier_isHollow);
+		d.modifiers = new ModifierDescriptor(Messages.spell_box_modifier_0, Messages.spell_box_modifier_1, Messages.spell_modifier_isHollow);
 		return d;
 	}
 
@@ -40,7 +40,8 @@ public class SpellBox extends AbstractSpellDraw {
 		boolean isCube = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		Point3d p0 = picks[0].toPoint3d();
 		Point3d p1 = picks[1].toPoint3d();
-		if (isCube) {
+		boolean onSurface = Keyboard.isKeyDown(Keyboard.KEY_LMENU);
+		if (onSurface) {
 			p0.y += 1;
 			p1.y += 1;
 		}

@@ -3,11 +3,20 @@ package ds.plato.geom;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
 import org.apache.commons.lang3.Range;
 
+import ds.plato.geom.surface.InfinitePlane;
+
 public class IntegerDomain {
+
+	public enum Plane {
+		XY,
+		XZ,
+		YZ
+	}
 
 	public Range<Integer> rx, ry, rz;
 	public int dx, dy, dz;
@@ -25,7 +34,7 @@ public class IntegerDomain {
 		dz = Math.abs(rz.getMaximum() - rz.getMinimum());
 	}
 
-	public IntegerDomain(Range<Integer> rx, Range<Integer> ry, Range<Integer> rz) {
+	private  IntegerDomain(Range<Integer> rx, Range<Integer> ry, Range<Integer> rz) {
 		this.rx = rx;
 		this.ry = ry;
 		this.rz = rz;
@@ -73,4 +82,37 @@ public class IntegerDomain {
 			return false;
 		return true;
 	}
+
+	public boolean isPlanar() {
+		if (dx == 0 && dy != 0 && dz != 0) {
+			return true;
+		}
+		if (dy == 0 && dx != 0 && dz != 0) {
+			return true;
+		}
+		if (dz == 0 && dx != 0 && dy != 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public Plane getPlane() {
+		if (dx == 0 && dy != 0 && dz != 0) {
+			//return InfinitePlane.YZ(pointOnPlane);
+			return Plane.YZ;
+		}
+		if (dy == 0 && dx != 0 && dz != 0) {
+			//return InfinitePlane.XZ(pointOnPlane);
+			return Plane.XZ;
+		}
+		if (dz == 0 && dx != 0 && dy != 0) {
+			//return InfinitePlane.XY(pointOnPlane);
+			return Plane.XY;
+		}
+		return null;
+	}
+
+//	public InfinitePlane getPlane(Point3i p) {
+//		return getPlane(new Point3d(p.x, p.y, p.z));
+//	}
 }

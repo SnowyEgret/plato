@@ -11,7 +11,7 @@ import net.minecraft.init.Blocks;
 import ds.plato.core.IWorld;
 
 public class Shell implements Iterable<Point3i> {
-	
+
 	public enum Type {
 		ALL,
 		HORIZONTAL,
@@ -24,11 +24,13 @@ public class Shell implements Iterable<Point3i> {
 		FLOOR,
 		CEILING,
 		FLOOR_EDGE,
-		CEILING_EDGE
+		CEILING_EDGE,
+		X,
+		Y,
+		Z
 	}
 
 	private List<Point3i> points = new ArrayList();
-	//private final EnumShell type;
 	private final Type type;
 
 	public Shell(Type type, Point3i p0, IWorld w) {
@@ -133,6 +135,24 @@ public class Shell implements Iterable<Point3i> {
 						}
 					}
 				}
+			}
+			break;
+		case X:
+			for (Point3i p : pts) {
+				if (p.z == p0.z && p.y == p0.y)
+					points.add(p);
+			}
+			break;
+		case Y:
+			for (Point3i p : pts) {
+				if (p.z == p0.z && p.x == p0.x)
+					points.add(p);
+			}
+			break;
+		case Z:
+			for (Point3i p : pts) {
+				if (p.x == p0.x && p.y == p0.y)
+					points.add(p);
 			}
 			break;
 		default:

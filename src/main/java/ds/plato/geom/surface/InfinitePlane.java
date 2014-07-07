@@ -16,16 +16,41 @@ public class InfinitePlane extends Surface {
 		this.p1 = p1;
 	}
 
-	public final static InfinitePlane XY() {
-		return new InfinitePlane(new Point3d(0, 0, 0), new Point3d(1, 0, 0), new Point3d(0, 1, 0));
+	public final static InfinitePlane XY(Point3d o) {
+		return new InfinitePlane(o, new Point3d(o.x + 1, o.y, o.z), new Point3d(o.x, o.y + 1, o.z));
 	}
 
-	public final static InfinitePlane XZ() {
-		return new InfinitePlane(new Point3d(0, 0, 0), new Point3d(0, 0, 1), new Point3d(1, 0, 0));
+	public final static InfinitePlane XZ(Point3d o) {
+		return new InfinitePlane(o, new Point3d(o.x, o.y, o.z + 1), new Point3d(o.x + 1, o.y, o.z));
 	}
 
-	public final static InfinitePlane YZ() {
-		return new InfinitePlane(new Point3d(0, 0, 0), new Point3d(0, 1, 0), new Point3d(0, 0, 1));
+	public final static InfinitePlane YZ(Point3d o) {
+		return new InfinitePlane(o, new Point3d(o.x, o.y + 1, o.z), new Point3d(o.x, o.y, o.z + 1));
+	}
+
+	public static InfinitePlane XY() {
+		return XY(new Point3d(0, 0, 0));
+	}
+
+	public static InfinitePlane XZ() {
+		return XZ(new Point3d(0, 0, 0));
+	}
+
+	public static InfinitePlane YZ() {
+		return YZ(new Point3d(0, 0, 0));
+	}
+
+	@Override
+	public boolean contains(Point3d p) {
+		Vector3d vP = new Vector3d();
+		vP.sub(p0, p);
+		return (Math.abs(vP.dot(normal)) - 0 < epsilon);
+	}
+
+	@Override
+	public Point3d pointAtParameters(double u, double v) {
+		throw new UnsupportedOperationException("Method 'Plane.pointAtParameters' not yet implemented");
+		// ax + by + cz = d
 	}
 
 	public Vector3d normal() {
@@ -133,19 +158,6 @@ public class InfinitePlane extends Surface {
 		vn.cross(v1, v2);
 		vn.normalize();
 		return vn;
-	}
-
-	@Override
-	public boolean contains(Point3d p) {
-		Vector3d vP = new Vector3d();
-		vP.sub(p0, p);
-		return (Math.abs(vP.dot(normal)) - 0 < epsilon);
-	}
-
-	@Override
-	public Point3d pointAtParameters(double u, double v) {
-		throw new UnsupportedOperationException("Method 'Plane.pointAtParameters' not yet implemented");
-		// ax + by + cz = d
 	}
 
 }

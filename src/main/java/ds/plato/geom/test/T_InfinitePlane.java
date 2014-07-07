@@ -11,23 +11,23 @@ import org.junit.Test;
 
 import ds.plato.geom.surface.InfinitePlane;
 
-public class T_InfinatePlane extends GeomTest {
+public class T_InfinitePlane extends GeomTest {
 
 	@Test
 	public void XY() {
-		InfinitePlane p = InfinitePlane.XY();
+		InfinitePlane p = InfinitePlane.XY(o());
 		assertThat(p.normal(), closeToTuple3d(new Vector3d(0, 0, 1)));
 	}
 
 	@Test
 	public void XZ() {
-		InfinitePlane p = InfinitePlane.XZ();
+		InfinitePlane p = InfinitePlane.XZ(o());
 		assertThat(p.normal(), closeToTuple3d(new Vector3d(0, 1, 0)));
 	}
 
 	@Test
 	public void YZ() {
-		InfinitePlane p = InfinitePlane.YZ();
+		InfinitePlane p = InfinitePlane.YZ(o());
 		assertThat(p.normal(), closeToTuple3d(new Vector3d(1, 0, 0)));
 	}
 	

@@ -10,6 +10,8 @@ import javax.vecmath.Matrix4d;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
+import ds.plato.geom.surface.InfinitePlane;
+
 public class VoxelSet implements Iterable<Point3i> {
 
 	Set<Point3i> voxels = new HashSet<>();
@@ -158,5 +160,6 @@ public class VoxelSet implements Iterable<Point3i> {
 	public Boolean contains(Point3i p) {
 		return voxels.contains(p);
 	}
+
 
 }
