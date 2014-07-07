@@ -15,6 +15,8 @@ import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
+import ds.plato.spell.descriptor.ModifierDescriptor;
+import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
@@ -34,8 +36,13 @@ public class SpellText extends Spell {
 
 	@Override
 	public SpellDescriptor getDescriptor() {
-		// TODO Auto-generated method stub
-		return null;
+		SpellDescriptor d = new SpellDescriptor();
+		d.name = Messages.spell_text_name;
+		d.description = Messages.spell_text_description;
+		d.picks = new PickDescriptor(Messages.spell_text_picks);
+//		d.modifiers = new ModifierDescriptor(Messages.spell_thicken_modifier_0, Messages.spell_thicken_modifier_1,
+//				Messages.spell_thicken_modifier_2);
+		return d;
 	}
 
 	@Override

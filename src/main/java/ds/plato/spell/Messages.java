@@ -155,6 +155,11 @@ public class Messages extends NLS {
 	public static String spell_drop_picks;
 	public static String spell_drop_modifier;
 	
+	public static String spell_text_name;
+	public static String spell_text_description;
+	public static String spell_text_picks;
+	//public static String spell_text_modifier;
+	
 	static {
 		NLS.initializeMessages("ds.plato.spell.messages", Messages.class);
 	}
