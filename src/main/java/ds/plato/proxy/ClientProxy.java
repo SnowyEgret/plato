@@ -21,6 +21,7 @@ import ds.plato.core.ForgeEventHandler;
 import ds.plato.core.KeyInputEventHandler;
 import ds.plato.gui.GuiRestore;
 import ds.plato.gui.GuiSave;
+import ds.plato.gui.GuiSpellText;
 import ds.plato.gui.Overlay;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
@@ -38,6 +39,8 @@ public class ClientProxy extends CommonProxy {
 			return new GuiSave(player);
 		case 1:
 			return new GuiRestore(player);
+		case 2:
+			return new GuiSpellText(player);
 		default:
 			return null;
 		}

@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.vecmath.Point3i;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import ds.plato.Plato;
@@ -36,27 +38,23 @@ public class SpellSave extends Spell {
 		// TODO could create a new item in the players inventory. Could be named with an anvil like a sword. Could have
 		// a texture generated from the player's view at the time of creation
 		Pick[] picks = pickManager.getPicksArray();
-		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 		String json = null;
 		try {
-			Pick p = picks[0];
-			json = IO.writeGroup(new Point3i(p.x, p.y, p.z), selectionManager.getSelectionList(), "saves/" + name + ".json");
+			json = IO.writeGroup(picks[0].getPoint3i(), selectionManager.getSelectionList(), "saves/" + name + ".json");
 			System.out.println("[SpellSave.writeFile] json=" + json);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		pickManager.clearPicks();
-		SpellDelete s = new SpellDelete((IUndo) undoManager, selectionManager, pickManager);
-		pickManager.reset(s.getNumPicks());
-		s.invoke(new WorldWrapper(player.worldObj), null);
-		// SpellRegenerate i = new SpellRegenerate(undoManager, selectionManager, pickManager, json);
-		// GameRegistry.registerItem(i, name);
-		// i.setCreativeTab(SpellLoader.tabSpells);
-		// i.setUnlocalizedName(name);
-		// System.out.println("[SpellSave.writeFile] i=" + i);
-		// player.displayGUIAnvil(0, 0, 0);
-		// player.dropItem(i, 7);
-		//pickManager.clearPicks();
+
+		boolean deleteOriginal = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
+		if (deleteOriginal) {
+			SpellDelete s = new SpellDelete(undoManager, selectionManager, pickManager);
+			pickManager.reset(s.getNumPicks());
+			// Can't remember why this world is preferable, or maybe I just didn't set world and slotEntries in invoke
+			EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+			s.invoke(new WorldWrapper(player.worldObj), null);
+		}
 	}
 
 	@Override
