@@ -20,8 +20,8 @@ import ds.plato.block.BlockSelectedRenderer;
 import ds.plato.core.ForgeEventHandler;
 import ds.plato.core.KeyInputEventHandler;
 import ds.plato.gui.GuiRestore;
-import ds.plato.gui.GuiSave;
 import ds.plato.gui.GuiSpellText;
+import ds.plato.gui.GuiTextInputDialog;
 import ds.plato.gui.Overlay;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
@@ -33,14 +33,12 @@ public class ClientProxy extends CommonProxy {
 	public static int blockPickedRenderId;
 
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		switch (ID) {
+	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+		switch (id) {
 		case 0:
-			return new GuiSave(player);
+			return new GuiTextInputDialog(player);
 		case 1:
 			return new GuiRestore(player);
-		case 2:
-			return new GuiSpellText(player);
 		default:
 			return null;
 		}

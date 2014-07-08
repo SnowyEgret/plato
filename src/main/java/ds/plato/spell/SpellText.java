@@ -11,13 +11,10 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.client.Minecraft;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-
-import say.swing.JFontChooser;
 import ds.plato.Plato;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
+import ds.plato.gui.ITextSetable;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
@@ -27,7 +24,7 @@ import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
 
-public class SpellText extends Spell {
+public class SpellText extends Spell implements ITextSetable {
 
 	private Font font;
 	private IWorld world;
@@ -65,10 +62,11 @@ public class SpellText extends Spell {
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
 		this.world = world;
 		this.slotEntries = slotEntries;
-		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 2, world.getWorld(), 0, 0, 0);
+		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 0, world.getWorld(), 0, 0, 0);
 	}
 	
-	public void doText(String text) {
+	@Override
+	public void setText(String text) {
 		
 		System.out.println("[SpellText.doText] text=" + text);
 		System.out.println("[SpellText.doText] font=" + font);

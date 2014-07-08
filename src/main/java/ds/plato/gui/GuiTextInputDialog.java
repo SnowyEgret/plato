@@ -1,5 +1,8 @@
 package ds.plato.gui;
 
+import org.lwjgl.opengl.GL11;
+
+import ds.plato.spell.SpellText;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
@@ -7,21 +10,16 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
-import ds.plato.spell.SpellSave;
-
-public class GuiSave extends GuiScreen {
-	// public class GuiSave extends GuiContainer {
+public class GuiTextInputDialog extends GuiScreen {
 
 	private int w = 200;
 	private int h = 100;
 	private GuiTextField textField;
-	private String fileName;
+	private String text;
 	private EntityPlayer player;
 	private GuiLabel label;
 
-	public GuiSave(EntityPlayer player) {
+	public GuiTextInputDialog(EntityPlayer player) {
 		this.player = player;
 	}
 
@@ -29,9 +27,9 @@ public class GuiSave extends GuiScreen {
 	protected void actionPerformed(GuiButton button) {
 		switch (button.id) {
 		case 0:
-			fileName = textField.getText();
-			SpellSave s = (SpellSave) player.getHeldItem().getItem();
-			s.writeFile(fileName);
+			text = textField.getText();
+			ITextSetable s = (ITextSetable) player.getHeldItem().getItem();
+			s.setText(text);
 			break;
 		case 1:
 			break;
@@ -58,34 +56,18 @@ public class GuiSave extends GuiScreen {
 		this.buttonList.clear();
 		buttonList.add(new GuiButton(0, posX + 20, posY + 40, 80, 20, "Ok"));
 		buttonList.add(new GuiButton(1, posX + 120, posY + 40, 80, 20, "Cancel"));
-
 		textField = new GuiTextField(mc.fontRenderer, posX, posY, 150, 20);
-		// label = new GuiLabel();
-		// labelList.add(label);
 	}
 
 	@Override
 	public void drawScreen(int x, int y, float par3) {
 		drawDefaultBackground();
-		// drawWorldBackground(0);
-
-		// ITextureObject texture = mc.renderEngine.getTexture(l);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(new ResourceLocation("gui/save.png"));
+		mc.renderEngine.bindTexture(new ResourceLocation("gui/textInputDialog.png"));
 		int posX = (width - w) / 2;
 		int posY = (height - h) / 2;
 		drawTexturedModalRect(posX, posY, 0, 0, w, h);
-
 		textField.drawTextBox();
-		// label.drawCenteredString(mc.fontRenderer, "Hello", 0, 0, 0);
-
 		super.drawScreen(x, y, par3);
 	}
-
-	// @Override
-	// protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-
 }

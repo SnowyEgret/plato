@@ -2,17 +2,17 @@ package ds.plato.spell;
 
 import java.io.IOException;
 
-import javax.vecmath.Point3i;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 
 import org.lwjgl.input.Keyboard;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import ds.plato.Plato;
 import ds.plato.core.IO;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.core.WorldWrapper;
+import ds.plato.gui.ITextSetable;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
@@ -22,7 +22,7 @@ import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.transform.SpellDelete;
 import ds.plato.undo.IUndo;
 
-public class SpellSave extends Spell {
+public class SpellSave extends Spell implements ITextSetable {
 
 	public SpellSave(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
@@ -33,14 +33,14 @@ public class SpellSave extends Spell {
 		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 0, world.getWorld(), 0, 0, 0);
 	}
 
-	// Called by GuiSave
-	public void writeFile(String name) {
+	@Override
+	public void setText(String text) {
 		// TODO could create a new item in the players inventory. Could be named with an anvil like a sword. Could have
 		// a texture generated from the player's view at the time of creation
 		Pick[] picks = pickManager.getPicksArray();
 		String json = null;
 		try {
-			json = IO.writeGroup(picks[0].getPoint3i(), selectionManager.getSelectionList(), "saves/" + name + ".json");
+			json = IO.writeGroup(picks[0].getPoint3i(), selectionManager.getSelectionList(), "saves/" + text + ".json");
 			System.out.println("[SpellSave.writeFile] json=" + json);
 		} catch (IOException e) {
 			e.printStackTrace();
