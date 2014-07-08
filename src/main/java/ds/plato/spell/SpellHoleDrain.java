@@ -55,7 +55,7 @@ public class SpellHoleDrain extends Spell {
 		points.clear();
 		numBlocksDrained = 0;
 		lastPointsSize = 0;
-		Pick pick = pickManager.getPicksArray()[0];
+		Pick pick = pickManager.getPicks()[0];
 		// Pick is some block under water. Find the top water block
 		int y = pick.y;
 		while (true) {

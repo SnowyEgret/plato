@@ -10,7 +10,7 @@ import java.util.Set;
 import javax.vecmath.Point3i;
 
 import net.minecraft.client.Minecraft;
-
+import net.minecraft.init.Items;
 import ds.plato.Plato;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
@@ -43,8 +43,7 @@ public class SpellText extends Spell implements ITextSetable {
 
 	@Override
 	public Object[] getRecipe() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Object[] { "   ", "BAB", "   ", 'A', Items.feather, 'B', Items.dye };
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public class SpellText extends Spell implements ITextSetable {
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
 		this.world = world;
 		this.slotEntries = slotEntries;
-		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 0, world.getWorld(), 0, 0, 0);
+		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, -1, world.getWorld(), 0, 0, 0);
 	}
 	
 	@Override
@@ -80,7 +79,7 @@ public class SpellText extends Spell implements ITextSetable {
 		// return;
 		// }
 
-		Pick[] picks = pickManager.getPicksArray();
+		Pick[] picks = pickManager.getPicks();
 		Point3i d = new Point3i();
 		d.sub(picks[0], picks[1]);
 		// int width = Math.abs(d.x);

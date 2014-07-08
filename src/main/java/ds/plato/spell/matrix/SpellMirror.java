@@ -29,7 +29,7 @@ public class SpellMirror extends AbstractSpellMatrix {
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
-		Pick[] picks = pickManager.getPicksArray();
+		Pick[] picks = pickManager.getPicks();
 		Point3i c = selectionManager.voxelSet().centroid();
 		// Matrix4d matrix = GeomUtil.newReflectionMatrix(new Point3d(c.x, c.y, c.z), picks[0].toDouble());
 		// FIXME

@@ -37,7 +37,7 @@ public class SpellSave extends Spell implements ITextSetable {
 	public void setText(String text) {
 		// TODO could create a new item in the players inventory. Could be named with an anvil like a sword. Could have
 		// a texture generated from the player's view at the time of creation
-		Pick[] picks = pickManager.getPicksArray();
+		Pick[] picks = pickManager.getPicks();
 		String json = null;
 		try {
 			json = IO.writeGroup(picks[0].getPoint3i(), selectionManager.getSelectionList(), "saves/" + text + ".json");

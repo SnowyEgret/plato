@@ -44,7 +44,7 @@ public class T_Staff extends PlatoTest {
 		MockitoAnnotations.initMocks(this);
 		PowerMockito.mockStatic(Keyboard.class);
 		Pick[] picks = new Pick[] { new Pick(1, 1, 1, dirt, 0), new Pick(2, 2, 2, dirt, 0) };
-		when(pickManager.getPicksArray()).thenReturn(picks);
+		when(pickManager.getPicks()).thenReturn(picks);
 		when(pickManager.isFinishedPicking()).thenReturn(true);
 		staff = new Staff(property, pickManager);
 		staff.addSpell(mockDelete);

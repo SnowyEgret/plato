@@ -34,7 +34,7 @@ public class SpellCone extends AbstractSpellDraw {
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
 		selectionManager.clearSelections();
-		Pick[] picks = pickManager.getPicksArray();
+		Pick[] picks = pickManager.getPicks();
 		IDrawable d = new Cone(picks[0].toPoint3d(), picks[1].toPoint3d(), picks[2].toPoint3d());
 		boolean isHollow = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
 		draw(d, world, slotEntries[0].block, slotEntries[0].metadata, isHollow);

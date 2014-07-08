@@ -35,7 +35,7 @@ public class SpellMeasure extends AbstractSpellDraw {
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
-		Pick[] picks = pickManager.getPicksArray();
+		Pick[] picks = pickManager.getPicks();
 		Point3d p0 = picks[0].toPoint3d();
 		Point3d p1 = picks[1].toPoint3d();
 		message = String.format("Distance: %.1f", p0.distance(p1));

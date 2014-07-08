@@ -35,7 +35,7 @@ public class SpellLine extends AbstractSpellDraw {
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
-		Pick[] picks = pickManager.getPicksArray();
+		Pick[] picks = pickManager.getPicks();
 		IDrawable d = new Line(picks[0].toPoint3d(), picks[1].toPoint3d());
 		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 			draw(d, world, slotEntries[0].block, slotEntries[0].metadata);

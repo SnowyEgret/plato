@@ -1,12 +1,7 @@
 package ds.plato.pick;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.NoSuchElementException;
-
-import javax.vecmath.Point3d;
-import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import ds.plato.block.BlockPicked;
@@ -23,35 +18,10 @@ public class PickManager implements IPick {
 		this.blockPicked = blockPicked;
 	}
 
-	public PickManager() {
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PickManager [maxPicks=");
-		builder.append(maxPicks);
-		builder.append(", picks=");
-		builder.append(picks);
-		builder.append("]");
-		return builder.toString();
-	}
-
 	@Override
 	public IPick setWorld(IWorld world) {
 		this.world = world;
 		return this;
-	}
-
-	@Override
-	public Pick addPick(int x, int y, int z, Block block, int metadata) {
-		if (picks.size() < maxPicks) {
-			Pick p = new Pick(x, y, z, block, metadata);
-			picks.add(p);
-			return p;
-		} else {
-			return null;
-		}
 	}
 
 	@Override
@@ -73,12 +43,8 @@ public class PickManager implements IPick {
 		return (picks.size() == maxPicks);
 	}
 
-	public Pick getPick(int i) {
-		return picks.get(i);
-	}
-
 	@Override
-	public Pick[] getPicksArray() {
+	public Pick[] getPicks() {
 		Pick[] array = new Pick[picks.size()];
 		return picks.toArray(array);
 	}
@@ -90,19 +56,15 @@ public class PickManager implements IPick {
 	}
 
 	@Override
-	public void clear() {
-		picks.clear();
-	}
-
-	@Override
 	public void clearPicks() {
-		for (Pick p : getPicksArray()) {
+		System.out.println("[PickManager.clearPicks] getPicks()=" + getPicks());
+		for (Pick p : getPicks()) {
 			Block block = world.getBlock(p.x, p.y, p.z);
 			if (block instanceof BlockPicked) {
 				world.setBlock(p.x, p.y, p.z, p.block, p.metadata);
 			}
 		}
-		clear();
+		picks.clear();
 	}
 
 	@Override
@@ -115,33 +77,47 @@ public class PickManager implements IPick {
 		return null;
 	}
 
-	@Deprecated
-	@Override
-	public Pick getPickAt(Point3i p) {
-		return getPickAt(p.x, p.y, p.z);
-	}
-
-	public Iterable<Pick> getPicks() {
-		return picks;
-	}
-
-	public List<Point3d> getPickPoints3d() {
-		List<Point3d> l = new ArrayList<>();
-		for (Pick p : picks) {
-			l.add(new Point3d(p.x, p.y, p.z));
-		}
-		return l;
-	}
-
-	public int size() {
-		return picks.size();
-	}
-
 	@Override
 	public Pick lastPick() {
 		try {
 			return picks.getLast();
 		} catch (NoSuchElementException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PickManager [maxPicks=");
+		builder.append(maxPicks);
+		builder.append(", picks=");
+		builder.append(picks);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	//TODO only used by test class. Make default when test class is in same package.
+	public PickManager() {
+	}
+
+	//TODO only used by test class. Make default when test class is in same package.
+	public Pick getPick(int i) {
+		return picks.get(i);
+	}
+
+	//TODO only used by test class. Make default when test class is in same package.
+	public int size() {
+		return picks.size();
+	}
+
+	//TODO only used by test class. Make default when test class is in same package.
+	public Pick addPick(int x, int y, int z, Block block, int metadata) {
+		if (picks.size() < maxPicks) {
+			Pick p = new Pick(x, y, z, block, metadata);
+			picks.add(p);
+			return p;
+		} else {
 			return null;
 		}
 	}

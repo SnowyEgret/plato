@@ -11,24 +11,15 @@ public interface IPick {
 
 	public void clearPicks();
 
-	//TODO rename to getPicks and remove getPicks returns list from pickManager when migrating to staffs and spells
-	public Pick[] getPicksArray();
+	public Pick[] getPicks();
 
 	public boolean isFinishedPicking();
 
 	public boolean isPicking();
 
-	public Pick getPickAt(Point3i p);
-
 	public Pick getPickAt(int x, int y, int z);
 
 	public void reset(int numPicks);
-
-	@Deprecated
-	public Pick addPick(int x, int y, int z, Block block, int metadata);
-
-	@Deprecated
-	public void clear();
 
 	public IPick setWorld(IWorld world);
 

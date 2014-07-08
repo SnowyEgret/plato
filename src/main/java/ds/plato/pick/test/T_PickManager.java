@@ -50,21 +50,6 @@ public class T_PickManager extends PlatoTest {
 	}
 
 	@Test
-	public void clear() {
-		m.addPick(1, 0, 0, dirt, 0);
-		m.addPick(2, 0, 0, dirt, 0);
-		m.clear();
-		assertThat(m.size(), is(0));
-	}
-
-	@Test
-	public void getPickPoints() {
-		Pick p1 = m.addPick(1, 0, 0, dirt, 0);
-		Pick p2 = m.addPick(2, 0, 0, dirt, 0);
-		assertThat(m.getPickPoints3d(), hasItems(p1.toPoint3d(), p2.toPoint3d()));
-	}
-
-	@Test
 	public void getPick() {
 		Pick p = m.addPick(1, 0, 0, dirt, 0);
 		assertThat(m.getPick(0), equalTo(p));
@@ -80,17 +65,10 @@ public class T_PickManager extends PlatoTest {
 	}
 
 	@Test
-	public void getPicks() {
-		Pick p = m.addPick(0, 0, 0, dirt, 0);
-		Iterable<Pick> picks = m.getPicks();
-		assertThat(picks, hasItems(p));
-	}
-
-	@Test
 	public void getPicksArray() {
 		Pick p0 = m.addPick(0, 0, 0, dirt, 0);
 		Pick p1 = m.addPick(1, 0, 0, dirt, 0);
-		Pick[] picks = m.getPicksArray();
+		Pick[] picks = m.getPicks();
 		assertEquals(p0, picks[0]);
 		assertEquals(p1, picks[1]);
 	}

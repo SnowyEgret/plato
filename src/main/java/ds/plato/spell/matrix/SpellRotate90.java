@@ -28,7 +28,7 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
-		Pick[] picks = pickManager.getPicksArray();
+		Pick[] picks = pickManager.getPicks();
 		Matrix4d matrix;
 		Point3d p;
 		if (Keyboard.isKeyDown(Keyboard.KEY_LMETA)) {
