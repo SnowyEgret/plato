@@ -1,22 +1,34 @@
 package ds.plato.gui;
 
+import java.awt.Font;
+
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiLabel;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
+import say.swing.JFontChooser;
 import ds.plato.spell.SpellText;
 
 public class GuiSpellText extends GuiTextInputDialog {
 
 	public GuiSpellText(EntityPlayer player) {
-		super(player);
-		//TODO GuiTextInputDialog extends GuiDialog extends GuiScreen
-		//button = addButton("Font");
+		super(player, "Font");
 	}
 
+	@Override
+	protected void actionPerformed(GuiButton button) {
+		switch (button.id) {
+		case 2:
+			SpellText s = (SpellText) player.getHeldItem().getItem();
+			JFontChooser chooser = new JFontChooser();
+			Font font = s.getFont();
+			System.out.println("[GuiSpellText.actionPerformed] font=" + font);
+			if (font != null) {
+				chooser.setSelectedFont(s.getFont());
+			}
+			chooser.showDialog(null);
+			font = chooser.getSelectedFont();
+			s.setFont(font);
+			return;
+		}
+		super.actionPerformed(button);
+	}
 }

@@ -2,6 +2,8 @@ package ds.plato.spell;
 
 import java.io.IOException;
 
+import javax.vecmath.Point3i;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 
@@ -24,23 +26,29 @@ import ds.plato.undo.IUndo;
 
 public class SpellSave extends Spell implements ITextSetable {
 
+	private Point3i insertionPoint;
+
 	public SpellSave(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
 	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
-		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 0, world.getWorld(), 0, 0, 0);
+		if (selectionManager.size() != 0) {
+			Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 0, world.getWorld(), 0, 0, 0);
+			Pick[] picks = pickManager.getPicks();
+			insertionPoint = picks[0].getPoint3i();
+		}
+		pickManager.clearPicks();
 	}
 
 	@Override
 	public void setText(String text) {
 		// TODO could create a new item in the players inventory. Could be named with an anvil like a sword. Could have
 		// a texture generated from the player's view at the time of creation
-		Pick[] picks = pickManager.getPicks();
 		String json = null;
 		try {
-			json = IO.writeGroup(picks[0].getPoint3i(), selectionManager.getSelectionList(), "saves/" + text + ".json");
+			json = IO.writeGroup(insertionPoint, selectionManager.getSelectionList(), "saves/" + text + ".json");
 			System.out.println("[SpellSave.writeFile] json=" + json);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,6 +63,7 @@ public class SpellSave extends Spell implements ITextSetable {
 			EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 			s.invoke(new WorldWrapper(player.worldObj), null);
 		}
+		selectionManager.clearSelections();
 	}
 
 	@Override
@@ -62,7 +71,7 @@ public class SpellSave extends Spell implements ITextSetable {
 		SpellDescriptor d = new SpellDescriptor();
 		d.name = Messages.spell_save_name;
 		d.description = Messages.spell_save_description;
-		d.picks = new PickDescriptor(Messages.spell_save_picks);
+		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
 		d.modifiers = new ModifierDescriptor(Messages.spell_save_modifier);
 		return d;
 	}

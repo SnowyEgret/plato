@@ -3,6 +3,7 @@ package ds.plato.spell;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.font.LineMetrics;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,16 +30,15 @@ public class SpellText extends Spell implements ITextSetable {
 	private Font font;
 	private IWorld world;
 	private SlotEntry[] slotEntries;
+	private Pick[] picks;
 
 	public SpellText(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(2, undoManager, selectionManager, pickManager);
-		
 		int fontSize = 24;
-		String fontName = "URW Chancery L";
+		String fontName = "Arial";
 		int fontStyle = Font.PLAIN;
 		font = new Font(fontName, fontStyle, fontSize);
 		// font = font.deriveFont(32);
-
 	}
 
 	@Override
@@ -61,39 +61,30 @@ public class SpellText extends Spell implements ITextSetable {
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
 		this.world = world;
 		this.slotEntries = slotEntries;
-		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, -1, world.getWorld(), 0, 0, 0);
+		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 2, world.getWorld(), 0, 0, 0);
+		picks = pickManager.getPicks();
+		//Clear the picks because player may have cancelled
+		pickManager.clearPicks();
 	}
-	
+
 	@Override
 	public void setText(String text) {
-		
+
 		System.out.println("[SpellText.doText] text=" + text);
 		System.out.println("[SpellText.doText] font=" + font);
-		// boolean chooseFont = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
-		// System.out.println("[SpellText.invoke] chooseFont=" + chooseFont);
-		// if (chooseFont) {
-		// JFontChooser chooser = new JFontChooser();
-		// chooser.showDialog(null);
-		// font = chooser.getSelectedFont();
-		// pickManager.clearPicks();
-		// return;
-		// }
-
-		Pick[] picks = pickManager.getPicks();
+		//Pick[] picks = pickManager.getPicks();
 		Point3i d = new Point3i();
 		d.sub(picks[0], picks[1]);
-		// int width = Math.abs(d.x);
-		// int height = Math.abs(d.z);
-		int width = 128;
-		int height = 32;
+					
+		int width = font.getSize() * text.length() + 10;
+		int height = font.getSize() + 10;
 
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics g = image.getGraphics();
 		g.setFont(font);
 		Graphics2D graphics = (Graphics2D) g;
 		// graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		graphics.drawString(text, 6, 24 + 6);
-		// ImageIO.write(image, "png", new File("text.png"));
+		graphics.drawString(text, 6, font.getSize() + 6);
 
 		Set<Point3i> points = new HashSet<>();
 		for (int h = 0; h < height; h++) {
@@ -116,8 +107,16 @@ public class SpellText extends Spell implements ITextSetable {
 					.set());
 		}
 		t.commit();
-		pickManager.clearPicks();
 		selectionManager.clearSelections();
+		pickManager.clearPicks();
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
+	}
+
+	public Font getFont() {
+		return font;
 	}
 
 }
