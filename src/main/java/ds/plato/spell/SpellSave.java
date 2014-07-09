@@ -37,7 +37,7 @@ public class SpellSave extends Spell implements ITextSetable {
 		if (selectionManager.size() != 0) {
 			Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 0, world.getWorld(), 0, 0, 0);
 			Pick[] picks = pickManager.getPicks();
-			insertionPoint = picks[0].getPoint3i();
+			insertionPoint = picks[0].point3i();
 		}
 		pickManager.clearPicks();
 	}

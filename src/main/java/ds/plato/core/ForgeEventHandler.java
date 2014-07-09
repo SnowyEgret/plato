@@ -167,12 +167,12 @@ public class ForgeEventHandler {
 			Point3i p = null;
 			Pick pick = pickManager.lastPick();
 			if (pick != null) {
-				p = pick.getPoint3i();
+				p = pick.point3i();
 			}
 			if (p == null) {
 				Selection s = selectionManager.firstSelection();
 				if (s != null) {
-					p = s.getPoint3i();
+					p = s.point3i();
 				}
 			}
 			if (p != null) {

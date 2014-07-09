@@ -16,11 +16,11 @@ public class Pick extends Point3i {
 		this.metadata = metadata;
 	}
 
-	public Point3d toPoint3d() {
+	public Point3d point3d() {
 		return new Point3d(x, y, z);
 	}
 
-	public Point3i getPoint3i() {
+	public Point3i point3i() {
 		return new Point3i(x, y, z);
 	}
 }

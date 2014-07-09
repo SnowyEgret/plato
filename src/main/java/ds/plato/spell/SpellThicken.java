@@ -67,8 +67,8 @@ public class SpellThicken extends AbstractSpellTransform {
 	private void thicken(Set<Point3i> points, VoxelSet voxels, IWorld world) {
 		final Point3d centroid = GeomUtil.toPoint3d(voxels.centroid());
 		for (Selection s : selectionManager.getSelections()) {
-			double d = s.getPoint3d().distance(centroid);
-			Shell shell = new Shell(Shell.Type.ALL, s.getPoint3i(), world);
+			double d = s.point3d().distance(centroid);
+			Shell shell = new Shell(Shell.Type.ALL, s.point3i(), world);
 			for (Point3i p : shell) {
 				double dd = GeomUtil.toPoint3d(p).distance(centroid);
 				boolean in = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
@@ -100,7 +100,7 @@ public class SpellThicken extends AbstractSpellTransform {
 		}
 		System.out.println("[SpellThicken.thickenPlane] shellType=" + shellType);
 		for (Selection s : selectionManager.getSelections()) {
-			Shell shell = new Shell(shellType, s.getPoint3i(), world);
+			Shell shell = new Shell(shellType, s.point3i(), world);
 			for (Point3i p : shell) {
 				if (!selectionManager.isSelected(p.x, p.y, p.z)) {
 					points.add(p);

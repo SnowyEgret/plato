@@ -78,7 +78,7 @@ public class SelectionManager implements ISelect {
 
 	@Override
 	public void addSelection(Selection s) {
-		selections.put(s.getPoint3i(), s);
+		selections.put(s.point3i(), s);
 	}
 
 	public void addSelections(Iterable<Selection> selections) {
@@ -118,7 +118,7 @@ public class SelectionManager implements ISelect {
 
 	@Override
 	public Selection removeSelection(Selection s) {
-		return removeSelection(s.getPoint3i());
+		return removeSelection(s.point3i());
 	}
 
 	@Override

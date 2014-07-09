@@ -28,7 +28,7 @@ public class SpellCopy extends AbstractSpellMatrix {
 	@Override
 	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
 		Pick[] picks = pickManager.getPicks();
-		Matrix4d matrix = GeomUtil.newTranslationMatrix(picks[0].toPoint3d(), picks[1].toPoint3d());
+		Matrix4d matrix = GeomUtil.newTranslationMatrix(picks[0].point3d(), picks[1].point3d());
 		transformSelections(matrix, world, Keyboard.isKeyDown(Keyboard.KEY_LCONTROL));
 	}
 

@@ -86,7 +86,7 @@ public abstract class AbstractSpellSelect extends Spell {
 	protected void shrinkSelections(Shell.Type shellType, IWorld world) {
 		List<Selection> shrunkSelections = new ArrayList<>();
 		for (Selection s : selectionManager.getSelections()) {
-			Shell shell = new Shell(shellType, s.getPoint3i(), world);
+			Shell shell = new Shell(shellType, s.point3i(), world);
 			for (Point3i p : shell) {
 				Block b = world.getBlock(p.x, p.y, p.z);
 				if (!(b instanceof BlockSelected)) {

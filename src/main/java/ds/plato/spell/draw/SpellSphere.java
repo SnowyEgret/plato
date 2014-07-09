@@ -29,7 +29,7 @@ public class SpellSphere extends AbstractSpellDraw {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		boolean isHemisphere = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
-		IDrawable d = new Sphere(picks[0].toPoint3d(), picks[1].toPoint3d(), isHemisphere);
+		IDrawable d = new Sphere(picks[0].point3d(), picks[1].point3d(), isHemisphere);
 		draw(d, world, slotEntries[0].block, slotEntries[0].metadata);
 		pickManager.clearPicks();
 	}

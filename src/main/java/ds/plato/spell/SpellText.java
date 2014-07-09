@@ -1,14 +1,16 @@
 package ds.plato.spell;
 
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.font.LineMetrics;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.vecmath.Point3i;
+import javax.vecmath.Vector3d;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
@@ -31,6 +33,7 @@ public class SpellText extends Spell implements ITextSetable {
 	private IWorld world;
 	private SlotEntry[] slotEntries;
 	private Pick[] picks;
+	private Graphics graphics;
 
 	public SpellText(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(2, undoManager, selectionManager, pickManager);
@@ -38,6 +41,8 @@ public class SpellText extends Spell implements ITextSetable {
 		String fontName = "Arial";
 		int fontStyle = Font.PLAIN;
 		font = new Font(fontName, fontStyle, fontSize);
+		// BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
+		graphics = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB).getGraphics();
 		// font = font.deriveFont(32);
 	}
 
@@ -63,28 +68,35 @@ public class SpellText extends Spell implements ITextSetable {
 		this.slotEntries = slotEntries;
 		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 2, world.getWorld(), 0, 0, 0);
 		picks = pickManager.getPicks();
-		//Clear the picks because player may have cancelled
+		// Clear the picks because player may have cancelled
 		pickManager.clearPicks();
 	}
 
 	@Override
 	public void setText(String text) {
 
-		System.out.println("[SpellText.doText] text=" + text);
-		System.out.println("[SpellText.doText] font=" + font);
-		//Pick[] picks = pickManager.getPicks();
-		Point3i d = new Point3i();
-		d.sub(picks[0], picks[1]);
-					
-		int width = font.getSize() * text.length() + 10;
-		int height = font.getSize() + 10;
+		Vector3d d = new Vector3d();
+		d.sub(picks[0].point3d(), picks[1].point3d());
+		double angleFromXAxis = new Vector3d(1, 0, 0).angle(d);
+		System.out.println("[SpellText.setText] angle=" + angleFromXAxis);
+
+		graphics.setFont(font);
+		FontMetrics fm = graphics.getFontMetrics();
+		Rectangle2D r = fm.getStringBounds(text, graphics);
+		System.out.println("[SpellText.setText] rectangle=" + r);
+
+		int border = 0;
+		int width = (int) r.getWidth() + 2 * border;
+		int height = (int) r.getHeight() + 2 * border;
 
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics g = image.getGraphics();
 		g.setFont(font);
 		Graphics2D graphics = (Graphics2D) g;
 		// graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		graphics.drawString(text, 6, font.getSize() + 6);
+		// g.drawString(text, 6, font.getSize() + 6);
+		g.drawRect(0, 0, width - 1, height - 1);
+		g.drawString(text, border, height - border - fm.getMaxDescent());
 
 		Set<Point3i> points = new HashSet<>();
 		for (int h = 0; h < height; h++) {
@@ -93,7 +105,7 @@ public class SpellText extends Spell implements ITextSetable {
 				// if (pixel == -16777216) {
 				if (pixel == -1) {
 					Point3i p = new Point3i(w, 0, h);
-					p.add(picks[0].getPoint3i());
+					p.add(picks[0].point3i());
 					points.add(p);
 				}
 			}

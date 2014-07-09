@@ -96,7 +96,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		// }
 
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
-			Point3d lastPointSelected = selectionManager.lastSelection().getPoint3d();
+			Point3d lastPointSelected = selectionManager.lastSelection().point3d();
 			selectionManager.clearSelections();
 			Box b = new Box(lastPointSelected, new Point3d(e.x, e.y, e.z));
 			for (Point3i p : b.voxelize()) {

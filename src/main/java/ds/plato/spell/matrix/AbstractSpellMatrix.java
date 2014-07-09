@@ -25,7 +25,7 @@ public abstract class AbstractSpellMatrix extends Spell {
 	protected void transformSelections(Matrix4d matrix, IWorld world, boolean deleteInitialBlocks) {
 		Transaction t = undoManager.newTransaction();
 		for (Selection s : selectionManager.getSelections()) {
-			Point3d p = s.getPoint3d();
+			Point3d p = s.point3d();
 			matrix.transform(p);
 			// TODO Optimize this. Expensive for large operations.
 			// Test that we are not transforming onto oneself

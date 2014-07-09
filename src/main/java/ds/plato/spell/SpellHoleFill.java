@@ -47,7 +47,7 @@ public class SpellHoleFill extends Spell {
 		Transaction t = undoManager.newTransaction();
 		for (Selection s : selectionManager.getSelections()) {
 			Shell.Type type = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) ? Shell.Type.HORIZONTAL : Shell.Type.BELLOW;
-			Shell shell = new Shell(type, s.getPoint3i(), world);
+			Shell shell = new Shell(type, s.point3i(), world);
 			for (Point3i p : shell) {
 				Block b = world.getBlock(p.x, p.y, p.z);
 				if (b == Blocks.air || b == Blocks.water) {
