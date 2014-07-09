@@ -15,7 +15,7 @@ public class GuiTextInputDialog extends GuiDialog {
 		super(player, "Ok", "Cancel");
 		if (buttons != null) {
 			for (String b : buttons) {
-				addExtraButton(b);
+				addButtonName(b);
 			}
 		}
 	}

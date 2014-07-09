@@ -17,17 +17,14 @@ import ds.plato.spell.SpellRestore;
 
 public class GuiSavesList extends GuiListExtended {
 
-	//private List<String> strings;
 	private List<Row> rows = new ArrayList<Row>();
 	private EntityPlayer player;
 
-	public GuiSavesList(Minecraft mc, int w, int h, int ww, int hh, int a,
-			EntityPlayer player, String... filenames) {
-		super(mc, w, h, ww, hh, a);
+	public GuiSavesList(Minecraft mc, int w, int h, int top, int bottom, int spacing, EntityPlayer player, String... filenames) {
+		super(mc, w, h, top, bottom, spacing);
 		this.player = player;
-		//this.strings = Lists.newArrayList(strings);
 		for (String filename : filenames) {
-			GuiButton b = new GuiButton(a, a, a, filename);
+			GuiButton b = new GuiButton(spacing, spacing, spacing, filename);
 			rows.add(new Row(b));
 		}
 	}
@@ -53,24 +50,18 @@ public class GuiSavesList extends GuiListExtended {
 		}
 
 		@Override
-		public void drawEntry(int p1, int p2, int y, int p4, int p5,
-				Tessellator p6, int p7, int p8, boolean p9) {
+		public void drawEntry(int p1, int p2, int y, int p4, int p5, Tessellator p6, int p7, int p8, boolean p9) {
 			button.yPosition = y;
 			button.drawButton(mc, p7, p8);
 		}
 
 		@Override
-		public boolean mousePressed(int p1, int p2, int p3, int p4, int p5,
-				int p6) {
+		public boolean mousePressed(int p1, int p2, int p3, int p4, int p5, int p6) {
 			System.out.println(button.displayString);
 			SpellRestore s = (SpellRestore) player.getHeldItem().getItem();
 			s.readFile(button.displayString);
+			mc.displayGuiScreen(null);
 			return button.mousePressed(mc, p2, p3);
-			// if (button.mousePressed(mc, p2, p3)) {
-			// System.out.println(button.displayString);
-			// return true;
-			// }
-			// return false;
 		}
 
 		@Override

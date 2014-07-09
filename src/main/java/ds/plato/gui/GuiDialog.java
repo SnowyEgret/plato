@@ -13,26 +13,28 @@ import org.lwjgl.opengl.GL11;
 public class GuiDialog extends GuiScreen {
 
 	protected int w = 260;
-	private int h = 100;
+	protected int h = 100;
 	private int buttonWidth = 60;
 	protected int buttonHeight = 20;
 	protected int padding = 10;
 	protected EntityPlayer player;
-	protected List<String> buttons = new ArrayList<>();
+	protected List<String> buttonNames = new ArrayList<>();
 	private int dx = 0;
 	private int buttonCount = 0;
 
-	public GuiDialog(EntityPlayer player, String... buttons) {
+	public GuiDialog(EntityPlayer player, String... buttonNames) {
 		this.player = player;
-		for (String b : buttons) {
-			this.buttons.add(b);
+		for (String b : buttonNames) {
+			this.buttonNames.add(b);
 		}
 	}
 
 	@Override
 	public void initGui() {
-		this.buttonList.clear();
-		for (String b : buttons) {
+		buttonList.clear();
+		dx = 0;
+		buttonCount = 0;
+		for (String b : buttonNames) {
 			addButton(b);
 		}
 	}
@@ -40,9 +42,6 @@ public class GuiDialog extends GuiScreen {
 	@Override
 	public void drawScreen(int x, int y, float par3) {
 		drawDefaultBackground();
-		//GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		//mc.renderEngine.bindTexture(new ResourceLocation("gui/textInputDialog.png"));
-		//drawTexturedModalRect(topLeftX(), topLeftY(), 0, 0, w, h);
 		super.drawScreen(x, y, par3);
 	}
 
@@ -54,18 +53,18 @@ public class GuiDialog extends GuiScreen {
 		return (height - h) / 2;
 	}
 
-	protected void addExtraButton(String button) {
-		this.buttons.add(button);
+	protected void addButtonName(String button) {
+		this.buttonNames.add(button);
 	}
 
-	private void addButton(String button) {
+	private void addButton(String buttonName) {
 		buttonList.add(new GuiButton(buttonCount, topLeftX() + (w / 2) - (widthOfButtons() / 2) + dx, topLeftY() + h
-				- padding - buttonHeight, buttonWidth, buttonHeight, button));
+				- padding - buttonHeight, buttonWidth, buttonHeight, buttonName));
 		buttonCount++;
 		dx += buttonWidth + padding;
 	}
 
 	private int widthOfButtons() {
-		return buttons.size() * buttonWidth + (buttons.size() - 1) * padding;
+		return buttonNames.size() * buttonWidth + (buttonNames.size() - 1) * padding;
 	}
 }

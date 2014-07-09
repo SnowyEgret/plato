@@ -13,6 +13,7 @@ import ds.plato.core.IO.Voxel;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
+import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -23,6 +24,7 @@ import ds.plato.undo.Transaction;
 public class SpellRestore extends Spell {
 
 	private IWorld world;
+	private Pick lastPick;
 
 	public SpellRestore(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
@@ -39,8 +41,17 @@ public class SpellRestore extends Spell {
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
-		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 1, world.getWorld(), 0, 0, 0);
 		this.world = world;
+		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 1, world.getWorld(), 0, 0, 0);
+		lastPick = pickManager.lastPick();
+		// Clear picks here because player might have cancelled
+		pickManager.clearPicks();
+	}
+
+	@Override
+	public Object[] getRecipe() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public void readFile(String filename) {
@@ -49,7 +60,7 @@ public class SpellRestore extends Spell {
 			System.out.println("[SpellRestore.readFile] group=" + group);
 			Transaction transaction = undoManager.newTransaction();
 			Point3i d = new Point3i();
-			d.sub(group.insertionPoint, pickManager.lastPick());
+			d.sub(group.insertionPoint, lastPick);
 			for (Voxel v : group.voxels) {
 				Block b = Block.getBlockFromName(v.b);
 				if (b != null) {
@@ -62,15 +73,8 @@ public class SpellRestore extends Spell {
 			transaction.commit();			
 			pickManager.clearPicks();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public Object[] getRecipe() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
