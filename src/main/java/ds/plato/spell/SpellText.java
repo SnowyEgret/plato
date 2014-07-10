@@ -1,9 +1,11 @@
 package ds.plato.spell;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
@@ -14,6 +16,11 @@ import javax.vecmath.Vector3d;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
+
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
+
 import ds.plato.Plato;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
@@ -75,28 +82,61 @@ public class SpellText extends Spell implements ITextSetable {
 	@Override
 	public void setText(String text) {
 
+		// Using slick2k (slick.jar not slick-util.jar)
+		// UnicodeFont uniFont = new UnicodeFont(font);
+		//
+		// uniFont.addAsciiGlyphs();
+		// uniFont.addGlyphs(0x3040, 0x30FF); // Setting the unicode Range
+		// //uniFont.addGlyphs(JPN_CHAR_STR); // Setting JPN Font by String
+		//
+		// // Setting the Color
+		// uniFont.getEffects().add(new ColorEffect(java.awt.Color.black));
+		// uniFont.getEffects().add(new ColorEffect(java.awt.Color.yellow));
+		// uniFont.getEffects().add(new ColorEffect(java.awt.Color.white));
+		//
+		// try {
+		// uniFont.loadGlyphs();
+		// } catch (SlickException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// uniFont.drawString(100, 100, "test");
+
 		Vector3d d = new Vector3d();
 		d.sub(picks[0].point3d(), picks[1].point3d());
-		double angleFromXAxis = new Vector3d(1, 0, 0).angle(d);
-		System.out.println("[SpellText.setText] angle=" + angleFromXAxis);
+		double angle = new Vector3d(-1, 0, 0).angle(d);
+		// AffineTransform transform = new AffineTransform();
+		// transform.rotate(angleFromXAxis);
+		// font = font.deriveFont(transform);
+		System.out.println("[SpellText.setText] angle=" + angle);
 
 		graphics.setFont(font);
 		FontMetrics fm = graphics.getFontMetrics();
 		Rectangle2D r = fm.getStringBounds(text, graphics);
 		System.out.println("[SpellText.setText] rectangle=" + r);
 
-		int border = 0;
-		int width = (int) r.getWidth() + 2 * border;
-		int height = (int) r.getHeight() + 2 * border;
+		double hyp = Math.sqrt(Math.pow(r.getWidth(), 2) + Math.pow(r.getHeight(), 2));
 
+		// int width = (int) r.getWidth();
+		// int height = (int) r.getHeight();
+		int width = (int) hyp * 2;
+		int height = (int) width;
+
+		// BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		System.out.println("[SpellText.setText] image=" + image);
 		Graphics g = image.getGraphics();
 		g.setFont(font);
-		Graphics2D graphics = (Graphics2D) g;
+		Graphics2D g2 = (Graphics2D) g;
 		// graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		// g.drawString(text, 6, font.getSize() + 6);
-		g.drawRect(0, 0, width - 1, height - 1);
-		g.drawString(text, border, height - border - fm.getMaxDescent());
+		// g2.drawRect(0, 0, width - 1, height - 1);
+		g2.drawRect(0, 0, width - 1, height - 1);
+		g.translate(width / 2, height / 2);
+		// for (double i = 0; i < 2 * Math.PI; i += .1) {
+		g2.rotate(angle);
+		g2.drawString(text, 0, 0);
+		// }
+		// g2.drawString(text, width, height);
 
 		Set<Point3i> points = new HashSet<>();
 		for (int h = 0; h < height; h++) {
@@ -104,7 +144,7 @@ public class SpellText extends Spell implements ITextSetable {
 				int pixel = image.getRGB(w, h);
 				// if (pixel == -16777216) {
 				if (pixel == -1) {
-					Point3i p = new Point3i(w, 0, h);
+					Point3i p = new Point3i(w - (width / 2), 0, h - (height / 2));
 					p.add(picks[0].point3i());
 					points.add(p);
 				}
