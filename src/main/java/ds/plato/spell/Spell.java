@@ -59,12 +59,6 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	}
 
 	@Override
-	public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
-		// Minimizes animation on selecting with left mouse button.
-		return true;
-	}
-
-	@Override
 	public void onMouseClickLeft(MovingObjectPosition e) {
 
 		// Standard selection behavior. Shift selects a region.
@@ -76,6 +70,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 				selectionManager.select(p.x, p.y, p.z);
 			}
 
+		// Control adds or subtracts a selection
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 			Selection s = selectionManager.selectionAt(e.blockX, e.blockY, e.blockZ);
 			System.out.println("[Spell.onMouseClickLeft] s=" + s);
@@ -89,25 +84,9 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			selectionManager.clearSelections();
 			selectionManager.select(e.blockX, e.blockY, e.blockZ);
 		}
-
-		// if (selectionManager.isSelected(e.blockX, e.blockY, e.blockZ)) {
-		// if (!Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-		// selectionManager.clearSelections();
-		// }
-		// selectionManager.select(e.blockX, e.blockY, e.blockZ);
-		// } else {
-		// if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-		// selectionManager.deselect(e.blockX, e.blockY, e.blockZ);
-		// }
-		// }
 	}
 
-	@Override
-	public boolean onBlockDestroyed(ItemStack is, World w, Block b, int x, int y, int z, EntityLivingBase p) {
-		// Minimizes animation on selecting with left mouse button.
-		return true;
-	}
-
+	@Deprecated //use onMouseClickRight
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
 		if (w.isRemote) {
@@ -153,6 +132,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		e.setCanceled(true);
 	}
 
+	@Deprecated //use onMouseClickRight
 	@Override
 	public void onClickRight(PlayerInteractEvent e) {
 		// System.out.println("[Spell.onClickRight] e.y=" + e.y);
@@ -164,16 +144,12 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		}
 	}
 
+	@Deprecated
 	@Override
 	public void onClickRightAir(PlayerInteractEvent e) {
 		System.out.println("[Spell.onClickRightAir] e=" + e);
 		// Not working
 		// pickManager.clearPicks();
-	}
-
-	// TODO remove this from ISelect. Pass selection manager to EventHandler instead.
-	public ISelect getSelectionManager() {
-		return selectionManager;
 	}
 
 	@Override
