@@ -44,6 +44,7 @@ public class ForgeEventHandler {
 	private IPick pickManager;
 	private boolean isWorldSet = false;
 	private Overlay overlay;
+	private long nanoseconds = 0;
 
 	public ForgeEventHandler(IUndo undoManager, ISelect selectionManager, IPick pickManager, Overlay overlay) {
 		this.selectionManager = selectionManager;
@@ -55,17 +56,24 @@ public class ForgeEventHandler {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onMouseEvent(MouseEvent e) {
+
 		if (e.button == 0) {
-			System.out.println("[ForgeEventHandler.onMouseEvent] e.button=" + e.button);
+
+			// This method is being called twice. Throw out the second call otherwise the last selection is lost and
+			// control click behave incorrectly
+			if (e.nanoseconds - nanoseconds < 1000000000) {
+				nanoseconds = 0;
+				return;
+			} else {
+				nanoseconds = e.nanoseconds;
+			}
+
 			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
 			if (position.typeOfHit == MovingObjectType.MISS) {
-				// This event is being called twice for some reason. Can't test for event having remote world. Clearing
-				// selection list twice creates an empty last selection list.
-				if (!selectionManager.getSelectionList().isEmpty()) {
-					selectionManager.clearSelections();
-				}
+				selectionManager.clearSelections();
 
-				// TODO a better way to clear the grown selections?
+				// TODO a better way to clear the grown selections? Yes. GrownSelections should belong to
+				// SelectionManager
 				EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 				ItemStack is = player.getCurrentEquippedItem();
 				if (is != null) {
@@ -75,6 +83,22 @@ public class ForgeEventHandler {
 						AbstractSpellSelect s = (AbstractSpellSelect) staff.currentSpell();
 						if (s != null) {
 							s.clearGrownSelections();
+						}
+					}
+				}
+
+			// Do this here instead of onPlayerInteractEvent
+			//TODO Move onPlayerInteractEvent right click code here also
+			} else if (position.typeOfHit == MovingObjectType.BLOCK) {
+				EntityPlayer p = Minecraft.getMinecraft().thePlayer;
+				ItemStack stack = p.inventory.getCurrentItem();
+				if (stack != null) {
+					Item item = stack.getItem();
+					if (item instanceof IClickable) {
+						IClickable c = (IClickable) item;
+						c.onMouseClickLeft(position);
+						if (e.isCancelable()) {
+							e.setCanceled(true);
 						}
 					}
 				}
@@ -99,8 +123,9 @@ public class ForgeEventHandler {
 	public void onPlayerInteractEvent(PlayerInteractEvent e) {
 
 		World w = e.entity.worldObj;
-		if (w.isRemote)
+		if (w.isRemote) {
 			return;
+		}
 		// Else we get java.lang.IllegalStateException: TickNextTick list out of synch
 		// MOD.log.info("[ForgeEventHandle.onPlayerInteractEvent] w.isRemote=" + w.isRemote);
 
@@ -111,7 +136,7 @@ public class ForgeEventHandler {
 		}
 		Item item = stack.getItem();
 
-		//TODO case clicking with bucket
+		// TODO case clicking with bucket
 		if (item instanceof ItemBlock) {
 			ItemBlock itemBlock = (ItemBlock) item;
 			switch (e.action) {
@@ -138,7 +163,8 @@ public class ForgeEventHandler {
 			IClickable c = (IClickable) item;
 			switch (e.action) {
 			case LEFT_CLICK_BLOCK:
-				c.onClickLeft(e);
+				// Comment out while trying IClickable.onMouseClickLeft instead
+				// c.onClickLeft(e);
 				break;
 			case RIGHT_CLICK_AIR:
 				// Recieving this when right clicking (not on air)
@@ -204,8 +230,8 @@ public class ForgeEventHandler {
 						Spell s = holdable.getSpell();
 						if (s != null) {
 							holdable.reset();
-//							pickManager.clearPicks();
-//							pickManager.reset(s.getNumPicks());
+							// pickManager.clearPicks();
+							// pickManager.reset(s.getNumPicks());
 						}
 					}
 				} else {

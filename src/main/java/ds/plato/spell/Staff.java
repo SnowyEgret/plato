@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -52,6 +53,12 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	public void onClickLeft(PlayerInteractEvent e) {
 		if (currentSpell() != null)
 			currentSpell().onClickLeft(e);
+	}
+
+	@Override
+	public void onMouseClickLeft(MovingObjectPosition position) {
+		if (currentSpell() != null)
+			currentSpell().onMouseClickLeft(position);
 	}
 
 	@Override

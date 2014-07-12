@@ -68,8 +68,16 @@ public class SelectionManager implements ISelect {
 
 	@Override
 	public void deselect(Selection s) {
-		removeSelection(s.x, s.y, s.z);
+		selections.remove(new Point3i(s.x, s.y, s.z));
 		world.setBlock(s.x, s.y, s.z, s.block, s.metadata);
+	}
+
+	@Override
+	public void clearSelections() {
+		lastSelections = Lists.newArrayList(selections.keySet());
+		for (Selection s : selections.values()) {
+			deselect(s);
+		}
 	}
 
 	@Override
@@ -102,14 +110,6 @@ public class SelectionManager implements ISelect {
 		List<Selection> l = new ArrayList<>();
 		l.addAll(selections.values());
 		return l;
-	}
-
-	@Override
-	public void clearSelections() {
-		lastSelections = Lists.newArrayList(selectedPoints());
-		for (Selection s : getSelections()) {
-			deselect(s);
-		}
 	}
 
 	@Override

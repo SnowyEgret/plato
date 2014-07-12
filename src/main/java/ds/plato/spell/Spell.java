@@ -21,6 +21,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
@@ -49,9 +50,9 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
 	}
-	
+
 	public abstract Object[] getRecipe();
-	
+
 	@Override
 	public Spell getSpell() {
 		return this;
@@ -61,6 +62,44 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
 		// Minimizes animation on selecting with left mouse button.
 		return true;
+	}
+
+	@Override
+	public void onMouseClickLeft(MovingObjectPosition e) {
+
+		// Standard selection behavior. Shift selects a region.
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
+			Point3d lastPointSelected = selectionManager.lastSelection().point3d();
+			selectionManager.clearSelections();
+			Box b = new Box(lastPointSelected, new Point3d(e.blockX, e.blockY, e.blockZ));
+			for (Point3i p : b.voxelize()) {
+				selectionManager.select(p.x, p.y, p.z);
+			}
+
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+			Selection s = selectionManager.selectionAt(e.blockX, e.blockY, e.blockZ);
+			System.out.println("[Spell.onMouseClickLeft] s=" + s);
+			if (s == null) {
+				selectionManager.select(e.blockX, e.blockY, e.blockZ);
+			} else {
+				selectionManager.deselect(s);
+			}
+			
+		} else {
+			selectionManager.clearSelections();
+			selectionManager.select(e.blockX, e.blockY, e.blockZ);
+		}
+
+		// if (selectionManager.isSelected(e.blockX, e.blockY, e.blockZ)) {
+		// if (!Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+		// selectionManager.clearSelections();
+		// }
+		// selectionManager.select(e.blockX, e.blockY, e.blockZ);
+		// } else {
+		// if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+		// selectionManager.deselect(e.blockX, e.blockY, e.blockZ);
+		// }
+		// }
 	}
 
 	@Override
@@ -87,13 +126,6 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			System.out.println("[Spell.onClickLeft] Returning. Got remote world: " + e.entity.worldObj);
 			return;
 		}
-
-		// MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-		// if (position.typeOfHit == MovingObjectType.MISS) {
-		// if (e.isCancelable())
-		// e.setCanceled(true);
-		// return;
-		// }
 
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
 			Point3d lastPointSelected = selectionManager.lastSelection().point3d();
@@ -221,7 +253,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	public int getNumPicks() {
 		return numPicks;
 	}
-	
+
 	@Override
 	public String getMessage() {
 		return message;
