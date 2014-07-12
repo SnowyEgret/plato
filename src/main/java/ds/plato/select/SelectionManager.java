@@ -18,6 +18,7 @@ import ds.plato.geom.VoxelSet;
 public class SelectionManager implements ISelect {
 
 	private final Map<Point3i, Selection> selections = new ConcurrentHashMap<>();
+	//private final Map<Point3i, Selection> selections = new HashMap<>();
 	private IWorld world;
 	private Block blockSelected;
 	private List<Point3i> lastSelections;
@@ -41,59 +42,34 @@ public class SelectionManager implements ISelect {
 		return l;
 	}
 
+//	@Override
+//	public Iterable<Selection> getSelections() {
+//		return selections.values();
+//	}
+
 	@Override
 	public Selection selectionAt(int x, int y, int z) {
-		return selectionAt(new Point3i(x, y, z));
+		return selections.get(new Point3i(x, y, z));
 	}
 
-	// For now, only used by UndoableSetBlock in new spell package.
 	@Override
-	public Selection select(int x, int y, int z) {
+	public void select(int x, int y, int z) {
 		Block prevBlock = world.getBlock(x, y, z);
 		int metadata = world.getMetadata(x, y, z);
 		world.setBlock(x, y, z, blockSelected, 0);
 		Selection s = new Selection(x, y, z, prevBlock, metadata);
-		addSelection(s);
-		return s;
+		selections.put(s.point3i(), s);
+	}
+
+	@Override
+	public void deselect(int x, int y, int z) {
+		deselect(selectionAt(x, y, z));
 	}
 
 	@Override
 	public void deselect(Selection s) {
-		removeSelection(s);
+		removeSelection(s.x, s.y, s.z);
 		world.setBlock(s.x, s.y, s.z, s.block, s.metadata);
-	}
-
-	@Override
-	public Iterable<Point3i> clear() {
-		List<Point3i> pointsCleared = new ArrayList<>();
-		pointsCleared.addAll(selections.keySet());
-		selections.clear();
-		// System.out.println("[SelectionManager.clear] selections.size()=" + selections.size());
-		return pointsCleared;
-	}
-
-	public Selection selectionAt(Point3i p) {
-		return selections.get(p);
-	}
-
-	@Override
-	public void addSelection(Selection s) {
-		selections.put(s.point3i(), s);
-	}
-
-	public void addSelections(Iterable<Selection> selections) {
-		for (Selection s : selections) {
-			addSelection(s);
-		}
-	}
-
-	public boolean isSelected(Point3i p) {
-		return selections.containsKey(p);
-	}
-
-	@Override
-	public boolean isSelected(int x, int y, int z) {
-		return isSelected(new Point3i(x, y, z));
 	}
 
 	@Override
@@ -102,23 +78,18 @@ public class SelectionManager implements ISelect {
 	}
 
 	@Override
+	public boolean isSelected(int x, int y, int z) {
+		return selections.containsKey(new Point3i(x, y, z));
+	}
+
+	@Override
 	public Collection<Point3i> selectedPoints() {
 		return selections.keySet();
 	}
 
 	@Override
-	public Selection removeSelection(Point3i p) {
-		return selections.remove(p);
-	}
-
-	@Override
 	public Selection removeSelection(int x, int y, int z) {
-		return removeSelection(new Point3i(x, y, z));
-	}
-
-	@Override
-	public Selection removeSelection(Selection s) {
-		return removeSelection(s.point3i());
+		return selections.remove(new Point3i(x, y, z));
 	}
 
 	@Override
@@ -131,15 +102,6 @@ public class SelectionManager implements ISelect {
 		List<Selection> l = new ArrayList<>();
 		l.addAll(selections.values());
 		return l;
-	}
-
-	@Override
-	public String toString() {
-		return "SelectionManager [world=" + idOf(world) + ", selections=" + selections.size() + "]";
-	}
-
-	private String idOf(Object o) {
-		return o.getClass().getSimpleName() + "@" + Integer.toHexString(o.hashCode());
 	}
 
 	@Override
@@ -175,6 +137,20 @@ public class SelectionManager implements ISelect {
 				select(p.x, p.y, p.z);
 			}
 		}
+	}
+
+	// TODO Used only by Test class. Make default when test class is in same package.
+	public void addSelection(Selection s) {
+		selections.put(s.point3i(), s);
+	}
+
+	@Override
+	public String toString() {
+		return "SelectionManager [world=" + idOf(world) + ", selections=" + selections.size() + "]";
+	}
+
+	private String idOf(Object o) {
+		return o.getClass().getSimpleName() + "@" + Integer.toHexString(o.hashCode());
 	}
 
 }

@@ -84,16 +84,13 @@ public class SpellText extends Spell implements ITextSetable {
 
 		// Using slick2k (slick.jar not slick-util.jar)
 		// UnicodeFont uniFont = new UnicodeFont(font);
-		//
 		// uniFont.addAsciiGlyphs();
 		// uniFont.addGlyphs(0x3040, 0x30FF); // Setting the unicode Range
 		// //uniFont.addGlyphs(JPN_CHAR_STR); // Setting JPN Font by String
-		//
 		// // Setting the Color
 		// uniFont.getEffects().add(new ColorEffect(java.awt.Color.black));
 		// uniFont.getEffects().add(new ColorEffect(java.awt.Color.yellow));
 		// uniFont.getEffects().add(new ColorEffect(java.awt.Color.white));
-		//
 		// try {
 		// uniFont.loadGlyphs();
 		// } catch (SlickException e) {
@@ -116,27 +113,19 @@ public class SpellText extends Spell implements ITextSetable {
 		System.out.println("[SpellText.setText] rectangle=" + r);
 
 		double hyp = Math.sqrt(Math.pow(r.getWidth(), 2) + Math.pow(r.getHeight(), 2));
-
-		// int width = (int) r.getWidth();
-		// int height = (int) r.getHeight();
 		int width = (int) hyp * 2;
 		int height = (int) width;
 
 		// BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		System.out.println("[SpellText.setText] image=" + image);
 		Graphics g = image.getGraphics();
 		g.setFont(font);
 		Graphics2D g2 = (Graphics2D) g;
 		// graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		// g2.drawRect(0, 0, width - 1, height - 1);
 		g2.drawRect(0, 0, width - 1, height - 1);
 		g.translate(width / 2, height / 2);
-		// for (double i = 0; i < 2 * Math.PI; i += .1) {
 		g2.rotate(angle);
 		g2.drawString(text, 0, 0);
-		// }
-		// g2.drawString(text, width, height);
 
 		Set<Point3i> points = new HashSet<>();
 		for (int h = 0; h < height; h++) {
@@ -145,6 +134,7 @@ public class SpellText extends Spell implements ITextSetable {
 				// if (pixel == -16777216) {
 				if (pixel == -1) {
 					Point3i p = new Point3i(w - (width / 2), 0, h - (height / 2));
+					//Point3i p = new Point3i(w - (width / 2), h - (height / 2), 0);
 					p.add(picks[0].point3i());
 					points.add(p);
 				}

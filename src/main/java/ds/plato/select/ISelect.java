@@ -16,19 +16,20 @@ public interface ISelect {
 
 	public Selection selectionAt(int x, int y, int z);
 
-	public Selection select(int x, int y, int z);
+	public void select(int x, int y, int z);
 
-	public void deselect(Selection selection);
+	public void deselect(int x, int y, int z);
+
+	public void deselect(Selection s);
 
 	public void clearSelections();
-
-	public Selection removeSelection(Selection s);
 
 	public Selection removeSelection(int x, int y, int z);
 
 	public int size();
 
-	public Collection<? extends Point3i> selectedPoints();
+	//public Collection<? extends Point3i> selectedPoints();
+	public Collection<Point3i> selectedPoints();
 
 	public boolean isSelected(int x, int y, int z);
 
@@ -41,12 +42,6 @@ public interface ISelect {
 	public VoxelSet voxelSet();
 
 	public List<Selection> getSelectionList();
-
-	@Deprecated public void addSelection(Selection selection);
-
-	@Deprecated public Iterable<Point3i> clear();
-
-	@Deprecated public Selection removeSelection(Point3i p);
 
 	public void reselectLast();
 
