@@ -1,4 +1,4 @@
-package ds.plato.undo.test;
+package ds.plato.undo;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,11 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ds.plato.test.PlatoTest;
-import ds.plato.undo.Transaction;
-import ds.plato.undo.UndoManager;
-import ds.plato.undo.IUndoable;
 
-public class T_UndoManager extends PlatoTest {
+public class UndoManagerTest extends PlatoTest {
 
 	String state = null;
 	UndoManager m;

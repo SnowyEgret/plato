@@ -1,4 +1,4 @@
-package ds.plato.undo.test;
+package ds.plato.undo;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -16,9 +16,8 @@ import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.select.SelectionManager;
 import ds.plato.test.PlatoTest;
-import ds.plato.undo.SetBlock;
 
-public class T_SetBlock extends PlatoTest {
+public class SetBlockTest extends PlatoTest {
 	
 	IWorld w;
 	ISelect sm;

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class T_PlatoTest {
+public class PlatoTestTest {
 
 	@Before
 	public void setUp() throws Exception {

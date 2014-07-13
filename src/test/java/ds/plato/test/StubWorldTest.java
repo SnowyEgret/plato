@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import ds.plato.core.IWorld;
 
-public class T_StubWorld extends PlatoTest {
+public class StubWorldTest extends PlatoTest {
 
 	IWorld world;
 
