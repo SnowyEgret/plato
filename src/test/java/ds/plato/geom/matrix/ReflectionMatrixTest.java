@@ -1,4 +1,4 @@
-package ds.plato.geom.matrix.test;
+package ds.plato.geom.matrix;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;
@@ -9,10 +9,9 @@ import javax.vecmath.Point3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.matrix.ReflectionMatrix;
 import ds.plato.geom.test.GeomTest;
 
-public class T_ReflectionMatrix extends GeomTest {
+public class ReflectionMatrixTest extends GeomTest {
 
 	@Test
 	public void test() {

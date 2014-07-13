@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.curve;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
-import ds.plato.geom.curve.Line;
+import ds.plato.geom.test.GeomTest;
 
-public class T_Line extends GeomTest {
+public class LineTest extends GeomTest {
 	
 	@Test
 	public void test() {

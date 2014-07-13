@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.curve;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -13,10 +13,10 @@ import ds.plato.geom.GeomUtil;
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
 import ds.plato.geom.VoxelSet;
-import ds.plato.geom.curve.Rectangle;
 import ds.plato.geom.surface.Sphere;
+import ds.plato.geom.test.GeomTest;
 
-public class T_Rectangle extends GeomTest {
+public class RectangleTest extends GeomTest {
 
 	@Test
 	public void firstQuadrant() {
