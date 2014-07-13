@@ -1,13 +1,13 @@
-package ds.plato.geom.test;
+package ds.plato.geom;
 
 import java.util.List;
 
 import org.apache.commons.lang3.Range;
 import org.junit.Test;
 
-import ds.plato.geom.IntegerDomain;
+import ds.plato.geom.test.GeomTest;
 
-public class T_IntegerDomain extends GeomTest {
+public class IntegerDomainTest extends GeomTest {
 
 	@Test
 	public void constuctor() {

@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom;
 
 import static ds.plato.geom.test.CloseToTuple3d.closeToTuple3d;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -12,12 +12,10 @@ import javax.vecmath.Vector3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.GeomUtil;
-import ds.plato.geom.Primitive;
-import ds.plato.geom.VoxelSet;
 import ds.plato.geom.surface.Sphere;
+import ds.plato.geom.test.GeomTest;
 
-public class T_GeomUtil extends GeomTest {
+public class GeomUtilTest extends GeomTest {
 	
 	double epsilon = .000001;
 

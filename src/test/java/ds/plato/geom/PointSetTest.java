@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThan;
@@ -9,11 +9,10 @@ import javax.vecmath.Vector3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.PointSet;
-import ds.plato.geom.VoxelSet;
 import ds.plato.geom.curve.Line;
+import ds.plato.geom.test.GeomTest;
 
-public class T_PointSet extends GeomTest {
+public class PointSetTest extends GeomTest {
 
 	@Test
 	public void voxelize() {

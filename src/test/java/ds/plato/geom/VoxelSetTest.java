@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -9,15 +9,12 @@ import javax.vecmath.Vector3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.GeomUtil;
-import ds.plato.geom.IntegerDomain;
-import ds.plato.geom.Primitive;
-import ds.plato.geom.VoxelSet;
 import ds.plato.geom.solid.Ball;
 import ds.plato.geom.solid.Box;
 import ds.plato.geom.surface.Sphere;
+import ds.plato.geom.test.GeomTest;
 
-public class T_VoxelSet extends GeomTest {
+public class VoxelSetTest extends GeomTest {
 
 	@Test
 	public void core_shell() {
