@@ -14,7 +14,7 @@ import ds.plato.geom.IntegerDomain;
 import ds.plato.geom.Primitive;
 import ds.plato.geom.VoxelSet;
 import ds.plato.geom.solid.Ball;
-import ds.plato.geom.solid.Cube;
+import ds.plato.geom.solid.Box;
 import ds.plato.geom.surface.Sphere;
 
 public class T_VoxelSet extends GeomTest {
@@ -64,7 +64,7 @@ public class T_VoxelSet extends GeomTest {
 		// int n = 2;
 		// int n = 5;
 		int n = 8;
-		Primitive cube = new Cube(p(0), p(n));
+		Primitive cube = new Box(p(0), p(n), true);
 		// System.out.println("[T_VoxelSet.divide] cube=" + cube);
 		VoxelSet voxels = cube.voxelize();
 		assertThat(voxels.size(), equalTo((int) Math.pow(n + 1, 3)));
@@ -86,7 +86,7 @@ public class T_VoxelSet extends GeomTest {
 		// int n = 5;
 		// int n = 8;
 		int n = 9;
-		Primitive cube = new Cube(p(1), p(9));
+		Primitive cube = new Box(p(1), p(9), true);
 		// System.out.println("[T_VoxelSet.divideDomain] cube=" + cube);
 		VoxelSet voxels = cube.voxelize();
 		assertThat(voxels.size(), equalTo((int) Math.pow(n, 3)));
@@ -108,7 +108,7 @@ public class T_VoxelSet extends GeomTest {
 		double b = d();
 		System.out.println("[T_VoxelSet.getDomain] a=" + a);
 		System.out.println("[T_VoxelSet.getDomain] b=" + b);
-		Primitive cube = new Cube(p(a), p(b));
+		Primitive cube = new Box(p(a), p(b), true);
 		System.out.println("[T_VoxelSet.getDomain] cube=" + cube);
 
 		IntegerDomain d = cube.voxelize().getDomain();

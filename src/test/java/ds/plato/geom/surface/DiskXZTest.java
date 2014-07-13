@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.surface;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
-import ds.plato.geom.surface.DiskXZ;
+import ds.plato.geom.test.GeomTest;
 
-public class T_Disk extends GeomTest {
+public class DiskXZTest extends GeomTest {
 
 	@Test
 	public void constructor() {

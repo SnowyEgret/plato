@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.surface;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -9,9 +9,9 @@ import javax.vecmath.Point3d;
 import org.junit.Test;
 
 import ds.plato.geom.PointSet;
-import ds.plato.geom.surface.Torus;
+import ds.plato.geom.test.GeomTest;
 
-public class T_Torus extends GeomTest {
+public class TorusTest extends GeomTest {
 
 	@Test
 	public void test() {

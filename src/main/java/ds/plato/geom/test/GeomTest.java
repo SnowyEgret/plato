@@ -1,9 +1,6 @@
 package ds.plato.geom.test;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Random;
-import java.util.concurrent.Callable;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
@@ -16,15 +13,13 @@ import ds.plato.geom.curve.InfiniteLine;
 import ds.plato.geom.curve.Line;
 import ds.plato.geom.solid.Ball;
 import ds.plato.geom.solid.Box;
-import ds.plato.geom.solid.Cube;
 import ds.plato.geom.surface.EllipticParaboloid;
 import ds.plato.geom.surface.InfinitePlane;
-import ds.plato.geom.surface.Sphere;
 
 public class GeomTest {
 
 	Random rand = new Random();
-	double scale = 200;
+	protected double scale = 200;
 	protected double epsilon = .000000001;
 
 	public Point3d p() {
@@ -71,7 +66,7 @@ public class GeomTest {
 		return new CircleXZ(origin, p());
 	}
 
-	double d() {
+	protected double d() {
 		return Math.round((rand.nextDouble() * scale) - scale / 2);
 	}
 
@@ -107,8 +102,5 @@ public class GeomTest {
 		return new Point3d(d, d, d);
 	}
 
-	public Primitive cube() {
-		return new Cube(p(), p());
-	}
 
 }

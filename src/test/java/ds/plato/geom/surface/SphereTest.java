@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.surface;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -9,16 +9,14 @@ import org.junit.Test;
 
 import ds.plato.geom.PointSet;
 import ds.plato.geom.Primitive;
+import ds.plato.geom.test.GeomTest;
 
-public class T_Ball extends GeomTest {
+public class SphereTest extends GeomTest {
 
 	@Test
 	public void test() {
-		scale = 100;
-		Primitive p = ball(p());
-		System.out.println("[T_Ball.test] p=" + p);
+		Primitive p = new Sphere(o(), p(), false);
 		PointSet points = p.pointSet();
-		System.out.println("[T_Ball.test] points.size=" + points.size());
 		for (Point3d pt : points) {
 			assertThat(p.contains(pt), equalTo(true));
 		}

@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.surface;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -6,10 +6,9 @@ import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
 
 import ds.plato.geom.VoxelSet;
-import ds.plato.geom.surface.ImageBasedTerrain;
-import ds.plato.geom.surface.Terrain;
+import ds.plato.geom.test.GeomTest;
 
-public class T_ImageBasedTerrain extends GeomTest {
+public class ImageBasedTerrainTest extends GeomTest {
 
 	@Test
 	public void test() throws Exception {

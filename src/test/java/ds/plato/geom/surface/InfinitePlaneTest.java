@@ -1,4 +1,4 @@
-package ds.plato.geom.test;
+package ds.plato.geom.surface;
 
 import static ds.plato.geom.test.CloseToTuple3d.closeToTuple3d;
 import static org.hamcrest.Matchers.is;
@@ -9,9 +9,9 @@ import javax.vecmath.Vector3d;
 
 import org.junit.Test;
 
-import ds.plato.geom.surface.InfinitePlane;
+import ds.plato.geom.test.GeomTest;
 
-public class T_InfinitePlane extends GeomTest {
+public class InfinitePlaneTest extends GeomTest {
 
 	@Test
 	public void XY() {
