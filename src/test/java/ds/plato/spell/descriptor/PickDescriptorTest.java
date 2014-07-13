@@ -1,10 +1,8 @@
-package ds.plato.spell.test;
+package ds.plato.spell.descriptor;
 
 import org.junit.Test;
 
-import ds.plato.spell.descriptor.PickDescriptor;
-
-public class T_PickDescriptor {
+public class PickDescriptorTest {
 
 	@Test
 	public void testToString() {

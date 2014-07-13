@@ -1,4 +1,4 @@
-package ds.plato.spell.test;
+package ds.plato.spell.matrix;
 
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertThat;
@@ -20,14 +20,13 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import ds.plato.pick.Pick;
 import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
-import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Keyboard.class })
 @PowerMockIgnore({ "javax.management.*" })
-public class T_MoveSpell extends PlatoTest {
+public class SpellCopyTest extends PlatoTest {
 
 	Spell spell;
 	Pick[] picks;

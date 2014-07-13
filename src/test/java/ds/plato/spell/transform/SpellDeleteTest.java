@@ -1,4 +1,4 @@
-package ds.plato.spell.test;
+package ds.plato.spell.transform;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,11 +15,10 @@ import ds.plato.pick.Pick;
 import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
 import ds.plato.spell.descriptor.SpellDescriptor;
-import ds.plato.spell.transform.SpellDelete;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
 
-public class T_DeleteSpell extends PlatoTest {
+public class SpellDeleteTest extends PlatoTest {
 
 	Spell s;
 

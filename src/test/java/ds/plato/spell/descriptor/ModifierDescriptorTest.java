@@ -1,13 +1,11 @@
-package ds.plato.spell.test;
+package ds.plato.spell.descriptor;
 
 import static org.junit.Assert.*;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 
-import ds.plato.spell.descriptor.ModifierDescriptor;
-
-public class T_ModifierDescriptor {
+public class ModifierDescriptorTest {
 
 	@Test
 	public void testToString() {

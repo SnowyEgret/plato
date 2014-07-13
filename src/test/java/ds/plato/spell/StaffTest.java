@@ -1,4 +1,4 @@
-package ds.plato.spell.test;
+package ds.plato.spell;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -22,8 +22,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
-import ds.plato.spell.Spell;
-import ds.plato.spell.Staff;
 import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.spell.transform.SpellDelete;
 import ds.plato.test.PlatoTest;
@@ -31,7 +29,7 @@ import ds.plato.test.PlatoTest;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Keyboard.class })
 @PowerMockIgnore({ "javax.management.*" })
-public class T_Staff extends PlatoTest {
+public class StaffTest extends PlatoTest {
 
 	@Mock PlayerInteractEvent mockEvent;
 	@Mock SpellDelete mockDelete;

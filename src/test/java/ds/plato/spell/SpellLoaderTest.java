@@ -1,4 +1,4 @@
-package ds.plato.spell.test;
+package ds.plato.spell;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
@@ -21,8 +21,6 @@ import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
-import ds.plato.spell.Spell;
-import ds.plato.spell.SpellLoader;
 import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.spell.select.SpellGrowAll;
 import ds.plato.spell.transform.SpellDelete;
@@ -31,7 +29,7 @@ import ds.plato.test.PlatoTest;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ GameRegistry.class })
 @PowerMockIgnore({ "javax.management.*" })
-public class T_SpellLoader extends PlatoTest {
+public class SpellLoaderTest extends PlatoTest {
 
 	SpellLoader loader;
 

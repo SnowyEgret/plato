@@ -21,7 +21,7 @@ import ds.plato.core.IWorld;
 import ds.plato.core.WorldWrapper;
 import ds.plato.test.PlatoTest;
 
-public class T_SelectionManager extends PlatoTest {
+public class SelectionManagerTest extends PlatoTest {
 	
 	SelectionManager m;
 	IWorld stubWorld;

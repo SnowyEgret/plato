@@ -1,4 +1,4 @@
-package ds.plato.pick.test;
+package ds.plato.pick;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
@@ -12,11 +12,9 @@ import javax.vecmath.Point3d;
 import org.junit.Before;
 import org.junit.Test;
 
-import ds.plato.pick.Pick;
-import ds.plato.pick.PickManager;
 import ds.plato.test.PlatoTest;
 
-public class T_PickManager extends PlatoTest {
+public class PickManagerTest extends PlatoTest {
 
 	PickManager m;
 

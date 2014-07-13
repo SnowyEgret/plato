@@ -1,4 +1,4 @@
-package ds.plato.spell.test;
+package ds.plato.spell.draw;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,12 +15,11 @@ import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Spell;
 import ds.plato.spell.descriptor.SpellDescriptor;
-import ds.plato.spell.draw.SpellSphere;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.Transaction;
 
-public class T_SphereSpell extends PlatoTest {
+public class SpellSphereTest extends PlatoTest {
 
 	@Mock SpellDescriptor sd;
 	SlotEntry[] slotEntries;

@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import ds.plato.test.PlatoIntegrationTest;
 
-public class TI_SelectionManager extends PlatoIntegrationTest {
+public class SelectionManagerIntegrationTest extends PlatoIntegrationTest {
 
 	@Test
 	public void select() {

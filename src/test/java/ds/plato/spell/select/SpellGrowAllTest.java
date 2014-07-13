@@ -1,4 +1,4 @@
-package ds.plato.spell.test;
+package ds.plato.spell.select;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -19,13 +19,12 @@ import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.select.SelectionManager;
 import ds.plato.spell.Spell;
-import ds.plato.spell.select.SpellGrowAll;
 import ds.plato.test.PlatoTest;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Keyboard.class })
 @PowerMockIgnore({ "javax.management.*" })
-public class T_GrowAllSpell extends PlatoTest {
+public class SpellGrowAllTest extends PlatoTest {
 
 	private SlotEntry[] slotEntries;
 	private Pick[] picks;

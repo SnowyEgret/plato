@@ -1,14 +1,12 @@
-package ds.plato.spell.test;
+package ds.plato.spell;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ds.plato.spell.Spell;
-import ds.plato.spell.SpellHoleDrain;
 import ds.plato.test.PlatoTest;
 
-public class T_Spell extends PlatoTest {
+public class SpellTest extends PlatoTest {
 
 	@Test
 	public void getRecipe() {
