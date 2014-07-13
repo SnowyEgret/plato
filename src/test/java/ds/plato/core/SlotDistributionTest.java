@@ -1,4 +1,4 @@
-package ds.plato.core.test;
+package ds.plato.core;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -11,11 +11,9 @@ import net.minecraft.init.Blocks;
 import org.junit.Before;
 import org.junit.Test;
 
-import ds.plato.core.SlotDistribution;
-import ds.plato.core.SlotEntry;
 import ds.plato.test.PlatoTest;
 
-public class T_SlotDistribution extends PlatoTest {
+public class SlotDistributionTest extends PlatoTest {
 	
 	@Test
 	public void test() {

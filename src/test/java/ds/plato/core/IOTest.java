@@ -1,4 +1,4 @@
-package ds.plato.core.test;
+package ds.plato.core;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,22 +7,13 @@ import java.util.List;
 
 import javax.vecmath.Point3i;
 
-import net.minecraft.block.BlockCactus;
-import net.minecraft.block.BlockDirt;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
-import ds.plato.core.IO;
 import ds.plato.core.IO.Group;
 import ds.plato.select.Selection;
 import ds.plato.test.PlatoTest;
 
-public class T_IO extends PlatoTest {
+public class IOTest extends PlatoTest {
 	
 	String filename = "saves/test.json";
 
