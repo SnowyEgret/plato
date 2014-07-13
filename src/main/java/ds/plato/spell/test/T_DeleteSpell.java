@@ -41,11 +41,11 @@ public class T_DeleteSpell extends PlatoTest {
 		verify(world).setBlock(0, 0, 0, air, 0);
 	}
 
-	@Test
-	public void onClickLeft() {
-		s.onClickLeft(new PlayerInteractEvent(null, null, 1, 1, 1, 0));
-		verify(selectionManager).select(1, 1, 1);
-	}
+//	@Test
+//	public void onClickLeft() {
+//		s.onClickLeft(new PlayerInteractEvent(null, null, 1, 1, 1, 0));
+//		verify(selectionManager).select(1, 1, 1);
+//	}
 
 	// @Test
 	// public void onClickRight() {

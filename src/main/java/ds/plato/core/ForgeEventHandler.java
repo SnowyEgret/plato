@@ -57,24 +57,18 @@ public class ForgeEventHandler {
 	@SubscribeEvent
 	public void onMouseEvent(MouseEvent e) {
 
-		if (e.button == 0) {
+		// MouseEvent does not have a player or a world like PlayerInteractEvent
+		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+		IWorld world = new WorldWrapper(player.getEntityWorld());
 
-			// This method is being called twice. Throw out the second call otherwise the last selection is lost and
-			// control click behave incorrectly
-			if (e.nanoseconds - nanoseconds < 1000000000) {
-				nanoseconds = 0;
-				return;
-			} else {
-				nanoseconds = e.nanoseconds;
-			}
+		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+		if (position.typeOfHit == MovingObjectType.MISS) {
+			if (e.button == 0) {
 
-			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-			if (position.typeOfHit == MovingObjectType.MISS) {
 				selectionManager.clearSelections();
 
 				// TODO a better way to clear the grown selections? Yes. GrownSelections should belong to
 				// SelectionManager
-				EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 				ItemStack is = player.getCurrentEquippedItem();
 				if (is != null) {
 					Item i = is.getItem();
@@ -86,20 +80,53 @@ public class ForgeEventHandler {
 						}
 					}
 				}
+				e.setCanceled(true);
 
-			// Do this here instead of onPlayerInteractEvent
-			//TODO Move onPlayerInteractEvent right click code here also
-			} else if (position.typeOfHit == MovingObjectType.BLOCK) {
-				EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-				ItemStack stack = p.inventory.getCurrentItem();
-				if (stack != null) {
-					Item item = stack.getItem();
-					if (item instanceof IClickable) {
-						IClickable c = (IClickable) item;
+			} else if (e.button == 1) {
+				pickManager.clearPicks();
+				e.setCanceled(true);
+			}
+
+		} else if (position.typeOfHit == MovingObjectType.BLOCK) {
+
+			ItemStack stack = player.inventory.getCurrentItem();
+			if (stack != null) {
+				Item item = stack.getItem();
+
+				if (item instanceof IClickable) {
+					IClickable c = (IClickable) item;
+					if (e.button == 0) {
+						// This method is being called twice. Throw out the second call otherwise the selection list is cleared
+						// twice resulting in the last selection being empty. Also control left click behaves incorrectly.
+						if (e.nanoseconds - nanoseconds < 1000000000) {
+							nanoseconds = 0;
+							e.setCanceled(true);
+							return;
+						} else {
+							nanoseconds = e.nanoseconds;
+						}
 						c.onMouseClickLeft(position);
 						if (e.isCancelable()) {
 							e.setCanceled(true);
 						}
+						return;
+					} else if (e.button == 1) {
+						c.onMouseClickRight(position);
+						e.setCanceled(true);
+					}
+
+				} else if (item instanceof ItemBlock) {
+					ItemBlock itemBlock = (ItemBlock) item;
+					if (e.button == 1) {
+						if (selectionManager.isSelected(position.blockX, position.blockY, position.blockZ)) {
+							Block b = itemBlock.field_150939_a;
+							int metadata = item.getDamage(stack);
+							SlotEntry[] slotEntries = new SlotEntry[] { new SlotEntry(b, metadata, 0) };
+							new SpellFill(undoManager, selectionManager, null).invoke(world, slotEntries);
+							e.setCanceled(true);
+						}
+					} else if (e.button == 0) {
+						System.out.println("[ForgeEventHandler.onMouseEvent] Left mouse button with block in hand");
 					}
 				}
 			}
@@ -115,72 +142,6 @@ public class ForgeEventHandler {
 			selectionManager.setWorld(w);
 			pickManager.setWorld(w);
 			isWorldSet = true;
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void onPlayerInteractEvent(PlayerInteractEvent e) {
-
-		World w = e.entity.worldObj;
-		if (w.isRemote) {
-			return;
-		}
-		// Else we get java.lang.IllegalStateException: TickNextTick list out of synch
-		// MOD.log.info("[ForgeEventHandle.onPlayerInteractEvent] w.isRemote=" + w.isRemote);
-
-		EntityPlayer p = e.entityPlayer;
-		ItemStack stack = p.inventory.getCurrentItem();
-		if (stack == null) {
-			return; // Do nothing if nothing held. Do not cancel event
-		}
-		Item item = stack.getItem();
-
-		// TODO case clicking with bucket
-		if (item instanceof ItemBlock) {
-			ItemBlock itemBlock = (ItemBlock) item;
-			switch (e.action) {
-			case LEFT_CLICK_BLOCK:
-				break;
-			case RIGHT_CLICK_AIR:
-				break;
-			case RIGHT_CLICK_BLOCK:
-				if (selectionManager.isSelected(e.x, e.y, e.z)) {
-					Block b = itemBlock.field_150939_a;
-					int metadata = item.getDamage(stack);
-					SlotEntry[] slotEntries = new SlotEntry[] { new SlotEntry(b, metadata, 0) };
-					new SpellFill(undoManager, selectionManager, null).invoke(new WorldWrapper(w), slotEntries);
-					if (e.isCancelable())
-						e.setCanceled(true);
-				}
-				break;
-			default:
-				break;
-			}
-
-			// IClickable covers both Spells and Staffs.
-		} else if (item instanceof IClickable) {
-			IClickable c = (IClickable) item;
-			switch (e.action) {
-			case LEFT_CLICK_BLOCK:
-				// Comment out while trying IClickable.onMouseClickLeft instead
-				// c.onClickLeft(e);
-				break;
-			case RIGHT_CLICK_AIR:
-				// Recieving this when right clicking (not on air)
-				// c.onClickRightAir(e);
-				break;
-			case RIGHT_CLICK_BLOCK:
-				c.onClickRight(e);
-				break;
-			default:
-				break;
-			}
-			if (e.isCancelable()) {
-				e.setCanceled(true);
-			}
-		} else {
-			System.out.println("[ForgeEventHandler.onPlayerInteractEvent] Unexpected item: " + item);
 		}
 	}
 

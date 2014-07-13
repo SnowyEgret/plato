@@ -49,11 +49,11 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 		return is;
 	}
 
-	@Override
-	public void onClickLeft(PlayerInteractEvent e) {
-		if (currentSpell() != null)
-			currentSpell().onClickLeft(e);
-	}
+//	@Override
+//	public void onClickLeft(PlayerInteractEvent e) {
+//		if (currentSpell() != null)
+//			currentSpell().onClickLeft(e);
+//	}
 
 	@Override
 	public void onMouseClickLeft(MovingObjectPosition position) {
@@ -62,16 +62,22 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	}
 
 	@Override
-	public void onClickRight(PlayerInteractEvent e) {
+	public void onMouseClickRight(MovingObjectPosition position) {
 		if (currentSpell() != null)
-			currentSpell().onClickRight(e);
+			currentSpell().onMouseClickRight(position);
 	}
 
-	@Override
-	public void onClickRightAir(PlayerInteractEvent e) {
-		if (currentSpell() != null)
-			currentSpell().onClickRightAir(e);
-	}
+//	@Override
+//	public void onClickRight(PlayerInteractEvent e) {
+//		if (currentSpell() != null)
+//			currentSpell().onClickRight(e);
+//	}
+
+//	@Override
+//	public void onClickRightAir(PlayerInteractEvent e) {
+//		if (currentSpell() != null)
+//			currentSpell().onClickRightAir(e);
+//	}
 
 	@Override
 	public void reset() {

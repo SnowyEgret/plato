@@ -8,6 +8,7 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -86,71 +87,82 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		}
 	}
 
-	@Deprecated //use onMouseClickRight
-	@Override
-	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
-		if (w.isRemote) {
-			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-			// System.out.println("[Spell.onItemRightClick] position.typeOfHit=" + position.typeOfHit);
-			if (position.typeOfHit == MovingObjectType.MISS) {
-				pickManager.clearPicks();
-			}
-		}
-		return is;
-	}
+//	@Deprecated //use onMouseClickRight
+//	@Override
+//	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
+//		if (w.isRemote) {
+//			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+//			// System.out.println("[Spell.onItemRightClick] position.typeOfHit=" + position.typeOfHit);
+//			if (position.typeOfHit == MovingObjectType.MISS) {
+//				pickManager.clearPicks();
+//			}
+//		}
+//		return is;
+//	}
 
 	@Override
-	public void onClickLeft(PlayerInteractEvent e) {
-		if (e.entity.worldObj.isRemote) {
-			System.out.println("[Spell.onClickLeft] Returning. Got remote world: " + e.entity.worldObj);
-			return;
-		}
-
-		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
-			Point3d lastPointSelected = selectionManager.lastSelection().point3d();
-			selectionManager.clearSelections();
-			Box b = new Box(lastPointSelected, new Point3d(e.x, e.y, e.z));
-			for (Point3i p : b.voxelize()) {
-				selectionManager.select(p.x, p.y, p.z);
-			}
-			if (e.isCancelable())
-				e.setCanceled(true);
-			return;
-		}
-
-		Selection s = selectionManager.selectionAt(e.x, e.y, e.z);
-		if (s == null) {
-			if (!Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-				selectionManager.clearSelections();
-			}
-			selectionManager.select(e.x, e.y, e.z);
-		} else {
-			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-				selectionManager.deselect(s);
-			}
-		}
-		e.setCanceled(true);
-	}
-
-	@Deprecated //use onMouseClickRight
-	@Override
-	public void onClickRight(PlayerInteractEvent e) {
-		// System.out.println("[Spell.onClickRight] e.y=" + e.y);
-		pickManager.pick(e.x, e.y, e.z);
+	public void onMouseClickRight(MovingObjectPosition e) {
+		pickManager.pick(e.blockX, e.blockY, e.blockZ);
 		if (pickManager.isFinishedPicking()) {
-			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
-			World w = e.entity.worldObj;
-			invoke(new WorldWrapper(w), entries);
+			EntityClientPlayerMP p = Minecraft.getMinecraft().thePlayer;
+			SlotEntry[] entries = getSlotEntriesFromPlayer(p);
+			invoke(new WorldWrapper(p.getEntityWorld()), entries);
 		}
 	}
 
-	@Deprecated
-	@Override
-	public void onClickRightAir(PlayerInteractEvent e) {
-		System.out.println("[Spell.onClickRightAir] e=" + e);
-		// Not working
-		// pickManager.clearPicks();
-	}
+//	@Deprecated //use onMouseClickLeft
+//	@Override
+//	public void onClickLeft(PlayerInteractEvent e) {
+//		if (e.entity.worldObj.isRemote) {
+//			System.out.println("[Spell.onClickLeft] Returning. Got remote world: " + e.entity.worldObj);
+//			return;
+//		}
+//
+//		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
+//			Point3d lastPointSelected = selectionManager.lastSelection().point3d();
+//			selectionManager.clearSelections();
+//			Box b = new Box(lastPointSelected, new Point3d(e.x, e.y, e.z));
+//			for (Point3i p : b.voxelize()) {
+//				selectionManager.select(p.x, p.y, p.z);
+//			}
+//			if (e.isCancelable())
+//				e.setCanceled(true);
+//			return;
+//		}
+//
+//		Selection s = selectionManager.selectionAt(e.x, e.y, e.z);
+//		if (s == null) {
+//			if (!Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+//				selectionManager.clearSelections();
+//			}
+//			selectionManager.select(e.x, e.y, e.z);
+//		} else {
+//			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+//				selectionManager.deselect(s);
+//			}
+//		}
+//		e.setCanceled(true);
+//	}
+
+//	@Deprecated //use onMouseClickRight
+//	@Override
+//	public void onClickRight(PlayerInteractEvent e) {
+//		// System.out.println("[Spell.onClickRight] e.y=" + e.y);
+//		pickManager.pick(e.x, e.y, e.z);
+//		if (pickManager.isFinishedPicking()) {
+//			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
+//			World w = e.entity.worldObj;
+//			invoke(new WorldWrapper(w), entries);
+//		}
+//	}
+
+//	@Deprecated
+//	@Override
+//	public void onClickRightAir(PlayerInteractEvent e) {
+//		System.out.println("[Spell.onClickRightAir] e=" + e);
+//		// Not working
+//		// pickManager.clearPicks();
+//	}
 
 	@Override
 	public abstract SpellDescriptor getDescriptor();

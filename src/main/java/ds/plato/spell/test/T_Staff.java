@@ -81,16 +81,16 @@ public class T_Staff extends PlatoTest {
 		assertEquals(mockMove, staff.previousSpell());
 	}
 
-	@Test
-	public void onClickRight() {
-		staff.onClickRight(mockEvent);
-		//verify(mockedDelete).invoke(mockPickManager.getPicksArray(), null);
-		verify(mockDelete).onClickRight(mockEvent);
-		staff.nextSpell();
-		staff.onClickRight(mockEvent);
-		//verify(mockedMove).invoke(mockPickManager.getPicksArray(), null);
-		verify(mockMove).onClickRight(mockEvent);
-	}
+//	@Test
+//	public void onClickRight() {
+//		staff.onClickRight(mockEvent);
+//		//verify(mockedDelete).invoke(mockPickManager.getPicksArray(), null);
+//		verify(mockDelete).onClickRight(mockEvent);
+//		staff.nextSpell();
+//		staff.onClickRight(mockEvent);
+//		//verify(mockedMove).invoke(mockPickManager.getPicksArray(), null);
+//		verify(mockMove).onClickRight(mockEvent);
+//	}
 
 	@Test
 	public void nextSpell_pickMangerIsReset() {

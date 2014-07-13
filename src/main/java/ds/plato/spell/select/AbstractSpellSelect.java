@@ -37,12 +37,12 @@ public abstract class AbstractSpellSelect extends Spell {
 		this.shellType = type;
 	}
 	
-	@Override
-	public void onClickRight(PlayerInteractEvent e) {
-		super.onClickRight(e);
-		//Only clear picks when this is an selection spell
-		pickManager.clearPicks();
-	}
+//	@Override
+//	public void onClickRight(PlayerInteractEvent e) {
+//		super.onClickRight(e);
+//		//Only clear picks when this is an selection spell
+//		pickManager.clearPicks();
+//	}
 
 	@Override
 	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
