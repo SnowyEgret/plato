@@ -64,16 +64,12 @@ public class Plato {
 	public static final String VERSION = "0.1";
 
 	@Instance(ID) public static Plato instance;
-
 	@SidedProxy(clientSide = "ds.plato.proxy.ClientProxy", serverSide = "ds.plato.proxy.CommonProxy") public static CommonProxy proxy;
 
-	private List<Spell> spells;
 	private List<Staff> staffs;
-
 	private static IUndo undoManager;
 	private static ISelect selectionManager;
 	private static IPick pickManager;
-
 	private Configuration configuration;
 	public static Logger log;
 
@@ -81,40 +77,38 @@ public class Plato {
 	public void preInit(FMLPreInitializationEvent event) {
 
 		log = LogManager.getLogger(NAME);
-		File file = event.getSuggestedConfigurationFile();
 
 		log.info("[Plato.preInit]Initializing blocks...");
 		Block blockSelected = initBlock(new BlockSelected());
 		Block blockPicked = initBlock(new BlockPicked());
-		
-		//Try loading a Wavefront model
+
+		// Try loading a Wavefront model
 		Block blockModel = initBlock(new BlockModel());
 		blockModel.setCreativeTab(CreativeTabs.tabBlock);
-		//TODO what is this stringID
+		// TODO what is this stringID
 		GameRegistry.registerTileEntity(BlockModelTileEntity.class, "stringID");
-		
-		undoManager = new UndoManager();		
+
+		undoManager = new UndoManager();
 		selectionManager = new SelectionManager(blockSelected);
 		pickManager = new PickManager(blockPicked);
 
 		log.info("[Plato.preInit] Initializing spells and staff");
-		configuration = new Configuration(file);
+		configuration = new Configuration(event.getSuggestedConfigurationFile());
 		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, ID);
 		try {
-			spells = loader.loadSpellsFromPackage("ds.plato.spell");
+			List<Spell> spells = loader.loadSpellsFromPackage("ds.plato.spell");
 			System.out.println("[Plato.preInit] loaded spells=" + spells);
 
 			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
 			Staff transformStaff = loader.loadStaff(StaffTransform.class);
 			Staff drawStaff = loader.loadStaff(StaffDraw.class);
-			//loader.loadStaff(Staff.class);
+			// loader.loadStaff(Staff.class);
 
 			staffs = new ArrayList<>();
 			// staffs.add(loader.loadStaff(Staff.class));
 			staffs.add(selectionStaff);
 			staffs.add(transformStaff);
 			staffs.add(drawStaff);
-			
 
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelect) {
@@ -134,8 +128,7 @@ public class Plato {
 			e.printStackTrace();
 		}
 		configuration.save();
-		//config.save();
-		
+
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
 	}
