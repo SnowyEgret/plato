@@ -99,8 +99,8 @@ public class Messages extends NLS {
 	public static String spell_grow_bellow_name;
 	public static String spell_grow_bellow_description;
 	
-	public static String spell_grow_xy_name;
-	public static String spell_grow_xy_description;
+	public static String spell_grow_vertical_plane_name;
+	public static String spell_grow_vertical_plane_description;
 	
 	//Matrix spells
 

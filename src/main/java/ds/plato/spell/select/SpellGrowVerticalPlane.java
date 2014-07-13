@@ -1,5 +1,9 @@
 package ds.plato.spell.select;
 
+import org.lwjgl.input.Keyboard;
+
+import ds.plato.core.IWorld;
+import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Messages;
@@ -8,17 +12,23 @@ import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
-public class SpellGrowXY extends AbstractSpellSelect {
+public class SpellGrowVerticalPlane extends AbstractSpellSelect {
 
-	public SpellGrowXY(IUndo undo, ISelect select, IPick pick) {
-		super(Shell.Type.VERTICAL_XY, undo, select, pick);
+	public SpellGrowVerticalPlane(IUndo undo, ISelect select, IPick pick) {
+		super(Shell.Type.XY, undo, select, pick);
+	}
+
+	@Override
+	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+		shellType = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? Shell.Type.YZ : Shell.Type.XY;
+		super.invoke(world, slotEntries);
 	}
 
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_grow_xy_name;
-		d.description = Messages.spell_grow_xy_description;
+		d.name = Messages.spell_grow_vertical_plane_name;
+		d.description = Messages.spell_grow_vertical_plane_description;
 		d.picks = new PickDescriptor(Messages.spell_grow_picks);
 		d.modifiers = new ModifierDescriptor(Messages.spell_grow_modifier_0, Messages.spell_grow_modifier_1);
 		return d;

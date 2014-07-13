@@ -18,8 +18,8 @@ import ds.plato.geom.VoxelSet;
 public class SelectionManager implements ISelect {
 
 	private final Map<Point3i, Selection> selections = new ConcurrentHashMap<>();
-	//private final Map<Point3i, Selection> selections = new HashMap<>();
-//	private IWorld world;
+	// private final Map<Point3i, Selection> selections = new HashMap<>();
+	// private IWorld world;
 	private IWorld world;
 	private Block blockSelected;
 	private List<Point3i> lastSelections;
@@ -29,11 +29,11 @@ public class SelectionManager implements ISelect {
 	}
 
 	// World is not available when SelectionManager is constructed. Called when player joins game in ForgeEventHandler
-//	@Override
-//	public ISelect setWorld(IWorld world) {
-//		this.world = world;
-//		return this;
-//	}
+	// @Override
+	// public ISelect setWorld(IWorld world) {
+	// this.world = world;
+	// return this;
+	// }
 
 	// Returns a copy to avoid concurrent modification
 	@Override
@@ -43,10 +43,10 @@ public class SelectionManager implements ISelect {
 		return l;
 	}
 
-//	@Override
-//	public Iterable<Selection> getSelections() {
-//		return selections.values();
-//	}
+	// @Override
+	// public Iterable<Selection> getSelections() {
+	// return selections.values();
+	// }
 
 	@Override
 	public Selection selectionAt(int x, int y, int z) {
@@ -76,9 +76,11 @@ public class SelectionManager implements ISelect {
 
 	@Override
 	public void clearSelections() {
-		lastSelections = Lists.newArrayList(selections.keySet());
-		for (Selection s : selections.values()) {
-			deselect(s);
+		if (!selections.isEmpty()) {
+			lastSelections = Lists.newArrayList(selections.keySet());
+			for (Selection s : selections.values()) {
+				deselect(s);
+			}
 		}
 	}
 

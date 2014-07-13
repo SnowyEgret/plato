@@ -42,7 +42,7 @@ public class ForgeEventHandler {
 	private IUndo undoManager;
 	private ISelect selectionManager;
 	private IPick pickManager;
-	//private boolean isWorldSet = false;
+	// private boolean isWorldSet = false;
 	private Overlay overlay;
 	private long nanoseconds = 0;
 
@@ -59,7 +59,7 @@ public class ForgeEventHandler {
 
 		// MouseEvent does not have a player or a world like PlayerInteractEvent
 		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		IWorld world = new WorldWrapper(player.getEntityWorld());
+		IWorld world = Spell.getWorldServer(player);
 
 		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
 		if (position.typeOfHit == MovingObjectType.MISS) {
@@ -74,9 +74,9 @@ public class ForgeEventHandler {
 					Item i = is.getItem();
 					if (i instanceof StaffSelect) {
 						StaffSelect staff = (StaffSelect) i;
-						AbstractSpellSelect s = (AbstractSpellSelect) staff.currentSpell();
-						if (s != null) {
-							s.clearGrownSelections();
+						AbstractSpellSelect spell = (AbstractSpellSelect) staff.currentSpell();
+						if (spell != null) {
+							spell.clearGrownSelections();
 						}
 					}
 				}
@@ -93,10 +93,11 @@ public class ForgeEventHandler {
 			if (stack != null) {
 				Item item = stack.getItem();
 
+				// Manage selection and picks. IClickable is either a staff or a spell
 				if (item instanceof IClickable) {
 					IClickable c = (IClickable) item;
-					// This method is being called twice. Throw out the second call otherwise the selection list is cleared
-					// twice resulting in the last selection being empty. Also control left click behaves incorrectly.
+
+					// MouseEvent is being sent twice. Throw out the second.
 					if (e.nanoseconds - nanoseconds < 1000000000) {
 						nanoseconds = 0;
 						e.setCanceled(true);
@@ -104,6 +105,7 @@ public class ForgeEventHandler {
 					} else {
 						nanoseconds = e.nanoseconds;
 					}
+
 					if (e.button == 0) {
 						c.onMouseClickLeft(position);
 						if (e.isCancelable()) {
@@ -115,6 +117,7 @@ public class ForgeEventHandler {
 						e.setCanceled(true);
 					}
 
+					// Fill the selections with the block in hand
 				} else if (item instanceof ItemBlock) {
 					ItemBlock itemBlock = (ItemBlock) item;
 					if (e.button == 1) {
@@ -133,17 +136,17 @@ public class ForgeEventHandler {
 		}
 	}
 
-//	@SideOnly(Side.CLIENT)
-//	@SubscribeEvent
-//	public void onEntityJoinWorldEvent(EntityJoinWorldEvent e) {
-//		if (!isWorldSet && e.entity instanceof EntityPlayerMP) {
-//			// Minecraft's world does not implement IWorld
-//			IWorld w = new WorldWrapper(e.entity.worldObj);
-//			selectionManager.setWorld(w);
-//			pickManager.setWorld(w);
-//			isWorldSet = true;
-//		}
-//	}
+	// @SideOnly(Side.CLIENT)
+	// @SubscribeEvent
+	// public void onEntityJoinWorldEvent(EntityJoinWorldEvent e) {
+	// if (!isWorldSet && e.entity instanceof EntityPlayerMP) {
+	// // Minecraft's world does not implement IWorld
+	// IWorld w = new WorldWrapper(e.entity.worldObj);
+	// selectionManager.setWorld(w);
+	// pickManager.setWorld(w);
+	// isWorldSet = true;
+	// }
+	// }
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

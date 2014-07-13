@@ -42,7 +42,6 @@ public class KeyInputEventHandler {
 
 		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 		IWorld w = Spell.getWorldServer(player);
-		//IWorld w = new WorldWrapper(Minecraft.getMinecraft().getIntegratedServer().worldServerForDimension(player.dimension));
 
 		if (keyBindings.get("undo").isPressed()) {
 			try {
@@ -145,11 +144,4 @@ public class KeyInputEventHandler {
 		if (event.isCancelable())
 			event.setCanceled(true);
 	}
-	// @SideOnly(Side.CLIENT)
-	// @SubscribeEvent
-	// public void onMouseInput(MouseInputEvent event) {
-	// // Works
-	// MOD.log.info("[KeyInputEventHandler.onMouseInput] event=" + event);
-	// }
-
 }

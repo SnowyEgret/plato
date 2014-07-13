@@ -28,33 +28,26 @@ import ds.plato.undo.IUndo;
 public abstract class AbstractSpellSelect extends Spell {
 
 	private List<Point3i> grownSelections = new ArrayList<>();
-	private Shell.Type shellType;
-	protected Item ingredientA  = Items.feather;
-	protected Item ingredientB  = Items.dye;
+	protected Shell.Type shellType;
+	protected Item ingredientA = Items.feather;
+	protected Item ingredientB = Items.dye;
 
 	public AbstractSpellSelect(Shell.Type type, IUndo undo, ISelect select, IPick pick) {
 		super(1, undo, select, pick);
 		this.shellType = type;
 	}
-	
-//	@Override
-//	public void onClickRight(PlayerInteractEvent e) {
-//		super.onClickRight(e);
-//		//Only clear picks when this is an selection spell
-//		pickManager.clearPicks();
-//	}
 
 	@Override
 	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
-		if (selectionManager.size() == 0) {
-			return;
-		}
-		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-			shrinkSelections(shellType, world);
-		} else {
-			//Is this really the first block? getSelections gets the values from a map.
-			Block firstBlockSelected = selectionManager.getSelections().iterator().next().block;
-			growSelections(shellType, world, firstBlockSelected);
+		pickManager.clearPicks();
+		if (selectionManager.size() != 0) {
+			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+				shrinkSelections(shellType, world);
+			} else {
+				// Is this really the first block? getSelections gets the values from a map.
+				Block firstBlockSelected = selectionManager.getSelections().iterator().next().block;
+				growSelections(shellType, world, firstBlockSelected);
+			}
 		}
 	}
 
@@ -102,20 +95,8 @@ public abstract class AbstractSpellSelect extends Spell {
 		grownSelections.clear();
 	}
 
-	// @Override
-	// public void onClickRightAir(PlayerInteractEvent e) {
-	// System.out.println("[AbstractSpellSelection.onClickRightAir] e=" + e);
-	// super.onClickRightAir(e);
-	// selectionManager.clearSelections();
-	// }
-
 	public void clearGrownSelections() {
 		grownSelections.clear();
 	}
 
-//	@Override
-//	public Object[] getRecipe() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

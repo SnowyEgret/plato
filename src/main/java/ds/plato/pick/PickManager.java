@@ -18,12 +18,6 @@ public class PickManager implements IPick {
 		this.blockPicked = blockPicked;
 	}
 
-//	@Override
-//	public IPick setWorld(IWorld world) {
-//		this.world = world;
-//		return this;
-//	}
-
 	@Override
 	public void pick(IWorld world, int x, int y, int z) {
 		// TODO: Handle case where location is already a selection
@@ -58,7 +52,6 @@ public class PickManager implements IPick {
 
 	@Override
 	public void clearPicks() {
-		System.out.println("[PickManager.clearPicks] getPicks()=" + getPicks());
 		for (Pick p : getPicks()) {
 			Block block = world.getBlock(p.x, p.y, p.z);
 			if (block instanceof BlockPicked) {
