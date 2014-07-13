@@ -95,16 +95,16 @@ public class ForgeEventHandler {
 
 				if (item instanceof IClickable) {
 					IClickable c = (IClickable) item;
+					// This method is being called twice. Throw out the second call otherwise the selection list is cleared
+					// twice resulting in the last selection being empty. Also control left click behaves incorrectly.
+					if (e.nanoseconds - nanoseconds < 1000000000) {
+						nanoseconds = 0;
+						e.setCanceled(true);
+						return;
+					} else {
+						nanoseconds = e.nanoseconds;
+					}
 					if (e.button == 0) {
-						// This method is being called twice. Throw out the second call otherwise the selection list is cleared
-						// twice resulting in the last selection being empty. Also control left click behaves incorrectly.
-						if (e.nanoseconds - nanoseconds < 1000000000) {
-							nanoseconds = 0;
-							e.setCanceled(true);
-							return;
-						} else {
-							nanoseconds = e.nanoseconds;
-						}
 						c.onMouseClickLeft(position);
 						if (e.isCancelable()) {
 							e.setCanceled(true);

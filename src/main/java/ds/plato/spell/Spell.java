@@ -9,21 +9,16 @@ import javax.vecmath.Point3i;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.world.World;
-import net.minecraftforge.client.event.MouseEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraft.world.WorldServer;
 
 import org.lwjgl.input.Keyboard;
 
@@ -106,8 +101,21 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		if (pickManager.isFinishedPicking()) {
 			EntityClientPlayerMP p = Minecraft.getMinecraft().thePlayer;
 			SlotEntry[] entries = getSlotEntriesFromPlayer(p);
-			invoke(new WorldWrapper(p.getEntityWorld()), entries);
+			//invoke(new WorldWrapper(p.getEntityWorld()), entries);
+			//invoke(selectionManager.getWorld(), entries);
+			invoke(getWorldServer(p), entries);
 		}
+	}
+	
+	private IWorld getWorldServer(EntityClientPlayerMP p) {
+		WorldServer w = null;
+		Minecraft mc = Minecraft.getMinecraft();
+		if (mc.getIntegratedServer() != null) {
+			w = mc.getIntegratedServer().worldServerForDimension(p.dimension);
+		} else if (MinecraftServer.getServer() != null) {
+			w = MinecraftServer.getServer().worldServerForDimension(p.dimension);
+		}
+		return new WorldWrapper(w);
 	}
 
 //	@Deprecated //use onMouseClickLeft
