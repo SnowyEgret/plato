@@ -57,13 +57,16 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 	@Override
 	public void onMouseClickLeft(MovingObjectPosition e) {
 
+		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+		IWorld w = getWorldServer(player);
+		
 		// Standard selection behavior. Shift selects a region.
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
 			Point3d lastPointSelected = selectionManager.lastSelection().point3d();
 			selectionManager.clearSelections();
 			Box b = new Box(lastPointSelected, new Point3d(e.blockX, e.blockY, e.blockZ));
 			for (Point3i p : b.voxelize()) {
-				selectionManager.select(p.x, p.y, p.z);
+				selectionManager.select(w, p.x, p.y, p.z);
 			}
 
 		// Control adds or subtracts a selection
@@ -71,14 +74,14 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 			Selection s = selectionManager.selectionAt(e.blockX, e.blockY, e.blockZ);
 			System.out.println("[Spell.onMouseClickLeft] s=" + s);
 			if (s == null) {
-				selectionManager.select(e.blockX, e.blockY, e.blockZ);
+				selectionManager.select(w, e.blockX, e.blockY, e.blockZ);
 			} else {
 				selectionManager.deselect(s);
 			}
 			
 		} else {
 			selectionManager.clearSelections();
-			selectionManager.select(e.blockX, e.blockY, e.blockZ);
+			selectionManager.select(w, e.blockX, e.blockY, e.blockZ);
 		}
 	}
 
@@ -97,7 +100,11 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	@Override
 	public void onMouseClickRight(MovingObjectPosition e) {
-		pickManager.pick(e.blockX, e.blockY, e.blockZ);
+		
+		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+		IWorld w = getWorldServer(player);
+		
+		pickManager.pick(w, e.blockX, e.blockY, e.blockZ);
 		if (pickManager.isFinishedPicking()) {
 			EntityClientPlayerMP p = Minecraft.getMinecraft().thePlayer;
 			SlotEntry[] entries = getSlotEntriesFromPlayer(p);
@@ -107,7 +114,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		}
 	}
 	
-	private IWorld getWorldServer(EntityClientPlayerMP p) {
+	public static IWorld getWorldServer(EntityClientPlayerMP p) {
 		WorldServer w = null;
 		Minecraft mc = Minecraft.getMinecraft();
 		if (mc.getIntegratedServer() != null) {

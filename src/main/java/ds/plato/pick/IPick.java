@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 
 public interface IPick {
 
-	public void pick(int x, int y, int z);
+	public void pick(IWorld world, int x, int y, int z);
 
 	public void clearPicks();
 
@@ -21,7 +21,7 @@ public interface IPick {
 
 	public void reset(int numPicks);
 
-	public IPick setWorld(IWorld world);
+//	public IPick setWorld(IWorld world);
 
 	public Pick lastPick();
 }

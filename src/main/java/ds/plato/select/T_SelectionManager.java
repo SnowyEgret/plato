@@ -24,13 +24,13 @@ import ds.plato.test.PlatoTest;
 public class T_SelectionManager extends PlatoTest {
 	
 	SelectionManager m;
-	IWorld w;
+	IWorld stubWorld;
 	
 	@Before
 	public void setUp() {
-		w = newStubWorld();
+		stubWorld = newStubWorld();
 		m = new SelectionManager(blockSelected);
-		m.setWorld(w);
+		//m.setWorld(w);
 	}
 
 	@Test
@@ -101,7 +101,7 @@ public class T_SelectionManager extends PlatoTest {
 	@Test
 	public void select() {
 		assertThat(m.size(), is(0));
-		m.select(1, 2, 3);
+		m.select(stubWorld, 1, 2, 3);
 		System.out.println("[T_SelectionManager.select] m=" + m);
 		assertThat(m.size(), is(1));
 		Selection s = m.getSelectionList().get(0);
@@ -113,13 +113,13 @@ public class T_SelectionManager extends PlatoTest {
 	// TODO fails. This is a bug in the test. blockSelected is null.
 	@Test
 	public void select_worldSetsBlocktoBlockSelected() {
-		m.select(1, 2, 3);
-		assertEquals(blockSelected, w.getBlock(1,  2,  3));
+		m.select(stubWorld, 1, 2, 3);
+		assertEquals(blockSelected, stubWorld.getBlock(1,  2,  3));
 	}
 
 	@Test
 	public void deselect() {
-		m.select(1, 2, 3);
+		m.select(stubWorld, 1, 2, 3);
 		assertThat(m.size(), is(1));
 		m.deselect(1, 2, 3);
 		assertThat(m.size(), is(0));
@@ -127,9 +127,9 @@ public class T_SelectionManager extends PlatoTest {
 
 	@Test
 	public void deselect_worldResetsBlock() {
-		m.select(1, 2, 3);
+		m.select(stubWorld, 1, 2, 3);
 		m.deselect(1, 2, 3);
-		assertEquals(dirt, w.getBlock(1, 2, 3));
+		assertEquals(dirt, stubWorld.getBlock(1, 2, 3));
 	}
 
 	@Test

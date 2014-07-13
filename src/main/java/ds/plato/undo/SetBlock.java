@@ -48,7 +48,7 @@ public class SetBlock implements IUndoable {
 			//We do not want a selection pointing to a newly set air block.
 			selectionManager.removeSelection(x, y, z);
 		} else {
-			selectionManager.select(x, y, z);
+			selectionManager.select(world, x, y, z);
 		}
 		return this;
 	}

@@ -40,13 +40,13 @@ public class T_GrowAllSpell extends PlatoTest {
 		slotEntries = new SlotEntry[] {new SlotEntry(dirt, 0, 0)};
 		picks = new Pick[] {new Pick(0, 0, 0, dirt, 0), new Pick(9, 0, 0, dirt, 0)};
 		stubWorld = newStubWorld();
-		sm = new SelectionManager(blockSelected).setWorld(stubWorld);
+		sm = new SelectionManager(blockSelected);//.setWorld(stubWorld);
 		growSpell = new SpellGrowAll(undoManager, sm, pickManager);
 	}
 
 	@Test
 	public void invoke_grow() {
-		sm.select(0, 0, 0);
+		sm.select(stubWorld, 0, 0, 0);
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
 		//growSpell.invoke(picks, slotEntries);
 		//TODO set up pickManager
@@ -56,7 +56,7 @@ public class T_GrowAllSpell extends PlatoTest {
 
 	@Test
 	public void invoke_shrink() {
-		sm.select(0, 0, 0);
+		sm.select(stubWorld, 0, 0, 0);
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
 		//growSpell.invoke(picks, slotEntries);
 		growSpell.invoke(stubWorld, slotEntries);

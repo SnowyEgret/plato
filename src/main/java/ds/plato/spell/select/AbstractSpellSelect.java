@@ -69,11 +69,11 @@ public abstract class AbstractSpellSelect extends Spell {
 				Block block = world.getBlock(p.x, p.y, p.z);
 				if (!(block instanceof BlockAir) && !(block instanceof BlockSelected)) {
 					if (Keyboard.isKeyDown(Keyboard.KEY_LMENU)) { // Alt
-						selectionManager.select(p.x, p.y, p.z);
+						selectionManager.select(world, p.x, p.y, p.z);
 						newGrownSelections.add(p);
 					} else {
 						if (block == patternBlock) {
-							selectionManager.select(p.x, p.y, p.z);
+							selectionManager.select(world, p.x, p.y, p.z);
 							newGrownSelections.add(p);
 						}
 					}

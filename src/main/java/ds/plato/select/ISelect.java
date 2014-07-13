@@ -16,11 +16,13 @@ public interface ISelect {
 
 	public Selection selectionAt(int x, int y, int z);
 
-	public void select(int x, int y, int z);
+	public void select(IWorld world, int x, int y, int z);
 
 	public void deselect(int x, int y, int z);
 
 	public void deselect(Selection s);
+
+	public void reselectLast();
 
 	public void clearSelections();
 
@@ -33,7 +35,7 @@ public interface ISelect {
 
 	public boolean isSelected(int x, int y, int z);
 
-	public ISelect setWorld(IWorld world);
+	//public ISelect setWorld(IWorld world);
 	
 	public Selection firstSelection();
 
@@ -42,7 +44,5 @@ public interface ISelect {
 	public VoxelSet voxelSet();
 
 	public List<Selection> getSelectionList();
-
-	public void reselectLast();
 
 }

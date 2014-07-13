@@ -19,6 +19,7 @@ public class SelectionManager implements ISelect {
 
 	private final Map<Point3i, Selection> selections = new ConcurrentHashMap<>();
 	//private final Map<Point3i, Selection> selections = new HashMap<>();
+//	private IWorld world;
 	private IWorld world;
 	private Block blockSelected;
 	private List<Point3i> lastSelections;
@@ -28,11 +29,11 @@ public class SelectionManager implements ISelect {
 	}
 
 	// World is not available when SelectionManager is constructed. Called when player joins game in ForgeEventHandler
-	@Override
-	public ISelect setWorld(IWorld world) {
-		this.world = world;
-		return this;
-	}
+//	@Override
+//	public ISelect setWorld(IWorld world) {
+//		this.world = world;
+//		return this;
+//	}
 
 	// Returns a copy to avoid concurrent modification
 	@Override
@@ -53,12 +54,13 @@ public class SelectionManager implements ISelect {
 	}
 
 	@Override
-	public void select(int x, int y, int z) {
+	public void select(IWorld world, int x, int y, int z) {
 		Block prevBlock = world.getBlock(x, y, z);
 		int metadata = world.getMetadata(x, y, z);
 		world.setBlock(x, y, z, blockSelected, 0);
 		Selection s = new Selection(x, y, z, prevBlock, metadata);
 		selections.put(s.point3i(), s);
+		this.world = world;
 	}
 
 	@Override
@@ -134,7 +136,7 @@ public class SelectionManager implements ISelect {
 	public void reselectLast() {
 		if (lastSelections != null) {
 			for (Point3i p : lastSelections) {
-				select(p.x, p.y, p.z);
+				select(world, p.x, p.y, p.z);
 			}
 		}
 	}

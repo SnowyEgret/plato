@@ -27,7 +27,7 @@ public class T_SetBlock extends PlatoTest {
 	public void setUp() {
 		super.setUp();
 		w = newStubWorld();
-		sm = new SelectionManager(blockSelected).setWorld(w);
+		sm = new SelectionManager(blockSelected);//.setWorld(w);
 	}
 
 	@Test

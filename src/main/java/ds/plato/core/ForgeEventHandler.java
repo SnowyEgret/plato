@@ -42,7 +42,7 @@ public class ForgeEventHandler {
 	private IUndo undoManager;
 	private ISelect selectionManager;
 	private IPick pickManager;
-	private boolean isWorldSet = false;
+	//private boolean isWorldSet = false;
 	private Overlay overlay;
 	private long nanoseconds = 0;
 
@@ -133,17 +133,17 @@ public class ForgeEventHandler {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void onEntityJoinWorldEvent(EntityJoinWorldEvent e) {
-		if (!isWorldSet && e.entity instanceof EntityPlayerMP) {
-			// Minecraft's world does not implement IWorld
-			IWorld w = new WorldWrapper(e.entity.worldObj);
-			selectionManager.setWorld(w);
-			pickManager.setWorld(w);
-			isWorldSet = true;
-		}
-	}
+//	@SideOnly(Side.CLIENT)
+//	@SubscribeEvent
+//	public void onEntityJoinWorldEvent(EntityJoinWorldEvent e) {
+//		if (!isWorldSet && e.entity instanceof EntityPlayerMP) {
+//			// Minecraft's world does not implement IWorld
+//			IWorld w = new WorldWrapper(e.entity.worldObj);
+//			selectionManager.setWorld(w);
+//			pickManager.setWorld(w);
+//			isWorldSet = true;
+//		}
+//	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

@@ -2,13 +2,11 @@ package ds.plato.core;
 
 import java.util.Map;
 
-import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
@@ -19,10 +17,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
+import ds.plato.spell.Spell;
 import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.spell.transform.SpellDelete;
 import ds.plato.undo.IUndo;
-import ds.plato.undo.IUndoable;
 
 public class KeyInputEventHandler {
 
@@ -43,9 +41,9 @@ public class KeyInputEventHandler {
 	public void onKeyInput(KeyInputEvent event) {
 
 		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		World w = Minecraft.getMinecraft().getIntegratedServer().worldServerForDimension(player.dimension);
+		IWorld w = Spell.getWorldServer(player);
+		//IWorld w = new WorldWrapper(Minecraft.getMinecraft().getIntegratedServer().worldServerForDimension(player.dimension));
 
-		// if (Plato.keyUndo.isPressed()) {
 		if (keyBindings.get("undo").isPressed()) {
 			try {
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
@@ -79,7 +77,7 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("delete").isPressed()) {
-			new SpellDelete(undoManager, selectionManager, pickManager).invoke(new WorldWrapper(w), null);
+			new SpellDelete(undoManager, selectionManager, pickManager).invoke(w, null);
 		}
 
 		if (keyBindings.get("lastSelection").isPressed()) {
@@ -87,56 +85,60 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("left").isPressed()) {
+			pickManager.clearPicks();
 			pickManager.reset(2);
-			pickManager.pick(0, 0, 0);
+			pickManager.pick(w, 0, 0, 0);
 			float yaw = player.rotationYawHead;
 			int y = (int) (yaw += (yaw > 0) ? 45 : -45) / 90;
 			switch (Math.abs(y % 4)) {
 			case 0:
-				pickManager.pick(1, 0, 0);
+				pickManager.pick(w, 1, 0, 0);
 			case 1:
-				pickManager.pick(0, 0, -1);
+				pickManager.pick(w, 0, 0, -1);
 			case 2:
-				pickManager.pick(-1, 0, 0);
+				pickManager.pick(w, -1, 0, 0);
 			case 3:
-				pickManager.pick(0, 0, 1);
+				pickManager.pick(w, 0, 0, 1);
 			}
-			new SpellCopy(undoManager, selectionManager, pickManager).invoke(new WorldWrapper(w), null);
+			new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
 			pickManager.clearPicks();
 		}
 
 		if (keyBindings.get("right").isPressed()) {
+			pickManager.clearPicks();
 			pickManager.reset(2);
-			pickManager.pick(0, 0, 0);
+			pickManager.pick(w, 0, 0, 0);
 			float yaw = player.rotationYawHead;
 			int y = (int) (yaw += (yaw > 0) ? 45 : -45) / 90;
 			switch (Math.abs(y % 4)) {
 			case 0:
-				pickManager.pick(-1, 0, 0);
+				pickManager.pick(w, -1, 0, 0);
 			case 1:
-				pickManager.pick(0, 0, 1);
+				pickManager.pick(w, 0, 0, 1);
 			case 2:
-				pickManager.pick(1, 0, 0);
+				pickManager.pick(w, 1, 0, 0);
 			case 3:
-				pickManager.pick(0, 0, -1);
+				pickManager.pick(w, 0, 0, -1);
 			}
-			new SpellCopy(undoManager, selectionManager, pickManager).invoke(new WorldWrapper(w), null);
+			new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
 			pickManager.clearPicks();
 		}
 
 		if (keyBindings.get("up").isPressed()) {
+			pickManager.clearPicks();
 			pickManager.reset(2);
-			pickManager.pick(0, 0, 0);
-			pickManager.pick(0, 1, 0);
-			new SpellCopy(undoManager, selectionManager, pickManager).invoke(new WorldWrapper(w), null);
+			pickManager.pick(w, 0, 0, 0);
+			pickManager.pick(w, 0, 1, 0);
+			new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
 			pickManager.clearPicks();
 		}
 
 		if (keyBindings.get("down").isPressed()) {
+			pickManager.clearPicks();
 			pickManager.reset(2);
-			pickManager.pick(0, 0, 0);
-			pickManager.pick(0, -1, 0);
-			new SpellCopy(undoManager, selectionManager, pickManager).invoke(new WorldWrapper(w), null);
+			pickManager.pick(w, 0, 0, 0);
+			pickManager.pick(w, 0, -1, 0);
+			new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
 			pickManager.clearPicks();
 		}
 

@@ -41,7 +41,7 @@ public class SpellLine extends AbstractSpellDraw {
 			draw(d, world, slotEntries[0].block, slotEntries[0].metadata);
 			pickManager.clearPicks();
 			pickManager.reset(2);
-			pickManager.pick(picks[1].x, picks[1].y, picks[1].z);
+			pickManager.pick(world, picks[1].x, picks[1].y, picks[1].z);
 		} else {
 			selectionManager.clearSelections();
 			draw(d, world, slotEntries[0].block, slotEntries[0].metadata);

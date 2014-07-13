@@ -18,19 +18,20 @@ public class PickManager implements IPick {
 		this.blockPicked = blockPicked;
 	}
 
-	@Override
-	public IPick setWorld(IWorld world) {
-		this.world = world;
-		return this;
-	}
+//	@Override
+//	public IPick setWorld(IWorld world) {
+//		this.world = world;
+//		return this;
+//	}
 
 	@Override
-	public void pick(int x, int y, int z) {
+	public void pick(IWorld world, int x, int y, int z) {
 		// TODO: Handle case where location is already a selection
 		Block block = world.getBlock(x, y, z);
 		int metadata = world.getMetadata(x, y, z);
 		world.setBlock(x, y, z, blockPicked, 0);
 		addPick(x, y, z, block, metadata);
+		this.world = world;
 	}
 
 	@Override
