@@ -11,6 +11,7 @@
   "credits": "DuncanMia",
   "logoFile": "",
   "screenshots": [],
+  "requiredMods": [ "Forge" ],
   "dependencies": []
 }
 ]

@@ -14,7 +14,7 @@ import ds.plato.proxy.ClientProxy;
 public class BlockSelected extends Block {
 
 	public BlockSelected() {
-		super(Material.ice);
+		super(Material.iron);
 		setHardness(-1F);
 		setStepSound(soundTypeGravel);
 	}

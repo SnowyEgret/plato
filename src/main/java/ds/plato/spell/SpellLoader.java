@@ -124,12 +124,6 @@ public class SpellLoader {
 		config.save();
 	}
 
-	// Not used
-	private String lastWordInCameltype(String cameltype) {
-		String[] tokens = cameltype.split("(?=[A-Z])");
-		return tokens[tokens.length - 1];
-	}
-
 	private String toName(Class c) {
 		String n = c.getSimpleName();
 		return n.substring(0, 1).toLowerCase() + n.substring(1);

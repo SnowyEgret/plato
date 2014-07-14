@@ -1,19 +1,10 @@
 package ds.plato;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.Level;
@@ -35,8 +26,6 @@ import ds.plato.block.BlockModel;
 import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
-import ds.plato.core.IWorld;
-import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.proxy.CommonProxy;
@@ -61,7 +50,7 @@ public class Plato {
 
 	public static final String ID = "plato";
 	public static final String NAME = "Plato";
-	public static final String VERSION = "0.1";
+	public static final String VERSION = "0.5";
 
 	@Instance(ID) public static Plato instance;
 	@SidedProxy(clientSide = "ds.plato.proxy.ClientProxy", serverSide = "ds.plato.proxy.CommonProxy") public static CommonProxy proxy;
@@ -97,7 +86,7 @@ public class Plato {
 		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, ID);
 		try {
 			List<Spell> spells = loader.loadSpellsFromPackage("ds.plato.spell");
-			System.out.println("[Plato.preInit] loaded spells=" + spells);
+			log.info("[Plato.preInit] loaded spells=" + spells);
 
 			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
 			Staff transformStaff = loader.loadStaff(StaffTransform.class);
@@ -120,9 +109,9 @@ public class Plato {
 				}
 			}
 
-			System.out.println("[Plato.preInit] selectionStaff=" + selectionStaff);
-			System.out.println("[Plato.preInit] transformStaff=" + transformStaff);
-			System.out.println("[Plato.preInit] drawStaff=" + drawStaff);
+			log.info("[Plato.preInit] selectionStaff=" + selectionStaff);
+			log.info("[Plato.preInit] transformStaff=" + transformStaff);
+			log.info("[Plato.preInit] drawStaff=" + drawStaff);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,12 +135,12 @@ public class Plato {
 
 	@EventHandler
 	public void serverStarted(FMLServerStartedEvent event) {
-		log.log(Level.INFO, "[Plato.serverStarted]");
+		log.info("[Plato.serverStarted]");
 	}
 
 	@EventHandler
 	public void serverStopping(FMLServerStoppingEvent event) {
-		log.log(Level.INFO, "[Plato.serverStopping]");
+		log.info("[Plato.serverStopping]");
 		selectionManager.clearSelections();
 		pickManager.clearPicks();
 		for (Staff s : staffs) {

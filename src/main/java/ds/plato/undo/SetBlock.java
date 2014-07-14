@@ -104,9 +104,9 @@ public class SetBlock implements IUndoable {
 		builder.append(", z=");
 		builder.append(z);
 		builder.append(", block=");
-		builder.append(block);
+		builder.append(lastWordInCamelCase(block.getClass().getSimpleName()));
 		builder.append(", prevBlock=");
-		builder.append(prevBlock);
+		builder.append(lastWordInCamelCase(prevBlock.getClass().getSimpleName()));
 		builder.append(", metadata=");
 		builder.append(metadata);
 		builder.append(", prevMetadata=");
@@ -115,8 +115,9 @@ public class SetBlock implements IUndoable {
 		return builder.toString();
 	}
 
-	private String idOf(Object o) {
-		return o.getClass().getSimpleName() + "@" + Integer.toHexString(o.hashCode());
+	private String lastWordInCamelCase(String camelCase) {
+		String[] tokens = camelCase.split("(?=[A-Z])");
+		return tokens[tokens.length - 1];
 	}
 
 }

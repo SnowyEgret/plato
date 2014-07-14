@@ -8,8 +8,6 @@ import ds.plato.select.Selection;
 
 public class Transaction implements IUndoable, Iterable {
 
-	// TODO Maybe this should be a set
-	//protected List<IUndoable> undoables = new ArrayList<>();
 	protected Set<IUndoable> undoables = new HashSet<>();
 	private final IUndo undoManager;
 
@@ -48,18 +46,18 @@ public class Transaction implements IUndoable, Iterable {
 		undoManager.addUndoable(this);
 	}
 
-	public boolean contains(Selection s) {
-		return undoables.contains(s);
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Transaction [undoManager=");
-		builder.append(undoManager);
+		builder.append(idOf(undoManager));
 		builder.append(", undoables=");
 		builder.append(undoables);
 		builder.append("]");
 		return builder.toString();
+	}
+	
+	private String idOf(Object o) {
+		return o.getClass().getSimpleName() + "@" + Integer.toHexString(o.hashCode());
 	}
 }
