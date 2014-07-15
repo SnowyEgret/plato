@@ -49,9 +49,25 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	public abstract Object[] getRecipe();
 
+	public abstract void invoke(IWorld world, final SlotEntry[] slotEntries);
+	
+	public void invoke(EntityClientPlayerMP player) {
+		IWorld w = getWorldServer(player);
+		SlotEntry[] entries = getSlotEntries(player);
+		invoke(w, entries);
+	}
+
+	@Override
+	public abstract SpellDescriptor getDescriptor();
+
 	@Override
 	public Spell getSpell() {
 		return this;
+	}
+
+	@Override
+	public String getMessage() {
+		return message;
 	}
 
 	@Override
@@ -85,103 +101,18 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		}
 	}
 
-//	@Deprecated //use onMouseClickRight
-//	@Override
-//	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
-//		if (w.isRemote) {
-//			MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-//			// System.out.println("[Spell.onItemRightClick] position.typeOfHit=" + position.typeOfHit);
-//			if (position.typeOfHit == MovingObjectType.MISS) {
-//				pickManager.clearPicks();
-//			}
-//		}
-//		return is;
-//	}
-
 	@Override
 	public void onMouseClickRight(MovingObjectPosition e) {
 		
 		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		IWorld w = getWorldServer(player);
-		
+		IWorld w = getWorldServer(player);		
 		pickManager.pick(w, e.blockX, e.blockY, e.blockZ);
 		if (pickManager.isFinishedPicking()) {
-			EntityClientPlayerMP p = Minecraft.getMinecraft().thePlayer;
-			SlotEntry[] entries = getSlotEntriesFromPlayer(p);
-			//invoke(new WorldWrapper(p.getEntityWorld()), entries);
-			//invoke(selectionManager.getWorld(), entries);
-			invoke(getWorldServer(p), entries);
+			SlotEntry[] entries = getSlotEntries(player);
+			invoke(w, entries);
 		}
 	}
 	
-	public static IWorld getWorldServer(EntityClientPlayerMP p) {
-		WorldServer w = null;
-		Minecraft mc = Minecraft.getMinecraft();
-		if (mc.getIntegratedServer() != null) {
-			w = mc.getIntegratedServer().worldServerForDimension(p.dimension);
-		} else if (MinecraftServer.getServer() != null) {
-			w = MinecraftServer.getServer().worldServerForDimension(p.dimension);
-		}
-		return new WorldWrapper(w);
-	}
-
-//	@Deprecated //use onMouseClickLeft
-//	@Override
-//	public void onClickLeft(PlayerInteractEvent e) {
-//		if (e.entity.worldObj.isRemote) {
-//			System.out.println("[Spell.onClickLeft] Returning. Got remote world: " + e.entity.worldObj);
-//			return;
-//		}
-//
-//		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
-//			Point3d lastPointSelected = selectionManager.lastSelection().point3d();
-//			selectionManager.clearSelections();
-//			Box b = new Box(lastPointSelected, new Point3d(e.x, e.y, e.z));
-//			for (Point3i p : b.voxelize()) {
-//				selectionManager.select(p.x, p.y, p.z);
-//			}
-//			if (e.isCancelable())
-//				e.setCanceled(true);
-//			return;
-//		}
-//
-//		Selection s = selectionManager.selectionAt(e.x, e.y, e.z);
-//		if (s == null) {
-//			if (!Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-//				selectionManager.clearSelections();
-//			}
-//			selectionManager.select(e.x, e.y, e.z);
-//		} else {
-//			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-//				selectionManager.deselect(s);
-//			}
-//		}
-//		e.setCanceled(true);
-//	}
-
-//	@Deprecated //use onMouseClickRight
-//	@Override
-//	public void onClickRight(PlayerInteractEvent e) {
-//		// System.out.println("[Spell.onClickRight] e.y=" + e.y);
-//		pickManager.pick(e.x, e.y, e.z);
-//		if (pickManager.isFinishedPicking()) {
-//			SlotEntry[] entries = getSlotEntriesFromPlayer(e.entityPlayer);
-//			World w = e.entity.worldObj;
-//			invoke(new WorldWrapper(w), entries);
-//		}
-//	}
-
-//	@Deprecated
-//	@Override
-//	public void onClickRightAir(PlayerInteractEvent e) {
-//		System.out.println("[Spell.onClickRightAir] e=" + e);
-//		// Not working
-//		// pickManager.clearPicks();
-//	}
-
-	@Override
-	public abstract SpellDescriptor getDescriptor();
-
 	@Override
 	public boolean isPicking() {
 		return pickManager.isPicking();
@@ -189,7 +120,7 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	@Override
 	public void reset() {
-		System.out.println("[Spell.reset] resetting");
+		//System.out.println("[Spell.reset] resetting");
 		pickManager.clearPicks();
 		pickManager.reset(numPicks);
 		message = null;
@@ -207,9 +138,18 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		return false;
 	}
 
-	public abstract void invoke(IWorld world, final SlotEntry[] slotEntries);
+	public static IWorld getWorldServer(EntityClientPlayerMP p) {
+		WorldServer w = null;
+		Minecraft mc = Minecraft.getMinecraft();
+		if (mc.getIntegratedServer() != null) {
+			w = mc.getIntegratedServer().worldServerForDimension(p.dimension);
+		} else if (MinecraftServer.getServer() != null) {
+			w = MinecraftServer.getServer().worldServerForDimension(p.dimension);
+		}
+		return new WorldWrapper(w);
+	}
 
-	public SlotEntry[] getSlotEntriesFromPlayer(EntityPlayer entityPlayer) {
+	public SlotEntry[] getSlotEntries(EntityPlayer entityPlayer) {
 		List<SlotEntry> entries = new ArrayList<>();
 		InventoryPlayer inventory = entityPlayer.inventory;
 		for (int i = 0; i < 9; i++) {
@@ -255,11 +195,6 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 
 	public int getNumPicks() {
 		return numPicks;
-	}
-
-	@Override
-	public String getMessage() {
-		return message;
 	}
 
 }

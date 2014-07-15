@@ -23,7 +23,6 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	protected List<Spell> spells = new ArrayList<>();
 	protected int ordinal = 0;
 	private IPick pickManager;
-	private IWorld world;
 	private Property propertyOrdinal;
 
 	public Staff(Property propertyOrdinal, IPick pickManager) {
@@ -31,28 +30,17 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 		this.propertyOrdinal = propertyOrdinal;
 	}
 
-	public Staff setWorld(IWorld world) {
-		this.world = world;
-		return this;
-	}
-
 	@Override
 	public Spell getSpell() {
 		return currentSpell();
 	}
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
-		System.out.println("[Staff.onItemRightClick] w=" + w);
-		if (currentSpell() != null)
-			currentSpell().onItemRightClick(is, w, player);
-		return is;
-	}
-
 //	@Override
-//	public void onClickLeft(PlayerInteractEvent e) {
+//	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
+//		System.out.println("[Staff.onItemRightClick] w=" + w);
 //		if (currentSpell() != null)
-//			currentSpell().onClickLeft(e);
+//			currentSpell().onItemRightClick(is, w, player);
+//		return is;
 //	}
 
 	@Override
@@ -66,18 +54,6 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 		if (currentSpell() != null)
 			currentSpell().onMouseClickRight(position);
 	}
-
-//	@Override
-//	public void onClickRight(PlayerInteractEvent e) {
-//		if (currentSpell() != null)
-//			currentSpell().onClickRight(e);
-//	}
-
-//	@Override
-//	public void onClickRightAir(PlayerInteractEvent e) {
-//		if (currentSpell() != null)
-//			currentSpell().onClickRightAir(e);
-//	}
 
 	@Override
 	public void reset() {

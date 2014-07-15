@@ -76,7 +76,8 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("delete").isPressed()) {
-			new SpellDelete(undoManager, selectionManager, pickManager).invoke(w, null);
+			//new SpellDelete(undoManager, selectionManager, pickManager).invoke(w, null);
+			new SpellDelete(undoManager, selectionManager, pickManager).invoke(player);
 		}
 
 		if (keyBindings.get("lastSelection").isPressed()) {
@@ -111,7 +112,7 @@ public class KeyInputEventHandler {
 			event.setCanceled(true);
 	}
 
-	// FIXME
+	// FIXME Directions are reversed when yaw > 0
 	private void copyHorizontal(EntityClientPlayerMP player, IWorld w, int d) {
 		pickManager.clearPicks();
 		pickManager.reset(2);
@@ -134,7 +135,8 @@ public class KeyInputEventHandler {
 		case 3:
 			pickManager.pick(w, 0, 0, -1);
 		}
-		new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
+		//new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
+		new SpellCopy(undoManager, selectionManager, pickManager).invoke(player);
 		pickManager.clearPicks();
 	}
 
@@ -143,7 +145,8 @@ public class KeyInputEventHandler {
 		pickManager.reset(2);
 		pickManager.pick(w, 0, 0, 0);
 		pickManager.pick(w, 0, d, 0);
-		new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
+		new SpellCopy(undoManager, selectionManager, pickManager).invoke(player);
+		//new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
 		pickManager.clearPicks();
 	}
 }

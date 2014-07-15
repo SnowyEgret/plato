@@ -73,7 +73,7 @@ public class Overlay {
 		if (s != null) {
 			if (s instanceof SpellFillRandom) {
 				SlotDistribution d = new SlotDistribution(
-						s.getSlotEntriesFromPlayer(Minecraft.getMinecraft().thePlayer));
+						s.getSlotEntries(Minecraft.getMinecraft().thePlayer));
 				
 				r.drawStringWithShadow(d.toString(), x, y += dy, blue);
 			}
