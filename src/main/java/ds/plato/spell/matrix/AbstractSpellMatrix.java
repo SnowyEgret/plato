@@ -35,7 +35,6 @@ public abstract class AbstractSpellMatrix extends Spell {
 			newBlockLocations.add(p);
 			t.add(new SetBlock(world, selectionManager, (int) p.x, (int) p.y, (int) p.z, s.block, s.metadata).set());
 		}
-		System.out.println("[AbstractSpellMatrixTransformation.transformSelections] t=" + t);
 		t.commit();
 		
 		// TODO Optimize this. Expensive for large operations.
@@ -43,7 +42,6 @@ public abstract class AbstractSpellMatrix extends Spell {
 		// Must be done before adding to transaction
 		for (Selection s : selections) {
 			if (!newBlockLocations.contains(s.point3d())) {
-				System.out.println("[AbstractSpellMatrix.transformSelections] s=" + s);
 				selectionManager.deselect(s);
 			}
 		}

@@ -32,6 +32,7 @@ public class ClientProxy extends CommonProxy {
 
 	public static int blockSelectedRenderId;
 	public static int blockPickedRenderId;
+	public static int blockModelRenderId;
 
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
@@ -52,9 +53,10 @@ public class ClientProxy extends CommonProxy {
 	public void setCustomRenderers(ISelect selectionManager, IPick pickManager) {
 		blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
+		blockModelRenderId = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId, selectionManager));
 		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, selectionManager, pickManager));
-		RenderingRegistry.registerBlockHandler(new BlockModelRenderer());
+		RenderingRegistry.registerBlockHandler(new BlockModelRenderer(blockModelRenderId));
 	}
 
 	@Override

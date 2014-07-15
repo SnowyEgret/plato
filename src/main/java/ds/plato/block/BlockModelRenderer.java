@@ -18,14 +18,15 @@ public class BlockModelRenderer implements ISimpleBlockRenderingHandler {
 	public static int id;
 	private IModelCustom model;
 
-	public BlockModelRenderer() {
-		this.id = RenderingRegistry.getNextAvailableRenderId();
+	public BlockModelRenderer(int blockModelRenderId) {
+		id = blockModelRenderId;
 		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/sphere.obj"));
+		//model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/bunny.obj"));
 	}
 
-	// TODO move to tile entity
-	public void setModel(String modelName) {
-		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/" + modelName + ".obj"));
+	@Override
+	public int getRenderId() {
+		return id;
 	}
 
 	@Override
@@ -61,9 +62,9 @@ public class BlockModelRenderer implements ISimpleBlockRenderingHandler {
 		return true;
 	}
 
-	@Override
-	public int getRenderId() {
-		return id;
+	// TODO move to tile entity
+	public void setModel(String modelName) {
+		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/" + modelName + ".obj"));
 	}
 
 }
