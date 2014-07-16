@@ -8,9 +8,9 @@ import ds.plato.test.PlatoTest;
 
 public class PlayerTest extends PlatoTest {
 
-	@Test
-	public void getDirection() {
-		Player p = Player.client();
-	}
+//	@Test
+//	public void getDirection() {
+//		Player p = Player.client();
+//	}
 
 }

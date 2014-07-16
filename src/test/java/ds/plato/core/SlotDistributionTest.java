@@ -3,12 +3,6 @@ package ds.plato.core;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.init.Blocks;
-
-import org.junit.Before;
 import org.junit.Test;
 
 import ds.plato.test.PlatoTest;

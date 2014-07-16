@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.closeTo;
 
 import org.junit.Test;
 
-public class T_GeomTest {
+public class GeomTestTest {
 	
 	GeomTest g = new GeomTest();
 

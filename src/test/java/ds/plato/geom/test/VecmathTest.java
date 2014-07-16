@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 //http://hub.jmonkeyengine.org/wiki/doku.php/jme3:math_for_dummies
-public class TestVecmath {
+public class VecmathTest {
 	
 	static double epsilon = .000001;
 
