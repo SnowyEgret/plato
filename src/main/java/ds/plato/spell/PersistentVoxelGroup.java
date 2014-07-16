@@ -38,9 +38,10 @@ public class PersistentVoxelGroup {
 		public int x, y, z, m;
 
 		public Voxel(Selection s) {
+			//FIXME broken for Quartz
 			b = s.block.getUnlocalizedName().substring(5);
 			// b = s.block.toString();
-			x = s.x;
+	 		x = s.x;
 			y = s.y;
 			z = s.z;
 			m = s.metadata;

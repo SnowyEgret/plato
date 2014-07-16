@@ -59,7 +59,7 @@ public class GuiSavesList extends GuiListExtended {
 		public boolean mousePressed(int p1, int p2, int p3, int p4, int p5, int p6) {
 			System.out.println(button.displayString);
 			SpellRestore s = (SpellRestore) player.getHeldItem().getItem();
-			s.readFile(button.displayString);
+			s.restore(button.displayString);
 			mc.displayGuiScreen(null);
 			return button.mousePressed(mc, p2, p3);
 		}

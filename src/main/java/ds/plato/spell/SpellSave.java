@@ -50,7 +50,6 @@ public class SpellSave extends Spell implements ITextSetable {
 		try {
 			//TODO
 			json = new PersistentVoxelGroup(insertionPoint, selectionManager.getSelectionList()).write("saves/" + text + ".json");
-			//json = IO.writeGroup(insertionPoint, selectionManager.getSelectionList(), "saves/" + text + ".json");
 			System.out.println("[SpellSave.writeFile] json=" + json);
 		} catch (IOException e) {
 			e.printStackTrace();

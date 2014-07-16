@@ -41,8 +41,8 @@ public class SpellRestore extends Spell {
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
 		this.world = world;
 		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 1, world.getWorld(), 0, 0, 0);
-		lastPick = pickManager.lastPick();
 		// Clear picks here because player might have cancelled
+		lastPick = pickManager.lastPick();
 		pickManager.clearPicks();
 	}
 
@@ -52,24 +52,41 @@ public class SpellRestore extends Spell {
 		return null;
 	}
 
-	public void readFile(String filename) {
+	public void restore(String filename) {
 		try {
-			//VoxelGroup group = IO.readGroup("saves/" + filename + ".json");
 			PersistentVoxelGroup group = PersistentVoxelGroup.read("saves/" + filename + ".json");
 			System.out.println("[SpellRestore.readFile] group=" + group);
 			Transaction transaction = undoManager.newTransaction();
 			Point3i d = new Point3i();
 			d.sub(group.insertionPoint, lastPick);
+			//Draw blocks one block up from pick
+			d.y -= 1;
 			for (Voxel v : group.voxels) {
-				Block b = Block.getBlockFromName(v.b);
+				String name = v.b;
+				Block b = Block.getBlockFromName(name);
+				if (b == null) {
+					//The block registry seems inconsistent regarding names
+					if (name.endsWith("Block")) {
+						//Quartz
+						System.out.println("[SpellRestore.restore] Try replacing suffix Block with _block");
+						name = name.substring(0, name.length()-5) + "_block";
+						b = Block.getBlockFromName(name);
+					} else if (name.equals("cloth")) {
+						System.out.println("[SpellRestore.restore] Try replacing cloth with wool");
+						name = "wool";
+						b = Block.getBlockFromName(name);
+					}
+				}
 				if (b != null) {
 					Point3i p = new Point3i(v.x, v.y, v.z);
 					p.sub(d);
-					p.y += 1;
 					transaction.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, b, v.m).set());
+				} else {
+					System.out.println("[SpellRestore.restore] Could not get block from name: " + v.b);		
 				}
 			}
-			transaction.commit();			
+			transaction.commit();
+			selectionManager.clearSelections();
 			pickManager.clearPicks();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
