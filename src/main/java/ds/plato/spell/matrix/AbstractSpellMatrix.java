@@ -37,9 +37,6 @@ public abstract class AbstractSpellMatrix extends Spell {
 		}
 		t.commit();
 		
-		// TODO Optimize this. Expensive for large operations.
-		// Test that we are not transforming onto oneself
-		// Must be done before adding to transaction
 		for (Selection s : selections) {
 			if (!newBlockLocations.contains(s.point3d())) {
 				selectionManager.deselect(s);

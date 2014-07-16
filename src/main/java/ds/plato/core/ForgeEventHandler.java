@@ -58,8 +58,10 @@ public class ForgeEventHandler {
 	public void onMouseEvent(MouseEvent e) {
 
 		// MouseEvent does not have a player or a world like PlayerInteractEvent
-		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		IWorld world = Spell.getWorldServer(player);
+		//EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+		//IWorld world = Spell.getWorldServer(player);
+		Player player = Player.client();
+		IWorld world = player.getWorldServer();
 
 		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
 		if (position.typeOfHit == MovingObjectType.MISS) {
@@ -69,7 +71,7 @@ public class ForgeEventHandler {
 
 				// TODO a better way to clear the grown selections? Yes. GrownSelections should belong to
 				// SelectionManager
-				ItemStack is = player.getCurrentEquippedItem();
+				ItemStack is = player.getHeldItem();
 				if (is != null) {
 					Item i = is.getItem();
 					if (i instanceof StaffSelect) {
@@ -89,7 +91,8 @@ public class ForgeEventHandler {
 
 		} else if (position.typeOfHit == MovingObjectType.BLOCK) {
 
-			ItemStack stack = player.inventory.getCurrentItem();
+			//ItemStack stack = player.inventory.getCurrentItem();
+			ItemStack stack = player.getHeldItem();
 			if (stack != null) {
 				Item item = stack.getItem();
 

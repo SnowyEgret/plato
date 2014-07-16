@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
 import ds.plato.select.ISelect;
 import ds.plato.spell.IHoldable;
@@ -17,7 +18,7 @@ public class Overlay {
 
 	private ISelect selectionManager;
 	private Vector3d displacement;
-	//private String message;
+	// private String message;
 	private final int white = 0xffffff;
 	private final int red = 0xffaaaa;
 	private final int green = 0xaaffaa;
@@ -31,9 +32,9 @@ public class Overlay {
 		this.displacement = displacement;
 	}
 
-//	public void setMessage(String message) {
-//		this.message = message;
-//	}
+	// public void setMessage(String message) {
+	// this.message = message;
+	// }
 
 	public void draw(IHoldable holdable) {
 		int x = 10;
@@ -60,9 +61,9 @@ public class Overlay {
 			if (displacement != null) {
 				int dx = (int) displacement.x;
 				int dz = (int) displacement.z;
-				//Add 1 to get distance instead of displacement
-				r.drawStringWithShadow(((dx >= 0) ? "East" : "West") + ": " + (Math.abs(dx) + 1) + "  " + ((dz >= 0) ? "North" : "South")
-						+ ": " + (Math.abs(dz) + 1), x, y += dy, red);
+				// Add 1 to get distance instead of displacement
+				r.drawStringWithShadow(((dx >= 0) ? "East" : "West") + ": " + (Math.abs(dx) + 1) + "  "
+						+ ((dz >= 0) ? "North" : "South") + ": " + (Math.abs(dz) + 1), x, y += dy, red);
 				r.drawStringWithShadow("Height: " + (Math.abs((int) displacement.y) + 1), x, y += dy, red);
 			}
 		}
@@ -72,9 +73,8 @@ public class Overlay {
 		Spell s = holdable.getSpell();
 		if (s != null) {
 			if (s instanceof SpellFillRandom) {
-				SlotDistribution d = new SlotDistribution(
-						s.getSlotEntries(Minecraft.getMinecraft().thePlayer));
-				
+				SlotDistribution d = Player.client().slotDistribution();
+				//SlotDistribution d = new SlotDistribution(s.getSlotEntries(Minecraft.getMinecraft().thePlayer));
 				r.drawStringWithShadow(d.toString(), x, y += dy, blue);
 			}
 		}

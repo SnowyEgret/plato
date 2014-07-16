@@ -62,6 +62,7 @@ public class SlotDistribution {
 		List<String> tokens = new ArrayList();
 		for (Entry<Integer, Block> e : mapPercentBlock.entrySet()) {
 			// int color = b.getBlockColor();
+			//FIXME not all blocks have localized name. Get from class name
 			String name = e.getValue().getLocalizedName();
 			tokens.add(String.format("%s: %d%%", name, e.getKey()));
 		}

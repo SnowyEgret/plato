@@ -40,8 +40,10 @@ public class KeyInputEventHandler {
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {
 
-		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		IWorld w = Spell.getWorldServer(player);
+		// EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+		Player player = Player.client();
+		// IWorld w = Spell.getWorldServer(player);
+		IWorld w = player.getWorldServer();
 
 		if (keyBindings.get("undo").isPressed()) {
 			try {
@@ -76,7 +78,7 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("delete").isPressed()) {
-			//new SpellDelete(undoManager, selectionManager, pickManager).invoke(w, null);
+			// new SpellDelete(undoManager, selectionManager, pickManager).invoke(w, null);
 			new SpellDelete(undoManager, selectionManager, pickManager).invoke(player);
 		}
 
@@ -85,18 +87,18 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("left").isPressed()) {
-			copyHorizontal(player, w, 2);
+			copy(player, w, -1, 0);
 		}
 
 		if (keyBindings.get("right").isPressed()) {
-			copyHorizontal(player, w, 0);
+			copy(player, w, 1, 0);
 		}
 
 		if (keyBindings.get("up").isPressed()) {
 			if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				copyVertical(player, w, 1);
 			} else {
-				copyHorizontal(player, w, 1);
+				copy(player, w, 0, -1);
 			}
 		}
 
@@ -104,7 +106,7 @@ public class KeyInputEventHandler {
 			if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				copyVertical(player, w, -1);
 			} else {
-				copyHorizontal(player, w, 3);
+				copy(player, w, 0, 1);
 			}
 		}
 
@@ -113,40 +115,38 @@ public class KeyInputEventHandler {
 	}
 
 	// FIXME Directions are reversed when yaw > 0
-	private void copyHorizontal(EntityClientPlayerMP player, IWorld w, int d) {
+	private void copy(Player player, IWorld w, int lr, int ud) {
 		pickManager.clearPicks();
 		pickManager.reset(2);
 		pickManager.pick(w, 0, 0, 0);
-		//int yaw = (int) player.rotationYawHead;
-		int yaw = (int) Math.abs(player.rotationYawHead);
-		System.out.println("[KeyInputEventHandler.copyHorizontal] yaw=" + yaw);
-		//d *= 90;
-		//int y = (yaw += (yaw >= 45) ? d + 45 : -d - 45) / 90;
-		int y = (yaw += 45) / 90;
-		y += d;
-		System.out.println("[KeyInputEventHandler.copyHorizontal] y=" + y);
-		switch (Math.abs(y % 4)) {
-		case 0:
-			pickManager.pick(w, -1, 0, 0);
-		case 1:
-			pickManager.pick(w, 0, 0, 1);
-		case 2:
-			pickManager.pick(w, 1, 0, 0);
-		case 3:
-			pickManager.pick(w, 0, 0, -1);
+		Direction direction = player.getDirection();
+		System.out.println("[KeyInputEventHandler.copy] direction=" + direction);
+		switch (direction) {
+		case NORTH:
+			pickManager.pick(w, lr, 0, ud);
+			break;
+		case SOUTH:
+			pickManager.pick(w, -lr, 0, -ud);
+			break;
+		case EAST:
+			pickManager.pick(w, -ud, 0, lr);
+			break;
+		case WEST:
+			pickManager.pick(w, ud, 0, -lr);
+			break;
 		}
-		//new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
-		new SpellCopy(undoManager, selectionManager, pickManager).invoke(player);
+		if (selectionManager.size() != 0) {
+			new SpellCopy(undoManager, selectionManager, pickManager).invoke(player);
+		}
 		pickManager.clearPicks();
 	}
 
-	private void copyVertical(EntityClientPlayerMP player, IWorld w, int d) {
+	private void copyVertical(Player player, IWorld w, int d) {
 		pickManager.clearPicks();
 		pickManager.reset(2);
 		pickManager.pick(w, 0, 0, 0);
 		pickManager.pick(w, 0, d, 0);
 		new SpellCopy(undoManager, selectionManager, pickManager).invoke(player);
-		//new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, null);
 		pickManager.clearPicks();
 	}
 }
