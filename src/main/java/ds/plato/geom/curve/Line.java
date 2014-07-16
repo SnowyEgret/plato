@@ -12,8 +12,9 @@ public class Line extends Curve {
 	public Line(Point3d origin, Point3d endPoint) {
 		super(origin);
 		dir = new Vector3d();
+		p0.add(new Point3d(.01, .01, .01));
 		endPoint.add(new Point3d(.01, .01, .01));
-		dir.sub(endPoint, origin);
+		dir.sub(endPoint, p0);
 		rT = Range.between(epsilon, 1d); // Unit test fails with origin at 0;
 	}
 
