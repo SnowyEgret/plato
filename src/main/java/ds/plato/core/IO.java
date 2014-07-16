@@ -14,29 +14,31 @@ import com.google.gson.Gson;
 
 import ds.plato.select.Selection;
 
+//TODO refactor this class
+@Deprecated
 public class IO {
 
 	public static String writeGroup(Point3i insertionPoint, List<Selection> selections, String fileName) throws IOException {
-		String json = new Gson().toJson(new Group(insertionPoint, selections));
+		String json = new Gson().toJson(new VoxelGroup(insertionPoint, selections));
 		FileWriter writer = new FileWriter(fileName);
 		writer.write(json);
 		writer.close();
 		return json;
 	}
 
-	public static Group readGroup(String fileName) throws FileNotFoundException {
+	public static VoxelGroup readGroup(String fileName) throws FileNotFoundException {
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		// Type listType = new TypeToken<ArrayList<Voxel>>() {
 		// }.getType();
-		Group g = new Gson().fromJson(br, Group.class);
+		VoxelGroup g = new Gson().fromJson(br, VoxelGroup.class);
 		return g;
 	}
 
-	public static class Group {
+	public static class VoxelGroup {
 		public Point3i insertionPoint;
 		public Voxel[] voxels;
 
-		public Group(Point3i insertionPoint, List<Selection> selections) {
+		public VoxelGroup(Point3i insertionPoint, List<Selection> selections) {
 			this.insertionPoint = insertionPoint;
 			Voxel[] voxels = new Voxel[selections.size()];
 			for (int i = 0; i < voxels.length; i++) {

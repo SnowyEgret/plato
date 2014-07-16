@@ -48,7 +48,9 @@ public class SpellSave extends Spell implements ITextSetable {
 		// a texture generated from the player's view at the time of creation
 		String json = null;
 		try {
-			json = IO.writeGroup(insertionPoint, selectionManager.getSelectionList(), "saves/" + text + ".json");
+			//TODO
+			json = new PersistentVoxelGroup(insertionPoint, selectionManager.getSelectionList()).write("saves/" + text + ".json");
+			//json = IO.writeGroup(insertionPoint, selectionManager.getSelectionList(), "saves/" + text + ".json");
 			System.out.println("[SpellSave.writeFile] json=" + json);
 		} catch (IOException e) {
 			e.printStackTrace();

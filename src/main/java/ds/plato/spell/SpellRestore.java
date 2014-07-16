@@ -7,14 +7,12 @@ import javax.vecmath.Point3i;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import ds.plato.Plato;
-import ds.plato.core.IO;
-import ds.plato.core.IO.Group;
-import ds.plato.core.IO.Voxel;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
+import ds.plato.spell.PersistentVoxelGroup.Voxel;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
@@ -56,7 +54,8 @@ public class SpellRestore extends Spell {
 
 	public void readFile(String filename) {
 		try {
-			Group group = IO.readGroup("saves/" + filename + ".json");
+			//VoxelGroup group = IO.readGroup("saves/" + filename + ".json");
+			PersistentVoxelGroup group = PersistentVoxelGroup.read("saves/" + filename + ".json");
 			System.out.println("[SpellRestore.readFile] group=" + group);
 			Transaction transaction = undoManager.newTransaction();
 			Point3i d = new Point3i();
