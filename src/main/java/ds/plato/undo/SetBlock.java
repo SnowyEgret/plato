@@ -2,13 +2,10 @@ package ds.plato.undo;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import ds.plato.Plato;
 import ds.plato.core.IWorld;
+import ds.plato.core.StringUtils;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
-import ds.plato.select.SelectionManager;
 
 public class SetBlock implements IUndoable {
 
@@ -104,20 +101,15 @@ public class SetBlock implements IUndoable {
 		builder.append(", z=");
 		builder.append(z);
 		builder.append(", block=");
-		builder.append(lastWordInCamelCase(block.getClass().getSimpleName()));
+		builder.append(StringUtils.lastWordInCamelCase(block.getClass().getSimpleName()));
 		builder.append(", prevBlock=");
-		builder.append(lastWordInCamelCase(prevBlock.getClass().getSimpleName()));
+		builder.append(StringUtils.lastWordInCamelCase(prevBlock.getClass().getSimpleName()));
 		builder.append(", metadata=");
 		builder.append(metadata);
 		builder.append(", prevMetadata=");
 		builder.append(prevMetadata);
 		builder.append("]");
 		return builder.toString();
-	}
-
-	private String lastWordInCamelCase(String camelCase) {
-		String[] tokens = camelCase.split("(?=[A-Z])");
-		return tokens[tokens.length - 1];
 	}
 
 }

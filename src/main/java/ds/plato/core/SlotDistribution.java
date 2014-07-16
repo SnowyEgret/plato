@@ -61,9 +61,14 @@ public class SlotDistribution {
 	public String toString() {
 		List<String> tokens = new ArrayList();
 		for (Entry<Integer, Block> e : mapPercentBlock.entrySet()) {
-			// int color = b.getBlockColor();
-			//FIXME not all blocks have localized name. Get from class name
-			String name = e.getValue().getLocalizedName();
+			Block b = e.getValue();
+			//TODO get color of BlockColored for example Wool
+			//int color = b.getBlockColor();
+			//System.out.println("[SlotDistribution.toString] color=" + color);
+			String name = b.getLocalizedName();
+			if (name.startsWith("tile.")) {
+				name = StringUtils.lastWordInCamelCase(b.getClass().getSimpleName());
+			}
 			tokens.add(String.format("%s: %d%%", name, e.getKey()));
 		}
 		return Joiner.on(", ").join(tokens);
