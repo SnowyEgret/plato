@@ -96,6 +96,7 @@ public abstract class AbstractSpellSelect extends Spell {
 	}
 
 	public void clearGrownSelections() {
+		System.out.println("[AbstractSpellSelect.clearGrownSelections]");
 		grownSelections.clear();
 	}
 

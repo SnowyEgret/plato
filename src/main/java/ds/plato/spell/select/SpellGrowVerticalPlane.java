@@ -30,7 +30,7 @@ public class SpellGrowVerticalPlane extends AbstractSpellSelect {
 		d.name = Messages.spell_grow_vertical_plane_name;
 		d.description = Messages.spell_grow_vertical_plane_description;
 		d.picks = new PickDescriptor(Messages.spell_grow_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_grow_modifier_0, Messages.spell_grow_modifier_1);
+		d.modifiers = new ModifierDescriptor(Messages.spell_grow_modifier_0, Messages.spell_grow_modifier_1, Messages.spell_grow_vertical_plane_modifier_2);
 		return d;
 	}
 

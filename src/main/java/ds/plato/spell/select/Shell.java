@@ -33,22 +33,33 @@ public class Shell implements Iterable<Point3i> {
 		YZ
 	}
 
-	private List<Point3i> points = new ArrayList();
+	private List<Point3i> points = new ArrayList<>();
+	//private List<Point3i> pts = initPoints();
 	private final Type type;
 
 	public Shell(Type type, Point3i p0, IWorld w) {
 		this.type = type;
-
+		
 		List<Point3i> pts = new ArrayList<>();
-		for (int x = 0; x < 3; x++) {
-			for (int y = 0; y < 3; y++) {
-				for (int z = 0; z < 3; z++) {
-					Point3i p = new Point3i(p0.x + x - 1, p0.y + y - 1, p0.z + z - 1);
-					if (!p.equals(p0))
-						pts.add(p);
-				}
-			}
+		pts.add(new Point3i(0, -1, 0));
+		pts.add(new Point3i(0, 0, -1));
+		pts.add(new Point3i(-1, 0, 0));
+		pts.add(new Point3i(1, 0, 0));
+		pts.add(new Point3i(0, 0, 1));
+		pts.add(new Point3i(0, 1, 0));
+		for (Point3i p : pts) {
+			p.add(p0);
 		}
+		
+//		for (int x = 0; x < 3; x++) {
+//			for (int y = 0; y < 3; y++) {
+//				for (int z = 0; z < 3; z++) {
+//					Point3i p = new Point3i(p0.x + x - 1, p0.y + y - 1, p0.z + z - 1);
+//					if (!p.equals(p0))
+//						pts.add(p);
+//				}
+//			}
+//		}
 
 		switch (type) {
 		case HORIZONTAL:
@@ -180,6 +191,18 @@ public class Shell implements Iterable<Point3i> {
 			break;
 		}
 	}
+
+//	private static List<Point3i> initPoints() {
+//		System.out.println("[Shell.initPoints]");
+//		List<Point3i> pts = new ArrayList<>();
+//		pts.add(new Point3i(0, -1, 0));
+//		pts.add(new Point3i(0, 0, -1));
+//		pts.add(new Point3i(-1, 0, 0));
+//		pts.add(new Point3i(1, 0, 0));
+//		pts.add(new Point3i(0, 0, 1));
+//		pts.add(new Point3i(0, 1, 0));
+//		return pts;
+//	}
 
 	@Override
 	public String toString() {

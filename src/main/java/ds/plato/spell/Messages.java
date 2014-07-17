@@ -101,6 +101,7 @@ public class Messages extends NLS {
 	
 	public static String spell_grow_vertical_plane_name;
 	public static String spell_grow_vertical_plane_description;
+	public static String spell_grow_vertical_plane_modifier_2;
 	
 	//Matrix spells
 
