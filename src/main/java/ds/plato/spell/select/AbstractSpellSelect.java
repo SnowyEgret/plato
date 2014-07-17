@@ -27,7 +27,7 @@ import ds.plato.undo.IUndo;
 
 public abstract class AbstractSpellSelect extends Spell {
 
-	private List<Point3i> grownSelections = new ArrayList<>();
+	//private List<Point3i> grownSelections = new ArrayList<>();
 	protected Shell.Type shellType;
 	protected Item ingredientA = Items.feather;
 	protected Item ingredientB = Items.dye;
@@ -52,11 +52,8 @@ public abstract class AbstractSpellSelect extends Spell {
 	}
 
 	protected void growSelections(Shell.Type shellType, IWorld world, Block patternBlock) {
-		if (grownSelections.isEmpty()) {
-			grownSelections.addAll(selectionManager.selectedPoints());
-		}
 		List<Point3i> newGrownSelections = new ArrayList();
-		for (Point3i center : grownSelections) {
+		for (Point3i center : selectionManager.getGrownSelections()) {
 			Shell shell = new Shell(shellType, center, world);
 			for (Point3i p : shell) {
 				Block block = world.getBlock(p.x, p.y, p.z);
@@ -73,7 +70,8 @@ public abstract class AbstractSpellSelect extends Spell {
 				}
 			}
 		}
-		grownSelections = newGrownSelections;
+		selectionManager.setGrownSelections(newGrownSelections);
+		//grownSelections = newGrownSelections;
 	}
 
 	protected void shrinkSelections(Shell.Type shellType, IWorld world) {
@@ -92,12 +90,14 @@ public abstract class AbstractSpellSelect extends Spell {
 		for (Selection s : shrunkSelections) {
 			selectionManager.deselect(s);
 		}
-		grownSelections.clear();
+		selectionManager.clearGrownSelections();
+		//grownSelections.clear();
 	}
 
-	public void clearGrownSelections() {
-		System.out.println("[AbstractSpellSelect.clearGrownSelections]");
-		grownSelections.clear();
-	}
+//	public void clearGrownSelections() {
+//		System.out.println("[AbstractSpellSelect.clearGrownSelections]");
+//		selectionManager.clearGrownSelections();
+//		//grownSelections.clear();
+//	}
 
 }

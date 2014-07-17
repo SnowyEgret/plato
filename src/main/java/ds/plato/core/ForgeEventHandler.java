@@ -42,7 +42,6 @@ public class ForgeEventHandler {
 	private IUndo undoManager;
 	private ISelect selectionManager;
 	private IPick pickManager;
-	// private boolean isWorldSet = false;
 	private Overlay overlay;
 	private long nanoseconds = 0;
 
@@ -57,9 +56,6 @@ public class ForgeEventHandler {
 	@SubscribeEvent
 	public void onMouseEvent(MouseEvent e) {
 
-		// MouseEvent does not have a player or a world like PlayerInteractEvent
-		//EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		//IWorld world = Spell.getWorldServer(player);
 		Player player = Player.client();
 		IWorld world = player.getWorldServer();
 
@@ -68,20 +64,6 @@ public class ForgeEventHandler {
 			if (e.button == 0) {
 
 				selectionManager.clearSelections();
-
-				// TODO a better way to clear the grown selections? Yes. GrownSelections should belong to
-				// SelectionManager
-				ItemStack is = player.getHeldItem();
-				if (is != null) {
-					Item i = is.getItem();
-					if (i instanceof StaffSelect) {
-						StaffSelect staff = (StaffSelect) i;
-						AbstractSpellSelect spell = (AbstractSpellSelect) staff.currentSpell();
-						if (spell != null) {
-							spell.clearGrownSelections();
-						}
-					}
-				}
 				e.setCanceled(true);
 
 			} else if (e.button == 1) {
@@ -138,18 +120,6 @@ public class ForgeEventHandler {
 			}
 		}
 	}
-
-	// @SideOnly(Side.CLIENT)
-	// @SubscribeEvent
-	// public void onEntityJoinWorldEvent(EntityJoinWorldEvent e) {
-	// if (!isWorldSet && e.entity instanceof EntityPlayerMP) {
-	// // Minecraft's world does not implement IWorld
-	// IWorld w = new WorldWrapper(e.entity.worldObj);
-	// selectionManager.setWorld(w);
-	// pickManager.setWorld(w);
-	// isWorldSet = true;
-	// }
-	// }
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

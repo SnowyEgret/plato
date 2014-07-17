@@ -19,21 +19,14 @@ public class SelectionManager implements ISelect {
 
 	private final Map<Point3i, Selection> selections = new ConcurrentHashMap<>();
 	// private final Map<Point3i, Selection> selections = new HashMap<>();
-	// private IWorld world;
 	private IWorld world;
 	private Block blockSelected;
 	private List<Point3i> lastSelections;
+	private List<Point3i> grownSelections = new ArrayList<>();
 
 	public SelectionManager(Block blockSelected) {
 		this.blockSelected = blockSelected;
 	}
-
-	// World is not available when SelectionManager is constructed. Called when player joins game in ForgeEventHandler
-	// @Override
-	// public ISelect setWorld(IWorld world) {
-	// this.world = world;
-	// return this;
-	// }
 
 	// Returns a copy to avoid concurrent modification
 	@Override
@@ -82,6 +75,7 @@ public class SelectionManager implements ISelect {
 				deselect(s);
 			}
 		}
+		grownSelections.clear();
 	}
 
 	@Override
@@ -141,6 +135,24 @@ public class SelectionManager implements ISelect {
 				select(world, p.x, p.y, p.z);
 			}
 		}
+	}
+
+	@Override
+	public List<Point3i> getGrownSelections() {
+		if (grownSelections.isEmpty()) {
+			grownSelections.addAll(selections.keySet());
+		}
+		return grownSelections;
+	}
+
+	@Override
+	public void setGrownSelections(List<Point3i> points) {
+		grownSelections = points;
+	}
+
+	@Override
+	public void clearGrownSelections() {
+		grownSelections.clear();
 	}
 
 	// TODO Used only by Test class. Make default when test class is in same package.

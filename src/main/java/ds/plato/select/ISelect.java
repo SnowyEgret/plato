@@ -45,4 +45,10 @@ public interface ISelect {
 
 	public List<Selection> getSelectionList();
 
+	public List<Point3i> getGrownSelections();
+
+	public void setGrownSelections(List<Point3i> points);
+
+	public void clearGrownSelections();
+
 }
