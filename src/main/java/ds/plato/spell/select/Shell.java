@@ -14,6 +14,7 @@ public class Shell implements Iterable<Point3i> {
 
 	public enum Type {
 		ALL,
+		XYZ,
 		HORIZONTAL,
 		UP,
 		DOWN,
@@ -39,89 +40,93 @@ public class Shell implements Iterable<Point3i> {
 	public Shell(Type type, Point3i p0, IWorld w) {
 		this.type = type;
 		
-		List<Point3i> pts = new ArrayList<>();
-		pts.add(new Point3i(0, -1, 0));
-		pts.add(new Point3i(0, 0, -1));
-		pts.add(new Point3i(-1, 0, 0));
-		pts.add(new Point3i(1, 0, 0));
-		pts.add(new Point3i(0, 0, 1));
-		pts.add(new Point3i(0, 1, 0));
-		for (Point3i p : pts) {
+		List<Point3i> noCorners = new ArrayList<>();
+		noCorners.add(new Point3i(0, -1, 0));
+		noCorners.add(new Point3i(0, 0, -1));
+		noCorners.add(new Point3i(-1, 0, 0));
+		noCorners.add(new Point3i(1, 0, 0));
+		noCorners.add(new Point3i(0, 0, 1));
+		noCorners.add(new Point3i(0, 1, 0));
+		for (Point3i p : noCorners) {
 			p.add(p0);
 		}
 		
-//		for (int x = 0; x < 3; x++) {
-//			for (int y = 0; y < 3; y++) {
-//				for (int z = 0; z < 3; z++) {
-//					Point3i p = new Point3i(p0.x + x - 1, p0.y + y - 1, p0.z + z - 1);
-//					if (!p.equals(p0))
-//						pts.add(p);
-//				}
-//			}
-//		}
+		List<Point3i> allPoints = new ArrayList<>();
+		for (int x = 0; x < 3; x++) {
+			for (int y = 0; y < 3; y++) {
+				for (int z = 0; z < 3; z++) {
+					Point3i p = new Point3i(p0.x + x - 1, p0.y + y - 1, p0.z + z - 1);
+					if (!p.equals(p0))
+						allPoints.add(p);
+				}
+			}
+		}
 
 		switch (type) {
+		case ALL:
+			points = allPoints;
+			break;
 		case HORIZONTAL:
-			for (Point3i p : pts) {
+			for (Point3i p : noCorners) {
 				if (p.y == p0.y)
 					points.add(p);
 			}
 			break;
+		case ABOVE:
+			for (Point3i p : noCorners) {
+				if (p.y >= p0.y)
+					points.add(p);
+			}
+			break;
+		case BELLOW:
+			for (Point3i p : noCorners) {
+				if (p.y <= p0.y)
+					points.add(p);
+			}
+			break;
+		case XYZ:
+			points = noCorners;
+			break;
+		case VERTICAL_XY:
+			for (Point3i p : noCorners) {
+				if (p.x == p0.x)
+					points.add(p);
+			}
+			break;
+		case VERTICAL_ZY:
+			for (Point3i p : noCorners) {
+				if (p.z == p0.z)
+					points.add(p);
+			}
+			break;
+		case DOWN:
+			for (Point3i p : noCorners) {
+				if (p.z == p0.z && p.x == p0.x && p.y < p0.y)
+					points.add(p);
+			}
+			break;
+		case UP:
+			for (Point3i p : noCorners) {
+				if (p.z == p0.z && p.x == p0.x && p.y > p0.y)
+					points.add(p);
+			}
+			break;
 		case FLOOR:
-			for (Point3i p : pts) {
+			for (Point3i p : noCorners) {
 				Block b = w.getBlock(p.x, p.y + 1, p.z);
 				if (p.y == p0.y && b == Blocks.air)
 					points.add(p);
 			}
 			break;
 		case CEILING:
-			for (Point3i p : pts) {
+			for (Point3i p : noCorners) {
 				Block b = w.getBlock(p.x, p.y - 1, p.z);
 				if (p.y == p0.y && b == Blocks.air)
 					points.add(p);
 			}
 			break;
-		case ABOVE:
-			for (Point3i p : pts) {
-				if (p.y >= p0.y)
-					points.add(p);
-			}
-			break;
-		case BELLOW:
-			for (Point3i p : pts) {
-				if (p.y <= p0.y)
-					points.add(p);
-			}
-			break;
-		case ALL:
-			points = pts;
-			break;
-		case VERTICAL_XY:
-			for (Point3i p : pts) {
-				if (p.x == p0.x)
-					points.add(p);
-			}
-			break;
-		case VERTICAL_ZY:
-			for (Point3i p : pts) {
-				if (p.z == p0.z)
-					points.add(p);
-			}
-			break;
-		case DOWN:
-			for (Point3i p : pts) {
-				if (p.z == p0.z && p.x == p0.x && p.y < p0.y)
-					points.add(p);
-			}
-			break;
-		case UP:
-			for (Point3i p : pts) {
-				if (p.z == p0.z && p.x == p0.x && p.y > p0.y)
-					points.add(p);
-			}
-			break;
 		case FLOOR_EDGE:
-			for (Point3i p : pts) {
+			for (Point3i p : allPoints) {
 				if (p.y == p0.y) {
 					if (w.getBlock(p.x, p.y + 1, p.z) == Blocks.air) {
 						Shell s = new Shell(Type.ABOVE, p, w);
@@ -136,7 +141,7 @@ public class Shell implements Iterable<Point3i> {
 			}
 			break;
 		case CEILING_EDGE:
-			for (Point3i p : pts) {
+			for (Point3i p : allPoints) {
 				if (p.y == p0.y) {
 					if (w.getBlock(p.x, p.y - 1, p.z) == Blocks.air) {
 						Shell s = new Shell(Type.BELLOW, p, w);
@@ -151,37 +156,37 @@ public class Shell implements Iterable<Point3i> {
 			}
 			break;
 		case X:
-			for (Point3i p : pts) {
+			for (Point3i p : noCorners) {
 				if (p.z == p0.z && p.y == p0.y)
 					points.add(p);
 			}
 			break;
 		case Y:
-			for (Point3i p : pts) {
+			for (Point3i p : noCorners) {
 				if (p.z == p0.z && p.x == p0.x)
 					points.add(p);
 			}
 			break;
 		case Z:
-			for (Point3i p : pts) {
+			for (Point3i p : noCorners) {
 				if (p.x == p0.x && p.y == p0.y)
 					points.add(p);
 			}
 			break;
 		case XY:
-			for (Point3i p : pts) {
+			for (Point3i p : noCorners) {
 				if (p.z == p0.z)
 					points.add(p);
 			}
 			break;
 		case XZ:
-			for (Point3i p : pts) {
+			for (Point3i p : noCorners) {
 				if (p.y == p0.y)
 					points.add(p);
 			}
 			break;
 		case YZ:
-			for (Point3i p : pts) {
+			for (Point3i p : noCorners) {
 				if (p.x == p0.x)
 					points.add(p);
 			}
