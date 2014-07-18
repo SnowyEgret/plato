@@ -2,14 +2,14 @@ package ds.plato.gui;
 
 import javax.vecmath.Vector3d;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+
+import org.lwjgl.input.Keyboard;
+
 import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
 import ds.plato.select.ISelect;
-import ds.plato.spell.IHoldable;
 import ds.plato.spell.Spell;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.transform.SpellFillRandom;
@@ -18,7 +18,6 @@ public class Overlay {
 
 	private ISelect selectionManager;
 	private Vector3d displacement;
-	// private String message;
 	private final int white = 0xffffff;
 	private final int red = 0xffaaaa;
 	private final int green = 0xaaffaa;
@@ -32,11 +31,6 @@ public class Overlay {
 		this.displacement = displacement;
 	}
 
-	// public void setMessage(String message) {
-	// this.message = message;
-	// }
-
-	//public void draw(IHoldable holdable) {
 	public void draw(Spell spell) {
 		int x = 10;
 		int y = x;

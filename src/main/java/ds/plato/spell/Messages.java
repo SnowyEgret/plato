@@ -6,9 +6,10 @@ public class Messages extends NLS {
 
 	//Generic strings
 	
-	public static String spell_modifier_deleteOriginal;
 	public static String spell_pick_anywhere;
+	public static String spell_modifier_deleteOriginal;
 	public static String spell_modifier_isHollow;
+	public static String spell_modifier_onSurface;
 	
 	//Transform Spells
 
@@ -102,6 +103,10 @@ public class Messages extends NLS {
 	public static String spell_grow_vertical_plane_name;
 	public static String spell_grow_vertical_plane_description;
 	public static String spell_grow_vertical_plane_modifier_2;
+	
+	public static String spell_grow_floor_name;
+	public static String spell_grow_floor_description;
+	public static String spell_grow_floor_modifier;
 	
 	//Matrix spells
 

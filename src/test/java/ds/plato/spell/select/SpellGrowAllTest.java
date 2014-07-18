@@ -37,7 +37,7 @@ public class SpellGrowAllTest extends PlatoTest {
 		super.setUp();
 		PowerMockito.mockStatic(Keyboard.class);
 		slotEntries = new SlotEntry[] {new SlotEntry(dirt, 0, 0)};
-		picks = new Pick[] {new Pick(0, 0, 0, dirt, 0), new Pick(9, 0, 0, dirt, 0)};
+		picks = new Pick[] {new Pick(0, 0, 0, dirt, 0, 0), new Pick(9, 0, 0, dirt, 0, 0)};
 		stubWorld = newStubWorld();
 		sm = new SelectionManager(blockSelected);//.setWorld(stubWorld);
 		growSpell = new SpellGrowAll(undoManager, sm, pickManager);

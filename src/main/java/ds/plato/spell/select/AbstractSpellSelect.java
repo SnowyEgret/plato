@@ -27,7 +27,6 @@ import ds.plato.undo.IUndo;
 
 public abstract class AbstractSpellSelect extends Spell {
 
-	//private List<Point3i> grownSelections = new ArrayList<>();
 	protected Shell.Type shellType;
 	protected Item ingredientA = Items.feather;
 	protected Item ingredientB = Items.dye;
@@ -39,15 +38,21 @@ public abstract class AbstractSpellSelect extends Spell {
 
 	@Override
 	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
+		
+		// Select the pick if there are no selections
+		Pick p = pickManager.getPicks()[0];
 		pickManager.clearPicks();
-		if (selectionManager.size() != 0) {
-			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-				shrinkSelections(shellType, world);
-			} else {
-				// Is this really the first block? getSelections gets the values from a map.
-				Block firstBlockSelected = selectionManager.getSelections().iterator().next().block;
-				growSelections(shellType, world, firstBlockSelected);
-			}
+		if (selectionManager.size() == 0) {
+			selectionManager.select(world, p.x, p.y, p.z);
+		}
+		
+		// Shrink or grow selections
+		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+			shrinkSelections(shellType, world);
+		} else {
+			// Is this really the first block? getSelections gets the values from a map.
+			Block patternBlock = selectionManager.getSelections().iterator().next().block;
+			growSelections(shellType, world, patternBlock);
 		}
 	}
 
@@ -71,7 +76,6 @@ public abstract class AbstractSpellSelect extends Spell {
 			}
 		}
 		selectionManager.setGrownSelections(newGrownSelections);
-		//grownSelections = newGrownSelections;
 	}
 
 	protected void shrinkSelections(Shell.Type shellType, IWorld world) {
@@ -91,13 +95,5 @@ public abstract class AbstractSpellSelect extends Spell {
 			selectionManager.deselect(s);
 		}
 		selectionManager.clearGrownSelections();
-		//grownSelections.clear();
 	}
-
-//	public void clearGrownSelections() {
-//		System.out.println("[AbstractSpellSelect.clearGrownSelections]");
-//		selectionManager.clearGrownSelections();
-//		//grownSelections.clear();
-//	}
-
 }

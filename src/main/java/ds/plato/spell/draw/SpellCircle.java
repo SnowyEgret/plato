@@ -1,5 +1,9 @@
 package ds.plato.spell.draw;
 
+import javax.vecmath.Point3d;
+
+import org.lwjgl.input.Keyboard;
+
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.geom.IDrawable;
@@ -8,10 +12,10 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Messages;
+import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
-
 
 public class SpellCircle extends AbstractSpellDraw {
 
@@ -25,6 +29,7 @@ public class SpellCircle extends AbstractSpellDraw {
 		d.name = Messages.spell_circle_name;
 		d.description = Messages.spell_circle_description;
 		d.picks = new PickDescriptor(Messages.spell_circle_picks);
+		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_onSurface);
 		return d;
 	}
 
@@ -32,7 +37,14 @@ public class SpellCircle extends AbstractSpellDraw {
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
-		IDrawable d = new CircleXZ(picks[0].point3d(), picks[1].point3d());
+		boolean onSurface = Keyboard.isKeyDown(Keyboard.KEY_LMENU);
+		Point3d p0 = picks[0].point3d();
+		Point3d p1 = picks[1].point3d();
+		if (onSurface) {
+			p0.y += 1;
+			p1.y += 1;
+		}
+		IDrawable d = new CircleXZ(p0, p1);
 		draw(d, world, slotEntries[0].block, slotEntries[0].metadata);
 		pickManager.clearPicks();
 	}

@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 
 public interface IPick {
 
-	public void pick(IWorld world, int x, int y, int z);
+	public void pick(IWorld world, int x, int y, int z, int side);
 
 	public void clearPicks();
 

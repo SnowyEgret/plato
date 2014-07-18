@@ -29,7 +29,7 @@ public class SpellBox extends AbstractSpellDraw {
 		d.name = Messages.spell_box_name;
 		d.description = Messages.spell_box_description;
 		d.picks = new PickDescriptor(Messages.spell_box_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_box_modifier_0, Messages.spell_box_modifier_1, Messages.spell_modifier_isHollow);
+		d.modifiers = new ModifierDescriptor(Messages.spell_box_modifier_0, Messages.spell_modifier_onSurface, Messages.spell_modifier_isHollow);
 		return d;
 	}
 

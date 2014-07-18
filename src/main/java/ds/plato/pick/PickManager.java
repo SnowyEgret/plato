@@ -19,12 +19,12 @@ public class PickManager implements IPick {
 	}
 
 	@Override
-	public void pick(IWorld world, int x, int y, int z) {
+	public void pick(IWorld world, int x, int y, int z, int side) {
 		// TODO: Handle case where location is already a selection
 		Block block = world.getBlock(x, y, z);
 		int metadata = world.getMetadata(x, y, z);
 		world.setBlock(x, y, z, blockPicked, 0);
-		addPick(x, y, z, block, metadata);
+		addPick(x, y, z, block, metadata, side);
 		this.world = world;
 	}
 
@@ -64,7 +64,7 @@ public class PickManager implements IPick {
 	@Override
 	public Pick getPickAt(int x, int y, int z) {
 		for (Pick p : picks) {
-			if (p.equals(new Pick(x, y, z, null, 0))) {
+			if (p.equals(new Pick(x, y, z, null, 0, 0))) {
 				return p;
 			}
 		}
@@ -91,24 +91,20 @@ public class PickManager implements IPick {
 		return builder.toString();
 	}
 
-	//TODO only used by test class. Make default when test class is in same package.
-	public PickManager() {
+	PickManager() {
 	}
 
-	//TODO only used by test class. Make default when test class is in same package.
-	public Pick getPick(int i) {
+	Pick getPick(int i) {
 		return picks.get(i);
 	}
 
-	//TODO only used by test class. Make default when test class is in same package.
-	public int size() {
+	int size() {
 		return picks.size();
 	}
 
-	//TODO only used by test class. Make default when test class is in same package.
-	public Pick addPick(int x, int y, int z, Block block, int metadata) {
+	Pick addPick(int x, int y, int z, Block block, int metadata, int side) {
 		if (picks.size() < maxPicks) {
-			Pick p = new Pick(x, y, z, block, metadata);
+			Pick p = new Pick(x, y, z, block, metadata, side);
 			picks.add(p);
 			return p;
 		} else {

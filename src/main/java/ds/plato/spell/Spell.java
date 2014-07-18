@@ -94,7 +94,8 @@ public abstract class Spell extends Item implements IClickable {
 		// IWorld w = getWorldServer(player);
 		Player player = Player.client();
 		IWorld w = player.getWorldServer();
-		pickManager.pick(w, e.blockX, e.blockY, e.blockZ);
+		int side = e.sideHit;
+		pickManager.pick(w, e.blockX, e.blockY, e.blockZ, side);
 		if (pickManager.isFinishedPicking()) {
 			// SlotEntry[] entries = getSlotEntries(player);
 			SlotEntry[] entries = player.getSlotEntries();

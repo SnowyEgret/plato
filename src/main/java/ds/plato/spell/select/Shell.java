@@ -34,7 +34,6 @@ public class Shell implements Iterable<Point3i> {
 	}
 
 	private List<Point3i> points = new ArrayList<>();
-	//private List<Point3i> pts = initPoints();
 	private final Type type;
 
 	public Shell(Type type, Point3i p0, IWorld w) {

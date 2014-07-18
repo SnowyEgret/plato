@@ -118,21 +118,21 @@ public class KeyInputEventHandler {
 	private void copy(Player player, IWorld w, int lr, int ud) {
 		pickManager.clearPicks();
 		pickManager.reset(2);
-		pickManager.pick(w, 0, 0, 0);
+		pickManager.pick(w, 0, 0, 0, 0);
 		Direction direction = player.getDirection();
 		System.out.println("[KeyInputEventHandler.copy] direction=" + direction);
 		switch (direction) {
 		case NORTH:
-			pickManager.pick(w, lr, 0, ud);
+			pickManager.pick(w, lr, 0, ud, 0);
 			break;
 		case SOUTH:
-			pickManager.pick(w, -lr, 0, -ud);
+			pickManager.pick(w, -lr, 0, -ud, 0);
 			break;
 		case EAST:
-			pickManager.pick(w, -ud, 0, lr);
+			pickManager.pick(w, -ud, 0, lr, 0);
 			break;
 		case WEST:
-			pickManager.pick(w, ud, 0, -lr);
+			pickManager.pick(w, ud, 0, -lr, 0);
 			break;
 		}
 		if (selectionManager.size() != 0) {
@@ -144,8 +144,8 @@ public class KeyInputEventHandler {
 	private void copyVertical(Player player, IWorld w, int d) {
 		pickManager.clearPicks();
 		pickManager.reset(2);
-		pickManager.pick(w, 0, 0, 0);
-		pickManager.pick(w, 0, d, 0);
+		pickManager.pick(w, 0, 0, 0, 0);
+		pickManager.pick(w, 0, d, 0, 0);
 		new SpellCopy(undoManager, selectionManager, pickManager).invoke(player);
 		pickManager.clearPicks();
 	}

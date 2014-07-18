@@ -44,7 +44,7 @@ public class SpellCopyTest extends PlatoTest {
 		when(selectionManager.getSelections()).thenReturn(selections);
 		when(undoManager.newTransaction()).thenReturn(new Transaction(undoManager));
 		spell = new SpellCopy(undoManager, selectionManager, pickManager);
-		picks = new Pick[] { new Pick(0, 0, 0, dirt, 0), new Pick(1, 0, 0, dirt, 0) };
+		picks = new Pick[] { new Pick(0, 0, 0, dirt, 0, 0), new Pick(1, 0, 0, dirt, 0, 0) };
 	}
 
 	@Test

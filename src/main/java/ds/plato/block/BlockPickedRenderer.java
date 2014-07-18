@@ -31,7 +31,6 @@ public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 			RenderBlocks renderer) {
 		Block pickedBlock = null;
 		Pick pick = pickManager.getPickAt(x, y, z);
-		System.out.println("[BlockPickedRenderer.renderWorldBlock] pick=" + pick);
 		if (pick == null) {
 			renderer.renderStandardBlock(block, x, y, z);
 			return true;
