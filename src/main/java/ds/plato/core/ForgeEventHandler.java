@@ -38,7 +38,8 @@ import ds.plato.undo.IUndo;
 
 public class ForgeEventHandler {
 
-	private IHoldable holdable = null;
+	// private IHoldable holdable = null;
+	private Spell spell = null;
 	private IUndo undoManager;
 	private ISelect selectionManager;
 	private IPick pickManager;
@@ -73,7 +74,7 @@ public class ForgeEventHandler {
 
 		} else if (position.typeOfHit == MovingObjectType.BLOCK) {
 
-			//ItemStack stack = player.inventory.getCurrentItem();
+			// ItemStack stack = player.inventory.getCurrentItem();
 			ItemStack stack = player.getHeldItem();
 			if (stack != null) {
 				Item item = stack.getItem();
@@ -93,9 +94,7 @@ public class ForgeEventHandler {
 
 					if (e.button == 0) {
 						c.onMouseClickLeft(position);
-						if (e.isCancelable()) {
-							e.setCanceled(true);
-						}
+						e.setCanceled(true);
 						return;
 					} else if (e.button == 1) {
 						c.onMouseClickRight(position);
@@ -126,7 +125,8 @@ public class ForgeEventHandler {
 	public void onDrawBlockHightlight(DrawBlockHighlightEvent e) {
 		MovingObjectPosition pos = e.target;
 
-		if (holdable != null) {
+		// if (holdable != null) {
+		if (spell != null) {
 			Point3i p = null;
 			Pick pick = pickManager.lastPick();
 			if (pick != null) {
@@ -148,6 +148,7 @@ public class ForgeEventHandler {
 		}
 	}
 
+	// TODO Player.getSpell(), discard interface IHoldable. Ignore an empty staff. Overlay.draw(Spell s)
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent e) {
@@ -155,34 +156,47 @@ public class ForgeEventHandler {
 		if (!w.isRemote)
 			return;
 		if (e.entity instanceof EntityPlayer) {
-			EntityPlayer p = (EntityPlayer) e.entity;
-			ItemStack is = p.getHeldItem();
-			if (is == null) {
-				holdable = null;
+
+			Player player = Player.client();
+			Spell s = player.getSpell();
+			if (s == null) {
+				spell = null;
 			} else {
-				Item item = is.getItem();
-				if (item instanceof IHoldable) {
-					if (item != holdable) {
-						holdable = (IHoldable) item;
-						Spell s = holdable.getSpell();
-						if (s != null) {
-							holdable.reset();
-							// pickManager.clearPicks();
-							// pickManager.reset(s.getNumPicks());
-						}
-					}
-				} else {
-					holdable = null;
+				if (s != spell) {
+					spell = s;
+					spell.reset();
 				}
 			}
+
+			// EntityPlayer p = (EntityPlayer) e.entity;
+			// ItemStack is = p.getHeldItem();
+			// if (is == null) {
+			// holdable = null;
+			// } else {
+			// Item item = is.getItem();
+			// if (item instanceof IHoldable) {
+			// if (item != holdable) {
+			// holdable = (IHoldable) item;
+			// Spell s = holdable.getSpell();
+			// if (s != null) {
+			// holdable.reset();
+			// }
+			// }
+			// } else {
+			// holdable = null;
+			// }
+			// }
 		}
 	}
 
 	@SubscribeEvent
 	public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
 		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
-			if (holdable != null) {
-				overlay.draw(holdable);
+			// if (holdable != null) {
+			// overlay.draw(holdable);
+			// }
+			if (spell != null) {
+				overlay.draw(spell);
 			}
 		}
 	}

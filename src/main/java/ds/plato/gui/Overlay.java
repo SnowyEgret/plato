@@ -36,12 +36,13 @@ public class Overlay {
 	// this.message = message;
 	// }
 
-	public void draw(IHoldable holdable) {
+	//public void draw(IHoldable holdable) {
+	public void draw(Spell spell) {
 		int x = 10;
 		int y = x;
 		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
 		int dy = r.FONT_HEIGHT + 5;
-		SpellDescriptor descriptor = holdable.getDescriptor();
+		SpellDescriptor descriptor = spell.getDescriptor();
 		if (descriptor != null) {
 			if (descriptor.name != null) {
 				r.drawStringWithShadow(descriptor.name.toUpperCase() + " spell", x, y, white);
@@ -57,7 +58,7 @@ public class Overlay {
 			}
 		}
 
-		if (holdable.isPicking() || (!holdable.isPicking() && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))) {
+		if (spell.isPicking() || (!spell.isPicking() && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))) {
 			if (displacement != null) {
 				int dx = (int) displacement.x;
 				int dz = (int) displacement.z;
@@ -70,7 +71,7 @@ public class Overlay {
 
 		r.drawStringWithShadow("Selection size: " + selectionManager.size(), x, y += dy, red);
 
-		Spell s = holdable.getSpell();
+		Spell s = spell.getSpell();
 		if (s != null) {
 			if (s instanceof SpellFillRandom) {
 				SlotDistribution d = Player.client().slotDistribution();
@@ -79,7 +80,7 @@ public class Overlay {
 			}
 		}
 
-		String message = holdable.getMessage();
+		String message = spell.getMessage();
 		if (message != null) {
 			r.drawStringWithShadow(message, x, y += dy, green);
 		}

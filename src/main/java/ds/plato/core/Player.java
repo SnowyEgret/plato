@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -15,6 +14,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
+import ds.plato.spell.Spell;
+import ds.plato.spell.Staff;
 
 public class Player {
 
@@ -126,5 +127,18 @@ public class Player {
 
 	public ItemStack getHeldItem() {
 		return player.getCurrentEquippedItem();
+	}
+
+	public Spell getSpell() {
+		Spell spell = null;
+		ItemStack is = player.getHeldItem();
+		if (is != null) {
+			Item item = is.getItem();
+			if (item instanceof Spell) {
+				spell = (Spell) item;
+			} else if (item instanceof Staff)
+				spell = ((Staff) item).currentSpell();
+		}
+		return spell;			
 	}
 }

@@ -18,7 +18,7 @@ import ds.plato.core.IWorld;
 import ds.plato.pick.IPick;
 import ds.plato.spell.descriptor.SpellDescriptor;
 
-public class Staff extends Item implements IClickable, IToggleable, IHoldable {
+public class Staff extends Item implements IClickable, IToggleable {
 
 	protected List<Spell> spells = new ArrayList<>();
 	protected int ordinal = 0;
@@ -31,19 +31,6 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	}
 
 	@Override
-	public Spell getSpell() {
-		return currentSpell();
-	}
-
-//	@Override
-//	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player) {
-//		System.out.println("[Staff.onItemRightClick] w=" + w);
-//		if (currentSpell() != null)
-//			currentSpell().onItemRightClick(is, w, player);
-//		return is;
-//	}
-
-	@Override
 	public void onMouseClickLeft(MovingObjectPosition position) {
 		if (currentSpell() != null)
 			currentSpell().onMouseClickLeft(position);
@@ -53,33 +40,6 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	public void onMouseClickRight(MovingObjectPosition position) {
 		if (currentSpell() != null)
 			currentSpell().onMouseClickRight(position);
-	}
-
-	@Override
-	public void reset() {
-		if (currentSpell() != null)
-			currentSpell().reset();
-	}
-
-	@Override
-	public boolean isPicking() {
-		Spell s = currentSpell();
-		if (s == null) {
-			return false;
-		} else {
-			return s.isPicking();
-		}
-	}
-
-	@Override
-	public SpellDescriptor getDescriptor() {
-		Spell s = currentSpell();
-		if (s == null) {
-			return new SpellDescriptor() {
-			};
-		} else {
-			return s.getDescriptor();
-		}
 	}
 
 	@Override
@@ -149,15 +109,5 @@ public class Staff extends Item implements IClickable, IToggleable, IHoldable {
 	public void save() {
 		propertyOrdinal.set(ordinal);
 		System.out.println("[Staff.save] propertyOrdinal=" + propertyOrdinal);
-	}
-
-	@Override
-	public String getMessage() {
-		Spell s = currentSpell();
-		if (s == null) {
-			return null;
-		} else {
-			return s.getMessage();
-		}
 	}
 }

@@ -18,7 +18,7 @@ import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
-public abstract class Spell extends Item implements IClickable, IHoldable {
+public abstract class Spell extends Item implements IClickable {
 
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
@@ -43,15 +43,12 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		invoke(w, entries);
 	}
 
-	@Override
 	public abstract SpellDescriptor getDescriptor();
 
-	@Override
 	public Spell getSpell() {
 		return this;
 	}
 
-	@Override
 	public String getMessage() {
 		return message;
 	}
@@ -105,12 +102,10 @@ public abstract class Spell extends Item implements IClickable, IHoldable {
 		}
 	}
 
-	@Override
 	public boolean isPicking() {
 		return pickManager.isPicking();
 	}
 
-	@Override
 	public void reset() {
 		// System.out.println("[Spell.reset] resetting");
 		pickManager.clearPicks();
