@@ -106,7 +106,11 @@ public class Messages extends NLS {
 	
 	public static String spell_grow_floor_name;
 	public static String spell_grow_floor_description;
-	public static String spell_grow_floor_modifier;
+	//public static String spell_grow_floor_modifier;
+	
+	public static String spell_grow_edge_name;
+	public static String spell_grow_edge_description;
+	//public static String spell_grow_edge_modifier;
 	
 	//Matrix spells
 
