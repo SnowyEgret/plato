@@ -14,6 +14,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
+import ds.plato.Plato;
 import ds.plato.spell.Spell;
 import ds.plato.spell.Staff;
 
@@ -125,8 +126,12 @@ public class Player {
 		return new SlotDistribution(getSlotEntries());
 	}
 
-	public ItemStack getHeldItem() {
+	public ItemStack getHeldItemStack() {
 		return player.getCurrentEquippedItem();
+	}
+	
+	public Item getHeldItem() {
+		return getHeldItemStack().getItem();
 	}
 
 	public Spell getSpell() {
@@ -140,5 +145,9 @@ public class Player {
 				spell = ((Staff) item).currentSpell();
 		}
 		return spell;			
+	}
+
+	public void openGui(int i) {
+		player.openGui(Plato.instance, i, getWorldServer().getWorld(), 0, 0, 0);
 	}
 }

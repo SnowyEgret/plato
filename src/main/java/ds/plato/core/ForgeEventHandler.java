@@ -67,7 +67,7 @@ public class ForgeEventHandler {
 		} else if (position.typeOfHit == MovingObjectType.BLOCK) {
 
 			// ItemStack stack = player.inventory.getCurrentItem();
-			ItemStack stack = player.getHeldItem();
+			ItemStack stack = player.getHeldItemStack();
 			if (stack != null) {
 				Item item = stack.getItem();
 

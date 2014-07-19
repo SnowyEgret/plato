@@ -94,7 +94,7 @@ public class Plato {
 			// loader.loadStaff(Staff.class);
 
 			staffs = new ArrayList<>();
-			// staffs.add(loader.loadStaff(Staff.class));
+			staffs.add(loader.loadStaff(Staff.class));
 			staffs.add(selectionStaff);
 			staffs.add(transformStaff);
 			staffs.add(drawStaff);

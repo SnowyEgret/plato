@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -19,9 +20,11 @@ import ds.plato.block.BlockPickedRenderer;
 import ds.plato.block.BlockSelectedRenderer;
 import ds.plato.core.ForgeEventHandler;
 import ds.plato.core.KeyInputEventHandler;
+import ds.plato.core.Player;
 import ds.plato.gui.GuiDialog;
 import ds.plato.gui.GuiRestore;
 import ds.plato.gui.GuiSpellText;
+import ds.plato.gui.GuiStaff;
 import ds.plato.gui.GuiTextInputDialog;
 import ds.plato.gui.Overlay;
 import ds.plato.pick.IPick;
@@ -45,8 +48,10 @@ public class ClientProxy extends CommonProxy {
 			return new GuiRestore(player);
 		case 2:
 			return new GuiSpellText(player);
+		case 3:
+			return new GuiStaff(player.inventory, (IInventory) Player.client().getHeldItem());
 		default:
-			return null;
+			throw new IllegalArgumentException("GUI id "+ id +" is undefined");
 		}
 	}
 
@@ -55,7 +60,8 @@ public class ClientProxy extends CommonProxy {
 		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		blockModelRenderId = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId, selectionManager));
-		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, selectionManager, pickManager));
+		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, selectionManager,
+				pickManager));
 		RenderingRegistry.registerBlockHandler(new BlockModelRenderer(blockModelRenderId));
 	}
 
