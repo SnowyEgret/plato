@@ -89,13 +89,13 @@ public class Player {
 		int yaw = (int) (player.rotationYawHead);
 		yaw += (yaw >= 0) ? 45 : -45;
 		yaw /= 90;
-		//System.out.println("[Player.getDirection] yaw=" + yaw);
+		// System.out.println("[Player.getDirection] yaw=" + yaw);
 		int modulus = yaw % 4;
-		//System.out.println("[Player.getDirection] modulus=" + modulus);
+		// System.out.println("[Player.getDirection] modulus=" + modulus);
 		Direction direction = null;
 		switch (modulus) {
 		case 0:
-			direction =  Direction.SOUTH;
+			direction = Direction.SOUTH;
 			break;
 		case 1:
 			direction = Direction.WEST;
@@ -118,7 +118,7 @@ public class Player {
 		default:
 			throw new RuntimeException("Unexpected modulus. Got " + modulus);
 		}
-		//System.out.println("[Player.getDirection] direction=" + direction);
+		// System.out.println("[Player.getDirection] direction=" + direction);
 		return direction;
 	}
 
@@ -129,7 +129,7 @@ public class Player {
 	public ItemStack getHeldItemStack() {
 		return player.getCurrentEquippedItem();
 	}
-	
+
 	public Item getHeldItem() {
 		return getHeldItemStack().getItem();
 	}
@@ -141,10 +141,11 @@ public class Player {
 			Item item = is.getItem();
 			if (item instanceof Spell) {
 				spell = (Spell) item;
-			} else if (item instanceof Staff)
+			} else if (item instanceof Staff) {
 				spell = ((Staff) item).getSpell();
+			}
 		}
-		return spell;			
+		return spell;
 	}
 
 	public void openGui(int i) {

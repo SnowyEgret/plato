@@ -110,7 +110,12 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		// } else {
 		// return spells.get(ordinal);
 		// }
-		return spells[ordinal];
+		
+		Spell s = spells[ordinal];
+		if (s == null) {
+			s = nextSpell();
+		}		
+		return s;
 	}
 
 	public void addSpell(Spell spell) {
