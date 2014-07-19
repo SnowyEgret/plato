@@ -28,25 +28,29 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 
 	@Override
 	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+		
 		Pick[] picks = pickManager.getPicks();
-		Matrix4d matrix;
-		Point3d p;
+		Point3d center;
 		if (Keyboard.isKeyDown(Keyboard.KEY_LMETA)) {
 			Point3i c = selectionManager.voxelSet().centroid();
-			p = new Point3d(c.x, c.y, c.z);
+			center = new Point3d(c.x, c.y, c.z);
 		} else {
-			p = picks[0].point3d();
+			center = picks[0].point3d();
 		}
+		
+		//TODO switch to RotationMatrix constructor with 2 vectors
+		Matrix4d matrix;
 		switch (Keyboard.getEventKey()) {
 		case (Keyboard.KEY_X):
-			matrix = GeomUtil.newRotX90Matrix(p);
+			matrix = GeomUtil.newRotX90Matrix(center);
 		case (Keyboard.KEY_Y):
-			matrix = GeomUtil.newRotY90Matrix(p);
+			matrix = GeomUtil.newRotY90Matrix(center);
 		case (Keyboard.KEY_Z):
-			matrix = GeomUtil.newRotZ90Matrix(p);
+			matrix = GeomUtil.newRotZ90Matrix(center);
 		default:
-			matrix = GeomUtil.newRotY90Matrix(p);
+			matrix = GeomUtil.newRotY90Matrix(center);
 		}
+		
 		boolean deleteInitialBlocks = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		transformSelections(matrix, world, deleteInitialBlocks);
 	}
@@ -57,9 +61,9 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 		d.name = Messages.spell_rotate_90_name;
 		d.description = Messages.spell_rotate_90_description;
 		d.picks = new PickDescriptor(Messages.spell_rotate_90_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal, Messages.spell_rotate_90_modifier_0,
-				Messages.spell_rotate_90_modifier_1, Messages.spell_rotate_90_modifier_2,
-				Messages.spell_rotate_90_modifier_3);
+		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal,
+				Messages.spell_rotate_90_modifier_0, Messages.spell_rotate_90_modifier_1,
+				Messages.spell_rotate_90_modifier_2, Messages.spell_rotate_90_modifier_3);
 		return d;
 	}
 
