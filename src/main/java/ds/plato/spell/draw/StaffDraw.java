@@ -23,7 +23,7 @@ public class StaffDraw extends Staff {
 		builder.append("StaffDraw [spells=");
 		builder.append(spells);
 		builder.append(", currentSpell()=");
-		builder.append(currentSpell());
+		builder.append(getSpell());
 		builder.append("]");
 		return builder.toString();
 	}

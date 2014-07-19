@@ -23,7 +23,7 @@ public class StaffSelect extends Staff {
 		builder.append("StaffSelect [spells=");
 		builder.append(spells);
 		builder.append(", currentSpell()=");
-		builder.append(currentSpell());
+		builder.append(getSpell());
 		builder.append("]");
 		return builder.toString();
 	}

@@ -142,7 +142,7 @@ public class Player {
 			if (item instanceof Spell) {
 				spell = (Spell) item;
 			} else if (item instanceof Staff)
-				spell = ((Staff) item).currentSpell();
+				spell = ((Staff) item).getSpell();
 		}
 		return spell;			
 	}

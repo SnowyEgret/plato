@@ -52,9 +52,9 @@ public class StaffTest extends PlatoTest {
 	@Test
 	public void nextSpell_setsCurrentSpell() {
 		staff.nextSpell();
-		assertEquals(mockMove, staff.currentSpell());
+		assertEquals(mockMove, staff.getSpell());
 		staff.nextSpell();
-		assertEquals(mockDelete, staff.currentSpell());
+		assertEquals(mockDelete, staff.getSpell());
 	}
 
 	@Test
@@ -109,14 +109,14 @@ public class StaffTest extends PlatoTest {
 	public void toggle() {
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(true);
 		staff.toggle();
-		assertEquals(mockMove, staff.currentSpell());
+		assertEquals(mockMove, staff.getSpell());
 		staff.toggle();
-		assertEquals(mockDelete, staff.currentSpell());
+		assertEquals(mockDelete, staff.getSpell());
 		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
 		staff.toggle();
-		assertEquals(mockMove, staff.currentSpell());
+		assertEquals(mockMove, staff.getSpell());
 		staff.toggle();
-		assertEquals(mockDelete, staff.currentSpell());
+		assertEquals(mockDelete, staff.getSpell());
 
 	}
 

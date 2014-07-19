@@ -1,6 +1,7 @@
 package ds.plato.spell;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +21,9 @@ import ds.plato.pick.IPick;
 
 public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
-	protected List<Spell> spells = new ArrayList<>();
+	// protected List<Spell> spells = new ArrayList<>(9);
+	// protected ItemStack[] spells = new ItemStack[9];
+	protected Spell[] spells = new Spell[9];
 	protected int ordinal = 0;
 	private IPick pickManager;
 	private Property propertyOrdinal;
@@ -29,21 +32,26 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	public Staff(Property propertyOrdinal, IPick pickManager) {
 		this.pickManager = pickManager;
 		this.propertyOrdinal = propertyOrdinal;
+		// for (int i = 0; i < 9; i++) {
+		// spells.add(null);
+		// }
+		System.out.println("[Staff.Staff] staff=" + this);
 	}
 
 	@Override
 	public void onMouseClickLeft(MovingObjectPosition position) {
-		if (currentSpell() != null)
-			currentSpell().onMouseClickLeft(position);
+		if (getSpell() != null)
+			getSpell().onMouseClickLeft(position);
 	}
 
 	@Override
 	public void onMouseClickRight(MovingObjectPosition position) {
-		if (currentSpell() == null) {
+		if (getSpell() == null) {
+			System.out.println("[Staff.onMouseClickRight] staff=" + this);
 			Player player = Player.client();
 			player.openGui(3);
 		} else {
-			currentSpell().onMouseClickRight(position);
+			getSpell().onMouseClickRight(position);
 		}
 	}
 
@@ -57,89 +65,151 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	}
 
 	public Spell nextSpell() {
-		if (ordinal == spells.size() - 1) {
-			ordinal = 0;
-		} else {
-			ordinal++;
+		// if (ordinal == spells.size() - 1) {
+		Spell s = null;
+		for (int i = 0; i < spells.length; i++) {
+			if (ordinal == spells.length - 1) {
+				ordinal = 0;
+			} else {
+				ordinal++;
+			}
+			s = spells[ordinal];
+			if (s == null) {
+				continue;
+			} else {
+				pickManager.reset(s.getNumPicks());
+				return s;
+			}
 		}
-		Spell currentSpell = currentSpell();
-		if (currentSpell != null) {
-			pickManager.reset(currentSpell.getNumPicks());
-		}
-		return currentSpell;
+		return null;
 	}
 
 	public Spell previousSpell() {
-		if (ordinal == 0) {
-			ordinal = spells.size() - 1;
-		} else {
-			ordinal--;
+		Spell s = null;
+		for (int i = 0; i < spells.length; i++) {
+			if (ordinal == 0) {
+				// ordinal = spells.size() - 1;
+				ordinal = spells.length - 1;
+			} else {
+				ordinal--;
+			}
+			s = spells[ordinal];
+			if (s == null) {
+				continue;
+			} else {
+				pickManager.reset(s.getNumPicks());
+				return s;
+			}
 		}
-		Spell currentSpell = currentSpell();
-		pickManager.reset(currentSpell.getNumPicks());
-		return currentSpell;
+		return null;
 	}
 
-	public Spell currentSpell() {
-		if (spells.isEmpty()) {
-			return null;
-		} else {
-			return spells.get(ordinal);
-		}
+	public Spell getSpell() {
+		// if (spells.isEmpty()) {
+		// return null;
+		// } else {
+		// return spells.get(ordinal);
+		// }
+		return spells[ordinal];
 	}
 
 	public void addSpell(Spell spell) {
-		if (!spells.contains(spell)) {
-			spells.add(spell);
+		// if (!spells.contains(spell)) {
+		// // spells.add(spell);
+		// // Run through spells and find first null spell to
+		// for (int i = 0; i < 9; i++) {
+		// Spell s = spells.get(i);
+		// if (s == null) {
+		// spells.set(i, spell);
+		// }
+		//
+		// }
+		// }
+
+		for (int i = 0; i < spells.length; i++) {
+			Spell s = spells[i];
+			if (s == null) {
+				spells[i] = spell;
+				return;
+			}
 		}
+
+		System.out.println("[Staff.addSpell] No room for spell on staff. spell=" + spell);
 	}
 
 	public int numSpells() {
-		return spells.size();
+		// return spells.size();
+		int numSpells = 0;
+		for (Spell s : spells) {
+			if (s != null)
+				numSpells++;
+		}
+		return numSpells;
 	}
 
 	public void clearPicks() {
 		pickManager.clearPicks();
 	}
 
-	@Override
-	public String toString() {
-		return "Staff [spells=" + spells + ", ordinal=" + ordinal + ", pickManager=" + pickManager + "]";
-	}
+	// @Override
+	// public String toString() {
+	// return "Staff [spells=" + spells + ", ordinal=" + ordinal + ", pickManager=" + pickManager + "]";
+	// }
 
 	public void setOrdinal(int ordinal) {
 		this.ordinal = ordinal;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Staff [ordinal=");
+		builder.append(ordinal);
+		builder.append(", spells=");
+		builder.append(Arrays.toString(spells));
+		builder.append("]");
+		return builder.toString();
+	}
+
 	public void save() {
 		propertyOrdinal.set(ordinal);
+		// TODO write spells to property
 		System.out.println("[Staff.save] propertyOrdinal=" + propertyOrdinal);
 	}
 
+	// ---------------------------------------------------------------------------------
 	// Implementation of interface IInventory. Needed for GuiStaff and GuiStaffContainer
 
 	@Override
 	public int getSizeInventory() {
-		return numSpells();
+		return spells.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int i) {
-		if (spells.isEmpty()) {
+		// if (spells.isEmpty()) {
+		// return null;
+		// } else {
+		// return new ItemStack(spells.get(i));
+		// }
+		System.out.println("[Staff.getStackInSlot] i=" + i);
+		if (spells[i] == null) {
 			return null;
 		} else {
-			return new ItemStack(spells.get(i));
+			return new ItemStack(spells[i]);
 		}
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int amt) {
+	public ItemStack decrStackSize(int slot, int amount) {
+		System.out.println("[Staff.decrStackSize] slot=" + slot);
+		System.out.println("[Staff.decrStackSize] amount=" + amount);
 		ItemStack stack = getStackInSlot(slot);
 		if (stack != null) {
-			if (stack.stackSize <= amt) {
+			if (stack.stackSize <= amount) {
 				setInventorySlotContents(slot, null);
 			} else {
-				stack = stack.splitStack(amt);
+				stack = stack.splitStack(amount);
 				if (stack.stackSize == 0) {
 					setInventorySlotContents(slot, null);
 				}
@@ -159,15 +229,18 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		spells.set(slot, (Spell) stack.getItem());
-		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-			stack.stackSize = getInventoryStackLimit();
+		// spells.set(slot, (Spell) stack.getItem());
+		if (stack != null) {
+			spells[slot] = (Spell) stack.getItem();
+			if (stack != null && stack.stackSize > getInventoryStackLimit()) {
+				stack.stackSize = getInventoryStackLimit();
+			}
 		}
 	}
 
 	@Override
 	public String getInventoryName() {
-		return name ;
+		return name;
 	}
 
 	@Override
@@ -177,7 +250,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public int getInventoryStackLimit() {
-		return 1;
+		return 64;
 	}
 
 	@Override
@@ -197,8 +270,11 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	public void closeInventory() {
 	}
 
+	// http://www.minecraftforge.net/forum/index.php?topic=14115.0
+	// Only called by hoppers, etc. Extend Slot (SpellSlot) and overide isItemValid
 	@Override
-	public boolean isItemValidForSlot(int var1, ItemStack var2) {
-		return true;
+	public boolean isItemValidForSlot(int var1, ItemStack stack) {
+		Item item = stack.getItem();
+		return Spell.class.isAssignableFrom(item.getClass()) ? true : false;
 	}
 }
