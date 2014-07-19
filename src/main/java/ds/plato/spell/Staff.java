@@ -3,24 +3,20 @@ package ds.plato.spell;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
 import net.minecraftforge.common.config.Property;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.plato.Plato;
 import ds.plato.core.IToggleable;
-import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.pick.IPick;
-import ds.plato.spell.descriptor.SpellDescriptor;
 
 public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
@@ -120,7 +116,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		System.out.println("[Staff.save] propertyOrdinal=" + propertyOrdinal);
 	}
 
-	// //////////////////////// IInventory
+	// Implementation of interface IInventory. Needed for GuiStaff and GuiStaffContainer
 
 	@Override
 	public int getSizeInventory() {
