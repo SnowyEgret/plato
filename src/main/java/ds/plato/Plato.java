@@ -117,6 +117,7 @@ public class Plato {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		}
 		configuration.save();
 

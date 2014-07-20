@@ -19,15 +19,14 @@ public class GuiStaffContainer extends Container {
 			addSlotToContainer(new SpellSlot(inventoryStaff, i, 8 + i * 18, 18));
 		}
 
-		int adjustment = 35;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 - adjustment + i * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 49 + i * 18));
 			}
 		}
 
 		for (int i = 0; i < 9; i++) {
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142 - adjustment));
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 107));
 		}
 	}
 
@@ -36,10 +35,12 @@ public class GuiStaffContainer extends Container {
 		return inventoryStaff.isUseableByPlayer(player);
 	}
 
+	//Called when a player shift clicks on a slot
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
 		ItemStack stack = null;
 		Slot slotObject = (Slot) inventorySlots.get(slot);
+		System.out.println("[GuiStaffContainer.transferStackInSlot] slot=" + slotObject);
 
 		// null checks and checks if the item can be stacked (maxStackSize > 1)
 		if (slotObject != null && slotObject.getHasStack()) {
@@ -69,19 +70,5 @@ public class GuiStaffContainer extends Container {
 			slotObject.onPickupFromSlot(player, stackInSlot);
 		}
 		return stack;
-	}
-
-	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
-		int adjustment = 35;
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 - adjustment));
-			}
-		}
-		adjustment = 34;
-		for (int i = 0; i < 9; i++) {
-			// addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 141 - adjustment));
-		}
 	}
 }

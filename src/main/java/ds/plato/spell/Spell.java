@@ -56,8 +56,6 @@ public abstract class Spell extends Item implements IClickable {
 	@Override
 	public void onMouseClickLeft(MovingObjectPosition e) {
 
-//		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-//		IWorld w = getWorldServer(player);
 		Player player = Player.client();
 		IWorld w = player.getWorldServer();
 
@@ -90,8 +88,6 @@ public abstract class Spell extends Item implements IClickable {
 	@Override
 	public void onMouseClickRight(MovingObjectPosition e) {
 
-		// EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		// IWorld w = getWorldServer(player);
 		Player player = Player.client();
 		IWorld w = player.getWorldServer();
 		int side = e.sideHit;
@@ -128,6 +124,13 @@ public abstract class Spell extends Item implements IClickable {
 
 	public int getNumPicks() {
 		return numPicks;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(getClass().getSimpleName());
+		return builder.toString();
 	}
 
 }

@@ -8,45 +8,37 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
+//Started with GuiChest
 //http://www.minecraftforge.net/wiki/Containers_and_GUIs
 public class GuiStaff extends GuiContainer {
 
 	private static final ResourceLocation texture = new ResourceLocation("textures/gui/container/generic_54.png");
-	private InventoryPlayer inventoryPlayer;
-	private IInventory inventoryStaff;
-	private int inventoryRows;
+	private int rowHeight = 35;
 
 	public GuiStaff(InventoryPlayer inventoryPlayer, IInventory inventoryStaff) {
 		super(new GuiStaffContainer(inventoryPlayer, inventoryStaff));
-		this.inventoryPlayer = inventoryPlayer;
-		this.inventoryStaff = inventoryStaff;
-		this.allowUserInput = false;
-		short short1 = 222;
-		int i = short1 - 108;
-		this.inventoryRows = inventoryStaff.getSizeInventory() / 9;
-		this.ySize = i + this.inventoryRows * 18;
+		//allowUserInput = false;
 	}
 
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
 	 */
 	@Override
-	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-		//TODO Name a staff?
-		fontRendererObj.drawString(inventoryStaff.getInventoryName(), 8, 6, 4210752);
-		fontRendererObj.drawString(
-				inventoryPlayer.hasCustomInventoryName() ? inventoryPlayer.getInventoryName() : I18n.format(
-						inventoryPlayer.getInventoryName(), new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+	protected void drawGuiContainerForegroundLayer(int p1, int p2) {
+		// TODO Name a staff?
+		fontRendererObj.drawString("Staff", 8, 6, 4210752);
+		fontRendererObj.drawString("Inventory", 8, rowHeight + 2, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+	protected void drawGuiContainerBackgroundLayer(float p1, int p2, int p3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(texture);
-		int k = (width - xSize) / 2;
-		int l = (height - ySize) / 2;
-		this.drawTexturedModalRect(k, l, 0, 0, xSize, inventoryRows * 18 + 17);
-		this.drawTexturedModalRect(k, l + inventoryRows * 18 + 17, 0, 126, xSize, 96);
+		mc.getTextureManager().bindTexture(texture);
+		int x = (width - xSize) / 2;
+		int y = (height - ySize) / 2;
+//		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		drawTexturedModalRect(x, y,             0, 0,   xSize, rowHeight);
+		drawTexturedModalRect(x, y + rowHeight, 0, 126, xSize, 96);
 	}
 
 	// @Override
@@ -57,17 +49,16 @@ public class GuiStaff extends GuiContainer {
 	// //draws "Inventory" or your regional equivalent
 	// fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	// }
-	//
-	// @Override
-	// protected void drawGuiContainerBackgroundLayer(float par1, int par2,
-	// int par3) {
-	// //draw your Gui here, only thing you need to change is the path
-	// int texture = mc.renderEngine.getTexture("/gui/trap.png");
-	// GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	// this.mc.renderEngine.bindTexture(texture);
-	// int x = (width - xSize) / 2;
-	// int y = (height - ySize) / 2;
-	// this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-	// }
+
+//	@Override
+//	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+//		// draw your Gui here, only thing you need to change is the path
+//		//int texture = mc.renderEngine.getTexture("/gui/trap.png");
+//		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+//		mc.renderEngine.bindTexture(texture);
+//		int x = (width - xSize) / 2;
+//		int y = (height - ySize) / 2;
+//		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+//	}
 
 }

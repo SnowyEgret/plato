@@ -63,6 +63,7 @@ public class SpellLoader {
 
 	public Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 
+		System.out.print("[SpellLoader.loadSpell] Loading spell=" + spellClass.getSimpleName() + "...");
 		String name = toName(spellClass);
 		Constructor<? extends Spell> c = spellClass.getConstructor(IUndo.class, ISelect.class, IPick.class);
 		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager);
@@ -72,14 +73,15 @@ public class SpellLoader {
 		s.setTextureName(modId + ":" + name);
 		GameRegistry.registerItem(s, name);
 		if (s.getRecipe() != null) {
-			System.out.println("[SpellLoader.loadSpell] s.getRecipe()=" + s.getRecipe());
+			//System.out.println("[SpellLoader.loadSpell] s.getRecipe()=" + s.getRecipe());
 			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
 		}
-		System.out.println("[SpellLoader.loadSpell] Loaded spell=" + s);
+		System.out.println("done.");
 		return s;
 	}
 
 	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		System.out.print("[SpellLoader.loadStaff] Loading staff=" + staffClass.getSimpleName() + "...");
 		String name = toName(staffClass);
 		Property propertyOrdinal = config.get("Staff", name + ".ordinal", 0);
 		Constructor c = staffClass.getConstructor(Property.class, IPick.class);
@@ -90,7 +92,7 @@ public class SpellLoader {
 		s.setTextureName(modId + ":" + name);
 		s.setOrdinal(propertyOrdinal.getInt());
 		GameRegistry.registerItem(s, name);
-		System.out.println("[SpellLoader.loadStaff] Loaded staff=" + s);
+		System.out.println("done.");
 		return s;
 	}
 
