@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 
 public class SpellSlot extends Slot {
 
-	public SpellSlot(IInventory par1iInventory, int par2, int par3, int par4) {
-		super(par1iInventory, par2, par3, par4);
+	public SpellSlot(IInventory inventoryStaff, int index, int x, int y) {
+		super(inventoryStaff, index, x, y);
 	}
 
 	@Override

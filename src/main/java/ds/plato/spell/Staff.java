@@ -175,7 +175,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int i) {
-		//System.out.println("[Staff.getStackInSlot] i=" + i);
 		if (spells[i] == null) {
 			return null;
 		} else {
@@ -183,10 +182,9 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		}
 	}
 
+	//called
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
-		//System.out.println("[Staff.decrStackSize] slot=" + slot);
-		//System.out.println("[Staff.decrStackSize] amount=" + amount);
 		ItemStack stack = getStackInSlot(slot);
 		if (stack != null) {
 			if (stack.stackSize <= amount) {
@@ -214,9 +212,9 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		if (stack != null) {
 			spells[slot] = (Spell) stack.getItem();
-			if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-				stack.stackSize = getInventoryStackLimit();
-			}
+		} else {
+			//Fix for issue #85 Spells cannot be re-positioned on staff
+			spells[slot] = null;
 		}
 	}
 
@@ -241,7 +239,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer var1) {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -256,7 +254,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	// Only called by hoppers, etc. Extend Slot (SpellSlot) and overide isItemValid
 	@Override
 	public boolean isItemValidForSlot(int var1, ItemStack stack) {
-		Item item = stack.getItem();
-		return Spell.class.isAssignableFrom(item.getClass()) ? true : false;
+		return true;
 	}
 }
