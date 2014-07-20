@@ -18,6 +18,11 @@ public class StaffSelect extends Staff {
 	}
 
 	@Override
+	public boolean hasRecipe() {
+		return false;
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("StaffSelect [spells=");

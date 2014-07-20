@@ -1,5 +1,7 @@
 package ds.plato.spell.draw;
 
+import java.util.Arrays;
+
 import net.minecraftforge.common.config.Property;
 import ds.plato.pick.IPick;
 import ds.plato.spell.Spell;
@@ -18,14 +20,20 @@ public class StaffDraw extends Staff {
 	}
 
 	@Override
+	public boolean hasRecipe() {
+		return false;
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("StaffDraw [spells=");
-		builder.append(spells);
-		builder.append(", currentSpell()=");
-		builder.append(getSpell());
+		builder.append(Arrays.toString(spells));
+		builder.append(", ordinal=");
+		builder.append(ordinal);
 		builder.append("]");
 		return builder.toString();
 	}
+
 
 }

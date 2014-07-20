@@ -34,6 +34,10 @@ public abstract class Spell extends Item implements IClickable {
 	}
 
 	public abstract Object[] getRecipe();
+	
+	public boolean hasRecipe() {
+		return getRecipe() != null;
+	}
 
 	public abstract void invoke(IWorld world, final SlotEntry[] slotEntries);
 

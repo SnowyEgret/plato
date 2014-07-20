@@ -1,5 +1,7 @@
 package ds.plato.spell.transform;
 
+import java.util.Arrays;
+
 import net.minecraftforge.common.config.Property;
 import ds.plato.pick.IPick;
 import ds.plato.spell.Spell;
@@ -19,14 +21,18 @@ public class StaffTransform extends Staff {
 	}
 
 	@Override
+	public boolean hasRecipe() {
+		return false;
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("StaffTransform [spells=");
-		builder.append(spells);
+		builder.append(Arrays.toString(spells));
 		builder.append(", ordinal=");
 		builder.append(ordinal);
 		builder.append("]");
 		return builder.toString();
 	}
-
 }

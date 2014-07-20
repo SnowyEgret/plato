@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,6 +37,14 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	public void setPropertySpells(Property propertySpells) {
 		this.propertySpells = propertySpells;
+	}
+	
+	public Object[] getRecipe() {
+		return new Object[] { "A  ", " A ", "  A", 'A', Items.bone };
+	}
+
+	public boolean hasRecipe() {
+		return getRecipe() != null;
 	}
 
 	@Override

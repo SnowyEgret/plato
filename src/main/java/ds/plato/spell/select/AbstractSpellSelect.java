@@ -29,7 +29,7 @@ public abstract class AbstractSpellSelect extends Spell {
 
 	protected Shell.Type shellType;
 	protected Item ingredientA = Items.feather;
-	protected Item ingredientB = Items.dye;
+	protected Item ingredientB = Items.coal;
 
 	public AbstractSpellSelect(Shell.Type type, IUndo undo, ISelect select, IPick pick) {
 		super(1, undo, select, pick);

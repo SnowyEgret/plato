@@ -1,6 +1,7 @@
 package ds.plato.spell.draw;
 
 import net.minecraft.block.BlockAir;
+import net.minecraft.init.Items;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
@@ -46,7 +47,6 @@ public class SpellSphere extends AbstractSpellDraw {
 
 	@Override
 	public Object[] getRecipe() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Object[] { " A ", "A A", " A ", 'A', Items.bone };
 	}
 }

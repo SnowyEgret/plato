@@ -72,7 +72,7 @@ public class SpellLoader {
 		s.setCreativeTab(tabSpells);
 		s.setTextureName(modId + ":" + name);
 		GameRegistry.registerItem(s, name);
-		if (s.getRecipe() != null) {
+		if (s.hasRecipe()) {
 			//System.out.println("[SpellLoader.loadSpell] s.getRecipe()=" + s.getRecipe());
 			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
 		}
@@ -92,6 +92,9 @@ public class SpellLoader {
 		s.setTextureName(modId + ":" + name);
 		s.setOrdinal(propertyOrdinal.getInt());
 		GameRegistry.registerItem(s, name);
+		if (s.hasRecipe()) {
+			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
+		}
 		System.out.println("done.");
 		return s;
 	}
