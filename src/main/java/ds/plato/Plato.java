@@ -94,10 +94,12 @@ public class Plato {
 			// loader.loadStaff(Staff.class);
 
 			staffs = new ArrayList<>();
-			staffs.add(loader.loadStaff(Staff.class));
 			staffs.add(selectionStaff);
 			staffs.add(transformStaff);
 			staffs.add(drawStaff);
+			
+			// Create an empty staff
+			staffs.add(loader.loadStaff(Staff.class));
 
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelect) {

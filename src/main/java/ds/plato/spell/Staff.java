@@ -21,21 +21,21 @@ import ds.plato.pick.IPick;
 
 public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
-	// protected List<Spell> spells = new ArrayList<>(9);
-	// protected ItemStack[] spells = new ItemStack[9];
 	protected Spell[] spells = new Spell[9];
 	protected int ordinal = 0;
 	private IPick pickManager;
 	private Property propertyOrdinal;
+	private Property propertySpells;
 	private String name = "Staff";
 
 	public Staff(Property propertyOrdinal, IPick pickManager) {
 		this.pickManager = pickManager;
 		this.propertyOrdinal = propertyOrdinal;
-		// for (int i = 0; i < 9; i++) {
-		// spells.add(null);
-		// }
 		System.out.println("[Staff.Staff] staff=" + this);
+	}
+
+	public void setPropertySpells(Property propertySpells) {
+		this.propertySpells = propertySpells;
 	}
 
 	@Override
@@ -65,7 +65,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	}
 
 	public Spell nextSpell() {
-		// if (ordinal == spells.size() - 1) {
 		Spell s = null;
 		for (int i = 0; i < spells.length; i++) {
 			if (ordinal == spells.length - 1) {
@@ -88,7 +87,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		Spell s = null;
 		for (int i = 0; i < spells.length; i++) {
 			if (ordinal == 0) {
-				// ordinal = spells.size() - 1;
 				ordinal = spells.length - 1;
 			} else {
 				ordinal--;
@@ -105,32 +103,14 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	}
 
 	public Spell getSpell() {
-		// if (spells.isEmpty()) {
-		// return null;
-		// } else {
-		// return spells.get(ordinal);
-		// }
-		
 		Spell s = spells[ordinal];
 		if (s == null) {
 			s = nextSpell();
-		}		
+		}
 		return s;
 	}
 
 	public void addSpell(Spell spell) {
-		// if (!spells.contains(spell)) {
-		// // spells.add(spell);
-		// // Run through spells and find first null spell to
-		// for (int i = 0; i < 9; i++) {
-		// Spell s = spells.get(i);
-		// if (s == null) {
-		// spells.set(i, spell);
-		// }
-		//
-		// }
-		// }
-
 		for (int i = 0; i < spells.length; i++) {
 			Spell s = spells[i];
 			if (s == null) {
@@ -156,11 +136,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		pickManager.clearPicks();
 	}
 
-	// @Override
-	// public String toString() {
-	// return "Staff [spells=" + spells + ", ordinal=" + ordinal + ", pickManager=" + pickManager + "]";
-	// }
-
 	public void setOrdinal(int ordinal) {
 		this.ordinal = ordinal;
 	}
@@ -178,8 +153,16 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	public void save() {
 		propertyOrdinal.set(ordinal);
-		// TODO write spells to property
-		System.out.println("[Staff.save] propertyOrdinal=" + propertyOrdinal);
+		
+		// Only save this staff if it has been assembled by player
+		if (propertySpells != null) {
+			List<String> spellClassNames = new ArrayList<>();
+			for (Spell s : spells) {
+				spellClassNames.add(s.getClass().getName());
+			}
+			String[] array = new String[spellClassNames.size()];
+			propertySpells.set(spellClassNames.toArray(array));
+		}
 	}
 
 	// ---------------------------------------------------------------------------------
@@ -192,12 +175,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int i) {
-		// if (spells.isEmpty()) {
-		// return null;
-		// } else {
-		// return new ItemStack(spells.get(i));
-		// }
-		System.out.println("[Staff.getStackInSlot] i=" + i);
+		//System.out.println("[Staff.getStackInSlot] i=" + i);
 		if (spells[i] == null) {
 			return null;
 		} else {
@@ -207,8 +185,8 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
-		System.out.println("[Staff.decrStackSize] slot=" + slot);
-		System.out.println("[Staff.decrStackSize] amount=" + amount);
+		//System.out.println("[Staff.decrStackSize] slot=" + slot);
+		//System.out.println("[Staff.decrStackSize] amount=" + amount);
 		ItemStack stack = getStackInSlot(slot);
 		if (stack != null) {
 			if (stack.stackSize <= amount) {
@@ -234,7 +212,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		// spells.set(slot, (Spell) stack.getItem());
 		if (stack != null) {
 			spells[slot] = (Spell) stack.getItem();
 			if (stack != null && stack.stackSize > getInventoryStackLimit()) {
