@@ -1,12 +1,14 @@
 package ds.plato.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+
+import org.lwjgl.opengl.GL11;
+
+import ds.plato.core.Player;
 
 //Started with GuiChest
 //http://www.minecraftforge.net/wiki/Containers_and_GUIs
@@ -14,9 +16,11 @@ public class GuiStaff extends GuiContainer {
 
 	private static final ResourceLocation texture = new ResourceLocation("textures/gui/container/generic_54.png");
 	private int rowHeight = 35;
+	private IInventory staff;
 
 	public GuiStaff(InventoryPlayer inventoryPlayer, IInventory inventoryStaff) {
 		super(new GuiStaffContainer(inventoryPlayer, inventoryStaff));
+		this.staff = inventoryStaff;
 		//allowUserInput = false;
 	}
 
@@ -25,9 +29,9 @@ public class GuiStaff extends GuiContainer {
 	 */
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p1, int p2) {
-		// TODO Name a staff?
-		fontRendererObj.drawString("Staff", 8, 6, 4210752);
-		fontRendererObj.drawString("Inventory", 8, rowHeight + 2, 4210752);
+		String staffName = Player.client().getHeldItemStack().getDisplayName();
+		fontRendererObj.drawString(staffName, 8, 6, 4210752);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, rowHeight + 2, 4210752);
 	}
 
 	@Override

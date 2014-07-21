@@ -55,8 +55,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public void onMouseClickRight(MovingObjectPosition position) {
-		if (getSpell() == null) {
-			System.out.println("[Staff.onMouseClickRight] staff=" + this);
+		if (getSpell() == null || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
 			Player player = Player.client();
 			player.openGui(3);
 		} else {
