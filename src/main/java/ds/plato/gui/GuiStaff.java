@@ -24,9 +24,6 @@ public class GuiStaff extends GuiContainer {
 		//allowUserInput = false;
 	}
 
-	/**
-	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
-	 */
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p1, int p2) {
 		String staffName = Player.client().getHeldItemStack().getDisplayName();
@@ -40,7 +37,6 @@ public class GuiStaff extends GuiContainer {
 		mc.getTextureManager().bindTexture(texture);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
-//		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 		drawTexturedModalRect(x, y,             0, 0,   xSize, rowHeight);
 		drawTexturedModalRect(x, y + rowHeight, 0, 126, xSize, 96);
 	}

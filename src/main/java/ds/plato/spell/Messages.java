@@ -62,7 +62,6 @@ public class Messages extends NLS {
 	public static String spell_box_description;
 	public static String spell_box_picks;
 	public static String spell_box_modifier_0;
-	public static String spell_box_modifier_1;
 
 	public static String spell_pyramid_name;
 	public static String spell_pyramid_description;
@@ -128,41 +127,34 @@ public class Messages extends NLS {
 	
 	public static String spell_save_name;
 	public static String spell_save_description;
-	public static String spell_save_picks;
 	public static String spell_save_modifier;
 	
 	public static String spell_restore_name;
 	public static String spell_restore_description;
 	public static String spell_restore_pick;
-	public static String spell_restore_modifier;
 
 	public static String spell_mengerSponge_name;
 	public static String spell_mengerSponge_description;
 	public static String spell_mengerSponge_pick;
-	public static String spell_mengerSponge_modifier;
 
 	public static String spell_hole_fill_name;
 	public static String spell_hole_fill_description;
-	public static String spell_hole_fill_picks;
 	public static String spell_hole_fill_modifier_0;
 	public static String spell_hole_fill_modifier_1;
 
 	public static String spell_hole_drain_name;
 	public static String spell_hole_drain_description;
-	public static String spell_hole_drain_picks;
 	//public static String spell_hole_drain_modifier_0;
 	//public static String spell_hole_drain_modifier_1;
 	
 	public static String spell_thicken_name;
 	public static String spell_thicken_description;
-	public static String spell_thicken_picks;
 	public static String spell_thicken_modifier_0;
 	public static String spell_thicken_modifier_1;
 	public static String spell_thicken_modifier_2;
 
 	public static String spell_drop_name;
 	public static String spell_drop_description;
-	public static String spell_drop_picks;
 	public static String spell_drop_modifier;
 	
 	public static String spell_text_name;

@@ -1,3 +1,5 @@
+#No spaces before or after =
+
 item.staff.name=Staff
 item.staffDraw.name=Draw Staff
 item.staffSelect.name=Select Staff
@@ -16,23 +18,27 @@ item.spellCopy.name=Copy Spell
 item.spellMirror.name=Mirror Spell
 item.spellRotate90.name=Rotate Spell
 
-item.spellGrowAll.name=Grow ALL Spell
-item.spellGrowAbove.name=Grow Above Spell
-item.spellGrowBellow.name=Grow Bellow Spell
-item.spellGrowDown.name=Grow Down Spell
-item.spellGrowHorizontal.name=Grow Horizontal Spell
-item.spellGrowUp.name=Grow Up Spell
-item.spellGrowXY.name=Grow XY Spell
+item.spellGrowAbove.name=Select Above Spell
+item.spellGrowAll.name=Select All spell
+item.spellGrowBellow.name=Select Bellow Spell
+item.spellGrowDown.name=Select Down Spell
+item.spellGrowEdge.name=Select Edge Spell
+item.spellGrowFloor.name=Select Floor Spell
+item.spellGrowHorizontal.name=Select Horizontal Spell
+item.spellGrowUp.name=Select Up Spell
+item.spellGrowVerticalPlane.name=Select Vertical Plane Spell
 
 item.spellDelete.name=Delete Spell
 item.spellFill.name=Fill Spell
 item.spellFillChecker.name=Checker Spell
 item.spellFillRandom.name=Random Fill Spell
+item.spellHollow.name=Hollow Spell
 
-item.spellHoleDrain.name = Drain Hole spell
-item.spellHoleFill.name = Fill Hole spell
-item.spellHoleDrain.name = Drain Hole spell
-item.spellMengerSponge.name = Menger Sponge spell
-item.spellSave.name = Store spell
-item.spellRestore.name = Restore spell
-item.spellThicken.name = Thicken spell
+item.spellDrop.name=Drop Spell
+item.spellHoleDrain.name=Drain Hole Spell
+item.spellHoleFill.name=Fill Hole Spell
+item.spellMengerSponge.name=Menger Sponge Spell
+item.spellRestore.name=Restore Spell
+item.spellSave.name=Store Spell
+item.spellText.name=Store Text
+item.spellThicken.name=Thicken Spell
