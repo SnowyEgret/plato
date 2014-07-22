@@ -29,14 +29,11 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	protected Spell[] spells = new Spell[9];
 	protected int ordinal = 0;
 	private IPick pickManager;
-	private Property propertyOrdinal;
 	private String name = "Staff";
 	private boolean spellsInitialized = false;
 
-	public Staff(Property propertyOrdinal, IPick pickManager) {
+	public Staff(IPick pickManager) {
 		this.pickManager = pickManager;
-		this.propertyOrdinal = propertyOrdinal;
-		System.out.println("[Staff.Staff] staff=" + this);
 	}
 
 	public Object[] getRecipe() {
@@ -71,12 +68,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 			nextSpell();
 		}
 	}
-
-//	@Override
-//	public IIcon getIcon(ItemStack stack, int pass) {
-//		System.out.println("[Staff.getIcon] stack.getTagCompound()=" + stack.getTagCompound());
-//		return super.getIcon(stack, pass);
-//	}
 
 	public Spell nextSpell() {
 		Spell s = null;
@@ -152,15 +143,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		pickManager.clearPicks();
 	}
 
-	public void setOrdinal(int ordinal) {
-		this.ordinal = ordinal;
-	}
-
-	@Deprecated
-	public void save() {
-		propertyOrdinal.set(ordinal);
-	}
-
 	// Sets tag after crafting
 	@Override
 	public void onCreated(ItemStack stack, World w, EntityPlayer player) {
@@ -201,54 +183,58 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	@Override
 	public void onUpdate(ItemStack stack, World w, Entity entity, int par4, boolean par5) {
 
-		if (getClass().equals(Staff.class)) {
+		if (!stack.hasTagCompound()) {
+			System.out.println("[Staff.onUpdate] No tag on stack. Creating a new one...");
+			stack.setTagCompound(new NBTTagCompound());
+		}
+		NBTTagCompound tag = stack.getTagCompound();
 
-			if (!stack.hasTagCompound()) {
-				System.out.println("[Staff.onUpdate] No tag on stack. Creating a new one...");
-				stack.setTagCompound(new NBTTagCompound());
-			}
-			NBTTagCompound tag = stack.getTagCompound();
-
-			// First time through, set spells array with tag info
-			if (!spellsInitialized) {
+		// First time through, set spells array with tag info
+		if (!spellsInitialized) {
+			// Subclasses of Staff already have spells.
+			if (getClass().equals(Staff.class)) {
 				System.out.println("[Staff.onUpdate] Initializing spells. tag=" + tag);
 				int i = 0;
 				while (true) {
 					String spellClassName = tag.getString(String.valueOf(i));
 					if (spellClassName != null && !spellClassName.equals("")) {
-						System.out.println("[Staff.onUpdate] found string in tag: i=" + i + ", spellClassName=" + spellClassName);
+						System.out.println("[Staff.onUpdate] Found string in tag: i=" + i + ", spellClassName="
+								+ spellClassName);
 						Spell spell = (Spell) GameRegistry.findItem(Plato.ID, spellClassName);
 						if (spell == null) {
-							throw new RuntimeException("Game registry could not find item " + spellClassName);
+							throw new RuntimeException("Game registry could not find item.  spellClassName="
+									+ spellClassName);
 						}
-						System.out.println("[Staff.onUpdate] Looked up spell in game registry. s=" + spell);
+						System.out.println("[Staff.onUpdate] Looked up spell in game registry. spell=" + spell);
 						spells[i] = spell;
 						i++;
 					} else {
 						break;
 					}
 				}
-				ordinal = tag.getInteger("ordinal");
-				spellsInitialized = true;
-				System.out.println("[Staff.onUpdate] Spells initialized spells=" + spells);
-			
+			}
+			ordinal = tag.getInteger("ordinal");
+			spellsInitialized = true;
+			System.out.println("[Staff.onUpdate] Spells initialized spells=" + spells);
+
 			// Spells array is initialized. Update tag to reflect any changes that may have been made to spells
-			} else {
+		} else {
+			// Subclasses of Staff cannot be reordered (Only in creative mode - no recipe)
+			if (getClass().equals(Staff.class)) {
 				int i = 0;
 				for (Spell s : spells) {
 					if (s == null) {
 						// If tags are not initialized in on created
 						tag.removeTag(String.valueOf(i));
-						//tag.setString(String.valueOf(i), "");
 					} else {
 						String n = s.getClass().getSimpleName();
 						tag.setString(String.valueOf(i), n);
 					}
 					i++;
 				}
-				tag.setInteger("ordinal",  ordinal);
-				//System.out.println("[Staff.onUpdate] tag after setting=" + tag);
 			}
+			tag.setInteger("ordinal", ordinal);
+			// System.out.println("[Staff.onUpdate] tag after setting=" + tag);
 		}
 	}
 

@@ -37,7 +37,7 @@ public class PlatoTest {
 	@Mock protected EntityPlayer player;
 	@Mock protected InventoryPlayer inventory;
 	@Mock protected Configuration config;
-	@Mock protected Property property;
+	//@Mock protected Property property;
 
 	@Before
 	public void setUp() {

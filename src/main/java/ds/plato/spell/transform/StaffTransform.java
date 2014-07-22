@@ -10,8 +10,8 @@ import ds.plato.spell.matrix.AbstractSpellMatrix;
 
 public class StaffTransform extends Staff {
 
-	public StaffTransform(Property propOrdinal, IPick pickManager) {
-		super(propOrdinal, pickManager);
+	public StaffTransform(IPick pickManager) {
+		super(pickManager);
 	}
 
 	@Override

@@ -84,9 +84,10 @@ public class SpellLoader {
 	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		System.out.print("[SpellLoader.loadStaff] Loading staff=" + staffClass.getSimpleName() + "...");
 		String name = toName(staffClass);
-		Property propertyOrdinal = config.get("Staff", name + ".ordinal", 0);
-		Constructor c = staffClass.getConstructor(Property.class, IPick.class);
-		Staff s = (Staff) c.newInstance(propertyOrdinal, pickManager);
+		//Property propertyOrdinal = config.get("Staff", name + ".ordinal", 0);
+		//Constructor c = staffClass.getConstructor(Property.class, IPick.class);
+		Constructor c = staffClass.getConstructor(IPick.class);
+		Staff s = (Staff) c.newInstance(pickManager);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);

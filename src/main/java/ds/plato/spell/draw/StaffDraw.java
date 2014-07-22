@@ -9,8 +9,8 @@ import ds.plato.spell.Staff;
 
 public class StaffDraw extends Staff {
 
-	public StaffDraw(Property propOrdinal, IPick pickManager) {
-		super(propOrdinal, pickManager);
+	public StaffDraw(IPick pickManager) {
+		super(pickManager);
 	}
 
 	@Override
