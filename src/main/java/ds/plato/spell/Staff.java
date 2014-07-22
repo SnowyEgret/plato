@@ -1,6 +1,5 @@
 package ds.plato.spell;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +10,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Property;
@@ -30,19 +30,14 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	protected int ordinal = 0;
 	private IPick pickManager;
 	private Property propertyOrdinal;
-	// private Property propertySpells;
 	private String name = "Staff";
-	private boolean areSpellsInitialized = false;
+	private boolean spellsInitialized = false;
 
 	public Staff(Property propertyOrdinal, IPick pickManager) {
 		this.pickManager = pickManager;
 		this.propertyOrdinal = propertyOrdinal;
 		System.out.println("[Staff.Staff] staff=" + this);
 	}
-
-	// public void setPropertySpells(Property propertySpells) {
-	// this.propertySpells = propertySpells;
-	// }
 
 	public Object[] getRecipe() {
 		return new Object[] { "A  ", " A ", "  A", 'A', Items.bone };
@@ -76,6 +71,12 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 			nextSpell();
 		}
 	}
+
+//	@Override
+//	public IIcon getIcon(ItemStack stack, int pass) {
+//		System.out.println("[Staff.getIcon] stack.getTagCompound()=" + stack.getTagCompound());
+//		return super.getIcon(stack, pass);
+//	}
 
 	public Spell nextSpell() {
 		Spell s = null;
@@ -116,11 +117,15 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	}
 
 	public Spell getSpell() {
-		Spell s = spells[ordinal];
-		if (s == null) {
-			s = nextSpell();
+		if (isEmpty()) {
+			return null;
+		} else {
+			Spell s = spells[ordinal];
+			if (s == null) {
+				s = nextSpell();
+			}
+			return s;
 		}
-		return s;
 	}
 
 	public void addSpell(Spell spell) {
@@ -131,12 +136,10 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 				return;
 			}
 		}
-
-		System.out.println("[Staff.addSpell] No room for spell on staff. spell=" + spell);
+		throw new RuntimeException("No room for spell on staff. spell=" + spell);
 	}
 
 	public int numSpells() {
-		// return spells.size();
 		int numSpells = 0;
 		for (Spell s : spells) {
 			if (s != null)
@@ -158,75 +161,19 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		propertyOrdinal.set(ordinal);
 	}
 
-	// // FIXME
-	// public void read(ItemStack stack) {
-	// NBTTagCompound tag = stack.getTagCompound();
-	// // FIXME tag is null
-	// // NBTTagCompound tag = new NBTTagCompound();
-	// System.out.println("[Staff.read] tag=" + tag);
-	// stack.readFromNBT(tag);
-	// int i = 0;
-	// while (true) {
-	// String n = tag.getString(String.valueOf(i));
-	// System.out.println("[Staff.read] n=" + n);
-	// if (n != "") {
-	// Spell s = (Spell) GameRegistry.findItem(Plato.ID, n);
-	// if (s == null) {
-	// throw new RuntimeException("Game registry could not find item " + n);
-	// }
-	// System.out.println("[Staff.read] Looked up spell in game registry. s=" + s);
-	// spells[i] = s;
-	// i++;
-	// } else {
-	// break;
-	// }
-	// }
-	// }
-
-	// public void save(ItemStack stack) {
-	// if (!stack.hasTagCompound()) {
-	// System.out.println("[Staff.save] No tag on stack. Creating a new one...");
-	// stack.setTagCompound(new NBTTagCompound());
-	// }
-	// NBTTagCompound tag = stack.getTagCompound();
-	// System.out.println("[Staff.save] tag before setting=" + tag);
-	//
-	// int i = 0;
-	// for (Spell s : spells) {
-	// if (s != null) {
-	// String n = s.getClass().getSimpleName();
-	// tag.setString(String.valueOf(i), n);
-	// i++;
-	// }
-	// }
-	// System.out.println("[Staff.save] tag after setting=" + tag);
-	// stack.writeToNBT(tag);
-	// }
-
 	// Sets tag after crafting
 	@Override
 	public void onCreated(ItemStack stack, World w, EntityPlayer player) {
-		if (!stack.hasTagCompound()) {
-			System.out.println("[Staff.onCreated] No tag on stack. Creating a new one...");
+		if (stack.stackTagCompound == null) {
 			stack.setTagCompound(new NBTTagCompound());
 		}
-		NBTTagCompound tag = stack.getTagCompound();
-		System.out.println("[Staff.onCreated] tag=" + tag);
-		// Do nothing. A newly crafted staff has no spells
+		System.out.println("[Staff.onCreated] stack.stackTagCompound=" + stack.stackTagCompound);
+		// Read here http://forgetutorials.weebly.com/nbt-tags.html that tag must be initialized
+		// Not convinced he is right
+		// for (int i = 0; i < spells.length; i++) {
+		// stack.stackTagCompound.setString(String.valueOf(i), "");
+		// }
 	}
-
-	// @Override
-	// public boolean onItemUseFirst(ItemStack stack, EntityPlayer p, World w, int x, int y, int z, int side, float
-	// hitX,
-	// float hitY, float hitZ) {
-	// if (!stack.hasTagCompound()) {
-	// System.out.println("[Staff.onItemUseFirst] No tag on stack. Creating a new one...");
-	// stack.setTagCompound(new NBTTagCompound());
-	// }
-	// NBTTagCompound tag = stack.getTagCompound();
-	// System.out.println("[Staff.onItemUseFirst] tag=" + tag);
-	// return true;
-	// }
 
 	// To write to tooltip on mouse over in creative tab
 	// FIXME tag is empty even though it has been set in onUpdate();
@@ -234,30 +181,9 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List toolTip, boolean par4) {
 		if (isEmpty()) {
-			toolTip.add("No spells on staff");
+			toolTip.add(EnumChatFormatting.RED + "No spells on staff");
 		}
 
-		//FIXME find the right place for this block
-		// if (!areSpellsInitialized) {
-		// int i = 0;
-		// while (true) {
-		// String spellClassName = tag.getString(String.valueOf(i));
-		// if (spellClassName != "") {
-		// System.out.println("[Staff.addInformation] found string in tag: i=" + 1 + ", n=" + spellClassName);
-		// Spell spell = (Spell) GameRegistry.findItem(Plato.ID, spellClassName);
-		// if (spell == null) {
-		// throw new RuntimeException("Game registry could not find item " + spellClassName);
-		// }
-		// System.out.println("[Staff.read] Looked up spell in game registry. s=" + spell);
-		// spells[i] = spell;
-		// // list.add(spellClassName);
-		// i++;
-		// } else {
-		// break;
-		// }
-		// }
-		// areSpellsInitialized = true;
-		// }
 	}
 
 	private boolean isEmpty() {
@@ -274,24 +200,56 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	// Could be used to update spells instead of in Plato.serverStopping
 	@Override
 	public void onUpdate(ItemStack stack, World w, Entity entity, int par4, boolean par5) {
-		if (!stack.hasTagCompound()) {
-			System.out.println("[Staff.onUpdate] No tag on stack. Creating a new one...");
-			stack.setTagCompound(new NBTTagCompound());
-		}
-		NBTTagCompound tag = stack.getTagCompound();
-		// System.out.println("[Staff.onUpdate] tag=" + tag);
 
-		int i = 0;
-		for (Spell s : spells) {
-			if (s == null) {
-				tag.removeTag(String.valueOf(i));
-			} else {
-				String n = s.getClass().getSimpleName();
-				tag.setString(String.valueOf(i), n);
+		if (getClass().equals(Staff.class)) {
+
+			if (!stack.hasTagCompound()) {
+				System.out.println("[Staff.onUpdate] No tag on stack. Creating a new one...");
+				stack.setTagCompound(new NBTTagCompound());
 			}
-			i++;
+			NBTTagCompound tag = stack.getTagCompound();
+
+			// First time through, set spells array with tag info
+			if (!spellsInitialized) {
+				System.out.println("[Staff.onUpdate] Initializing spells. tag=" + tag);
+				int i = 0;
+				while (true) {
+					String spellClassName = tag.getString(String.valueOf(i));
+					if (spellClassName != null && !spellClassName.equals("")) {
+						System.out.println("[Staff.onUpdate] found string in tag: i=" + i + ", spellClassName=" + spellClassName);
+						Spell spell = (Spell) GameRegistry.findItem(Plato.ID, spellClassName);
+						if (spell == null) {
+							throw new RuntimeException("Game registry could not find item " + spellClassName);
+						}
+						System.out.println("[Staff.onUpdate] Looked up spell in game registry. s=" + spell);
+						spells[i] = spell;
+						i++;
+					} else {
+						break;
+					}
+				}
+				ordinal = tag.getInteger("ordinal");
+				spellsInitialized = true;
+				System.out.println("[Staff.onUpdate] Spells initialized spells=" + spells);
+			
+			// Spells array is initialized. Update tag to reflect any changes that may have been made to spells
+			} else {
+				int i = 0;
+				for (Spell s : spells) {
+					if (s == null) {
+						// If tags are not initialized in on created
+						tag.removeTag(String.valueOf(i));
+						//tag.setString(String.valueOf(i), "");
+					} else {
+						String n = s.getClass().getSimpleName();
+						tag.setString(String.valueOf(i), n);
+					}
+					i++;
+				}
+				tag.setInteger("ordinal",  ordinal);
+				//System.out.println("[Staff.onUpdate] tag after setting=" + tag);
+			}
 		}
-		// System.out.println("[Staff.onUpdate] tag after setting=" + tag);
 	}
 
 	@Override

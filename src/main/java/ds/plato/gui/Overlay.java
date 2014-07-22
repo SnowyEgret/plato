@@ -65,14 +65,15 @@ public class Overlay {
 
 		r.drawStringWithShadow("Selection size: " + selectionManager.size(), x, y += dy, red);
 
-		Spell s = spell.getSpell();
-		if (s != null) {
-			if (s instanceof SpellFillRandom) {
-				SlotDistribution d = Player.client().slotDistribution();
-				//SlotDistribution d = new SlotDistribution(s.getSlotEntries(Minecraft.getMinecraft().thePlayer));
-				r.drawStringWithShadow(d.toString(), x, y += dy, blue);
-			}
+		// Spell s = spell.getSpell();
+		// if (s != null) {
+		//TODO SpellFillRandom should set message
+		if (spell instanceof SpellFillRandom) {
+			SlotDistribution d = Player.client().slotDistribution();
+			// SlotDistribution d = new SlotDistribution(s.getSlotEntries(Minecraft.getMinecraft().thePlayer));
+			r.drawStringWithShadow(d.toString(), x, y += dy, blue);
 		}
+		// }
 
 		String message = spell.getMessage();
 		if (message != null) {

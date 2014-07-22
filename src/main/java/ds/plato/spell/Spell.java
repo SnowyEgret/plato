@@ -54,9 +54,9 @@ public abstract class Spell extends Item implements IClickable {
 
 	public abstract SpellDescriptor getDescriptor();
 
-	public Spell getSpell() {
-		return this;
-	}
+//	public Spell getSpell() {
+//		return this;
+//	}
 
 	public String getMessage() {
 		return message;

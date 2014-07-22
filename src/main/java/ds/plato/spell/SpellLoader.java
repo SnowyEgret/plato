@@ -91,7 +91,7 @@ public class SpellLoader {
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
 		s.setTextureName(modId + ":" + name);
-		s.setOrdinal(propertyOrdinal.getInt());
+		//s.setOrdinal(propertyOrdinal.getInt());
 		GameRegistry.registerItem(s, name);
 		if (s.hasRecipe()) {
 			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());

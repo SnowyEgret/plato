@@ -177,34 +177,12 @@ public class ForgeEventHandler {
 					spell.reset();
 				}
 			}
-
-			// EntityPlayer p = (EntityPlayer) e.entity;
-			// ItemStack is = p.getHeldItem();
-			// if (is == null) {
-			// holdable = null;
-			// } else {
-			// Item item = is.getItem();
-			// if (item instanceof IHoldable) {
-			// if (item != holdable) {
-			// holdable = (IHoldable) item;
-			// Spell s = holdable.getSpell();
-			// if (s != null) {
-			// holdable.reset();
-			// }
-			// }
-			// } else {
-			// holdable = null;
-			// }
-			// }
 		}
 	}
 
 	@SubscribeEvent
 	public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
 		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
-			// if (holdable != null) {
-			// overlay.draw(holdable);
-			// }
 			if (spell != null) {
 				overlay.draw(spell);
 			}
