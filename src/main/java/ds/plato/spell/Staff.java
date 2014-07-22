@@ -233,38 +233,40 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	// Called every tick when mouse over staff in creative tab and player inventory.
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List toolTip, boolean par4) {
-		if (!stack.hasTagCompound()) {
-			System.out.println("[Staff.addInformation] No tag on stack. Creating a new one...");
-			stack.setTagCompound(new NBTTagCompound());
-		}
-		NBTTagCompound tag = stack.getTagCompound();
-		// System.out.println("[Staff.addInformation] tag=" + tag);
-		// TODO could display something meaningfull here
-		if (spells.length == 0) {
+		if (isEmpty()) {
 			toolTip.add("No spells on staff");
 		}
 
 		//FIXME find the right place for this block
 		// if (!areSpellsInitialized) {
-		int i = 0;
-		while (true) {
-			String spellClassName = tag.getString(String.valueOf(i));
-			if (spellClassName != "") {
-				System.out.println("[Staff.addInformation] found string in tag: i=" + 1 + ", n=" + spellClassName);
-				Spell spell = (Spell) GameRegistry.findItem(Plato.ID, spellClassName);
-				if (spell == null) {
-					throw new RuntimeException("Game registry could not find item " + spellClassName);
-				}
-				System.out.println("[Staff.read] Looked up spell in game registry. s=" + spell);
-				spells[i] = spell;
-				// list.add(spellClassName);
-				i++;
-			} else {
-				break;
-			}
-		}
+		// int i = 0;
+		// while (true) {
+		// String spellClassName = tag.getString(String.valueOf(i));
+		// if (spellClassName != "") {
+		// System.out.println("[Staff.addInformation] found string in tag: i=" + 1 + ", n=" + spellClassName);
+		// Spell spell = (Spell) GameRegistry.findItem(Plato.ID, spellClassName);
+		// if (spell == null) {
+		// throw new RuntimeException("Game registry could not find item " + spellClassName);
+		// }
+		// System.out.println("[Staff.read] Looked up spell in game registry. s=" + spell);
+		// spells[i] = spell;
+		// // list.add(spellClassName);
+		// i++;
+		// } else {
+		// break;
+		// }
+		// }
 		// areSpellsInitialized = true;
 		// }
+	}
+
+	private boolean isEmpty() {
+		for (Spell s : spells) {
+			if (s != null) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	// Seems to be working ok.

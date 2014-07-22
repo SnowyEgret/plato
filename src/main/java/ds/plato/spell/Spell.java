@@ -1,9 +1,14 @@
 package ds.plato.spell;
 
+import java.util.List;
+
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 
 import org.lwjgl.input.Keyboard;
@@ -103,6 +108,11 @@ public abstract class Spell extends Item implements IClickable {
 		}
 	}
 
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List toolTip, boolean par4) {
+		toolTip.add(getDescriptor().description);
+	}
+	
 	public boolean isPicking() {
 		return pickManager.isPicking();
 	}
