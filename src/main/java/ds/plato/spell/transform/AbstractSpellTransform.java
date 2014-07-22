@@ -11,21 +11,23 @@ import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
 
 public abstract class AbstractSpellTransform extends Spell {
-	
 
 	public AbstractSpellTransform(IUndo undo, ISelect select, IPick pick) {
 		super(1, undo, select, pick);
 	}
 
 	protected void transformSelections(IWorld world, ITransform transformer) {
-		Transaction t = undoManager.newTransaction();
-		for (Selection s : selectionManager.getSelections()) {
-			t.add(new SetBlock(world, selectionManager, transformer.transform(s)).set());
+		if (selectionManager.getSelectionList().size() != 0) {
+			Transaction t = undoManager.newTransaction();
+			for (Selection s : selectionManager.getSelections()) {
+				t.add(new SetBlock(world, selectionManager, transformer.transform(s)).set());
+			}
+			t.commit();
+			selectionManager.clearSelections();
 		}
-		t.commit();
-		selectionManager.clearSelections();
+		pickManager.clearPicks();
 	}
-	
+
 	@Override
 	public Object[] getRecipe() {
 		// TODO Auto-generated method stub

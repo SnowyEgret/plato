@@ -151,4 +151,18 @@ public class Player {
 	public void openGui(int i) {
 		player.openGui(Plato.instance, i, getWorldServer().getWorld(), 0, 0, 0);
 	}
+
+	public Iterable<ItemStack> getStaffItemStacks() {
+		List<ItemStack> stacks = new ArrayList<>();
+		InventoryPlayer inventory = player.inventory;
+		System.out.println("[Player.getStaffItemStacks] inventory=" + inventory);
+		for (ItemStack s : inventory.mainInventory) {
+			if (s != null) {
+				if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
+					stacks.add(s);
+				}
+			}
+		}
+		return stacks;
+	}
 }

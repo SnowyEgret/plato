@@ -1,5 +1,8 @@
 package ds.plato.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.vecmath.Point3i;
 import javax.vecmath.Vector3d;
 
@@ -9,6 +12,8 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -18,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -29,6 +35,7 @@ import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.IClickable;
 import ds.plato.spell.Spell;
+import ds.plato.spell.Staff;
 import ds.plato.spell.transform.SpellFill;
 import ds.plato.undo.IUndo;
 
@@ -202,5 +209,42 @@ public class ForgeEventHandler {
 				overlay.draw(spell);
 			}
 		}
+	}
+	
+//	@SubscribeEvent
+//	public void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
+//		if (event.entity instanceof EntityPlayerMP) {
+//			EntityPlayerMP p = (EntityPlayerMP)event.entity;
+//			System.out.println("[ForgeEventHandler.onEntityJoinWorldEvent] player=" + p);
+//			System.out.println("[ForgeEventHandler.onEntityJoinWorldEvent] inventory=" + p.inventory);
+//			//FIXME this instance of player does not have an inventory
+//			//Iterable<ItemStack> ss = Player.client().getStaffItemStacks();
+//			Iterable<ItemStack> staffs = getStaffItemStacks(p);
+//			for (ItemStack stack : staffs) {
+//				Staff staff = (Staff) stack.getItem();
+//				//staff.read(stack);
+//				//FIXME staff itemstacks with no items
+//				// Caused by: java.lang.NullPointerException
+//				// at net.minecraft.item.ItemStack.getAttributeModifiers(ItemStack.java:884) ~[ItemStack.class:?]
+//				// at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:1812)
+//				// ~[EntityLivingBase.class:?]
+//				// at net.minecraft.entity.player.EntityPlayer.onUpdate(EntityPlayer.java:342) ~[EntityPlayer.class:?]
+//			}
+//		}
+//	}
+
+	//Copied from class Player
+	private Iterable<ItemStack> getStaffItemStacks(EntityPlayer player) {
+		List<ItemStack> stacks = new ArrayList<>();
+		InventoryPlayer inventory = player.inventory;
+		for (ItemStack s : inventory.mainInventory) {
+			if (s != null) {
+				if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
+					System.out.println("[ForgeEventHandler.getStaffItemStacks] s=" + s);
+					stacks.add(s);
+				}
+			}
+		}
+		return stacks;
 	}
 }

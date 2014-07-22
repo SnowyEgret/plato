@@ -5,9 +5,10 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,6 +27,7 @@ import ds.plato.block.BlockModel;
 import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
+import ds.plato.core.Player;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.proxy.CommonProxy;
@@ -97,7 +99,7 @@ public class Plato {
 			staffs.add(selectionStaff);
 			staffs.add(transformStaff);
 			staffs.add(drawStaff);
-			
+
 			// Create an empty staff
 			staffs.add(loader.loadStaff(Staff.class));
 
@@ -146,10 +148,18 @@ public class Plato {
 		log.info("[Plato.serverStopping]");
 		selectionManager.clearSelections();
 		pickManager.clearPicks();
-		for (Staff s : staffs) {
-			s.save();
-		}
-		configuration.save();
+
+		// TODO run through players inventory to look for ItemStacks containing staffs and set their NBT.
+		// Iterable<ItemStack> ss = Player.client().getStaffItemStacks();
+		// for (ItemStack stack : ss) {
+		// Staff staff = (Staff) stack.getItem();
+		// staff.save(stack);
+		// }
+
+		// for (Staff s : staffs) {
+		// s.save();
+		// }
+		// configuration.save();
 	}
 
 	private Block initBlock(Block block) {
