@@ -185,30 +185,16 @@ public class ForgeEventHandler {
 		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
 			if (spell != null) {
 				overlay.draw(spell);
+			} else {
+				if (Player.client().getStaff().isEmpty()) {
+					overlay.drawEmptyStaff();
+				}
 			}
 		}
 	}
 	
 //	@SubscribeEvent
 //	public void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
-//		if (event.entity instanceof EntityPlayerMP) {
-//			EntityPlayerMP p = (EntityPlayerMP)event.entity;
-//			System.out.println("[ForgeEventHandler.onEntityJoinWorldEvent] player=" + p);
-//			System.out.println("[ForgeEventHandler.onEntityJoinWorldEvent] inventory=" + p.inventory);
-//			//FIXME this instance of player does not have an inventory
-//			//Iterable<ItemStack> ss = Player.client().getStaffItemStacks();
-//			Iterable<ItemStack> staffs = getStaffItemStacks(p);
-//			for (ItemStack stack : staffs) {
-//				Staff staff = (Staff) stack.getItem();
-//				//staff.read(stack);
-//				//FIXME staff itemstacks with no items
-//				// Caused by: java.lang.NullPointerException
-//				// at net.minecraft.item.ItemStack.getAttributeModifiers(ItemStack.java:884) ~[ItemStack.class:?]
-//				// at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:1812)
-//				// ~[EntityLivingBase.class:?]
-//				// at net.minecraft.entity.player.EntityPlayer.onUpdate(EntityPlayer.java:342) ~[EntityPlayer.class:?]
-//			}
-//		}
 //	}
 
 	//Copied from class Player

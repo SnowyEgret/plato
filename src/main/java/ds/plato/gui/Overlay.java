@@ -67,7 +67,7 @@ public class Overlay {
 
 		// Spell s = spell.getSpell();
 		// if (s != null) {
-		//TODO SpellFillRandom should set message
+		// TODO SpellFillRandom should set message
 		if (spell instanceof SpellFillRandom) {
 			SlotDistribution d = Player.client().slotDistribution();
 			// SlotDistribution d = new SlotDistribution(s.getSlotEntries(Minecraft.getMinecraft().thePlayer));
@@ -79,6 +79,13 @@ public class Overlay {
 		if (message != null) {
 			r.drawStringWithShadow(message, x, y += dy, green);
 		}
+	}
+
+	public void drawEmptyStaff() {
+		int x = 10;
+		int y = x;
+		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
+		r.drawStringWithShadow("Staff has no spells", x, y, white);
 	}
 
 }

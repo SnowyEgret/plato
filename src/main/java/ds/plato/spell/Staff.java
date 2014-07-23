@@ -166,11 +166,13 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		// }
 	}
 
-	// To write to tooltip on mouse over in creative tab
+	// To write to rollover on mouse over in creative tab
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List toolTip, boolean par4) {
+	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
 		if (isEmpty()) {
-			toolTip.add(EnumChatFormatting.RED + "No spells on staff");
+			rollOver.add(EnumChatFormatting.RED + "No spells on staff");
+		} else {
+			rollOver.add(EnumChatFormatting.GREEN + " "+ numSpells() + " spells on staff");
 		}
 
 	}

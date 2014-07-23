@@ -148,6 +148,18 @@ public class Player {
 		return spell;
 	}
 
+	public Staff getStaff() {
+		Staff staff = null;
+		ItemStack is = player.getHeldItem();
+		if (is != null) {
+			Item item = is.getItem();
+			if (item instanceof Staff) {
+				staff = (Staff) item;
+			} 
+		}
+		return staff;
+	}
+
 	public void openGui(int i) {
 		player.openGui(Plato.instance, i, getWorldServer().getWorld(), 0, 0, 0);
 	}
