@@ -6,9 +6,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class SpellSlot extends Slot {
+public class GuiStaffSlotSpell extends Slot {
 
-	public SpellSlot(IInventory inventoryStaff, int index, int x, int y) {
+	public GuiStaffSlotSpell(IInventory inventoryStaff, int index, int x, int y) {
 		super(inventoryStaff, index, x, y);
 	}
 

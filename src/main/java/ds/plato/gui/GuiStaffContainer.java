@@ -16,7 +16,8 @@ public class GuiStaffContainer extends Container {
 		this.inventoryStaff = inventoryStaff;
 
 		for (int i = 0; i < 9; i++) {
-			addSlotToContainer(new SpellSlot(inventoryStaff, i, 8 + i * 18, 18));
+			//SpellSlot overides isItemValid to permit only spells in these slots
+			addSlotToContainer(new GuiStaffSlotSpell(inventoryStaff, i, 8 + i * 18, 18));
 		}
 
 		for (int i = 0; i < 3; i++) {
@@ -37,37 +38,36 @@ public class GuiStaffContainer extends Container {
 
 	//Called when a player shift clicks on a slot
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int i) {
+		System.out.println("[GuiStaffContainer.transferStackInSlot] i=" + i);
 		ItemStack stack = null;
-		Slot slotObject = (Slot) inventorySlots.get(slot);
-		System.out.println("[GuiStaffContainer.transferStackInSlot] slot=" + slotObject);
+		Slot slot = (Slot) inventorySlots.get(i);
 
 		// null checks and checks if the item can be stacked (maxStackSize > 1)
-		if (slotObject != null && slotObject.getHasStack()) {
-			ItemStack stackInSlot = slotObject.getStack();
-			stack = stackInSlot.copy();
+		if (slot != null && slot.getHasStack()) {
+			stack = slot.getStack().copy();
 
 			// merges the item into player inventory since its in the tileEntity
-			if (slot < 9) {
-				if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
+			if (i < 9) {
+				if (!this.mergeItemStack(stack, 0, 35, true)) {
 					return null;
 				}
 			}
 			// places it into the tileEntity is possible since its in the player inventory
-			else if (!this.mergeItemStack(stackInSlot, 0, 9, false)) {
+			else if (!this.mergeItemStack(stack, 0, 9, false)) {
 				return null;
 			}
 
-			if (stackInSlot.stackSize == 0) {
-				slotObject.putStack(null);
+			if (stack.stackSize == 0) {
+				slot.putStack(null);
 			} else {
-				slotObject.onSlotChanged();
+				slot.onSlotChanged();
 			}
 
-			if (stackInSlot.stackSize == stack.stackSize) {
+			if (stack.stackSize == stack.stackSize) {
 				return null;
 			}
-			slotObject.onPickupFromSlot(player, stackInSlot);
+			slot.onPickupFromSlot(player, stack);
 		}
 		return stack;
 	}

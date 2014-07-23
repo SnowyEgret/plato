@@ -175,6 +175,9 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	}
 
+	// On first call, initializes spells array and ordinal from stack's tag.
+	// On tick, synchronizes tag with spells array and ordinal
+	// For subclasses of Staff which have fixed spells, only manages ordinal.
 	@Override
 	public void onUpdate(ItemStack stack, World w, Entity entity, int par4, boolean par5) {
 
@@ -252,8 +255,19 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		return spells.length;
 	}
 
+	//Called every tick by GUI to draw screen.
+	//Called by decrStackSize
 	@Override
 	public ItemStack getStackInSlot(int i) {
+		
+		// Exception e = new Exception();
+		// StackTraceElement[] trace = e.getStackTrace();
+		// for (int j = 0; j < 3; j++) {
+		// if (!trace[1].getClassName().equals("net.minecraft.inventory.Slot")) {
+		// e.printStackTrace();
+		// }
+		// }
+		
 		if (spells[i] == null) {
 			return null;
 		} else {
@@ -261,22 +275,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 			return s;
 		}
 	}
-
-	// @Override
-	// public ItemStack decrStackSize(int slotIndex, int amount) {
-	// ItemStack stack = getStackInSlot(slotIndex);
-	// if (stack != null) {
-	// if (stack.stackSize <= amount) {
-	// setInventorySlotContents(slotIndex, null);
-	// } else {
-	// stack = stack.splitStack(amount);
-	// if (stack.stackSize == 0) {
-	// setInventorySlotContents(slotIndex, null);
-	// }
-	// }
-	// }
-	// return stack;
-	// }
 
 	@Override
 	public ItemStack decrStackSize(int i, int amount) {
@@ -286,6 +284,8 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		if (stack != null) {
 			if (stack.stackSize <= amount) {
 				setInventorySlotContents(i, null);
+				// Added this line. We return stack.
+				stack.stackSize = 0;
 			} else {
 				stack = stack.splitStack(amount);
 				if (stack.stackSize == 0) {
@@ -298,17 +298,26 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		return stack;
 	}
 
+	// When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
+	// like when you close a workbench GUI.
+	//Not being called
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		ItemStack stack = getStackInSlot(slot);
+	public ItemStack getStackInSlotOnClosing(int i) {
+		System.out.println("[Staff.getStackInSlotOnClosing] i=" + i);
+		ItemStack stack = getStackInSlot(i);
 		if (stack != null) {
-			setInventorySlotContents(slot, null);
+			setInventorySlotContents(i, null);
 		}
 		return stack;
 	}
 
+	//Is being called twice (i, null) when player left clicks on a spell. Both have same stack trace.
 	@Override
 	public void setInventorySlotContents(int i, ItemStack stack) {
+		System.out.println("[Staff.setInventorySlotContents] i=" + i);
+		//new Exception().printStackTrace();
+		System.out.println("[Staff.setInventorySlotContents] stack=" + stack);
+		//new Exception().printStackTrace();
 		if (stack == null) {
 			// Fix for issue #85 Spells cannot be re-positioned on staff
 			// Spell was copied when moved
@@ -330,7 +339,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public int getInventoryStackLimit() {
-		//System.out.println("[Staff.getInventoryStackLimit]");
+		// System.out.println("[Staff.getInventoryStackLimit]");
 		return 1;
 	}
 
@@ -338,8 +347,10 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	public void markDirty() {
 	}
 
+	//Not being called
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer var1) {
+	public boolean isUseableByPlayer(EntityPlayer player) {
+		System.out.println("[Staff.isUseableByPlayer] player=" + player);
 		return true;
 	}
 
