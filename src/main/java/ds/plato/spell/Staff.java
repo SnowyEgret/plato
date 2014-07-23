@@ -143,6 +143,15 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		pickManager.clearPicks();
 	}
 
+	public boolean isEmpty() {
+		for (Spell s : spells) {
+			if (s != null) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	// Sets tag after crafting
 	@Override
 	public void onCreated(ItemStack stack, World w, EntityPlayer player) {
@@ -158,8 +167,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	}
 
 	// To write to tooltip on mouse over in creative tab
-	// FIXME tag is empty even though it has been set in onUpdate();
-	// Called every tick when mouse over staff in creative tab and player inventory.
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List toolTip, boolean par4) {
 		if (isEmpty()) {
@@ -168,18 +175,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	}
 
-	private boolean isEmpty() {
-		for (Spell s : spells) {
-			if (s != null) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	// Seems to be working ok.
-	// Called every tick when staff is in inventory
-	// Could be used to update spells instead of in Plato.serverStopping
 	@Override
 	public void onUpdate(ItemStack stack, World w, Entity entity, int par4, boolean par5) {
 
@@ -215,7 +210,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 			}
 			ordinal = tag.getInteger("ordinal");
 			spellsInitialized = true;
-			System.out.println("[Staff.onUpdate] Spells initialized spells=" + spells);
+			System.out.println("[Staff.onUpdate] Staff initialized. " + this);
 
 			// Spells array is initialized. Update tag to reflect any changes that may have been made to spells
 		} else {
@@ -234,14 +229,14 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 				}
 			}
 			tag.setInteger("ordinal", ordinal);
-			// System.out.println("[Staff.onUpdate] tag after setting=" + tag);
 		}
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Staff [ordinal=");
+		builder.append(getClass().getSimpleName());
+		builder.append(" [ordinal=");
 		builder.append(ordinal);
 		builder.append(", spells=");
 		builder.append(Arrays.toString(spells));
@@ -262,23 +257,43 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		if (spells[i] == null) {
 			return null;
 		} else {
-			return new ItemStack(spells[i]);
+			ItemStack s = new ItemStack(spells[i]);
+			return s;
 		}
 	}
 
-	// called
+	// @Override
+	// public ItemStack decrStackSize(int slotIndex, int amount) {
+	// ItemStack stack = getStackInSlot(slotIndex);
+	// if (stack != null) {
+	// if (stack.stackSize <= amount) {
+	// setInventorySlotContents(slotIndex, null);
+	// } else {
+	// stack = stack.splitStack(amount);
+	// if (stack.stackSize == 0) {
+	// setInventorySlotContents(slotIndex, null);
+	// }
+	// }
+	// }
+	// return stack;
+	// }
+
 	@Override
-	public ItemStack decrStackSize(int slot, int amount) {
-		ItemStack stack = getStackInSlot(slot);
+	public ItemStack decrStackSize(int i, int amount) {
+		System.out.println("[Staff.decrStackSize] i=" + i);
+		System.out.println("[Staff.decrStackSize] amount=" + amount);
+		ItemStack stack = getStackInSlot(i);
 		if (stack != null) {
 			if (stack.stackSize <= amount) {
-				setInventorySlotContents(slot, null);
+				setInventorySlotContents(i, null);
 			} else {
 				stack = stack.splitStack(amount);
 				if (stack.stackSize == 0) {
-					setInventorySlotContents(slot, null);
+					setInventorySlotContents(i, null);
 				}
 			}
+		} else {
+			System.out.println("[Staff.decrStackSize] UNEXPEXTED! stack=" + stack);
 		}
 		return stack;
 	}
@@ -293,12 +308,13 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		if (stack != null) {
-			spells[slot] = (Spell) stack.getItem();
-		} else {
+	public void setInventorySlotContents(int i, ItemStack stack) {
+		if (stack == null) {
 			// Fix for issue #85 Spells cannot be re-positioned on staff
-			spells[slot] = null;
+			// Spell was copied when moved
+			spells[i] = null;
+		} else {
+			spells[i] = (Spell) stack.getItem();
 		}
 	}
 
@@ -314,6 +330,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public int getInventoryStackLimit() {
+		//System.out.println("[Staff.getInventoryStackLimit]");
 		return 1;
 	}
 
@@ -323,7 +340,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer var1) {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -337,7 +354,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	// http://www.minecraftforge.net/forum/index.php?topic=14115.0
 	// Only called by hoppers, etc. Extend Slot (SpellSlot) and overide isItemValid
 	@Override
-	public boolean isItemValidForSlot(int var1, ItemStack stack) {
+	public boolean isItemValidForSlot(int i, ItemStack stack) {
 		return true;
 	}
 }

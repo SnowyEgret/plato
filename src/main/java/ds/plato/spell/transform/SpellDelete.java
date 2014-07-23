@@ -30,27 +30,10 @@ public class SpellDelete extends AbstractSpellTransform {
 	}
 
 	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SpellDelete [getNumPicks()=");
-		builder.append(getNumPicks());
-		builder.append("]");
-		return builder.toString();
-	}
-
-	@Override
 	public int getNumPicks() {
 		return 1;
 	}
 	
-//	private static class Descriptor extends AbstractSpellDescriptor {
-//		public Descriptor() {
-//			name = Messages.spell_delete_name;
-//			description = Messages.spell_delete_description;
-//			picks = new PickDescriptor(Messages.spell_pick);
-//		}
-//	}
-
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();

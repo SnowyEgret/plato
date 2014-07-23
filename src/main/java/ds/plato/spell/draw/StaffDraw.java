@@ -23,17 +23,4 @@ public class StaffDraw extends Staff {
 	public boolean hasRecipe() {
 		return false;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("StaffDraw [spells=");
-		builder.append(Arrays.toString(spells));
-		builder.append(", ordinal=");
-		builder.append(ordinal);
-		builder.append("]");
-		return builder.toString();
-	}
-
-
 }

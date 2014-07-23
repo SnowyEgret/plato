@@ -21,16 +21,4 @@ public class StaffSelect extends Staff {
 	public boolean hasRecipe() {
 		return false;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("StaffSelect [spells=");
-		builder.append(spells);
-		builder.append(", currentSpell()=");
-		builder.append(getSpell());
-		builder.append("]");
-		return builder.toString();
-	}
-
 }
