@@ -11,16 +11,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.Property;
 
 import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
-import ds.plato.core.IToggleable;
 import ds.plato.core.Player;
 import ds.plato.pick.IPick;
 
@@ -70,50 +67,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 			previousSpell();
 			break;
 		}
-//		}
-//		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-//			previousSpell();
-//		} else {
-//			nextSpell();
-//		}
-	}
-
-	public Spell nextSpell() {
-		Spell s = null;
-		for (int i = 0; i < spells.length; i++) {
-			if (ordinal == spells.length - 1) {
-				ordinal = 0;
-			} else {
-				ordinal++;
-			}
-			s = spells[ordinal];
-			if (s == null) {
-				continue;
-			} else {
-				pickManager.reset(s.getNumPicks());
-				return s;
-			}
-		}
-		return null;
-	}
-
-	public Spell previousSpell() {
-		Spell s = null;
-		for (int i = 0; i < spells.length; i++) {
-			if (ordinal == 0) {
-				ordinal = spells.length - 1;
-			} else {
-				ordinal--;
-			}
-			s = spells[ordinal];
-			if (s == null) {
-				continue;
-			} else {
-				pickManager.reset(s.getNumPicks());
-				return s;
-			}
-		}
-		return null;
 	}
 
 	public Spell getSpell() {
@@ -157,6 +110,46 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		}
 		return true;
 	}
+
+	Spell nextSpell() {
+		Spell s = null;
+		for (int i = 0; i < spells.length; i++) {
+			if (ordinal == spells.length - 1) {
+				ordinal = 0;
+			} else {
+				ordinal++;
+			}
+			s = spells[ordinal];
+			if (s == null) {
+				continue;
+			} else {
+				pickManager.reset(s.getNumPicks());
+				return s;
+			}
+		}
+		return null;
+	}
+
+	Spell previousSpell() {
+		Spell s = null;
+		for (int i = 0; i < spells.length; i++) {
+			if (ordinal == 0) {
+				ordinal = spells.length - 1;
+			} else {
+				ordinal--;
+			}
+			s = spells[ordinal];
+			if (s == null) {
+				continue;
+			} else {
+				pickManager.reset(s.getNumPicks());
+				return s;
+			}
+		}
+		return null;
+	}
+	
+	
 
 	// Sets tag after crafting
 	@Override

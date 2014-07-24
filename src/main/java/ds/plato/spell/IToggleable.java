@@ -1,4 +1,4 @@
-package ds.plato.core;
+package ds.plato.spell;
 
 public interface IToggleable {
 	

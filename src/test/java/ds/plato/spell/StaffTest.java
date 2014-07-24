@@ -20,7 +20,6 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import ds.plato.core.IToggleable;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.spell.matrix.SpellCopy;

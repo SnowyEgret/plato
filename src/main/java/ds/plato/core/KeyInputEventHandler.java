@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
+import ds.plato.spell.IToggleable;
 import ds.plato.spell.Spell;
 import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.spell.transform.SpellDelete;
