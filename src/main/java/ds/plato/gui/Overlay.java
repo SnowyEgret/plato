@@ -31,7 +31,7 @@ public class Overlay {
 		this.displacement = displacement;
 	}
 
-	public void draw(Spell spell) {
+	public void drawSpell(Spell spell) {
 		int x = 10;
 		int y = x;
 		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
@@ -65,15 +65,11 @@ public class Overlay {
 
 		r.drawStringWithShadow("Selection size: " + selectionManager.size(), x, y += dy, red);
 
-		// Spell s = spell.getSpell();
-		// if (s != null) {
 		// TODO SpellFillRandom should set message
 		if (spell instanceof SpellFillRandom) {
 			SlotDistribution d = Player.client().slotDistribution();
-			// SlotDistribution d = new SlotDistribution(s.getSlotEntries(Minecraft.getMinecraft().thePlayer));
 			r.drawStringWithShadow(d.toString(), x, y += dy, blue);
 		}
-		// }
 
 		String message = spell.getMessage();
 		if (message != null) {

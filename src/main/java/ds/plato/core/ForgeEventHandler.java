@@ -61,12 +61,11 @@ public class ForgeEventHandler {
 
 		Player player = Player.client();
 		IWorld world = player.getWorldServer();
-
 		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
+		//System.out.println("[ForgeEventHandler.onMouseEvent] position.typeOfHit=" + position.typeOfHit + ", e.button=" + e.button);
 
 		if (position.typeOfHit == MovingObjectType.MISS) {
 			if (e.button == 0) {
-
 				selectionManager.clearSelections();
 				e.setCanceled(true);
 
@@ -184,9 +183,10 @@ public class ForgeEventHandler {
 	public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
 		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
 			if (spell != null) {
-				overlay.draw(spell);
+				overlay.drawSpell(spell);
 			} else {
-				if (Player.client().getStaff().isEmpty()) {
+				Staff s = Player.client().getStaff();
+				if (s != null && s.isEmpty()) {
 					overlay.drawEmptyStaff();
 				}
 			}

@@ -37,7 +37,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	}
 
 	public Object[] getRecipe() {
-		return new Object[] { "A  ", " A ", "  A", 'A', Items.bone };
+		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
 	}
 
 	public boolean hasRecipe() {
@@ -46,15 +46,15 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public void onMouseClickLeft(MovingObjectPosition position) {
-		if (getSpell() != null)
+		if (!isEmpty()) {
 			getSpell().onMouseClickLeft(position);
+		}
 	}
 
 	@Override
 	public void onMouseClickRight(MovingObjectPosition position) {
-		if (getSpell() == null || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-			Player player = Player.client();
-			player.openGui(3);
+		if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+			Player.client().openGui(3);
 		} else {
 			getSpell().onMouseClickRight(position);
 		}
@@ -119,6 +119,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		}
 	}
 
+	//Called in preInit to initialize staffs
 	public void addSpell(Spell spell) {
 		for (int i = 0; i < spells.length; i++) {
 			Spell s = spells[i];
@@ -137,10 +138,6 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 				numSpells++;
 		}
 		return numSpells;
-	}
-
-	public void clearPicks() {
-		pickManager.clearPicks();
 	}
 
 	public boolean isEmpty() {
@@ -172,7 +169,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		if (isEmpty()) {
 			rollOver.add(EnumChatFormatting.RED + "No spells on staff");
 		} else {
-			rollOver.add(EnumChatFormatting.GREEN + " "+ numSpells() + " spells on staff");
+			rollOver.add(EnumChatFormatting.GREEN + " " + numSpells() + " spells on staff");
 		}
 
 	}
@@ -257,11 +254,11 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		return spells.length;
 	}
 
-	//Called every tick by GUI to draw screen.
-	//Called by decrStackSize
+	// Called every tick by GUI to draw screen.
+	// Called by decrStackSize
 	@Override
 	public ItemStack getStackInSlot(int i) {
-		
+
 		// Exception e = new Exception();
 		// StackTraceElement[] trace = e.getStackTrace();
 		// for (int j = 0; j < 3; j++) {
@@ -269,7 +266,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		// e.printStackTrace();
 		// }
 		// }
-		
+
 		if (spells[i] == null) {
 			return null;
 		} else {
@@ -280,20 +277,18 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public ItemStack decrStackSize(int i, int amount) {
-		System.out.println("[Staff.decrStackSize] i=" + i);
-		System.out.println("[Staff.decrStackSize] amount=" + amount);
+		System.out.println("\n[Staff.decrStackSize] i=" + i + ", amount=" + amount);
 		ItemStack stack = getStackInSlot(i);
 		if (stack != null) {
-			if (stack.stackSize <= amount) {
-				setInventorySlotContents(i, null);
-				// Added this line. We return stack.
-				stack.stackSize = 0;
-			} else {
-				stack = stack.splitStack(amount);
-				if (stack.stackSize == 0) {
-					setInventorySlotContents(i, null);
-				}
-			}
+			// Simplified because inventory stack limit is 1
+			// if (stack.stackSize <= amount) {
+			setInventorySlotContents(i, null);
+			// } else {
+			// stack = stack.splitStack(amount);
+			// if (stack.stackSize == 0) {
+			// setInventorySlotContents(i, null);
+			// }
+			// }
 		} else {
 			System.out.println("[Staff.decrStackSize] UNEXPEXTED! stack=" + stack);
 		}
@@ -302,7 +297,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	// When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
 	// like when you close a workbench GUI.
-	//Not being called
+	// Not being called
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i) {
 		System.out.println("[Staff.getStackInSlotOnClosing] i=" + i);
@@ -313,16 +308,11 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		return stack;
 	}
 
-	//Is being called twice (i, null) when player left clicks on a spell. Both have same stack trace.
 	@Override
 	public void setInventorySlotContents(int i, ItemStack stack) {
-		System.out.println("[Staff.setInventorySlotContents] i=" + i);
-		//new Exception().printStackTrace();
-		System.out.println("[Staff.setInventorySlotContents] stack=" + stack);
-		//new Exception().printStackTrace();
+		System.out.println("[Staff.setInventorySlotContents] i=" + i + ", stack=" + stack);
 		if (stack == null) {
 			// Fix for issue #85 Spells cannot be re-positioned on staff
-			// Spell was copied when moved
 			spells[i] = null;
 		} else {
 			spells[i] = (Spell) stack.getItem();
@@ -336,7 +326,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -349,7 +339,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	public void markDirty() {
 	}
 
-	//Not being called
+	// Not being called
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		System.out.println("[Staff.isUseableByPlayer] player=" + player);
