@@ -2,6 +2,10 @@ package ds.plato.core;
 
 public interface IToggleable {
 	
-	public void toggle();
+	public enum Direction {
+		NEXT, PREVIOUS
+	}
+	
+	public void toggle(Direction direction);
 
 }

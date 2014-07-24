@@ -15,7 +15,7 @@ public class GuiStaffContainer extends Container {
 	public GuiStaffContainer(InventoryPlayer inventoryPlayer, IInventory inventoryStaff) {
 		this.inventoryStaff = inventoryStaff;
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < inventoryStaff.getSizeInventory(); i++) {
 			//SpellSlot overides isItemValid to permit only spells in these slots
 			addSlotToContainer(new GuiStaffSlotSpell(inventoryStaff, i, 8 + i * 18, 18));
 		}

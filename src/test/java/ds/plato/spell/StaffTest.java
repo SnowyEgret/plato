@@ -20,15 +20,16 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import ds.plato.core.IToggleable;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.spell.transform.SpellDelete;
 import ds.plato.test.PlatoTest;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ Keyboard.class })
-@PowerMockIgnore({ "javax.management.*" })
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest({ Keyboard.class })
+//@PowerMockIgnore({ "javax.management.*" })
 public class StaffTest extends PlatoTest {
 
 	@Mock PlayerInteractEvent mockEvent;
@@ -40,7 +41,7 @@ public class StaffTest extends PlatoTest {
 	public void setUp() {
 		super.setUp();
 		MockitoAnnotations.initMocks(this);
-		PowerMockito.mockStatic(Keyboard.class);
+		//PowerMockito.mockStatic(Keyboard.class);
 		Pick[] picks = new Pick[] { new Pick(1, 1, 1, dirt, 0, 0), new Pick(2, 2, 2, dirt, 0, 0) };
 		when(pickManager.getPicks()).thenReturn(picks);
 		when(pickManager.isFinishedPicking()).thenReturn(true);
@@ -107,15 +108,13 @@ public class StaffTest extends PlatoTest {
 
 	@Test
 	public void toggle() {
-		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(true);
-		staff.toggle();
+		staff.toggle(IToggleable.Direction.PREVIOUS);
 		assertEquals(mockMove, staff.getSpell());
-		staff.toggle();
+		staff.toggle(IToggleable.Direction.PREVIOUS);
 		assertEquals(mockDelete, staff.getSpell());
-		when(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)).thenReturn(false);
-		staff.toggle();
+		staff.toggle(IToggleable.Direction.NEXT);
 		assertEquals(mockMove, staff.getSpell());
-		staff.toggle();
+		staff.toggle(IToggleable.Direction.NEXT);
 		assertEquals(mockDelete, staff.getSpell());
 
 	}

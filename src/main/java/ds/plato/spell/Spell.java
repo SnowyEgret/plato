@@ -54,10 +54,6 @@ public abstract class Spell extends Item implements IClickable {
 
 	public abstract SpellDescriptor getDescriptor();
 
-//	public Spell getSpell() {
-//		return this;
-//	}
-
 	public String getMessage() {
 		return message;
 	}
@@ -102,15 +98,14 @@ public abstract class Spell extends Item implements IClickable {
 		int side = e.sideHit;
 		pickManager.pick(w, e.blockX, e.blockY, e.blockZ, side);
 		if (pickManager.isFinishedPicking()) {
-			// SlotEntry[] entries = getSlotEntries(player);
 			SlotEntry[] entries = player.getSlotEntries();
 			invoke(w, entries);
 		}
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List toolTip, boolean par4) {
-		toolTip.add(getDescriptor().description);
+	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
+		rollOver.add(getDescriptor().description);
 	}
 	
 	public boolean isPicking() {

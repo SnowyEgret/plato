@@ -34,7 +34,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 
 	public Staff(IPick pickManager) {
 		this.pickManager = pickManager;
-	}
+	} 
 
 	public Object[] getRecipe() {
 		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
@@ -61,12 +61,21 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	}
 
 	@Override
-	public void toggle() {
-		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-			previousSpell();
-		} else {
+	public void toggle(IToggleable.Direction direction) {
+		switch (direction) {
+		case NEXT:
 			nextSpell();
+			break;
+		case PREVIOUS:
+			previousSpell();
+			break;
 		}
+//		}
+//		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+//			previousSpell();
+//		} else {
+//			nextSpell();
+//		}
 	}
 
 	public Spell nextSpell() {
@@ -311,6 +320,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 	@Override
 	public void setInventorySlotContents(int i, ItemStack stack) {
 		System.out.println("[Staff.setInventorySlotContents] i=" + i + ", stack=" + stack);
+		//new Exception().printStackTrace();
 		if (stack == null) {
 			// Fix for issue #85 Spells cannot be re-positioned on staff
 			spells[i] = null;

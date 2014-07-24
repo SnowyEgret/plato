@@ -72,7 +72,11 @@ public class KeyInputEventHandler {
 			if (is != null) {
 				Item i = is.getItem();
 				if (i instanceof IToggleable) {
-					((IToggleable) i).toggle();
+					if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+						((IToggleable) i).toggle(IToggleable.Direction.PREVIOUS);
+					} else {
+						((IToggleable) i).toggle(IToggleable.Direction.NEXT);
+					}
 				}
 			}
 		}
