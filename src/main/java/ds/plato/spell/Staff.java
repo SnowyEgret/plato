@@ -21,7 +21,7 @@ import ds.plato.Plato;
 import ds.plato.core.Player;
 import ds.plato.pick.IPick;
 
-public class Staff extends Item implements IClickable, IToggleable, IInventory {
+public class Staff extends Item implements IClickable, IInventory {
 
 	protected Spell[] spells = new Spell[9];
 	protected int ordinal = 0;
@@ -57,17 +57,17 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		}
 	}
 
-	@Override
-	public void toggle(IToggleable.Direction direction) {
-		switch (direction) {
-		case NEXT:
-			nextSpell();
-			break;
-		case PREVIOUS:
-			previousSpell();
-			break;
-		}
-	}
+//	@Override
+//	public void toggle(IToggleable.Direction direction) {
+//		switch (direction) {
+//		case NEXT:
+//			nextSpell();
+//			break;
+//		case PREVIOUS:
+//			previousSpell();
+//			break;
+//		}
+//	}
 
 	public Spell getSpell() {
 		if (isEmpty()) {
@@ -111,7 +111,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		return true;
 	}
 
-	Spell nextSpell() {
+	public Spell nextSpell() {
 		Spell s = null;
 		for (int i = 0; i < spells.length; i++) {
 			if (ordinal == spells.length - 1) {
@@ -130,7 +130,7 @@ public class Staff extends Item implements IClickable, IToggleable, IInventory {
 		return null;
 	}
 
-	Spell previousSpell() {
+	public Spell previousSpell() {
 		Spell s = null;
 		for (int i = 0; i < spells.length; i++) {
 			if (ordinal == 0) {

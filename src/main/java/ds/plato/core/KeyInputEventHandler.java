@@ -3,7 +3,6 @@ package ds.plato.core;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,8 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.IToggleable;
-import ds.plato.spell.Spell;
+import ds.plato.spell.Staff;
 import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.spell.transform.SpellDelete;
 import ds.plato.undo.IUndo;
@@ -72,11 +70,11 @@ public class KeyInputEventHandler {
 			ItemStack is = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
 			if (is != null) {
 				Item i = is.getItem();
-				if (i instanceof IToggleable) {
+				if (i instanceof Staff) {
 					if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-						((IToggleable) i).toggle(IToggleable.Direction.PREVIOUS);
+						((Staff) i).previousSpell();
 					} else {
-						((IToggleable) i).toggle(IToggleable.Direction.NEXT);
+						((Staff) i).nextSpell();
 					}
 				}
 			}

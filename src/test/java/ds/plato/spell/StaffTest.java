@@ -106,14 +106,14 @@ public class StaffTest extends PlatoTest {
 	}
 
 	@Test
-	public void toggle() {
-		staff.toggle(IToggleable.Direction.PREVIOUS);
+	public void previousSpellnextSpell() {
+		staff.previousSpell();
 		assertEquals(mockMove, staff.getSpell());
-		staff.toggle(IToggleable.Direction.PREVIOUS);
+		staff.previousSpell();
 		assertEquals(mockDelete, staff.getSpell());
-		staff.toggle(IToggleable.Direction.NEXT);
+		staff.nextSpell();
 		assertEquals(mockMove, staff.getSpell());
-		staff.toggle(IToggleable.Direction.NEXT);
+		staff.nextSpell();
 		assertEquals(mockDelete, staff.getSpell());
 
 	}
