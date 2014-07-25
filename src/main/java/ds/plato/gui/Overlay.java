@@ -4,6 +4,7 @@ import javax.vecmath.Vector3d;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.item.ItemStack;
 
 import org.lwjgl.input.Keyboard;
 
@@ -11,6 +12,7 @@ import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Spell;
+import ds.plato.spell.Staff;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.transform.SpellFillRandom;
 
@@ -31,6 +33,7 @@ public class Overlay {
 		this.displacement = displacement;
 	}
 
+	
 	public void drawSpell(Spell spell) {
 		int x = 10;
 		int y = x;
@@ -77,11 +80,12 @@ public class Overlay {
 		}
 	}
 
-	public void drawEmptyStaff() {
+	public void drawStaff(Staff staff, ItemStack stack) {
 		int x = 10;
 		int y = x;
 		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
-		r.drawStringWithShadow("Staff has no spells", x, y, white);
+		String staffName = staff.getItemStackDisplayName(stack);
+		r.drawStringWithShadow(staffName + " has no spells", x, y, white);
 	}
 
 }

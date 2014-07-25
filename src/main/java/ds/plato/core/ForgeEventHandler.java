@@ -173,7 +173,7 @@ public class ForgeEventHandler {
 			} else {
 				if (s != spell) {
 					spell = s;
-					spell.reset();
+					s.reset();
 				}
 			}
 		}
@@ -185,9 +185,10 @@ public class ForgeEventHandler {
 			if (spell != null) {
 				overlay.drawSpell(spell);
 			} else {
-				Staff s = Player.client().getStaff();
-				if (s != null && s.isEmpty()) {
-					overlay.drawEmptyStaff();
+				Player p = Player.client();
+				Staff staff = p.getStaff();
+				if (staff != null) {
+					overlay.drawStaff(staff, p.getHeldItemStack());
 				}
 			}
 		}
