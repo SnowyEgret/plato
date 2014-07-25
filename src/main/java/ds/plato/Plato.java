@@ -5,8 +5,6 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.LogManager;
@@ -27,7 +25,6 @@ import ds.plato.block.BlockModel;
 import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
-import ds.plato.core.Player;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.proxy.CommonProxy;
@@ -35,14 +32,15 @@ import ds.plato.select.ISelect;
 import ds.plato.select.SelectionManager;
 import ds.plato.spell.Spell;
 import ds.plato.spell.SpellLoader;
-import ds.plato.spell.Staff;
 import ds.plato.spell.draw.AbstractSpellDraw;
-import ds.plato.spell.draw.StaffDraw;
 import ds.plato.spell.matrix.AbstractSpellMatrix;
 import ds.plato.spell.select.AbstractSpellSelect;
-import ds.plato.spell.select.StaffSelect;
 import ds.plato.spell.transform.AbstractSpellTransform;
-import ds.plato.spell.transform.StaffTransform;
+import ds.plato.staff.Staff;
+import ds.plato.staff.StaffDraw;
+import ds.plato.staff.StaffOak;
+import ds.plato.staff.StaffSelect;
+import ds.plato.staff.StaffTransform;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
 
@@ -93,7 +91,6 @@ public class Plato {
 			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
 			Staff transformStaff = loader.loadStaff(StaffTransform.class);
 			Staff drawStaff = loader.loadStaff(StaffDraw.class);
-			// loader.loadStaff(Staff.class);
 
 			staffs = new ArrayList<>();
 			staffs.add(selectionStaff);
@@ -101,7 +98,8 @@ public class Plato {
 			staffs.add(drawStaff);
 
 			// Create an empty staff
-			staffs.add(loader.loadStaff(Staff.class));
+			//staffs.add(loader.loadStaff(Staff.class));
+			staffs.add(loader.loadStaff(StaffOak.class));
 
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelect) {

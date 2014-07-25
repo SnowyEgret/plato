@@ -22,6 +22,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
+import ds.plato.staff.Staff;
 import ds.plato.undo.IUndo;
 
 public class SpellLoader {

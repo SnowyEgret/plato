@@ -1,21 +1,19 @@
-package ds.plato.spell.draw;
-
-import java.util.Arrays;
+package ds.plato.staff;
 
 import net.minecraftforge.common.config.Property;
 import ds.plato.pick.IPick;
 import ds.plato.spell.Spell;
-import ds.plato.spell.Staff;
+import ds.plato.spell.select.AbstractSpellSelect;
 
-public class StaffDraw extends Staff {
+public class StaffSelect extends Staff {
 
-	public StaffDraw(IPick pickManager) {
+	public StaffSelect(IPick pickManager) {
 		super(pickManager);
 	}
 
 	@Override
 	public void addSpell(Spell spell) {
-		assert spell instanceof AbstractSpellDraw;
+		assert spell instanceof AbstractSpellSelect;
 		super.addSpell(spell);
 	}
 

@@ -1,4 +1,4 @@
-package ds.plato.spell;
+package ds.plato.staff;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +20,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
 import ds.plato.core.Player;
 import ds.plato.pick.IPick;
+import ds.plato.spell.IClickable;
+import ds.plato.spell.Spell;
 
-public class Staff extends Item implements IClickable, IInventory {
+public abstract class Staff extends Item implements IClickable, IInventory {
 
 	protected Spell[] spells = new Spell[9];
 	protected int ordinal = 0;
@@ -29,7 +31,7 @@ public class Staff extends Item implements IClickable, IInventory {
 	private String name = "Staff";
 	private boolean spellsInitialized = false;
 
-	public Staff(IPick pickManager) {
+	protected Staff(IPick pickManager) {
 		this.pickManager = pickManager;
 	}
 

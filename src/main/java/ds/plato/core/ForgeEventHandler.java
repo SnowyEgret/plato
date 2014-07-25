@@ -35,8 +35,8 @@ import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.IClickable;
 import ds.plato.spell.Spell;
-import ds.plato.spell.Staff;
 import ds.plato.spell.transform.SpellFill;
+import ds.plato.staff.Staff;
 import ds.plato.undo.IUndo;
 
 public class ForgeEventHandler {

@@ -11,19 +11,14 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.lwjgl.input.Keyboard;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
-import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.spell.transform.SpellDelete;
+import ds.plato.staff.Staff;
+import ds.plato.staff.StaffOak;
 import ds.plato.test.PlatoTest;
 
 //@RunWith(PowerMockRunner.class)
@@ -44,7 +39,7 @@ public class StaffTest extends PlatoTest {
 		Pick[] picks = new Pick[] { new Pick(1, 1, 1, dirt, 0, 0), new Pick(2, 2, 2, dirt, 0, 0) };
 		when(pickManager.getPicks()).thenReturn(picks);
 		when(pickManager.isFinishedPicking()).thenReturn(true);
-		staff = new Staff(pickManager);
+		staff = new StaffOak(pickManager);
 		staff.addSpell(mockDelete);
 		staff.addSpell(mockMove);
 	}

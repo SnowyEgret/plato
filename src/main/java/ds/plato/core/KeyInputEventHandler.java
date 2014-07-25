@@ -16,9 +16,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Staff;
 import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.spell.transform.SpellDelete;
+import ds.plato.staff.Staff;
 import ds.plato.undo.IUndo;
 
 public class KeyInputEventHandler {

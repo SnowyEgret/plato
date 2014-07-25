@@ -12,9 +12,9 @@ import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Spell;
-import ds.plato.spell.Staff;
 import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.transform.SpellFillRandom;
+import ds.plato.staff.Staff;
 
 public class Overlay {
 

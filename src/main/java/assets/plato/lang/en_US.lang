@@ -4,6 +4,7 @@ item.staff.name=Staff
 item.staffDraw.name=Draw Staff
 item.staffSelect.name=Select Staff
 item.staffTransform.name=Edit Staff
+item.staffOak.name=Oak Staff
 
 item.spellBox.name=Box Spell
 item.spellCircle.name=Circle Spell

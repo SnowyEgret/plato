@@ -16,7 +16,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import ds.plato.Plato;
 import ds.plato.spell.Spell;
-import ds.plato.spell.Staff;
+import ds.plato.staff.Staff;
 
 public class Player {
 
