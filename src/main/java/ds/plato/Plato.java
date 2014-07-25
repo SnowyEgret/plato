@@ -37,6 +37,7 @@ import ds.plato.spell.matrix.AbstractSpellMatrix;
 import ds.plato.spell.select.AbstractSpellSelect;
 import ds.plato.spell.transform.AbstractSpellTransform;
 import ds.plato.staff.Staff;
+import ds.plato.staff.StaffBirch;
 import ds.plato.staff.StaffDraw;
 import ds.plato.staff.StaffOak;
 import ds.plato.staff.StaffSelect;
@@ -100,6 +101,7 @@ public class Plato {
 			// Create an empty staff
 			//staffs.add(loader.loadStaff(Staff.class));
 			staffs.add(loader.loadStaff(StaffOak.class));
+			staffs.add(loader.loadStaff(StaffBirch.class));
 
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelect) {
