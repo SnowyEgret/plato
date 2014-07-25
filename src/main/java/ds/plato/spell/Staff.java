@@ -31,7 +31,7 @@ public class Staff extends Item implements IClickable, IInventory {
 
 	public Staff(IPick pickManager) {
 		this.pickManager = pickManager;
-	} 
+	}
 
 	public Object[] getRecipe() {
 		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
@@ -50,65 +50,12 @@ public class Staff extends Item implements IClickable, IInventory {
 
 	@Override
 	public void onMouseClickRight(MovingObjectPosition position) {
+		// For now, jump while right clicking to open gui again.
 		if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
 			Player.client().openGui(3);
 		} else {
 			getSpell().onMouseClickRight(position);
 		}
-	}
-
-//	@Override
-//	public void toggle(IToggleable.Direction direction) {
-//		switch (direction) {
-//		case NEXT:
-//			nextSpell();
-//			break;
-//		case PREVIOUS:
-//			previousSpell();
-//			break;
-//		}
-//	}
-
-	public Spell getSpell() {
-		if (isEmpty()) {
-			return null;
-		} else {
-			Spell s = spells[ordinal];
-			if (s == null) {
-				s = nextSpell();
-			}
-			return s;
-		}
-	}
-
-	//Called in preInit to initialize staffs
-	public void addSpell(Spell spell) {
-		for (int i = 0; i < spells.length; i++) {
-			Spell s = spells[i];
-			if (s == null) {
-				spells[i] = spell;
-				return;
-			}
-		}
-		throw new RuntimeException("No room for spell on staff. spell=" + spell);
-	}
-
-	public int numSpells() {
-		int numSpells = 0;
-		for (Spell s : spells) {
-			if (s != null)
-				numSpells++;
-		}
-		return numSpells;
-	}
-
-	public boolean isEmpty() {
-		for (Spell s : spells) {
-			if (s != null) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public Spell nextSpell() {
@@ -148,10 +95,50 @@ public class Staff extends Item implements IClickable, IInventory {
 		}
 		return null;
 	}
-	
-	
 
-	// Sets tag after crafting
+	public Spell getSpell() {
+		if (isEmpty()) {
+			return null;
+		} else {
+			Spell s = spells[ordinal];
+			if (s == null) {
+				s = nextSpell();
+			}
+			return s;
+		}
+	}
+
+	// Called in preInit to initialize staffs
+	public void addSpell(Spell spell) {
+		for (int i = 0; i < spells.length; i++) {
+			Spell s = spells[i];
+			if (s == null) {
+				spells[i] = spell;
+				return;
+			}
+		}
+		throw new RuntimeException("No room for spell on staff. spell=" + spell + ", staff=" + this);
+	}
+
+	public int numSpells() {
+		int numSpells = 0;
+		for (Spell s : spells) {
+			if (s != null)
+				numSpells++;
+		}
+		return numSpells;
+	}
+
+	public boolean isEmpty() {
+		for (Spell s : spells) {
+			if (s != null) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// Sets tag when staff is crafted
 	@Override
 	public void onCreated(ItemStack stack, World w, EntityPlayer player) {
 		if (stack.stackTagCompound == null) {
@@ -165,7 +152,7 @@ public class Staff extends Item implements IClickable, IInventory {
 		// }
 	}
 
-	// To write to rollover on mouse over in creative tab
+	// Adds information to rollover in creative tab
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
 		if (isEmpty()) {
@@ -173,12 +160,11 @@ public class Staff extends Item implements IClickable, IInventory {
 		} else {
 			rollOver.add(EnumChatFormatting.GREEN + " " + numSpells() + " spells on staff");
 		}
-
 	}
 
 	// On first call, initializes spells array and ordinal from stack's tag.
-	// On tick, synchronizes tag with spells array and ordinal
-	// For subclasses of Staff which have fixed spells, only manages ordinal.
+	// Subsequently, on tick, syncs tag with spells array and ordinal
+	// For subclasses of Staff which have fixed spells, only syncs ordinal.
 	@Override
 	public void onUpdate(ItemStack stack, World w, Entity entity, int par4, boolean par5) {
 
@@ -261,14 +247,6 @@ public class Staff extends Item implements IClickable, IInventory {
 	@Override
 	public ItemStack getStackInSlot(int i) {
 
-		// Exception e = new Exception();
-		// StackTraceElement[] trace = e.getStackTrace();
-		// for (int j = 0; j < 3; j++) {
-		// if (!trace[1].getClassName().equals("net.minecraft.inventory.Slot")) {
-		// e.printStackTrace();
-		// }
-		// }
-
 		if (spells[i] == null) {
 			return null;
 		} else {
@@ -313,7 +291,7 @@ public class Staff extends Item implements IClickable, IInventory {
 	@Override
 	public void setInventorySlotContents(int i, ItemStack stack) {
 		System.out.println("[Staff.setInventorySlotContents] i=" + i + ", stack=" + stack);
-		//new Exception().printStackTrace();
+		// new Exception().printStackTrace();
 		if (stack == null) {
 			// Fix for issue #85 Spells cannot be re-positioned on staff
 			spells[i] = null;
@@ -358,7 +336,7 @@ public class Staff extends Item implements IClickable, IInventory {
 	}
 
 	// http://www.minecraftforge.net/forum/index.php?topic=14115.0
-	// Only called by hoppers, etc. Extend Slot (SpellSlot) and overide isItemValid
+	// Only called by hoppers, etc. Extend Slot and override isItemValid
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
 		return true;

@@ -1,10 +1,11 @@
 package ds.plato.proxy;
 
-import net.minecraft.block.BlockAir;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import ds.plato.Plato;
+import ds.plato.gui.GuiStaffContainer;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.undo.IUndo;
@@ -22,6 +23,10 @@ public class CommonProxy implements IGuiHandler {
 		switch (ID) {
 		case 0:
 			return null;
+		case 3:
+			//From http://www.minecraftforge.net/wiki/Containers_and_GUIs:
+			//Note that the client returns a Gui while the server returns a Container
+			return new GuiStaffContainer(player.inventory, (IInventory) player.getHeldItem().getItem());
 		default:
 			return null;
 		}

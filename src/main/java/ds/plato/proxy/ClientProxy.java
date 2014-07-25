@@ -49,7 +49,8 @@ public class ClientProxy extends CommonProxy {
 		case 2:
 			return new GuiSpellText(player);
 		case 3:
-			return new GuiStaff(player.inventory, (IInventory) Player.client().getHeldItem());
+			//return new GuiStaff(player.inventory, (IInventory) Player.client().getHeldItem());
+			return new GuiStaff(player.inventory, (IInventory) player.getHeldItem().getItem());
 		default:
 			throw new IllegalArgumentException("GUI id "+ id +" is undefined");
 		}
