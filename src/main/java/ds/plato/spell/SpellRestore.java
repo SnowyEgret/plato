@@ -58,7 +58,7 @@ public class SpellRestore extends Spell {
 			System.out.println("[SpellRestore.readFile] group=" + group);
 			Transaction transaction = undoManager.newTransaction();
 			Point3i d = new Point3i();
-			d.sub(group.insertionPoint, lastPick);
+			d.sub(group.insertionPoint, lastPick.point3i());
 			//Draw blocks one block up from pick
 			d.y -= 1;
 			for (Voxel v : group.voxels) {

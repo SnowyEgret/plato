@@ -9,8 +9,8 @@ import ds.plato.core.IWorld;
 
 public class PickManager implements IPick {
 
-	private int maxPicks = 0;
 	private final LinkedList<Pick> picks = new LinkedList<>();
+	private int maxPicks = 0;
 	private IWorld world;
 	private Block blockPicked;
 
