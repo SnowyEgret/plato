@@ -62,7 +62,8 @@ public class ForgeEventHandler {
 		Player player = Player.client();
 		IWorld world = player.getWorldServer();
 		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
-		//System.out.println("[ForgeEventHandler.onMouseEvent] position.typeOfHit=" + position.typeOfHit + ", e.button=" + e.button);
+		// System.out.println("[ForgeEventHandler.onMouseEvent] position.typeOfHit=" + position.typeOfHit +
+		// ", e.button=" + e.button);
 
 		if (position.typeOfHit == MovingObjectType.MISS) {
 			if (e.button == 0) {
@@ -75,16 +76,16 @@ public class ForgeEventHandler {
 			}
 
 		} else if (position.typeOfHit == MovingObjectType.BLOCK) {
-			
+
 			ItemStack stack = player.getHeldItemStack();
 			if (stack != null) {
 				Item item = stack.getItem();
 
-				//IClickable is either a staff or a spell
+				// IClickable is either a staff or a spell
 				if (item instanceof IClickable) {
 					IClickable c = (IClickable) item;
 
-					//MouseEvent is being sent twice. Throw out the second.
+					// MouseEvent is being sent twice. Throw out the second.
 					if (e.nanoseconds - nanoseconds < 1000000000) {
 						nanoseconds = 0;
 						e.setCanceled(true);
@@ -93,24 +94,22 @@ public class ForgeEventHandler {
 						nanoseconds = e.nanoseconds;
 					}
 
-					//Select
+					// Select
 					if (e.button == 0) {
 						c.onMouseClickLeft(position);
 						e.setCanceled(true);
 						return;
-						
-					//Pick
+
+						// Pick
 					} else if (e.button == 1) {
-						//TODO test block class for containment in list of classes to ignore
 						Block block = world.getBlock(position.blockX, position.blockY, position.blockZ);
-						if (block instanceof BlockWorkbench || block instanceof BlockContainer || block instanceof BlockAnvil) {
-							return;
+						if (isAccepted(block)) {
+							c.onMouseClickRight(position);
+							e.setCanceled(true);
 						}
-						c.onMouseClickRight(position);
-						e.setCanceled(true);
 					}
 
-				//Fill the selections with the block in hand
+					// Fill the selections with the block in hand
 				} else if (item instanceof ItemBlock) {
 					ItemBlock itemBlock = (ItemBlock) item;
 					if (e.button == 1) {
@@ -193,12 +192,19 @@ public class ForgeEventHandler {
 			}
 		}
 	}
-	
-//	@SubscribeEvent
-//	public void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
-//	}
 
-	//Copied from class Player
+	// @SubscribeEvent
+	// public void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
+	// }
+
+	private boolean isAccepted(Block block) {
+		if (block instanceof BlockWorkbench) return false;
+		if (block instanceof BlockContainer) return false;
+		if (block instanceof BlockAnvil) return false;
+		return true;
+	}
+
+	// Copied from class Player
 	private Iterable<ItemStack> getStaffItemStacks(EntityPlayer player) {
 		List<ItemStack> stacks = new ArrayList<>();
 		InventoryPlayer inventory = player.inventory;

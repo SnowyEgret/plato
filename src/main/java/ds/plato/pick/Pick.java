@@ -5,16 +5,15 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 
-//public class Pick extends Point3i {
-	public class Pick {
-	
+public class Pick {
+
 	public int x, y, z;
 	public Block block;
 	public int metadata;
 	public int side;
 
 	public Pick(int x, int y, int z, Block block, int metadata, int side) {
-		//super(x, y, z);
+		// super(x, y, z);
 		this.x = x;
 		this.y = y;
 		this.z = z;

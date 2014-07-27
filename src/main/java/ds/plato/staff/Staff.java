@@ -60,6 +60,18 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 		}
 	}
 
+	// @Override
+	// public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4,
+	// int par5, int par6, int par7, float par8, float par9, float par10) {
+	// if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+	// Player.client().openGui(3);
+	// } else {
+	// return getSpell().onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9,
+	// par10);
+	// }
+	// return false;
+	// }
+
 	public Spell getSpell() {
 		if (isEmpty()) {
 			return null;

@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
@@ -92,7 +93,6 @@ public abstract class Spell extends Item implements IClickable {
 
 	@Override
 	public void onMouseClickRight(MovingObjectPosition e) {
-
 		Player player = Player.client();
 		IWorld w = player.getWorldServer();
 		int side = e.sideHit;
@@ -102,6 +102,20 @@ public abstract class Spell extends Item implements IClickable {
 			invoke(w, entries);
 		}
 	}
+
+	// @Override
+	// public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x,
+	// int y, int z, int side, float par8, float par9, float par10) {
+	// Player player = Player.client();
+	// IWorld w = player.getWorldServer();
+	// //int side = e.sideHit;
+	// pickManager.pick(w, x, y, z, side);
+	// if (pickManager.isFinishedPicking()) {
+	// SlotEntry[] entries = player.getSlotEntries();
+	// invoke(w, entries);
+	// }
+	// return true;
+	// }
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
