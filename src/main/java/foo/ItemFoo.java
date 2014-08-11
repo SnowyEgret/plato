@@ -1,16 +1,21 @@
-package container;
+package foo;
 
-import ds.plato.spell.Spell;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
-public class ItemTest extends Item implements IInventory {
+public class ItemFoo extends Item implements IInventory {
 	
 	protected ItemStack[] stacks = new ItemStack[9];
-
 	
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World w, EntityPlayer player) {
+		player.openGui(ModFoo.instance, 0, w, 0, 0, 0);
+		return stack;
+	}
+
 	// IInventory ----------------------------------------------
 
 	@Override
@@ -25,12 +30,11 @@ public class ItemTest extends Item implements IInventory {
 
 	@Override
 	public ItemStack decrStackSize(int i, int var2) {
-		ItemStack stack = getStackInSlot(i);
-		if (stack != null) {
-			setInventorySlotContents(i, null);
-		} else {
-			System.out.println("[Staff.decrStackSize] UNEXPEXTED! stack=" + stack);
-		}
+		//ItemStack stack = getStackInSlot(i);
+		//ItemStack stack = stacks[i].copy();
+		ItemStack stack = stacks[i];
+		stacks[i] = null;
+		//setInventorySlotContents(i, null);
 		return stack;
 	}
 
@@ -41,9 +45,8 @@ public class ItemTest extends Item implements IInventory {
 	}
 
 	@Override
-	public void setInventorySlotContents(int var1, ItemStack var2) {
-		// TODO Auto-generated method stub
-
+	public void setInventorySlotContents(int i, ItemStack stack) {
+		stacks[i] = stack;
 	}
 
 	@Override
@@ -60,14 +63,12 @@ public class ItemTest extends Item implements IInventory {
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
 	public void markDirty() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -79,13 +80,11 @@ public class ItemTest extends Item implements IInventory {
 	@Override
 	public void openInventory() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void closeInventory() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override

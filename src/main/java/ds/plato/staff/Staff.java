@@ -100,8 +100,6 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 				break;
 			}
 		}
-		// NBTTagCompound tag = Player.client().getHeldItemStack().getTagCompound();
-		// writeToNBT(tag);
 		return s;
 	}
 
@@ -121,8 +119,6 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 				break;
 			}
 		}
-		// NBTTagCompound tag = Player.client().getHeldItemStack().getTagCompound();
-		// writeToNBT(tag);
 		return s;
 	}
 
@@ -222,12 +218,10 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 	// Called by decrStackSize
 	@Override
 	public ItemStack getStackInSlot(int i) {
-
 		if (spells[i] == null) {
 			return null;
 		} else {
-			ItemStack s = new ItemStack(spells[i]);
-			return s;
+			return new ItemStack(spells[i]);
 		}
 	}
 
@@ -235,19 +229,20 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 	public ItemStack decrStackSize(int i, int amount) {
 		System.out.println("\n[Staff.decrStackSize] i=" + i + ", amount=" + amount);
 		ItemStack stack = getStackInSlot(i);
-		if (stack != null) {
-			// Simplified because inventory stack limit is 1
-			// if (stack.stackSize <= amount) {
-			setInventorySlotContents(i, null);
-			// } else {
-			// stack = stack.splitStack(amount);
-			// if (stack.stackSize == 0) {
-			// setInventorySlotContents(i, null);
-			// }
-			// }
-		} else {
-			System.out.println("[Staff.decrStackSize] UNEXPEXTED! stack=" + stack);
-		}
+		// //if (stack != null) {
+		// Simplified because inventory stack limit is 1
+		// if (stack.stackSize <= amount) {
+		setInventorySlotContents(i, null);
+		// } else {
+		// stack = stack.splitStack(amount);
+		// if (stack.stackSize == 0) {
+		// setInventorySlotContents(i, null);
+		// }
+		// }
+		// } else {
+		// System.out.println("[Staff.decrStackSize] UNEXPEXTED! stack=" + stack);
+		// }
+		//System.out.println("[Staff.decrStackSize] stack=" + stack);
 		return stack;
 	}
 
@@ -274,8 +269,6 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 		} else {
 			spells[i] = (Spell) stack.getItem();
 		}
-		// NBTTagCompound tag = Player.client().getHeldItemStack().getTagCompound();
-		// writeToNBT(tag);
 	}
 
 	@Override
