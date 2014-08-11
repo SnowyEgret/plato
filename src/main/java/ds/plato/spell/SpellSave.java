@@ -33,7 +33,7 @@ public class SpellSave extends Spell implements ITextSetable {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
 		if (selectionManager.size() != 0) {
 			Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 0, world.getWorld(), 0, 0, 0);
 			Pick[] picks = pickManager.getPicks();
@@ -48,8 +48,9 @@ public class SpellSave extends Spell implements ITextSetable {
 		// a texture generated from the player's view at the time of creation
 		String json = null;
 		try {
-			//TODO
-			json = new PersistentVoxelGroup(insertionPoint, selectionManager.getSelectionList()).write("saves/" + text + ".json");
+			// TODO
+			json = new PersistentVoxelGroup(insertionPoint, selectionManager.getSelectionList()).write("saves/" + text
+					+ ".json");
 			System.out.println("[SpellSave.writeFile] json=" + json);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -62,7 +63,7 @@ public class SpellSave extends Spell implements ITextSetable {
 			pickManager.reset(s.getNumPicks());
 			// Can't remember why this world is preferable, or maybe I just didn't set world and slotEntries in invoke
 			EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-			s.invoke(new WorldWrapper(player.worldObj), null);
+			s.invoke(new WorldWrapper(player.worldObj), (SlotEntry[]) null);
 		}
 		selectionManager.clearSelections();
 	}

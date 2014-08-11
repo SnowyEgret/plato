@@ -34,7 +34,7 @@ public class SpellDrop extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		boolean fill = Keyboard.isKeyDown(Keyboard.KEY_LMENU);
 		boolean deleteOriginal = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		Transaction transaction = undoManager.newTransaction();

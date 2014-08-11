@@ -38,7 +38,7 @@ public class SpellRestore extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		this.world = world;
 		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 1, world.getWorld(), 0, 0, 0);
 		// Clear picks here because player might have cancelled

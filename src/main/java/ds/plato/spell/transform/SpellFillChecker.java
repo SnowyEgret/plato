@@ -18,7 +18,7 @@ public class SpellFillChecker extends AbstractSpellTransform {
 	}
 
 	@Override
-	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, final SlotEntry...slotEntries) {
 		transformSelections(world, new ITransform() {
 			@Override
 			public Selection transform(Selection s) {

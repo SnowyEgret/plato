@@ -38,7 +38,7 @@ public class SpellMengerSponge extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		//TODO use enclosing cube
 		recursivelySubtract(selectionManager.voxelSet());
 		System.out.println("[SpellMengerSponge.invoke] pointsToDelete=" + pointsToDelete);

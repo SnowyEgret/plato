@@ -28,7 +28,7 @@ public class SpellMirror extends AbstractSpellMatrix {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		Pick[] picks = pickManager.getPicks();
 		Point3i c = selectionManager.voxelSet().centroid();
 		// FIXME

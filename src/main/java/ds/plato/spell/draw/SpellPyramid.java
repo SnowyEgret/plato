@@ -34,7 +34,7 @@ public class SpellPyramid extends AbstractSpellDraw {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		Point3d p0 = picks[0].point3d();

@@ -33,7 +33,7 @@ public class SpellGrowEdge extends AbstractSpellSelect {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		int side = pickManager.getPicks()[0].side;
 		System.out.println("[SpellGrowEdge.invoke] side=" + side);
 		if (side == 1) {

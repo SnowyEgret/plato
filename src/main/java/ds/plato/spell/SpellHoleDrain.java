@@ -51,7 +51,7 @@ public class SpellHoleDrain extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		points.clear();
 		numBlocksDrained = 0;
 		lastPointsSize = 0;

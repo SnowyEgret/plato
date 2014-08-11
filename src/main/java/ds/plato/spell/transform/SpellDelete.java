@@ -19,7 +19,7 @@ public class SpellDelete extends AbstractSpellTransform {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		transformSelections(world, new ITransform() {
 			@Override
 			public Selection transform(Selection s) {

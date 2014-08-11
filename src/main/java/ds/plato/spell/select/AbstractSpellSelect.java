@@ -37,7 +37,7 @@ public abstract class AbstractSpellSelect extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, final SlotEntry...slotEntries) {
 		
 		// Select the pick if there are no selections
 		Pick p = pickManager.getPicks()[0];

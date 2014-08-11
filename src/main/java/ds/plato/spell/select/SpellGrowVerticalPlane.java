@@ -19,7 +19,7 @@ public class SpellGrowVerticalPlane extends AbstractSpellSelect {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		shellType = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? Shell.Type.YZ : Shell.Type.XY;
 		super.invoke(world, slotEntries);
 	}

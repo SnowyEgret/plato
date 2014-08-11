@@ -63,7 +63,7 @@ public class SpellText extends Spell implements ITextSetable {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		this.world = world;
 		this.slotEntries = slotEntries;
 		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 2, world.getWorld(), 0, 0, 0);

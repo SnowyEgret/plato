@@ -37,7 +37,7 @@ public class SpellGrowFloor extends AbstractSpellSelect {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		int side = pickManager.getPicks()[0].side;
 		System.out.println("[SpellGrowFloor.invoke] side=" + side);
 		if (side == 0) {

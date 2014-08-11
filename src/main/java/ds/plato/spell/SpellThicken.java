@@ -44,7 +44,7 @@ public class SpellThicken extends AbstractSpellTransform {
 	}
 
 	@Override
-	public void invoke(final IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(final IWorld world, SlotEntry...slotEntries) {
 		Set<Point3i> points = new HashSet<>();
 		Selection first = selectionManager.getSelections().iterator().next();
 		VoxelSet voxels = selectionManager.voxelSet();

@@ -32,7 +32,7 @@ public class SpellRectangle extends AbstractSpellDraw {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, SlotEntry...slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		boolean isSquare = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
