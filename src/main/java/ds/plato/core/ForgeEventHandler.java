@@ -116,8 +116,9 @@ public class ForgeEventHandler {
 						if (selectionManager.isSelected(position.blockX, position.blockY, position.blockZ)) {
 							Block b = itemBlock.field_150939_a;
 							int metadata = item.getDamage(stack);
-							SlotEntry[] slotEntries = new SlotEntry[] { new SlotEntry(b, metadata, 0) };
-							new SpellFill(undoManager, selectionManager, null).invoke(world, slotEntries);
+//							SlotEntry[] slotEntries = new SlotEntry[] { new SlotEntry(b, metadata, 0) };
+//							new SpellFill(undoManager, selectionManager, pickManager).invoke(world, slotEntries);
+							new SpellFill(undoManager, selectionManager, pickManager).invoke(world, new SlotEntry(b, metadata, 0));
 							e.setCanceled(true);
 						}
 					} else if (e.button == 0) {

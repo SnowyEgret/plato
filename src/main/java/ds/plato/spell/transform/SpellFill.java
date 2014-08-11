@@ -18,7 +18,8 @@ public class SpellFill extends AbstractSpellTransform {
 	}
 
 	@Override
-	public void invoke(IWorld world, final SlotEntry[] slotEntries) {
+	// public void invoke(IWorld world, final SlotEntry[] slotEntries) {
+	public void invoke(IWorld world, final SlotEntry...slotEntries) {
 		transformSelections(world, new ITransform() {
 			@Override
 			public Selection transform(Selection s) {
@@ -28,11 +29,6 @@ public class SpellFill extends AbstractSpellTransform {
 				return new Selection(s.x, s.y, s.z, e.block, e.metadata);
 			}
 		});
-	}
-
-	@Override
-	public int getNumPicks() {
-		return 1;
 	}
 
 	@Override

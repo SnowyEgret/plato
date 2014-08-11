@@ -45,7 +45,8 @@ public abstract class Spell extends Item implements IClickable {
 		return getRecipe() != null;
 	}
 
-	public abstract void invoke(IWorld world, final SlotEntry[] slotEntries);
+	//public abstract void invoke(IWorld world, final SlotEntry[] slotEntries);
+	public abstract void invoke(IWorld world, final SlotEntry...slotEntries);
 
 	public void invoke(Player player) {
 		IWorld w = player.getWorldServer();
