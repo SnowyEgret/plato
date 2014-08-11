@@ -59,6 +59,11 @@ public class ForgeEventHandler {
 	@SubscribeEvent
 	public void onMouseEvent(MouseEvent e) {
 
+		//Fix for Clicking back to game selects a block. Issue #100
+		if (Minecraft.getMinecraft().isGamePaused()) {
+			return;
+		}
+		
 		Player player = Player.client();
 		IWorld world = player.getWorldServer();
 		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
@@ -116,9 +121,10 @@ public class ForgeEventHandler {
 						if (selectionManager.isSelected(position.blockX, position.blockY, position.blockZ)) {
 							Block b = itemBlock.field_150939_a;
 							int metadata = item.getDamage(stack);
-//							SlotEntry[] slotEntries = new SlotEntry[] { new SlotEntry(b, metadata, 0) };
-//							new SpellFill(undoManager, selectionManager, pickManager).invoke(world, slotEntries);
-							new SpellFill(undoManager, selectionManager, pickManager).invoke(world, new SlotEntry(b, metadata, 0));
+							// SlotEntry[] slotEntries = new SlotEntry[] { new SlotEntry(b, metadata, 0) };
+							// new SpellFill(undoManager, selectionManager, pickManager).invoke(world, slotEntries);
+							new SpellFill(undoManager, selectionManager, pickManager).invoke(world, new SlotEntry(b,
+									metadata, 0));
 							e.setCanceled(true);
 						}
 					} else if (e.button == 0) {
@@ -199,9 +205,12 @@ public class ForgeEventHandler {
 	// }
 
 	private boolean isAccepted(Block block) {
-		if (block instanceof BlockWorkbench) return false;
-		if (block instanceof BlockContainer) return false;
-		if (block instanceof BlockAnvil) return false;
+		if (block instanceof BlockWorkbench)
+			return false;
+		if (block instanceof BlockContainer)
+			return false;
+		if (block instanceof BlockAnvil)
+			return false;
 		return true;
 	}
 

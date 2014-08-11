@@ -45,7 +45,6 @@ public abstract class Spell extends Item implements IClickable {
 		return getRecipe() != null;
 	}
 
-	//public abstract void invoke(IWorld world, final SlotEntry[] slotEntries);
 	public abstract void invoke(IWorld world, final SlotEntry...slotEntries);
 
 	public void invoke(Player player) {
@@ -58,6 +57,10 @@ public abstract class Spell extends Item implements IClickable {
 
 	public String getMessage() {
 		return message;
+	}
+
+	public int getNumPicks() {
+		return numPicks;
 	}
 
 	@Override
@@ -99,24 +102,9 @@ public abstract class Spell extends Item implements IClickable {
 		int side = e.sideHit;
 		pickManager.pick(w, e.blockX, e.blockY, e.blockZ, side);
 		if (pickManager.isFinishedPicking()) {
-			SlotEntry[] entries = player.getSlotEntries();
-			invoke(w, entries);
+			invoke(w, player.getSlotEntries());
 		}
 	}
-
-	// @Override
-	// public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x,
-	// int y, int z, int side, float par8, float par9, float par10) {
-	// Player player = Player.client();
-	// IWorld w = player.getWorldServer();
-	// //int side = e.sideHit;
-	// pickManager.pick(w, x, y, z, side);
-	// if (pickManager.isFinishedPicking()) {
-	// SlotEntry[] entries = player.getSlotEntries();
-	// invoke(w, entries);
-	// }
-	// return true;
-	// }
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
@@ -144,10 +132,6 @@ public abstract class Spell extends Item implements IClickable {
 		if (getClass() == obj.getClass())
 			return true;
 		return false;
-	}
-
-	public int getNumPicks() {
-		return numPicks;
 	}
 
 	@Override
