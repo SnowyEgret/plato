@@ -323,21 +323,21 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 	// -------------------------------------------------------
 
 	private void readFromNBT(NBTTagCompound tag) {
-		// Subclasses of Staff already have spells.
-		if (getClass().equals(Staff.class)) {
-			System.out.println("[Staff.onUpdate] Initializing spells. tag=" + tag);
+		// Prepared staffs already have spells.
+		if (this instanceof StaffOak || this instanceof StaffBirch) {
+			System.out.println("[Staff.readFromNBT] Initializing spells. tag=" + tag);
 			int i = 0;
 			while (true) {
 				String spellClassName = tag.getString(String.valueOf(i));
 				if (spellClassName != null && !spellClassName.equals("")) {
-					System.out.println("[Staff.onUpdate] Found string in tag: i=" + i + ", spellClassName="
+					System.out.println("[Staff.readFromNBT] Found string in tag: i=" + i + ", spellClassName="
 							+ spellClassName);
 					Spell spell = (Spell) GameRegistry.findItem(Plato.ID, spellClassName);
 					if (spell == null) {
 						throw new RuntimeException("Game registry could not find item.  spellClassName="
 								+ spellClassName);
 					}
-					System.out.println("[Staff.onUpdate] Looked up spell in game registry. spell=" + spell);
+					System.out.println("[Staff.readFromNBT] Looked up spell in game registry. spell=" + spell);
 					spells[i] = spell;
 					i++;
 				} else {
@@ -347,12 +347,12 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 		}
 		ordinal = tag.getInteger("ordinal");
 		spellsInitialized = true;
-		System.out.println("[Staff.onUpdate] Staff initialized. " + this);
+		System.out.println("[Staff.readFromNBT] Staff initialized. " + this);
 	}
 
 	private void writeToNBT(NBTTagCompound tag) {
-		// Subclasses of Staff cannot be reordered (Only in creative mode - no recipe)
-		if (getClass().equals(Staff.class)) {
+		// Prepared staffs can't be reordered (Only in creative mode - no recipe)
+		if (this instanceof StaffOak || this instanceof StaffBirch) {
 			int i = 0;
 			for (Spell s : spells) {
 				if (s == null) {
