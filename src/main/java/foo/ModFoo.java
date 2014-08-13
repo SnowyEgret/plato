@@ -14,15 +14,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @Mod(modid = "foo", name = "foo", version = "")
 public class ModFoo implements IGuiHandler {
 
-	ItemFoo itemTest;
+	ItemFoo item;
 	@Instance("foo")
 	public static ModFoo instance;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		itemTest = new ItemFoo();
-		itemTest.setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(itemTest, "foo");
+		item = new ItemFoo();
+		item.setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(item, "foo");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, this);
 	}
 
@@ -34,7 +34,7 @@ public class ModFoo implements IGuiHandler {
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		return new GuiFoo(player.inventory, itemTest);
+		return new GuiFoo(player.inventory, item.inventory);
 	}
 
 }
