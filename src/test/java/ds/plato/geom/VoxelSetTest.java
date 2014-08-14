@@ -29,7 +29,7 @@ public class VoxelSetTest extends GeomTest {
 		}
 	}
 
-	@Test
+	//@Test
 	public void centroid() {
 		for (int i = 0; i < 10; i++) {
 			Point3d o = p();

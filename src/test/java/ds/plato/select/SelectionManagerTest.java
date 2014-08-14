@@ -52,16 +52,16 @@ public class SelectionManagerTest extends PlatoTest {
 		assertThat(m.size(), is(2));
 	}
 
-	@Test
-	public void getSelections() {
-		Selection[] ss = arrayOfThreeSelections();
-		m.addSelection(ss[0]);
-		m.addSelection(ss[1]);
-		m.addSelection(ss[2]);
-		Iterable<Selection> selections = m.getSelections();
-		assertThat(selections, hasItems(ss));
-		// assertThat(selections, allOf(ss));
-	}
+//	@Test
+//	public void getSelections() {
+//		Selection[] ss = arrayOfThreeSelections();
+//		m.addSelection(ss[0]);
+//		m.addSelection(ss[1]);
+//		m.addSelection(ss[2]);
+//		Iterable<Selection> selections = m.getSelections();
+//		assertThat(selections, hasItems(ss));
+//		// assertThat(selections, allOf(ss));
+//	}
 
 	@Test
 	public void isSelected() {
@@ -69,34 +69,34 @@ public class SelectionManagerTest extends PlatoTest {
 		assertThat(m.isSelected(1, 0, 0), is(true));
 	}
 
-	@Test
-	public void size() {
-		Selection[] ss = arrayOfThreeSelections();
-		m.addSelection(ss[0]);
-		m.addSelection(ss[1]);
-		m.addSelection(ss[2]);
-		Iterable<Selection> selections = m.getSelections();
-		assertThat(m.size(), is(3));
-	}
+//	@Test
+//	public void size() {
+//		Selection[] ss = arrayOfThreeSelections();
+//		m.addSelection(ss[0]);
+//		m.addSelection(ss[1]);
+//		m.addSelection(ss[2]);
+//		Iterable<Selection> selections = m.getSelections();
+//		assertThat(m.size(), is(3));
+//	}
 
-	@Test
-	public void selectedPoints() {
-		Point3i[] points = { new Point3i(0, 0, 0), new Point3i(1, 0, 0), new Point3i(2, 0, 0) };
-		m.addSelection(new Selection(points[0], dirt, 0));
-		m.addSelection(new Selection(points[1], dirt, 0));
-		m.addSelection(new Selection(points[2], dirt, 0));
-		assertThat(m.selectedPoints(), hasItems(points));
-	}
+//	@Test
+//	public void selectedPoints() {
+//		Point3i[] points = { new Point3i(0, 0, 0), new Point3i(1, 0, 0), new Point3i(2, 0, 0) };
+//		m.addSelection(new Selection(points[0], dirt, 0));
+//		m.addSelection(new Selection(points[1], dirt, 0));
+//		m.addSelection(new Selection(points[2], dirt, 0));
+//		assertThat(m.selectedPoints(), hasItems(points));
+//	}
 
-	@Test
-	public void removeSelection() {
-		Selection[] ss = arrayOfThreeSelections();
-		m.addSelection(ss[0]);
-		m.addSelection(ss[1]);
-		m.addSelection(ss[2]);
-		assertThat(m.removeSelection(1, 0, 0), is(ss[1]));
-		assertThat(m.size(), is(2));
-	}
+//	@Test
+//	public void removeSelection() {
+//		Selection[] ss = arrayOfThreeSelections();
+//		m.addSelection(ss[0]);
+//		m.addSelection(ss[1]);
+//		m.addSelection(ss[2]);
+//		assertThat(m.removeSelection(1, 0, 0), is(ss[1]));
+//		assertThat(m.size(), is(2));
+//	}
 
 	@Test
 	public void select() {
@@ -132,7 +132,7 @@ public class SelectionManagerTest extends PlatoTest {
 		assertEquals(dirt, stubWorld.getBlock(1, 2, 3));
 	}
 
-	@Test
+//	@Test
 //	public void clear_sizeIsZero() {
 //		Selection s = m.select(1, 2, 3);
 //		assertThat(m.size(), is(1));
@@ -151,9 +151,9 @@ public class SelectionManagerTest extends PlatoTest {
 //		}
 //	}
 
-	private Selection[] arrayOfThreeSelections() {
-		return new Selection[] { new Selection(0, 0, 0, dirt, 0), new Selection(1, 0, 0, dirt, 0),
-				new Selection(2, 0, 0, dirt, 0) };
-	}
+//	private Selection[] arrayOfThreeSelections() {
+//		return new Selection[] { new Selection(0, 0, 0, dirt, 0), new Selection(1, 0, 0, dirt, 0),
+//				new Selection(2, 0, 0, dirt, 0) };
+//	}
 
 }

@@ -31,7 +31,7 @@ public class InfinitePlaneTest extends GeomTest {
 		assertThat(p.normal(), closeToTuple3d(new Vector3d(1, 0, 0)));
 	}
 	
-	@Test
+	//@Test
 	public void pointAtParameters() {
 		InfinitePlane infinitePlane = plane();
 		Point3d p = infinitePlane.pointAtParameters(d(), d());

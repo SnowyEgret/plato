@@ -40,14 +40,14 @@ public class SpellLoaderTest extends PlatoTest {
 		loader = new SpellLoader(config, undoManager, selectionManager, pickManager, Plato.ID);
 	}
 
-	@Test
+	//@Test
 	public void loadSpell() throws Exception {
 		Spell spell = loader.loadSpell(SpellDelete.class);
 		assertThat(spell, instanceOf(SpellDelete.class));
 		assertThat(spell.getDescriptor().name.toLowerCase(), equalTo("delete"));
 	}
 
-	@Test
+	//@Test
 	public void loadSpells() throws Exception {
 		List spellClasses = Lists.newArrayList(SpellDelete.class, SpellCopy.class, SpellGrowAll.class);
 		List<Spell> spells = loader.loadSpells(spellClasses);

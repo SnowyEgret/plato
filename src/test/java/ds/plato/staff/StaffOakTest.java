@@ -36,7 +36,7 @@ public class StaffOakTest extends PlatoTest {
 	public void setUp() {
 		super.setUp();
 		MockitoAnnotations.initMocks(this);
-		//PowerMockito.mockStatic(Keyboard.class);
+		// PowerMockito.mockStatic(Keyboard.class);
 		Pick[] picks = new Pick[] { new Pick(1, 1, 1, dirt, 0, 0), new Pick(2, 2, 2, dirt, 0, 0) };
 		when(pickManager.getPicks()).thenReturn(picks);
 		when(pickManager.isFinishedPicking()).thenReturn(true);
@@ -75,16 +75,16 @@ public class StaffOakTest extends PlatoTest {
 		assertEquals(mockMove, staff.previousSpell());
 	}
 
-//	@Test
-//	public void onClickRight() {
-//		staff.onClickRight(mockEvent);
-//		//verify(mockedDelete).invoke(mockPickManager.getPicksArray(), null);
-//		verify(mockDelete).onClickRight(mockEvent);
-//		staff.nextSpell();
-//		staff.onClickRight(mockEvent);
-//		//verify(mockedMove).invoke(mockPickManager.getPicksArray(), null);
-//		verify(mockMove).onClickRight(mockEvent);
-//	}
+	// @Test
+	// public void onClickRight() {
+	// staff.onClickRight(mockEvent);
+	// //verify(mockedDelete).invoke(mockPickManager.getPicksArray(), null);
+	// verify(mockDelete).onClickRight(mockEvent);
+	// staff.nextSpell();
+	// staff.onClickRight(mockEvent);
+	// //verify(mockedMove).invoke(mockPickManager.getPicksArray(), null);
+	// verify(mockMove).onClickRight(mockEvent);
+	// }
 
 	@Test
 	public void nextSpell_pickMangerIsReset() {
@@ -94,7 +94,8 @@ public class StaffOakTest extends PlatoTest {
 		verify(pickManager, times(2)).reset(s.getNumPicks());
 	}
 
-	@Test
+	// This is permitted now
+	// @Test
 	public void addSpell_spellNotAddedTwice() {
 		assertThat(staff.numSpells(), equalTo(2));
 		staff.addSpell(mockMove);

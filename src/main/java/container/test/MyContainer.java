@@ -1,4 +1,4 @@
-package foo;
+package container.test;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -6,12 +6,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
-public class ContainerFoo extends Container {
+public class MyContainer extends Container {
 
 	IInventory inventory;
 
-	public ContainerFoo(InventoryPlayer playerInventory, IInventory inventory) {
-		
+	public MyContainer(InventoryPlayer playerInventory, IInventory inventory) {
+
 		this.inventory = inventory;
 
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
@@ -28,9 +28,10 @@ public class ContainerFoo extends Container {
 			addSlotToContainer(new Slot(playerInventory, i, 8 + i * 18, 107));
 		}
 	}
-	
+
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return inventory.isUseableByPlayer(player);	}
+		return inventory.isUseableByPlayer(player);
+	}
 
 }

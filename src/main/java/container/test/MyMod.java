@@ -1,4 +1,4 @@
-package foo;
+package container.test;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,30 +11,30 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "foo", name = "foo", version = "")
-public class ModFoo implements IGuiHandler {
+@Mod(modid = "myMod", name = "myMod", version = "")
+public class MyMod implements IGuiHandler {
 
-	ItemFoo item;
-	@Instance("foo")
-	public static ModFoo instance;
+	MyItem item;
+	@Instance("myMod")
+	public static MyMod instance;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		item = new ItemFoo();
+		item = new MyItem();
 		item.setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(item, "foo");
+		GameRegistry.registerItem(item, "myMod");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, this);
 	}
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		// TODO Auto-generated method stub
+		//return new MyContainer(player.inventory, item.inventory);
 		return null;
 	}
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		return new GuiFoo(player.inventory, item.inventory);
+		return new MyGui(player.inventory, item.inventory);
 	}
 
 }

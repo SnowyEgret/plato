@@ -20,7 +20,7 @@ public class BlockModelRenderer implements ISimpleBlockRenderingHandler {
 
 	public BlockModelRenderer(int blockModelRenderId) {
 		id = blockModelRenderId;
-		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/sphere.obj"));
+		//model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/sphere.obj"));
 		//model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/bunny.obj"));
 	}
 

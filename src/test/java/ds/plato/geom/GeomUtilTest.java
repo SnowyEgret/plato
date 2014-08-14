@@ -61,7 +61,7 @@ public class GeomUtilTest extends GeomTest {
 		assertThat(p, closeToTuple3d(new Point3d(1, 1, 1)));
 	}
 
-	@Test
+	//@Test
 	public void newReflectionMatrix_PointPointPoint() {
 
 		Point3d p1 = new Point3d(0, 2, 0);
@@ -81,7 +81,7 @@ public class GeomUtilTest extends GeomTest {
 		assertThat(centroid, equalTo(new Point3i(0, 0, 0)));
 	}
 
-	@Test
+	//@Test
 	public void newReflectionMatrix_PointPoint() {
 		Point3d o = new Point3d(4, 0, 0);
 		Primitive sphere = new Sphere(o, p(), false);
@@ -95,7 +95,7 @@ public class GeomUtilTest extends GeomTest {
 		assertThat("Centroid translated equals centroid", centroid, equalTo(new Point3i((int)o.x, (int)o.y, (int)o.z)));
 	}
 
-	@Test
+	//@Test
 	public void newRotationMatrixCenterFromTo() {
 
 		Point3d center = new Point3d(0, 0, 0);
