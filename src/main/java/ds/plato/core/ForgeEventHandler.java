@@ -60,12 +60,13 @@ public class ForgeEventHandler {
 	public void onMouseEvent(MouseEvent e) {
 
 		//Fix for Clicking back to game selects a block. Issue #100
+		//TODO Seems not to work in multiplayer
 		if (Minecraft.getMinecraft().isGamePaused()) {
 			return;
 		}
 		
 		Player player = Player.client();
-		IWorld world = player.getWorldServer();
+		IWorld world = player.getWorld(); 
 		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
 		// System.out.println("[ForgeEventHandler.onMouseEvent] position.typeOfHit=" + position.typeOfHit +
 		// ", e.button=" + e.button);
@@ -107,8 +108,8 @@ public class ForgeEventHandler {
 
 						// Pick
 					} else if (e.button == 1) {
-						Block block = world.getBlock(position.blockX, position.blockY, position.blockZ);
-						if (isAccepted(block)) {
+						Block b = world.getBlock(position.blockX, position.blockY, position.blockZ);
+						if (isRightClickable(b)) {
 							c.onMouseClickRight(position);
 							e.setCanceled(true);
 						}
@@ -204,7 +205,7 @@ public class ForgeEventHandler {
 	// public void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
 	// }
 
-	private boolean isAccepted(Block block) {
+	private boolean isRightClickable(Block block) {
 		if (block instanceof BlockWorkbench)
 			return false;
 		if (block instanceof BlockContainer)

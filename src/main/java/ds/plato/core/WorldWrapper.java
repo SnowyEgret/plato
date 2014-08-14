@@ -13,6 +13,7 @@ public class WorldWrapper implements IWorld {
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
+		//TODO Test for WorldClient and send a packet to server
 		return world.getBlock(x, y, z);
 	}
 

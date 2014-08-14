@@ -42,7 +42,7 @@ public class KeyInputEventHandler {
 		// EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 		Player player = Player.client();
 		// IWorld w = Spell.getWorldServer(player);
-		IWorld w = player.getWorldServer();
+		IWorld w = player.getWorld();
 
 		if (keyBindings.get("undo").isPressed()) {
 			try {

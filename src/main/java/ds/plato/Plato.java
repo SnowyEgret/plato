@@ -25,6 +25,7 @@ import ds.plato.block.BlockModel;
 import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
+import ds.plato.item.ItemFoo;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.proxy.CommonProxy;
@@ -77,6 +78,11 @@ public class Plato {
 		blockModel.setCreativeTab(CreativeTabs.tabBlock);
 		// TODO what is this stringID
 		GameRegistry.registerTileEntity(BlockModelTileEntity.class, "stringID");
+		
+		ItemFoo foo = new ItemFoo();
+		foo.setUnlocalizedName("foo");
+		foo.setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(foo, foo.getClass().getSimpleName());
 
 		undoManager = new UndoManager();
 		selectionManager = new SelectionManager(blockSelected);

@@ -12,8 +12,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.WorldServer;
+import net.minecraft.server.integrated.IntegratedServer;
+import net.minecraft.world.World;
 import ds.plato.Plato;
 import ds.plato.spell.Spell;
 import ds.plato.staff.Staff;
@@ -30,14 +30,16 @@ public class Player {
 		return new Player(Minecraft.getMinecraft().thePlayer);
 	}
 
-	public IWorld getWorldServer() {
-		WorldServer w = null;
+	public IWorld getWorld() {
+		World w = null;
 		Minecraft mc = Minecraft.getMinecraft();
-		if (mc.getIntegratedServer() != null) {
-			w = mc.getIntegratedServer().worldServerForDimension(player.dimension);
-		} else if (MinecraftServer.getServer() != null) {
-			w = MinecraftServer.getServer().worldServerForDimension(player.dimension);
+		IntegratedServer integratedServer = mc.getIntegratedServer();
+		if (integratedServer != null) {
+			w = integratedServer.worldServerForDimension(player.dimension);
+		} else {
+			w = mc.theWorld;
 		}
+		System.out.println("[Player.getWorld] w=" + w);
 		return new WorldWrapper(w);
 	}
 
@@ -155,13 +157,13 @@ public class Player {
 			Item item = is.getItem();
 			if (item instanceof Staff) {
 				staff = (Staff) item;
-			} 
+			}
 		}
 		return staff;
 	}
 
 	public void openGui(int i) {
-		player.openGui(Plato.instance, i, getWorldServer().getWorld(), 0, 0, 0);
+		player.openGui(Plato.instance, i, getWorld().getWorld(), 0, 0, 0);
 	}
 
 	public Iterable<ItemStack> getStaffItemStacks() {

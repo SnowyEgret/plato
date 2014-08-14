@@ -48,7 +48,7 @@ public abstract class Spell extends Item implements IClickable {
 	public abstract void invoke(IWorld world, final SlotEntry...slotEntries);
 
 	public void invoke(Player player) {
-		IWorld w = player.getWorldServer();
+		IWorld w = player.getWorld();
 		SlotEntry[] entries = player.getSlotEntries();
 		invoke(w, entries);
 	}
@@ -67,7 +67,7 @@ public abstract class Spell extends Item implements IClickable {
 	public void onMouseClickLeft(MovingObjectPosition e) {
 
 		Player player = Player.client();
-		IWorld w = player.getWorldServer();
+		IWorld w = player.getWorld();
 
 		// Standard selection behavior. Shift replaces the current selection set with a region.
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
@@ -98,7 +98,7 @@ public abstract class Spell extends Item implements IClickable {
 	@Override
 	public void onMouseClickRight(MovingObjectPosition e) {
 		Player player = Player.client();
-		IWorld w = player.getWorldServer();
+		IWorld w = player.getWorld();
 		int side = e.sideHit;
 		pickManager.pick(w, e.blockX, e.blockY, e.blockZ, side);
 		if (pickManager.isFinishedPicking()) {
