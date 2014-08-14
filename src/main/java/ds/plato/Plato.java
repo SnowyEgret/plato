@@ -20,12 +20,16 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 import ds.plato.block.BlockModel;
 import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
 import ds.plato.item.ItemFoo;
+import ds.plato.network.SetBlockMessage;
+import ds.plato.network.SetBlockMessageHandler;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.proxy.CommonProxy;
@@ -62,6 +66,7 @@ public class Plato {
 	private static ISelect selectionManager;
 	private static IPick pickManager;
 	private Configuration configuration;
+	public static SimpleNetworkWrapper network;
 	public static Logger log;
 
 	@EventHandler
@@ -131,6 +136,10 @@ public class Plato {
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
+		//http://www.minecraftforge.net/forum/index.php?topic=20135.0
+		network = NetworkRegistry.INSTANCE.newSimpleChannel("plato");
+		network.registerMessage(SetBlockMessageHandler.class, SetBlockMessage.class, 0, Side.SERVER);
+		
 	}
 
 	@EventHandler

@@ -1,19 +1,26 @@
 package ds.plato.core;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.World;
+import ds.plato.Plato;
+import ds.plato.network.SetBlockMessage;
 
 public class WorldWrapper implements IWorld {
 
 	private World world;
+	private boolean sendPackets;
 
 	public WorldWrapper(World world) {
 		this.world = world;
+		if (world instanceof WorldClient) {
+			sendPackets = true;
+		}
 	}
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
-		//TODO Test for WorldClient and send a packet to server
+		// TODO Test for WorldClient and send a packet to server
 		return world.getBlock(x, y, z);
 	}
 
@@ -25,6 +32,10 @@ public class WorldWrapper implements IWorld {
 	@Override
 	public void setBlock(int x, int y, int z, Block block, int metadata) {
 		world.setBlock(x, y, z, block, metadata, 3);
+		System.out.println("[WorldWrapper.setBlock] sendPackets=" + sendPackets);
+		if (sendPackets) {
+			Plato.network.sendToServer(new SetBlockMessage(x, y, z, block, metadata));
+		}
 	}
 
 	@Override

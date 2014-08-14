@@ -39,7 +39,7 @@ public class Player {
 		} else {
 			w = mc.theWorld;
 		}
-		System.out.println("[Player.getWorld] w=" + w);
+		//System.out.println("[Player.getWorld] w=" + w);
 		return new WorldWrapper(w);
 	}
 
