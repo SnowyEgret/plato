@@ -41,8 +41,10 @@ public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 			typeOfBlockBeforeSelection = sel.block;
 		} else {
 			// Block has been set to BlockSelected but is not in the selection list.
+			// Or block is in selection list of another player
 			// This is usually the result of a crash where the selections were not cleared before quitting the game.
-			r.renderStandardBlock(block, x, y, z);
+			// Render as dirt
+			r.renderStandardBlock(Blocks.dirt, x, y, z);
 			return true;
 		}
 		

@@ -3,6 +3,7 @@ package ds.plato.spell;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 
@@ -30,10 +31,11 @@ public class SpellHoleFill extends Spell {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_hole_fill_name;
-		d.description = Messages.spell_hole_fill_description;
-		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
-		d.modifiers = new ModifierDescriptor(Messages.spell_hole_fill_modifier_0, Messages.spell_hole_fill_modifier_1);
+		d.name = I18n.format("item.spellHoleFill.name");
+		d.description = I18n.format("item.spellHoleFill.description");
+		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
+		d.modifiers = new ModifierDescriptor("ctrl," + I18n.format("item.spellHoleFill.modifier.0"), "shift,"
+				+ I18n.format("item.spellHoleFill.modifier.1"));
 		return d;
 	}
 
@@ -43,7 +45,7 @@ public class SpellHoleFill extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
 		Transaction t = undoManager.newTransaction();
 		for (Selection s : selectionManager.getSelections()) {
 			Shell.Type type = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) ? Shell.Type.HORIZONTAL : Shell.Type.BELLOW;

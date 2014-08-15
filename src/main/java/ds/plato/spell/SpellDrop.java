@@ -1,6 +1,7 @@
 package ds.plato.spell;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 
 import org.lwjgl.input.Keyboard;
@@ -26,15 +27,15 @@ public class SpellDrop extends Spell {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_drop_name;
-		d.description = Messages.spell_drop_description;
-		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
-		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal, Messages.spell_drop_modifier);
+		d.name = I18n.format("item.spellDrop.name");
+		d.description = I18n.format("item.spellDrop.description");
+		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
+		d.modifiers = new ModifierDescriptor(I18n.format("modifier.deleteOriginal"), "alt," + I18n.format("item.spellDrop.modifier.0"));
 		return d;
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
 		boolean fill = Keyboard.isKeyDown(Keyboard.KEY_LMENU);
 		boolean deleteOriginal = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		Transaction transaction = undoManager.newTransaction();
@@ -45,7 +46,8 @@ public class SpellDrop extends Spell {
 				drop++;
 				Block nextBlockDown = world.getBlock(s.x, s.y - drop - 1, s.z);
 				if (fill || nextBlockDown != Blocks.air) {
-					transaction.add(new SetBlock(world, selectionManager, s.x, s.y - drop, s.z, s.block, s.metadata).set());
+					transaction.add(new SetBlock(world, selectionManager, s.x, s.y - drop, s.z, s.block, s.metadata)
+							.set());
 				}
 				b = nextBlockDown;
 			}

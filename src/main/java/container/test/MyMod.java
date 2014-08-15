@@ -22,14 +22,15 @@ public class MyMod implements IGuiHandler {
 	public void preInit(FMLPreInitializationEvent event) {
 		item = new MyItem();
 		item.setCreativeTab(CreativeTabs.tabMisc);
+		item.setUnlocalizedName(item.getClass().getSimpleName());
 		GameRegistry.registerItem(item, "myMod");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, this);
 	}
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		//return new MyContainer(player.inventory, item.inventory);
-		return null;
+		return new MyContainer(player.inventory, item.inventory);
+		//return null;
 	}
 
 	@Override

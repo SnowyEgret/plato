@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 
@@ -42,11 +43,9 @@ public class SpellHoleDrain extends Spell {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_hole_drain_name;
-		d.description = Messages.spell_hole_drain_description;
-		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
-		// d.modifiers = new ModifierDescriptor(Messages.spell_hole_drain_modifier_0,
-		// Messages.spell_hole_drain_modifier_1);
+		d.name = I18n.format("item.spellHoleDrain.name");
+		d.description = I18n.format("item.spellHoleDrain.description");
+		d.picks = new PickDescriptor(I18n.format("item.spellHoleDrain.pick.0"));
 		return d;
 	}
 

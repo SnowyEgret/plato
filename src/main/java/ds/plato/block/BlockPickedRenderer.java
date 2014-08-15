@@ -2,6 +2,7 @@ package ds.plato.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import ds.plato.pick.IPick;
@@ -32,7 +33,11 @@ public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 		Block pickedBlock = null;
 		Pick pick = pickManager.getPickAt(x, y, z);
 		if (pick == null) {
-			renderer.renderStandardBlock(block, x, y, z);
+			// Block has been set to BlockPicked but is not in the pickManager's list of picked blocks.
+			// Or block is managed by pickManager of another player
+			// This is usually the result of a crash where the selections were not cleared before quitting the game.
+			// Render as dirt
+			renderer.renderStandardBlock(Blocks.dirt, x, y, z);
 			return true;
 		} else {
 			pickedBlock = pick.block;
