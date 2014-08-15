@@ -83,16 +83,24 @@ item.spellHoleDrain.description=drains a body of water
 item.spellHoleDrain.pick.0=any block under water
 
 item.spellHoleFill.name=Fill Hole Spell
-item.spellHoleFill.description=fills a hole or body of water with selected block (level with selected block)
+item.spellHoleFill.description=fills a hole or body of water with level with selected block
 item.spellHoleFill.modifier.0=top surface only
 item.spellHoleFill.modifier.1=use first block in inventory
 
 item.spellMengerSponge.name=Menger Sponge Spell
+item.spellMengerSponge.description=creates Menger Sponge cavities in selection
 
 item.spellRestore.name=Restore Spell
+item.spellRestore.description=restores a selection from Store Spell
+item.spellRestore.pick.0=insertion point
 
 item.spellSave.name=Store Spell
+item.spellSave.description=stores a selection for Restore Spell
+item.spellSave.modifier.0=deletes original selection
 
-item.spellText.name=Store Text
+item.spellText.name=Text Spell
+item.spellText.description=draws text
+item.spellText.pick.0=location
+item.spellText.pick.1=direction
 
 item.spellThicken.name=Thicken Spell

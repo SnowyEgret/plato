@@ -13,6 +13,7 @@ import javax.vecmath.Point3i;
 import javax.vecmath.Vector3d;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
 import ds.plato.Plato;
 import ds.plato.core.IWorld;
@@ -54,11 +55,9 @@ public class SpellText extends Spell implements ITextSetable {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_text_name;
-		d.description = Messages.spell_text_description;
-		d.picks = new PickDescriptor(Messages.spell_text_picks);
-		// d.modifiers = new ModifierDescriptor(Messages.spell_thicken_modifier_0, Messages.spell_thicken_modifier_1,
-		// Messages.spell_thicken_modifier_2);
+		d.name = I18n.format("item.spellText.name");
+		d.description = I18n.format("item.spellText.description");
+		d.picks = new PickDescriptor(I18n.format("item.spellText.pick.0"), I18n.format("item.spellText.pick.1"));
 		return d;
 	}
 

@@ -6,11 +6,11 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.resources.I18n;
 
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.Plato;
-import ds.plato.core.IO;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.core.WorldWrapper;
@@ -71,10 +71,10 @@ public class SpellSave extends Spell implements ITextSetable {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_save_name;
-		d.description = Messages.spell_save_description;
-		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
-		d.modifiers = new ModifierDescriptor(Messages.spell_save_modifier);
+		d.name = I18n.format("item.spellSave.name");
+		d.description = I18n.format("item.spellSave.description");
+		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
+		d.modifiers = new ModifierDescriptor("ctrl," + I18n.format("item.spellSave.modifier.0"));
 		return d;
 	}
 

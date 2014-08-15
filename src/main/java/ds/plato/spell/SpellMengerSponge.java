@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.vecmath.Point3i;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
@@ -31,9 +32,9 @@ public class SpellMengerSponge extends Spell {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_mengerSponge_name;
-		d.description = Messages.spell_mengerSponge_description;
-		d.picks = new PickDescriptor(Messages.spell_mengerSponge_pick);
+		d.name = I18n.format("item.spellMengerSponge.name");
+		d.description = I18n.format("item.spellMengerSponge.description");
+		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
 		return d;
 	}
 

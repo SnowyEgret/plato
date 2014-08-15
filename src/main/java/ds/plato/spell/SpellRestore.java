@@ -6,6 +6,7 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import ds.plato.Plato;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
@@ -31,9 +32,9 @@ public class SpellRestore extends Spell {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_restore_name;
-		d.description = Messages.spell_restore_description;
-		d.picks = new PickDescriptor(Messages.spell_restore_pick);
+		d.name = I18n.format("item.spellRestore.name");
+		d.description = I18n.format("item.spellRestore.description");
+		d.picks = new PickDescriptor(I18n.format("item.spellRestore.pick.0"));
 		return d;
 	}
 
