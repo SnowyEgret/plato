@@ -34,7 +34,7 @@ public class SpellHoleFill extends Spell {
 		d.name = I18n.format("item.spellHoleFill.name");
 		d.description = I18n.format("item.spellHoleFill.description");
 		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
-		d.modifiers = new ModifierDescriptor("ctrl," + I18n.format("item.spellHoleFill.modifier.0"), "shift,"
+		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellHoleFill.modifier.0"), SHIFT
 				+ I18n.format("item.spellHoleFill.modifier.1"));
 		return d;
 	}

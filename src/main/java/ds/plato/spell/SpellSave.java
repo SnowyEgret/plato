@@ -74,7 +74,7 @@ public class SpellSave extends Spell implements ITextSetable {
 		d.name = I18n.format("item.spellSave.name");
 		d.description = I18n.format("item.spellSave.description");
 		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
-		d.modifiers = new ModifierDescriptor("ctrl," + I18n.format("item.spellSave.modifier.0"));
+		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellSave.modifier.0"));
 		return d;
 	}
 

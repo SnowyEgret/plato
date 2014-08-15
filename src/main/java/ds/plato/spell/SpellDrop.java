@@ -30,7 +30,7 @@ public class SpellDrop extends Spell {
 		d.name = I18n.format("item.spellDrop.name");
 		d.description = I18n.format("item.spellDrop.description");
 		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
-		d.modifiers = new ModifierDescriptor(I18n.format("modifier.deleteOriginal"), "alt," + I18n.format("item.spellDrop.modifier.0"));
+		d.modifiers = new ModifierDescriptor(I18n.format("modifier.deleteOriginal"), ALT + I18n.format("item.spellDrop.modifier.0"));
 		return d;
 	}
 

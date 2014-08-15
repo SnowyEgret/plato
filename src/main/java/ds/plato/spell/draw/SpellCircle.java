@@ -2,6 +2,8 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3d;
 
+import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -11,7 +13,6 @@ import ds.plato.geom.curve.CircleXZ;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -26,15 +27,15 @@ public class SpellCircle extends AbstractSpellDraw {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_circle_name;
-		d.description = Messages.spell_circle_description;
-		d.picks = new PickDescriptor(Messages.spell_circle_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_onSurface);
+		d.name = I18n.format("item.spellCircle.name");
+		d.description = I18n.format("item.spellCircle.description");
+		d.picks = new PickDescriptor(I18n.format("item.spellCircle.pick.0"), I18n.format("item.spellCircle.pick.1"));
+		d.modifiers = new ModifierDescriptor(ALT + I18n.format("modifier.onSurface"));
 		return d;
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		boolean onSurface = Keyboard.isKeyDown(Keyboard.KEY_LMENU);

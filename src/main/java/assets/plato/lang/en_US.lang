@@ -12,15 +12,22 @@ item.staffBirch.name=Birch Staff
 # Spells ##########
 
 pick.anywhere=anywhere
-modifier.deleteOriginal=ctrl, deletes original
-modifier.isHollow=shift, hollow
-modifier.onSurface=alt, on surface
+modifier.deleteOriginal=deletes original
+modifier.isHollow=hollow
+modifier.onSurface=on surface
 
 # Draw spells ##########
 
 item.spellBox.name=Box Spell
+item.spellBox.description=creates a solid box
+item.spellBox.pick.0=from
+item.spellBox.pick.1=diagonal corner
+item.spellBox.modifier.0=cubic
 
 item.spellCircle.name=Circle Spell
+item.spellCircle.description=creates a circle
+item.spellCircle.pick.0=center
+item.spellCircle.pick.1=radius
 
 item.spellCone.name=Cone Spell
 
@@ -104,3 +111,8 @@ item.spellText.pick.0=location
 item.spellText.pick.1=direction
 
 item.spellThicken.name=Thicken Spell
+item.spellThicken.description=thickens selections
+item.spellThicken.modifier.0=inwards only
+item.spellThicken.modifier.1=outwards only
+item.spellThicken.modifier.2=within plane
+

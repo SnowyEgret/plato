@@ -2,6 +2,8 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3d;
 
+import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -11,7 +13,6 @@ import ds.plato.geom.solid.Box;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -26,15 +27,16 @@ public class SpellBox extends AbstractSpellDraw {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_box_name;
-		d.description = Messages.spell_box_description;
-		d.picks = new PickDescriptor(Messages.spell_box_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_box_modifier_0, Messages.spell_modifier_onSurface, Messages.spell_modifier_isHollow);
+		d.name = I18n.format("item.spellBox.name");
+		d.description = I18n.format("item.spellBox.description");
+		d.picks = new PickDescriptor(I18n.format("item.spellBox.pick.0"), I18n.format("item.spellBox.pick.1"));
+		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellBox.modifier.0"), ALT
+				+ I18n.format("modifier.onSurface"), SHIFT + I18n.format("modifier.isHollow"));
 		return d;
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		boolean isCube = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);

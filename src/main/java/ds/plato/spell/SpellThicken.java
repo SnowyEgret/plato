@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
+import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -13,7 +15,6 @@ import ds.plato.core.SlotEntry;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.IntegerDomain;
 import ds.plato.geom.VoxelSet;
-import ds.plato.geom.surface.InfinitePlane;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
@@ -35,16 +36,16 @@ public class SpellThicken extends AbstractSpellTransform {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_thicken_name;
-		d.description = Messages.spell_thicken_description;
-		d.picks = new PickDescriptor(Messages.spell_pick_anywhere);
-		d.modifiers = new ModifierDescriptor(Messages.spell_thicken_modifier_0, Messages.spell_thicken_modifier_1,
-				Messages.spell_thicken_modifier_2);
+		d.name = I18n.format("item.spellThicken.name");
+		d.description = I18n.format("item.spellThicken.description");
+		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
+		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellThicken.modifier.0"), SHIFT
+				+ I18n.format("item.spellThicken.modifier.1"), ALT + I18n.format("item.spellThicken.modifier.2"));
 		return d;
 	}
 
 	@Override
-	public void invoke(final IWorld world, SlotEntry...slotEntries) {
+	public void invoke(final IWorld world, SlotEntry... slotEntries) {
 		Set<Point3i> points = new HashSet<>();
 		Selection first = selectionManager.getSelections().iterator().next();
 		VoxelSet voxels = selectionManager.voxelSet();
