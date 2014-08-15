@@ -2,16 +2,16 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3d;
 
+import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
-import ds.plato.geom.IDrawable;
 import ds.plato.geom.PointSet;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -26,15 +26,16 @@ public class SpellMeasure extends AbstractSpellDraw {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_measure_name;
-		d.description = Messages.spell_measure_description;
-		d.picks = new PickDescriptor(Messages.spell_measure_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_measure_modifier_0, Messages.spell_measure_modifier_1, Messages.spell_measure_modifier_2);
+		d.name = I18n.format("item.spellMeasure.name");
+		d.description = I18n.format("item.spellMeasure.description");
+		d.picks = new PickDescriptor(I18n.format("pick.from"), I18n.format("pick.to"));
+		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellMeasure.modifier.0"), SHIFT
+				+ I18n.format("item.spellMeasure.modifier.1"), ALT + I18n.format("item.spellMeasure.modifier.2"));
 		return d;
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
 		Pick[] picks = pickManager.getPicks();
 		Point3d p0 = picks[0].point3d();
 		Point3d p1 = picks[1].point3d();
@@ -44,7 +45,7 @@ public class SpellMeasure extends AbstractSpellDraw {
 			// TODO if point is on border between two blocks, draw both blocks
 			points.addPoint(interpolate(p0, p1, .5d));
 		}
-		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU)) { //Alt
+		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU)) { // Alt
 			double d = 1 / 3d;
 			for (int i = 1; i < 3; i++) {
 				double dd = i * d;

@@ -2,6 +2,8 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3d;
 
+import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -11,7 +13,6 @@ import ds.plato.geom.solid.RectangularPyramid;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -26,22 +27,23 @@ public class SpellPyramid extends AbstractSpellDraw {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_pyramid_name;
-		d.description = Messages.spell_pyramid_description;
-		d.picks = new PickDescriptor(Messages.spell_pyramid_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_pyramid_modifier, Messages.spell_modifier_isHollow);
+		d.name = I18n.format("item.spellPyramid.name");
+		d.description = I18n.format("item.spellPyramid.description");
+		d.picks = new PickDescriptor(I18n.format("item.spellPyramid.pick.0"), I18n.format("item.spellPyramid.pick.1"));
+		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("modifier.isSquare"), SHIFT
+				+ I18n.format("modifier.isHollow"));
 		return d;
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		Point3d p0 = picks[0].point3d();
 		Point3d p1 = picks[1].point3d();
-		//Pyramid sits on ground like cube
-//		p0.y += 1;
-//		p1.y += 1;
+		// Pyramid sits on ground like cube
+		// p0.y += 1;
+		// p1.y += 1;
 		boolean isSquare = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		IDrawable d = new RectangularPyramid(p0, p1, isSquare);
 		boolean isHollow = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);

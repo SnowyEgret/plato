@@ -1,6 +1,6 @@
 package ds.plato.spell.draw;
 
-import javax.vecmath.Point3d;
+import net.minecraft.client.resources.I18n;
 
 import org.lwjgl.input.Keyboard;
 
@@ -11,7 +11,6 @@ import ds.plato.geom.curve.Line;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -26,10 +25,10 @@ public class SpellLine extends AbstractSpellDraw {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_line_name;
-		d.description = Messages.spell_line_description;
-		d.picks = new PickDescriptor(Messages.spell_line_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_line_modifier);
+		d.name = I18n.format("item.spellLine.name");
+		d.description = I18n.format("item.spellLine.description");
+		d.picks = new PickDescriptor(I18n.format("pick.from"), I18n.format("pick.to"));
+		d.modifiers = new ModifierDescriptor(CTRL+ I18n.format("item.spellLine.modifier.0"));
 		return d;
 	}
 

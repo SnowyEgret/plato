@@ -12,17 +12,19 @@ item.staffBirch.name=Birch Staff
 # Spells ##########
 
 pick.anywhere=anywhere
+pick.from=from
+pick.to=to
+pick.diagonal=diagonal corner
 modifier.deleteOriginal=deletes original
 modifier.isHollow=hollow
+modifier.isSquare=square
 modifier.onSurface=on surface
 
 # Draw spells ##########
 
 item.spellBox.name=Box Spell
 item.spellBox.description=creates a solid box
-item.spellBox.pick.0=from
-item.spellBox.pick.1=diagonal corner
-item.spellBox.modifier.0=cubic
+item.spellBox.modifier.0=cube
 
 item.spellCircle.name=Circle Spell
 item.spellCircle.description=creates a circle
@@ -30,20 +32,41 @@ item.spellCircle.pick.0=center
 item.spellCircle.pick.1=radius
 
 item.spellCone.name=Cone Spell
+item.spellCone.description=creates a cone
+item.spellCone.pick.0=center
+item.spellCone.pick.1=radius
+item.spellCone.pick.2=height
 
 item.spellLine.name=Line Spell
+item.spellLine.description=creates a line
+item.spellLine.modifier.0=polyline
 
 item.spellMeasure.name=Measure Spell
+item.spellMeasure.description=measures distance between picks
+item.spellMeasure.modifier.0=place markers at picks
+item.spellMeasure.modifier.1=divides by 2
+item.spellMeasure.modifier.2=divides by 3
 
 item.spellPyramid.name=Pyramid Spell
+item.spellPyramid.description=creates a solid pyramid
+item.spellPyramid.pick.0=from
+item.spellPyramid.pick.1=diagonal corner
 
 item.spellRectangle.name=Rectangle Spell
+item.spellRectangle.description=creates a rectangle
+item.spellRectangle.pick.0=from
+item.spellRectangle.pick.1=diagonal corner
 
 item.spellSphere.name=Sphere Spell
+item.spellSphere.description=creates a sphere
+item.spellSphere.pick.0=center
+item.spellSphere.pick.1=radius
+item.spellSphere.modifier.0=hemisphere
 
 # Transform spells ##########
 
 item.spellCopy.name=Copy Spell
+item.spellCopy.description=copies selection
 
 item.spellMirror.name=Mirror Spell
 
@@ -103,6 +126,7 @@ item.spellRestore.pick.0=insertion point
 
 item.spellSave.name=Store Spell
 item.spellSave.description=stores a selection for Restore Spell
+item.spellSave.pick.0=origin
 item.spellSave.modifier.0=deletes original selection
 
 item.spellText.name=Text Spell

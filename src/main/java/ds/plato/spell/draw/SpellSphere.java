@@ -1,9 +1,8 @@
 package ds.plato.spell.draw;
 
-import net.minecraft.block.BlockAir;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -13,10 +12,9 @@ import ds.plato.geom.surface.Sphere;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
 import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellSphere extends AbstractSpellDraw {
@@ -26,7 +24,7 @@ public class SpellSphere extends AbstractSpellDraw {
 	}
 
 	@Override
-	public void invoke(IWorld world, final SlotEntry...slotEntries) {
+	public void invoke(IWorld world, final SlotEntry... slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		boolean isHemisphere = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
@@ -38,10 +36,10 @@ public class SpellSphere extends AbstractSpellDraw {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_sphere_name;
-		d.description = Messages.spell_sphere_description;
-		d.picks = new PickDescriptor(Messages.spell_sphere_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_sphere_modifier);
+		d.name = I18n.format("item.spellSphere.name");
+		d.description = I18n.format("item.spellSphere.description");
+		d.picks = new PickDescriptor(I18n.format("item.spellSphere.pick.0"), I18n.format("item.spellSphere.pick.1"));
+		d.modifiers = new ModifierDescriptor(SHIFT + I18n.format("item.spellSphere.modifier.0"));
 		return d;
 	}
 

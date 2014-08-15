@@ -29,7 +29,7 @@ public class SpellBox extends AbstractSpellDraw {
 		SpellDescriptor d = new SpellDescriptor();
 		d.name = I18n.format("item.spellBox.name");
 		d.description = I18n.format("item.spellBox.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellBox.pick.0"), I18n.format("item.spellBox.pick.1"));
+		d.picks = new PickDescriptor(I18n.format("pick.from"), I18n.format("pick.diagonal"));
 		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellBox.modifier.0"), ALT
 				+ I18n.format("modifier.onSurface"), SHIFT + I18n.format("modifier.isHollow"));
 		return d;

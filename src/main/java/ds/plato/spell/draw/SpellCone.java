@@ -1,5 +1,7 @@
 package ds.plato.spell.draw;
 
+import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -9,7 +11,6 @@ import ds.plato.geom.surface.Cone;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -24,15 +25,16 @@ public class SpellCone extends AbstractSpellDraw {
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_cone_name;
-		d.description = Messages.spell_cone_description;
-		d.picks = new PickDescriptor(Messages.spell_cone_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_isHollow);
+		d.name = I18n.format("item.spellCone.name");
+		d.description = I18n.format("item.spellCone.description");
+		d.picks = new PickDescriptor(I18n.format("item.spellCone.pick.0"), I18n.format("item.spellCone.pick.1"),
+				I18n.format("item.spellCone.pick.2"));
+		d.modifiers = new ModifierDescriptor(SHIFT + I18n.format("modifier.isHollow"));
 		return d;
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		IDrawable d = new Cone(picks[0].point3d(), picks[1].point3d(), picks[2].point3d());
