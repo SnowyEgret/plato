@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.registry.GameRegistry;
+import ds.plato.Plato;
 
 public class SetBlockMessage implements IMessage {
 
@@ -29,9 +31,9 @@ public class SetBlockMessage implements IMessage {
 		x = ByteBufUtils.readVarInt(buf, 2);
 		y = ByteBufUtils.readVarInt(buf, 2);
 		z = ByteBufUtils.readVarInt(buf, 2);
-		String blockName = ByteBufUtils.readUTF8String(buf);
-		System.out.println("[SetBlockMessage.fromBytes] blockName=" + blockName);
-		block = Block.getBlockFromName(blockName);
+		int blockId = ByteBufUtils.readVarInt(buf, 2);
+		System.out.println("[SetBlockMessage.fromBytes] blockId=" + blockId);
+		block = Block.getBlockById(blockId);
 		System.out.println("[SetBlockMessage.fromBytes] block=" + block);
 		metadata = ByteBufUtils.readVarInt(buf, 1);
 	}
@@ -41,8 +43,25 @@ public class SetBlockMessage implements IMessage {
 		ByteBufUtils.writeVarInt(buf, x, 2);
 		ByteBufUtils.writeVarInt(buf, y, 2);
 		ByteBufUtils.writeVarInt(buf, z, 2);
-		ByteBufUtils.writeUTF8String(buf, block.getUnlocalizedName());
+		ByteBufUtils.writeVarInt(buf, Block.getIdFromBlock(block), 2);
 		ByteBufUtils.writeVarInt(buf, metadata, 1);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("SetBlockMessage [x=");
+		builder.append(x);
+		builder.append(", y=");
+		builder.append(y);
+		builder.append(", z=");
+		builder.append(z);
+		builder.append(", block=");
+		builder.append(block);
+		builder.append(", metadata=");
+		builder.append(metadata);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }
