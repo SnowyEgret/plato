@@ -15,10 +15,13 @@ pick.anywhere=anywhere
 pick.from=from
 pick.to=to
 pick.diagonal=diagonal corner
+pick.pattern=pattern block
 modifier.deleteOriginal=deletes original
 modifier.isHollow=hollow
 modifier.isSquare=square
 modifier.onSurface=on surface
+modifier.shrink=shrink
+modifier.any=select any block
 
 # Draw spells ##########
 
@@ -69,28 +72,48 @@ item.spellCopy.name=Copy Spell
 item.spellCopy.description=copies selection
 
 item.spellMirror.name=Mirror Spell
+item.spellMirror.description=mirrors selection about plane
+item.spellMirror.pick.0=point on plane
+item.spellMirror.pick.1=point on plane
+item.spellMirror.pick.2=point on plane
 
 item.spellRotate90.name=Rotate Spell
+item.spellRotate90.description=rotates selection 90 degrees around specified axis
+item.spellRotate90.pick.0=center of rotation
+item.spellRotate90.modifier.0=rotate around centroid
+item.spellRotate90.modifier.1=x axis
+item.spellRotate90.modifier.2=y axis (default)
+item.spellRotate90.modifier.3=z axis
 
 # Select spells ##########
 
 item.spellGrowAbove.name=Select Above Spell
+item.spellGrowAbove.description=grows or shrinks selection above selected blocks
 
 item.spellGrowAll.name=Select All spell
+item.spellGrowAll.description=grows or shrinks selection in all directions
 
 item.spellGrowBellow.name=Select Bellow Spell
+item.spellGrowBellow.description=grows or shrinks selection bellow selected blocks
 
 item.spellGrowDown.name=Select Down Spell
+item.spellGrowDown.description=grows or shrinks selection downwards
 
 item.spellGrowEdge.name=Select Edge Spell
+item.spellGrowEdge.description=selects an edge
 
 item.spellGrowFloor.name=Select Floor Spell
+item.spellGrowFloor.description=selects floor or ceiling
 
 item.spellGrowHorizontal.name=Select Horizontal Spell
+item.spellGrowHorizontal.description=grows or shrinks selection horizontally
 
 item.spellGrowUp.name=Select Up Spell
+item.spellGrowUp.description=grows or shrinks selection upwards
 
 item.spellGrowVerticalPlane.name=Select Vertical Plane Spell
+item.spellGrowVerticalPlane.description=grows or shrinks selection in the vertical EW (default) or NS plane
+item.spellGrowVerticalPlane.modifier.2=a, NS plane
 
 # Other spells ##########
 

@@ -4,7 +4,7 @@ import javax.vecmath.Matrix4d;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
-import net.minecraft.block.BlockAir;
+import net.minecraft.client.resources.I18n;
 
 import org.lwjgl.input.Keyboard;
 
@@ -15,9 +15,9 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
+import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellRotate90 extends AbstractSpellMatrix {
@@ -27,8 +27,8 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
-		
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
+
 		Pick[] picks = pickManager.getPicks();
 		Point3d center;
 		if (Keyboard.isKeyDown(Keyboard.KEY_LMETA)) {
@@ -37,8 +37,8 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 		} else {
 			center = picks[0].point3d();
 		}
-		
-		//TODO switch to RotationMatrix constructor with 2 vectors
+
+		// TODO switch to RotationMatrix constructor with 2 vectors
 		Matrix4d matrix;
 		switch (Keyboard.getEventKey()) {
 		case (Keyboard.KEY_X):
@@ -50,20 +50,20 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 		default:
 			matrix = GeomUtil.newRotY90Matrix(center);
 		}
-		
-		boolean deleteInitialBlocks = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
-		transformSelections(matrix, world, deleteInitialBlocks);
+
+		boolean deleteOriginal = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
+		transformSelections(matrix, world, deleteOriginal);
 	}
 
 	@Override
 	public SpellDescriptor getDescriptor() {
 		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_rotate_90_name;
-		d.description = Messages.spell_rotate_90_description;
-		d.picks = new PickDescriptor(Messages.spell_rotate_90_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_modifier_deleteOriginal,
-				Messages.spell_rotate_90_modifier_0, Messages.spell_rotate_90_modifier_1,
-				Messages.spell_rotate_90_modifier_2, Messages.spell_rotate_90_modifier_3);
+		d.name = I18n.format("item.spellRotate90.name");
+		d.description = I18n.format("item.spellRotate90.description");
+		d.picks = new PickDescriptor(I18n.format("item.spellRotate90.pick.0"));
+		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("modifier.deleteOriginal"), ALT
+				+ I18n.format("item.spellRotate90.modifier.0"), X + I18n.format("item.spellRotate90.modifier.1"), Y
+				+ I18n.format("item.spellRotate90.modifier.2"), Z + I18n.format("item.spellRotate90.modifier.3"));
 		return d;
 	}
 

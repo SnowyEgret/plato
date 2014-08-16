@@ -13,10 +13,7 @@ public class ModifierDescriptor {
 
 	public ModifierDescriptor(String... commaSeparatedKeyActionPairs) {
 		for (String keyActionPair : commaSeparatedKeyActionPairs) {
-			String[] strings = keyActionPair.split(",");
-			if (strings.length == 2) {
-				modifiers.add(Pair.of(strings[0].trim(), strings[1].trim()));
-			}
+			addModifier(keyActionPair);
 		}
 	}
 
@@ -27,6 +24,15 @@ public class ModifierDescriptor {
 			pairs.add(String.format("<%s>", p.getLeft()) + " " + p.getRight());
 		}
 		return Joiner.on(", ").join(pairs);
+	}
+
+	public void addModifier(String keyActionPair) {
+		String[] strings = keyActionPair.split(",");
+		if (strings.length == 2) {
+			modifiers.add(Pair.of(strings[0].trim(), strings[1].trim()));
+		} else {
+			modifiers.add(Pair.of("Bad format:", keyActionPair));
+		}
 	}
 
 }

@@ -1,15 +1,15 @@
 package ds.plato.spell.select;
 
+import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.descriptor.SpellGrowDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellGrowVerticalPlane extends AbstractSpellSelect {
@@ -19,18 +19,17 @@ public class SpellGrowVerticalPlane extends AbstractSpellSelect {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, SlotEntry... slotEntries) {
 		shellType = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? Shell.Type.YZ : Shell.Type.XY;
 		super.invoke(world, slotEntries);
 	}
 
 	@Override
 	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_grow_vertical_plane_name;
-		d.description = Messages.spell_grow_vertical_plane_description;
-		d.picks = new PickDescriptor(Messages.spell_grow_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_grow_modifier_0, Messages.spell_grow_modifier_1, Messages.spell_grow_vertical_plane_modifier_2);
+		SpellDescriptor d = new SpellGrowDescriptor();
+		d.name = I18n.format("item.spellGrowVerticalPlane.name");
+		d.description = I18n.format("item.spellGrowVerticalPlane.description");
+		d.modifiers.addModifier(SHIFT + I18n.format("item.spellGrowVerticalPlane.modifier.2"));
 		return d;
 	}
 

@@ -35,6 +35,9 @@ public abstract class Spell extends Item implements IClickable {
 	protected String CTRL = "ctrl,";
 	protected String ALT = "alt,";
 	protected String SHIFT = "shift,";
+	protected String X = "X,";
+	protected String Y = "Y,";
+	protected String Z = "Z,";
 
 	public Spell(int numPicks, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		this.numPicks = numPicks;

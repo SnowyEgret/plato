@@ -1,17 +1,12 @@
 package ds.plato.spell.select;
 
-import org.lwjgl.input.Keyboard;
-
+import net.minecraft.client.resources.I18n;
 import ds.plato.core.IWorld;
-import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
-import ds.plato.spell.select.Shell.Type;
+import ds.plato.spell.descriptor.SpellGrowDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellGrowFloor extends AbstractSpellSelect {
@@ -28,11 +23,9 @@ public class SpellGrowFloor extends AbstractSpellSelect {
 
 	@Override
 	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_grow_floor_name;
-		d.description = Messages.spell_grow_floor_description;
-		d.picks = new PickDescriptor(Messages.spell_grow_picks);
-		d.modifiers = new ModifierDescriptor(Messages.spell_grow_modifier_0, Messages.spell_grow_modifier_1);
+		SpellDescriptor d = new SpellGrowDescriptor();
+		d.name =I18n.format("item.spellGrowFloor.name");
+		d.description =I18n.format("item.spellGrowFloor.description");
 		return d;
 	}
 
