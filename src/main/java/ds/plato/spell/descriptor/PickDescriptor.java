@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.common.base.Joiner;
 
+@Deprecated
 public class PickDescriptor {
 
 	List<String> picks = new ArrayList<>();

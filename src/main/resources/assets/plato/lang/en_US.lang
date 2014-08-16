@@ -113,9 +113,9 @@ item.spellGrowUp.description=grows or shrinks selection upwards
 
 item.spellGrowVerticalPlane.name=Select Vertical Plane Spell
 item.spellGrowVerticalPlane.description=grows or shrinks selection in the vertical EW (default) or NS plane
-item.spellGrowVerticalPlane.modifier.2=a, NS plane
+item.spellGrowVerticalPlane.modifier.0=NS plane
 
-# Other spells ##########
+# Transform spells ##########
 
 item.spellDelete.name=Delete Spell
 
@@ -127,9 +127,13 @@ item.spellFillRandom.name=Random Fill Spell
 
 item.spellHollow.name=Hollow Spell
 
+# Other spells ##########
+
 item.spellDrop.name=Drop Spell
 item.spellDrop.description=drops selections to ground
-item.spellDrop.modifier.0=fill on the way down
+item.spellDrop.pick.0=anywhere
+item.spellDrop.modifier.ctrl=delete original
+item.spellDrop.modifier.alt=fill on the way down
 
 item.spellHoleDrain.name=Drain Hole Spell
 item.spellHoleDrain.description=drains a body of water

@@ -29,7 +29,7 @@ public class SpellGrowVerticalPlane extends AbstractSpellSelect {
 		SpellDescriptor d = new SpellGrowDescriptor();
 		d.name = I18n.format("item.spellGrowVerticalPlane.name");
 		d.description = I18n.format("item.spellGrowVerticalPlane.description");
-		d.modifiers.addModifier(SHIFT + I18n.format("item.spellGrowVerticalPlane.modifier.2"));
+		d.modifiers.addModifier(SHIFT + I18n.format("item.spellGrowVerticalPlane.modifier.0"));
 		return d;
 	}
 

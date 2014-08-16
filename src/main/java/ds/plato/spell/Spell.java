@@ -22,6 +22,7 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.descriptor.SpellInfo;
 import ds.plato.undo.IUndo;
 
 public abstract class Spell extends Item implements IClickable {
@@ -31,6 +32,7 @@ public abstract class Spell extends Item implements IClickable {
 	protected IPick pickManager;
 	protected String message;
 	private int numPicks;
+	protected SpellInfo info;
 	
 	protected String CTRL = "ctrl,";
 	protected String ALT = "alt,";
@@ -44,6 +46,7 @@ public abstract class Spell extends Item implements IClickable {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
+		info = new SpellInfo(this.getClass());
 	}
 
 	public abstract Object[] getRecipe();
@@ -59,8 +62,6 @@ public abstract class Spell extends Item implements IClickable {
 		SlotEntry[] entries = player.getSlotEntries();
 		invoke(w, entries);
 	}
-
-	public abstract SpellDescriptor getDescriptor();
 
 	public String getMessage() {
 		return message;
@@ -112,10 +113,14 @@ public abstract class Spell extends Item implements IClickable {
 			invoke(w, player.getSlotEntries());
 		}
 	}
+	
+	public SpellDescriptor getDescriptor() {
+		return null;
+	}
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
-		rollOver.add(getDescriptor().description);
+		rollOver.add(info.getDescription());
 	}
 	
 	public boolean isPicking() {
@@ -146,6 +151,10 @@ public abstract class Spell extends Item implements IClickable {
 		StringBuilder builder = new StringBuilder();
 		builder.append(getClass().getSimpleName());
 		return builder.toString();
+	}
+
+	public SpellInfo getInfo() {
+		return info;
 	}
 
 }

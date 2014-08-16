@@ -33,6 +33,7 @@ public class SpellHoleDrain extends Spell {
 
 	public SpellHoleDrain(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
+		info.addPick();
 	} 
 
 	@Override
@@ -40,14 +41,14 @@ public class SpellHoleDrain extends Spell {
 		return new Object[] { "   ", "BTB", "   ", 'T', Items.ghast_tear, 'B', Items.bucket };
 	}
 
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellHoleDrain.name");
-		d.description = I18n.format("item.spellHoleDrain.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellHoleDrain.pick.0"));
-		return d;
-	}
+//	@Override
+//	public SpellDescriptor getDescriptor() {
+//		SpellDescriptor d = new SpellDescriptor();
+//		d.name = I18n.format("item.spellHoleDrain.name");
+//		d.description = I18n.format("item.spellHoleDrain.description");
+//		d.picks = new PickDescriptor(I18n.format("item.spellHoleDrain.pick.0"));
+//		return d;
+//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry...slotEntries) {

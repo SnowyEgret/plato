@@ -7,6 +7,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Joiner;
 
+@Deprecated
 public class ModifierDescriptor {
 
 	List<Pair<String, String>> modifiers = new ArrayList<>();

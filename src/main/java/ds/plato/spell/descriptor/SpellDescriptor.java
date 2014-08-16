@@ -1,6 +1,6 @@
 package ds.plato.spell.descriptor;
 
-
+@Deprecated
 public class SpellDescriptor {
 	
 	public String name = "This staff has no spells";
@@ -18,6 +18,10 @@ public class SpellDescriptor {
 		this.picks = picks;
 		this.modifiers = modifiers;
 	}
+	
+//	public void addShiftModifier() {
+//		xmodifiers.add(new Modifier(SHIFT, ))
+//	}
 	
 //	public String getName() {
 //		return name.toUpperCase() + " spell";

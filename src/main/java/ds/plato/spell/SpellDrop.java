@@ -11,6 +11,7 @@ import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -22,16 +23,9 @@ public class SpellDrop extends Spell {
 
 	public SpellDrop(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
-	}
-
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellDrop.name");
-		d.description = I18n.format("item.spellDrop.description");
-		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
-		d.modifiers = new ModifierDescriptor(I18n.format("modifier.deleteOriginal"), ALT + I18n.format("item.spellDrop.modifier.0"));
-		return d;
+		info.addPick();
+		info.addModifier(Modifier.CTRL);
+		info.addModifier(Modifier.ALT);
 	}
 
 	@Override

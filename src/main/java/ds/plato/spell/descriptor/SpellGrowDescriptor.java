@@ -2,6 +2,7 @@ package ds.plato.spell.descriptor;
 
 import net.minecraft.client.resources.I18n;
 
+@Deprecated
 public class SpellGrowDescriptor extends SpellDescriptor {
 	
 	public SpellGrowDescriptor() {
