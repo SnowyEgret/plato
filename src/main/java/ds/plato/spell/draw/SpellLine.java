@@ -11,6 +11,7 @@ import ds.plato.geom.curve.Line;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -20,17 +21,18 @@ public class SpellLine extends AbstractSpellDraw {
 
 	public SpellLine(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(2, undoManager, selectionManager, pickManager);
+		info.addModifiers(Modifier.CTRL);
 	}
 
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellLine.name");
-		d.description = I18n.format("item.spellLine.description");
-		d.picks = new PickDescriptor(I18n.format("pick.from"), I18n.format("pick.to"));
-		d.modifiers = new ModifierDescriptor(CTRL+ I18n.format("item.spellLine.modifier.0"));
-		return d;
-	}
+//	@Override
+//	public SpellDescriptor getDescriptor() {
+//		SpellDescriptor d = new SpellDescriptor();
+//		d.name = I18n.format("item.spellLine.name");
+//		d.description = I18n.format("item.spellLine.description");
+//		d.picks = new PickDescriptor(I18n.format("pick.from"), I18n.format("pick.to"));
+//		d.modifiers = new ModifierDescriptor(CTRL+ I18n.format("item.spellLine.modifier.0"));
+//		return d;
+//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry...slotEntries) {

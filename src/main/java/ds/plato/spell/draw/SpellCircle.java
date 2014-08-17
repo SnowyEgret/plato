@@ -22,17 +22,19 @@ public class SpellCircle extends AbstractSpellDraw {
 
 	public SpellCircle(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(2, undoManager, selectionManager, pickManager);
+//		info.setNumPicks(null);
+//		info.setNumPicks(null);
 	}
 
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellCircle.name");
-		d.description = I18n.format("item.spellCircle.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellCircle.pick.0"), I18n.format("item.spellCircle.pick.1"));
-		d.modifiers = new ModifierDescriptor(ALT + I18n.format("modifier.onSurface"));
-		return d;
-	}
+//	@Override
+//	public SpellDescriptor getDescriptor() {
+//		SpellDescriptor d = new SpellDescriptor();
+//		d.name = I18n.format("item.spellCircle.name");
+//		d.description = I18n.format("item.spellCircle.description");
+//		d.picks = new PickDescriptor(I18n.format("item.spellCircle.pick.0"), I18n.format("item.spellCircle.pick.1"));
+//		d.modifiers = new ModifierDescriptor(ALT + I18n.format("modifier.onSurface"));
+//		return d;
+//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry... slotEntries) {

@@ -27,16 +27,17 @@ public class SpellRestore extends Spell {
 
 	public SpellRestore(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
+		//info.setNumPicks(1);
 	}
 
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellRestore.name");
-		d.description = I18n.format("item.spellRestore.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellRestore.pick.0"));
-		return d;
-	}
+//	@Override
+//	public SpellDescriptor getDescriptor() {
+//		SpellDescriptor d = new SpellDescriptor();
+//		d.name = I18n.format("item.spellRestore.name");
+//		d.description = I18n.format("item.spellRestore.description");
+//		d.picks = new PickDescriptor(I18n.format("item.spellRestore.pick.0"));
+//		return d;
+//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry...slotEntries) {

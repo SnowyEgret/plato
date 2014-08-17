@@ -14,6 +14,7 @@ import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -26,18 +27,20 @@ public class SpellHoleFill extends Spell {
 
 	public SpellHoleFill(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
+		//info.setNumPicks(1);
+		info.addModifiers(Modifier.CTRL, Modifier.SHIFT);
 	}
 
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellHoleFill.name");
-		d.description = I18n.format("item.spellHoleFill.description");
-		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
-		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellHoleFill.modifier.0"), SHIFT
-				+ I18n.format("item.spellHoleFill.modifier.1"));
-		return d;
-	}
+//	@Override
+//	public SpellDescriptor getDescriptor() {
+//		SpellDescriptor d = new SpellDescriptor();
+//		d.name = I18n.format("item.spellHoleFill.name");
+//		d.description = I18n.format("item.spellHoleFill.description");
+//		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
+//		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellHoleFill.modifier.0"), SHIFT
+//				+ I18n.format("item.spellHoleFill.modifier.1"));
+//		return d;
+//	}
 
 	@Override
 	public Object[] getRecipe() {

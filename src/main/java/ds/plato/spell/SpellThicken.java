@@ -18,6 +18,7 @@ import ds.plato.geom.VoxelSet;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -31,18 +32,20 @@ public class SpellThicken extends AbstractSpellTransform {
 
 	public SpellThicken(IUndo undo, ISelect select, IPick pick) {
 		super(undo, select, pick);
+		//info.setNumPicks(1);
+		info.addModifiers(Modifier.CTRL, Modifier.SHIFT, Modifier.ALT);
 	}
 
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellThicken.name");
-		d.description = I18n.format("item.spellThicken.description");
-		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
-		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellThicken.modifier.0"), SHIFT
-				+ I18n.format("item.spellThicken.modifier.1"), ALT + I18n.format("item.spellThicken.modifier.2"));
-		return d;
-	}
+//	@Override
+//	public SpellDescriptor getDescriptor() {
+//		SpellDescriptor d = new SpellDescriptor();
+//		d.name = I18n.format("item.spellThicken.name");
+//		d.description = I18n.format("item.spellThicken.description");
+//		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
+//		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellThicken.modifier.0"), SHIFT
+//				+ I18n.format("item.spellThicken.modifier.1"), ALT + I18n.format("item.spellThicken.modifier.2"));
+//		return d;
+//	}
 
 	@Override
 	public void invoke(final IWorld world, SlotEntry... slotEntries) {

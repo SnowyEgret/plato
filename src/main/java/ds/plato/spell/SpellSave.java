@@ -18,6 +18,7 @@ import ds.plato.gui.ITextSetable;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.spell.descriptor.ModifierDescriptor;
 import ds.plato.spell.descriptor.PickDescriptor;
 import ds.plato.spell.descriptor.SpellDescriptor;
@@ -30,6 +31,8 @@ public class SpellSave extends Spell implements ITextSetable {
 
 	public SpellSave(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
+		//info.setNumPicks(1);
+		info.addModifiers(Modifier.CTRL);
 	}
 
 	@Override
@@ -68,15 +71,15 @@ public class SpellSave extends Spell implements ITextSetable {
 		selectionManager.clearSelections();
 	}
 
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellSave.name");
-		d.description = I18n.format("item.spellSave.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellSave.pick.0"));
-		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellSave.modifier.0"));
-		return d;
-	}
+//	@Override
+//	public SpellDescriptor getDescriptor() {
+//		SpellDescriptor d = new SpellDescriptor();
+//		d.name = I18n.format("item.spellSave.name");
+//		d.description = I18n.format("item.spellSave.description");
+//		d.picks = new PickDescriptor(I18n.format("item.spellSave.pick.0"));
+//		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellSave.modifier.0"));
+//		return d;
+//	}
 
 	@Override
 	public Object[] getRecipe() {

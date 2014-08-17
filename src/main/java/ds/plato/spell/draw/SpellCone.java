@@ -1,7 +1,5 @@
 package ds.plato.spell.draw;
 
-import net.minecraft.client.resources.I18n;
-
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -11,27 +9,27 @@ import ds.plato.geom.surface.Cone;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.undo.IUndo;
 
 public class SpellCone extends AbstractSpellDraw {
 
 	public SpellCone(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(3, undoManager, selectionManager, pickManager);
+		//info.setNumPicks(null);
+		info.addModifiers(Modifier.SHIFT);
 	}
 
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellCone.name");
-		d.description = I18n.format("item.spellCone.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellCone.pick.0"), I18n.format("item.spellCone.pick.1"),
-				I18n.format("item.spellCone.pick.2"));
-		d.modifiers = new ModifierDescriptor(SHIFT + I18n.format("modifier.isHollow"));
-		return d;
-	}
+//	@Override
+//	public SpellDescriptor getDescriptor() {
+//		SpellDescriptor d = new SpellDescriptor();
+//		d.name = I18n.format("item.spellCone.name");
+//		d.description = I18n.format("item.spellCone.description");
+//		d.picks = new PickDescriptor(I18n.format("item.spellCone.pick.0"), I18n.format("item.spellCone.pick.1"),
+//				I18n.format("item.spellCone.pick.2"));
+//		d.modifiers = new ModifierDescriptor(SHIFT + I18n.format("modifier.isHollow"));
+//		return d;
+//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry... slotEntries) {

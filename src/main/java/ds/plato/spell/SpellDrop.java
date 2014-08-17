@@ -23,9 +23,8 @@ public class SpellDrop extends Spell {
 
 	public SpellDrop(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
-		info.addPick();
-		info.addModifier(Modifier.CTRL);
-		info.addModifier(Modifier.ALT);
+		//info.setNumPicks(1);
+		info.addModifiers(Modifier.CTRL, Modifier.ALT);
 	}
 
 	@Override

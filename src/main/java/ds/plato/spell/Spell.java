@@ -46,7 +46,7 @@ public abstract class Spell extends Item implements IClickable {
 		this.undoManager = undoManager;
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
-		info = new SpellInfo(this.getClass());
+		info = new SpellInfo(this);
 	}
 
 	public abstract Object[] getRecipe();

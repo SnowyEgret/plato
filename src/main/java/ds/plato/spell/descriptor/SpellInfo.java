@@ -20,34 +20,38 @@ public class SpellInfo {
 	private List<String> picks = new ArrayList<>();
 	private Map<String, String> modifiers = new HashMap<>();
 
-	public SpellInfo(Class<? extends Spell> spellClass) {
-		root = "item." + StringUtils.toCamelCase(spellClass) + ".";
+	public SpellInfo(Spell spell) {
+		root = "item." + StringUtils.toCamelCase(spell.getClass()) + ".";
 		name = format("name");
 		description = format("description");
+		addPicks(spell.getNumPicks());
 	}
 
 	private String format(String string) {
 		return I18n.format(root + string);
 	}
 
-	public void addPick() {
-		picks.add(format("pick." + picks.size()));
+	private void addPicks(int numPicks) {
+		for (int i = 0; i < numPicks; i++) {
+			picks.add(format("pick." + picks.size()));
+		}
 	}
 
-	public void addModifier(Modifier modifier) {
-		//String s = format("modifier." + suffix);
-		switch (modifier) {
-		case CTRL:
-			modifiers.put("ctrl", format("modifier.ctrl"));
-			break;
-		case ALT:
-			modifiers.put("alt", format("modifier.alt"));
-			break;
-		case SHIFT:
-			modifiers.put("shift", format("modifier.shift"));
-			break;
-		default:
-			break;
+	public void addModifiers(Modifier... modifiers) {
+		for (Modifier modifier : modifiers) {
+			switch (modifier) {
+			case CTRL:
+				this.modifiers.put("ctrl", format("modifier.ctrl"));
+				break;
+			case ALT:
+				this.modifiers.put("alt", format("modifier.alt"));
+				break;
+			case SHIFT:
+				this.modifiers.put("shift", format("modifier.shift"));
+				break;
+			default:
+				break;
+			}
 		}
 	}
 

@@ -45,6 +45,7 @@ public class SpellText extends Spell implements ITextSetable {
 		// BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
 		graphics = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB).getGraphics();
 		// font = font.deriveFont(32);
+		//info.setNumPicks(2);
 	}
 
 	@Override
@@ -52,14 +53,14 @@ public class SpellText extends Spell implements ITextSetable {
 		return new Object[] { "   ", "BAB", "   ", 'A', Items.feather, 'B', Items.dye };
 	}
 
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellText.name");
-		d.description = I18n.format("item.spellText.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellText.pick.0"), I18n.format("item.spellText.pick.1"));
-		return d;
-	}
+//	@Override
+//	public SpellDescriptor getDescriptor() {
+//		SpellDescriptor d = new SpellDescriptor();
+//		d.name = I18n.format("item.spellText.name");
+//		d.description = I18n.format("item.spellText.description");
+//		d.picks = new PickDescriptor(I18n.format("item.spellText.pick.0"), I18n.format("item.spellText.pick.1"));
+//		return d;
+//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry...slotEntries) {

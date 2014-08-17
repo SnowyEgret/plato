@@ -8,11 +8,7 @@ import net.minecraft.inventory.Slot;
 
 public class MyContainer extends Container {
 
-	IInventory inventory;
-
 	public MyContainer(InventoryPlayer playerInventory, IInventory inventory) {
-
-		this.inventory = inventory;
 
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 18));
@@ -31,7 +27,6 @@ public class MyContainer extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return inventory.isUseableByPlayer(player);
+		return true;
 	}
-
 }

@@ -27,28 +27,34 @@ modifier.any=select any block
 
 item.spellBox.name=Box Spell
 item.spellBox.description=creates a solid box
-item.spellBox.modifier.0=cube
+item.spellBox.pick.0=origin
+item.spellBox.pick.1=diagonal corner
+item.spellBox.modifier.ctrl=cube
+item.spellBox.modifier.shift=hollow
+item.spellBox.modifier.alt=on surface
 
 item.spellCircle.name=Circle Spell
 item.spellCircle.description=creates a circle
 item.spellCircle.pick.0=center
 item.spellCircle.pick.1=radius
+item.spellCircle.modifier.alt=on surface
 
 item.spellCone.name=Cone Spell
 item.spellCone.description=creates a cone
 item.spellCone.pick.0=center
 item.spellCone.pick.1=radius
 item.spellCone.pick.2=height
+item.spellCone.modifier.shift=hollow
 
 item.spellLine.name=Line Spell
 item.spellLine.description=creates a line
-item.spellLine.modifier.0=polyline
+item.spellLine.modifier.ctrl=polyline
 
 item.spellMeasure.name=Measure Spell
 item.spellMeasure.description=measures distance between picks
-item.spellMeasure.modifier.0=place markers at picks
-item.spellMeasure.modifier.1=divides by 2
-item.spellMeasure.modifier.2=divides by 3
+item.spellMeasure.modifier.ctrl=place markers at picks
+item.spellMeasure.modifier.shift=divides by 2
+item.spellMeasure.modifier.alt=divides by 3
 
 item.spellPyramid.name=Pyramid Spell
 item.spellPyramid.description=creates a solid pyramid
@@ -141,11 +147,13 @@ item.spellHoleDrain.pick.0=any block under water
 
 item.spellHoleFill.name=Fill Hole Spell
 item.spellHoleFill.description=fills a hole or body of water with level with selected block
-item.spellHoleFill.modifier.0=top surface only
-item.spellHoleFill.modifier.1=use first block in inventory
+item.spellHoleFill.pick.0=anywhere
+item.spellHoleFill.modifier.ctrl=top surface only
+item.spellHoleFill.modifier.shift=use first block in inventory
 
 item.spellMengerSponge.name=Menger Sponge Spell
 item.spellMengerSponge.description=creates Menger Sponge cavities in selection
+item.spellMengerSponge.pick.0=anywhere
 
 item.spellRestore.name=Restore Spell
 item.spellRestore.description=restores a selection from Store Spell
@@ -154,7 +162,7 @@ item.spellRestore.pick.0=insertion point
 item.spellSave.name=Store Spell
 item.spellSave.description=stores a selection for Restore Spell
 item.spellSave.pick.0=origin
-item.spellSave.modifier.0=deletes original selection
+item.spellSave.modifier.ctrl=deletes original selection
 
 item.spellText.name=Text Spell
 item.spellText.description=draws text
@@ -163,7 +171,8 @@ item.spellText.pick.1=direction
 
 item.spellThicken.name=Thicken Spell
 item.spellThicken.description=thickens selections
-item.spellThicken.modifier.0=inwards only
-item.spellThicken.modifier.1=outwards only
-item.spellThicken.modifier.2=within plane
+item.spellThicken.pick.0=anywhere
+item.spellThicken.modifier.ctrl=inwards only
+item.spellThicken.modifier.shift=outwards only
+item.spellThicken.modifier.alt=within plane
 
