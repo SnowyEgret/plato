@@ -3,7 +3,6 @@ package ds.plato.spell;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 
@@ -15,9 +14,6 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.Modifier;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.select.Shell;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
@@ -30,17 +26,6 @@ public class SpellHoleFill extends Spell {
 		//info.setNumPicks(1);
 		info.addModifiers(Modifier.CTRL, Modifier.SHIFT);
 	}
-
-//	@Override
-//	public SpellDescriptor getDescriptor() {
-//		SpellDescriptor d = new SpellDescriptor();
-//		d.name = I18n.format("item.spellHoleFill.name");
-//		d.description = I18n.format("item.spellHoleFill.description");
-//		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
-//		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellHoleFill.modifier.0"), SHIFT
-//				+ I18n.format("item.spellHoleFill.modifier.1"));
-//		return d;
-//	}
 
 	@Override
 	public Object[] getRecipe() {

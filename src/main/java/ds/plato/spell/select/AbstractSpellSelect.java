@@ -23,6 +23,7 @@ import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.undo.IUndo;
 
 public abstract class AbstractSpellSelect extends Spell {
@@ -34,6 +35,7 @@ public abstract class AbstractSpellSelect extends Spell {
 	public AbstractSpellSelect(Shell.Type type, IUndo undo, ISelect select, IPick pick) {
 		super(1, undo, select, pick);
 		this.shellType = type;
+		info.addModifiers(Modifier.CTRL, Modifier.ALT);
 	}
 
 	@Override

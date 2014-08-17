@@ -4,8 +4,6 @@ import javax.vecmath.Matrix4d;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
-import net.minecraft.client.resources.I18n;
-
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -14,16 +12,14 @@ import ds.plato.geom.GeomUtil;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.undo.IUndo;
 
 public class SpellRotate90 extends AbstractSpellMatrix {
 
 	public SpellRotate90(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
+		info.addModifiers(Modifier.ALT, Modifier.X, Modifier.Y, Modifier.Z);
 	}
 
 	@Override
@@ -53,18 +49,6 @@ public class SpellRotate90 extends AbstractSpellMatrix {
 
 		boolean deleteOriginal = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		transformSelections(matrix, world, deleteOriginal);
-	}
-
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellRotate90.name");
-		d.description = I18n.format("item.spellRotate90.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellRotate90.pick.0"));
-		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("modifier.deleteOriginal"), ALT
-				+ I18n.format("item.spellRotate90.modifier.0"), X + I18n.format("item.spellRotate90.modifier.1"), Y
-				+ I18n.format("item.spellRotate90.modifier.2"), Z + I18n.format("item.spellRotate90.modifier.3"));
-		return d;
 	}
 
 	@Override

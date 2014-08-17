@@ -2,8 +2,6 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3d;
 
-import net.minecraft.client.resources.I18n;
-
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -13,26 +11,14 @@ import ds.plato.geom.solid.RectangularPyramid;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.undo.IUndo;
 
 public class SpellPyramid extends AbstractSpellDraw {
 
 	public SpellPyramid(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(2, undoManager, selectionManager, pickManager);
-	}
-
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellPyramid.name");
-		d.description = I18n.format("item.spellPyramid.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellPyramid.pick.0"), I18n.format("item.spellPyramid.pick.1"));
-		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("modifier.isSquare"), SHIFT
-				+ I18n.format("modifier.isHollow"));
-		return d;
+		info.addModifiers(Modifier.CTRL, Modifier.SHIFT);
 	}
 
 	@Override

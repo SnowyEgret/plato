@@ -2,8 +2,6 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3d;
 
-import net.minecraft.client.resources.I18n;
-
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -14,9 +12,6 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.descriptor.Modifier;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellBox extends AbstractSpellDraw {
@@ -26,17 +21,6 @@ public class SpellBox extends AbstractSpellDraw {
 		//info.setNumPicks(2);
 		info.addModifiers(Modifier.CTRL, Modifier.SHIFT, Modifier.ALT);
 	}
-
-//	@Override
-//	public SpellDescriptor getDescriptor() {
-//		SpellDescriptor d = new SpellDescriptor();
-//		d.name = I18n.format("item.spellBox.name");
-//		d.description = I18n.format("item.spellBox.description");
-//		d.picks = new PickDescriptor(I18n.format("pick.from"), I18n.format("pick.diagonal"));
-//		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellBox.modifier.0"), ALT
-//				+ I18n.format("modifier.onSurface"), SHIFT + I18n.format("modifier.isHollow"));
-//		return d;
-//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry... slotEntries) {

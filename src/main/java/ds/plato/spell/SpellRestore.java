@@ -6,7 +6,6 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import ds.plato.Plato;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
@@ -14,8 +13,6 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.PersistentVoxelGroup.Voxel;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
@@ -29,15 +26,6 @@ public class SpellRestore extends Spell {
 		super(1, undoManager, selectionManager, pickManager);
 		//info.setNumPicks(1);
 	}
-
-//	@Override
-//	public SpellDescriptor getDescriptor() {
-//		SpellDescriptor d = new SpellDescriptor();
-//		d.name = I18n.format("item.spellRestore.name");
-//		d.description = I18n.format("item.spellRestore.description");
-//		d.picks = new PickDescriptor(I18n.format("item.spellRestore.pick.0"));
-//		return d;
-//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry...slotEntries) {

@@ -8,9 +8,7 @@ import javax.vecmath.Point3i;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
@@ -21,7 +19,6 @@ import ds.plato.geom.solid.Box;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.SpellInfo;
 import ds.plato.undo.IUndo;
 
@@ -114,10 +111,6 @@ public abstract class Spell extends Item implements IClickable {
 		}
 	}
 	
-	public SpellDescriptor getDescriptor() {
-		return null;
-	}
-
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
 		rollOver.add(info.getDescription());

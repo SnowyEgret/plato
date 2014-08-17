@@ -33,7 +33,13 @@ public class SpellInfo {
 
 	private void addPicks(int numPicks) {
 		for (int i = 0; i < numPicks; i++) {
-			picks.add(format("pick." + picks.size()));
+			String s = format("pick." + picks.size());
+			//To avoid repeating [].pick.0=anywhere in the lang file it can be left out
+			//
+			if (s.startsWith("item.")) {
+				s = I18n.format("pick.anywhere");
+			}
+			picks.add(s);
 		}
 	}
 
@@ -48,6 +54,15 @@ public class SpellInfo {
 				break;
 			case SHIFT:
 				this.modifiers.put("shift", format("modifier.shift"));
+				break;
+			case X:
+				this.modifiers.put("x", format("modifier.x"));
+				break;
+			case Y:
+				this.modifiers.put("y", format("modifier.y"));
+				break;
+			case Z:
+				this.modifiers.put("z", format("modifier.z"));
 				break;
 			default:
 				break;

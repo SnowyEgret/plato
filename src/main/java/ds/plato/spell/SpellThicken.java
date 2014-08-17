@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
-import net.minecraft.client.resources.I18n;
-
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -19,9 +17,6 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.Modifier;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.select.Shell;
 import ds.plato.spell.transform.AbstractSpellTransform;
 import ds.plato.undo.IUndo;
@@ -35,17 +30,6 @@ public class SpellThicken extends AbstractSpellTransform {
 		//info.setNumPicks(1);
 		info.addModifiers(Modifier.CTRL, Modifier.SHIFT, Modifier.ALT);
 	}
-
-//	@Override
-//	public SpellDescriptor getDescriptor() {
-//		SpellDescriptor d = new SpellDescriptor();
-//		d.name = I18n.format("item.spellThicken.name");
-//		d.description = I18n.format("item.spellThicken.description");
-//		d.picks = new PickDescriptor(I18n.format("pick.anywhere"));
-//		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellThicken.modifier.0"), SHIFT
-//				+ I18n.format("item.spellThicken.modifier.1"), ALT + I18n.format("item.spellThicken.modifier.2"));
-//		return d;
-//	}
 
 	@Override
 	public void invoke(final IWorld world, SlotEntry... slotEntries) {

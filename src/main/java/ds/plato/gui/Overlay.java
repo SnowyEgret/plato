@@ -12,7 +12,6 @@ import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
 import ds.plato.select.ISelect;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.descriptor.SpellInfo;
 import ds.plato.spell.transform.SpellFillRandom;
 import ds.plato.staff.Staff;
@@ -40,21 +39,6 @@ public class Overlay {
 		int y = x;
 		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
 		int dy = r.FONT_HEIGHT + 5;
-		// SpellDescriptor descriptor = spell.getDescriptor();
-		// if (descriptor != null) {
-		// if (descriptor.name != null) {
-		// r.drawStringWithShadow(descriptor.name.toUpperCase() + " spell", x, y, white);
-		// }
-		// if (descriptor.description != null) {
-		// r.drawStringWithShadow(descriptor.description, x, y += dy, white);
-		// }
-		// if (descriptor.picks != null) {
-		// r.drawStringWithShadow(descriptor.picks.toString(), x, y += dy, green);
-		// }
-		// if (descriptor.modifiers != null) {
-		// r.drawStringWithShadow(descriptor.modifiers.toString(), x, y += dy, blue);
-		// }
-		// }
 		
 		SpellInfo info = spell.getInfo();
 		r.drawStringWithShadow(info.getName().toUpperCase() + " spell", x, y, white);

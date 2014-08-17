@@ -13,7 +13,6 @@ import javax.vecmath.Point3i;
 import javax.vecmath.Vector3d;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
 import ds.plato.Plato;
 import ds.plato.core.IWorld;
@@ -22,8 +21,6 @@ import ds.plato.gui.ITextSetable;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
@@ -52,15 +49,6 @@ public class SpellText extends Spell implements ITextSetable {
 	public Object[] getRecipe() {
 		return new Object[] { "   ", "BAB", "   ", 'A', Items.feather, 'B', Items.dye };
 	}
-
-//	@Override
-//	public SpellDescriptor getDescriptor() {
-//		SpellDescriptor d = new SpellDescriptor();
-//		d.name = I18n.format("item.spellText.name");
-//		d.description = I18n.format("item.spellText.description");
-//		d.picks = new PickDescriptor(I18n.format("item.spellText.pick.0"), I18n.format("item.spellText.pick.1"));
-//		return d;
-//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry...slotEntries) {

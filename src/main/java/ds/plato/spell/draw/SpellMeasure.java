@@ -2,8 +2,6 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3d;
 
-import net.minecraft.client.resources.I18n;
-
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -13,9 +11,6 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.descriptor.Modifier;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellMeasure extends AbstractSpellDraw {
@@ -24,17 +19,6 @@ public class SpellMeasure extends AbstractSpellDraw {
 		super(2, undoManager, selectionManager, pickManager);
 		info.addModifiers(Modifier.CTRL, Modifier.SHIFT, Modifier.ALT);
 	}
-
-//	@Override
-//	public SpellDescriptor getDescriptor() {
-//		SpellDescriptor d = new SpellDescriptor();
-//		d.name = I18n.format("item.spellMeasure.name");
-//		d.description = I18n.format("item.spellMeasure.description");
-//		d.picks = new PickDescriptor(I18n.format("pick.from"), I18n.format("pick.to"));
-//		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("item.spellMeasure.modifier.0"), SHIFT
-//				+ I18n.format("item.spellMeasure.modifier.1"), ALT + I18n.format("item.spellMeasure.modifier.2"));
-//		return d;
-//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry... slotEntries) {

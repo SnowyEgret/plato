@@ -1,7 +1,5 @@
 package ds.plato.spell.draw;
 
-import net.minecraft.client.resources.I18n;
-
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
@@ -11,25 +9,14 @@ import ds.plato.geom.curve.Rectangle;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
+import ds.plato.spell.descriptor.Modifier;
 import ds.plato.undo.IUndo;
 
 public class SpellRectangle extends AbstractSpellDraw {
 
 	public SpellRectangle(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(2, undoManager, selectionManager, pickManager);
-	}
-
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = I18n.format("item.spellRectangle.name");
-		d.description = I18n.format("item.spellRectangle.description");
-		d.picks = new PickDescriptor(I18n.format("item.spellRectangle.pick.0"), I18n.format("item.spellRectangle.pick.1"));
-		d.modifiers = new ModifierDescriptor(CTRL + I18n.format("modifier.isSquare"));
-		return d;
+		info.addModifiers(Modifier.CTRL);
 	}
 
 	@Override

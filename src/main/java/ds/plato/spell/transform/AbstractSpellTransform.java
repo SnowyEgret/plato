@@ -5,7 +5,6 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;

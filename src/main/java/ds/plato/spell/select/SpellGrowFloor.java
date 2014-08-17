@@ -1,12 +1,9 @@
 package ds.plato.spell.select;
 
-import net.minecraft.client.resources.I18n;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.descriptor.SpellDescriptor;
-import ds.plato.spell.descriptor.SpellGrowDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellGrowFloor extends AbstractSpellSelect {
@@ -19,14 +16,6 @@ public class SpellGrowFloor extends AbstractSpellSelect {
 	public Object[] getRecipe() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellGrowDescriptor();
-		d.name =I18n.format("item.spellGrowFloor.name");
-		d.description =I18n.format("item.spellGrowFloor.description");
-		return d;
 	}
 
 	@Override

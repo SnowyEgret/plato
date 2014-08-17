@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import ds.plato.staff.StaffOakTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({ PersistentVoxelGroupTest.class, SpellLoaderTest.class, SpellTest.class })
+@SuiteClasses({ PersistentVoxelGroupTest.class, SpellLoaderTest.class })
 public class AllTests {
 
 }

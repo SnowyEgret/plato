@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.vecmath.Point3i;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
@@ -14,8 +13,6 @@ import ds.plato.geom.IntegerDomain;
 import ds.plato.geom.VoxelSet;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;

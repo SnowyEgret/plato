@@ -16,20 +16,8 @@ public class SpellCone extends AbstractSpellDraw {
 
 	public SpellCone(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(3, undoManager, selectionManager, pickManager);
-		//info.setNumPicks(null);
 		info.addModifiers(Modifier.SHIFT);
 	}
-
-//	@Override
-//	public SpellDescriptor getDescriptor() {
-//		SpellDescriptor d = new SpellDescriptor();
-//		d.name = I18n.format("item.spellCone.name");
-//		d.description = I18n.format("item.spellCone.description");
-//		d.picks = new PickDescriptor(I18n.format("item.spellCone.pick.0"), I18n.format("item.spellCone.pick.1"),
-//				I18n.format("item.spellCone.pick.2"));
-//		d.modifiers = new ModifierDescriptor(SHIFT + I18n.format("modifier.isHollow"));
-//		return d;
-//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry... slotEntries) {

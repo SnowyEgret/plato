@@ -6,9 +6,6 @@ import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
-import ds.plato.spell.Messages;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 
 public class SpellDelete extends AbstractSpellTransform {
@@ -28,19 +25,4 @@ public class SpellDelete extends AbstractSpellTransform {
 			}
 		});
 	}
-
-	@Override
-	public int getNumPicks() {
-		return 1;
-	}
-	
-	@Override
-	public SpellDescriptor getDescriptor() {
-		SpellDescriptor d = new SpellDescriptor();
-		d.name = Messages.spell_delete_name;
-		d.description = Messages.spell_delete_description;
-		d.picks = new PickDescriptor(Messages.spell_restore_pick);
-		return d;
-	}
-
 }

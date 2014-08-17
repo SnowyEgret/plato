@@ -1,7 +1,6 @@
 package ds.plato.spell;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 
 import org.lwjgl.input.Keyboard;
@@ -12,9 +11,6 @@ import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.Modifier;
-import ds.plato.spell.descriptor.ModifierDescriptor;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;

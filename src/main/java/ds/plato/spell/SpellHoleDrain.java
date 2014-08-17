@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 
@@ -17,8 +16,6 @@ import ds.plato.core.SlotEntry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.descriptor.PickDescriptor;
-import ds.plato.spell.descriptor.SpellDescriptor;
 import ds.plato.spell.select.Shell;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.SetBlock;
@@ -40,15 +37,6 @@ public class SpellHoleDrain extends Spell {
 	public Object[] getRecipe() {
 		return new Object[] { "   ", "BTB", "   ", 'T', Items.ghast_tear, 'B', Items.bucket };
 	}
-
-//	@Override
-//	public SpellDescriptor getDescriptor() {
-//		SpellDescriptor d = new SpellDescriptor();
-//		d.name = I18n.format("item.spellHoleDrain.name");
-//		d.description = I18n.format("item.spellHoleDrain.description");
-//		d.picks = new PickDescriptor(I18n.format("item.spellHoleDrain.pick.0"));
-//		return d;
-//	}
 
 	@Override
 	public void invoke(IWorld world, SlotEntry...slotEntries) {
