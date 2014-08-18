@@ -30,7 +30,6 @@ public class SpellHoleDrain extends Spell {
 
 	public SpellHoleDrain(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
-		//info.setNumPicks(1);
 	} 
 
 	@Override

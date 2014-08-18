@@ -42,7 +42,6 @@ public class SpellText extends Spell implements ITextSetable {
 		// BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
 		graphics = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB).getGraphics();
 		// font = font.deriveFont(32);
-		//info.setNumPicks(2);
 	}
 
 	@Override

@@ -24,7 +24,6 @@ public class SpellRestore extends Spell {
 
 	public SpellRestore(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
-		//info.setNumPicks(1);
 	}
 
 	@Override

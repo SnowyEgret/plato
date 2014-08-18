@@ -18,7 +18,6 @@ public class SpellBox extends AbstractSpellDraw {
 
 	public SpellBox(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(2, undoManager, selectionManager, pickManager);
-		//info.setNumPicks(2);
 		info.addModifiers(Modifier.CTRL, Modifier.SHIFT, Modifier.ALT);
 	}
 

@@ -27,7 +27,6 @@ public class SpellThicken extends AbstractSpellTransform {
 
 	public SpellThicken(IUndo undo, ISelect select, IPick pick) {
 		super(undo, select, pick);
-		//info.setNumPicks(1);
 		info.addModifiers(Modifier.CTRL, Modifier.SHIFT, Modifier.ALT);
 	}
 

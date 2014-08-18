@@ -51,7 +51,6 @@ import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)
-// @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class Plato {
 
 	public static final String ID = "plato";

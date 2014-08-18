@@ -27,7 +27,6 @@ public class SpellSave extends Spell implements ITextSetable {
 
 	public SpellSave(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
-		//info.setNumPicks(1);
 		info.addModifiers(Modifier.CTRL);
 	}
 
