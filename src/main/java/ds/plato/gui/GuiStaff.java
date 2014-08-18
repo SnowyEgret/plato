@@ -25,7 +25,7 @@ public class GuiStaff extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p1, int p2) {
-		String staffName = Player.client().getHeldItemStack().getDisplayName();
+		String staffName = Player.getPlayer().getHeldItemStack().getDisplayName();
 		fontRendererObj.drawString(staffName, 8, 6, 4210752);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, rowHeight + 2, 4210752);
 	}

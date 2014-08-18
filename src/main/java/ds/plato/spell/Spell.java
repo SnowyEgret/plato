@@ -71,7 +71,7 @@ public abstract class Spell extends Item implements IClickable {
 	@Override
 	public void onMouseClickLeft(MovingObjectPosition e) {
 
-		Player player = Player.client();
+		Player player = Player.getPlayer();
 		IWorld w = player.getWorld();
 
 		// Standard selection behavior. Shift replaces the current selection set with a region.
@@ -102,7 +102,7 @@ public abstract class Spell extends Item implements IClickable {
 
 	@Override
 	public void onMouseClickRight(MovingObjectPosition e) {
-		Player player = Player.client();
+		Player player = Player.getPlayer();
 		IWorld w = player.getWorld();
 		int side = e.sideHit;
 		pickManager.pick(w, e.blockX, e.blockY, e.blockZ, side);

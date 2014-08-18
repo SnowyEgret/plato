@@ -40,7 +40,7 @@ public class KeyInputEventHandler {
 	public void onKeyInput(KeyInputEvent event) {
 
 		// EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		Player player = Player.client();
+		Player player = Player.getPlayer();
 		// IWorld w = Spell.getWorldServer(player);
 		IWorld w = player.getWorld();
 

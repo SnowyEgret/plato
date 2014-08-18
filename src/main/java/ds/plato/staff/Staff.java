@@ -54,7 +54,7 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 	public void onMouseClickRight(MovingObjectPosition position) {
 		// For now, jump while right clicking to open gui again.
 		if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-			Player.client().openGui(3);
+			Player.getPlayer().openGui(3);
 		} else {
 			getSpell().onMouseClickRight(position);
 		}

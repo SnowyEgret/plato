@@ -26,7 +26,7 @@ public class Player {
 		this.player = player;
 	}
 
-	public static Player client() {
+	public static Player getPlayer() {
 		return new Player(Minecraft.getMinecraft().thePlayer);
 	}
 

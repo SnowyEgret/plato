@@ -62,7 +62,7 @@ public class Overlay {
 
 		// TODO SpellFillRandom should set message
 		if (spell instanceof SpellFillRandom) {
-			SlotDistribution d = Player.client().slotDistribution();
+			SlotDistribution d = Player.getPlayer().slotDistribution();
 			r.drawStringWithShadow(d.toString(), x, y += dy, blue);
 		}
 

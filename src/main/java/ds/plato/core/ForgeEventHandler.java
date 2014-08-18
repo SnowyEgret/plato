@@ -65,7 +65,7 @@ public class ForgeEventHandler {
 			return;
 		}
 		
-		Player player = Player.client();
+		Player player = Player.getPlayer();
 		IWorld world = player.getWorld(); 
 		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
 		// System.out.println("[ForgeEventHandler.onMouseEvent] position.typeOfHit=" + position.typeOfHit +
@@ -169,12 +169,11 @@ public class ForgeEventHandler {
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent e) {
 		World w = e.entity.worldObj;
-		if (!w.isRemote)
+		if (!w.isRemote) {
 			return;
+		}
 		if (e.entity instanceof EntityPlayer) {
-
-			Player player = Player.client();
-			Spell s = player.getSpell();
+			Spell s = Player.getPlayer().getSpell();
 			if (s == null) {
 				spell = null;
 			} else {
@@ -192,7 +191,7 @@ public class ForgeEventHandler {
 			if (spell != null) {
 				overlay.drawSpell(spell);
 			} else {
-				Player p = Player.client();
+				Player p = Player.getPlayer();
 				Staff staff = p.getStaff();
 				if (staff != null) {
 					overlay.drawStaff(staff, p.getHeldItemStack());
