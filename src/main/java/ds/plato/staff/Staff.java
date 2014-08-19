@@ -30,6 +30,8 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 	private IPick pickManager;
 	private String name = "Staff";
 	private boolean spellsInitialized = false;
+	//Try to reduce overhead of onUpdate
+	private boolean isDirty = false;
 
 	protected Staff(IPick pickManager) {
 		this.pickManager = pickManager;
@@ -181,6 +183,9 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 	// For subclasses of Staff which have fixed spells, only syncs ordinal.
 	@Override
 	public void onUpdate(ItemStack stack, World w, Entity entity, int par4, boolean par5) {
+		if (w.isRemote) {
+			return;
+		}
 		if (stack.getTagCompound() == null) {
 			stack.setTagCompound(new NBTTagCompound());
 		}
@@ -190,8 +195,13 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 		if (!spellsInitialized) {
 			readFromNBT(tag);
 		} else {
-			writeToNBT(tag);
+			//FIXME tag is written only once, but when game is restarted the tag seems not to be written.
+			//For now, write tag continuously.
+			if (isDirty) {
+				writeToNBT(tag);
+			}
 		}
+		System.out.println("[Staff.onUpdate] stack.getTagCompound()=" + stack.getTagCompound());
 	}
 
 	@Override
@@ -289,6 +299,7 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 
 	@Override
 	public void markDirty() {
+		this.isDirty = true;
 	}
 
 	// Not being called
@@ -359,6 +370,8 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 			}
 		}
 		tag.setInteger("ordinal", ordinal);
+		System.out.println("[Staff.writeToNBT] tag=" + tag);
+		isDirty = false;
 	}
 
 }

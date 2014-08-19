@@ -164,7 +164,6 @@ public class ForgeEventHandler {
 		}
 	}
 
-	// TODO Player.getSpell(), discard interface IHoldable. Ignore an empty staff. Overlay.draw(Spell s)
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent e) {
@@ -214,18 +213,18 @@ public class ForgeEventHandler {
 		return true;
 	}
 
-	// Copied from class Player
-	private Iterable<ItemStack> getStaffItemStacks(EntityPlayer player) {
-		List<ItemStack> stacks = new ArrayList<>();
-		InventoryPlayer inventory = player.inventory;
-		for (ItemStack s : inventory.mainInventory) {
-			if (s != null) {
-				if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
-					System.out.println("[ForgeEventHandler.getStaffItemStacks] s=" + s);
-					stacks.add(s);
-				}
-			}
-		}
-		return stacks;
-	}
+//	// Copied from class Player
+//	private Iterable<ItemStack> getStaffItemStacks(EntityPlayer player) {
+//		List<ItemStack> stacks = new ArrayList<>();
+//		InventoryPlayer inventory = player.inventory;
+//		for (ItemStack s : inventory.mainInventory) {
+//			if (s != null) {
+//				if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
+//					System.out.println("[ForgeEventHandler.getStaffItemStacks] s=" + s);
+//					stacks.add(s);
+//				}
+//			}
+//		}
+//		return stacks;
+//	}
 }
