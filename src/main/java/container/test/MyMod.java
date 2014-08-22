@@ -13,22 +13,17 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class MyMod {
 
 	@Instance("myMod") public static MyMod instance;
-	private MyItem myItem;
-
-	// @SidedProxy(clientSide = "container.test.ClientProxy", serverSide = "container.test.CommonProxy")
-	// public static CommonProxy proxy;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		myItem = new MyItem();
+		MyItem myItem = new MyItem();
 		myItem.setCreativeTab(CreativeTabs.tabMisc);
 		myItem.setUnlocalizedName(myItem.getClass().getSimpleName());
 		GameRegistry.registerItem(myItem, "myMod");
-		// proxy.registerGuiHandler(myItem.inventory);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent evt) {
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new MyGuiHandler(myItem.inventory));
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new MyGuiHandler());
 	}
 }

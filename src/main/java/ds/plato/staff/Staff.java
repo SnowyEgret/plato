@@ -30,7 +30,7 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 	private IPick pickManager;
 	private String name = "Staff";
 	private boolean spellsInitialized = false;
-	//Try to reduce overhead of onUpdate
+	//To reduce overhead of onUpdate
 	private boolean isDirty = false;
 
 	protected Staff(IPick pickManager) {
@@ -195,13 +195,11 @@ public abstract class Staff extends Item implements IClickable, IInventory {
 		if (!spellsInitialized) {
 			readFromNBT(tag);
 		} else {
-			//FIXME tag is written only once, but when game is restarted the tag seems not to be written.
-			//For now, write tag continuously.
 			if (isDirty) {
 				writeToNBT(tag);
 			}
 		}
-		System.out.println("[Staff.onUpdate] stack.getTagCompound()=" + stack.getTagCompound());
+		//System.out.println("[Staff.onUpdate] stack.getTagCompound()=" + stack.getTagCompound());
 	}
 
 	@Override
