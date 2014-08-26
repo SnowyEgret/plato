@@ -27,6 +27,7 @@ import ds.plato.block.BlockModel;
 import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
+import ds.plato.gui.GuiHandler;
 import ds.plato.item.ItemFoo;
 import ds.plato.network.SetBlockMessage;
 import ds.plato.network.SetBlockMessageHandler;
@@ -82,7 +83,7 @@ public class Plato {
 		blockModel.setCreativeTab(CreativeTabs.tabBlock);
 		// TODO what is this stringID
 		GameRegistry.registerTileEntity(BlockModelTileEntity.class, "stringID");
-		
+
 		ItemFoo foo = new ItemFoo();
 		foo.setUnlocalizedName("foo");
 		foo.setCreativeTab(CreativeTabs.tabMisc);
@@ -109,7 +110,7 @@ public class Plato {
 			staffs.add(drawStaff);
 
 			// Create an empty staff
-			//staffs.add(loader.loadStaff(Staff.class));
+			// staffs.add(loader.loadStaff(Staff.class));
 			staffs.add(loader.loadStaff(StaffOak.class));
 			staffs.add(loader.loadStaff(StaffBirch.class));
 
@@ -133,12 +134,12 @@ public class Plato {
 		}
 		configuration.save();
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
-		//http://www.minecraftforge.net/forum/index.php?topic=20135.0
+		// http://www.minecraftforge.net/forum/index.php?topic=20135.0
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("plato");
 		network.registerMessage(SetBlockMessageHandler.class, SetBlockMessage.class, 0, Side.SERVER);
-		
+
 	}
 
 	@EventHandler

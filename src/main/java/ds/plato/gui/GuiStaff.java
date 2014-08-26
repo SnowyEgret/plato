@@ -16,11 +16,11 @@ public class GuiStaff extends GuiContainer {
 
 	private static final ResourceLocation texture = new ResourceLocation("textures/gui/container/generic_54.png");
 	private int rowHeight = 35;
-	private IInventory staff;
+	//private IInventory staff;
 
-	public GuiStaff(InventoryPlayer inventoryPlayer, IInventory inventoryStaff) {
-		super(new GuiStaffContainer(inventoryPlayer, inventoryStaff));
-		this.staff = inventoryStaff;
+	public GuiStaff(GuiStaffContainer container) {
+		super(container);
+		//this.staff = inventoryStaff;
 	}
 
 	@Override
