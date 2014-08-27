@@ -104,7 +104,7 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("up").isPressed()) {
-			if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+			if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 				copyVertical(player, w, 1);
 			} else {
 				copy(player, w, 0, -1);
@@ -112,7 +112,7 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("down").isPressed()) {
-			if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+			if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 				copyVertical(player, w, -1);
 			} else {
 				copy(player, w, 0, 1);
