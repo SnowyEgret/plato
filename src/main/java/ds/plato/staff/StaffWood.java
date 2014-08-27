@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
@@ -70,11 +71,17 @@ public class StaffWood extends Item implements IClickable, IStaff {
 
 	@Override
 	public void onMouseClickRight(ItemStack stack, MovingObjectPosition position) {
-		if (isEmpty(stack) || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-			Player.getPlayer().openGui(3);
-		} else {
+		if (!isEmpty(stack)) {
 			getSpell(stack).onMouseClickRight(stack, position);
 		}
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer p) {
+		if (!world.isRemote) {
+			Player.getPlayer().openGui(3);
+		}
+		return stack;
 	}
 
 	@Override

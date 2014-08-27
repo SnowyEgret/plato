@@ -1,5 +1,8 @@
 package ds.plato.staff;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import ds.plato.Plato;
+import ds.plato.spell.Spell;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
@@ -9,7 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class InventoryStaff implements IInventory {
 
-	private TagStaff tag;
+	private TagWrapper tag;
 	private int size = 9;
 	IInventory inventory;
 	ItemStack stack;
@@ -24,7 +27,7 @@ public class InventoryStaff implements IInventory {
 			t = new NBTTagCompound();
 			stack.setTagCompound(t);
 		}
-		tag = new TagStaff(t, size);
+		tag = new TagWrapper(t, size);
 	}
 
 	@Override
@@ -81,7 +84,7 @@ public class InventoryStaff implements IInventory {
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
+	public boolean isUseableByPlayer(EntityPlayer player) {
 		return true;
 	}
 
@@ -96,5 +99,48 @@ public class InventoryStaff implements IInventory {
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
 		return true;
+	}
+	
+	private class TagWrapper {
+
+		private NBTTagCompound tag;
+		private int size;
+
+		public TagWrapper(NBTTagCompound tag, int size) {
+			this.tag = tag;
+			this.size = size;
+		}
+
+		public ItemStack getItemStack(int i) {
+			if (i < 0 || i > size - 1) {
+				throw new IllegalArgumentException("Index not in tag range: " + i);
+			}
+			// System.out.println("[MyTagWrapper.getItemStack] tag=" + tag);
+			String itemSimpleClassName = tag.getString(String.valueOf(i));
+			if (itemSimpleClassName != null && !itemSimpleClassName.equals("")) {
+				Spell spell = (Spell) GameRegistry.findItem(Plato.ID, itemSimpleClassName);
+				if (spell == null) {
+					throw new RuntimeException("Game registry could not find item.  itemSimpleClassName="
+							+ itemSimpleClassName);
+				}
+				// System.out.println("[TagWrapper.getItemStack] Looked up spell in game registry. spell=" + spell);
+				return new ItemStack(spell);
+			}
+			return null;
+		}
+
+		public void setItemStack(int i, ItemStack stack) {
+			if (i < 0 || i > size - 1) {
+				throw new IllegalArgumentException("Index not in tag range: " + i);
+			}
+			if (stack == null) {
+				tag.removeTag(String.valueOf(i));
+			} else {
+				String n = stack.getItem().getClass().getSimpleName();
+				// String n = StringUtils.toCamelCase(stack.getItem().getClass());
+				tag.setString(String.valueOf(i), n);
+			}
+			System.out.println("[TagWrapper.setItemStack] i=" + i + ", tag=@" + System.identityHashCode(tag) + tag);
+		}
 	}
 }

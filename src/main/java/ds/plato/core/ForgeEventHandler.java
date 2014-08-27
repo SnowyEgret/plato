@@ -6,6 +6,8 @@ import java.util.List;
 import javax.vecmath.Point3i;
 import javax.vecmath.Vector3d;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAnvil;
 import net.minecraft.block.BlockContainer;
@@ -59,14 +61,14 @@ public class ForgeEventHandler {
 	@SubscribeEvent
 	public void onMouseEvent(MouseEvent e) {
 
-		//Fix for Clicking back to game selects a block. Issue #100
-		//TODO Seems not to work in multiplayer
+		// Fix for Clicking back to game selects a block. Issue #100
+		// TODO Seems not to work in multiplayer
 		if (Minecraft.getMinecraft().isGamePaused()) {
 			return;
 		}
-		
+
 		Player player = Player.getPlayer();
-		IWorld world = player.getWorld(); 
+		IWorld world = player.getWorld();
 		MovingObjectPosition position = Minecraft.getMinecraft().objectMouseOver;
 		// System.out.println("[ForgeEventHandler.onMouseEvent] position.typeOfHit=" + position.typeOfHit +
 		// ", e.button=" + e.button);
@@ -110,8 +112,13 @@ public class ForgeEventHandler {
 					} else if (e.button == 1) {
 						Block b = world.getBlock(position.blockX, position.blockY, position.blockZ);
 						if (isRightClickable(b)) {
-							c.onMouseClickRight(stack, position);
-							e.setCanceled(true);
+							if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+								//Do not cancel event so that onItemRightClick is called
+								return;
+							} else {
+								c.onMouseClickRight(stack, position);
+								e.setCanceled(true);
+							}
 						}
 					}
 
@@ -213,18 +220,18 @@ public class ForgeEventHandler {
 		return true;
 	}
 
-//	// Copied from class Player
-//	private Iterable<ItemStack> getStaffItemStacks(EntityPlayer player) {
-//		List<ItemStack> stacks = new ArrayList<>();
-//		InventoryPlayer inventory = player.inventory;
-//		for (ItemStack s : inventory.mainInventory) {
-//			if (s != null) {
-//				if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
-//					System.out.println("[ForgeEventHandler.getStaffItemStacks] s=" + s);
-//					stacks.add(s);
-//				}
-//			}
-//		}
-//		return stacks;
-//	}
+	// // Copied from class Player
+	// private Iterable<ItemStack> getStaffItemStacks(EntityPlayer player) {
+	// List<ItemStack> stacks = new ArrayList<>();
+	// InventoryPlayer inventory = player.inventory;
+	// for (ItemStack s : inventory.mainInventory) {
+	// if (s != null) {
+	// if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
+	// System.out.println("[ForgeEventHandler.getStaffItemStacks] s=" + s);
+	// stacks.add(s);
+	// }
+	// }
+	// }
+	// return stacks;
+	// }
 }
