@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
+import container.test.MyMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
 import ds.plato.core.Player;
@@ -77,9 +78,9 @@ public class StaffWood extends Item implements IClickable, IStaff {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer p) {
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (!world.isRemote) {
-			Player.getPlayer().openGui(3);
+			player.openGui(Plato.instance, 3, world, 0, 0, 0);
 		}
 		return stack;
 	}

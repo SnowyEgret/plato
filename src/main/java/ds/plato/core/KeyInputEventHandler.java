@@ -19,6 +19,7 @@ import ds.plato.select.ISelect;
 import ds.plato.spell.matrix.SpellCopy;
 import ds.plato.spell.transform.SpellDelete;
 import ds.plato.staff.Staff;
+import ds.plato.staff.StaffWood;
 import ds.plato.undo.IUndo;
 
 public class KeyInputEventHandler {
@@ -65,14 +66,21 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("toggle").isPressed()) {
-			ItemStack is = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
-			if (is != null) {
-				Item i = is.getItem();
+			ItemStack stack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
+			if (stack != null) {
+				Item i = stack.getItem();
 				if (i instanceof Staff) {
 					if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 						((Staff) i).previousSpell();
 					} else {
 						((Staff) i).nextSpell();
+					}
+				}
+				if (i instanceof StaffWood) {
+					if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+						((StaffWood) i).previousSpell(stack);
+					} else {
+						((StaffWood) i).nextSpell(stack);
 					}
 				}
 			}

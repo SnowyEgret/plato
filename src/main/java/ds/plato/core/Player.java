@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import ds.plato.Plato;
 import ds.plato.spell.Spell;
 import ds.plato.staff.Staff;
+import ds.plato.staff.StaffWood;
 
 public class Player {
 
@@ -39,7 +40,7 @@ public class Player {
 		} else {
 			w = mc.theWorld;
 		}
-		//System.out.println("[Player.getWorld] w=" + w);
+		// System.out.println("[Player.getWorld] w=" + w);
 		return new WorldWrapper(w);
 	}
 
@@ -138,13 +139,15 @@ public class Player {
 
 	public Spell getSpell() {
 		Spell spell = null;
-		ItemStack is = player.getHeldItem();
-		if (is != null) {
-			Item item = is.getItem();
+		ItemStack stack = player.getHeldItem();
+		if (stack != null) {
+			Item item = stack.getItem();
 			if (item instanceof Spell) {
 				spell = (Spell) item;
 			} else if (item instanceof Staff) {
 				spell = ((Staff) item).getSpell();
+			} else if (item instanceof StaffWood) {
+				spell = ((StaffWood) item).getSpell(stack);
 			}
 		}
 		return spell;
