@@ -3,7 +3,7 @@ package ds.plato.staff;
 import net.minecraft.init.Items;
 import ds.plato.pick.IPick;
 
-public class StaffBirch extends Staff {
+public class StaffBirch extends StaffWood {
 
 	public StaffBirch(IPick pickManager) {
 		super(pickManager);

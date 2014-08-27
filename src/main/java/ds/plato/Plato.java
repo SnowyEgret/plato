@@ -100,19 +100,14 @@ public class Plato {
 			List<Spell> spells = loader.loadSpellsFromPackage("ds.plato.spell");
 			log.info("[Plato.preInit] loaded spells=" + spells);
 
-			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
-			Staff transformStaff = loader.loadStaff(StaffTransform.class);
-			Staff drawStaff = loader.loadStaff(StaffDraw.class);
+			Staff selectionStaff = (Staff) loader.loadStaff(StaffSelect.class);
+			Staff transformStaff = (Staff) loader.loadStaff(StaffTransform.class);
+			Staff drawStaff = (Staff) loader.loadStaff(StaffDraw.class);
 
 			staffs = new ArrayList<>();
 			staffs.add(selectionStaff);
 			staffs.add(transformStaff);
 			staffs.add(drawStaff);
-
-			// Create an empty staff
-			// staffs.add(loader.loadStaff(Staff.class));
-			staffs.add(loader.loadStaff(StaffOak.class));
-			staffs.add(loader.loadStaff(StaffBirch.class));
 
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelect) {
@@ -127,6 +122,12 @@ public class Plato {
 			log.info("[Plato.preInit] selectionStaff=" + selectionStaff);
 			log.info("[Plato.preInit] transformStaff=" + transformStaff);
 			log.info("[Plato.preInit] drawStaff=" + drawStaff);
+
+			// Create some empty staffs
+//			staffs.add(loader.loadStaffWood(StaffOak.class));
+//			staffs.add(loader.loadStaffWood(StaffBirch.class));
+			loader.loadStaffWood(StaffOak.class);
+			loader.loadStaffWood(StaffBirch.class);
 
 		} catch (Exception e) {
 			e.printStackTrace();

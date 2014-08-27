@@ -69,7 +69,7 @@ public abstract class Spell extends Item implements IClickable {
 	}
 
 	@Override
-	public void onMouseClickLeft(MovingObjectPosition e) {
+	public void onMouseClickLeft(ItemStack stack, MovingObjectPosition e) {
 
 		Player player = Player.getPlayer();
 		IWorld w = player.getWorld();
@@ -101,7 +101,7 @@ public abstract class Spell extends Item implements IClickable {
 	}
 
 	@Override
-	public void onMouseClickRight(MovingObjectPosition e) {
+	public void onMouseClickRight(ItemStack stack, MovingObjectPosition e) {
 		Player player = Player.getPlayer();
 		IWorld w = player.getWorld();
 		int side = e.sideHit;

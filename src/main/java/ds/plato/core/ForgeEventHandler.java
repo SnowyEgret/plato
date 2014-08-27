@@ -102,7 +102,7 @@ public class ForgeEventHandler {
 
 					// Select
 					if (e.button == 0) {
-						c.onMouseClickLeft(position);
+						c.onMouseClickLeft(stack, position);
 						e.setCanceled(true);
 						return;
 
@@ -110,7 +110,7 @@ public class ForgeEventHandler {
 					} else if (e.button == 1) {
 						Block b = world.getBlock(position.blockX, position.blockY, position.blockZ);
 						if (isRightClickable(b)) {
-							c.onMouseClickRight(position);
+							c.onMouseClickRight(stack, position);
 							e.setCanceled(true);
 						}
 					}

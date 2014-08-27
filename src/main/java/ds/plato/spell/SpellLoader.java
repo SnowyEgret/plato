@@ -23,6 +23,7 @@ import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.staff.Staff;
+import ds.plato.staff.StaffWood;
 import ds.plato.undo.IUndo;
 
 public class SpellLoader {
@@ -85,15 +86,30 @@ public class SpellLoader {
 	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		System.out.print("[SpellLoader.loadStaff] Loading staff=" + staffClass.getSimpleName() + "...");
 		String name = toName(staffClass);
-		//Property propertyOrdinal = config.get("Staff", name + ".ordinal", 0);
-		//Constructor c = staffClass.getConstructor(Property.class, IPick.class);
 		Constructor c = staffClass.getConstructor(IPick.class);
 		Staff s = (Staff) c.newInstance(pickManager);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
 		s.setTextureName(modId + ":" + name);
-		//s.setOrdinal(propertyOrdinal.getInt());
+		GameRegistry.registerItem(s, name);
+		if (s.hasRecipe()) {
+			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
+		}
+		System.out.println("done.");
+		return s;
+	}
+
+	//For now, duplicate method loadStaff()
+	public StaffWood loadStaffWood(Class<? extends StaffWood> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		System.out.print("[SpellLoader.loadStaff] Loading staff=" + staffClass.getSimpleName() + "...");
+		String name = toName(staffClass);
+		Constructor c = staffClass.getConstructor(IPick.class);
+		StaffWood s = (StaffWood) c.newInstance(pickManager);
+		s.setUnlocalizedName(name);
+		s.setMaxStackSize(1);
+		s.setCreativeTab(tabSpells);
+		s.setTextureName(modId + ":" + name);
 		GameRegistry.registerItem(s, name);
 		if (s.hasRecipe()) {
 			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());

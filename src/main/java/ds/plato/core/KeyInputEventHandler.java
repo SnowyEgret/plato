@@ -39,9 +39,7 @@ public class KeyInputEventHandler {
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {
 
-		// EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 		Player player = Player.getPlayer();
-		// IWorld w = Spell.getWorldServer(player);
 		IWorld w = player.getWorld();
 
 		if (keyBindings.get("undo").isPressed()) {
@@ -117,7 +115,6 @@ public class KeyInputEventHandler {
 			event.setCanceled(true);
 	}
 
-	// FIXME Directions are reversed when yaw > 0
 	private void copy(Player player, IWorld w, int lr, int ud) {
 		pickManager.clearPicks();
 		pickManager.reset(2);

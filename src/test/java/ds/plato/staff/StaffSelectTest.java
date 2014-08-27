@@ -25,7 +25,7 @@ import ds.plato.test.PlatoTest;
 //@RunWith(PowerMockRunner.class)
 //@PrepareForTest({ Keyboard.class })
 //@PowerMockIgnore({ "javax.management.*" })
-public class StaffOakTest extends PlatoTest {
+public class StaffSelectTest extends PlatoTest {
 
 	@Mock PlayerInteractEvent mockEvent;
 	@Mock SpellDelete mockDelete;
@@ -40,7 +40,7 @@ public class StaffOakTest extends PlatoTest {
 		Pick[] picks = new Pick[] { new Pick(1, 1, 1, dirt, 0, 0), new Pick(2, 2, 2, dirt, 0, 0) };
 		when(pickManager.getPicks()).thenReturn(picks);
 		when(pickManager.isFinishedPicking()).thenReturn(true);
-		staff = new StaffOak(pickManager);
+		staff = new StaffSelect(pickManager);
 		staff.addSpell(mockDelete);
 		staff.addSpell(mockMove);
 	}
