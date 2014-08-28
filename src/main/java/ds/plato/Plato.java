@@ -1,6 +1,5 @@
 package ds.plato;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -28,7 +27,6 @@ import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
 import ds.plato.gui.GuiHandler;
-import ds.plato.item.ItemFoo;
 import ds.plato.network.SetBlockMessage;
 import ds.plato.network.SetBlockMessageHandler;
 import ds.plato.pick.IPick;
@@ -61,7 +59,7 @@ public class Plato {
 	@Instance(ID) public static Plato instance;
 	@SidedProxy(clientSide = "ds.plato.proxy.ClientProxy", serverSide = "ds.plato.proxy.CommonProxy") public static CommonProxy proxy;
 
-	private List<Staff> staffs;
+	//private List<Staff> staffs;
 	private static IUndo undoManager;
 	private static ISelect selectionManager;
 	private static IPick pickManager;
@@ -84,30 +82,30 @@ public class Plato {
 		// TODO what is this stringID
 		GameRegistry.registerTileEntity(BlockModelTileEntity.class, "stringID");
 
-		ItemFoo foo = new ItemFoo();
-		foo.setUnlocalizedName("foo");
-		foo.setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(foo, foo.getClass().getSimpleName());
+		// ItemFoo foo = new ItemFoo();
+		// foo.setUnlocalizedName("foo");
+		// foo.setCreativeTab(CreativeTabs.tabMisc);
+		// GameRegistry.registerItem(foo, foo.getClass().getSimpleName());
 
 		undoManager = new UndoManager();
 		selectionManager = new SelectionManager(blockSelected);
 		pickManager = new PickManager(blockPicked);
 
-		log.info("[Plato.preInit] Initializing spells and staff");
+		log.info("[Plato.preInit] Initializing spells and staffs");
 		configuration = new Configuration(event.getSuggestedConfigurationFile());
 		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, ID);
 		try {
 			List<Spell> spells = loader.loadSpellsFromPackage("ds.plato.spell");
 			log.info("[Plato.preInit] loaded spells=" + spells);
 
-			Staff selectionStaff = (Staff) loader.loadStaff(StaffSelect.class);
-			Staff transformStaff = (Staff) loader.loadStaff(StaffTransform.class);
-			Staff drawStaff = (Staff) loader.loadStaff(StaffDraw.class);
+			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
+			Staff transformStaff = loader.loadStaff(StaffTransform.class);
+			Staff drawStaff = loader.loadStaff(StaffDraw.class);
 
-			staffs = new ArrayList<>();
-			staffs.add(selectionStaff);
-			staffs.add(transformStaff);
-			staffs.add(drawStaff);
+			// staffs = new ArrayList<>();
+			// staffs.add(selectionStaff);
+			// staffs.add(transformStaff);
+			// staffs.add(drawStaff);
 
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelect) {
@@ -123,9 +121,7 @@ public class Plato {
 			log.info("[Plato.preInit] transformStaff=" + transformStaff);
 			log.info("[Plato.preInit] drawStaff=" + drawStaff);
 
-			// Create some empty staffs
-//			staffs.add(loader.loadStaffWood(StaffOak.class));
-//			staffs.add(loader.loadStaffWood(StaffBirch.class));
+			// Create some empty staffs. For now, they have a different base class.
 			loader.loadStaffWood(StaffOak.class);
 			loader.loadStaffWood(StaffBirch.class);
 
@@ -164,18 +160,6 @@ public class Plato {
 		log.info("[Plato.serverStopping]");
 		selectionManager.clearSelections();
 		pickManager.clearPicks();
-
-		// TODO run through players inventory to look for ItemStacks containing staffs and set their NBT.
-		// Iterable<ItemStack> ss = Player.client().getStaffItemStacks();
-		// for (ItemStack stack : ss) {
-		// Staff staff = (Staff) stack.getItem();
-		// staff.save(stack);
-		// }
-
-		// for (Staff s : staffs) {
-		// s.save();
-		// }
-		// configuration.save();
 	}
 
 	private Block initBlock(Block block) {

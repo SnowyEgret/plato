@@ -87,7 +87,6 @@ public class KeyInputEventHandler {
 		}
 
 		if (keyBindings.get("delete").isPressed()) {
-			// new SpellDelete(undoManager, selectionManager, pickManager).invoke(w, null);
 			new SpellDelete(undoManager, selectionManager, pickManager).invoke(player);
 		}
 
