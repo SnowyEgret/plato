@@ -39,6 +39,12 @@ public class StaffWood extends Item implements IClickable, IStaff {
 		return getRecipe() != null;
 	}
 
+	//https://github.com/TheGreyGhost/ItemRendering/blob/master/src/TestItemRendering/items/ItemLampshade.java
+	@Override
+	public int getSpriteNumber() {
+		return 0;
+	}
+
 	// // Sets tag when staff is crafted
 	// @Override
 	// public void onCreated(ItemStack stack, World w, EntityPlayer player) {

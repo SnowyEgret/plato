@@ -46,6 +46,7 @@ import ds.plato.staff.StaffDraw;
 import ds.plato.staff.StaffOak;
 import ds.plato.staff.StaffSelect;
 import ds.plato.staff.StaffTransform;
+import ds.plato.staff.StaffWood;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
 
@@ -64,6 +65,7 @@ public class Plato {
 	private static ISelect selectionManager;
 	private static IPick pickManager;
 	private Configuration configuration;
+	private StaffWood staffOak;
 	public static SimpleNetworkWrapper network;
 	public static Logger log;
 
@@ -122,7 +124,7 @@ public class Plato {
 			log.info("[Plato.preInit] drawStaff=" + drawStaff);
 
 			// Create some empty staffs. For now, they have a different base class.
-			loader.loadStaffWood(StaffOak.class);
+			staffOak = loader.loadStaffWood(StaffOak.class);
 			loader.loadStaffWood(StaffBirch.class);
 
 		} catch (Exception e) {
@@ -141,7 +143,7 @@ public class Plato {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		proxy.setCustomRenderers(selectionManager, pickManager);
+		proxy.setCustomRenderers(selectionManager, pickManager, staffOak);
 		proxy.registerEventHandlers(this, selectionManager, undoManager, pickManager);
 	}
 

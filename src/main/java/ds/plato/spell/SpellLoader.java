@@ -63,28 +63,8 @@ public class SpellLoader {
 		return spells;
 	}
 
-	public Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-
-		System.out.print("[SpellLoader.loadSpell] Loading spell=" + spellClass.getSimpleName() + "...");
-		String name = toName(spellClass);
-		Constructor<? extends Spell> c = spellClass.getConstructor(IUndo.class, ISelect.class, IPick.class);
-		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager);
-		s.setUnlocalizedName(name);
-		s.setMaxStackSize(1);
-		s.setCreativeTab(tabSpells);
-		s.setTextureName(modId + ":" + name);
-		GameRegistry.registerItem(s, s.getClass().getSimpleName());
-		//GameRegistry.registerItem(s, name);
-		if (s.hasRecipe()) {
-			//System.out.println("[SpellLoader.loadSpell] s.getRecipe()=" + s.getRecipe());
-			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
-		}
-		System.out.println("done.");
-		return s;
-	}
-
 	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		System.out.print("[SpellLoader.loadStaff] Loading staff=" + staffClass.getSimpleName() + "...");
+		System.out.print("[SpellLoader.loadStaff] Loading staff " + staffClass.getSimpleName() + "...");
 		String name = toName(staffClass);
 		Constructor c = staffClass.getConstructor(IPick.class);
 		Staff s = (Staff) c.newInstance(pickManager);
@@ -102,7 +82,7 @@ public class SpellLoader {
 
 	//For now, duplicate method loadStaff()
 	public StaffWood loadStaffWood(Class<? extends StaffWood> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		System.out.print("[SpellLoader.loadStaff] Loading staff=" + staffClass.getSimpleName() + "...");
+		System.out.print("[SpellLoader.loadStaff] Loading staff " + staffClass.getSimpleName() + "...");
 		String name = toName(staffClass);
 		Constructor c = staffClass.getConstructor(IPick.class);
 		StaffWood s = (StaffWood) c.newInstance(pickManager);
@@ -131,21 +111,43 @@ public class SpellLoader {
 		return spells;
 	}
 
-	public List<Class> loadClassesFromPackage(Class type, String packageName) throws MalformedURLException, IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+	// public List<Class> loadClassesFromPackage(Class type, String packageName) throws MalformedURLException,
+	// IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+	// NoSuchMethodException, SecurityException, ClassNotFoundException {
+	//
+	// ClassPath p = ClassPath.from(this.getClass().getClassLoader());
+	// List<Class> classes = new ArrayList<>();
+	// for (ClassInfo i : p.getTopLevelClasses(packageName)) {
+	// Class c = i.load();
+	// if (type.isAssignableFrom(c) && !Modifier.isAbstract(c.getModifiers())) {
+	// classes.add(c);
+	// }
+	// }
+	// return classes;
+	// }
 
-		ClassPath p = ClassPath.from(this.getClass().getClassLoader());
-		List<Class> classes = new ArrayList<>();
-		for (ClassInfo i : p.getTopLevelClasses(packageName)) {
-			Class c = i.load();
-			if (type.isAssignableFrom(c) && !Modifier.isAbstract(c.getModifiers())) {
-				classes.add(c);
-			}
+//	public void save() {
+//		config.save();
+//	}
+
+	private Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+	
+		System.out.print("[SpellLoader.loadSpell] Loading spell=" + spellClass.getSimpleName() + "...");
+		String name = toName(spellClass);
+		Constructor<? extends Spell> c = spellClass.getConstructor(IUndo.class, ISelect.class, IPick.class);
+		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager);
+		s.setUnlocalizedName(name);
+		s.setMaxStackSize(1);
+		s.setCreativeTab(tabSpells);
+		s.setTextureName(modId + ":" + name);
+		GameRegistry.registerItem(s, s.getClass().getSimpleName());
+		//GameRegistry.registerItem(s, name);
+		if (s.hasRecipe()) {
+			//System.out.println("[SpellLoader.loadSpell] s.getRecipe()=" + s.getRecipe());
+			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
 		}
-		return classes;
-	}
-
-	public void save() {
-		config.save();
+		System.out.println("done.");
+		return s;
 	}
 
 	private String toName(Class c) {
@@ -153,20 +155,19 @@ public class SpellLoader {
 		return n.substring(0, 1).toLowerCase() + n.substring(1);
 	}
 
-	private Object instanciate(Class cls, Property property) {
-		Object o;
-		try {
-			if (property == null) {
-				o = cls.getConstructor().newInstance();
-			} else {
-				o = cls.getConstructor(property.getClass()).newInstance(property);
-			}
-			Plato.log.info("Constructed: " + o);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		return o;
-	}
+//	private Object instanciate(Class cls, Property property) {
+//		Object o;
+//		try {
+//			if (property == null) {
+//				o = cls.getConstructor().newInstance();
+//			} else {
+//				o = cls.getConstructor(property.getClass()).newInstance(property);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//		return o;
+//	}
 
 }

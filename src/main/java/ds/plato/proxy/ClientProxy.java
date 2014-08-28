@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.input.Keyboard;
@@ -20,6 +21,8 @@ import ds.plato.core.KeyInputEventHandler;
 import ds.plato.gui.Overlay;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
+import ds.plato.staff.StaffWood;
+import ds.plato.staff.StaffWoodRenderer;
 import ds.plato.undo.IUndo;
 
 public class ClientProxy extends CommonProxy {
@@ -48,7 +51,7 @@ public class ClientProxy extends CommonProxy {
 	// }
 
 	@Override
-	public void setCustomRenderers(ISelect selectionManager, IPick pickManager) {
+	public void setCustomRenderers(ISelect selectionManager, IPick pickManager, StaffWood staffWood) {
 		blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
 		blockModelRenderId = RenderingRegistry.getNextAvailableRenderId();
@@ -56,6 +59,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, selectionManager,
 				pickManager));
 		RenderingRegistry.registerBlockHandler(new BlockModelRenderer(blockModelRenderId));
+		
+		MinecraftForgeClient.registerItemRenderer(staffWood, new StaffWoodRenderer());
 	}
 
 	@Override

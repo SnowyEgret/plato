@@ -3,11 +3,12 @@ package ds.plato.proxy;
 import ds.plato.Plato;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
+import ds.plato.staff.StaffWood;
 import ds.plato.undo.IUndo;
 
 public class CommonProxy {
 
-	public void setCustomRenderers(ISelect selectionManager, IPick pickManager) {
+	public void setCustomRenderers(ISelect selectionManager, IPick pickManager, StaffWood staffWood) {
 	}
 
 	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick) {

@@ -41,11 +41,11 @@ public class SpellLoaderTest extends PlatoTest {
 	}
 
 	//@Test
-	public void loadSpell() throws Exception {
-		Spell spell = loader.loadSpell(SpellDelete.class);
-		assertThat(spell, instanceOf(SpellDelete.class));
-		assertThat(spell.getInfo().getName().toLowerCase(), equalTo("delete"));
-	}
+	// public void loadSpell() throws Exception {
+	// Spell spell = loader.loadSpell(SpellDelete.class);
+	// assertThat(spell, instanceOf(SpellDelete.class));
+	// assertThat(spell.getInfo().getName().toLowerCase(), equalTo("delete"));
+	// }
 
 	//@Test
 	public void loadSpells() throws Exception {
