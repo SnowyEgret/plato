@@ -8,6 +8,8 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
+import ds.plato.spell.Spell;
+
 //http://greyminecraftcoder.blogspot.com.au/2013/09/custom-item-rendering-using.html
 public class StaffWoodRenderer implements IItemRenderer {
 
@@ -46,17 +48,17 @@ public class StaffWoodRenderer implements IItemRenderer {
 		}
 	}
 
-	private enum TransformationTypes {
-		NONE,
-		DROPPED,
-		INVENTORY,
-		THIRDPERSONEQUIPPED
-	};
+	// private enum TransformationTypes {
+	// NONE,
+	// DROPPED,
+	// INVENTORY,
+	// THIRDPERSONEQUIPPED
+	// };
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+	public void renderItem(ItemRenderType type, ItemStack stack, Object... data) {
 
-		//Tessellator tessellator = Tessellator.instance;
+		// Tessellator tessellator = Tessellator.instance;
 		// tessellator.startDrawingQuads();
 
 		/*
@@ -76,8 +78,15 @@ public class StaffWoodRenderer implements IItemRenderer {
 		 * default: break; // never here }
 		 */
 
+		StaffWood staff = (StaffWood) stack.getItem();
+		Spell spell = staff.getSpell(stack);
 		GL11.glPushMatrix();
 		model.renderAll();
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		IModelCustom spellModel = spell.getModel();
+		if (spellModel != null) {
+			spellModel.renderAll();
+		}
 		GL11.glPopMatrix();
 
 		/*

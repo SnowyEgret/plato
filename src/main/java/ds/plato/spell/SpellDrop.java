@@ -2,6 +2,9 @@ package ds.plato.spell;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.input.Keyboard;
 
@@ -17,9 +20,11 @@ import ds.plato.undo.Transaction;
 
 public class SpellDrop extends Spell {
 
+
 	public SpellDrop(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
 		info.addModifiers(Modifier.CTRL, Modifier.ALT);
+		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/sphere.obj"));
 	}
 
 	@Override
@@ -51,6 +56,11 @@ public class SpellDrop extends Spell {
 	@Override
 	public Object[] getRecipe() {
 		return null;
+	}
+
+	@Override
+	public IModelCustom getModel() {
+		return model;
 	}
 
 }

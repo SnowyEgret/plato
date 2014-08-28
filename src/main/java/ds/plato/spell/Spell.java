@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.input.Keyboard;
 
@@ -37,6 +38,7 @@ public abstract class Spell extends Item implements IClickable {
 	protected String X = "X,";
 	protected String Y = "Y,";
 	protected String Z = "Z,";
+	protected IModelCustom model;
 
 	public Spell(int numPicks, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		this.numPicks = numPicks;
@@ -148,6 +150,10 @@ public abstract class Spell extends Item implements IClickable {
 
 	public SpellInfo getInfo() {
 		return info;
+	}
+
+	public IModelCustom getModel() {
+		return model;
 	}
 
 }
