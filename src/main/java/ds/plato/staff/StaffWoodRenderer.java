@@ -200,6 +200,8 @@ public class StaffWoodRenderer implements IItemRenderer {
 
 	private void renderModel() {
 		GL11.glPushMatrix();
+		GL11.glTranslated(0, 0, .5);
+		GL11.glRotated(-15, 0, 0, 1);
 		model.renderAll();
 		GL11.glPopMatrix();
 	}
