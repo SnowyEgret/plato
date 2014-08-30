@@ -13,13 +13,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import ds.plato.Plato;
+import ds.plato.core.StringUtils;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.staff.Staff;
@@ -65,7 +64,7 @@ public class SpellLoader {
 
 	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		System.out.print("[SpellLoader.loadStaff] Loading staff " + staffClass.getSimpleName() + "...");
-		String name = toName(staffClass);
+		String name = StringUtils.toCamelCase(staffClass);
 		Constructor c = staffClass.getConstructor(IPick.class);
 		Staff s = (Staff) c.newInstance(pickManager);
 		s.setUnlocalizedName(name);
@@ -83,7 +82,7 @@ public class SpellLoader {
 	//For now, duplicate method loadStaff()
 	public StaffWood loadStaffWood(Class<? extends StaffWood> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		System.out.print("[SpellLoader.loadStaff] Loading staff " + staffClass.getSimpleName() + "...");
-		String name = toName(staffClass);
+		String name = StringUtils.toCamelCase(staffClass);
 		Constructor c = staffClass.getConstructor(IPick.class);
 		StaffWood s = (StaffWood) c.newInstance(pickManager);
 		s.setUnlocalizedName(name);
@@ -133,7 +132,7 @@ public class SpellLoader {
 	private Spell loadSpell(Class<? extends Spell> spellClass) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 	
 		System.out.print("[SpellLoader.loadSpell] Loading spell=" + spellClass.getSimpleName() + "...");
-		String name = toName(spellClass);
+		String name = StringUtils.toCamelCase(spellClass);
 		Constructor<? extends Spell> c = spellClass.getConstructor(IUndo.class, ISelect.class, IPick.class);
 		Spell s = (Spell) c.newInstance(undoManager, selectionManager, pickManager);
 		s.setUnlocalizedName(name);
@@ -148,11 +147,6 @@ public class SpellLoader {
 		}
 		System.out.println("done.");
 		return s;
-	}
-
-	private String toName(Class c) {
-		String n = c.getSimpleName();
-		return n.substring(0, 1).toLowerCase() + n.substring(1);
 	}
 
 //	private Object instanciate(Class cls, Property property) {

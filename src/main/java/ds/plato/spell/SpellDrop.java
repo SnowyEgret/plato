@@ -24,7 +24,6 @@ public class SpellDrop extends Spell {
 	public SpellDrop(IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		super(1, undoManager, selectionManager, pickManager);
 		info.addModifiers(Modifier.CTRL, Modifier.ALT);
-		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/spellDrop.obj"));
 	}
 
 	@Override
@@ -58,9 +57,9 @@ public class SpellDrop extends Spell {
 		return null;
 	}
 
-	@Override
-	public IModelCustom getModel() {
-		return model;
-	}
+//	@Override
+//	public IModelCustom getModel() {
+//		return model;
+//	}
 
 }

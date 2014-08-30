@@ -9,13 +9,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
+import net.minecraftforge.client.model.ModelFormatException;
 
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
+import ds.plato.core.StringUtils;
 import ds.plato.geom.solid.Box;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
@@ -31,14 +35,16 @@ public abstract class Spell extends Item implements IClickable {
 	protected String message;
 	private int numPicks;
 	protected SpellInfo info;
-	
+
 	protected String CTRL = "ctrl,";
 	protected String ALT = "alt,";
 	protected String SHIFT = "shift,";
 	protected String X = "X,";
 	protected String Y = "Y,";
 	protected String Z = "Z,";
+
 	protected IModelCustom model;
+	private boolean hasModel = true;
 
 	public Spell(int numPicks, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		this.numPicks = numPicks;
@@ -49,12 +55,12 @@ public abstract class Spell extends Item implements IClickable {
 	}
 
 	public abstract Object[] getRecipe();
-	
+
 	public boolean hasRecipe() {
 		return getRecipe() != null;
 	}
 
-	public abstract void invoke(IWorld world, final SlotEntry...slotEntries);
+	public abstract void invoke(IWorld world, final SlotEntry... slotEntries);
 
 	public void invoke(Player player) {
 		IWorld w = player.getWorld();
@@ -112,12 +118,12 @@ public abstract class Spell extends Item implements IClickable {
 			invoke(w, player.getSlotEntries());
 		}
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
 		rollOver.add(info.getDescription());
 	}
-	
+
 	public boolean isPicking() {
 		return pickManager.isPicking();
 	}
@@ -153,7 +159,16 @@ public abstract class Spell extends Item implements IClickable {
 	}
 
 	public IModelCustom getModel() {
+		if (hasModel && model == null) {
+			try {
+				return AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/"
+						+ StringUtils.toCamelCase(getClass()) + ".obj"));
+			} catch (Exception e) {
+				System.out.println("[Spell.getModel] e=" + e);
+				hasModel  = false;
+				return null;
+			}
+		}
 		return model;
 	}
-
 }
