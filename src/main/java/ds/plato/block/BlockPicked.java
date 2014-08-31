@@ -1,6 +1,5 @@
 package ds.plato.block;
 
-import ds.plato.proxy.ClientProxy;
 
 public class BlockPicked extends BlockSelected {
 
@@ -10,6 +9,6 @@ public class BlockPicked extends BlockSelected {
 	
 	@Override
 	public int getRenderType() {
-		return ClientProxy.blockPickedRenderId;
+		return BlockPickedRenderer.id;
 	}
 }

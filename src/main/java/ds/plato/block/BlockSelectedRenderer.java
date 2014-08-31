@@ -20,12 +20,9 @@ import ds.plato.select.Selection;
 public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {
 
 	static int id = RenderingRegistry.getNextAvailableRenderId();
-	// private int id;
 	private ISelect selectionManager;
 
-	// public BlockSelectedRenderer(int id, ISelect selectionManager) {
 	public BlockSelectedRenderer(ISelect selectionManager) {
-		// this.id = id;
 		this.selectionManager = selectionManager;
 	}
 

@@ -20,20 +20,11 @@ import ds.plato.undo.IUndo;
 
 public class ClientProxy extends CommonProxy {
 
-	//public static int blockSelectedRenderId;
-	public static int blockPickedRenderId;
-	public static int blockModelRenderId;
-
 	@Override
 	public void setCustomRenderers(ISelect select, IPick pick, StaffWood staffWood) {
-		//blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
-		blockPickedRenderId = RenderingRegistry.getNextAvailableRenderId();
-		blockModelRenderId = RenderingRegistry.getNextAvailableRenderId();
-		//RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(blockSelectedRenderId, select));
 		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(select));
-		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(blockPickedRenderId, select, pick));
-		RenderingRegistry.registerBlockHandler(new BlockModelRenderer(blockModelRenderId));
-
+		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(select, pick));
+		RenderingRegistry.registerBlockHandler(new BlockModelRenderer());
 		MinecraftForgeClient.registerItemRenderer(staffWood, new StaffWoodRenderer());
 	}
 

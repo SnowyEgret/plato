@@ -15,11 +15,10 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class BlockModelRenderer implements ISimpleBlockRenderingHandler {
 
-	public static int id;
+	static int id = RenderingRegistry.getNextAvailableRenderId();
 	private IModelCustom model;
 
-	public BlockModelRenderer(int blockModelRenderId) {
-		id = blockModelRenderId;
+	public BlockModelRenderer() {
 		//model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/sphere.obj"));
 		//model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/bunny.obj"));
 	}

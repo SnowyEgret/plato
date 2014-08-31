@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
@@ -12,12 +13,11 @@ import ds.plato.select.Selection;
 
 public class BlockPickedRenderer implements ISimpleBlockRenderingHandler {
 
-	private int id;
+	static int id = RenderingRegistry.getNextAvailableRenderId();
 	private IPick pickManager;
 	private ISelect selectionManager;
 
-	public BlockPickedRenderer(int id, ISelect selectionManager, IPick pickManager) {
-		this.id = id;
+	public BlockPickedRenderer(ISelect selectionManager, IPick pickManager) {
 		this.pickManager = pickManager;
 		this.selectionManager = selectionManager;
 	}
