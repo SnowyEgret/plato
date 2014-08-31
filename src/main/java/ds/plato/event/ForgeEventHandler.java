@@ -1,4 +1,4 @@
-package ds.plato.core;
+package ds.plato.event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,9 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ds.plato.core.IWorld;
+import ds.plato.core.Player;
+import ds.plato.core.SlotEntry;
 import ds.plato.gui.Overlay;
 import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;

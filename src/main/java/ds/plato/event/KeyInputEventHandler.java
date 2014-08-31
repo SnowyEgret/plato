@@ -1,4 +1,4 @@
-package ds.plato.core;
+package ds.plato.event;
 
 import java.util.Map;
 
@@ -14,6 +14,9 @@ import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
+import ds.plato.core.Direction;
+import ds.plato.core.IWorld;
+import ds.plato.core.Player;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.spell.matrix.SpellCopy;
@@ -46,7 +49,11 @@ public class KeyInputEventHandler {
 		if (keyBindings.get("undo").isPressed()) {
 			try {
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-					undoManager.undo();
+					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+						undoManager.redo();
+					} else {
+						undoManager.undo();
+					}
 				}
 			} catch (Exception e) {
 				// TODO Log to chat

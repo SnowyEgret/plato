@@ -139,6 +139,7 @@ public class SpellLoader {
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
 		s.setTextureName(modId + ":" + name);
+		//Can't remember why I did this. For SpellRestor?
 		GameRegistry.registerItem(s, s.getClass().getSimpleName());
 		//GameRegistry.registerItem(s, name);
 		if (s.hasRecipe()) {
