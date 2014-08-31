@@ -2,7 +2,6 @@ package ds.plato.core;
 
 import net.minecraft.block.Block;
 
-
 public class SlotEntry {
 
 	public Block block;

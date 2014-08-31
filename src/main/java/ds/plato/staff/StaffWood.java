@@ -39,7 +39,7 @@ public class StaffWood extends Item implements IClickable, IStaff {
 		return getRecipe() != null;
 	}
 
-	//https://github.com/TheGreyGhost/ItemRendering/blob/master/src/TestItemRendering/items/ItemLampshade.java
+	// https://github.com/TheGreyGhost/ItemRendering/blob/master/src/TestItemRendering/items/ItemLampshade.java
 	@Override
 	public int getSpriteNumber() {
 		return 0;
@@ -70,17 +70,26 @@ public class StaffWood extends Item implements IClickable, IStaff {
 	}
 
 	@Override
-	public void onMouseClickLeft(ItemStack stack, MovingObjectPosition position) {
+	public void onMouseClickLeft(ItemStack stack, int x, int y, int z, int side) {
 		if (!isEmpty(stack)) {
-			getSpell(stack).onMouseClickLeft(stack, position);
+			getSpell(stack).onMouseClickLeft(stack, x, y, z, side);
 		}
 	}
 
 	@Override
-	public void onMouseClickRight(ItemStack stack, MovingObjectPosition position) {
+	public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
 		if (!isEmpty(stack)) {
-			getSpell(stack).onMouseClickRight(stack, position);
+			getSpell(stack).onMouseClickRight(stack, x, y, z, side);
 		}
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int s, float sx,
+			float sy, float sz) {
+		if (!isEmpty(stack)) {
+			getSpell(stack).onMouseClickRight(stack, x, y, z, s);
+		}
+		return true;
 	}
 
 	@Override

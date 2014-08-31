@@ -88,7 +88,7 @@ public class MouseHandler {
 
 					// Select
 					if (e.button == 0) {
-						c.onMouseClickLeft(stack, position);
+						c.onMouseClickLeft(stack, position.blockX, position.blockY, position.blockZ, position.sideHit);
 						e.setCanceled(true);
 						return;
 
@@ -100,7 +100,8 @@ public class MouseHandler {
 								// Do not cancel event so that onItemRightClick is called
 								return;
 							} else {
-								c.onMouseClickRight(stack, position);
+								//c.onMouseClickRight(stack, position);
+								c.onMouseClickRight(stack, position.blockX, position.blockY, position.blockZ, position.sideHit);
 								e.setCanceled(true);
 							}
 						}

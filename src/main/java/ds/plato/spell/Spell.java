@@ -77,7 +77,7 @@ public abstract class Spell extends Item implements IClickable {
 	}
 
 	@Override
-	public void onMouseClickLeft(ItemStack stack, MovingObjectPosition e) {
+	public void onMouseClickLeft(ItemStack stack, int x, int y, int z, int side) {
 
 		Player player = Player.getPlayer();
 		IWorld w = player.getWorld();
@@ -86,17 +86,17 @@ public abstract class Spell extends Item implements IClickable {
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && selectionManager.size() != 0) {
 			Point3d lastPointSelected = selectionManager.lastSelection().point3d();
 			selectionManager.clearSelections();
-			Box b = new Box(lastPointSelected, new Point3d(e.blockX, e.blockY, e.blockZ), false);
+			Box b = new Box(lastPointSelected, new Point3d(x, y, z), false);
 			for (Point3i p : b.voxelize()) {
 				selectionManager.select(w, p.x, p.y, p.z);
 			}
 
 			// Control adds or subtracts a selection to the current selection set
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-			Selection s = selectionManager.selectionAt(e.blockX, e.blockY, e.blockZ);
+			Selection s = selectionManager.selectionAt(x, y, z);
 			System.out.println("[Spell.onMouseClickLeft] s=" + s);
 			if (s == null) {
-				selectionManager.select(w, e.blockX, e.blockY, e.blockZ);
+				selectionManager.select(w, x, y, z);
 			} else {
 				selectionManager.deselect(s);
 			}
@@ -104,16 +104,18 @@ public abstract class Spell extends Item implements IClickable {
 			// Replaces the current selection set with a selection
 		} else {
 			selectionManager.clearSelections();
-			selectionManager.select(w, e.blockX, e.blockY, e.blockZ);
+			selectionManager.select(w, x, y, z);
 		}
 	}
 
 	@Override
-	public void onMouseClickRight(ItemStack stack, MovingObjectPosition e) {
+	// public void onMouseClickRight(ItemStack stack, MovingObjectPosition e) {
+	public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
 		Player player = Player.getPlayer();
 		IWorld w = player.getWorld();
-		int side = e.sideHit;
-		pickManager.pick(w, e.blockX, e.blockY, e.blockZ, side);
+		// int side = e.sideHit;
+		// pickManager.pick(w, e.blockX, e.blockY, e.blockZ, side);
+		pickManager.pick(w, x, y, z, side);
 		if (pickManager.isFinishedPicking()) {
 			invoke(w, player.getSlotEntries());
 		}
@@ -165,7 +167,7 @@ public abstract class Spell extends Item implements IClickable {
 						+ StringUtils.toCamelCase(getClass()) + ".obj"));
 			} catch (Exception e) {
 				System.out.println("[Spell.getModel] e=" + e);
-				hasModel  = false;
+				hasModel = false;
 				return null;
 			}
 		}

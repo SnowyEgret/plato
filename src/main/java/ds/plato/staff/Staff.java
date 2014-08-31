@@ -47,19 +47,19 @@ public abstract class Staff extends Item implements IClickable {
 	}
 
 	@Override
-	public void onMouseClickLeft(ItemStack stack, MovingObjectPosition position) {
+	public void onMouseClickLeft(ItemStack stack, int x, int y, int z, int side) {
 		if (!isEmpty()) {
-			getSpell().onMouseClickLeft(stack, position);
+			getSpell().onMouseClickLeft(stack, x, y, z, side);
 		}
 	}
 
 	@Override
-	public void onMouseClickRight(ItemStack stack, MovingObjectPosition position) {
+	public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
 		// For now, jump while right clicking to open gui again.
 		if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
 			Player.getPlayer().openGui(3);
 		} else {
-			getSpell().onMouseClickRight(stack, position);
+			getSpell().onMouseClickRight(stack, x, y, z, side);
 		}
 	}
 
