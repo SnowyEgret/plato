@@ -1,5 +1,6 @@
 package ds.plato.event;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.input.Keyboard;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -28,15 +30,25 @@ import ds.plato.undo.IUndo;
 public class KeyInputEventHandler {
 
 	private IUndo undoManager;
-	private Map<String, KeyBinding> keyBindings;
 	private ISelect selectionManager;
 	private IPick pickManager;
+	Map<String, KeyBinding> keyBindings = new HashMap<>();
 
-	public KeyInputEventHandler(Map<String, KeyBinding> keyBindings, IUndo undo, ISelect select, IPick pick) {
+
+	public KeyInputEventHandler(IUndo undo, ISelect select, IPick pick) {
 		this.undoManager = undo;
 		this.selectionManager = select;
 		this.pickManager = pick;
-		this.keyBindings = keyBindings;
+		// TODO internationalize these strings
+		keyBindings.put("undo", registerKeyBinding("Undo", Keyboard.KEY_Z));
+		keyBindings.put("redo", registerKeyBinding("Redo", Keyboard.KEY_Y));
+		keyBindings.put("toggle", registerKeyBinding("Toggle", Keyboard.KEY_TAB));
+		keyBindings.put("delete", registerKeyBinding("Delete", Keyboard.KEY_DELETE));
+		keyBindings.put("lastSelection", registerKeyBinding("Last selection", Keyboard.KEY_L));
+		keyBindings.put("left", registerKeyBinding("Move left", Keyboard.KEY_LEFT));
+		keyBindings.put("right", registerKeyBinding("Move right", Keyboard.KEY_RIGHT));
+		keyBindings.put("up", registerKeyBinding("Move up", Keyboard.KEY_UP));
+		keyBindings.put("down", registerKeyBinding("Move down", Keyboard.KEY_DOWN));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -162,5 +174,11 @@ public class KeyInputEventHandler {
 		pickManager.pick(w, 0, d, 0, 0);
 		new SpellCopy(undoManager, selectionManager, pickManager).invoke(player);
 		pickManager.clearPicks();
+	}
+
+	private KeyBinding registerKeyBinding(String name, int key) {
+		KeyBinding b = new KeyBinding(name, key, Plato.NAME);
+		ClientRegistry.registerKeyBinding(b);
+		return b;
 	}
 }

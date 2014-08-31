@@ -31,25 +31,6 @@ public class ClientProxy extends CommonProxy {
 	public static int blockPickedRenderId;
 	public static int blockModelRenderId;
 
-	// @Override
-	// public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-	// switch (id) {
-	// case -1:
-	// return new GuiDialog(player, "Ok", "Cancel");
-	// case 0:
-	// return new GuiTextInputDialog(player);
-	// case 1:
-	// return new GuiRestore(player);
-	// case 2:
-	// return new GuiSpellText(player);
-	// case 3:
-	// //return new GuiStaff(player.inventory, (IInventory) Player.client().getHeldItem());
-	// return new GuiStaff(player.inventory, (IInventory) player.getHeldItem().getItem());
-	// default:
-	// throw new IllegalArgumentException("GUI id "+ id +" is undefined");
-	// }
-	// }
-
 	@Override
 	public void setCustomRenderers(ISelect selectionManager, IPick pickManager, StaffWood staffWood) {
 		blockSelectedRenderId = RenderingRegistry.getNextAvailableRenderId();
@@ -67,23 +48,6 @@ public class ClientProxy extends CommonProxy {
 	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick) {
 		Overlay overlay = new Overlay(select);
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHandler(undo, select, pick, overlay));
-		Map<String, KeyBinding> keyBindings = new HashMap<>();
-		// TODO get NLS properties these strings
-		keyBindings.put("undo", registerKeyBinding("Undo", Keyboard.KEY_Z, Plato.NAME));
-		keyBindings.put("redo", registerKeyBinding("Redo", Keyboard.KEY_Y, Plato.NAME));
-		keyBindings.put("toggle", registerKeyBinding("Toggle", Keyboard.KEY_TAB, Plato.NAME));
-		keyBindings.put("delete", registerKeyBinding("Delete", Keyboard.KEY_DELETE, Plato.NAME));
-		keyBindings.put("lastSelection", registerKeyBinding("Last selection", Keyboard.KEY_L, Plato.NAME));
-		keyBindings.put("left", registerKeyBinding("Move left", Keyboard.KEY_LEFT, Plato.NAME));
-		keyBindings.put("right", registerKeyBinding("Move right", Keyboard.KEY_RIGHT, Plato.NAME));
-		keyBindings.put("up", registerKeyBinding("Move up", Keyboard.KEY_UP, Plato.NAME));
-		keyBindings.put("down", registerKeyBinding("Move down", Keyboard.KEY_DOWN, Plato.NAME));
-		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(keyBindings, undo, select, pick));
-	}
-
-	private KeyBinding registerKeyBinding(String name, int key, String modName) {
-		KeyBinding b = new KeyBinding(name, key, modName);
-		ClientRegistry.registerKeyBinding(b);
-		return b;
+		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler(undo, select, pick));
 	}
 }
