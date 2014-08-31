@@ -47,25 +47,21 @@ import ds.plato.undo.IUndo;
 public class ForgeEventHandler {
 
 	private Spell spell = null;
-	private IUndo undoManager;
 	private ISelect selectionManager;
 	private IPick pickManager;
 	private Overlay overlay;
 
-	public ForgeEventHandler(IUndo undoManager, ISelect selectionManager, IPick pickManager, Overlay overlay) {
+	public ForgeEventHandler(ISelect selectionManager, IPick pickManager, Overlay overlay) {
 		this.selectionManager = selectionManager;
-		this.undoManager = undoManager;
 		this.pickManager = pickManager;
 		this.overlay = overlay;
 	}
-
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onDrawBlockHightlight(DrawBlockHighlightEvent e) {
 		MovingObjectPosition pos = e.target;
 
-		// if (holdable != null) {
 		if (spell != null) {
 			Point3i p = null;
 			Pick pick = pickManager.lastPick();
@@ -122,23 +118,4 @@ public class ForgeEventHandler {
 			}
 		}
 	}
-
-	// @SubscribeEvent
-	// public void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
-	// }
-
-	// // Copied from class Player
-	// private Iterable<ItemStack> getStaffItemStacks(EntityPlayer player) {
-	// List<ItemStack> stacks = new ArrayList<>();
-	// InventoryPlayer inventory = player.inventory;
-	// for (ItemStack s : inventory.mainInventory) {
-	// if (s != null) {
-	// if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
-	// System.out.println("[ForgeEventHandler.getStaffItemStacks] s=" + s);
-	// stacks.add(s);
-	// }
-	// }
-	// }
-	// return stacks;
-	// }
 }

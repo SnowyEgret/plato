@@ -9,8 +9,8 @@ import net.minecraft.client.resources.I18n;
 
 import com.google.common.base.Joiner;
 
-import ds.plato.core.StringUtils;
 import ds.plato.spell.Spell;
+import ds.plato.util.StringUtils;
 
 public class SpellInfo {
 

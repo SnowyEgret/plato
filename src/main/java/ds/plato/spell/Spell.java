@@ -19,13 +19,13 @@ import org.lwjgl.input.Keyboard;
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
-import ds.plato.core.StringUtils;
 import ds.plato.geom.solid.Box;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 import ds.plato.spell.descriptor.SpellInfo;
 import ds.plato.undo.IUndo;
+import ds.plato.util.StringUtils;
 
 public abstract class Spell extends Item implements IClickable {
 

@@ -3,9 +3,9 @@ package ds.plato.undo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import ds.plato.core.IWorld;
-import ds.plato.core.StringUtils;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
+import ds.plato.util.StringUtils;
 
 public class SetBlock implements IUndoable {
 

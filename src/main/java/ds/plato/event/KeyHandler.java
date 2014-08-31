@@ -16,7 +16,6 @@ import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
-import ds.plato.core.Direction;
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.pick.IPick;
@@ -145,9 +144,7 @@ public class KeyHandler {
 		pickManager.clearPicks();
 		pickManager.reset(2);
 		pickManager.pick(w, 0, 0, 0, 0);
-		Direction direction = player.getDirection();
-		System.out.println("[KeyInputEventHandler.copy] direction=" + direction);
-		switch (direction) {
+		switch (player.getDirection()) {
 		case NORTH:
 			pickManager.pick(w, lr, 0, ud, 0);
 			break;

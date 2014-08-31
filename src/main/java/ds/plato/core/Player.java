@@ -23,6 +23,13 @@ public class Player {
 
 	private EntityPlayer player;
 
+	public enum Direction {
+		NORTH,
+		SOUTH,
+		EAST,
+		WEST;
+	}
+
 	public Player(EntityPlayer player) {
 		this.player = player;
 	}

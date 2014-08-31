@@ -18,12 +18,12 @@ import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import ds.plato.core.StringUtils;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
 import ds.plato.staff.Staff;
 import ds.plato.staff.StaffWood;
 import ds.plato.undo.IUndo;
+import ds.plato.util.StringUtils;
 
 public class SpellLoader {
 
