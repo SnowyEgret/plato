@@ -27,7 +27,7 @@ import ds.plato.staff.Staff;
 import ds.plato.staff.StaffWood;
 import ds.plato.undo.IUndo;
 
-public class KeyInputEventHandler {
+public class KeyHandler {
 
 	private IUndo undoManager;
 	private ISelect selectionManager;
@@ -35,7 +35,7 @@ public class KeyInputEventHandler {
 	Map<String, KeyBinding> keyBindings = new HashMap<>();
 
 
-	public KeyInputEventHandler(IUndo undo, ISelect select, IPick pick) {
+	public KeyHandler(IUndo undo, ISelect select, IPick pick) {
 		this.undoManager = undo;
 		this.selectionManager = select;
 		this.pickManager = pick;

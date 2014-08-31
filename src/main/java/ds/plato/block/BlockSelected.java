@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
@@ -13,6 +14,7 @@ import ds.plato.proxy.ClientProxy;
 
 public class BlockSelected extends Block {
 
+	
 	public BlockSelected() {
 		super(Material.clay);
 		setHardness(-1F);
@@ -32,6 +34,7 @@ public class BlockSelected extends Block {
 
 	@Override
 	public int getRenderType() {
-		return ClientProxy.blockSelectedRenderId;
+		return BlockSelectedRenderer.id;
+		//return ClientProxy.blockSelectedRenderId;
 	}
 }
