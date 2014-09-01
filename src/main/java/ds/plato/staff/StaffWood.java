@@ -19,10 +19,10 @@ import ds.plato.Plato;
 import ds.plato.core.Player;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
-import ds.plato.spell.IClickable;
+import ds.plato.spell.ISelector;
 import ds.plato.spell.Spell;
 
-public class StaffWood extends Item implements IClickable, IStaff {
+public class StaffWood extends Item implements ISelector, IStaff {
 
 	int size = 9;
 	IPick pickManager;
@@ -56,16 +56,9 @@ public class StaffWood extends Item implements IClickable, IStaff {
 	}
 
 	@Override
-	public void onMouseClickLeft(ItemStack stack, int x, int y, int z, int side) {
+	public void select(ItemStack stack, int x, int y, int z, int side) {
 		if (!isEmpty(stack)) {
-			getSpell(stack).onMouseClickLeft(stack, x, y, z, side);
-		}
-	}
-
-	@Override
-	public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
-		if (!isEmpty(stack)) {
-			getSpell(stack).onMouseClickRight(stack, x, y, z, side);
+			getSpell(stack).select(stack, x, y, z, side);
 		}
 	}
 

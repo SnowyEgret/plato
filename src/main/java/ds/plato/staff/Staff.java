@@ -20,11 +20,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
 import ds.plato.core.Player;
 import ds.plato.pick.IPick;
-import ds.plato.spell.IClickable;
+import ds.plato.spell.ISelector;
 import ds.plato.spell.Spell;
 
 //public abstract class Staff extends Item implements IClickable, IInventory {
-public abstract class Staff extends Item implements IClickable {
+public abstract class Staff extends Item implements ISelector {
 
 	protected Spell[] spells = new Spell[9];
 	protected int ordinal = 0;
@@ -47,21 +47,21 @@ public abstract class Staff extends Item implements IClickable {
 	}
 
 	@Override
-	public void onMouseClickLeft(ItemStack stack, int x, int y, int z, int side) {
+	public void select(ItemStack stack, int x, int y, int z, int side) {
 		if (!isEmpty()) {
-			getSpell().onMouseClickLeft(stack, x, y, z, side);
+			getSpell().select(stack, x, y, z, side);
 		}
 	}
 
-	@Override
-	public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
-		// For now, jump while right clicking to open gui again.
-		if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-			Player.getPlayer().openGui(3);
-		} else {
-			getSpell().onMouseClickRight(stack, x, y, z, side);
-		}
-	}
+//	@Override
+//	public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
+//		// For now, jump while right clicking to open gui again.
+//		if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+//			Player.getPlayer().openGui(3);
+//		} else {
+//			getSpell().onMouseClickRight(stack, x, y, z, side);
+//		}
+//	}
 
 	// @Override
 	// public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4,

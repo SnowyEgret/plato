@@ -38,7 +38,7 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
-import ds.plato.spell.IClickable;
+import ds.plato.spell.ISelector;
 import ds.plato.spell.Spell;
 import ds.plato.spell.transform.SpellFill;
 import ds.plato.staff.Staff;

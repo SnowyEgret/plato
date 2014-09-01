@@ -27,7 +27,7 @@ import ds.plato.spell.descriptor.SpellInfo;
 import ds.plato.undo.IUndo;
 import ds.plato.util.StringUtils;
 
-public abstract class Spell extends Item implements IClickable {
+public abstract class Spell extends Item implements ISelector {
 
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
@@ -77,7 +77,7 @@ public abstract class Spell extends Item implements IClickable {
 	}
 
 	@Override
-	public void onMouseClickLeft(ItemStack stack, int x, int y, int z, int side) {
+	public void select(ItemStack stack, int x, int y, int z, int side) {
 
 		Player player = Player.getPlayer();
 		IWorld w = player.getWorld();
@@ -105,17 +105,6 @@ public abstract class Spell extends Item implements IClickable {
 		} else {
 			selectionManager.clearSelections();
 			selectionManager.select(w, x, y, z);
-		}
-	}
-
-	@Override
-	public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
-		System.out.println("[Spell.onMouseClickRight] stack=" + stack);
-		Player player = Player.getPlayer();
-		IWorld w = player.getWorld();
-		pickManager.pick(w, x, y, z, side);
-		if (pickManager.isFinishedPicking()) {
-			invoke(w, player.getSlotEntries());
 		}
 	}
 
