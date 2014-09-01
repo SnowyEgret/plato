@@ -8,17 +8,17 @@ import javax.vecmath.Point3i;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
-import net.minecraftforge.client.model.ModelFormatException;
 
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
+import ds.plato.core.WorldWrapper;
 import ds.plato.geom.solid.Box;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
@@ -109,16 +109,28 @@ public abstract class Spell extends Item implements IClickable {
 	}
 
 	@Override
-	// public void onMouseClickRight(ItemStack stack, MovingObjectPosition e) {
 	public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
+		System.out.println("[Spell.onMouseClickRight] stack=" + stack);
 		Player player = Player.getPlayer();
 		IWorld w = player.getWorld();
-		// int side = e.sideHit;
-		// pickManager.pick(w, e.blockX, e.blockY, e.blockZ, side);
 		pickManager.pick(w, x, y, z, side);
 		if (pickManager.isFinishedPicking()) {
 			invoke(w, player.getSlotEntries());
 		}
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+			float sx, float sy, float sz) {
+		if (!world.isRemote) {
+			IWorld w = new WorldWrapper(world);
+			pickManager.pick(w, x, y, z, side);
+			if (pickManager.isFinishedPicking()) {
+				invoke(w, Player.getPlayer().getSlotEntries());
+			}
+			return true;
+		}
+		return false;
 	}
 
 	@Override

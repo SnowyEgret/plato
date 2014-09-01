@@ -58,7 +58,7 @@ public class Player {
 			ItemStack stack = inventory.getStackInSlot(i);
 			if (stack != null) {
 				Item item = stack.getItem();
-				int metadata = item.getDamage(stack);
+				int metadata = stack.getItemDamage();
 
 				Block b = null;
 				if (item instanceof ItemBlock) {

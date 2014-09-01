@@ -14,6 +14,7 @@ public class SetBlockMessage implements IMessage {
 	public int z;
 	public Block block;
 	public int metadata;
+	int size = 5;
 	
 	public SetBlockMessage() {
 	}
@@ -28,10 +29,10 @@ public class SetBlockMessage implements IMessage {
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
-		x = ByteBufUtils.readVarInt(buf, 2);
-		y = ByteBufUtils.readVarInt(buf, 2);
-		z = ByteBufUtils.readVarInt(buf, 2);
-		int blockId = ByteBufUtils.readVarInt(buf, 2);
+		x = ByteBufUtils.readVarInt(buf, size);
+		y = ByteBufUtils.readVarInt(buf, size);
+		z = ByteBufUtils.readVarInt(buf, size);
+		int blockId = ByteBufUtils.readVarInt(buf, size);
 		System.out.println("[SetBlockMessage.fromBytes] blockId=" + blockId);
 		block = Block.getBlockById(blockId);
 		System.out.println("[SetBlockMessage.fromBytes] block=" + block);
@@ -40,10 +41,10 @@ public class SetBlockMessage implements IMessage {
 
 	@Override
 	public void toBytes(ByteBuf buf) {
-		ByteBufUtils.writeVarInt(buf, x, 2);
-		ByteBufUtils.writeVarInt(buf, y, 2);
-		ByteBufUtils.writeVarInt(buf, z, 2);
-		ByteBufUtils.writeVarInt(buf, Block.getIdFromBlock(block), 2);
+		ByteBufUtils.writeVarInt(buf, x, size);
+		ByteBufUtils.writeVarInt(buf, y, size);
+		ByteBufUtils.writeVarInt(buf, z, size);
+		ByteBufUtils.writeVarInt(buf, Block.getIdFromBlock(block), size);
 		ByteBufUtils.writeVarInt(buf, metadata, 1);
 	}
 

@@ -34,7 +34,7 @@ public class GuiStaffContainer extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		boolean isUsable = inventoryStaff.isUseableByPlayer(player);
-		System.out.println("[GuiStaffContainer.canInteractWith] isUsable=" + isUsable);
+		//System.out.println("[GuiStaffContainer.canInteractWith] isUsable=" + isUsable);
 		return isUsable;
 	}
 

@@ -45,20 +45,6 @@ public class StaffWood extends Item implements IClickable, IStaff {
 		return 0;
 	}
 
-	// // Sets tag when staff is crafted
-	// @Override
-	// public void onCreated(ItemStack stack, World w, EntityPlayer player) {
-	// if (stack.stackTagCompound == null) {
-	// stack.setTagCompound(new NBTTagCompound());
-	// }
-	// System.out.println("[Staff.onCreated] stack.stackTagCompound=" + stack.stackTagCompound);
-	// // Read here http://forgetutorials.weebly.com/nbt-tags.html that tag must be initialized
-	// // Not convinced he is right
-	// // for (int i = 0; i < spells.length; i++) {
-	// // stack.stackTagCompound.setString(String.valueOf(i), "");
-	// // }
-	// }
-
 	// Adds information to rollover in creative tab
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
@@ -84,21 +70,29 @@ public class StaffWood extends Item implements IClickable, IStaff {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int s, float sx,
-			float sy, float sz) {
-		if (!isEmpty(stack)) {
-			getSpell(stack).onMouseClickRight(stack, x, y, z, s);
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+			float sx, float sy, float sz) {
+		if (!world.isRemote && Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+			player.openGui(Plato.instance, 3, world, 0, 0, 0);
+			// } else if (!world.isRemote && !isEmpty(stack)) {
+			// } else if (world.isRemote && !isEmpty(stack)) {
+			// getSpell(stack).onMouseClickRight(stack, x, y, z, side);
+			// }
+		} else if (!world.isRemote && !isEmpty(stack)) {
+			Spell s = getSpell(stack);
+			System.out.println("[StaffWood.onItemUse] s=" + s);
+			s.onItemUse(stack, player, world, x, y, z, side, sx, sy, sz);
 		}
 		return true;
 	}
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (!world.isRemote) {
-			player.openGui(Plato.instance, 3, world, 0, 0, 0);
-		}
-		return stack;
-	}
+	// @Override
+	// public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	// if (!world.isRemote) {
+	// player.openGui(Plato.instance, 3, world, 0, 0, 0);
+	// }
+	// return stack;
+	// }
 
 	@Override
 	public Spell getSpell(ItemStack stack) {
@@ -130,6 +124,7 @@ public class StaffWood extends Item implements IClickable, IStaff {
 				break;
 			}
 		}
+		//System.out.println("[StaffWood.nextSpell] s=" + s);
 		return s;
 	}
 
