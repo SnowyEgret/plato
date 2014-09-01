@@ -14,12 +14,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.world.World;
-import ds.plato.Plato;
 import ds.plato.spell.Spell;
 import ds.plato.staff.Staff;
 import ds.plato.staff.StaffWood;
 
-public class Player {
+public class Player implements IPlayer {
 
 	private EntityPlayer player;
 
@@ -34,10 +33,14 @@ public class Player {
 		this.player = player;
 	}
 
-	public static Player getPlayer() {
+	public static IPlayer getPlayer() {
 		return new Player(Minecraft.getMinecraft().thePlayer);
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.core.IPlayer#getWorld()
+	 */
+	@Override
 	public IWorld getWorld() {
 		World w = null;
 		Minecraft mc = Minecraft.getMinecraft();
@@ -51,6 +54,10 @@ public class Player {
 		return new WorldWrapper(w);
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.core.IPlayer#getSlotEntries()
+	 */
+	@Override
 	public SlotEntry[] getSlotEntries() {
 		List<SlotEntry> entries = new ArrayList<>();
 		InventoryPlayer inventory = player.inventory;
@@ -95,6 +102,10 @@ public class Player {
 		return entries.toArray(array);
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.core.IPlayer#getDirection()
+	 */
+	@Override
 	public Direction getDirection() {
 		int yaw = (int) (player.rotationYawHead);
 		yaw += (yaw >= 0) ? 45 : -45;
@@ -132,18 +143,34 @@ public class Player {
 		return direction;
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.core.IPlayer#slotDistribution()
+	 */
+	@Override
 	public SlotDistribution slotDistribution() {
 		return new SlotDistribution(getSlotEntries());
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.core.IPlayer#getHeldItemStack()
+	 */
+	@Override
 	public ItemStack getHeldItemStack() {
 		return player.getCurrentEquippedItem();
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.core.IPlayer#getHeldItem()
+	 */
+	@Override
 	public Item getHeldItem() {
 		return getHeldItemStack().getItem();
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.core.IPlayer#getSpell()
+	 */
+	@Override
 	public Spell getSpell() {
 		Spell spell = null;
 		ItemStack stack = player.getHeldItem();
@@ -160,6 +187,10 @@ public class Player {
 		return spell;
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.core.IPlayer#getStaff()
+	 */
+	@Override
 	public Staff getStaff() {
 		Staff staff = null;
 		ItemStack is = player.getHeldItem();
@@ -172,21 +203,29 @@ public class Player {
 		return staff;
 	}
 
-	public void openGui(int i) {
-		player.openGui(Plato.instance, i, getWorld().getWorld(), 0, 0, 0);
-	}
+//	/* (non-Javadoc)
+//	 * @see ds.plato.core.IPlayer#openGui(int)
+//	 */
+//	@Override
+//	public void openGui(int i) {
+//		player.openGui(Plato.instance, i, getWorld().getWorld(), 0, 0, 0);
+//	}
 
-	public Iterable<ItemStack> getStaffItemStacks() {
-		List<ItemStack> stacks = new ArrayList<>();
-		InventoryPlayer inventory = player.inventory;
-		System.out.println("[Player.getStaffItemStacks] inventory=" + inventory);
-		for (ItemStack s : inventory.mainInventory) {
-			if (s != null) {
-				if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
-					stacks.add(s);
-				}
-			}
-		}
-		return stacks;
-	}
+//	/* (non-Javadoc)
+//	 * @see ds.plato.core.IPlayer#getStaffItemStacks()
+//	 */
+//	@Override
+//	public Iterable<ItemStack> getStaffItemStacks() {
+//		List<ItemStack> stacks = new ArrayList<>();
+//		InventoryPlayer inventory = player.inventory;
+//		System.out.println("[Player.getStaffItemStacks] inventory=" + inventory);
+//		for (ItemStack s : inventory.mainInventory) {
+//			if (s != null) {
+//				if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
+//					stacks.add(s);
+//				}
+//			}
+//		}
+//		return stacks;
+//	}
 }

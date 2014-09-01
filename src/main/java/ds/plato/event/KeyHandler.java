@@ -16,6 +16,7 @@ import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.Plato;
+import ds.plato.core.IPlayer;
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.pick.IPick;
@@ -54,7 +55,7 @@ public class KeyHandler {
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event) {
 
-		Player player = Player.getPlayer();
+		IPlayer player = Player.getPlayer();
 		IWorld w = player.getWorld();
 
 		if (keyBindings.get("undo").isPressed()) {
@@ -105,7 +106,7 @@ public class KeyHandler {
 		}
 
 		if (keyBindings.get("delete").isPressed()) {
-			new SpellDelete(undoManager, selectionManager, pickManager).invoke(player);
+			new SpellDelete(undoManager, selectionManager, pickManager).invoke(w, player.getSlotEntries());
 		}
 
 		if (keyBindings.get("lastSelection").isPressed()) {
@@ -140,7 +141,7 @@ public class KeyHandler {
 			event.setCanceled(true);
 	}
 
-	private void copy(Player player, IWorld w, int lr, int ud) {
+	private void copy(IPlayer player, IWorld w, int lr, int ud) {
 		pickManager.clearPicks();
 		pickManager.reset(2);
 		pickManager.pick(w, 0, 0, 0, 0);
@@ -159,17 +160,17 @@ public class KeyHandler {
 			break;
 		}
 		if (selectionManager.size() != 0) {
-			new SpellCopy(undoManager, selectionManager, pickManager).invoke(player);
+			new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, player.getSlotEntries());
 		}
 		pickManager.clearPicks();
 	}
 
-	private void copyVertical(Player player, IWorld w, int d) {
+	private void copyVertical(IPlayer player, IWorld w, int d) {
 		pickManager.clearPicks();
 		pickManager.reset(2);
 		pickManager.pick(w, 0, 0, 0, 0);
 		pickManager.pick(w, 0, d, 0, 0);
-		new SpellCopy(undoManager, selectionManager, pickManager).invoke(player);
+		new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, player.getSlotEntries());
 		pickManager.clearPicks();
 	}
 

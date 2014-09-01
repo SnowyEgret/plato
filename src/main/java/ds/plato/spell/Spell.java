@@ -15,6 +15,7 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.input.Keyboard;
 
+import ds.plato.core.IPlayer;
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
@@ -60,13 +61,21 @@ public abstract class Spell extends Item implements ISelector {
 		return getRecipe() != null;
 	}
 
-	public abstract void invoke(IWorld world, final SlotEntry... slotEntries);
-
-	public void invoke(Player player) {
-		IWorld w = player.getWorld();
-		SlotEntry[] entries = player.getSlotEntries();
-		invoke(w, entries);
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+			float sx, float sy, float sz) {
+		if (!world.isRemote) {
+			IWorld w = new WorldWrapper(world);
+			pickManager.pick(w, x, y, z, side);
+			if (pickManager.isFinishedPicking()) {
+				invoke(w, Player.getPlayer().getSlotEntries());
+			}
+			return true;
+		}
+		return false;
 	}
+
+	public abstract void invoke(IWorld world, final SlotEntry... slotEntries);
 
 	public String getMessage() {
 		return message;
@@ -79,7 +88,7 @@ public abstract class Spell extends Item implements ISelector {
 	@Override
 	public void select(ItemStack stack, int x, int y, int z, int side) {
 
-		Player player = Player.getPlayer();
+		IPlayer player = Player.getPlayer();
 		IWorld w = player.getWorld();
 
 		// Standard selection behavior. Shift replaces the current selection set with a region.
@@ -106,20 +115,6 @@ public abstract class Spell extends Item implements ISelector {
 			selectionManager.clearSelections();
 			selectionManager.select(w, x, y, z);
 		}
-	}
-
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
-			float sx, float sy, float sz) {
-		if (!world.isRemote) {
-			IWorld w = new WorldWrapper(world);
-			pickManager.pick(w, x, y, z, side);
-			if (pickManager.isFinishedPicking()) {
-				invoke(w, Player.getPlayer().getSlotEntries());
-			}
-			return true;
-		}
-		return false;
 	}
 
 	@Override

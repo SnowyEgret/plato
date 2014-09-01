@@ -30,6 +30,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ds.plato.core.IPlayer;
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
@@ -110,7 +111,7 @@ public class ForgeEventHandler {
 			if (spell != null) {
 				overlay.drawSpell(spell);
 			} else {
-				Player p = Player.getPlayer();
+				IPlayer p = Player.getPlayer();
 				Staff staff = p.getStaff();
 				if (staff != null) {
 					overlay.drawStaff(staff, p.getHeldItemStack());

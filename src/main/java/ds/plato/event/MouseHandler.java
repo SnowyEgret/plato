@@ -17,6 +17,7 @@ import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ds.plato.core.IPlayer;
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
@@ -43,18 +44,15 @@ public class MouseHandler {
 	@SubscribeEvent
 	public void onMouseEvent(MouseEvent e) {
 
-		System.out.println("[MouseHandler.onMouseEvent] e=" + e);
-
 		// Fix for Clicking back to game selects a block. Issue #100
 		// TODO Seems not to work in multiplayer
 		if (Minecraft.getMinecraft().isGamePaused()) {
 			return;
 		}
 
-		Player player = Player.getPlayer();
-		IWorld world = player.getWorld();
+		IPlayer player = Player.getPlayer();
 		MovingObjectPosition p = Minecraft.getMinecraft().objectMouseOver;
-		// System.out.println("[ForgeEventHandler.onMouseEvent] position.typeOfHit=" + position.typeOfHit +
+		// System.out.println("[MouseHandler.onMouseEvent] position.typeOfHit=" + position.typeOfHit +
 		// ", e.button=" + e.button);
 
 		if (p.typeOfHit == MovingObjectType.MISS) {
@@ -109,25 +107,25 @@ public class MouseHandler {
 					if (selectionManager.isSelected(p.blockX, p.blockY, p.blockZ)) {
 						Block b = itemBlock.field_150939_a;
 						int metadata = stack.getItemDamage();
-						new SpellFill(undoManager, selectionManager, pickManager).invoke(world, new SlotEntry(b,
+						new SpellFill(undoManager, selectionManager, pickManager).invoke(player.getWorld(), new SlotEntry(b,
 								metadata, 0));
 						e.setCanceled(true);
 					}
 				} else if (e.button == 0) {
-					System.out.println("[ForgeEventHandler.onMouseEvent] Left mouse button with block in hand");
+					System.out.println("[MouseHandler.onMouseEvent] Left mouse button with block in hand");
 				}
 			}
 		}
 	}
 
-	private boolean isRightClickable(Block block) {
-		if (block instanceof BlockWorkbench)
-			return false;
-		if (block instanceof BlockContainer)
-			return false;
-		if (block instanceof BlockAnvil)
-			return false;
-		return true;
-	}
+//	private boolean isRightClickable(Block block) {
+//		if (block instanceof BlockWorkbench)
+//			return false;
+//		if (block instanceof BlockContainer)
+//			return false;
+//		if (block instanceof BlockAnvil)
+//			return false;
+//		return true;
+//	}
 
 }
