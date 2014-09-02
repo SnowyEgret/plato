@@ -1,5 +1,6 @@
 package ds.plato;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -60,13 +61,12 @@ public class Plato {
 	@Instance(ID) public static Plato instance;
 	@SidedProxy(clientSide = "ds.plato.proxy.ClientProxy", serverSide = "ds.plato.proxy.CommonProxy") public static CommonProxy proxy;
 
-	//private List<Staff> staffs;
 	private static IUndo undoManager;
 	private static ISelect selectionManager;
 	private static IPick pickManager;
 	private Configuration configuration;
-	private StaffWood staffOak;
 	private List<Spell> spells;
+	private List<StaffWood> staffs;
 	public static SimpleNetworkWrapper network;
 	public static Logger log;
 
@@ -125,8 +125,9 @@ public class Plato {
 			log.info("[Plato.preInit] drawStaff=" + drawStaff);
 
 			// Create some empty staffs. For now, they have a different base class.
-			staffOak = loader.loadStaffWood(StaffOak.class);
-			loader.loadStaffWood(StaffBirch.class);
+			staffs = new ArrayList<>();
+			staffs.add(loader.loadStaffWood(StaffOak.class));
+			staffs.add(loader.loadStaffWood(StaffBirch.class));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -144,7 +145,7 @@ public class Plato {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		proxy.setCustomRenderers(selectionManager, pickManager, staffOak, spells);
+		proxy.setCustomRenderers(selectionManager, pickManager, staffs, spells);
 		proxy.registerEventHandlers(this, selectionManager, undoManager, pickManager);
 	}
 

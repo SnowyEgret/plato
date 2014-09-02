@@ -9,7 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.input.Keyboard;
 
@@ -21,14 +24,36 @@ import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.spell.ISelector;
 import ds.plato.spell.Spell;
+import ds.plato.util.StringUtils;
 
 public class StaffWood extends Item implements ISelector, IStaff {
 
 	int size = 9;
 	IPick pickManager;
+	protected IModelCustom model;
 
 	public StaffWood(IPick pickManager) {
 		this.pickManager = pickManager;
+		try {
+			model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/"
+					+ StringUtils.toCamelCase(getClass()) + ".obj"));
+		} catch (Exception e) {
+			System.out.println("[StaffWood.StaffWood] e=" + e);
+		}
+	}
+
+	public IModelCustom getModel() {
+		return model;
+	}
+
+	public ResourceLocation getTextureResourceLocation() {
+		return new ResourceLocation("plato", "models/" + StringUtils.toCamelCase(getClass()) + ".png");
+	}
+
+	// https://github.com/TheGreyGhost/ItemRendering/blob/master/src/TestItemRendering/items/ItemLampshade.java
+	@Override
+	public int getSpriteNumber() {
+		return model == null ? 1 : 0;
 	}
 
 	public Object[] getRecipe() {
@@ -37,12 +62,6 @@ public class StaffWood extends Item implements ISelector, IStaff {
 
 	public boolean hasRecipe() {
 		return getRecipe() != null;
-	}
-
-	// https://github.com/TheGreyGhost/ItemRendering/blob/master/src/TestItemRendering/items/ItemLampshade.java
-	@Override
-	public int getSpriteNumber() {
-		return 0;
 	}
 
 	// Adds information to rollover in creative tab

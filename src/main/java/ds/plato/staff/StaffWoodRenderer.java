@@ -20,7 +20,7 @@ import ds.plato.spell.Spell;
 public class StaffWoodRenderer implements IItemRenderer {
 
 	private IModelCustom staffModel;
-	private final ResourceLocation staffTexture = new ResourceLocation("plato", "models/cube.png");
+	private ResourceLocation staffTextureResourceLocation;
 
 	private enum TransformationTypes {
 		NONE,
@@ -29,9 +29,9 @@ public class StaffWoodRenderer implements IItemRenderer {
 		THIRDPERSONEQUIPPED
 	};
 
-	public StaffWoodRenderer() {
-		// model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/staff.obj"));
-		staffModel = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/cube.obj"));
+	public StaffWoodRenderer(StaffWood staff) {
+		staffModel = staff.getModel();
+		staffTextureResourceLocation = staff.getTextureResourceLocation();
 	}
 
 	@Override
@@ -209,7 +209,7 @@ public class StaffWoodRenderer implements IItemRenderer {
 		GL11.glPushMatrix();
 		GL11.glTranslated(0, 0, .5);
 		GL11.glRotated(-15, 0, 0, 1);
-		Minecraft.getMinecraft().renderEngine.bindTexture(staffTexture);
+		Minecraft.getMinecraft().renderEngine.bindTexture(staffTextureResourceLocation);
 		staffModel.renderAll();
 		GL11.glPopMatrix();
 	}
@@ -225,9 +225,7 @@ public class StaffWoodRenderer implements IItemRenderer {
 					GL11.glTranslated(0, 1.5, 0);
 					GL11.glScaled(.6, .6, .6);
 					ResourceLocation spellTexture = spell.getTextureResourceLocation();
-					if (spellTexture != null) {
-						Minecraft.getMinecraft().renderEngine.bindTexture(spellTexture);
-					}
+					Minecraft.getMinecraft().renderEngine.bindTexture(spellTexture);
 					spellModel.renderAll();
 					GL11.glPopMatrix();
 				}

@@ -62,6 +62,19 @@ public abstract class Spell extends Item implements ISelector {
 		}
 	}
 
+	public IModelCustom getModel() {
+		return model;
+	}
+
+	public ResourceLocation getTextureResourceLocation() {
+		return new ResourceLocation("plato", "models/" + StringUtils.toCamelCase(getClass()) + ".png");
+	}
+
+	@Override
+	public int getSpriteNumber() {
+		return model == null ? 1 : 0;
+	}
+
 	public abstract Object[] getRecipe();
 
 	public boolean hasRecipe() {
@@ -161,18 +174,5 @@ public abstract class Spell extends Item implements ISelector {
 
 	public SpellInfo getInfo() {
 		return info;
-	}
-
-	public ResourceLocation getTextureResourceLocation() {
-		return new ResourceLocation("plato", "models/" + StringUtils.toCamelCase(getClass()) + ".png");
-	}
-
-	public IModelCustom getModel() {
-		return model;
-	}
-
-	@Override
-	public int getSpriteNumber() {
-		return model == null ? 1 : 0;
 	}
 }

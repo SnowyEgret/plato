@@ -9,7 +9,7 @@ import ds.plato.undo.IUndo;
 
 public class CommonProxy {
 
-	public void setCustomRenderers(ISelect selectionManager, IPick pickManager, StaffWood staffWood, Iterable<Spell> spells) {
+	public void setCustomRenderers(ISelect selectionManager, IPick pickManager, Iterable<StaffWood> staffs, Iterable<Spell> spells) {
 	}
 
 	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick) {

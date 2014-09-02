@@ -1,14 +1,14 @@
 package ds.plato.spell;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 import net.minecraftforge.client.model.IModelCustom;
 
+import org.lwjgl.opengl.GL11;
+
+//Based on http://greyminecraftcoder.blogspot.com.au/2013/09/custom-item-rendering-using.html
 public class SpellRenderer implements IItemRenderer {
 
 	private IModelCustom model;
@@ -52,8 +52,6 @@ public class SpellRenderer implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		if (model != null) {
 			GL11.glPushMatrix();
-			GL11.glTranslated(0, 0, .5);
-			GL11.glRotated(-15, 0, 0, 1);
 			Minecraft.getMinecraft().renderEngine.bindTexture(textureResourceLocation);
 			model.renderAll();
 			GL11.glPopMatrix();

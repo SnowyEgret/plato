@@ -23,11 +23,17 @@ import ds.plato.undo.IUndo;
 public class ClientProxy extends CommonProxy {
 
 	@Override
-	public void setCustomRenderers(ISelect select, IPick pick, StaffWood staffWood, Iterable<Spell> spells) {
+	public void setCustomRenderers(ISelect select, IPick pick, Iterable<StaffWood> staffs, Iterable<Spell> spells) {
 		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(select));
 		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(select, pick));
 		RenderingRegistry.registerBlockHandler(new BlockModelRenderer());
-		MinecraftForgeClient.registerItemRenderer(staffWood, new StaffWoodRenderer());
+		for (StaffWood s : staffs) {
+			if (s.getModel() == null) {
+				System.out.println("[ClientProxy.setCustomRenderers] Missing model for class=" + s.getClass());
+			} else {
+				MinecraftForgeClient.registerItemRenderer(s, new StaffWoodRenderer(s));
+			}
+		}
 		for (Spell s : spells) {
 			if (s.getModel() == null) {
 				System.out.println("[ClientProxy.setCustomRenderers] Missing model for class=" + s.getClass());
