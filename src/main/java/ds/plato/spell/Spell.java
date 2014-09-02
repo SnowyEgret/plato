@@ -45,7 +45,8 @@ public abstract class Spell extends Item implements ISelector {
 	protected String Z = "Z,";
 
 	protected IModelCustom model;
-	private boolean hasModel = true;
+
+	// private boolean hasModel = true;
 
 	public Spell(int numPicks, IUndo undoManager, ISelect selectionManager, IPick pickManager) {
 		this.numPicks = numPicks;
@@ -53,6 +54,12 @@ public abstract class Spell extends Item implements ISelector {
 		this.selectionManager = selectionManager;
 		this.pickManager = pickManager;
 		info = new SpellInfo(this);
+		try {
+			model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/"
+					+ StringUtils.toCamelCase(getClass()) + ".obj"));
+		} catch (Exception e) {
+			System.out.println("[Spell.Spell] e=" + e);
+		}
 	}
 
 	public abstract Object[] getRecipe();
@@ -156,17 +163,16 @@ public abstract class Spell extends Item implements ISelector {
 		return info;
 	}
 
+	public ResourceLocation getTextureResourceLocation() {
+		return new ResourceLocation("plato", "models/" + StringUtils.toCamelCase(getClass()) + ".png");
+	}
+
 	public IModelCustom getModel() {
-		if (hasModel && model == null) {
-			try {
-				return AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/"
-						+ StringUtils.toCamelCase(getClass()) + ".obj"));
-			} catch (Exception e) {
-				System.out.println("[Spell.getModel] e=" + e);
-				hasModel = false;
-				return null;
-			}
-		}
 		return model;
+	}
+
+	@Override
+	public int getSpriteNumber() {
+		return model == null ? 1 : 0;
 	}
 }

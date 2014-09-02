@@ -30,8 +30,10 @@ public class WorldWrapper implements IWorld {
 
 	@Override
 	public void setBlock(int x, int y, int z, Block block, int metadata) {
+		// TODO try this for preventing dropping
+		// world.removeTileEntity(x, y, z);
 		world.setBlock(x, y, z, block, metadata, 3);
-		//System.out.println("[WorldWrapper.setBlock] sendPackets=" + sendPackets);
+		// System.out.println("[WorldWrapper.setBlock] sendPackets=" + sendPackets);
 		if (sendPackets) {
 			Plato.network.sendToServer(new SetBlockMessage(x, y, z, block, metadata));
 		}

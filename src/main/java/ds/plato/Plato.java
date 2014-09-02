@@ -66,6 +66,7 @@ public class Plato {
 	private static IPick pickManager;
 	private Configuration configuration;
 	private StaffWood staffOak;
+	private List<Spell> spells;
 	public static SimpleNetworkWrapper network;
 	public static Logger log;
 
@@ -97,7 +98,7 @@ public class Plato {
 		configuration = new Configuration(event.getSuggestedConfigurationFile());
 		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, ID);
 		try {
-			List<Spell> spells = loader.loadSpellsFromPackage("ds.plato.spell");
+			spells = loader.loadSpellsFromPackage("ds.plato.spell");
 			log.info("[Plato.preInit] loaded spells=" + spells);
 
 			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
@@ -143,7 +144,7 @@ public class Plato {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		proxy.setCustomRenderers(selectionManager, pickManager, staffOak);
+		proxy.setCustomRenderers(selectionManager, pickManager, staffOak, spells);
 		proxy.registerEventHandlers(this, selectionManager, undoManager, pickManager);
 	}
 

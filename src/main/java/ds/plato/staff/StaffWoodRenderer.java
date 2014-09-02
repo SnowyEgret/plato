@@ -1,5 +1,7 @@
 package ds.plato.staff;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -11,12 +13,14 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import ds.plato.spell.Spell;
 
 //Based on http://greyminecraftcoder.blogspot.com.au/2013/09/custom-item-rendering-using.html
 public class StaffWoodRenderer implements IItemRenderer {
 
-	private IModelCustom model;
+	private IModelCustom staffModel;
+	private final ResourceLocation staffTexture = new ResourceLocation("plato", "models/cube.png");
 
 	private enum TransformationTypes {
 		NONE,
@@ -26,7 +30,20 @@ public class StaffWoodRenderer implements IItemRenderer {
 	};
 
 	public StaffWoodRenderer() {
-		model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/staff.obj"));
+		// model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/staff.obj"));
+		staffModel = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/cube.obj"));
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack stack, Object... data) {
+		EntityClientPlayerMP p = Minecraft.getMinecraft().thePlayer;
+		if (!p.isSprinting()) {
+			TransformationTypes transformationToBeUndone = doTransform(type);
+			// renderLampshade();
+			renderStaff();
+			renderSpell(stack);
+			undoTransform(transformationToBeUndone);
+		}
 	}
 
 	@Override
@@ -58,38 +75,7 @@ public class StaffWoodRenderer implements IItemRenderer {
 		}
 	}
 
-	@Override
-	public void renderItem(ItemRenderType type, ItemStack stack, Object... data) {
-		TransformationTypes transformationToBeUndone = doTransforms(type);
-		// renderLampshade();
-		renderModel();
-		renderModel(stack);
-		undoTransforms(transformationToBeUndone);
-	}
-
-	private void undoTransforms(TransformationTypes transformationToBeUndone) {
-		switch (transformationToBeUndone) {
-		case NONE: {
-			break;
-		}
-		case DROPPED: {
-			GL11.glTranslatef(0.5F, 0.5F, 0.0F);
-			GL11.glScalef(2.0F, 2.0F, 2.0F);
-			break;
-		}
-		case INVENTORY: {
-			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			break;
-		}
-		case THIRDPERSONEQUIPPED: {
-			GL11.glDisable(GL11.GL_CULL_FACE);
-		}
-		default:
-			break;
-		}
-	}
-
-	private TransformationTypes doTransforms(ItemRenderType type) {
+	private TransformationTypes doTransform(ItemRenderType type) {
 		// adjust rendering space to match what caller expects
 		TransformationTypes transformationToBeUndone = TransformationTypes.NONE;
 		switch (type) {
@@ -102,7 +88,6 @@ public class StaffWoodRenderer implements IItemRenderer {
 			transformationToBeUndone = TransformationTypes.THIRDPERSONEQUIPPED;
 			break;
 		}
-
 		case EQUIPPED_FIRST_PERSON: {
 			break; // caller expects us to render over [0,0,0] to [1,1,1], no transformation necessary
 		}
@@ -123,6 +108,28 @@ public class StaffWoodRenderer implements IItemRenderer {
 			break; // never here
 		}
 		return transformationToBeUndone;
+	}
+
+	private void undoTransform(TransformationTypes transformationToBeUndone) {
+		switch (transformationToBeUndone) {
+		case NONE: {
+			break;
+		}
+		case DROPPED: {
+			GL11.glTranslatef(0.5F, 0.5F, 0.0F);
+			GL11.glScalef(2.0F, 2.0F, 2.0F);
+			break;
+		}
+		case INVENTORY: {
+			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+			break;
+		}
+		case THIRDPERSONEQUIPPED: {
+			GL11.glDisable(GL11.GL_CULL_FACE);
+		}
+		default:
+			break;
+		}
 	}
 
 	private void renderLampshade() {
@@ -198,15 +205,16 @@ public class StaffWoodRenderer implements IItemRenderer {
 		tessellator.draw();
 	}
 
-	private void renderModel() {
+	private void renderStaff() {
 		GL11.glPushMatrix();
 		GL11.glTranslated(0, 0, .5);
 		GL11.glRotated(-15, 0, 0, 1);
-		model.renderAll();
+		Minecraft.getMinecraft().renderEngine.bindTexture(staffTexture);
+		staffModel.renderAll();
 		GL11.glPopMatrix();
 	}
 
-	private void renderModel(ItemStack stack) {
+	private void renderSpell(ItemStack stack) {
 		StaffWood staff = (StaffWood) stack.getItem();
 		if (staff != null) {
 			Spell spell = staff.getSpell(stack);
@@ -216,6 +224,10 @@ public class StaffWoodRenderer implements IItemRenderer {
 					GL11.glPushMatrix();
 					GL11.glTranslated(0, 1.5, 0);
 					GL11.glScaled(.6, .6, .6);
+					ResourceLocation spellTexture = spell.getTextureResourceLocation();
+					if (spellTexture != null) {
+						Minecraft.getMinecraft().renderEngine.bindTexture(spellTexture);
+					}
 					spellModel.renderAll();
 					GL11.glPopMatrix();
 				}
