@@ -2,9 +2,15 @@ package ds.plato.spell.draw;
 
 import javax.vecmath.Point3d;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.SoundManager;
+import net.minecraft.entity.Entity;
+
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.IWorld;
+import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.curve.CircleXZ;
@@ -33,6 +39,9 @@ public class SpellCircle extends AbstractSpellDraw {
 		IDrawable d = new CircleXZ(p0, p1);
 		draw(d, world, slotEntries[0].block, slotEntries[0].metadata);
 		pickManager.clearPicks();
+		
+		//Try playing a sound
+		world.getWorld().playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "plato:spellCircle", 1f, 1f);
 	}
 
 	@Override

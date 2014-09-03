@@ -1,9 +1,8 @@
 {
-  "surface.sphere": {
+  "spellCircle": {
     "category": "block",
     "sounds": [
-      "surface.sphere0",
-      "surface.sphere1"
+      {"name" : "spellCircle"}
     ]
   }
 }
