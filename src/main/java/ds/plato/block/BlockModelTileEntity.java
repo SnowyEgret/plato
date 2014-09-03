@@ -1,19 +1,21 @@
 package ds.plato.block;
 
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 
 public class BlockModelTileEntity extends TileEntity {
 
 	private String model;
-
-	public String getModel() {
-		return model;
-	}
+	public IInventory inventory = new InventoryBasic("foo", false, 9);
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+
+	public String getModel() {
+		return model;
 	}
 
 	@Override

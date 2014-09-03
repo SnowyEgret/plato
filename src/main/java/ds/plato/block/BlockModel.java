@@ -7,8 +7,6 @@ import net.minecraft.world.World;
 
 public class BlockModel extends BlockContainer  {
 
-	private BlockModelTileEntity tile;
-
 	public BlockModel() {
 		super(Material.clay);
 	}
@@ -17,11 +15,10 @@ public class BlockModel extends BlockContainer  {
 	public int getRenderType() {
 		return BlockModelRenderer.id;
 	}
-
+	
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		tile = new BlockModelTileEntity();
-		return tile;
+		return new BlockModelTileEntity();
 	}
 
 }
