@@ -39,9 +39,6 @@ public class SpellCircle extends AbstractSpellDraw {
 		IDrawable d = new CircleXZ(p0, p1);
 		draw(d, world, slotEntries[0].block, slotEntries[0].metadata);
 		pickManager.clearPicks();
-		
-		//Try playing a sound
-		world.getWorld().playSoundAtEntity(Minecraft.getMinecraft().thePlayer, "plato:spellCircle", 1f, 1f);
 	}
 
 	@Override
