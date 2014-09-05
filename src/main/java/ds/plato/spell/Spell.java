@@ -15,6 +15,7 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.input.Keyboard;
 
+import ds.plato.Plato;
 import ds.plato.core.IPlayer;
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
@@ -44,6 +45,9 @@ public abstract class Spell extends Item implements ISelector {
 	protected String Y = "Y,";
 	protected String Z = "Z,";
 
+	private final String modelPath = "models/" + StringUtils.toCamelCase(getClass());
+	private final ResourceLocation modelLocation = new ResourceLocation(Plato.ID, modelPath + ".obj");
+	private final ResourceLocation modelTextureLocation = new ResourceLocation(Plato.ID, modelPath + ".png");
 	protected IModelCustom model;
 
 	// private boolean hasModel = true;
@@ -55,10 +59,9 @@ public abstract class Spell extends Item implements ISelector {
 		this.pickManager = pickManager;
 		info = new SpellInfo(this);
 		try {
-			model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/"
-					+ StringUtils.toCamelCase(getClass()) + ".obj"));
+			model = AdvancedModelLoader.loadModel(modelLocation);
 		} catch (Exception e) {
-			System.out.println("[Spell.Spell] e=" + e);
+			System.out.print("(No model found at resource location " + modelLocation+")");
 		}
 	}
 
@@ -66,8 +69,8 @@ public abstract class Spell extends Item implements ISelector {
 		return model;
 	}
 
-	public ResourceLocation getTextureResourceLocation() {
-		return new ResourceLocation("plato", "models/" + StringUtils.toCamelCase(getClass()) + ".png");
+	public ResourceLocation getModelTextureResourceLocation() {
+		return modelTextureLocation;
 	}
 
 	@Override

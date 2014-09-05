@@ -32,9 +32,7 @@ public abstract class AbstractSpellDraw extends Spell {
 		if (drawable instanceof Solid && isHollow) {
 			voxels = voxels.shell();
 		}
-		// TODO Change all geom classes for y is up
 		for (Point3i p : voxels) {
-			// SlotEntry entry = Plato.getBlocksWithMetadataInIventorySlots().get(0);
 			t.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, block, metadata).set());
 		}
 		t.commit();

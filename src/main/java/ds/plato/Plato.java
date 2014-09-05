@@ -80,10 +80,10 @@ public class Plato {
 		Block blockPicked = initBlock(new BlockPicked());
 
 		// Try loading a Wavefront model
-		Block blockModel = initBlock(new BlockModel());
-		blockModel.setCreativeTab(CreativeTabs.tabBlock);
+//		Block blockModel = initBlock(new BlockModel());
+//		blockModel.setCreativeTab(CreativeTabs.tabBlock);
 		// TODO what is this stringID
-		GameRegistry.registerTileEntity(BlockModelTileEntity.class, "stringID");
+//		GameRegistry.registerTileEntity(BlockModelTileEntity.class, "stringID");
 
 		// ItemFoo foo = new ItemFoo();
 		// foo.setUnlocalizedName("foo");
@@ -170,6 +170,7 @@ public class Plato {
 		String classname = block.getClass().getSimpleName();
 		String name = classname.substring(0, 1).toLowerCase() + classname.substring(1);
 		block.setBlockName(name);
+		block.setBlockTextureName(ID+":"+name);
 		GameRegistry.registerBlock(block, ID + name);
 		return block;
 	}

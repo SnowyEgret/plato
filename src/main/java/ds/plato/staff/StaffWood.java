@@ -38,7 +38,7 @@ public class StaffWood extends Item implements ISelector, IStaff {
 			model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/"
 					+ StringUtils.toCamelCase(getClass()) + ".obj"));
 		} catch (Exception e) {
-			System.out.println("[StaffWood.StaffWood] e=" + e);
+			//ClientProxy.setCustomRenderers logs missing model
 		}
 	}
 

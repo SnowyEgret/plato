@@ -70,12 +70,13 @@ public class SpellLoader {
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
-		s.setTextureName(modId + ":" + name);
+		//s.setTextureName(modId + ":" + name);
+		s.setTextureName(modId + ":staff");
 		GameRegistry.registerItem(s, name);
 		if (s.hasRecipe()) {
 			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
 		}
-		System.out.println("done.");
+		System.out.println("...done.");
 		return s;
 	}
 
@@ -88,12 +89,13 @@ public class SpellLoader {
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
-		s.setTextureName(modId + ":" + name);
+		s.setTextureName(modId + ":staff");
+		//s.setTextureName(modId + ":" + name);
 		GameRegistry.registerItem(s, name);
 		if (s.hasRecipe()) {
 			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
 		}
-		System.out.println("done.");
+		System.out.println("...done.");
 		return s;
 	}
 
@@ -138,15 +140,15 @@ public class SpellLoader {
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
-		s.setTextureName(modId + ":" + name);
-		//Can't remember why I did this. For SpellRestor?
+		s.setTextureName(modId + ":spell");
+		//Can't remember why I did this. For SpellRestore?
 		GameRegistry.registerItem(s, s.getClass().getSimpleName());
 		//GameRegistry.registerItem(s, name);
 		if (s.hasRecipe()) {
 			//System.out.println("[SpellLoader.loadSpell] s.getRecipe()=" + s.getRecipe());
 			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
 		}
-		System.out.println("done.");
+		System.out.println("...done.");
 		return s;
 	}
 

@@ -16,10 +16,11 @@ public class MyMod {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		MyItem myItem = new MyItem();
-		myItem.setCreativeTab(CreativeTabs.tabMisc);
-		myItem.setUnlocalizedName(myItem.getClass().getSimpleName());
-		GameRegistry.registerItem(myItem, "myMod");
+		MyItem i = new MyItem();
+		i.setCreativeTab(CreativeTabs.tabMisc);
+		i.setUnlocalizedName(i.getClass().getSimpleName());
+		i.setTextureName("plato:spell");
+		GameRegistry.registerItem(i, "myMod");
 	}
 
 	@EventHandler
