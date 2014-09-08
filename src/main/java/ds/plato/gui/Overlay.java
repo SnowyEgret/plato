@@ -10,11 +10,11 @@ import org.lwjgl.input.Keyboard;
 
 import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
+import ds.plato.item.spell.Spell;
+import ds.plato.item.spell.descriptor.SpellInfo;
+import ds.plato.item.spell.transform.SpellFillRandom;
+import ds.plato.item.staff.Staff;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Spell;
-import ds.plato.spell.descriptor.SpellInfo;
-import ds.plato.spell.transform.SpellFillRandom;
-import ds.plato.staff.Staff;
 
 public class Overlay {
 

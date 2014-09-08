@@ -8,8 +8,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import ds.plato.core.SlotEntry;
+import ds.plato.item.spell.Spell;
+import ds.plato.item.spell.draw.SpellSphere;
 import ds.plato.pick.Pick;
-import ds.plato.spell.Spell;
 import ds.plato.test.PlatoTest;
 import ds.plato.undo.Transaction;
 

@@ -9,6 +9,7 @@ import javax.vecmath.Point3i;
 
 import org.junit.Test;
 
+import ds.plato.item.spell.PersistentVoxelGroup;
 import ds.plato.select.Selection;
 import ds.plato.test.PlatoTest;
 

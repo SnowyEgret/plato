@@ -14,9 +14,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.world.World;
-import ds.plato.spell.Spell;
-import ds.plato.staff.Staff;
-import ds.plato.staff.StaffWood;
+import ds.plato.item.spell.Spell;
+import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.StaffWood;
 
 public class Player implements IPlayer {
 

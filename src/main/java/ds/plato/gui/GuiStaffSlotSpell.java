@@ -1,6 +1,6 @@
 package ds.plato.gui;
 
-import ds.plato.spell.Spell;
+import ds.plato.item.spell.Spell;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

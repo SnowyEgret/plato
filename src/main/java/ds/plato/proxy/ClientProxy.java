@@ -12,12 +12,12 @@ import ds.plato.event.ForgeEventHandler;
 import ds.plato.event.KeyHandler;
 import ds.plato.event.MouseHandler;
 import ds.plato.gui.Overlay;
+import ds.plato.item.spell.Spell;
+import ds.plato.item.spell.SpellRenderer;
+import ds.plato.item.staff.StaffWood;
+import ds.plato.item.staff.StaffWoodRenderer;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Spell;
-import ds.plato.spell.SpellRenderer;
-import ds.plato.staff.StaffWood;
-import ds.plato.staff.StaffWoodRenderer;
 import ds.plato.undo.IUndo;
 
 public class ClientProxy extends CommonProxy {

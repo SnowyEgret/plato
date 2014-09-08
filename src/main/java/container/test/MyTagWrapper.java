@@ -2,9 +2,9 @@ package container.test;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
-import ds.plato.spell.Spell;
-import ds.plato.staff.StaffBirch;
-import ds.plato.staff.StaffOak;
+import ds.plato.item.spell.Spell;
+import ds.plato.item.staff.StaffBirch;
+import ds.plato.item.staff.StaffOak;
 import ds.plato.util.StringUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

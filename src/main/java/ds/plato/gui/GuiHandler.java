@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
-import ds.plato.staff.InventoryStaff;
+import ds.plato.item.staff.InventoryStaff;
 
 public class GuiHandler implements IGuiHandler {
 

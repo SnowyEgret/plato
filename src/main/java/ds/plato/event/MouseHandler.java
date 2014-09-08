@@ -21,10 +21,10 @@ import ds.plato.core.IPlayer;
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
+import ds.plato.item.spell.ISelector;
+import ds.plato.item.spell.transform.SpellFill;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.ISelector;
-import ds.plato.spell.transform.SpellFill;
 import ds.plato.undo.IUndo;
 
 public class MouseHandler {

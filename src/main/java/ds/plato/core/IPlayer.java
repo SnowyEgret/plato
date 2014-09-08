@@ -3,8 +3,8 @@ package ds.plato.core;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import ds.plato.core.Player.Direction;
-import ds.plato.spell.Spell;
-import ds.plato.staff.Staff;
+import ds.plato.item.spell.Spell;
+import ds.plato.item.staff.Staff;
 
 public interface IPlayer {
 

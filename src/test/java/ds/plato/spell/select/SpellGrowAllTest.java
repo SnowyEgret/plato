@@ -15,10 +15,10 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import ds.plato.core.IWorld;
 import ds.plato.core.SlotEntry;
+import ds.plato.item.spell.Spell;
 import ds.plato.pick.Pick;
 import ds.plato.select.ISelect;
 import ds.plato.select.SelectionManager;
-import ds.plato.spell.Spell;
 import ds.plato.test.PlatoTest;
 
 @RunWith(PowerMockRunner.class)

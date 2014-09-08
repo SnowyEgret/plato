@@ -28,6 +28,19 @@ import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
 import ds.plato.gui.GuiHandler;
+import ds.plato.item.spell.Spell;
+import ds.plato.item.spell.SpellLoader;
+import ds.plato.item.spell.draw.AbstractSpellDraw;
+import ds.plato.item.spell.matrix.AbstractSpellMatrix;
+import ds.plato.item.spell.select.AbstractSpellSelect;
+import ds.plato.item.spell.transform.AbstractSpellTransform;
+import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.StaffBirch;
+import ds.plato.item.staff.StaffDraw;
+import ds.plato.item.staff.StaffOak;
+import ds.plato.item.staff.StaffSelect;
+import ds.plato.item.staff.StaffTransform;
+import ds.plato.item.staff.StaffWood;
 import ds.plato.network.SetBlockMessage;
 import ds.plato.network.SetBlockMessageHandler;
 import ds.plato.pick.IPick;
@@ -35,19 +48,6 @@ import ds.plato.pick.PickManager;
 import ds.plato.proxy.CommonProxy;
 import ds.plato.select.ISelect;
 import ds.plato.select.SelectionManager;
-import ds.plato.spell.Spell;
-import ds.plato.spell.SpellLoader;
-import ds.plato.spell.draw.AbstractSpellDraw;
-import ds.plato.spell.matrix.AbstractSpellMatrix;
-import ds.plato.spell.select.AbstractSpellSelect;
-import ds.plato.spell.transform.AbstractSpellTransform;
-import ds.plato.staff.Staff;
-import ds.plato.staff.StaffBirch;
-import ds.plato.staff.StaffDraw;
-import ds.plato.staff.StaffOak;
-import ds.plato.staff.StaffSelect;
-import ds.plato.staff.StaffTransform;
-import ds.plato.staff.StaffWood;
 import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
 
@@ -98,7 +98,7 @@ public class Plato {
 		configuration = new Configuration(event.getSuggestedConfigurationFile());
 		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, ID);
 		try {
-			spells = loader.loadSpellsFromPackage("ds.plato.spell");
+			spells = loader.loadSpellsFromPackage("ds.plato.item.spell");
 			log.info("[Plato.preInit] loaded spells=" + spells);
 
 			Staff selectionStaff = loader.loadStaff(StaffSelect.class);

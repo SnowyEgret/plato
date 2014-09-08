@@ -1,10 +1,10 @@
 package ds.plato.proxy;
 
 import ds.plato.Plato;
+import ds.plato.item.spell.Spell;
+import ds.plato.item.staff.StaffWood;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.Spell;
-import ds.plato.staff.StaffWood;
 import ds.plato.undo.IUndo;
 
 public class CommonProxy {

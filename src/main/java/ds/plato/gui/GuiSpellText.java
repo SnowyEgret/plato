@@ -5,7 +5,7 @@ import java.awt.Font;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import say.swing.JFontChooser;
-import ds.plato.spell.SpellText;
+import ds.plato.item.spell.SpellText;
 
 public class GuiSpellText extends GuiTextInputDialog {
 

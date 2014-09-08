@@ -19,12 +19,12 @@ import ds.plato.Plato;
 import ds.plato.core.IPlayer;
 import ds.plato.core.IWorld;
 import ds.plato.core.Player;
+import ds.plato.item.spell.matrix.SpellCopy;
+import ds.plato.item.spell.transform.SpellDelete;
+import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.StaffWood;
 import ds.plato.pick.IPick;
 import ds.plato.select.ISelect;
-import ds.plato.spell.matrix.SpellCopy;
-import ds.plato.spell.transform.SpellDelete;
-import ds.plato.staff.Staff;
-import ds.plato.staff.StaffWood;
 import ds.plato.undo.IUndo;
 
 public class KeyHandler {

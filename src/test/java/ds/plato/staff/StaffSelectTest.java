@@ -14,12 +14,13 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import ds.plato.item.spell.Spell;
+import ds.plato.item.spell.matrix.SpellCopy;
+import ds.plato.item.spell.transform.SpellDelete;
+import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.StaffOak;
+import ds.plato.item.staff.StaffSelect;
 import ds.plato.pick.Pick;
-import ds.plato.spell.Spell;
-import ds.plato.spell.matrix.SpellCopy;
-import ds.plato.spell.transform.SpellDelete;
-import ds.plato.staff.Staff;
-import ds.plato.staff.StaffOak;
 import ds.plato.test.PlatoTest;
 
 //@RunWith(PowerMockRunner.class)
