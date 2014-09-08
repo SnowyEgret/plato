@@ -31,14 +31,16 @@ public class StaffWood extends Item implements ISelector, IStaff {
 	int size = 9;
 	IPick pickManager;
 	protected IModelCustom model;
-
+	private final String modelPath = "models/" + StringUtils.toCamelCase(getClass());
+	private final ResourceLocation modelLocation = new ResourceLocation("plato", modelPath + ".obj");
+	private final ResourceLocation modelTextureLocation = new ResourceLocation("plato", modelPath + ".png");
+	
 	public StaffWood(IPick pickManager) {
 		this.pickManager = pickManager;
 		try {
-			model = AdvancedModelLoader.loadModel(new ResourceLocation("plato", "models/"
-					+ StringUtils.toCamelCase(getClass()) + ".obj"));
+			model = AdvancedModelLoader.loadModel(modelLocation);
 		} catch (Exception e) {
-			//ClientProxy.setCustomRenderers logs missing model
+			// ClientProxy.setCustomRenderers logs missing model
 		}
 	}
 
@@ -47,7 +49,7 @@ public class StaffWood extends Item implements ISelector, IStaff {
 	}
 
 	public ResourceLocation getTextureResourceLocation() {
-		return new ResourceLocation("plato", "models/" + StringUtils.toCamelCase(getClass()) + ".png");
+		return modelTextureLocation;
 	}
 
 	// https://github.com/TheGreyGhost/ItemRendering/blob/master/src/TestItemRendering/items/ItemLampshade.java
@@ -111,7 +113,7 @@ public class StaffWood extends Item implements ISelector, IStaff {
 		if (isEmpty(stack)) {
 			return null;
 		} else {
-			Spell s = getSpell(stack, getOrdinal(stack));
+			Spell s = getSpellAtIndex(stack, getOrdinal(stack));
 			if (s == null) {
 				s = nextSpell(stack);
 			}
@@ -128,7 +130,7 @@ public class StaffWood extends Item implements ISelector, IStaff {
 			} else {
 				incrementOrdinal(stack, 1);
 			}
-			s = getSpell(stack, getOrdinal(stack));
+			s = getSpellAtIndex(stack, getOrdinal(stack));
 			if (s == null) {
 				continue;
 			} else {
@@ -136,7 +138,7 @@ public class StaffWood extends Item implements ISelector, IStaff {
 				break;
 			}
 		}
-		//System.out.println("[StaffWood.nextSpell] s=" + s);
+		// System.out.println("[StaffWood.nextSpell] s=" + s);
 		return s;
 	}
 
@@ -150,7 +152,7 @@ public class StaffWood extends Item implements ISelector, IStaff {
 				incrementOrdinal(stack, -1);
 
 			}
-			s = getSpell(stack, getOrdinal(stack));
+			s = getSpellAtIndex(stack, getOrdinal(stack));
 			if (s == null) {
 				continue;
 			} else {
@@ -165,7 +167,7 @@ public class StaffWood extends Item implements ISelector, IStaff {
 	public int numSpells(ItemStack stack) {
 		int numSpells = 0;
 		for (int i = 0; i < size; i++) {
-			Spell s = getSpell(stack, i);
+			Spell s = getSpellAtIndex(stack, i);
 			if (s != null)
 				numSpells++;
 		}
@@ -175,7 +177,7 @@ public class StaffWood extends Item implements ISelector, IStaff {
 	@Override
 	public boolean isEmpty(ItemStack stack) {
 		for (int i = 0; i < size; i++) {
-			Spell s = getSpell(stack, i);
+			Spell s = getSpellAtIndex(stack, i);
 			if (s != null) {
 				return false;
 			}
@@ -183,9 +185,9 @@ public class StaffWood extends Item implements ISelector, IStaff {
 		return true;
 	}
 
-	// ///////////////////////////
+	// Private methods ///////////////////////////
 
-	private Spell getSpell(ItemStack stack, int i) {
+	private Spell getSpellAtIndex(ItemStack stack, int i) {
 		NBTTagCompound t = getTag(stack);
 		String name = t.getString(String.valueOf(i));
 		if (name != null && !name.equals("")) {
@@ -211,9 +213,9 @@ public class StaffWood extends Item implements ISelector, IStaff {
 
 	private void incrementOrdinal(ItemStack stack, int increment) {
 		NBTTagCompound t = getTag(stack);
-		int ordinal = t.getInteger("o");
-		ordinal = ordinal + increment;
-		t.setInteger("o", ordinal);
+		int i = t.getInteger("o");
+		i = i + increment;
+		t.setInteger("o", i);
 	}
 
 	private NBTTagCompound getTag(ItemStack stack) {
