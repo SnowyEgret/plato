@@ -8,13 +8,13 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.input.Keyboard;
 
+import ds.plato.api.ISelect;
 import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.descriptor.SpellInfo;
 import ds.plato.item.spell.transform.SpellFillRandom;
 import ds.plato.item.staff.Staff;
-import ds.plato.select.ISelect;
 
 public class Overlay {
 

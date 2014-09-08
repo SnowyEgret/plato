@@ -1,4 +1,4 @@
-package ds.plato.item;
+package ds.plato.api;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModelCustom;

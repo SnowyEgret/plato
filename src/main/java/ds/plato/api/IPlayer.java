@@ -1,7 +1,10 @@
-package ds.plato.core;
+package ds.plato.api;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import ds.plato.core.Player;
+import ds.plato.core.SlotDistribution;
+import ds.plato.core.SlotEntry;
 import ds.plato.core.Player.Direction;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.staff.Staff;

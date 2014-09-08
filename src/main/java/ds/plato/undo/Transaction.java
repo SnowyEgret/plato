@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import ds.plato.api.IUndo;
+import ds.plato.api.IUndoable;
 import ds.plato.select.Selection;
 
 public class Transaction implements IUndoable, Iterable {

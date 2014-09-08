@@ -10,16 +10,16 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.Plato;
-import ds.plato.core.IWorld;
+import ds.plato.api.IPick;
+import ds.plato.api.ISelect;
+import ds.plato.api.IUndo;
+import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.core.WorldWrapper;
 import ds.plato.gui.ITextSetable;
 import ds.plato.item.spell.descriptor.Modifier;
 import ds.plato.item.spell.transform.SpellDelete;
-import ds.plato.pick.IPick;
 import ds.plato.pick.Pick;
-import ds.plato.select.ISelect;
-import ds.plato.undo.IUndo;
 
 public class SpellSave extends Spell implements ITextSetable {
 

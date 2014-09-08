@@ -14,6 +14,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.world.World;
+import ds.plato.api.IPlayer;
+import ds.plato.api.IWorld;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.staff.Staff;
 import ds.plato.item.staff.StaffWood;

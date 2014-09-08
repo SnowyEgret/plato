@@ -2,12 +2,12 @@ package ds.plato.item.spell.select;
 
 import org.lwjgl.input.Keyboard;
 
-import ds.plato.core.IWorld;
+import ds.plato.api.IPick;
+import ds.plato.api.ISelect;
+import ds.plato.api.IUndo;
+import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.item.spell.descriptor.Modifier;
-import ds.plato.pick.IPick;
-import ds.plato.select.ISelect;
-import ds.plato.undo.IUndo;
 
 public class SpellGrowVerticalPlane extends AbstractSpellSelect {
 

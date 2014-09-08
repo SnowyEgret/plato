@@ -8,7 +8,7 @@ import javax.vecmath.Point3i;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import ds.plato.core.IWorld;
+import ds.plato.api.IWorld;
 
 public class Shell implements Iterable<Point3i> {
 

@@ -2,8 +2,9 @@ package ds.plato.undo;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
-import ds.plato.core.IWorld;
-import ds.plato.select.ISelect;
+import ds.plato.api.ISelect;
+import ds.plato.api.IUndoable;
+import ds.plato.api.IWorld;
 import ds.plato.select.Selection;
 import ds.plato.util.StringUtils;
 

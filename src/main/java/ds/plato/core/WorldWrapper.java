@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.World;
 import ds.plato.Plato;
+import ds.plato.api.IWorld;
 import ds.plato.network.SetBlockMessage;
 
 public class WorldWrapper implements IWorld {

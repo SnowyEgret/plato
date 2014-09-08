@@ -1,4 +1,4 @@
-package ds.plato.select;
+package ds.plato.api;
 
 import java.util.Collection;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3i;
 
-import ds.plato.core.IWorld;
 import ds.plato.geom.VoxelSet;
+import ds.plato.select.Selection;
 import net.minecraft.block.Block;
 
 public interface ISelect {

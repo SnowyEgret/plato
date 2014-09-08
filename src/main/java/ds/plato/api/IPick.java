@@ -1,8 +1,8 @@
-package ds.plato.pick;
+package ds.plato.api;
 
 import javax.vecmath.Point3i;
 
-import ds.plato.core.IWorld;
+import ds.plato.pick.Pick;
 import net.minecraft.block.Block;
 
 public interface IPick {

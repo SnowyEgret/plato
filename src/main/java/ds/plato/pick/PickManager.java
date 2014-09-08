@@ -4,8 +4,9 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 import net.minecraft.block.Block;
+import ds.plato.api.IPick;
+import ds.plato.api.IWorld;
 import ds.plato.block.BlockPicked;
-import ds.plato.core.IWorld;
 
 public class PickManager implements IPick {
 

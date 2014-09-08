@@ -5,6 +5,9 @@ import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import ds.plato.Plato;
+import ds.plato.api.IPick;
+import ds.plato.api.ISelect;
+import ds.plato.api.IUndo;
 import ds.plato.block.BlockModelRenderer;
 import ds.plato.block.BlockPickedRenderer;
 import ds.plato.block.BlockSelectedRenderer;
@@ -16,9 +19,6 @@ import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.SpellRenderer;
 import ds.plato.item.staff.StaffWood;
 import ds.plato.item.staff.StaffWoodRenderer;
-import ds.plato.pick.IPick;
-import ds.plato.select.ISelect;
-import ds.plato.undo.IUndo;
 
 public class ClientProxy extends CommonProxy {
 

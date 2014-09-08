@@ -18,10 +18,10 @@ import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
+import ds.plato.api.IPick;
 import ds.plato.core.Player;
 import ds.plato.item.spell.ISelector;
 import ds.plato.item.spell.Spell;
-import ds.plato.pick.IPick;
 
 //public abstract class Staff extends Item implements IClickable, IInventory {
 public abstract class Staff extends Item implements ISelector {

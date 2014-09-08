@@ -1,8 +1,8 @@
 package ds.plato.item.staff;
 
+import ds.plato.api.IPick;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.draw.AbstractSpellDraw;
-import ds.plato.pick.IPick;
 
 public class StaffDraw extends Staff {
 

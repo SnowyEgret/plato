@@ -1,4 +1,4 @@
-package ds.plato.item.staff;
+package ds.plato.api;
 
 import net.minecraft.item.ItemStack;
 import ds.plato.item.spell.Spell;

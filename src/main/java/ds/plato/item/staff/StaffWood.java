@@ -19,11 +19,12 @@ import org.lwjgl.input.Keyboard;
 import container.test.MyMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
+import ds.plato.api.IItem;
+import ds.plato.api.IPick;
+import ds.plato.api.IStaff;
 import ds.plato.core.Player;
-import ds.plato.item.IItem;
 import ds.plato.item.spell.ISelector;
 import ds.plato.item.spell.Spell;
-import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.util.StringUtils;
 

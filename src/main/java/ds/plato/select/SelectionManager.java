@@ -12,7 +12,8 @@ import net.minecraft.block.Block;
 
 import com.google.common.collect.Lists;
 
-import ds.plato.core.IWorld;
+import ds.plato.api.ISelect;
+import ds.plato.api.IWorld;
 import ds.plato.geom.VoxelSet;
 
 public class SelectionManager implements ISelect {

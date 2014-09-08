@@ -1,4 +1,4 @@
-package ds.plato.undo;
+package ds.plato.api;
 
 public interface IUndoable {
 	

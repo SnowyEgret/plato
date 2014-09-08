@@ -23,6 +23,9 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import ds.plato.api.IPick;
+import ds.plato.api.ISelect;
+import ds.plato.api.IUndo;
 import ds.plato.block.BlockModel;
 import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
@@ -43,12 +46,9 @@ import ds.plato.item.staff.StaffTransform;
 import ds.plato.item.staff.StaffWood;
 import ds.plato.network.SetBlockMessage;
 import ds.plato.network.SetBlockMessageHandler;
-import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.proxy.CommonProxy;
-import ds.plato.select.ISelect;
 import ds.plato.select.SelectionManager;
-import ds.plato.undo.IUndo;
 import ds.plato.undo.UndoManager;
 
 @Mod(modid = Plato.ID, name = Plato.NAME, version = Plato.VERSION)

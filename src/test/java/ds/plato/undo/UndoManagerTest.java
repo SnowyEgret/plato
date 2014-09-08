@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import org.junit.Before;
 import org.junit.Test;
 
+import ds.plato.api.IUndoable;
 import ds.plato.test.PlatoTest;
 
 public class UndoManagerTest extends PlatoTest {

@@ -16,17 +16,17 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.input.Keyboard;
 
 import ds.plato.Plato;
-import ds.plato.core.IPlayer;
-import ds.plato.core.IWorld;
+import ds.plato.api.IPick;
+import ds.plato.api.IPlayer;
+import ds.plato.api.ISelect;
+import ds.plato.api.IUndo;
+import ds.plato.api.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
 import ds.plato.core.WorldWrapper;
 import ds.plato.geom.solid.Box;
 import ds.plato.item.spell.descriptor.SpellInfo;
-import ds.plato.pick.IPick;
-import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
-import ds.plato.undo.IUndo;
 import ds.plato.util.StringUtils;
 
 public abstract class Spell extends Item implements ISelector {

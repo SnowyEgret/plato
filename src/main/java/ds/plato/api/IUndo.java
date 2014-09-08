@@ -1,4 +1,6 @@
-package ds.plato.undo;
+package ds.plato.api;
+
+import ds.plato.undo.Transaction;
 
 public interface IUndo extends IUndoable {
 

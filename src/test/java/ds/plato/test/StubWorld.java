@@ -3,7 +3,7 @@ package ds.plato.test;
 import java.util.HashMap;
 import java.util.Map;
 
-import ds.plato.core.IWorld;
+import ds.plato.api.IWorld;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 

@@ -13,8 +13,8 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import ds.plato.Plato;
+import ds.plato.api.ISelect;
 import ds.plato.pick.Pick;
-import ds.plato.select.ISelect;
 import ds.plato.select.Selection;
 
 public class BlockSelectedRenderer implements ISimpleBlockRenderingHandler {

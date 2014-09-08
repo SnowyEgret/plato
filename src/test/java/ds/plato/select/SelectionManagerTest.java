@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import ds.plato.core.IWorld;
+import ds.plato.api.IWorld;
 import ds.plato.core.WorldWrapper;
 import ds.plato.test.PlatoTest;
 
