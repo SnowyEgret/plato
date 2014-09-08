@@ -20,13 +20,14 @@ import container.test.MyMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
 import ds.plato.core.Player;
+import ds.plato.item.IItem;
 import ds.plato.item.spell.ISelector;
 import ds.plato.item.spell.Spell;
 import ds.plato.pick.IPick;
 import ds.plato.pick.PickManager;
 import ds.plato.util.StringUtils;
 
-public class StaffWood extends Item implements ISelector, IStaff {
+public class StaffWood extends Item implements ISelector, IStaff, IItem {
 
 	int size = 9;
 	IPick pickManager;
@@ -44,10 +45,18 @@ public class StaffWood extends Item implements ISelector, IStaff {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.staff.IItem#getModel()
+	 */
+	@Override
 	public IModelCustom getModel() {
 		return model;
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.staff.IItem#getTextureResourceLocation()
+	 */
+	@Override
 	public ResourceLocation getTextureResourceLocation() {
 		return modelTextureLocation;
 	}
@@ -58,10 +67,18 @@ public class StaffWood extends Item implements ISelector, IStaff {
 		return model == null ? 1 : 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.staff.IItem#getRecipe()
+	 */
+	@Override
 	public Object[] getRecipe() {
 		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.staff.IItem#hasRecipe()
+	 */
+	@Override
 	public boolean hasRecipe() {
 		return getRecipe() != null;
 	}

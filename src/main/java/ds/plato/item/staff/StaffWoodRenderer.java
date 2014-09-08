@@ -14,6 +14,7 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import ds.plato.item.IItem;
 import ds.plato.item.spell.Spell;
 
 //Based on http://greyminecraftcoder.blogspot.com.au/2013/09/custom-item-rendering-using.html
@@ -29,7 +30,7 @@ public class StaffWoodRenderer implements IItemRenderer {
 		THIRDPERSONEQUIPPED
 	};
 
-	public StaffWoodRenderer(StaffWood staff) {
+	public StaffWoodRenderer(IItem staff) {
 		staffModel = staff.getModel();
 		staffTextureResourceLocation = staff.getTextureResourceLocation();
 	}

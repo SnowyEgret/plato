@@ -105,11 +105,6 @@ public class Plato {
 			Staff transformStaff = loader.loadStaff(StaffTransform.class);
 			Staff drawStaff = loader.loadStaff(StaffDraw.class);
 
-			// staffs = new ArrayList<>();
-			// staffs.add(selectionStaff);
-			// staffs.add(transformStaff);
-			// staffs.add(drawStaff);
-
 			for (Spell s : spells) {
 				if (s instanceof AbstractSpellSelect) {
 					selectionStaff.addSpell(s);
