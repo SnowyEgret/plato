@@ -33,13 +33,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ds.plato.api.IPick;
 import ds.plato.api.IPlayer;
 import ds.plato.api.ISelect;
+import ds.plato.api.ISpell;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
 import ds.plato.gui.Overlay;
 import ds.plato.item.spell.ISelector;
-import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.transform.SpellFill;
 import ds.plato.item.staff.Staff;
 import ds.plato.pick.Pick;
@@ -47,7 +47,7 @@ import ds.plato.select.Selection;
 
 public class ForgeEventHandler {
 
-	private Spell spell = null;
+	private ISpell spell = null;
 	private ISelect selectionManager;
 	private IPick pickManager;
 	private Overlay overlay;
@@ -93,7 +93,7 @@ public class ForgeEventHandler {
 			return;
 		}
 		if (e.entity instanceof EntityPlayer) {
-			Spell s = Player.getPlayer().getSpell();
+			ISpell s = Player.getPlayer().getSpell();
 			if (s == null) {
 				spell = null;
 			} else {

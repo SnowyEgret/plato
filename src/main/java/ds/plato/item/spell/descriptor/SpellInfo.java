@@ -9,7 +9,7 @@ import net.minecraft.client.resources.I18n;
 
 import com.google.common.base.Joiner;
 
-import ds.plato.item.spell.Spell;
+import ds.plato.api.ISpell;
 import ds.plato.util.StringUtils;
 
 public class SpellInfo {
@@ -20,7 +20,7 @@ public class SpellInfo {
 	private List<String> picks = new ArrayList<>();
 	private Map<String, String> modifiers = new HashMap<>();
 
-	public SpellInfo(Spell spell) {
+	public SpellInfo(ISpell spell) {
 		root = "item." + StringUtils.toCamelCase(spell.getClass()) + ".";
 		name = format("name");
 		description = format("description");

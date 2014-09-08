@@ -19,6 +19,7 @@ import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
 import ds.plato.api.IPick;
+import ds.plato.api.ISpell;
 import ds.plato.core.Player;
 import ds.plato.item.spell.ISelector;
 import ds.plato.item.spell.Spell;
@@ -106,8 +107,8 @@ public abstract class Staff extends Item implements ISelector {
 		return s;
 	}
 
-	public Spell previousSpell() {
-		Spell s = null;
+	public ISpell previousSpell() {
+		ISpell s = null;
 		for (int i = 0; i < spells.length; i++) {
 			if (ordinal == 0) {
 				ordinal = spells.length - 1;
@@ -128,7 +129,7 @@ public abstract class Staff extends Item implements ISelector {
 	// Called in preInit to initialize staffs
 	public void addSpell(Spell spell) {
 		for (int i = 0; i < spells.length; i++) {
-			Spell s = spells[i];
+			ISpell s = spells[i];
 			if (s == null) {
 				spells[i] = spell;
 				return;
@@ -139,7 +140,7 @@ public abstract class Staff extends Item implements ISelector {
 
 	public int numSpells() {
 		int numSpells = 0;
-		for (Spell s : spells) {
+		for (ISpell s : spells) {
 			if (s != null)
 				numSpells++;
 		}
@@ -147,7 +148,7 @@ public abstract class Staff extends Item implements ISelector {
 	}
 
 	public boolean isEmpty() {
-		for (Spell s : spells) {
+		for (ISpell s : spells) {
 			if (s != null) {
 				return false;
 			}

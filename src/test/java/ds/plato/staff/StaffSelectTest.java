@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import ds.plato.item.spell.Spell;
+import ds.plato.api.ISpell;
 import ds.plato.item.spell.matrix.SpellCopy;
 import ds.plato.item.spell.transform.SpellDelete;
 import ds.plato.item.staff.Staff;
@@ -89,7 +89,7 @@ public class StaffSelectTest extends PlatoTest {
 
 	@Test
 	public void nextSpell_pickMangerIsReset() {
-		Spell s = staff.nextSpell();
+		ISpell s = staff.nextSpell();
 		verify(pickManager).reset(s.getNumPicks());
 		s = staff.nextSpell();
 		verify(pickManager, times(2)).reset(s.getNumPicks());

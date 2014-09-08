@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import ds.plato.api.ISpell;
 import ds.plato.core.SlotEntry;
-import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.draw.SpellSphere;
 import ds.plato.pick.Pick;
 import ds.plato.test.PlatoTest;
@@ -34,7 +34,7 @@ public class SpellSphereTest extends PlatoTest {
 
 	//@Test
 	public void invoke() {
-		Spell s = new SpellSphere(undoManager, selectionManager, pickManager);
+		ISpell s = new SpellSphere(undoManager, selectionManager, pickManager);
 		//s.invoke(picks, slotEntries);
 		s.invoke(world, slotEntries);
 		verify(world).setBlock(9, 0, 0, dirt, 0);

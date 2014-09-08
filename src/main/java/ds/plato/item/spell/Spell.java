@@ -19,6 +19,7 @@ import ds.plato.Plato;
 import ds.plato.api.IPick;
 import ds.plato.api.IPlayer;
 import ds.plato.api.ISelect;
+import ds.plato.api.ISpell;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
 import ds.plato.core.Player;
@@ -29,7 +30,7 @@ import ds.plato.item.spell.descriptor.SpellInfo;
 import ds.plato.select.Selection;
 import ds.plato.util.StringUtils;
 
-public abstract class Spell extends Item implements ISelector {
+public abstract class Spell extends Item implements ISelector, ISpell {
 
 	protected IUndo undoManager;
 	protected ISelect selectionManager;
@@ -98,12 +99,24 @@ public abstract class Spell extends Item implements ISelector {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.spell.ISpell#invoke(ds.plato.api.IWorld, ds.plato.core.SlotEntry)
+	 */
+	@Override
 	public abstract void invoke(IWorld world, final SlotEntry... slotEntries);
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.spell.ISpell#getMessage()
+	 */
+	@Override
 	public String getMessage() {
 		return message;
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.spell.ISpell#getNumPicks()
+	 */
+	@Override
 	public int getNumPicks() {
 		return numPicks;
 	}
@@ -145,10 +158,18 @@ public abstract class Spell extends Item implements ISelector {
 		rollOver.add(info.getDescription());
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.spell.ISpell#isPicking()
+	 */
+	@Override
 	public boolean isPicking() {
 		return pickManager.isPicking();
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.spell.ISpell#reset()
+	 */
+	@Override
 	public void reset() {
 		// System.out.println("[Spell.reset] resetting");
 		pickManager.clearPicks();
@@ -175,6 +196,10 @@ public abstract class Spell extends Item implements ISelector {
 		return builder.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see ds.plato.item.spell.ISpell#getInfo()
+	 */
+	@Override
 	public SpellInfo getInfo() {
 		return info;
 	}

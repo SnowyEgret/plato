@@ -6,7 +6,6 @@ import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
 import ds.plato.core.SlotEntry;
 import ds.plato.core.Player.Direction;
-import ds.plato.item.spell.Spell;
 import ds.plato.item.staff.Staff;
 
 public interface IPlayer {
@@ -23,7 +22,7 @@ public interface IPlayer {
 
 	public abstract Item getHeldItem();
 
-	public abstract Spell getSpell();
+	public abstract ISpell getSpell();
 
 	public abstract Staff getStaff();
 

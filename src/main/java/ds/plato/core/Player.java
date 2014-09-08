@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.world.World;
 import ds.plato.api.IPlayer;
+import ds.plato.api.ISpell;
 import ds.plato.api.IWorld;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.staff.Staff;
@@ -173,13 +174,13 @@ public class Player implements IPlayer {
 	 * @see ds.plato.core.IPlayer#getSpell()
 	 */
 	@Override
-	public Spell getSpell() {
-		Spell spell = null;
+	public ISpell getSpell() {
+		ISpell spell = null;
 		ItemStack stack = player.getHeldItem();
 		if (stack != null) {
 			Item item = stack.getItem();
 			if (item instanceof Spell) {
-				spell = (Spell) item;
+				spell = (ISpell) item;
 			} else if (item instanceof Staff) {
 				spell = ((Staff) item).getSpell();
 			} else if (item instanceof StaffWood) {

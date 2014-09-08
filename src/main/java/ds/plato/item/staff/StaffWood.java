@@ -21,6 +21,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
 import ds.plato.api.IItem;
 import ds.plato.api.IPick;
+import ds.plato.api.ISpell;
 import ds.plato.api.IStaff;
 import ds.plato.core.Player;
 import ds.plato.item.spell.ISelector;
@@ -161,8 +162,8 @@ public class StaffWood extends Item implements ISelector, IStaff, IItem {
 	}
 
 	@Override
-	public Spell previousSpell(ItemStack stack) {
-		Spell s = null;
+	public ISpell previousSpell(ItemStack stack) {
+		ISpell s = null;
 		for (int i = 0; i < size; i++) {
 			if (getOrdinal(stack) == 0) {
 				setOrdinal(stack, size - 1);
@@ -185,7 +186,7 @@ public class StaffWood extends Item implements ISelector, IStaff, IItem {
 	public int numSpells(ItemStack stack) {
 		int numSpells = 0;
 		for (int i = 0; i < size; i++) {
-			Spell s = getSpellAtIndex(stack, i);
+			ISpell s = getSpellAtIndex(stack, i);
 			if (s != null)
 				numSpells++;
 		}
@@ -195,7 +196,7 @@ public class StaffWood extends Item implements ISelector, IStaff, IItem {
 	@Override
 	public boolean isEmpty(ItemStack stack) {
 		for (int i = 0; i < size; i++) {
-			Spell s = getSpellAtIndex(stack, i);
+			ISpell s = getSpellAtIndex(stack, i);
 			if (s != null) {
 				return false;
 			}

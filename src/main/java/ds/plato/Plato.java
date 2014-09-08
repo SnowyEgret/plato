@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,8 +25,6 @@ import cpw.mods.fml.relauncher.Side;
 import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
-import ds.plato.block.BlockModel;
-import ds.plato.block.BlockModelTileEntity;
 import ds.plato.block.BlockPicked;
 import ds.plato.block.BlockSelected;
 import ds.plato.gui.GuiHandler;
