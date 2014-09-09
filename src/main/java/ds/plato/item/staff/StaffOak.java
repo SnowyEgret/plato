@@ -1,6 +1,9 @@
 package ds.plato.item.staff;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import ds.plato.api.IPick;
 
 public class StaffOak extends StaffWood {

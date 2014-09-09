@@ -13,7 +13,6 @@ import ds.plato.api.ISpell;
 import ds.plato.item.spell.ISelector;
 import ds.plato.item.spell.Spell;
 
-//public abstract class Staff extends Item implements IClickable, IInventory {
 public abstract class Staff extends Item implements ISelector {
 
 	protected Spell[] spells = new Spell[9];

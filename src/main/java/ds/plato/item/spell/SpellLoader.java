@@ -20,9 +20,9 @@ import com.google.common.reflect.ClassPath.ClassInfo;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
-import ds.plato.api.ISpell;
 import ds.plato.api.IUndo;
 import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.StaffPreset;
 import ds.plato.item.staff.StaffWood;
 import ds.plato.util.StringUtils;
 
@@ -87,6 +87,25 @@ public class SpellLoader {
 		String name = StringUtils.toCamelCase(staffClass);
 		Constructor c = staffClass.getConstructor(IPick.class);
 		StaffWood s = (StaffWood) c.newInstance(pickManager);
+		s.setUnlocalizedName(name);
+		s.setMaxStackSize(1);
+		s.setCreativeTab(tabSpells);
+		s.setTextureName(modId + ":staff");
+		//s.setTextureName(modId + ":" + name);
+		GameRegistry.registerItem(s, name);
+		if (s.hasRecipe()) {
+			GameRegistry.addRecipe(new ItemStack(s), s.getRecipe());
+		}
+		System.out.println("...done.");
+		return s;
+	}
+
+	public StaffPreset loadStaffPreset(Class<? extends StaffPreset> staffClass, String spellPackageName) throws NoSuchMethodException, SecurityException, MalformedURLException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, IOException {
+		System.out.print("[SpellLoader.loadStaffPreset] Loading staff " + staffClass.getSimpleName() + "...");
+		String name = StringUtils.toCamelCase(staffClass);
+		Constructor c = staffClass.getConstructor(IPick.class, List.class);
+		List<Spell> spells = loadSpellsFromPackage(spellPackageName);
+		StaffPreset s = (StaffPreset) c.newInstance(pickManager, spells);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);

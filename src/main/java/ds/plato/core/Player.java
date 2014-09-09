@@ -40,9 +40,6 @@ public class Player implements IPlayer {
 		return new Player(Minecraft.getMinecraft().thePlayer);
 	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.core.IPlayer#getWorld()
-	 */
 	@Override
 	public IWorld getWorld() {
 		World w = null;
@@ -57,9 +54,6 @@ public class Player implements IPlayer {
 		return new WorldWrapper(w);
 	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.core.IPlayer#getSlotEntries()
-	 */
 	@Override
 	public SlotEntry[] getSlotEntries() {
 		List<SlotEntry> entries = new ArrayList<>();
@@ -105,9 +99,6 @@ public class Player implements IPlayer {
 		return entries.toArray(array);
 	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.core.IPlayer#getDirection()
-	 */
 	@Override
 	public Direction getDirection() {
 		int yaw = (int) (player.rotationYawHead);
@@ -204,29 +195,4 @@ public class Player implements IPlayer {
 		return staff;
 	}
 
-//	/* (non-Javadoc)
-//	 * @see ds.plato.core.IPlayer#openGui(int)
-//	 */
-//	@Override
-//	public void openGui(int i) {
-//		player.openGui(Plato.instance, i, getWorld().getWorld(), 0, 0, 0);
-//	}
-
-//	/* (non-Javadoc)
-//	 * @see ds.plato.core.IPlayer#getStaffItemStacks()
-//	 */
-//	@Override
-//	public Iterable<ItemStack> getStaffItemStacks() {
-//		List<ItemStack> stacks = new ArrayList<>();
-//		InventoryPlayer inventory = player.inventory;
-//		System.out.println("[Player.getStaffItemStacks] inventory=" + inventory);
-//		for (ItemStack s : inventory.mainInventory) {
-//			if (s != null) {
-//				if (Staff.class.isAssignableFrom(s.getItem().getClass())) {
-//					stacks.add(s);
-//				}
-//			}
-//		}
-//		return stacks;
-//	}
 }

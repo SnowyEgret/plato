@@ -37,6 +37,7 @@ import ds.plato.item.spell.transform.AbstractSpellTransform;
 import ds.plato.item.staff.Staff;
 import ds.plato.item.staff.StaffBirch;
 import ds.plato.item.staff.StaffDraw;
+import ds.plato.item.staff.StaffDraw2;
 import ds.plato.item.staff.StaffOak;
 import ds.plato.item.staff.StaffSelect;
 import ds.plato.item.staff.StaffTransform;
@@ -95,26 +96,30 @@ public class Plato {
 		configuration = new Configuration(event.getSuggestedConfigurationFile());
 		SpellLoader loader = new SpellLoader(configuration, undoManager, selectionManager, pickManager, ID);
 		try {
-			spells = loader.loadSpellsFromPackage("ds.plato.item.spell");
-			log.info("[Plato.preInit] loaded spells=" + spells);
-
-			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
-			Staff transformStaff = loader.loadStaff(StaffTransform.class);
-			Staff drawStaff = loader.loadStaff(StaffDraw.class);
-
-			for (Spell s : spells) {
-				if (s instanceof AbstractSpellSelect) {
-					selectionStaff.addSpell(s);
-				} else if (s instanceof AbstractSpellTransform || s instanceof AbstractSpellMatrix) {
-					transformStaff.addSpell(s);
-				} else if (s instanceof AbstractSpellDraw) {
-					drawStaff.addSpell(s);
-				}
-			}
-
-			log.info("[Plato.preInit] selectionStaff=" + selectionStaff);
-			log.info("[Plato.preInit] transformStaff=" + transformStaff);
-			log.info("[Plato.preInit] drawStaff=" + drawStaff);
+//			spells = loader.loadSpellsFromPackage("ds.plato.item.spell");
+//			log.info("[Plato.preInit] loaded spells=" + spells);
+//
+//			Staff selectionStaff = loader.loadStaff(StaffSelect.class);
+//			Staff transformStaff = loader.loadStaff(StaffTransform.class);
+//			Staff drawStaff = loader.loadStaff(StaffDraw.class);
+//
+//			for (Spell s : spells) {
+//				if (s instanceof AbstractSpellSelect) {
+//					selectionStaff.addSpell(s);
+//				} else if (s instanceof AbstractSpellTransform || s instanceof AbstractSpellMatrix) {
+//					transformStaff.addSpell(s);
+//				} else if (s instanceof AbstractSpellDraw) {
+//					drawStaff.addSpell(s);
+//				}
+//			}
+//
+//			log.info("[Plato.preInit] selectionStaff=" + selectionStaff);
+//			log.info("[Plato.preInit] transformStaff=" + transformStaff);
+//			log.info("[Plato.preInit] drawStaff=" + drawStaff);
+			
+			//Try loading a staff with preset spells
+			spells = new ArrayList<>();
+			loader.loadStaffPreset(StaffDraw2.class, "ds.plato.item.spell.draw");
 
 			// Create some empty staffs. For now, they have a different base class.
 			staffs = new ArrayList<>();
