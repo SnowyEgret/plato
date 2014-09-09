@@ -1,8 +1,5 @@
 package ds.plato.item.staff;
 
-import java.util.Arrays;
-
-import net.minecraftforge.common.config.Property;
 import ds.plato.api.IPick;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.matrix.AbstractSpellMatrix;

@@ -10,11 +10,13 @@ import org.lwjgl.input.Keyboard;
 
 import ds.plato.api.ISelect;
 import ds.plato.api.ISpell;
+import ds.plato.api.IStaff;
 import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
 import ds.plato.item.spell.SpellInfo;
 import ds.plato.item.spell.transform.SpellFillRandom;
 import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.StaffWood;
 
 public class Overlay {
 
@@ -77,6 +79,14 @@ public class Overlay {
 		int y = x;
 		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
 		String staffName = staff.getItemStackDisplayName(stack);
+		r.drawStringWithShadow(staffName + " has no spells", x, y, white);
+	}
+
+	public void drawStaffWood(StaffWood staffWood, ItemStack stack) {
+		int x = 10;
+		int y = x;
+		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
+		String staffName = staffWood.getItemStackDisplayName(stack);
 		r.drawStringWithShadow(staffName + " has no spells", x, y, white);
 	}
 

@@ -3,24 +3,13 @@ package ds.plato.item.staff;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-
-import org.lwjgl.input.Keyboard;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import ds.plato.Plato;
 import ds.plato.api.IPick;
 import ds.plato.api.ISpell;
-import ds.plato.core.Player;
 import ds.plato.item.spell.ISelector;
 import ds.plato.item.spell.Spell;
 
@@ -31,9 +20,10 @@ public abstract class Staff extends Item implements ISelector {
 	protected int ordinal = 0;
 	private IPick pickManager;
 	private String name = "Staff";
-	//private boolean spellsInitialized = false;
+
+	// private boolean spellsInitialized = false;
 	// To reduce overhead of onUpdate
-	//private boolean isDirty = false;
+	// private boolean isDirty = false;
 
 	protected Staff(IPick pickManager) {
 		this.pickManager = pickManager;
@@ -54,15 +44,15 @@ public abstract class Staff extends Item implements ISelector {
 		}
 	}
 
-//	@Override
-//	public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
-//		// For now, jump while right clicking to open gui again.
-//		if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-//			Player.getPlayer().openGui(3);
-//		} else {
-//			getSpell().onMouseClickRight(stack, x, y, z, side);
-//		}
-//	}
+	// @Override
+	// public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
+	// // For now, jump while right clicking to open gui again.
+	// if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+	// Player.getPlayer().openGui(3);
+	// } else {
+	// getSpell().onMouseClickRight(stack, x, y, z, side);
+	// }
+	// }
 
 	// @Override
 	// public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4,

@@ -1,8 +1,12 @@
 package ds.plato.proxy;
 
+import java.util.List;
+
 import ds.plato.Plato;
 import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
+import ds.plato.api.ISpell;
+import ds.plato.api.IStaff;
 import ds.plato.api.IUndo;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.staff.StaffWood;
@@ -13,6 +17,11 @@ public class CommonProxy {
 	}
 
 	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick) {
+	}
+
+	public void setCustomRenderers(ISelect selectionManager, IPick pickManager, List<IStaff> staffs, List<ISpell> spells) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// @Override

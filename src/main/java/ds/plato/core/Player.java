@@ -146,33 +146,21 @@ public class Player implements IPlayer {
 		return direction;
 	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.core.IPlayer#slotDistribution()
-	 */
 	@Override
 	public SlotDistribution slotDistribution() {
 		return new SlotDistribution(getSlotEntries());
 	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.core.IPlayer#getHeldItemStack()
-	 */
 	@Override
 	public ItemStack getHeldItemStack() {
 		return player.getCurrentEquippedItem();
 	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.core.IPlayer#getHeldItem()
-	 */
 	@Override
 	public Item getHeldItem() {
 		return getHeldItemStack().getItem();
 	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.core.IPlayer#getSpell()
-	 */
 	@Override
 	public ISpell getSpell() {
 		ISpell spell = null;
@@ -190,9 +178,6 @@ public class Player implements IPlayer {
 		return spell;
 	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.core.IPlayer#getStaff()
-	 */
 	@Override
 	public Staff getStaff() {
 		Staff staff = null;
@@ -201,6 +186,19 @@ public class Player implements IPlayer {
 			Item item = is.getItem();
 			if (item instanceof Staff) {
 				staff = (Staff) item;
+			}
+		}
+		return staff;
+	}
+
+	@Override
+	public StaffWood getStaffWood() {
+		StaffWood staff = null;
+		ItemStack is = player.getHeldItem();
+		if (is != null) {
+			Item item = is.getItem();
+			if (item instanceof StaffWood) {
+				staff = (StaffWood) item;
 			}
 		}
 		return staff;

@@ -1,16 +1,12 @@
 package ds.plato.spell;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
@@ -21,6 +17,7 @@ import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
+import ds.plato.api.ISpell;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.SpellLoader;
 import ds.plato.item.spell.matrix.SpellCopy;

@@ -20,6 +20,7 @@ import com.google.common.reflect.ClassPath.ClassInfo;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
+import ds.plato.api.ISpell;
 import ds.plato.api.IUndo;
 import ds.plato.item.staff.Staff;
 import ds.plato.item.staff.StaffWood;
