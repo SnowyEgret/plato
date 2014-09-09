@@ -1,4 +1,4 @@
-package ds.plato.item.spell;
+package ds.plato.item.spell.other;
 
 import java.io.IOException;
 
@@ -17,7 +17,9 @@ import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.core.WorldWrapper;
 import ds.plato.gui.ITextSetable;
-import ds.plato.item.spell.descriptor.Modifier;
+import ds.plato.item.spell.Modifier;
+import ds.plato.item.spell.PersistentVoxelGroup;
+import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.transform.SpellDelete;
 import ds.plato.pick.Pick;
 

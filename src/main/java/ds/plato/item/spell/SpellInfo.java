@@ -1,4 +1,4 @@
-package ds.plato.item.spell.descriptor;
+package ds.plato.item.spell;
 
 import java.util.ArrayList;
 import java.util.HashMap;

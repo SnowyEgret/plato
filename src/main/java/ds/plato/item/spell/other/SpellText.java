@@ -1,4 +1,4 @@
-package ds.plato.item.spell;
+package ds.plato.item.spell.other;
 
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -21,6 +21,7 @@ import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.gui.ITextSetable;
+import ds.plato.item.spell.Spell;
 import ds.plato.pick.Pick;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;

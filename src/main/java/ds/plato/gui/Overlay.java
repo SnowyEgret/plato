@@ -12,7 +12,7 @@ import ds.plato.api.ISelect;
 import ds.plato.api.ISpell;
 import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
-import ds.plato.item.spell.descriptor.SpellInfo;
+import ds.plato.item.spell.SpellInfo;
 import ds.plato.item.spell.transform.SpellFillRandom;
 import ds.plato.item.staff.Staff;
 

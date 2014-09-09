@@ -1,7 +1,7 @@
 package ds.plato.api;
 
 import ds.plato.core.SlotEntry;
-import ds.plato.item.spell.descriptor.SpellInfo;
+import ds.plato.item.spell.SpellInfo;
 
 public interface ISpell {
 

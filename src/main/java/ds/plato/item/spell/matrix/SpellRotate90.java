@@ -12,7 +12,7 @@ import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.geom.GeomUtil;
-import ds.plato.item.spell.descriptor.Modifier;
+import ds.plato.item.spell.Modifier;
 import ds.plato.pick.Pick;
 
 public class SpellRotate90 extends AbstractSpellMatrix {

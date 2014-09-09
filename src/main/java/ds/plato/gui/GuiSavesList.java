@@ -13,7 +13,7 @@ import com.google.common.collect.Lists;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ds.plato.item.spell.SpellRestore;
+import ds.plato.item.spell.other.SpellRestore;
 
 public class GuiSavesList extends GuiListExtended {
 

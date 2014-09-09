@@ -1,4 +1,4 @@
-package ds.plato.item.spell;
+package ds.plato.item.spell.other;
 
 import java.io.FileNotFoundException;
 
@@ -12,6 +12,8 @@ import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
+import ds.plato.item.spell.PersistentVoxelGroup;
+import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.PersistentVoxelGroup.Voxel;
 import ds.plato.pick.Pick;
 import ds.plato.undo.SetBlock;

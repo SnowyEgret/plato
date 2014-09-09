@@ -1,4 +1,4 @@
-package ds.plato.item.spell;
+package ds.plato.item.spell.other;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +14,7 @@ import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.geom.IntegerDomain;
 import ds.plato.geom.VoxelSet;
+import ds.plato.item.spell.Spell;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
 

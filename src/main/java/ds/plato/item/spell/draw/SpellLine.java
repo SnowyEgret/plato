@@ -9,7 +9,7 @@ import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.curve.Line;
-import ds.plato.item.spell.descriptor.Modifier;
+import ds.plato.item.spell.Modifier;
 import ds.plato.pick.Pick;
 
 public class SpellLine extends AbstractSpellDraw {

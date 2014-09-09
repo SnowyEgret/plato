@@ -22,7 +22,6 @@ import ds.plato.core.SlotEntry;
 import ds.plato.core.WorldWrapper;
 import ds.plato.geom.solid.Box;
 import ds.plato.item.ItemBase;
-import ds.plato.item.spell.descriptor.SpellInfo;
 import ds.plato.select.Selection;
 
 public abstract class Spell extends ItemBase implements ISpell {

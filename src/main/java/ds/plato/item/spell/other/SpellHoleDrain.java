@@ -1,4 +1,4 @@
-package ds.plato.item.spell;
+package ds.plato.item.spell.other;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +16,7 @@ import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
+import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.select.Shell;
 import ds.plato.pick.Pick;
 import ds.plato.undo.SetBlock;

@@ -21,8 +21,8 @@ import ds.plato.api.IWorld;
 import ds.plato.block.BlockSelected;
 import ds.plato.core.SlotEntry;
 import ds.plato.core.WorldWrapper;
+import ds.plato.item.spell.Modifier;
 import ds.plato.item.spell.Spell;
-import ds.plato.item.spell.descriptor.Modifier;
 import ds.plato.pick.Pick;
 import ds.plato.select.Selection;
 

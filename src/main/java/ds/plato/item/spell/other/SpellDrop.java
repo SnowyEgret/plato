@@ -1,4 +1,4 @@
-package ds.plato.item.spell;
+package ds.plato.item.spell.other;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -13,7 +13,8 @@ import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
 import ds.plato.core.SlotEntry;
-import ds.plato.item.spell.descriptor.Modifier;
+import ds.plato.item.spell.Modifier;
+import ds.plato.item.spell.Spell;
 import ds.plato.select.Selection;
 import ds.plato.undo.SetBlock;
 import ds.plato.undo.Transaction;
