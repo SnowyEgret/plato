@@ -3,33 +3,25 @@ package ds.plato.item.staff;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.input.Keyboard;
 
-import container.test.MyMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.Plato;
-import ds.plato.api.IItem;
 import ds.plato.api.IPick;
 import ds.plato.api.ISpell;
 import ds.plato.api.IStaff;
-import ds.plato.core.Player;
-import ds.plato.item.spell.ISelector;
+import ds.plato.item.ItemBase;
 import ds.plato.item.spell.Spell;
-import ds.plato.pick.PickManager;
 import ds.plato.util.StringUtils;
 
-public class StaffWood extends Item implements ISelector, IStaff, IItem {
+public class StaffWood extends ItemBase implements IStaff {
 
 	int size = 9;
 	IPick pickManager;
@@ -40,50 +32,45 @@ public class StaffWood extends Item implements ISelector, IStaff, IItem {
 	
 	public StaffWood(IPick pickManager) {
 		this.pickManager = pickManager;
-		try {
-			model = AdvancedModelLoader.loadModel(modelLocation);
-		} catch (Exception e) {
-			// ClientProxy.setCustomRenderers logs missing model
+//		try {
+//			model = AdvancedModelLoader.loadModel(modelLocation);
+//		} catch (Exception e) {
+//			// ClientProxy.setCustomRenderers logs missing model
+//		}
+	}
+
+@Override
+	public void onMouseClickLeft(ItemStack stack, int x, int y, int z, int side) {
+		if (!isEmpty(stack)) {
+			getSpell(stack).onMouseClickLeft(stack, x, y, z, side);
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.item.staff.IItem#getModel()
-	 */
-	@Override
-	public IModelCustom getModel() {
-		return model;
-	}
+//	@Override
+//	public IModelCustom getModel() {
+//		return model;
+//	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.item.staff.IItem#getTextureResourceLocation()
-	 */
-	@Override
-	public ResourceLocation getTextureResourceLocation() {
-		return modelTextureLocation;
-	}
+//	@Override
+//	public ResourceLocation getTextureResourceLocation() {
+//		return modelTextureLocation;
+//	}
 
-	// https://github.com/TheGreyGhost/ItemRendering/blob/master/src/TestItemRendering/items/ItemLampshade.java
-	@Override
-	public int getSpriteNumber() {
-		return model == null ? 1 : 0;
-	}
+//	// https://github.com/TheGreyGhost/ItemRendering/blob/master/src/TestItemRendering/items/ItemLampshade.java
+//	@Override
+//	public int getSpriteNumber() {
+//		return model == null ? 1 : 0;
+//	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.item.staff.IItem#getRecipe()
-	 */
-	@Override
-	public Object[] getRecipe() {
-		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
-	}
+//	@Override
+//	public Object[] getRecipe() {
+//		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
+//	}
 
-	/* (non-Javadoc)
-	 * @see ds.plato.item.staff.IItem#hasRecipe()
-	 */
-	@Override
-	public boolean hasRecipe() {
-		return getRecipe() != null;
-	}
+//	@Override
+//	public boolean hasRecipe() {
+//		return getRecipe() != null;
+//	}
 
 	// Adds information to rollover in creative tab
 	@Override
@@ -92,13 +79,6 @@ public class StaffWood extends Item implements ISelector, IStaff, IItem {
 			rollOver.add(EnumChatFormatting.RED + "No spells on staff");
 		} else {
 			rollOver.add(EnumChatFormatting.GREEN + " " + numSpells(stack) + " spells on staff");
-		}
-	}
-
-	@Override
-	public void select(ItemStack stack, int x, int y, int z, int side) {
-		if (!isEmpty(stack)) {
-			getSpell(stack).select(stack, x, y, z, side);
 		}
 	}
 
@@ -118,14 +98,8 @@ public class StaffWood extends Item implements ISelector, IStaff, IItem {
 		}
 		return true;
 	}
-
-	// @Override
-	// public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-	// if (!world.isRemote) {
-	// player.openGui(Plato.instance, 3, world, 0, 0, 0);
-	// }
-	// return stack;
-	// }
+	
+	// ISpell ----------------------------------------------------------------------
 
 	@Override
 	public Spell getSpell(ItemStack stack) {
@@ -204,7 +178,7 @@ public class StaffWood extends Item implements ISelector, IStaff, IItem {
 		return true;
 	}
 
-	// Private methods ///////////////////////////
+	// Private ---------------------------------------------------
 
 	private Spell getSpellAtIndex(ItemStack stack, int i) {
 		NBTTagCompound t = getTag(stack);

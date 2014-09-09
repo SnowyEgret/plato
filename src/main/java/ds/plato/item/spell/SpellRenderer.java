@@ -16,7 +16,7 @@ public class SpellRenderer implements IItemRenderer {
 
 	public SpellRenderer(Spell spell) {
 		model = spell.getModel();
-		textureResourceLocation = spell.getModelTextureResourceLocation();
+		textureResourceLocation = spell.getTextureResourceLocation();
 	}
 
 	@Override

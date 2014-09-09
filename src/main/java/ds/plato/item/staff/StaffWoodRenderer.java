@@ -225,7 +225,7 @@ public class StaffWoodRenderer implements IItemRenderer {
 					GL11.glPushMatrix();
 					GL11.glTranslated(0, 1.5, 0);
 					GL11.glScaled(.6, .6, .6);
-					ResourceLocation spellTexture = spell.getModelTextureResourceLocation();
+					ResourceLocation spellTexture = spell.getTextureResourceLocation();
 					Minecraft.getMinecraft().renderEngine.bindTexture(spellTexture);
 					spellModel.renderAll();
 					GL11.glPopMatrix();

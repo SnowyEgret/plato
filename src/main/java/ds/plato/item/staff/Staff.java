@@ -50,7 +50,7 @@ public abstract class Staff extends Item implements ISelector {
 	@Override
 	public void select(ItemStack stack, int x, int y, int z, int side) {
 		if (!isEmpty()) {
-			getSpell().select(stack, x, y, z, side);
+			getSpell().onMouseClickLeft(stack, x, y, z, side);
 		}
 	}
 

@@ -1,9 +1,6 @@
 package ds.plato.event;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockAnvil;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockWorkbench;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -11,20 +8,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraftforge.client.event.MouseEvent;
-
-import org.lwjgl.input.Keyboard;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ds.plato.api.IItem;
 import ds.plato.api.IPick;
 import ds.plato.api.IPlayer;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
-import ds.plato.api.IWorld;
 import ds.plato.core.Player;
 import ds.plato.core.SlotEntry;
-import ds.plato.item.spell.ISelector;
 import ds.plato.item.spell.transform.SpellFill;
 
 public class MouseHandler {
@@ -74,8 +67,10 @@ public class MouseHandler {
 			Item item = stack.getItem();
 
 			// IClickable is either a staff or a spell
-			if (item instanceof ISelector) {
-				ISelector selector = (ISelector) item;
+			// if (item instanceof ISelector) {
+			// ISelector selector = (ISelector) item;
+				if (item instanceof IItem) {
+					IItem selector = (IItem) item;
 
 				// MouseEvent is being sent twice. Throw out the second.
 				// Commented out when switched to onItemUse instead of onMouseClickRight
@@ -89,7 +84,7 @@ public class MouseHandler {
 
 				if (e.button == 0) {
 					// Select
-					selector.select(stack, p.blockX, p.blockY, p.blockZ, p.sideHit);
+					selector.onMouseClickLeft(stack, p.blockX, p.blockY, p.blockZ, p.sideHit);
 					e.setCanceled(true);
 
 				} else if (e.button == 1) {

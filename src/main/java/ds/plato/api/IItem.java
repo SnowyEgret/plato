@@ -1,16 +1,18 @@
 package ds.plato.api;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModelCustom;
 
 public interface IItem {
 
-	public abstract IModelCustom getModel();
+	public IModelCustom getModel();
 
-	public abstract ResourceLocation getTextureResourceLocation();
+	public ResourceLocation getTextureResourceLocation();
 
-	public abstract Object[] getRecipe();
+	public Object[] getRecipe();
 
-	public abstract boolean hasRecipe();
+	public boolean hasRecipe();
 
+	public void onMouseClickLeft(ItemStack stack, int x, int y, int z, int side);
 }
