@@ -99,7 +99,7 @@ public class StaffWood extends ItemBase implements IStaff {
 		return true;
 	}
 	
-	// ISpell ----------------------------------------------------------------------
+	// IStaff ----------------------------------------------------------------------
 
 	@Override
 	public Spell getSpell(ItemStack stack) {

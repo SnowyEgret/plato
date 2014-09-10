@@ -11,7 +11,6 @@ import ds.plato.item.spell.Spell;
 
 public class StaffPreset extends StaffWood {
 
-
 	private List<Spell> spells;
 
 	public StaffPreset(IPick pickManager, List<Spell> spells) {
@@ -25,9 +24,9 @@ public class StaffPreset extends StaffWood {
 		int i = 0;
 		for (Spell s : spells) {
 			if (i < 9) {
-			String n = s.getClass().getSimpleName();
-			stack.stackTagCompound.setString(String.valueOf(i), n);
-			i++;
+				String n = s.getClass().getSimpleName();
+				stack.stackTagCompound.setString(String.valueOf(i), n);
+				i++;
 			} else {
 				System.out.println("[StaffPreset.onCreated] No room on staff for spell " + s);
 			}
