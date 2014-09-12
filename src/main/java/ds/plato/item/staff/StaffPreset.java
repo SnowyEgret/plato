@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import ds.plato.api.IPick;
 import ds.plato.item.spell.Spell;
 
-public class StaffPreset extends StaffWood {
+public abstract class StaffPreset extends Staff {
 
 	private List<Spell> spells;
 

@@ -5,8 +5,8 @@ import net.minecraft.item.ItemStack;
 import ds.plato.core.Player.Direction;
 import ds.plato.core.SlotDistribution;
 import ds.plato.core.SlotEntry;
+import ds.plato.item.staff.OldStaff;
 import ds.plato.item.staff.Staff;
-import ds.plato.item.staff.StaffWood;
 
 public interface IPlayer {
 
@@ -24,8 +24,8 @@ public interface IPlayer {
 
 	public abstract ISpell getSpell();
 
-	public abstract Staff getStaff();
+	public abstract OldStaff getStaff();
 
-	public abstract StaffWood getStaffWood();
+	public abstract Staff getStaffWood();
 
 }

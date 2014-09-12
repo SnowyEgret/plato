@@ -1,24 +1,18 @@
 package ds.plato.item.staff;
 
+import java.util.List;
+
+import net.minecraft.init.Items;
 import ds.plato.api.IPick;
 import ds.plato.item.spell.Spell;
-import ds.plato.item.spell.matrix.AbstractSpellMatrix;
-import ds.plato.item.spell.transform.AbstractSpellTransform;
 
-public class StaffTransform extends Staff {
+public class StaffTransform extends StaffPreset {
 
-	public StaffTransform(IPick pickManager) {
-		super(pickManager);
+	public StaffTransform(IPick pickManager, List<Spell> spells) {
+		super(pickManager, spells);
 	}
-
-	@Override
-	public void addSpell(Spell spell) {
-		assert (spell instanceof AbstractSpellTransform || spell instanceof AbstractSpellMatrix);
-		super.addSpell(spell);
-	}
-
-	@Override
-	public boolean hasRecipe() {
-		return false;
+	
+	public Object[] getRecipe() {
+		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
 	}
 }

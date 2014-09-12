@@ -18,8 +18,8 @@ import ds.plato.api.ISelect;
 import ds.plato.api.ISpell;
 import ds.plato.core.Player;
 import ds.plato.gui.Overlay;
+import ds.plato.item.staff.OldStaff;
 import ds.plato.item.staff.Staff;
-import ds.plato.item.staff.StaffWood;
 import ds.plato.pick.Pick;
 import ds.plato.select.Selection;
 
@@ -90,13 +90,13 @@ public class ForgeEventHandler {
 				overlay.drawSpell(spell);
 			} else {
 				IPlayer p = Player.getPlayer();
-				Staff staff = p.getStaff();
+				OldStaff staff = p.getStaff();
 				if (staff != null) {
 					overlay.drawStaff(staff, p.getHeldItemStack());
 					return;
 				}
 				
-				StaffWood staffWood = p.getStaffWood();
+				Staff staffWood = p.getStaffWood();
 				if (staffWood != null) {
 					overlay.drawStaffWood(staffWood, p.getHeldItemStack());
 					return;

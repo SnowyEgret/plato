@@ -9,11 +9,11 @@ import ds.plato.api.ISpell;
 import ds.plato.api.IStaff;
 import ds.plato.api.IUndo;
 import ds.plato.item.spell.Spell;
-import ds.plato.item.staff.StaffWood;
+import ds.plato.item.staff.Staff;
 
 public class CommonProxy {
 
-	public void setCustomRenderers(ISelect selectionManager, IPick pickManager, Iterable<StaffWood> staffs, Iterable<Spell> spells) {
+	public void setCustomRenderers(ISelect selectionManager, IPick pickManager, Iterable<Staff> staffs, Iterable<Spell> spells) {
 	}
 
 	public void registerEventHandlers(Plato plato, ISelect select, IUndo undo, IPick pick) {

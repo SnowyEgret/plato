@@ -17,9 +17,9 @@ import org.mockito.MockitoAnnotations;
 import ds.plato.api.ISpell;
 import ds.plato.item.spell.matrix.SpellCopy;
 import ds.plato.item.spell.transform.SpellDelete;
-import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.OldStaff;
 import ds.plato.item.staff.StaffOak;
-import ds.plato.item.staff.StaffSelect;
+import ds.plato.item.staff.OldStaffSelect;
 import ds.plato.pick.Pick;
 import ds.plato.test.PlatoTest;
 
@@ -31,7 +31,7 @@ public class StaffSelectTest extends PlatoTest {
 	@Mock PlayerInteractEvent mockEvent;
 	@Mock SpellDelete mockDelete;
 	@Mock SpellCopy mockMove;
-	Staff staff;
+	OldStaff staff;
 
 	@Before
 	public void setUp() {
@@ -41,7 +41,7 @@ public class StaffSelectTest extends PlatoTest {
 		Pick[] picks = new Pick[] { new Pick(1, 1, 1, dirt, 0, 0), new Pick(2, 2, 2, dirt, 0, 0) };
 		when(pickManager.getPicks()).thenReturn(picks);
 		when(pickManager.isFinishedPicking()).thenReturn(true);
-		staff = new StaffSelect(pickManager);
+		staff = new OldStaffSelect(pickManager);
 		staff.addSpell(mockDelete);
 		staff.addSpell(mockMove);
 	}

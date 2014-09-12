@@ -18,7 +18,7 @@ import ds.plato.api.IItem;
 import ds.plato.item.spell.Spell;
 
 //Based on http://greyminecraftcoder.blogspot.com.au/2013/09/custom-item-rendering-using.html
-public class StaffWoodRenderer implements IItemRenderer {
+public class StaffRenderer implements IItemRenderer {
 
 	private IModelCustom staffModel;
 	private ResourceLocation staffTextureResourceLocation;
@@ -30,7 +30,7 @@ public class StaffWoodRenderer implements IItemRenderer {
 		THIRDPERSONEQUIPPED
 	};
 
-	public StaffWoodRenderer(IItem staff) {
+	public StaffRenderer(IItem staff) {
 		staffModel = staff.getModel();
 		staffTextureResourceLocation = staff.getTextureResourceLocation();
 	}
@@ -216,7 +216,7 @@ public class StaffWoodRenderer implements IItemRenderer {
 	}
 
 	private void renderSpell(ItemStack stack) {
-		StaffWood staff = (StaffWood) stack.getItem();
+		Staff staff = (Staff) stack.getItem();
 		if (staff != null) {
 			Spell spell = staff.getSpell(stack);
 			if (spell != null) {

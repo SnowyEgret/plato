@@ -15,8 +15,8 @@ import ds.plato.core.Player;
 import ds.plato.core.SlotDistribution;
 import ds.plato.item.spell.SpellInfo;
 import ds.plato.item.spell.transform.SpellFillRandom;
+import ds.plato.item.staff.OldStaff;
 import ds.plato.item.staff.Staff;
-import ds.plato.item.staff.StaffWood;
 
 public class Overlay {
 
@@ -74,7 +74,7 @@ public class Overlay {
 		}
 	}
 
-	public void drawStaff(Staff staff, ItemStack stack) {
+	public void drawStaff(OldStaff staff, ItemStack stack) {
 		int x = 10;
 		int y = x;
 		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
@@ -82,7 +82,7 @@ public class Overlay {
 		r.drawStringWithShadow(staffName + " has no spells", x, y, white);
 	}
 
-	public void drawStaffWood(StaffWood staffWood, ItemStack stack) {
+	public void drawStaffWood(Staff staffWood, ItemStack stack) {
 		int x = 10;
 		int y = x;
 		FontRenderer r = Minecraft.getMinecraft().fontRenderer;

@@ -21,9 +21,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
-import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.OldStaff;
 import ds.plato.item.staff.StaffPreset;
-import ds.plato.item.staff.StaffWood;
+import ds.plato.item.staff.Staff;
 import ds.plato.util.StringUtils;
 
 public class SpellLoader {
@@ -55,6 +55,7 @@ public class SpellLoader {
 		};
 	}
 
+	@Deprecated
 	public List<Spell> loadSpells(List<Class<? extends Spell>> spellClasses) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		List<Spell> spells = new ArrayList<>();
 		for (Class<? extends Spell> c : spellClasses) {
@@ -63,11 +64,12 @@ public class SpellLoader {
 		return spells;
 	}
 
-	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	@Deprecated
+	public OldStaff loadOldStaff(Class<? extends OldStaff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		System.out.print("[SpellLoader.loadStaff] Loading staff " + staffClass.getSimpleName() + "...");
 		String name = StringUtils.toCamelCase(staffClass);
 		Constructor c = staffClass.getConstructor(IPick.class);
-		Staff s = (Staff) c.newInstance(pickManager);
+		OldStaff s = (OldStaff) c.newInstance(pickManager);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);
@@ -82,11 +84,11 @@ public class SpellLoader {
 	}
 
 	//For now, duplicate method loadStaff()
-	public StaffWood loadStaffWood(Class<? extends StaffWood> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public Staff loadStaff(Class<? extends Staff> staffClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		System.out.print("[SpellLoader.loadStaff] Loading staff " + staffClass.getSimpleName() + "...");
 		String name = StringUtils.toCamelCase(staffClass);
 		Constructor c = staffClass.getConstructor(IPick.class);
-		StaffWood s = (StaffWood) c.newInstance(pickManager);
+		Staff s = (Staff) c.newInstance(pickManager);
 		s.setUnlocalizedName(name);
 		s.setMaxStackSize(1);
 		s.setCreativeTab(tabSpells);

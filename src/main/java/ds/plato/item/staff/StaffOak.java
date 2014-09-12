@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import ds.plato.api.IPick;
 
-public class StaffOak extends StaffWood {
+public class StaffOak extends Staff {
 
 	public StaffOak(IPick pickManager) {
 		super(pickManager);

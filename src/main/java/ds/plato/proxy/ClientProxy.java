@@ -17,21 +17,21 @@ import ds.plato.event.MouseHandler;
 import ds.plato.gui.Overlay;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.SpellRenderer;
-import ds.plato.item.staff.StaffWood;
-import ds.plato.item.staff.StaffWoodRenderer;
+import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.StaffRenderer;
 
 public class ClientProxy extends CommonProxy {
 
 	@Override
-	public void setCustomRenderers(ISelect select, IPick pick, Iterable<StaffWood> staffs, Iterable<Spell> spells) {
+	public void setCustomRenderers(ISelect select, IPick pick, Iterable<Staff> staffs, Iterable<Spell> spells) {
 		RenderingRegistry.registerBlockHandler(new BlockSelectedRenderer(select));
 		RenderingRegistry.registerBlockHandler(new BlockPickedRenderer(select, pick));
 		RenderingRegistry.registerBlockHandler(new BlockModelRenderer());
-		for (StaffWood s : staffs) {
+		for (Staff s : staffs) {
 			if (s.getModel() == null) {
 				System.out.println("[ClientProxy.setCustomRenderers] Missing model for class=" + s.getClass());
 			} else {
-				MinecraftForgeClient.registerItemRenderer(s, new StaffWoodRenderer(s));
+				MinecraftForgeClient.registerItemRenderer(s, new StaffRenderer(s));
 			}
 		}
 		for (Spell s : spells) {

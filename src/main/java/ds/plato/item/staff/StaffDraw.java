@@ -1,23 +1,18 @@
 package ds.plato.item.staff;
 
+import java.util.List;
+
+import net.minecraft.init.Items;
 import ds.plato.api.IPick;
 import ds.plato.item.spell.Spell;
-import ds.plato.item.spell.draw.AbstractSpellDraw;
 
-public class StaffDraw extends Staff {
+public class StaffDraw extends StaffPreset {
 
-	public StaffDraw(IPick pickManager) {
-		super(pickManager);
+	public StaffDraw(IPick pickManager, List<Spell> spells) {
+		super(pickManager, spells);
 	}
-
-	@Override
-	public void addSpell(Spell spell) {
-		assert spell instanceof AbstractSpellDraw;
-		super.addSpell(spell);
-	}
-
-	@Override
-	public boolean hasRecipe() {
-		return false;
+	
+	public Object[] getRecipe() {
+		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
 	}
 }

@@ -1,91 +1,129 @@
 package ds.plato.item.staff;
 
-import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.IModelCustom;
+
+import org.lwjgl.input.Keyboard;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import ds.plato.Plato;
 import ds.plato.api.IPick;
 import ds.plato.api.ISpell;
-import ds.plato.item.spell.ISelector;
+import ds.plato.api.IStaff;
+import ds.plato.item.ItemBase;
 import ds.plato.item.spell.Spell;
+import ds.plato.util.StringUtils;
 
-public abstract class Staff extends Item implements ISelector {
+public abstract class Staff extends ItemBase implements IStaff {
 
-	protected Spell[] spells = new Spell[9];
-	protected int ordinal = 0;
-	private IPick pickManager;
-	private String name = "Staff";
-
-	// private boolean spellsInitialized = false;
-	// To reduce overhead of onUpdate
-	// private boolean isDirty = false;
-
-	protected Staff(IPick pickManager) {
+	int size = 9;
+	IPick pickManager;
+	protected IModelCustom model;
+	private final String modelPath = "models/" + StringUtils.toCamelCase(getClass());
+	private final ResourceLocation modelLocation = new ResourceLocation("plato", modelPath + ".obj");
+	private final ResourceLocation modelTextureLocation = new ResourceLocation("plato", modelPath + ".png");
+	
+	public Staff(IPick pickManager) {
 		this.pickManager = pickManager;
+//		try {
+//			model = AdvancedModelLoader.loadModel(modelLocation);
+//		} catch (Exception e) {
+//			// ClientProxy.setCustomRenderers logs missing model
+//		}
 	}
 
-	public Object[] getRecipe() {
-		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
-	}
-
-	public boolean hasRecipe() {
-		return getRecipe() != null;
-	}
-
-	@Override
-	public void select(ItemStack stack, int x, int y, int z, int side) {
-		if (!isEmpty()) {
-			getSpell().onMouseClickLeft(stack, x, y, z, side);
+@Override
+	public void onMouseClickLeft(ItemStack stack, int x, int y, int z, int side) {
+		if (!isEmpty(stack)) {
+			getSpell(stack).onMouseClickLeft(stack, x, y, z, side);
 		}
 	}
 
-	// @Override
-	// public void onMouseClickRight(ItemStack stack, int x, int y, int z, int side) {
-	// // For now, jump while right clicking to open gui again.
-	// if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-	// Player.getPlayer().openGui(3);
-	// } else {
-	// getSpell().onMouseClickRight(stack, x, y, z, side);
-	// }
-	// }
+//	@Override
+//	public IModelCustom getModel() {
+//		return model;
+//	}
 
-	// @Override
-	// public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4,
-	// int par5, int par6, int par7, float par8, float par9, float par10) {
-	// if (isEmpty() || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-	// Player.client().openGui(3);
-	// } else {
-	// return getSpell().onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9,
-	// par10);
-	// }
-	// return false;
-	// }
+//	@Override
+//	public ResourceLocation getTextureResourceLocation() {
+//		return modelTextureLocation;
+//	}
 
-	public Spell getSpell() {
-		if (isEmpty()) {
+//	// https://github.com/TheGreyGhost/ItemRendering/blob/master/src/TestItemRendering/items/ItemLampshade.java
+//	@Override
+//	public int getSpriteNumber() {
+//		return model == null ? 1 : 0;
+//	}
+
+//	@Override
+//	public Object[] getRecipe() {
+//		return new Object[] { "#  ", " # ", "  #", '#', Items.bone };
+//	}
+
+//	@Override
+//	public boolean hasRecipe() {
+//		return getRecipe() != null;
+//	}
+
+	// Adds information to rollover in creative tab
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
+		if (isEmpty(stack)) {
+			rollOver.add(EnumChatFormatting.RED + "No spells on staff");
+		} else {
+			rollOver.add(EnumChatFormatting.GREEN + " " + numSpells(stack) + " spells on staff");
+		}
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+			float sx, float sy, float sz) {
+		if (!world.isRemote && Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+			player.openGui(Plato.instance, 3, world, 0, 0, 0);
+			// } else if (!world.isRemote && !isEmpty(stack)) {
+			// } else if (world.isRemote && !isEmpty(stack)) {
+			// getSpell(stack).onMouseClickRight(stack, x, y, z, side);
+			// }
+		} else if (!world.isRemote && !isEmpty(stack)) {
+			Spell s = getSpell(stack);
+			System.out.println("[StaffWood.onItemUse] s=" + s);
+			s.onItemUse(stack, player, world, x, y, z, side, sx, sy, sz);
+		}
+		return true;
+	}
+	
+	// IStaff ----------------------------------------------------------------------
+
+	@Override
+	public Spell getSpell(ItemStack stack) {
+		if (isEmpty(stack)) {
 			return null;
 		} else {
-			Spell s = spells[ordinal];
+			Spell s = getSpellAtIndex(stack, getOrdinal(stack));
 			if (s == null) {
-				s = nextSpell();
+				s = nextSpell(stack);
 			}
 			return s;
 		}
 	}
 
-	public Spell nextSpell() {
+	@Override
+	public Spell nextSpell(ItemStack stack) {
 		Spell s = null;
-		for (int i = 0; i < spells.length; i++) {
-			if (ordinal == spells.length - 1) {
-				ordinal = 0;
+		for (int i = 0; i < size; i++) {
+			if (getOrdinal(stack) == size - 1) {
+				setOrdinal(stack, 0);
 			} else {
-				ordinal++;
+				incrementOrdinal(stack, 1);
 			}
-			s = spells[ordinal];
+			s = getSpellAtIndex(stack, getOrdinal(stack));
 			if (s == null) {
 				continue;
 			} else {
@@ -93,18 +131,21 @@ public abstract class Staff extends Item implements ISelector {
 				break;
 			}
 		}
+		// System.out.println("[StaffWood.nextSpell] s=" + s);
 		return s;
 	}
 
-	public ISpell previousSpell() {
+	@Override
+	public ISpell previousSpell(ItemStack stack) {
 		ISpell s = null;
-		for (int i = 0; i < spells.length; i++) {
-			if (ordinal == 0) {
-				ordinal = spells.length - 1;
+		for (int i = 0; i < size; i++) {
+			if (getOrdinal(stack) == 0) {
+				setOrdinal(stack, size - 1);
 			} else {
-				ordinal--;
+				incrementOrdinal(stack, -1);
+
 			}
-			s = spells[ordinal];
+			s = getSpellAtIndex(stack, getOrdinal(stack));
 			if (s == null) {
 				continue;
 			} else {
@@ -115,29 +156,21 @@ public abstract class Staff extends Item implements ISelector {
 		return s;
 	}
 
-	// Called in preInit to initialize staffs
-	public void addSpell(Spell spell) {
-		for (int i = 0; i < spells.length; i++) {
-			ISpell s = spells[i];
-			if (s == null) {
-				spells[i] = spell;
-				return;
-			}
-		}
-		throw new RuntimeException("No room for spell on staff. spell=" + spell + ", staff=" + this);
-	}
-
-	public int numSpells() {
+	@Override
+	public int numSpells(ItemStack stack) {
 		int numSpells = 0;
-		for (ISpell s : spells) {
+		for (int i = 0; i < size; i++) {
+			ISpell s = getSpellAtIndex(stack, i);
 			if (s != null)
 				numSpells++;
 		}
 		return numSpells;
 	}
 
-	public boolean isEmpty() {
-		for (ISpell s : spells) {
+	@Override
+	public boolean isEmpty(ItemStack stack) {
+		for (int i = 0; i < size; i++) {
+			ISpell s = getSpellAtIndex(stack, i);
 			if (s != null) {
 				return false;
 			}
@@ -145,222 +178,45 @@ public abstract class Staff extends Item implements ISelector {
 		return true;
 	}
 
-	// // Sets tag when staff is crafted
-	// @Override
-	// public void onCreated(ItemStack stack, World w, EntityPlayer player) {
-	// if (stack.stackTagCompound == null) {
-	// stack.setTagCompound(new NBTTagCompound());
-	// }
-	// System.out.println("[Staff.onCreated] stack.stackTagCompound=" + stack.stackTagCompound);
-	// // Read here http://forgetutorials.weebly.com/nbt-tags.html that tag must be initialized
-	// // Not convinced he is right
-	// // for (int i = 0; i < spells.length; i++) {
-	// // stack.stackTagCompound.setString(String.valueOf(i), "");
-	// // }
-	// }
+	// Private ---------------------------------------------------
 
-	// Adds information to rollover in creative tab
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List rollOver, boolean par4) {
-		if (isEmpty()) {
-			rollOver.add(EnumChatFormatting.RED + "No spells on staff");
-		} else {
-			rollOver.add(EnumChatFormatting.GREEN + " " + numSpells() + " spells on staff");
+	private Spell getSpellAtIndex(ItemStack stack, int i) {
+		NBTTagCompound t = getTag(stack);
+		String name = t.getString(String.valueOf(i));
+		if (name != null && !name.equals("")) {
+			Spell spell = (Spell) GameRegistry.findItem(Plato.ID, name);
+			if (spell == null) {
+				throw new RuntimeException("Game registry could not find item.  itemSimpleClassName=" + name);
+			}
+			return spell;
 		}
+		return null;
 	}
 
-	// On first call, initializes spells array and ordinal from stack's tag.
-	// Subsequently, on tick, syncs tag with spells array and ordinal
-	// For subclasses of Staff which have fixed spells, only syncs ordinal.
-	// @Override
-	// public void onUpdate(ItemStack stack, World w, Entity entity, int par4, boolean par5) {
-	// if (w.isRemote) {
-	// return;
-	// }
-	// if (stack.getTagCompound() == null) {
-	// stack.setTagCompound(new NBTTagCompound());
-	// }
-	// NBTTagCompound tag = stack.getTagCompound();
-	//
-	// // First time through, set spells array with tag info
-	// if (!spellsInitialized) {
-	// readFromNBT(tag);
-	// } else {
-	// if (isDirty) {
-	// writeToNBT(tag);
-	// }
-	// }
-	// //System.out.println("[Staff.onUpdate] stack.getTagCompound()=" + stack.getTagCompound());
-	// }
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append(getClass().getSimpleName());
-		builder.append(" [ordinal=");
-		builder.append(ordinal);
-		builder.append(", spells=");
-		builder.append(Arrays.toString(spells));
-		builder.append("]");
-		return builder.toString();
+	private int getOrdinal(ItemStack stack) {
+		NBTTagCompound t = getTag(stack);
+		int ordinal = t.getInteger("o");
+		return ordinal;
 	}
 
-	// ---------------------------------------------------------------------------------
-	// Implementation of interface IInventory. Needed for GuiStaff and GuiStaffContainer
+	private void setOrdinal(ItemStack stack, int i) {
+		NBTTagCompound t = getTag(stack);
+		t.setInteger("o", i);
+	}
 
-	// @Override
-	// public int getSizeInventory() {
-	// return spells.length;
-	// }
-	//
-	// // Called every tick by GUI to draw screen.
-	// // Called by decrStackSize
-	// @Override
-	// public ItemStack getStackInSlot(int i) {
-	// if (spells[i] == null) {
-	// return null;
-	// } else {
-	// return new ItemStack(spells[i]);
-	// }
-	// }
-	//
-	// @Override
-	// public ItemStack decrStackSize(int i, int amount) {
-	// System.out.println("\n[Staff.decrStackSize] i=" + i + ", amount=" + amount);
-	// ItemStack stack = getStackInSlot(i);
-	// // //if (stack != null) {
-	// // Simplified because inventory stack limit is 1
-	// // if (stack.stackSize <= amount) {
-	// setInventorySlotContents(i, null);
-	// // } else {
-	// // stack = stack.splitStack(amount);
-	// // if (stack.stackSize == 0) {
-	// // setInventorySlotContents(i, null);
-	// // }
-	// // }
-	// // } else {
-	// // System.out.println("[Staff.decrStackSize] UNEXPEXTED! stack=" + stack);
-	// // }
-	// //System.out.println("[Staff.decrStackSize] stack=" + stack);
-	// return stack;
-	// }
-	//
-	// // When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
-	// // like when you close a workbench GUI.
-	// // Not being called
-	// @Override
-	// public ItemStack getStackInSlotOnClosing(int i) {
-	// System.out.println("[Staff.getStackInSlotOnClosing] i=" + i);
-	// ItemStack stack = getStackInSlot(i);
-	// if (stack != null) {
-	// setInventorySlotContents(i, null);
-	// }
-	// return stack;
-	// }
-	//
-	// @Override
-	// public void setInventorySlotContents(int i, ItemStack stack) {
-	// System.out.println("[Staff.setInventorySlotContents] i=" + i + ", stack=" + stack);
-	// // new Exception().printStackTrace();
-	// if (stack == null) {
-	// // Fix for issue #85 Spells cannot be re-positioned on staff
-	// spells[i] = null;
-	// } else {
-	// spells[i] = (Spell) stack.getItem();
-	// }
-	// }
-	//
-	// @Override
-	// public String getInventoryName() {
-	// return name;
-	// }
-	//
-	// @Override
-	// public boolean hasCustomInventoryName() {
-	// return false;
-	// }
-	//
-	// @Override
-	// public int getInventoryStackLimit() {
-	// // System.out.println("[Staff.getInventoryStackLimit]");
-	// return 1;
-	// }
-	//
-	// @Override
-	// public void markDirty() {
-	// this.isDirty = true;
-	// }
-	//
-	// // Not being called
-	// @Override
-	// public boolean isUseableByPlayer(EntityPlayer player) {
-	// System.out.println("[Staff.isUseableByPlayer] player=" + player);
-	// return true;
-	// }
-	//
-	// @Override
-	// public void openInventory() {
-	// }
-	//
-	// @Override
-	// public void closeInventory() {
-	// }
-	//
-	// // http://www.minecraftforge.net/forum/index.php?topic=14115.0
-	// // Only called by hoppers, etc. Extend Slot and override isItemValid
-	// @Override
-	// public boolean isItemValidForSlot(int i, ItemStack stack) {
-	// return true;
-	// }
-	//
-	// // -------------------------------------------------------
-	//
-	// private void readFromNBT(NBTTagCompound tag) {
-	// // Prepared staffs already have spells.
-	// if (this instanceof StaffOak || this instanceof StaffBirch) {
-	// System.out.println("[Staff.readFromNBT] Initializing spells. tag=" + tag);
-	// int i = 0;
-	// while (true) {
-	// String spellClassName = tag.getString(String.valueOf(i));
-	// if (spellClassName != null && !spellClassName.equals("")) {
-	// System.out.println("[Staff.readFromNBT] Found string in tag: i=" + i + ", spellClassName="
-	// + spellClassName);
-	// Spell spell = (Spell) GameRegistry.findItem(Plato.ID, spellClassName);
-	// if (spell == null) {
-	// throw new RuntimeException("Game registry could not find item.  spellClassName="
-	// + spellClassName);
-	// }
-	// System.out.println("[Staff.readFromNBT] Looked up spell in game registry. spell=" + spell);
-	// spells[i] = spell;
-	// i++;
-	// } else {
-	// break;
-	// }
-	// }
-	// }
-	// ordinal = tag.getInteger("ordinal");
-	// spellsInitialized = true;
-	// System.out.println("[Staff.readFromNBT] Staff initialized. " + this);
-	// }
-	//
-	// private void writeToNBT(NBTTagCompound tag) {
-	// // Prepared staffs can't be reordered (Only in creative mode - no recipe)
-	// if (this instanceof StaffOak || this instanceof StaffBirch) {
-	// int i = 0;
-	// for (Spell s : spells) {
-	// if (s == null) {
-	// // If tags are not initialized in on created
-	// tag.removeTag(String.valueOf(i));
-	// } else {
-	// String n = s.getClass().getSimpleName();
-	// tag.setString(String.valueOf(i), n);
-	// }
-	// i++;
-	// }
-	// }
-	// tag.setInteger("ordinal", ordinal);
-	// System.out.println("[Staff.writeToNBT] tag=" + tag);
-	// isDirty = false;
-	// }
-	//
+	private void incrementOrdinal(ItemStack stack, int increment) {
+		NBTTagCompound t = getTag(stack);
+		int i = t.getInteger("o");
+		i = i + increment;
+		t.setInteger("o", i);
+	}
+
+	private NBTTagCompound getTag(ItemStack stack) {
+		NBTTagCompound t = stack.getTagCompound();
+		if (t == null) {
+			t = new NBTTagCompound();
+			stack.setTagCompound(t);
+		}
+		return t;
+	}
 }

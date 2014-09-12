@@ -18,8 +18,8 @@ import ds.plato.api.IPlayer;
 import ds.plato.api.ISpell;
 import ds.plato.api.IWorld;
 import ds.plato.item.spell.Spell;
+import ds.plato.item.staff.OldStaff;
 import ds.plato.item.staff.Staff;
-import ds.plato.item.staff.StaffWood;
 
 public class Player implements IPlayer {
 
@@ -160,36 +160,36 @@ public class Player implements IPlayer {
 			Item item = stack.getItem();
 			if (item instanceof Spell) {
 				spell = (ISpell) item;
+			} else if (item instanceof OldStaff) {
+				spell = ((OldStaff) item).getSpell();
 			} else if (item instanceof Staff) {
-				spell = ((Staff) item).getSpell();
-			} else if (item instanceof StaffWood) {
-				spell = ((StaffWood) item).getSpell(stack);
+				spell = ((Staff) item).getSpell(stack);
 			}
 		}
 		return spell;
 	}
 
 	@Override
-	public Staff getStaff() {
-		Staff staff = null;
+	public OldStaff getStaff() {
+		OldStaff staff = null;
 		ItemStack is = player.getHeldItem();
 		if (is != null) {
 			Item item = is.getItem();
-			if (item instanceof Staff) {
-				staff = (Staff) item;
+			if (item instanceof OldStaff) {
+				staff = (OldStaff) item;
 			}
 		}
 		return staff;
 	}
 
 	@Override
-	public StaffWood getStaffWood() {
-		StaffWood staff = null;
+	public Staff getStaffWood() {
+		Staff staff = null;
 		ItemStack is = player.getHeldItem();
 		if (is != null) {
 			Item item = is.getItem();
-			if (item instanceof StaffWood) {
-				staff = (StaffWood) item;
+			if (item instanceof Staff) {
+				staff = (Staff) item;
 			}
 		}
 		return staff;

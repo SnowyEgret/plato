@@ -30,18 +30,12 @@ import ds.plato.block.BlockSelected;
 import ds.plato.gui.GuiHandler;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.SpellLoader;
-import ds.plato.item.spell.draw.AbstractSpellDraw;
-import ds.plato.item.spell.matrix.AbstractSpellMatrix;
-import ds.plato.item.spell.select.AbstractSpellSelect;
-import ds.plato.item.spell.transform.AbstractSpellTransform;
 import ds.plato.item.staff.Staff;
 import ds.plato.item.staff.StaffBirch;
 import ds.plato.item.staff.StaffDraw;
-import ds.plato.item.staff.StaffDraw2;
 import ds.plato.item.staff.StaffOak;
 import ds.plato.item.staff.StaffSelect;
 import ds.plato.item.staff.StaffTransform;
-import ds.plato.item.staff.StaffWood;
 import ds.plato.network.SetBlockMessage;
 import ds.plato.network.SetBlockMessageHandler;
 import ds.plato.pick.PickManager;
@@ -64,7 +58,7 @@ public class Plato {
 	private static IPick pickManager;
 	private Configuration configuration;
 	private List<Spell> spells;
-	private List<StaffWood> staffs;
+	private List<Staff> staffs;
 	public static SimpleNetworkWrapper network;
 	public static Logger log;
 
@@ -119,14 +113,20 @@ public class Plato {
 			
 			spells = new ArrayList<>();
 			List<Spell> drawSpells = loader.loadSpellsFromPackage("ds.plato.item.spell.draw");
+			List<Spell> selectSpells = loader.loadSpellsFromPackage("ds.plato.item.spell.select");
+			List<Spell> transformSpells = loader.loadSpellsFromPackage("ds.plato.item.spell.transform");
 			spells.addAll(drawSpells);
+			spells.addAll(selectSpells);
+			spells.addAll(transformSpells);
 
 			// Create some empty staffs. For now, they have a different base class.
 			staffs = new ArrayList<>();
-			staffs.add(loader.loadStaffWood(StaffOak.class));
-			staffs.add(loader.loadStaffWood(StaffBirch.class));
-			//Try loading a staff with preset spells
-			staffs.add(loader.loadStaffPreset(StaffDraw2.class, drawSpells));
+			staffs.add(loader.loadStaff(StaffOak.class));
+			staffs.add(loader.loadStaff(StaffBirch.class));
+
+			staffs.add(loader.loadStaffPreset(StaffDraw.class, drawSpells));
+			staffs.add(loader.loadStaffPreset(StaffSelect.class, selectSpells));
+			staffs.add(loader.loadStaffPreset(StaffTransform.class, transformSpells));
 
 		} catch (Exception e) {
 			e.printStackTrace();
