@@ -117,14 +117,16 @@ public class Plato {
 //			log.info("[Plato.preInit] transformStaff=" + transformStaff);
 //			log.info("[Plato.preInit] drawStaff=" + drawStaff);
 			
-			//Try loading a staff with preset spells
 			spells = new ArrayList<>();
-			loader.loadStaffPreset(StaffDraw2.class, "ds.plato.item.spell.draw");
+			List<Spell> drawSpells = loader.loadSpellsFromPackage("ds.plato.item.spell.draw");
+			spells.addAll(drawSpells);
 
 			// Create some empty staffs. For now, they have a different base class.
 			staffs = new ArrayList<>();
 			staffs.add(loader.loadStaffWood(StaffOak.class));
 			staffs.add(loader.loadStaffWood(StaffBirch.class));
+			//Try loading a staff with preset spells
+			staffs.add(loader.loadStaffPreset(StaffDraw2.class, drawSpells));
 
 		} catch (Exception e) {
 			e.printStackTrace();

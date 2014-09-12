@@ -2,7 +2,9 @@ package ds.plato.item.staff;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -20,6 +22,10 @@ public class StaffPreset extends StaffWood {
 
 	@Override
 	public void onCreated(ItemStack stack, World world, EntityPlayer player) {
+		setTag(stack);
+	}
+
+	private void setTag(ItemStack stack) {
 		stack.setTagCompound(new NBTTagCompound());
 		int i = 0;
 		for (Spell s : spells) {
@@ -33,4 +39,13 @@ public class StaffPreset extends StaffWood {
 		}
 		stack.stackTagCompound.setInteger("o=", 0);
 	}
+
+	@Override
+	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+		ItemStack stack = new ItemStack(this);
+		setTag(stack);
+		list.add(stack);
+	}
+	
+	
 }
