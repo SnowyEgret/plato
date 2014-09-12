@@ -3,15 +3,15 @@ package ds.plato.item.staff;
 import net.minecraft.init.Items;
 import ds.plato.api.IPick;
 
-public class StaffOak extends Staff {
+public class StaffAcacia extends Staff {
 
-	public StaffOak(IPick pickManager) {
+	public StaffAcacia(IPick pickManager) {
 		super(pickManager);
 	}
 
 	@Override
 	public Object[] getRecipe() {
-		//TODO how to make recipe with oak?
+		//TODO how to make recipe with acacia?
 		return new Object[] { "#  ", " # ", "  #", '#', Items.apple};
 	}
 

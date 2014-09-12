@@ -31,6 +31,7 @@ import ds.plato.gui.GuiHandler;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.SpellLoader;
 import ds.plato.item.staff.Staff;
+import ds.plato.item.staff.StaffAcacia;
 import ds.plato.item.staff.StaffBirch;
 import ds.plato.item.staff.StaffDraw;
 import ds.plato.item.staff.StaffOak;
@@ -115,14 +116,17 @@ public class Plato {
 			List<Spell> drawSpells = loader.loadSpellsFromPackage("ds.plato.item.spell.draw");
 			List<Spell> selectSpells = loader.loadSpellsFromPackage("ds.plato.item.spell.select");
 			List<Spell> transformSpells = loader.loadSpellsFromPackage("ds.plato.item.spell.transform");
+			List<Spell> otherSpells = loader.loadSpellsFromPackage("ds.plato.item.spell.other");
 			spells.addAll(drawSpells);
 			spells.addAll(selectSpells);
 			spells.addAll(transformSpells);
+			spells.addAll(otherSpells);
 
 			// Create some empty staffs. For now, they have a different base class.
 			staffs = new ArrayList<>();
 			staffs.add(loader.loadStaff(StaffOak.class));
 			staffs.add(loader.loadStaff(StaffBirch.class));
+			staffs.add(loader.loadStaff(StaffAcacia.class));
 
 			staffs.add(loader.loadStaffPreset(StaffDraw.class, drawSpells));
 			staffs.add(loader.loadStaffPreset(StaffSelect.class, selectSpells));

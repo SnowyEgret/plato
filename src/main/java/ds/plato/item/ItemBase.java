@@ -16,7 +16,7 @@ public abstract class ItemBase extends Item implements IItem {
 	private final ResourceLocation modelTextureLocation = new ResourceLocation(Plato.ID, modelPath + ".png");
 	protected IModelCustom model;
 
-	public ItemBase() {
+	protected ItemBase() {
 		try {
 			model = AdvancedModelLoader.loadModel(modelLocation);
 		} catch (Exception e) {

@@ -15,7 +15,7 @@ public abstract class StaffPreset extends Staff {
 
 	private List<Spell> spells;
 
-	public StaffPreset(IPick pickManager, List<Spell> spells) {
+	protected StaffPreset(IPick pickManager, List<Spell> spells) {
 		super(pickManager);
 		this.spells = spells;
 	}
@@ -23,6 +23,13 @@ public abstract class StaffPreset extends Staff {
 	@Override
 	public void onCreated(ItemStack stack, World world, EntityPlayer player) {
 		setTag(stack);
+	}
+
+	@Override
+	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+		ItemStack stack = new ItemStack(this);
+		setTag(stack);
+		list.add(stack);
 	}
 
 	private void setTag(ItemStack stack) {
@@ -34,17 +41,10 @@ public abstract class StaffPreset extends Staff {
 				stack.stackTagCompound.setString(String.valueOf(i), n);
 				i++;
 			} else {
-				System.out.println("[StaffPreset.onCreated] No room on staff for spell " + s);
+				System.out.println("[StaffPreset.setTag] No room on staff for spell " + s);
 			}
 		}
 		stack.stackTagCompound.setInteger("o=", 0);
-	}
-
-	@Override
-	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-		ItemStack stack = new ItemStack(this);
-		setTag(stack);
-		list.add(stack);
 	}
 	
 	

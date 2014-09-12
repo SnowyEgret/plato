@@ -30,7 +30,7 @@ public abstract class Staff extends ItemBase implements IStaff {
 	private final ResourceLocation modelLocation = new ResourceLocation("plato", modelPath + ".obj");
 	private final ResourceLocation modelTextureLocation = new ResourceLocation("plato", modelPath + ".png");
 	
-	public Staff(IPick pickManager) {
+	protected Staff(IPick pickManager) {
 		this.pickManager = pickManager;
 //		try {
 //			model = AdvancedModelLoader.loadModel(modelLocation);
