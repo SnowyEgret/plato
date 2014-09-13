@@ -17,7 +17,7 @@ import ds.plato.api.IPlayer;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.core.Player;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.item.spell.transform.SpellFill;
 
 public class MouseHandler {
@@ -102,7 +102,7 @@ public class MouseHandler {
 					if (selectionManager.isSelected(p.blockX, p.blockY, p.blockZ)) {
 						Block b = itemBlock.field_150939_a;
 						int metadata = stack.getItemDamage();
-						new SpellFill(undoManager, selectionManager, pickManager).invoke(player.getWorld(), new SlotEntry(b,
+						new SpellFill(undoManager, selectionManager, pickManager).invoke(player.getWorld(), new HotbarSlot(b,
 								metadata, 0));
 						e.setCanceled(true);
 					}

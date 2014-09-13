@@ -90,15 +90,9 @@ public class ForgeEventHandler {
 				overlay.drawSpell(spell);
 			} else {
 				IPlayer p = Player.getPlayer();
-				OldStaff staff = p.getStaff();
+				Staff staff = p.getStaff();
 				if (staff != null) {
 					overlay.drawStaff(staff, p.getHeldItemStack());
-					return;
-				}
-				
-				Staff staffWood = p.getStaffWood();
-				if (staffWood != null) {
-					overlay.drawStaffWood(staffWood, p.getHeldItemStack());
 					return;
 				}
 			}

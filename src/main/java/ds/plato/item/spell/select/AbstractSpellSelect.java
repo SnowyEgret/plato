@@ -19,7 +19,7 @@ import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
 import ds.plato.block.BlockSelected;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.core.WorldWrapper;
 import ds.plato.item.spell.Modifier;
 import ds.plato.item.spell.Spell;
@@ -39,7 +39,7 @@ public abstract class AbstractSpellSelect extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, final SlotEntry...slotEntries) {
+	public void invoke(IWorld world, final HotbarSlot...slotEntries) {
 		
 		// Select the pick if there are no selections
 		Pick p = pickManager.getPicks()[0];

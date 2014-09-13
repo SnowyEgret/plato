@@ -8,7 +8,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.geom.PointSet;
 import ds.plato.item.spell.Modifier;
 import ds.plato.pick.Pick;
@@ -21,7 +21,7 @@ public class SpellMeasure extends AbstractSpellDraw {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry... slotEntries) {
+	public void invoke(IWorld world, HotbarSlot... slotEntries) {
 		Pick[] picks = pickManager.getPicks();
 		Point3d p0 = picks[0].point3d();
 		Point3d p1 = picks[1].point3d();

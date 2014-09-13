@@ -6,7 +6,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.curve.Rectangle;
 import ds.plato.item.spell.Modifier;
@@ -20,7 +20,7 @@ public class SpellRectangle extends AbstractSpellDraw {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry... slotEntries) {
+	public void invoke(IWorld world, HotbarSlot... slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		boolean isSquare = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);

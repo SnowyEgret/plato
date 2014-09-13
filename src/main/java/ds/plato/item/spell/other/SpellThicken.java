@@ -12,7 +12,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.geom.GeomUtil;
 import ds.plato.geom.IntegerDomain;
 import ds.plato.geom.VoxelSet;
@@ -31,7 +31,7 @@ public class SpellThicken extends AbstractSpellTransform {
 	}
 
 	@Override
-	public void invoke(final IWorld world, SlotEntry... slotEntries) {
+	public void invoke(final IWorld world, HotbarSlot... slotEntries) {
 		Set<Point3i> points = new HashSet<>();
 		Selection first = selectionManager.getSelections().iterator().next();
 		VoxelSet voxels = selectionManager.voxelSet();

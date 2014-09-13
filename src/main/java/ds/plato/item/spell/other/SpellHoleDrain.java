@@ -15,7 +15,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.select.Shell;
 import ds.plato.pick.Pick;
@@ -39,7 +39,7 @@ public class SpellHoleDrain extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, HotbarSlot...slotEntries) {
 		points.clear();
 		numBlocksDrained = 0;
 		lastPointsSize = 0;

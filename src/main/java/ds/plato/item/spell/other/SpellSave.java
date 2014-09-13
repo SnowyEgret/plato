@@ -14,7 +14,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.core.WorldWrapper;
 import ds.plato.gui.ITextSetable;
 import ds.plato.item.spell.Modifier;
@@ -33,7 +33,7 @@ public class SpellSave extends Spell implements ITextSetable {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry... slotEntries) {
+	public void invoke(IWorld world, HotbarSlot... slotEntries) {
 		if (selectionManager.size() != 0) {
 			Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 0, world.getWorld(), 0, 0, 0);
 			Pick[] picks = pickManager.getPicks();
@@ -63,7 +63,7 @@ public class SpellSave extends Spell implements ITextSetable {
 			pickManager.reset(s.getNumPicks());
 			// Can't remember why this world is preferable, or maybe I just didn't set world and slotEntries in invoke
 			EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-			s.invoke(new WorldWrapper(player.worldObj), (SlotEntry[]) null);
+			s.invoke(new WorldWrapper(player.worldObj), (HotbarSlot[]) null);
 		}
 		selectionManager.clearSelections();
 	}

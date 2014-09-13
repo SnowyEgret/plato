@@ -3,8 +3,8 @@ package ds.plato.api;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import ds.plato.core.Player.Direction;
-import ds.plato.core.SlotDistribution;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarDistribution;
+import ds.plato.core.HotbarSlot;
 import ds.plato.item.staff.OldStaff;
 import ds.plato.item.staff.Staff;
 
@@ -12,11 +12,11 @@ public interface IPlayer {
 
 	public abstract IWorld getWorld();
 
-	public abstract SlotEntry[] getSlotEntries();
+	public abstract HotbarSlot[] getHotbarSlots();
 
 	public abstract Direction getDirection();
 
-	public abstract SlotDistribution slotDistribution();
+	public abstract HotbarDistribution getHotbarDistribution();
 
 	public abstract ItemStack getHeldItemStack();
 
@@ -24,8 +24,6 @@ public interface IPlayer {
 
 	public abstract ISpell getSpell();
 
-	public abstract OldStaff getStaff();
-
-	public abstract Staff getStaffWood();
+	public abstract Staff getStaff();
 
 }

@@ -8,7 +8,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.geom.IDrawable;
 import ds.plato.geom.surface.Sphere;
 import ds.plato.item.spell.Modifier;
@@ -22,7 +22,7 @@ public class SpellSphere extends AbstractSpellDraw {
 	}
 
 	@Override
-	public void invoke(IWorld world, final SlotEntry... slotEntries) {
+	public void invoke(IWorld world, final HotbarSlot... slotEntries) {
 		selectionManager.clearSelections();
 		Pick[] picks = pickManager.getPicks();
 		boolean isHemisphere = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);

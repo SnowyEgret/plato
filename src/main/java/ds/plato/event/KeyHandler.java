@@ -106,7 +106,7 @@ public class KeyHandler {
 		}
 
 		if (keyBindings.get("delete").isPressed()) {
-			new SpellDelete(undoManager, selectionManager, pickManager).invoke(w, player.getSlotEntries());
+			new SpellDelete(undoManager, selectionManager, pickManager).invoke(w, player.getHotbarSlots());
 		}
 
 		if (keyBindings.get("lastSelection").isPressed()) {
@@ -160,7 +160,7 @@ public class KeyHandler {
 			break;
 		}
 		if (selectionManager.size() != 0) {
-			new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, player.getSlotEntries());
+			new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, player.getHotbarSlots());
 		}
 		pickManager.clearPicks();
 	}
@@ -170,7 +170,7 @@ public class KeyHandler {
 		pickManager.reset(2);
 		pickManager.pick(w, 0, 0, 0, 0);
 		pickManager.pick(w, 0, d, 0, 0);
-		new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, player.getSlotEntries());
+		new SpellCopy(undoManager, selectionManager, pickManager).invoke(w, player.getHotbarSlots());
 		pickManager.clearPicks();
 	}
 

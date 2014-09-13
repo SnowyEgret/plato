@@ -1,11 +1,11 @@
 package ds.plato.api;
 
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.item.spell.SpellInfo;
 
 public interface ISpell {
 
-	public abstract void invoke(IWorld world, SlotEntry... slotEntries);
+	public abstract void invoke(IWorld world, HotbarSlot... hotbarSlot);
 
 	public abstract String getMessage();
 

@@ -12,7 +12,7 @@ import ds.plato.api.ISelect;
 import ds.plato.api.ISpell;
 import ds.plato.api.IStaff;
 import ds.plato.core.Player;
-import ds.plato.core.SlotDistribution;
+import ds.plato.core.HotbarDistribution;
 import ds.plato.item.spell.SpellInfo;
 import ds.plato.item.spell.transform.SpellFillRandom;
 import ds.plato.item.staff.OldStaff;
@@ -64,7 +64,7 @@ public class Overlay {
 
 		// TODO SpellFillRandom should set message
 		if (spell instanceof SpellFillRandom) {
-			SlotDistribution d = Player.getPlayer().slotDistribution();
+			HotbarDistribution d = Player.getPlayer().getHotbarDistribution();
 			r.drawStringWithShadow(d.toString(), x, y += dy, blue);
 		}
 
@@ -74,19 +74,11 @@ public class Overlay {
 		}
 	}
 
-	public void drawStaff(OldStaff staff, ItemStack stack) {
+	public void drawStaff(Staff staff, ItemStack stack) {
 		int x = 10;
 		int y = x;
 		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
 		String staffName = staff.getItemStackDisplayName(stack);
-		r.drawStringWithShadow(staffName + " has no spells", x, y, white);
-	}
-
-	public void drawStaffWood(Staff staffWood, ItemStack stack) {
-		int x = 10;
-		int y = x;
-		FontRenderer r = Minecraft.getMinecraft().fontRenderer;
-		String staffName = staffWood.getItemStackDisplayName(stack);
 		r.drawStringWithShadow(staffName + " has no spells", x, y, white);
 	}
 

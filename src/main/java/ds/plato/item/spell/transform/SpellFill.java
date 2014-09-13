@@ -4,7 +4,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.select.Selection;
 
 public class SpellFill extends AbstractSpellTransform {
@@ -14,13 +14,13 @@ public class SpellFill extends AbstractSpellTransform {
 	}
 
 	@Override
-	public void invoke(IWorld world, final SlotEntry...slotEntries) {
+	public void invoke(IWorld world, final HotbarSlot...slotEntries) {
 		transformSelections(world, new ITransform() {
 			@Override
 			public Selection transform(Selection s) {
 				// Create a copy here because we don't want to modify the selection list.
 				// Use first (left-most) block in inventory
-				SlotEntry e = slotEntries[0];
+				HotbarSlot e = slotEntries[0];
 				return new Selection(s.x, s.y, s.z, e.block, e.metadata);
 			}
 		});

@@ -11,7 +11,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.item.spell.PersistentVoxelGroup;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.PersistentVoxelGroup.Voxel;
@@ -29,7 +29,7 @@ public class SpellRestore extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, HotbarSlot...slotEntries) {
 		this.world = world;
 		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 1, world.getWorld(), 0, 0, 0);
 		// Clear picks here because player might have cancelled

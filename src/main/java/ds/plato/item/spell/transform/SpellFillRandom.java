@@ -4,8 +4,8 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotDistribution;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarDistribution;
+import ds.plato.core.HotbarSlot;
 import ds.plato.select.Selection;
 
 public class SpellFillRandom extends AbstractSpellTransform {
@@ -15,12 +15,12 @@ public class SpellFillRandom extends AbstractSpellTransform {
 	}
 
 	@Override
-	public void invoke(IWorld world, final SlotEntry...slotEntries) {
+	public void invoke(IWorld world, final HotbarSlot...slotEntries) {
 		transformSelections(world, new ITransform() {
 			@Override
 			public Selection transform(Selection s) {
-				SlotDistribution d = new SlotDistribution(slotEntries);
-				SlotEntry entry = d.randomEntry();
+				HotbarDistribution d = new HotbarDistribution(slotEntries);
+				HotbarSlot entry = d.randomEntry();
 				s.block = entry.block;
 				s.metadata = entry.metadata;
 				return s;

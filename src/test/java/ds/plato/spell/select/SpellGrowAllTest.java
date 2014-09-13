@@ -15,7 +15,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import ds.plato.api.ISelect;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.item.spell.Spell;
 import ds.plato.pick.Pick;
 import ds.plato.select.SelectionManager;

@@ -55,8 +55,8 @@ public class Player implements IPlayer {
 	}
 
 	@Override
-	public SlotEntry[] getSlotEntries() {
-		List<SlotEntry> entries = new ArrayList<>();
+	public HotbarSlot[] getHotbarSlots() {
+		List<HotbarSlot> entries = new ArrayList<>();
 		InventoryPlayer inventory = player.inventory;
 		for (int i = 0; i < 9; i++) {
 			ItemStack stack = inventory.getStackInSlot(i);
@@ -87,15 +87,15 @@ public class Player implements IPlayer {
 				}
 
 				if (b != null) {
-					SlotEntry entry = new SlotEntry(b, metadata, i + 1);
+					HotbarSlot entry = new HotbarSlot(b, metadata, i + 1);
 					entries.add(entry);
 				}
 			}
 		}
 		if (entries.isEmpty()) {
-			entries.add(new SlotEntry(Blocks.dirt));
+			entries.add(new HotbarSlot(Blocks.dirt));
 		}
-		SlotEntry[] array = new SlotEntry[entries.size()];
+		HotbarSlot[] array = new HotbarSlot[entries.size()];
 		return entries.toArray(array);
 	}
 
@@ -138,8 +138,8 @@ public class Player implements IPlayer {
 	}
 
 	@Override
-	public SlotDistribution slotDistribution() {
-		return new SlotDistribution(getSlotEntries());
+	public HotbarDistribution getHotbarDistribution() {
+		return new HotbarDistribution(getHotbarSlots());
 	}
 
 	@Override
@@ -170,20 +170,7 @@ public class Player implements IPlayer {
 	}
 
 	@Override
-	public OldStaff getStaff() {
-		OldStaff staff = null;
-		ItemStack is = player.getHeldItem();
-		if (is != null) {
-			Item item = is.getItem();
-			if (item instanceof OldStaff) {
-				staff = (OldStaff) item;
-			}
-		}
-		return staff;
-	}
-
-	@Override
-	public Staff getStaffWood() {
+	public Staff getStaff() {
 		Staff staff = null;
 		ItemStack is = player.getHeldItem();
 		if (is != null) {

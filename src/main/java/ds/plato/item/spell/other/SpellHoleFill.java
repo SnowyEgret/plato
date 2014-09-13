@@ -12,7 +12,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.item.spell.Modifier;
 import ds.plato.item.spell.Spell;
 import ds.plato.item.spell.select.Shell;
@@ -33,7 +33,7 @@ public class SpellHoleFill extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry... slotEntries) {
+	public void invoke(IWorld world, HotbarSlot... slotEntries) {
 		Transaction t = undoManager.newTransaction();
 		for (Selection s : selectionManager.getSelections()) {
 			Shell.Type type = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) ? Shell.Type.HORIZONTAL : Shell.Type.BELLOW;
@@ -42,7 +42,7 @@ public class SpellHoleFill extends Spell {
 				Block b = world.getBlock(p.x, p.y, p.z);
 				if (b == Blocks.air || b == Blocks.water) {
 					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-						SlotEntry e = slotEntries[0];
+						HotbarSlot e = slotEntries[0];
 						t.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, e.block, e.metadata).set());
 					} else {
 						t.add(new SetBlock(world, selectionManager, p.x, p.y, p.z, s.block, s.metadata).set());

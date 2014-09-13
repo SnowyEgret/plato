@@ -16,17 +16,17 @@ import com.google.common.collect.Lists;
 import ds.plato.util.StringUtils;
 import net.minecraft.block.Block;
 
-public class SlotDistribution {
+public class HotbarDistribution {
 
-	private final SlotEntry[] slotEntries;
+	private final HotbarSlot[] slotEntries;
 	private final List<Integer> indices = new ArrayList<>();
 	private final Random random = new Random();
 	private final Map<Integer, Block> mapPercentBlock = new TreeMap<>();
 
-	public SlotDistribution(SlotEntry... slotEntries) {
+	public HotbarDistribution(HotbarSlot... slotEntries) {
 		this.slotEntries = slotEntries;
 		int j = 0;
-		for (SlotEntry e : slotEntries) {
+		for (HotbarSlot e : slotEntries) {
 			for (int i = 0; i < e.slotNumber; i++) {
 				indices.add(j);
 			}
@@ -53,7 +53,7 @@ public class SlotDistribution {
 		return mapPercentBlock.keySet();
 	}
 
-	public SlotEntry randomEntry() {
+	public HotbarSlot randomEntry() {
 		int i = random.nextInt(indices.size() - 1);
 		return slotEntries[indices.get(i)];
 	}

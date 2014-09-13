@@ -4,7 +4,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 
 public class SpellGrowEdge extends AbstractSpellSelect {
 
@@ -18,7 +18,7 @@ public class SpellGrowEdge extends AbstractSpellSelect {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, HotbarSlot...slotEntries) {
 		int side = pickManager.getPicks()[0].side;
 		System.out.println("[SpellGrowEdge.invoke] side=" + side);
 		if (side == 1) {

@@ -18,7 +18,7 @@ import ds.plato.api.ISpell;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
 import ds.plato.core.Player;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.core.WorldWrapper;
 import ds.plato.geom.solid.Box;
 import ds.plato.item.ItemBase;
@@ -118,7 +118,7 @@ public abstract class Spell extends ItemBase implements ISpell {
 			IWorld w = new WorldWrapper(world);
 			pickManager.pick(w, x, y, z, side);
 			if (pickManager.isFinishedPicking()) {
-				invoke(w, Player.getPlayer().getSlotEntries());
+				invoke(w, Player.getPlayer().getHotbarSlots());
 			}
 			return true;
 		}
@@ -133,7 +133,7 @@ public abstract class Spell extends ItemBase implements ISpell {
 	// ISpell --------------------------------------------
 
 	@Override
-	public abstract void invoke(IWorld world, final SlotEntry... slotEntries);
+	public abstract void invoke(IWorld world, final HotbarSlot... slotEntries);
 
 	@Override
 	public String getMessage() {

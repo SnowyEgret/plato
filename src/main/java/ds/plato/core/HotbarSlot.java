@@ -2,20 +2,20 @@ package ds.plato.core;
 
 import net.minecraft.block.Block;
 
-public class SlotEntry {
+public class HotbarSlot {
 
 	public Block block;
 	public int metadata;
 	int slotNumber;
 	
-	public SlotEntry(Block block, int metadata, int slotNumber) {
+	public HotbarSlot(Block block, int metadata, int slotNumber) {
 		super();
 		this.block = block;
 		this.metadata = metadata;
 		this.slotNumber = slotNumber;
 	}
 
-	public SlotEntry(Block block) {
+	public HotbarSlot(Block block) {
 		this(block, 0, 0);
 	}
 
@@ -37,7 +37,7 @@ public class SlotEntry {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SlotEntry other = (SlotEntry) obj;
+		HotbarSlot other = (HotbarSlot) obj;
 		if (metadata != other.metadata)
 			return false;
 		if (block == null) {

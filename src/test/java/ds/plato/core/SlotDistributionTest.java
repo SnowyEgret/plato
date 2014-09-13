@@ -11,11 +11,11 @@ public class SlotDistributionTest extends PlatoTest {
 	
 	@Test
 	public void test() {
-		SlotEntry[] l = new SlotEntry[3];
-		l[0] = new SlotEntry(dirt, 0, 2);
-		l[1] = new SlotEntry(sand, 0, 5);
-		l[2] = new SlotEntry(clay, 0, 7);
-		SlotDistribution d = new SlotDistribution(l);
+		HotbarSlot[] l = new HotbarSlot[3];
+		l[0] = new HotbarSlot(dirt, 0, 2);
+		l[1] = new HotbarSlot(sand, 0, 5);
+		l[2] = new HotbarSlot(clay, 0, 7);
+		HotbarDistribution d = new HotbarDistribution(l);
 		int sum = 0;
 		for (Integer p : d.getPecentages()) {
 			sum += p;

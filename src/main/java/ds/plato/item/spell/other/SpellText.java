@@ -19,7 +19,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.gui.ITextSetable;
 import ds.plato.item.spell.Spell;
 import ds.plato.pick.Pick;
@@ -30,7 +30,7 @@ public class SpellText extends Spell implements ITextSetable {
 
 	private Font font;
 	private IWorld world;
-	private SlotEntry[] slotEntries;
+	private HotbarSlot[] slotEntries;
 	private Pick[] picks;
 	private Graphics graphics;
 
@@ -51,7 +51,7 @@ public class SpellText extends Spell implements ITextSetable {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry...slotEntries) {
+	public void invoke(IWorld world, HotbarSlot...slotEntries) {
 		this.world = world;
 		this.slotEntries = slotEntries;
 		Minecraft.getMinecraft().thePlayer.openGui(Plato.instance, 2, world.getWorld(), 0, 0, 0);

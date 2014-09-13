@@ -12,7 +12,7 @@ import ds.plato.api.IPick;
 import ds.plato.api.ISelect;
 import ds.plato.api.IUndo;
 import ds.plato.api.IWorld;
-import ds.plato.core.SlotEntry;
+import ds.plato.core.HotbarSlot;
 import ds.plato.item.spell.Modifier;
 import ds.plato.item.spell.Spell;
 import ds.plato.select.Selection;
@@ -28,7 +28,7 @@ public class SpellDrop extends Spell {
 	}
 
 	@Override
-	public void invoke(IWorld world, SlotEntry... slotEntries) {
+	public void invoke(IWorld world, HotbarSlot... slotEntries) {
 		boolean fill = Keyboard.isKeyDown(Keyboard.KEY_LMENU);
 		boolean deleteOriginal = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 		Transaction transaction = undoManager.newTransaction();
